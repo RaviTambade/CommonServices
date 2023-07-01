@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AddressesService } from '../addresses.service';
 import { NgForm } from '@angular/forms';
+import { Addresses } from 'src/app/addresses';
 
 @Component({
   selector: 'app-update-address',
@@ -9,21 +10,24 @@ import { NgForm } from '@angular/forms';
 })
 export class UpdateAddressComponent  {
  
-  Address:any={
-    "pinCode":'',
-    "landMark":'',
-    
+  address:Addresses={
+    personId: 3,
+    latitude: '18.535317',
+    langitude: '9.595334',
+    landMark: '',
+    pinCode: ''
   }
+
+  status: boolean | undefined;
 
   constructor(private svc:AddressesService){}
 
  
-  onUpdate(form:NgForm){
-
-    this.Address.pinCode=form.value.pincode;
-    this.Address.landMark=form.value.landmark;
-    console.log(this.Address);
-   
-  }
+  onUpdate(form:any){
+     this.svc.updateAddress(form).subscribe((res) => {
+      this.status = res;
+      console.log(res);
+});
+}
 
 }
