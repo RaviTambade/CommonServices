@@ -11,6 +11,9 @@ public class PeopleService:IPeopleService{
         _repo=repo;
     }
 
+
+    public async Task<List<People>> GetAllPeoples() => await _repo.GetAllPeoples();
+
     public async Task<bool> AddPerson(People people)=> await _repo.AddPerson(people);
 
     public async Task<bool> UpdatePerson(int id,People people)=> await _repo.UpdatePerson(id,people);

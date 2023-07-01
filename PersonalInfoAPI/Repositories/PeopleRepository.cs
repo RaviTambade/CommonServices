@@ -56,13 +56,6 @@ public class PeopleRepository : IPeopleRepository
 
     public async Task<bool> UpdatePerson(int id,People people)
     {
-        Console.WriteLine(people.ContactNumber);
-        Console.WriteLine(people.FirstName);
-        Console.WriteLine(people.LastName);
-        Console.WriteLine(people.Email);
-        Console.WriteLine(people.Gender);
-        Console.WriteLine(people.BirthDate);
-        Console.WriteLine(people.AadharId);
         bool status = false;
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _constring;
@@ -97,5 +90,52 @@ public class PeopleRepository : IPeopleRepository
             await con.CloseAsync();
         }
         return status;
+    }
+
+    public async Task<List<People>> GetAllPeoples()
+    {
+            List<People> peoples = new List<People>();
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = _constring;
+            try
+            {
+                string query = "select * from peoples";
+                MySqlCommand cmd = new MySqlCommand(query,con);
+                await con.OpenAsync();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while(await reader.ReadAsync())
+                {
+                    int id = int.Parse(reader["id"].ToString());
+                    string? aadharId = reader["aadharid"].ToString();
+                    string? firstName = reader["firstname"].ToString();
+                    string? lastName = reader["lastname"].ToString();
+                    DateOnly birthDate = DateOnly.Parse(reader["birthdate"].ToString());
+                    string? gender = reader["gender"].ToString();
+                    string? email = reader["email"].ToString();
+                    string? contactNumber = reader["contactnumber"].ToString();
+
+                    People people = new People()
+                    {
+                        Id = id,
+                        AadharId = aadharId,
+                        FirstName = firstName,
+                        LastName = lastName,
+                        BirthDate = birthDate,
+                        Gender = gender,
+                        Email = email,
+                        ContactNumber = contactNumber
+
+                    };
+                    peoples.Add(people);
+                }
+                await reader.CloseAsync();
+            }
+            catch(Exception e){
+                throw e;
+            }
+            finally{
+                await con.CloseAsync();
+            }
+            return peoples;
     }
 }

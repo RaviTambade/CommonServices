@@ -30,16 +30,17 @@ public class PeoplesController: ControllerBase{
 
     public async Task<bool> UpdatePerson(int id,People people)
     {
-        Console.WriteLine(people.ContactNumber);
-        Console.WriteLine(people.FirstName);
-        Console.WriteLine(people.LastName);
-        Console.WriteLine(people.Email);
-        Console.WriteLine(people.Gender);
-        Console.WriteLine(people.BirthDate);
-        Console.WriteLine(people.AadharId);
-
         bool status = await _svc.UpdatePerson(id,people);
         return status;
 
+    }
+
+    [HttpGet]
+    [Route("getall")]
+
+    public async Task<List<People>> GetAllPeoples()
+    {
+        List<People> peoples = await _svc.GetAllPeoples();
+        return peoples;
     }
 }
