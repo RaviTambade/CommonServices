@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,10 @@ import { Injectable } from '@angular/core';
 })
 export class AddressesService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
+
+  updateAddress(address:any){
+    let url ="http://localhost:";
+    return this.http.post(url,address);
+  }
 }
