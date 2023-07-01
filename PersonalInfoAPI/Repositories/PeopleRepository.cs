@@ -138,4 +138,54 @@ public class PeopleRepository : IPeopleRepository
             }
             return peoples;
     }
+
+
+    public async Task<People> GetDetails(string addharid){
+      
+          People people =new People();
+       MySqlConnection con = new MySqlConnection();
+       con.ConnectionString= _constring;
+       try{
+        string query = "select * from peoples where aadharid=@AadharId";
+        MySqlCommand command = new MySqlCommand(query,con);
+        await con.OpenAsync();
+         MySqlDataReader reader = command.ExecuteReader();
+            if(await reader.ReadAsync())
+                {
+                    int id = int.Parse(reader["id"].ToString());
+                    string? aadharId = reader["aadharid"].ToString();
+                    string? firstName = reader["firstname"].ToString();
+                    string? lastName = reader["lastname"].ToString();
+                    DateOnly birthDate = DateOnly.Parse(reader["birthdate"].ToString());
+                    string? gender = reader["gender"].ToString();
+                    string? email = reader["email"].ToString();
+                    string? contactNumber = reader["contactnumber"].ToString();
+
+                     people =  new People()
+                    {
+                        Id = id,
+                        AadharId = aadharId,
+                        FirstName = firstName,
+                        LastName = lastName,
+                        BirthDate = birthDate,
+                        Gender = gender,
+                        Email = email,
+                        ContactNumber = contactNumber
+
+                    };
+                }
+                await reader.CloseAsync();
+       }
+
+       catch(Exception e){
+                throw e;
+            }
+            finally{
+                await con.CloseAsync();
+            }
+            return people;
+
+    }
+
+   
 }

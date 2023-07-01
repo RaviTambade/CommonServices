@@ -43,4 +43,15 @@ public class PeoplesController: ControllerBase{
         List<People> peoples = await _svc.GetAllPeoples();
         return peoples;
     }
+
+
+
+    [HttpGet]
+    [Route("getDetails/{aaddharid}")]
+
+    public async Task<People> GetDetails(string aaddharid)
+    {
+        People people = await _svc.GetDetails(aaddharid);
+        return people;
+    }
 }
