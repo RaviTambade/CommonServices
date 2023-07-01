@@ -21,7 +21,6 @@ public class AddressRepository : IAddressRepository
        try
        {
         string query = "INSERT INTO addresses (personId, longitude, latitude, landmark, pincode) VALUES (@personId, @longitude, @latitude, @landMark, @pinCode)";
-        Console.WriteLine(theAddress.Latitude);
         MySqlCommand cmd = new MySqlCommand(query, con);
         cmd.Parameters.AddWithValue("@personId",theAddress.PersonId);
         cmd.Parameters.AddWithValue("@longitude",theAddress.Longitude);
