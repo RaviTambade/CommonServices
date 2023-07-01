@@ -12,11 +12,11 @@ export class AddressesService {
 
   updateAddress(address:Addresses):Observable<any>{
     let url ="http://localhost:5102/api/addresses/";
-    return this.http.put(url,address);
+    return this.http.put<any>(url,address);
   }
 
   addAddress(address:Addresses):Observable<any>{
     let url ="http://localhost:5102/api/addresses/";
-    return this.http.post(url,address);
+    return this.http.post<Addresses>(url,address);
   }
 }

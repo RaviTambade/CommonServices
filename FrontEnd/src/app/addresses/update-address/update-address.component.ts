@@ -13,7 +13,7 @@ export class UpdateAddressComponent  {
   address:Addresses={
     personId: 3,
     latitude: '18.535317',
-    langitude: '9.595334',
+    longitude: '9.595334',
     landMark: '',
     pinCode: ''
   }
@@ -23,8 +23,11 @@ export class UpdateAddressComponent  {
   constructor(private svc:AddressesService){}
 
  
-  onUpdate(form:any){
-     this.svc.updateAddress(form).subscribe((res) => {
+  onUpdate(form:NgForm){
+   this.address.pinCode= form.value.pincode;
+   this.address.landMark=form.value.landmark;
+   console.log(this.address);
+     this.svc.updateAddress(this.address).subscribe((res) => {
       this.status = res;
       console.log(res);
 });
