@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddAddressComponent } from './add-address/add-address.component';
 import { UpdateAddressComponent } from './update-address/update-address.component';
-
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -11,7 +12,13 @@ import { UpdateAddressComponent } from './update-address/update-address.componen
     UpdateAddressComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule, 
+    HttpClientModule
+     
+  ],
+  exports :[
+    UpdateAddressComponent
   ]
 })
 export class AddressesModule { }

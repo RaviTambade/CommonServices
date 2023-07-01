@@ -1,18 +1,19 @@
-using PersonalInfoAPI.Repositories;
-using PersonalInfoAPI.Repositories.Interfaces;
-using PersonalInfoAPI.Services;
-using PersonalInfoAPI.Services.Interfaces;
+using AuthenticationAPI.Repositories.Interfaces;
+using AuthenticationAPI.Repositories;
+using AuthenticationAPI.Services.Interfaces;
+using AuthenticationAPI.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddTransient<IAddressRepository, AddressRepository>();
-builder.Services.AddTransient<IAddressService, AddressService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ICredentialService,CredentialService>();
+builder.Services.AddScoped<ICredentialRepository,CredentialRepository>();
 
 var app = builder.Build();
 
