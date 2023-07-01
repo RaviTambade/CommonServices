@@ -11,28 +11,23 @@ import { Addresses } from 'src/app/addresses';
 export class UpdateAddressComponent  {
  
   address:Addresses={
-    personId: 0,
-    latitude: '',
-    langitude: '',
+    personId: 3,
+    latitude: '18.535317',
+    langitude: '9.595334',
     landMark: '',
     pinCode: ''
   }
 
-  status : boolean | undefined;
+  status: boolean | undefined;
 
   constructor(private svc:AddressesService){}
 
  
   onUpdate(form:any){
-     this.svc.updateAddress(form).subscribe((response)=>{
-    //  this.status=response;
-    //  console.log(status);
-     })
-   
-
-     
- 
-   
-  }
+     this.svc.updateAddress(form).subscribe((res) => {
+      this.status = res;
+      console.log(res);
+});
+}
 
 }

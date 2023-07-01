@@ -19,7 +19,6 @@ namespace PersonalInfoAPI.Controllers;
         [HttpPost]
         public bool Insert([FromBody] Address theAddress)
         {
-            Console.WriteLine(theAddress.Latitude);
             bool status = _addresssrv.Insert(theAddress);
             return status;
         }
