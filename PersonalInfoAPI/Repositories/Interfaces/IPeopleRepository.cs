@@ -5,4 +5,5 @@ public interface IPeopleRepository
 {
    Task<bool> AddPerson(People people);
 
+   Task<bool> UpdatePerson(int id,People people);
 }

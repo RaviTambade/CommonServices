@@ -25,5 +25,21 @@ public class PeoplesController: ControllerBase{
 
     }
 
+    [HttpPut]
+    [Route("updatepeople/{id}")]
 
+    public async Task<bool> UpdatePerson(int id,People people)
+    {
+        Console.WriteLine(people.ContactNumber);
+        Console.WriteLine(people.FirstName);
+        Console.WriteLine(people.LastName);
+        Console.WriteLine(people.Email);
+        Console.WriteLine(people.Gender);
+        Console.WriteLine(people.BirthDate);
+        Console.WriteLine(people.AadharId);
+
+        bool status = await _svc.UpdatePerson(id,people);
+        return status;
+
+    }
 }

@@ -5,14 +5,14 @@
     <div class="card-title mx-auto">
         Address
     </div>
-    <form  #insertForm="ngForm" (ngSubmit)="onUpdate(insertForm.value)">
+    <form  #insertForm="ngForm" (ngSubmit)="onUpdate(insertForm)">
         <span id="card-header"></span>
         <div class="row-1">
             <div class="row row-2">
                 <span id="card-inner">Pin Code</span>
             </div>
             <div class="row row-2">
-                <input type="text" name="pincode" [(ngModel)]="address.pincode" placeholder="Pin Code">
+                <input type="text" name="pincode" ngModel placeholder="Pin Code">
             </div>
         </div>
         <div class="row-1">
@@ -20,25 +20,10 @@
               <span id="card-inner">Land Mark</span>
           </div>
           <div class="row row-2">
-              <input type="text"  name="landmark"  [(ngModel)]="address.landmark" placeholder="Land Mark">
+              <input type="text"  name="landmark"  ngModel placeholder="Land Mark">
           </div>
       </div>
-      <div class="row-1">
-        <div class="row row-2">
-            <span id="card-inner">Longitude</span>
-        </div>
-        <div class="row row-2">
-            <input type="text"  name="latitude"  [(ngModel)]="address.longitude" placeholder="Longitude">
-        </div>
-    </div>
-    <div class="row-1">
-        <div class="row row-2">
-            <span id="card-inner">Latitude</span>
-        </div>
-        <div class="row row-2">
-            <input type="text"  name="landmark"  [(ngModel)]="address.latitude" placeholder="Latitude">
-        </div>
-    </div>
+
         <button class="btn d-flex mx-auto"><b>Proceed</b></button>
     </form>
 </div>

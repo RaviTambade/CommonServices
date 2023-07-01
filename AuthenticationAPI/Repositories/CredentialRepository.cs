@@ -15,18 +15,20 @@ public class CredentialRepository : ICredentialRepository
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
 
-    public bool Delete(int id)
+public bool Validate(Credential credential)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query = "DELETE FROM credentials WHERE id=@credentialId";
+            string query =
+                "SELECT EXISTS(SELECT * FROM credentials WHERE contactnumber=@contactNumber AND password=@password)";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@credentialId", id);
+            cmd.Parameters.AddWithValue("@contactNumber", credential.ContactNumber);
+            cmd.Parameters.AddWithValue("@password", credential.Password);
             con.Open();
-            int rowsAffected = cmd.ExecuteNonQuery();
-            if (rowsAffected > 0)
+            long result = (long)cmd.ExecuteScalar();
+            if (result == 1)
             {
                 status = true;
             }
@@ -41,9 +43,7 @@ public class CredentialRepository : ICredentialRepository
         }
         return status;
     }
-
-   
-
+  
     public bool Register(Credential credential)
     {
         bool status = false;
@@ -73,18 +73,18 @@ public class CredentialRepository : ICredentialRepository
         return status;
     }
 
-    public bool UpdatePassword(ChangedCredential changedCredential)
+    public bool UpdateContactNumber(ChangeContactNumber credential)
     {
-        bool status = false;
+       bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query =
-                "UPDATE credentials SET password=@newPassword  WHERE password=@oldpassword AND contactnumber=@contactNumber";
+                "UPDATE credentials SET contactnumber=@newContactNumber  WHERE password=@password AND contactnumber=@oldContactNumber";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@contactNumber", changedCredential.ContactNumber);
-            cmd.Parameters.AddWithValue("@oldPassword", changedCredential.OldPassword);
-            cmd.Parameters.AddWithValue("@newPassword", changedCredential.NewPassword);
+            cmd.Parameters.AddWithValue("@oldContactNumber", credential.OldContactNumber);
+            cmd.Parameters.AddWithValue("@newContactNumber", credential.NewContactNumber);
+            cmd.Parameters.AddWithValue("@password", credential.Password);
             con.Open();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
@@ -103,20 +103,48 @@ public class CredentialRepository : ICredentialRepository
         return status;
     }
 
-    public bool Validate(Credential credential)
+    public bool UpdatePassword(ChangePassword credential)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query =
-                "SELECT EXISTS(SELECT * FROM credentials WHERE contactnumber=@contactNumber AND password=@password)";
+                "UPDATE credentials SET password=@newPassword  WHERE password=@oldpassword AND contactnumber=@contactNumber";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@contactNumber", credential.ContactNumber);
-            cmd.Parameters.AddWithValue("@password", credential.Password);
+            cmd.Parameters.AddWithValue("@oldPassword", credential.OldPassword);
+            cmd.Parameters.AddWithValue("@newPassword", credential.NewPassword);
             con.Open();
-            long rowsAffected = (long)cmd.ExecuteScalar();
-            if (rowsAffected == 1)
+            int rowsAffected = cmd.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return status;
+    }
+
+      public bool Delete(int id)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "DELETE FROM credentials WHERE id=@credentialId";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@credentialId", id);
+            con.Open();
+            int rowsAffected = cmd.ExecuteNonQuery();
+            if (rowsAffected > 0)
             {
                 status = true;
             }
