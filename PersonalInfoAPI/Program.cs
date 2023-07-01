@@ -1,8 +1,15 @@
+using PersonalInfoAPI.Repositories;
+using PersonalInfoAPI.Repositories.Interfaces;
+using PersonalInfoAPI.Services;
+using PersonalInfoAPI.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddTransient<IAddressRepository, AddressRepository>();
+builder.Services.AddTransient<IAddressService, AddressService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
