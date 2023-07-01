@@ -1,0 +1,3 @@
+{
+    "dotnet.defaultSolution": "AuthenticationAPI\\AuthenticationAPI.sln"
+}

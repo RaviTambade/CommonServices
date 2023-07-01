@@ -21,21 +21,27 @@ public class CredentialController : ControllerBase
         return _service.Validate(credential);
     }
 
-    [HttpDelete("{id}")]
-    public bool Delete(int id)
-    {
-        return _service.Delete(id);
-    }
-
     [HttpPost("register")]
     public bool Register(Credential credential)
     {
         return _service.Register(credential);
     }
 
+    [HttpPut("updatecontactnumber")]
+     public bool UpdateContactNumber(ChangeContactNumber credential)
+    {
+        return _service.UpdateContactNumber(credential);
+    }
+
     [HttpPut("updatepassword")]
-    public bool UpdatePassword(ChangedCredential credential)
+    public bool UpdatePassword(ChangePassword credential)
     {
         return _service.UpdatePassword(credential);
+    }
+
+    [HttpDelete("{id}")]
+    public bool Delete(int id)
+    {
+        return _service.Delete(id);
     }
 }

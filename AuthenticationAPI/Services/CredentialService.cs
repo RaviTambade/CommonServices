@@ -13,9 +13,9 @@ public class CredentialService : ICredentialService
         _credentialRepository = credentialRepository;
     }
 
-    public bool Delete(int id)
+    public bool Validate(Credential credential)
     {
-        return _credentialRepository.Delete(id);
+        return _credentialRepository.Validate(credential);
     }
 
     public bool Register(Credential credential)
@@ -23,15 +23,18 @@ public class CredentialService : ICredentialService
         return _credentialRepository.Register(credential);
     }
 
- 
+    public bool UpdateContactNumber(ChangeContactNumber credential)
+    {
+        return _credentialRepository.UpdateContactNumber(credential);
+    }
 
-    public bool UpdatePassword(ChangedCredential credential)
+    public bool UpdatePassword(ChangePassword credential)
     {
         return _credentialRepository.UpdatePassword(credential);
     }
 
-    public bool Validate(Credential credential)
+    public bool Delete(int id)
     {
-        return _credentialRepository.Validate(credential);
+        return _credentialRepository.Delete(id);
     }
 }
