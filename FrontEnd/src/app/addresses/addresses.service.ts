@@ -10,6 +10,11 @@ export class AddressesService {
 
   updateAddress(address:any){
     let url ="http://localhost:";
+    return this.http.put(url,address);
+  }
+
+  addAddress(address:any){
+    let url ="http://localhost:";
     return this.http.post(url,address);
   }
 }
