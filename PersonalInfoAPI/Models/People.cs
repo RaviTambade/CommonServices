@@ -1,4 +1,4 @@
-namespace PersonalInfoAPI.Models;
+    namespace PersonalInfoAPI.Models;
 
 public class People{
 
