@@ -53,4 +53,49 @@ public class PeopleRepository : IPeopleRepository
         }
         return status;
     }
+
+    public async Task<bool> UpdatePerson(int id,People people)
+    {
+        Console.WriteLine(people.ContactNumber);
+        Console.WriteLine(people.FirstName);
+        Console.WriteLine(people.LastName);
+        Console.WriteLine(people.Email);
+        Console.WriteLine(people.Gender);
+        Console.WriteLine(people.BirthDate);
+        Console.WriteLine(people.AadharId);
+        bool status = false;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+
+        try
+        {
+            string birthDateString = people.BirthDate.ToString("yyyy-MM-dd");
+            string query = "Update peoples set aadharid=@aadharId,firstname=@firstName,lastname=@lastName,birthdate=@birthDate,gender=@gender,email=@email,contactnumber=@contactNumber where id=@Id";
+            Console.WriteLine(query);
+            MySqlCommand command = new MySqlCommand(query, con);
+            await con.OpenAsync();
+            command.Parameters.AddWithValue("@aadharId", people.AadharId);
+            command.Parameters.AddWithValue("@firstName", people.FirstName);
+            command.Parameters.AddWithValue("@lastName", people.LastName);
+            command.Parameters.AddWithValue("@birthDate", birthDateString);
+            command.Parameters.AddWithValue("@gender", people.Gender);
+            command.Parameters.AddWithValue("@email", people.Email);
+            command.Parameters.AddWithValue("@Id", id);
+            command.Parameters.AddWithValue("@contactNumber", people.ContactNumber);
+            int rowsAffected = command.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
 }
