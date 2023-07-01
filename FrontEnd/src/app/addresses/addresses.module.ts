@@ -18,7 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
      
   ],
   exports :[
-    UpdateAddressComponent
+    UpdateAddressComponent,
+    AddAddressComponent
   ]
 })
 export class AddressesModule { }
