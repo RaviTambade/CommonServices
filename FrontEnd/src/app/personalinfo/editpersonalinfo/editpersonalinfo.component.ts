@@ -12,7 +12,7 @@ personalInfo:Personalinfo ;
 id:number;
 constructor(private svc:PersonalinfoService){
   this.personalInfo={
-    id: 0,
+    id: 1,
     aadharId: '',
     firstName: '',
     lastName: '',

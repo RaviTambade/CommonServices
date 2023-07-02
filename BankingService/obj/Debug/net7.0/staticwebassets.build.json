@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "avHITWS2TSPRQmXtOqWSunFRDQlno/MTxZ6EQb6OBBs=",
+  "Source": "BankingService",
+  "BasePath": "_content/BankingService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

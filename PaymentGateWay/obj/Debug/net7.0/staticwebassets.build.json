@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "JLZPkJtxPYIfmCnc5zqMEhNltN4MukBjmixwHnLkM4E=",
+  "Source": "PaymentGateWay",
+  "BasePath": "_content/PaymentGateWay",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
