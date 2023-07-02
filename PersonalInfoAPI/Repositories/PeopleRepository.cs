@@ -26,14 +26,14 @@ public class PeopleRepository : IPeopleRepository
 
         try
         {
-            string birthDateString = people.BirthDate.ToString("yyyy-MM-dd");
+            // string birthDateString = people.BirthDate.ToString("yyyy-MM-dd");
             string query = "Insert Into peoples(aadharid,firstname,lastname,birthdate,gender,email,contactnumber) Values(@aadharId,@firstName,@lastName,@birthDate,@gender,@email,@contactNumber)";
             MySqlCommand command = new MySqlCommand(query, con);
             await con.OpenAsync();
             command.Parameters.AddWithValue("@aadharId", people.AadharId);
             command.Parameters.AddWithValue("@firstName", people.FirstName);
             command.Parameters.AddWithValue("@lastName", people.LastName);
-            command.Parameters.AddWithValue("@birthDate", birthDateString);
+            command.Parameters.AddWithValue("@birthDate", people.BirthDate);
             command.Parameters.AddWithValue("@gender", people.Gender);
             command.Parameters.AddWithValue("@email", people.Email);
             command.Parameters.AddWithValue("@contactNumber", people.ContactNumber);
@@ -62,7 +62,7 @@ public class PeopleRepository : IPeopleRepository
 
         try
         {
-            string birthDateString = people.BirthDate.ToString("yyyy-MM-dd");
+            //string birthDateString = people.BirthDate.ToString("yyyy-MM-dd");
             string query = "Update peoples set aadharid=@aadharId,firstname=@firstName,lastname=@lastName,birthdate=@birthDate,gender=@gender,email=@email,contactnumber=@contactNumber where id=@Id";
             Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
@@ -70,7 +70,7 @@ public class PeopleRepository : IPeopleRepository
             command.Parameters.AddWithValue("@aadharId", people.AadharId);
             command.Parameters.AddWithValue("@firstName", people.FirstName);
             command.Parameters.AddWithValue("@lastName", people.LastName);
-            command.Parameters.AddWithValue("@birthDate", birthDateString);
+            command.Parameters.AddWithValue("@birthDate", people.BirthDate);
             command.Parameters.AddWithValue("@gender", people.Gender);
             command.Parameters.AddWithValue("@email", people.Email);
             command.Parameters.AddWithValue("@Id", id);
@@ -109,7 +109,7 @@ public class PeopleRepository : IPeopleRepository
                     string? aadharId = reader["aadharid"].ToString();
                     string? firstName = reader["firstname"].ToString();
                     string? lastName = reader["lastname"].ToString();
-                    DateOnly birthDate = DateOnly.Parse(reader["birthdate"].ToString());
+                    DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
                     string? gender = reader["gender"].ToString();
                     string? email = reader["email"].ToString();
                     string? contactNumber = reader["contactnumber"].ToString();
@@ -138,4 +138,55 @@ public class PeopleRepository : IPeopleRepository
             }
             return peoples;
     }
+
+
+    public async Task<People> GetDetails(string addharid){
+      
+          People people =new People();
+       MySqlConnection con = new MySqlConnection();
+       con.ConnectionString= _constring;
+       try{
+        string query = "select * from peoples where aadharid=@AadharId";
+        MySqlCommand command = new MySqlCommand(query,con);
+        command.Parameters.AddWithValue("@AadharId",addharid);
+        await con.OpenAsync();
+         MySqlDataReader reader = command.ExecuteReader();
+            if(await reader.ReadAsync())
+                {
+                    int id = int.Parse(reader["id"].ToString());
+                    string? aadharId = reader["aadharid"].ToString();
+                    string? firstName = reader["firstname"].ToString();
+                    string? lastName = reader["lastname"].ToString();
+                    DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
+                    string? gender = reader["gender"].ToString();
+                    string? email = reader["email"].ToString();
+                    string? contactNumber = reader["contactnumber"].ToString();
+
+                     people =  new People()
+                    {
+                        Id = id,
+                        AadharId = aadharId,
+                        FirstName = firstName,
+                        LastName = lastName,
+                        BirthDate = birthDate,
+                        Gender = gender,
+                        Email = email,
+                        ContactNumber = contactNumber
+
+                    };
+                }
+                await reader.CloseAsync();
+       }
+
+       catch(Exception e){
+                throw e;
+            }
+            finally{
+                await con.CloseAsync();
+            }
+            return people;
+
+    }
+
+   
 }
