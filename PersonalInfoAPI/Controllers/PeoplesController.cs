@@ -54,4 +54,15 @@ public class PeoplesController: ControllerBase{
         People people = await _svc.GetDetails(aaddharid);
         return people;
     }
+
+
+    [HttpDelete]
+    [Route("DeletePeople/{aaddharid}")]
+
+    public async Task<bool> DeletePeople(string aaddharid)
+    {
+        bool status = await _svc.DeletePeople(aaddharid);
+        return status;
+
+    }
 }

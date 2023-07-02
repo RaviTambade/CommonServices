@@ -20,7 +20,7 @@ public class PeopleService:IPeopleService{
 
     public async Task<People> GetDetails(string adharid) => await _repo.GetDetails(adharid);
 
-
+   public async Task<bool> DeletePeople(string aaddharid)=> await _repo.DeletePeople(aaddharid);
     
 
 }

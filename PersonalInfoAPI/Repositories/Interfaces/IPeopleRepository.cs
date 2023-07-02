@@ -9,4 +9,6 @@ public interface IPeopleRepository
    Task<bool> UpdatePerson(int id,People people);
 
    Task<People> GetDetails(string addharid);
+
+   Task<bool> DeletePeople(string addharid);
 }

@@ -188,5 +188,35 @@ public class PeopleRepository : IPeopleRepository
 
     }
 
-   
+       public async Task<bool> DeletePeople(string addharid)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+
+        try
+        {
+            //string birthDateString = people.BirthDate.ToString("yyyy-MM-dd");
+            string query = "Delete from peoples where aadharid=@AadharId";
+            Console.WriteLine(query);
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@AadharId",addharid);
+            await con.OpenAsync();
+            int rowsAffected = command.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
+
 }
