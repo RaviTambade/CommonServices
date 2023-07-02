@@ -9,9 +9,13 @@ using MySql.Data.MySqlClient;
 //Saving and Restoring logic into json file
 public class AccountRepo:IAccountRepo{
 
-    private string conString = @"server=localhost;user=root;database=banking;password=PASSWORD";
-
-
+    private IConfiguration _configuration;
+    private string _conString;
+    public AccountRepo(IConfiguration configuration)
+    {
+        _configuration = configuration;
+        _conString = this._configuration.GetConnectionString("DefaultConnection");
+    }
     /*public BankRepository(string connectionstring)
     {
         this.conString = connectionstring;
@@ -21,7 +25,7 @@ public class AccountRepo:IAccountRepo{
           List<Account> acctlist = new List<Account>();
 
         //Create connection object
-        IDbConnection con = new MySqlConnection(conString);
+        IDbConnection con = new MySqlConnection(_conString);
 
         Console.WriteLine("\n Connection status "+ con.State);
         string query = "SELECT * FROM accounts";
@@ -86,7 +90,7 @@ public class AccountRepo:IAccountRepo{
         Account acct = null;
          
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = conString;
+        con.ConnectionString = _conString;
         try
         {
             string query = "SELECT * FROM accounts WHERE acctnumber=" + acctNumber;
@@ -135,7 +139,7 @@ public class AccountRepo:IAccountRepo{
         Account acct = null;
          
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = conString;
+        con.ConnectionString = _conString;
         try
         {
             string query = "SELECT * FROM accounts WHERE id=" + Id;
@@ -182,7 +186,7 @@ public class AccountRepo:IAccountRepo{
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = conString;
+        con.ConnectionString = _conString;
         try
         {
             string query = "DELETE FROM accounts WHERE acctnumber=" + acctNumber;
@@ -206,7 +210,7 @@ public class AccountRepo:IAccountRepo{
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = conString;
+        con.ConnectionString = _conString;
         try
         {
             string query = "INSERT INTO accounts(id,acctnumber,accttype,ifsccode,customerid,balance) VALUES(@Id,@acctNumber,@acctType,@ifscCode,@customerId,@balance)";
@@ -240,7 +244,7 @@ public class AccountRepo:IAccountRepo{
     {
          bool status = false;
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = conString;
+        con.ConnectionString = _conString;
         try
         {
             string query = "Update accounts SET acctnumber =@acctNumber,accttype=@acctType,ifsccode =@ifscCode,balance=@balance,customerid=@customerid WHERE id=@Id";

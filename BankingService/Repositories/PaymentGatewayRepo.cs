@@ -8,22 +8,28 @@ using MySql.Data.MySqlClient;
 
 //Saving and Restoring logic into json file
 public class PaymentGatewayRepo:IPaymentGatewayRepo{
-    private string conString = @"server=localhost;user=root;database=banking;password=PASSWORD";
-    public int FundTransfer(PaymentGateway info )
+    private IConfiguration _configuration;
+    private string _conString;
+    public PaymentGatewayRepo(IConfiguration configuration)
+    {
+        _configuration = configuration;
+        _conString = this._configuration.GetConnectionString("DefaultConnection");
+    }
+    public int FundTransfer(PaymentGateway info)
     {
         int transactionId=0;
-        IDbConnection con = new MySqlConnection(conString);
+        MySqlConnection con = new MySqlConnection(_conString);
         //Create Command Object
         try{
             con.Open();
-            IDbCommand cmd = new MySqlCommand("fundtransfer", con as MySqlConnection);
-            cmd.CommandType=CommandType.StoreProcedure;
+            MySqlCommand cmd = new MySqlCommand("fundtransfer", con as MySqlConnection);
+            cmd.CommandType=CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@fromaccountnumber",info.FromAcct);
             cmd.Parameters.AddWithValue("@toaccountnumber",info.ToAcct);
             cmd.Parameters.AddWithValue("@amount",info.Amount);
             cmd.Parameters["@transactionId"].Direction=ParameterDirection.Output;
             int rowsAffected = cmd.ExecuteNonQuery();
-            transactionId=cmd.Parameters["@transactionId"].Value;
+            transactionId=(int)cmd.Parameters["@transactionId"].Value;
         }
          catch (Exception e)
         {

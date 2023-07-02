@@ -6,12 +6,12 @@ namespace ServicesLib;
 
 public class PaymentGatewayService:IPaymentGatewayService
 {
-    private IPaymentGatewayRepo repo;
+    private IPaymentGatewayRepo _repo;
 
-   public IPaymentGatewayRepo(IPaymentGatewayRepo _repo){
-    this.repo=_repo;
+   public PaymentGatewayService(IPaymentGatewayRepo repo){
+     _repo =repo;
    }
    public int FundTransfer(PaymentGateway info){
-    return repo.FundTransfer(info);
+    return _repo.FundTransfer(info);
    }
 }

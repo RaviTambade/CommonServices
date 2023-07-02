@@ -9,9 +9,13 @@ using MySql.Data.MySqlClient;
 //Saving and Restoring logic into json file
 public class OperationRepo:IOperationRepo{
 
-    private string conString = @"server=localhost;user=root;database=banking;password=omkar7218";
-
-
+    private IConfiguration _configuration;
+    private string _conString;
+    public OperationRepo(IConfiguration configuration)
+    {
+        _configuration = configuration;
+        _conString = this._configuration.GetConnectionString("DefaultConnection");
+    }
     /*public BankRepository(string connectionstring)
     {
         this.conString = connectionstring;
@@ -21,7 +25,7 @@ public class OperationRepo:IOperationRepo{
           List<Operation> operationlist = new List<Operation>();
 
         //Create connection object
-        IDbConnection con = new MySqlConnection(conString);
+        IDbConnection con = new MySqlConnection(_conString);
 
         Console.WriteLine("\n Connection status "+ con.State);
         string query = "SELECT * FROM operations";
@@ -81,7 +85,7 @@ public class OperationRepo:IOperationRepo{
         Operation opr = null;
          
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = conString;
+        con.ConnectionString = _conString;
         try
         {
             string query = "SELECT * FROM operations WHERE acctnumber=" + acctNumber;
@@ -126,7 +130,7 @@ public class OperationRepo:IOperationRepo{
         Operation opr = null;
          
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = conString;
+        con.ConnectionString = _conString;
         try
         {
             string query = "SELECT * FROM operations WHERE operationid=" + Id;
@@ -172,7 +176,7 @@ public class OperationRepo:IOperationRepo{
         Console.WriteLine(mode);
         MySqlConnection con = new MySqlConnection();
         Console.WriteLine(con.State);
-        con.ConnectionString = conString;
+        con.ConnectionString = _conString;
         try
         {
             string query = "SELECT * FROM operations WHERE operationmode= @mode";
@@ -221,7 +225,7 @@ public class OperationRepo:IOperationRepo{
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = conString;
+        con.ConnectionString = _conString;
         try
         {
             string query = "DELETE FROM operations WHERE acctnumber=" + acctNumber;
@@ -245,7 +249,7 @@ public class OperationRepo:IOperationRepo{
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = conString;
+        con.ConnectionString = _conString;
         try
         {
             string query = "INSERT INTO operations(operationid,acctid,acctnumber,amount,operationdate,operationmode) VALUES(@OperationId,@AcctID,@acctNumber,@Amount,@Operationdate,@operationMode)";
@@ -279,7 +283,7 @@ public class OperationRepo:IOperationRepo{
     {
          bool status = false;
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = conString;
+        con.ConnectionString = _conString;
         try
         {
             string query = "Update operations SET amount=@amount,operationdate=@operationdate,operationmode=@operationmode WHERE operationid=@OperationId";
