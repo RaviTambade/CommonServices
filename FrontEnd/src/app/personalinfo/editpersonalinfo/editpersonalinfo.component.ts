@@ -9,7 +9,7 @@ import { PersonalinfoService } from '../personalinfo.service';
 })
 export class EditpersonalinfoComponent implements OnInit {
 personalInfo:Personalinfo ;
-id:number;
+personalInfoId:number;
 constructor(private svc:PersonalinfoService){
   this.personalInfo={
     id: 1,
@@ -21,13 +21,16 @@ constructor(private svc:PersonalinfoService){
     email: '',
     contactNumber: ''
   },
-  this.id=1;
+  this.personalInfoId=1;
 }
   ngOnInit(): void {
   }
   updatePersonalInfo(){
-    this.svc.updatePersonalInfo(this.id,this.personalInfo).subscribe((response)=>{
+    this.svc.updatePersonalInfo(this.personalInfoId,this.personalInfo).subscribe((response)=>{
       console.log(response)
      })
+  }
+  receivePersonalInfo($event:any){
+  this.personalInfo=$event.personalInfo
   }
 }

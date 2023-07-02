@@ -1,3 +1,4 @@
+<app-getpersonalinfo [personalInfoId]="personalInfoId" (sendPersonalInfo)="receivePersonalInfo($event)" hidden></app-getpersonalinfo>
 <div *ngIf="personalInfo">
     <div class="container">
         <table class="table table-striped">

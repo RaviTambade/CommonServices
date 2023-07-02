@@ -15,7 +15,12 @@ export class PersonalinfoService {
   }
 
   updatePersonalInfo(id:number,personalInfo:Personalinfo):Observable<any>{
-    let url="http://localhost:5102/api/peoples/updatepeople" +id
-    return this.httpClient.post<any>(url,personalInfo)
+    let url="http://localhost:5102/api/peoples/updatepeople/" +id
+    return this.httpClient.put<any>(url,personalInfo)
+  }
+
+  getPersonalInfo(id:number):Observable<any>{
+let url="http://localhost:5102/api/peoples/" +id
+return this.httpClient.get<any>(url)
   }
 }
