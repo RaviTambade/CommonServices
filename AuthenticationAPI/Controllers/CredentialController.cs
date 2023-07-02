@@ -21,6 +21,13 @@ public class CredentialController : ControllerBase
         return _service.Validate(credential);
     }
 
+    [HttpPost("authenticate")]
+    public  AuthenticateResponse Authenticate([FromBody] AuthenticateRequest request)
+    {
+        var token = _service.Authenticate(request);
+        return token;
+    }
+
     [HttpPost("register")]
     public bool Register(Credential credential)
     {

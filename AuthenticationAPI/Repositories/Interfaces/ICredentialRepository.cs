@@ -8,4 +8,6 @@ public interface ICredentialRepository{
     bool UpdatePassword(ChangePassword credential);
     bool UpdateContactNumber(ChangeContactNumber credential);
     bool Delete(int id);
+    AuthenticateResponse Authenticate(AuthenticateRequest request);
+
 }
