@@ -614,44 +614,6 @@
             "rid": "win"
           }
         }
-      },
-      "EntityLib/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "compile": {
-          "bin/placeholder/EntityLib.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/EntityLib.dll": {}
-        }
-      },
-      "repolib/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "dependencies": {
-          "EntityLib": "1.0.0",
-          "MySql.Data": "8.0.33"
-        },
-        "compile": {
-          "bin/placeholder/repolib.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/repolib.dll": {}
-        }
-      },
-      "ServicesLib/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "dependencies": {
-          "EntityLib": "1.0.0",
-          "repolib": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/ServicesLib.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ServicesLib.dll": {}
-        }
       }
     }
   },
@@ -2183,68 +2145,43 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "EntityLib/1.0.0": {
-      "type": "project",
-      "path": "../EntityLib/EntityLib.csproj",
-      "msbuildProject": "../EntityLib/EntityLib.csproj"
-    },
-    "repolib/1.0.0": {
-      "type": "project",
-      "path": "../repolib/repolib.csproj",
-      "msbuildProject": "../repolib/repolib.csproj"
-    },
-    "ServicesLib/1.0.0": {
-      "type": "project",
-      "path": "../ServicesLib/ServicesLib.csproj",
-      "msbuildProject": "../ServicesLib/ServicesLib.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "EntityLib >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 7.0.5",
-      "ServicesLib >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.4.0",
-      "repolib >= 1.0.0"
+      "mysql.data >= 8.0.33"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Final project\\DBBanking\\BankingSolution\\PaymentGateWay\\PaymentGateWay.csproj",
+      "projectUniqueName": "E:\\Project\\AddressService\\CommonServices\\PaymentGateWay\\PaymentGateWay.csproj",
       "projectName": "PaymentGateWay",
-      "projectPath": "D:\\Final project\\DBBanking\\BankingSolution\\PaymentGateWay\\PaymentGateWay.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Final project\\DBBanking\\BankingSolution\\PaymentGateWay\\obj\\",
+      "projectPath": "E:\\Project\\AddressService\\CommonServices\\PaymentGateWay\\PaymentGateWay.csproj",
+      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+      "outputPath": "E:\\Project\\AddressService\\CommonServices\\PaymentGateWay\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {
-            "D:\\Final project\\DBBanking\\BankingSolution\\EntityLib\\EntityLib.csproj": {
-              "projectPath": "D:\\Final project\\DBBanking\\BankingSolution\\EntityLib\\EntityLib.csproj"
-            },
-            "D:\\Final project\\DBBanking\\BankingSolution\\repolib\\repolib.csproj": {
-              "projectPath": "D:\\Final project\\DBBanking\\BankingSolution\\repolib\\repolib.csproj"
-            },
-            "D:\\Final project\\DBBanking\\BankingSolution\\ServicesLib\\ServicesLib.csproj": {
-              "projectPath": "D:\\Final project\\DBBanking\\BankingSolution\\ServicesLib\\ServicesLib.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -2264,6 +2201,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.4.0, )"
+          },
+          "mysql.data": {
+            "target": "Package",
+            "version": "[8.0.33, )"
           }
         },
         "imports": [
@@ -2285,7 +2226,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

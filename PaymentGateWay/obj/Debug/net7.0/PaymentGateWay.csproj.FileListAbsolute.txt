@@ -59,3 +59,13 @@ D:\Final project\DBBanking\BankingSolution\PaymentGateWay\obj\Debug\net7.0\refin
 D:\Final project\DBBanking\BankingSolution\PaymentGateWay\obj\Debug\net7.0\PaymentGateWay.pdb
 D:\Final project\DBBanking\BankingSolution\PaymentGateWay\obj\Debug\net7.0\PaymentGateWay.genruntimeconfig.cache
 D:\Final project\DBBanking\BankingSolution\PaymentGateWay\obj\Debug\net7.0\ref\PaymentGateWay.dll
+E:\Project\AddressService\CommonServices\PaymentGateWay\obj\Debug\net7.0\PaymentGateWay.csproj.AssemblyReference.cache
+E:\Project\AddressService\CommonServices\PaymentGateWay\obj\Debug\net7.0\PaymentGateWay.GeneratedMSBuildEditorConfig.editorconfig
+E:\Project\AddressService\CommonServices\PaymentGateWay\obj\Debug\net7.0\PaymentGateWay.AssemblyInfoInputs.cache
+E:\Project\AddressService\CommonServices\PaymentGateWay\obj\Debug\net7.0\PaymentGateWay.AssemblyInfo.cs
+E:\Project\AddressService\CommonServices\PaymentGateWay\obj\Debug\net7.0\PaymentGateWay.csproj.CoreCompileInputs.cache
+E:\Project\AddressService\CommonServices\PaymentGateWay\obj\Debug\net7.0\PaymentGateWay.MvcApplicationPartsAssemblyInfo.cs
+E:\Project\AddressService\CommonServices\PaymentGateWay\obj\Debug\net7.0\PaymentGateWay.MvcApplicationPartsAssemblyInfo.cache
+E:\Project\AddressService\CommonServices\PaymentGateWay\obj\Debug\net7.0\PaymentGateWay.dll
+E:\Project\AddressService\CommonServices\PaymentGateWay\obj\Debug\net7.0\refint\PaymentGateWay.dll
+E:\Project\AddressService\CommonServices\PaymentGateWay\obj\Debug\net7.0\PaymentGateWay.pdb

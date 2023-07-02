@@ -1583,7 +1583,8 @@
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
         "system.runtime.4.3.0.nupkg.sha512",
-        "system.runtime.nuspec"
+        "system.runtime.nuspec",
+        "yrdv55ob.pyx"
       ]
     },
     "System.Runtime.CompilerServices.Unsafe/6.0.0": {

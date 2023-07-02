@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using  ServicesLib;
-using EntityLib;
+using API.Models;
+using API.Services;
+using API.Services.Interfaces;
 
 namespace PaymentGateWayService.Controllers;
 
@@ -16,7 +17,7 @@ public class FundTransferController: ControllerBase
     }
 
     [HttpPost]
-    public int PaymentGateWay([FromBody] Payment info)
+    public int PaymentGateWay([FromBody] PaymentGateWay info)
     {
         return _svc.FundTransfer(info);
     }
