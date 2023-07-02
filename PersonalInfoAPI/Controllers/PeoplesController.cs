@@ -63,6 +63,12 @@ public class PeoplesController: ControllerBase{
     {
         bool status = await _svc.DeletePeople(aaddharid);
         return status;
-
     }
+
+    [HttpGet]
+    [Route("{peopleid}")]
+    public async Task<People> GetPeople(int peopleId){
+        return await _svc.GetPeople(peopleId);
+    }
+
 }
