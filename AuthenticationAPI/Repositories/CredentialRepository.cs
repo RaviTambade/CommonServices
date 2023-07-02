@@ -1,5 +1,8 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using AuthenticationAPI.Models;
 using AuthenticationAPI.Repositories.Interfaces;
+using Microsoft.IdentityModel.Tokens;
 using MySql.Data.MySqlClient;
 
 namespace AuthenticationAPI.Repositories;
@@ -15,7 +18,7 @@ public class CredentialRepository : ICredentialRepository
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
 
-public bool Validate(Credential credential)
+    public bool Validate(Credential credential)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -43,7 +46,7 @@ public bool Validate(Credential credential)
         }
         return status;
     }
-  
+
     public bool Register(Credential credential)
     {
         bool status = false;
@@ -75,7 +78,7 @@ public bool Validate(Credential credential)
 
     public bool UpdateContactNumber(ChangeContactNumber credential)
     {
-       bool status = false;
+        bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -133,7 +136,7 @@ public bool Validate(Credential credential)
         return status;
     }
 
-      public bool Delete(int id)
+    public bool Delete(int id)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -158,5 +161,78 @@ public bool Validate(Credential credential)
             con.Close();
         }
         return status;
+    }
+
+    public AuthenticateResponse Authenticate(AuthenticateRequest request)
+    {
+        var credential = GetCredentials(request);
+        
+        if (credential == null)
+        {
+            return null;
+        }
+
+        var token =  generateJwtToken(credential);
+        return new AuthenticateResponse(token);
+    }
+    private string generateJwtToken(Credential credential)
+    {
+        //token will expire after one hour 
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = System.Text.Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Secret"));
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(AllClaims(credential)),
+            Expires = DateTime.UtcNow.AddHours(1),
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+       SecurityAlgorithms.HmacSha256Signature)
+        };
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
+    }
+    private List<Claim> AllClaims(Credential credential)
+      {
+        List<Claim> claims = new List<Claim>
+        {
+            new Claim("contactNumber", credential.ContactNumber)
+        };
+
+        return claims;
+    }
+
+    private Credential? GetCredentials(AuthenticateRequest request)
+    {
+         Credential credential = null;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query =
+                "SELECT * FROM credentials WHERE contactnumber=@contactNumber AND password=@password";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@contactNumber", request.ContactNumber);
+            cmd.Parameters.AddWithValue("@password", request.Password);
+            con.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                string contactNumber = reader["contactnumber"].ToString();
+                string password = reader["password"].ToString();
+
+                 credential = new Credential()
+                {
+                    ContactNumber = contactNumber,
+                    Password = password
+                };
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return credential;
     }
 }

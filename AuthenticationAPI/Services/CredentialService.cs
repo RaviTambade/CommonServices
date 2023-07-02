@@ -37,4 +37,9 @@ public class CredentialService : ICredentialService
     {
         return _credentialRepository.Delete(id);
     }
+
+    public AuthenticateResponse Authenticate(AuthenticateRequest request)
+    {
+       return _credentialRepository.Authenticate(request);
+    }
 }
