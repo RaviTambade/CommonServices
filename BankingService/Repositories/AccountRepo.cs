@@ -213,13 +213,12 @@ public class AccountRepo:IAccountRepo{
         con.ConnectionString = _conString;
         try
         {
-            string query = "INSERT INTO accounts(id,acctnumber,accttype,ifsccode,customerid,balance) VALUES(@Id,@acctNumber,@acctType,@ifscCode,@customerId,@balance)";
+            string query = "INSERT INTO accounts(acctnumber,accttype,ifsccode,peopleid,balance) VALUES(@acctNumber,@acctType,@ifscCode,@peopleId,@balance)";
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@id", acct.Id);
             command.Parameters.AddWithValue("@acctNumber", acct.AcctNumber);
             command.Parameters.AddWithValue("@acctType", acct.AcctType);
             command.Parameters.AddWithValue("@ifscCode", acct.IFSCCode);
-            command.Parameters.AddWithValue("@customerId", acct.CustomerId);
+            command.Parameters.AddWithValue("@peopleId", acct.PeopleId);
             command.Parameters.AddWithValue("@balance", acct.Balance);
              
             con.Open();
