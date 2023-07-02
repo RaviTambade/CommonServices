@@ -1,55 +1,55 @@
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\BankingService.csproj.AssemblyReference.cache
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\BankingService.GeneratedMSBuildEditorConfig.editorconfig
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\BankingService.AssemblyInfoInputs.cache
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\BankingService.AssemblyInfo.cs
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\BankingService.csproj.CoreCompileInputs.cache
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\BankingService.MvcApplicationPartsAssemblyInfo.cs
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\BankingService.MvcApplicationPartsAssemblyInfo.cache
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\appsettings.Development.json
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\appsettings.json
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\BankingService.exe
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\BankingService.deps.json
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\BankingService.runtimeconfig.json
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\BankingService.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\BankingService.pdb
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\Google.Protobuf.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\K4os.Compression.LZ4.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\K4os.Compression.LZ4.Streams.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\K4os.Hash.xxHash.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\Microsoft.OpenApi.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\MySql.Data.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\BouncyCastle.Crypto.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\System.Drawing.Common.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\System.Security.Permissions.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\System.Windows.Extensions.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win-x64\native\comerr64.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win-x64\native\gssapi64.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win-x64\native\k5sprt64.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win-x64\native\krb5_64.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win-x64\native\krbcc64.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\Final project\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets\msbuild.BankingService.Microsoft.AspNetCore.StaticWebAssets.props
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets\msbuild.build.BankingService.props
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.BankingService.props
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.BankingService.props
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets.pack.json
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets.build.json
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets.development.json
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\scopedcss\bundle\BankingService.styles.css
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\BankingService.csproj.CopyComplete
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\BankingService.dll
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\refint\BankingService.dll
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\BankingService.pdb
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\BankingService.genruntimeconfig.cache
-D:\Final project\CommonServices\BankingService\obj\Debug\net7.0\ref\BankingService.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\appsettings.Development.json
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\appsettings.json
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\BankingService.exe
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\Google.Protobuf.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\K4os.Compression.LZ4.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\K4os.Compression.LZ4.Streams.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\K4os.Hash.xxHash.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\MySql.Data.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\BouncyCastle.Crypto.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\System.Drawing.Common.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\System.Security.Permissions.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\System.Windows.Extensions.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win-x64\native\comerr64.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win-x64\native\gssapi64.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win-x64\native\k5sprt64.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win-x64\native\krb5_64.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win-x64\native\krbcc64.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\BankingService.csproj.AssemblyReference.cache
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\BankingService.GeneratedMSBuildEditorConfig.editorconfig
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\BankingService.AssemblyInfoInputs.cache
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\BankingService.AssemblyInfo.cs
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\BankingService.csproj.CoreCompileInputs.cache
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\BankingService.MvcApplicationPartsAssemblyInfo.cs
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\BankingService.MvcApplicationPartsAssemblyInfo.cache
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets\msbuild.BankingService.Microsoft.AspNetCore.StaticWebAssets.props
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets\msbuild.build.BankingService.props
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.BankingService.props
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.BankingService.props
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets.pack.json
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets.build.json
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\staticwebassets.development.json
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\scopedcss\bundle\BankingService.styles.css
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\BankingService.csproj.CopyComplete
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\BankingService.dll
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\refint\BankingService.dll
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\BankingService.pdb
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\BankingService.deps.json
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\BankingService.runtimeconfig.json
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\BankingService.dll
+C:\PersonalInfo\CommonServices\BankingService\bin\Debug\net7.0\BankingService.pdb
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\BankingService.genruntimeconfig.cache
+C:\PersonalInfo\CommonServices\BankingService\obj\Debug\net7.0\ref\BankingService.dll

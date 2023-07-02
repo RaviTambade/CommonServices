@@ -9,9 +9,16 @@ import { Account } from '../account';
 })
 export class UpdateAccountComponent {
     constructor(private svc :AccountManagerService){}
-account :Account | undefined;
+    account:Account={
+      peopleId: 1,
+      acctNumber: '',
+      acctType: '',
+      ifscCode: '',
+      balance: 0,
+      registeredDate: new Date()
+    }
 
-    public updateAccount(){
+    public updateAccount(form:any){
       this.svc.UpdateAccount(this.account).subscribe((res)=>{
         this.account =res;
       })

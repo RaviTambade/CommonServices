@@ -6,6 +6,7 @@ import { PersonalinfoModule } from './personalinfo/personalinfo.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationModule, authRoutes } from './authentication/authentication.module';
 import { AuthenticationRoutingComponent } from './authentication/authentication-routing/authentication-routing.component';
+import { AccountManagerModule } from './account-manager/account-manager.module';
 
 const routes: Routes = [
 {path:'authentication',component:AuthenticationRoutingComponent,children:authRoutes },
@@ -19,6 +20,7 @@ const routes: Routes = [
     AddressesModule,
     PersonalinfoModule,
     AuthenticationModule,
+    AccountManagerModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

@@ -139,8 +139,6 @@ public class PeopleRepository : IPeopleRepository
             }
             return peoples;
     }
-
-
     public async Task<People> GetDetails(string addharid){
       
           People people =new People();
@@ -190,6 +188,54 @@ public class PeopleRepository : IPeopleRepository
 
     }
 
+     public async Task<People> GetPeople(int peopleId)
+    {
+            People people=new People();
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = _constring;
+            try
+            {
+                string query = "select * from peoples where id=@peopleId";
+                MySqlCommand cmd = new MySqlCommand(query,con);
+                cmd.Parameters.AddWithValue("@peopleId",peopleId);
+                await con.OpenAsync();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while(await reader.ReadAsync())
+                {
+                    int id = int.Parse(reader["id"].ToString());
+                    string? aadharId = reader["aadharid"].ToString();
+                    string? firstName = reader["firstname"].ToString();
+                    string? lastName = reader["lastname"].ToString();
+                    DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
+                    DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);      
+                    string? gender = reader["gender"].ToString();
+                    string? email = reader["email"].ToString();
+                    string? contactNumber = reader["contactnumber"].ToString();
+                    people = new People()
+                    {
+                        Id = id,
+                        AadharId = aadharId,
+                        FirstName = firstName,
+                        LastName = lastName,
+                        BirthDate = dateOnlyBirthDate,
+                        Gender = gender,
+                        Email = email,
+                        ContactNumber = contactNumber
+
+                    };
+                }
+                await reader.CloseAsync();
+            }
+            catch(Exception e){
+                throw e;
+            }
+            finally{
+                await con.CloseAsync();
+            }
+            return people;
+    }
+
+
        public async Task<bool> DeletePeople(string addharid)
     {
         bool status = false;
@@ -220,5 +266,4 @@ public class PeopleRepository : IPeopleRepository
         }
         return status;
     }
-
 }

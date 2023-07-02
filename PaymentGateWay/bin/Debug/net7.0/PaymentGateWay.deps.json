@@ -8,11 +8,9 @@
     ".NETCoreApp,Version=v7.0": {
       "PaymentGateWay/1.0.0": {
         "dependencies": {
-          "EntityLib": "1.0.0",
           "Microsoft.AspNetCore.OpenApi": "7.0.5",
-          "ServicesLib": "1.0.0",
           "Swashbuckle.AspNetCore": "6.4.0",
-          "repolib": "1.0.0"
+          "MySql.Data": "8.0.33"
         },
         "runtime": {
           "PaymentGateWay.dll": {}
@@ -347,29 +345,6 @@
             "fileVersion": "4.700.19.56404"
           }
         }
-      },
-      "EntityLib/1.0.0": {
-        "runtime": {
-          "EntityLib.dll": {}
-        }
-      },
-      "repolib/1.0.0": {
-        "dependencies": {
-          "EntityLib": "1.0.0",
-          "MySql.Data": "8.0.33"
-        },
-        "runtime": {
-          "repolib.dll": {}
-        }
-      },
-      "ServicesLib/1.0.0": {
-        "dependencies": {
-          "EntityLib": "1.0.0",
-          "repolib": "1.0.0"
-        },
-        "runtime": {
-          "ServicesLib.dll": {}
-        }
       }
     }
   },
@@ -637,21 +612,6 @@
       "sha512": "sha512-CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
-    },
-    "EntityLib/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "repolib/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "ServicesLib/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }
