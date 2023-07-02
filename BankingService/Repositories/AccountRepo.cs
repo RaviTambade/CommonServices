@@ -110,7 +110,7 @@ public class AccountRepo:IAccountRepo{
                 double Balance = double.Parse(reader["balance"].ToString());
                     
                    //DateTime date = reader["registereddate"].ToString();
-                int custId = int.Parse(reader["customerid"].ToString());
+                int custId = int.Parse(reader["peopleid"].ToString());
                 acct = new Account
                 {
                         Id = id,
