@@ -1,5 +1,7 @@
-using RepoLib;
-using ServicesLib;
+using API.Repositories;
+using API.Repositories.Interfaces;
+using API.Services;
+using API.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
