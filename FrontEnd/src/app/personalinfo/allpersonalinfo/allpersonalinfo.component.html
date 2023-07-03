@@ -1,1 +1,25 @@
-<p>allpersonalinfo works!</p>
+<table>
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Aadhar Id</th>
+        <th>Birth Date</th>
+        <th>Gender</th>
+        <th>Email</th>
+        <th>Contact Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let info of allPersonalInfo">
+        <td>{{ info.firstName }}</td>
+        <td>{{ info.lastName }}</td>
+        <td>{{ info.aadharId }}</td>
+        <td>{{ info.birthDate |date}}</td>
+        <td>{{ info.gender }}</td>
+        <td>{{ info.email }}</td>
+        <td>{{ info.contactNumber }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
