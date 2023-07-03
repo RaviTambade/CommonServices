@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AccountManagerService } from '../account-manager.service';
 
 @Component({
   selector: 'app-details',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class DetailsComponent {
 
+  constructor(private svc:AccountManagerService){}
+  acctno:any;
+  onClick(acctno:any){
+console.log(acctno);
+    this.svc.getDetails(acctno).subscribe((res)=>{
+      console.log(res);
+    })
+  }
 }

@@ -18,7 +18,9 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule
   ],
   exports: [
-    CreateAccountComponent
+    CreateAccountComponent,
+    UpdateAccountComponent,
+    DetailsComponent
   ]
 })
 export class AccountManagerModule { }

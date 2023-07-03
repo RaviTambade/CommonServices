@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AccountManagerService } from '../account-manager.service';
-import { Account } from '../account';
+import { Account } from 'src/app/Account';
 
 @Component({
   selector: 'app-update-account',

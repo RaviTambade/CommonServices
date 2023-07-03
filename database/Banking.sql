@@ -1,4 +1,4 @@
--- Active: 1678339848098@@127.0.0.1@3306@banking1
+-- Active: 1678859769284@@127.0.0.1@3306
 
 
 DROP DATABASE IF EXISTS  banking1;
