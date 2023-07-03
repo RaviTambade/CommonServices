@@ -266,4 +266,34 @@ public class PeopleRepository : IPeopleRepository
         }
         return status;
     }
+
+       public async Task<bool> DeletePeoplebyId(int peopleId)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+
+        try
+        {
+            string query = "Delete from peoples where id=@PeopleId";
+            Console.WriteLine(query);
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@PeopleId",peopleId);
+            await con.OpenAsync();
+            int rowsAffected = command.ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
 }

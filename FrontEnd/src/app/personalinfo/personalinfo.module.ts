@@ -24,7 +24,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   ],
   exports:[
     AddpersonalinfoComponent,
-    EditpersonalinfoComponent
+    EditpersonalinfoComponent,
+    GetpersonalinfoComponent,
+    AllpersonalinfoComponent,
+    RemovepersonalinfoComponent
   ]
 })
 export class PersonalinfoModule { }

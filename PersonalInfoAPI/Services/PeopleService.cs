@@ -22,6 +22,8 @@ public class PeopleService:IPeopleService{
 
    public async Task<bool> DeletePeople(string aaddharid)=> await _repo.DeletePeople(aaddharid);
     public async Task<People> GetPeople(int peopleId)=>await _repo.GetPeople(peopleId);
+   public async Task<bool> DeletePeoplebyId(int peopleId)=> await _repo.DeletePeoplebyId(peopleId);
+
     
 
 }

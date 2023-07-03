@@ -37,4 +37,9 @@ return this.httpClient.get<any>(url)
     );
     return this.personalInfoSubject.asObservable();
   }
+
+  removePersonalInfo(peopleId:number):Observable<any>{
+    let url="http://localhost:5102/api/peoples/" +peopleId 
+    return this.httpClient.delete<any>(url)
+  }
   }

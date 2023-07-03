@@ -12,4 +12,6 @@ public interface IPeopleRepository
    Task<People> GetPeople(int peopleId);
 
    Task<bool> DeletePeople(string addharid);
+   Task<bool> DeletePeoplebyId(int peopleId);
+
 }
