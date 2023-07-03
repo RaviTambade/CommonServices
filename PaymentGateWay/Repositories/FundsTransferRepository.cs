@@ -24,15 +24,18 @@ public class PaymentGatewayRepo:IPaymentGatewayRepo
         try{
             con.Open();
             MySqlCommand cmd = new MySqlCommand("fundtransfer", con as MySqlConnection);
-            cmd.CommandType=CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@fromaccountnumber",info.FromAcct);
             cmd.Parameters.AddWithValue("@toaccountnumber",info.ToAcct);
             cmd.Parameters.AddWithValue("@amount",info.Amount);
+            cmd.Parameters.AddWithValue("@fromifsccode",info.FromIfsc);
+            cmd.Parameters.AddWithValue("@toifsccode",info.ToIfsc);
+            cmd.Parameters.AddWithValue("@transactionId", MySqlDbType.Int32);
             cmd.Parameters["@transactionId"].Direction=ParameterDirection.Output;
             int rowsAffected = cmd.ExecuteNonQuery();
             transactionId=(int)cmd.Parameters["@transactionId"].Value;
         }
-         catch (Exception e)
+        catch (Exception e)
         {
             throw e;
         }

@@ -21,7 +21,7 @@ export class RemovepersonalinfoComponent {
       email: '',
       contactNumber: ''
     }
-    this.personalInfoId=2;
+    this.personalInfoId=4;
   }
     ngOnInit(): void {
     }

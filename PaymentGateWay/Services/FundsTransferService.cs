@@ -10,7 +10,7 @@ public class PaymentGatewayService:IPaymentGatewayService
 {
     private IPaymentGatewayRepo _repo;
 
-   public PaymentGatewayService(PaymentGatewayRepo repo)
+   public PaymentGatewayService(IPaymentGatewayRepo repo)
    {
      _repo =repo;
    }

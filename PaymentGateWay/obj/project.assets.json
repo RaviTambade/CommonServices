@@ -2155,24 +2155,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\naval\\.nuget\\packages\\": {}
+    "C:\\Users\\admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CommonServices\\PaymentGateWay\\PaymentGateWay.csproj",
+      "projectUniqueName": "E:\\RushiRepo\\CommonServices\\PaymentGateWay\\PaymentGateWay.csproj",
       "projectName": "PaymentGateWay",
-      "projectPath": "D:\\CommonServices\\PaymentGateWay\\PaymentGateWay.csproj",
-      "packagesPath": "C:\\Users\\naval\\.nuget\\packages\\",
-      "outputPath": "D:\\CommonServices\\PaymentGateWay\\obj\\",
+      "projectPath": "E:\\RushiRepo\\CommonServices\\PaymentGateWay\\PaymentGateWay.csproj",
+      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+      "outputPath": "E:\\RushiRepo\\CommonServices\\PaymentGateWay\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\naval\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2223,7 +2226,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

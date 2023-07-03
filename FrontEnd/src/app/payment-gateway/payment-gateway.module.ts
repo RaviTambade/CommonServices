@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DebitCardComponent } from './debit-card/debit-card.component';
 import { CreditCardComponent } from './credit-card/credit-card.component';
 import { AccountComponent } from './account/account.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,11 @@ import { AccountComponent } from './account/account.component';
     AccountComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
+  ],
+  exports : [
+    AccountComponent
   ]
 })
 export class PaymentGatewayModule { }

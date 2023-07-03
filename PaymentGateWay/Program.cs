@@ -9,6 +9,7 @@ var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddCors();
 builder.Services.AddScoped<IPaymentGatewayRepo, PaymentGatewayRepo>();
 builder.Services.AddScoped<IPaymentGatewayService, PaymentGatewayService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -38,6 +39,9 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.UseCors(MyAllowSpecificOrigins);
+app.UseCors(x => x.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
 
 app.MapControllers();
 
