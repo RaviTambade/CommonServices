@@ -27,7 +27,7 @@ public class OperationsController : ControllerBase
     
 
 [HttpGet]
-[Route("operationsbyaccountnumber")]
+[Route("operationsbyaccountnumber/{acctNumber}")]
 public  Operation GetOperationByAccountNumber(string acctNumber)
     {
         Operation opeartion=_svc.GetByAccountNumber(acctNumber);
