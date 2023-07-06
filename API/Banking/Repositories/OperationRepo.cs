@@ -80,19 +80,20 @@ public class OperationRepo:IOperationRepo{
             }
             return operationlist;
       }   
-    Operation IOperationRepo.GetByAccountNumber(string acctNumber)
+   public List<Operation> GetByAccountNumber(string acctNumber)
     {
-        Operation opr = null;
+        List<Operation> opr =new List<Operation>();
          
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
         try
         {
-            string query = "SELECT * FROM operations WHERE acctnumber=" + acctNumber;
+            string query = "SELECT * FROM operations WHERE acctnumber='"+ acctNumber +"'";
+            Console.WriteLine(query);
             con.Open();
             MySqlCommand command = new MySqlCommand(query, con);
             MySqlDataReader reader = command.ExecuteReader();
-            if (reader.Read())
+            while (reader.Read())
             {
                 int operationId = int.Parse(reader["operationid"].ToString());
                     int acctId = int.Parse(reader["acctid"].ToString());
@@ -101,17 +102,17 @@ public class OperationRepo:IOperationRepo{
                     DateTime operationdate = Convert.ToDateTime(reader["operationdate"].ToString());
                     char operationmode= Convert.ToChar(reader["operationmode"].ToString());
                     
-                    new Operation()
+                    opr.Add(new Operation
                     {
                         OperationId = operationId,
                         AcctId=acctId,
-                        AccountNumber = acctNumber,
+                        AccountNumber = acctNum,
                         Amount = amount,
                         OperationTime=operationdate,
                         OperationMode=operationmode
-                    };
+                    });
             }
-
+            reader.Close();
         }
         catch (Exception e)
         {
@@ -124,7 +125,7 @@ public class OperationRepo:IOperationRepo{
         return opr;
     }
 
-    Operation IOperationRepo.GetById(int Id)
+    Operation IOperationRepo.GetById(int id)
     {
 
         Operation opr = null;
@@ -133,7 +134,7 @@ public class OperationRepo:IOperationRepo{
         con.ConnectionString = _conString;
         try
         {
-            string query = "SELECT * FROM operations WHERE operationid=" + Id;
+            string query = "SELECT * FROM operations WHERE operationid=" + id;
             con.Open();
             MySqlCommand command = new MySqlCommand(query, con);
             MySqlDataReader reader = command.ExecuteReader();
@@ -146,7 +147,7 @@ public class OperationRepo:IOperationRepo{
                     DateTime operationdate = Convert.ToDateTime(reader["operationdate"].ToString());
                     char operationmode= Convert.ToChar(reader["operationmode"].ToString());
                     
-                    new Operation()
+                   opr= new Operation()
                     {
                         OperationId = operationId,
                         AcctId=acctId,
@@ -156,7 +157,7 @@ public class OperationRepo:IOperationRepo{
                         OperationMode=operationmode
                     };
             }
-
+           reader.Close();
         }
         catch (Exception e)
         {
@@ -169,7 +170,7 @@ public class OperationRepo:IOperationRepo{
         return opr;
     }
 
-    List<Operation> IOperationRepo.GetByMode(char mode)
+    List<Operation> IOperationRepo.GetByMode(string mode)
     {
         
         List<Operation> oprlist = new List<Operation>();
@@ -182,7 +183,9 @@ public class OperationRepo:IOperationRepo{
             string query = "SELECT * FROM operations WHERE operationmode= @mode";
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@mode",mode);
+           Console.WriteLine(command.CommandText);
             con.Open();
+
             MySqlDataReader reader = command.ExecuteReader();
             //if((reader.Read())!=null)
            // Console.WriteLine(reader);
@@ -209,7 +212,7 @@ public class OperationRepo:IOperationRepo{
 
                     
                 }
-
+           reader.Close();
         }
         catch (Exception e)
         {

@@ -27,11 +27,10 @@ public class OperationsService:IOperationsService
         return operations;
     }
 
-    public Operation GetByAccountNumber(string acctNumber)
+    public List<Operation> GetByAccountNumber(string acctNumber)
     {
-       Operation opeartion=new Operation();
-        opeartion=_repo.GetByAccountNumber(acctNumber);
-        return opeartion;
+       return _repo.GetByAccountNumber(acctNumber);
+         
     }
 
     public bool Delete(string acctNumber)
@@ -52,13 +51,13 @@ public class OperationsService:IOperationsService
          return status;
     }
 
-    public Operation GetById(int Id)
+    public Operation GetById(int id)
     {
-        throw new NotImplementedException();
+        return _repo.GetById(id);
     }
 
-    public List<Operation> GetByMode(char Mode)
+    public List<Operation> GetByMode(string mode)
     {
-        throw new NotImplementedException();
+      return  _repo.GetByMode(mode);
     }
 }
