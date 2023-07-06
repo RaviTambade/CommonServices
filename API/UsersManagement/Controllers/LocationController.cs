@@ -8,10 +8,10 @@ namespace PersonalInfoAPI.Controllers;
 
     [ApiController]
     [Route("/api/[controller]")]
-    public class AddressesController : ControllerBase
+    public class LocationController : ControllerBase
     {
-        private readonly IAddressService _addresssrv;
-        public AddressesController(IAddressService service)
+        private readonly ILocationService _addresssrv;
+        public LocationController(ILocationService service)
         {
             _addresssrv = service;
         }

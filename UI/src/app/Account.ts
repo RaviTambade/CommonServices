@@ -7,6 +7,4 @@ export class Account{
         public balance:number,
         public registeredDate:Date,
    ){}
-
-
 }

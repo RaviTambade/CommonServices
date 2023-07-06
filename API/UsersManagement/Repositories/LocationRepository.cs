@@ -3,11 +3,11 @@ using PersonalInfoAPI.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
 namespace PersonalInfoAPI.Repositories;
 
-public class AddressRepository : IAddressRepository
+public class LocationRepository : ILocationRepository
 {
     private IConfiguration _configuration;
     private string _conString;
-    public AddressRepository(IConfiguration configuration)
+    public LocationRepository(IConfiguration configuration)
     {
         _configuration = configuration;
         _conString = this._configuration.GetConnectionString("DefaultConnection");
