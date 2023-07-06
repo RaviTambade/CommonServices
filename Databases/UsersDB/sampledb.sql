@@ -3,8 +3,8 @@ INSERT INTO users(aadharid,firstname,lastname,birthdate,gender,email,contactnumb
 INSERT INTO users(aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("58040801153","Akash","Ajab","2000-12-28","male","ajabakash11@gmail.com","9881571268");
 
 
-insert into locations(userid,longitude, latitude, landmark, pincode)values (1, "9.595334","18.535317","bazar peth", "415612" );
-insert into locations(userid,longitude, latitude, landmark, pincode)values (2, "9.595334","18.535317","Rest House", "412452" );
-insert into locations(userid,longitude, latitude, landmark, pincode)values (3, "9.595334","18.535317","Taj Hotel", "521411" );
-insert into locations(userid,longitude, latitude, landmark, pincode)values (3, "9.595334","18.535317","Taj BeautiParal", "521418" );
+INSERT INTO locations(userid,longitude, latitude, landmark, pincode)VALUES (1, "9.595334","18.535317","bazar peth", "415612" );
+INSERT INTO locations(userid,longitude, latitude, landmark, pincode)VALUES (2, "9.595334","18.535317","Rest House", "412452" );
+INSERT INTO locations(userid,longitude, latitude, landmark, pincode)VALUES (3, "9.595334","18.535317","Taj Hotel", "521411" );
+INSERT INTO locations(userid,longitude, latitude, landmark, pincode)VALUES (3, "9.595334","18.535317","Taj BeautiParal", "521418" );
                   
