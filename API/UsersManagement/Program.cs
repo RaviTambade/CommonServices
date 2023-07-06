@@ -1,7 +1,7 @@
-using PersonalInfoAPI.Repositories.Interfaces;
-using PersonalInfoAPI.Repositories;
-using PersonalInfoAPI.Services.Interfaces;
-using PersonalInfoAPI.Services;
+using UsersManagement.Repositories.Interfaces;
+using UsersManagement.Repositories;
+using UsersManagement.Services.Interfaces;
+using UsersManagement.Services;
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -10,8 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddCors();
 builder.Services.AddControllers();
-builder.Services.AddScoped<IPeopleRepository,PeopleRepository>();
-builder.Services.AddScoped<IPeopleService,PeopleService>();
+builder.Services.AddScoped<IUserRepository,UserRepository>();
+builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddScoped<IAddressRepository,AddressRepository>();
 builder.Services.AddScoped<IAddressService,AddressService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

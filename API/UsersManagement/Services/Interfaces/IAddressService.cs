@@ -1,6 +1,6 @@
-using PersonalInfoAPI.Repositories.Interfaces;
+using UsersManagement.Repositories.Interfaces;
 
-namespace PersonalInfoAPI.Services.Interfaces;
+namespace UsersManagement.Services.Interfaces;
 
 public interface IAddressService : IAddressRepository
 {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Addresses } from 'src/app/addresses';
+import { Location } from 'src/app/location';
 import { AddressesService } from '../addresses.service';
 import { NgForm } from '@angular/forms';
 
@@ -11,8 +11,8 @@ import { NgForm } from '@angular/forms';
 export class AddAddressComponent {
 
 
-  address:Addresses={
-    personId: 2,
+  address:Location ={
+    userId: 2,
     latitude: '18.12345',
     longitude: '9.56789',
     landMark: '',
@@ -22,12 +22,12 @@ export class AddAddressComponent {
 
  
   onInsert(form:NgForm){
-   this.address.pinCode= form.value.pincode;
-   this.address.landMark=form.value.landmark;
-   console.log(this.address);
-     this.svc.addAddress(this.address).subscribe((res) => {
-      console.log(res);
-});
+//    this.address.pinCode= form.value.pincode;
+//    this.address.landMark=form.value.landmark;
+//    console.log(this.address);
+//      this.svc.addAddress(this.address).subscribe((res) => {
+//       console.log(res);
+// });
 }
   
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\RushiRepo\\CommonServices\\BankingService\\BankingService.csproj": {}
+    "C:\\Users\\dell\\Desktop\\bl\\CommonServices\\API\\Banking\\BankingService.csproj": {}
   },
   "projects": {
-    "E:\\RushiRepo\\CommonServices\\BankingService\\BankingService.csproj": {
+    "C:\\Users\\dell\\Desktop\\bl\\CommonServices\\API\\Banking\\BankingService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\RushiRepo\\CommonServices\\BankingService\\BankingService.csproj",
+        "projectUniqueName": "C:\\Users\\dell\\Desktop\\bl\\CommonServices\\API\\Banking\\BankingService.csproj",
         "projectName": "BankingService",
-        "projectPath": "E:\\RushiRepo\\CommonServices\\BankingService\\BankingService.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "E:\\RushiRepo\\CommonServices\\BankingService\\obj\\",
+        "projectPath": "C:\\Users\\dell\\Desktop\\bl\\CommonServices\\API\\Banking\\BankingService.csproj",
+        "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dell\\Desktop\\bl\\CommonServices\\API\\Banking\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
