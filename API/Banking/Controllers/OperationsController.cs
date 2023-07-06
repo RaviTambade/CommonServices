@@ -76,7 +76,9 @@ public class OperationsController : ControllerBase
         return status;
     }
 
-
+    // HTTP Verb: PUT   url: http://banking/operaionts/456545
+    //body: operation object
+    //[Route("banking/operations/{operationid}")]
     [HttpPut]
     [Route("operations")]
     public bool Update(Operation opr)

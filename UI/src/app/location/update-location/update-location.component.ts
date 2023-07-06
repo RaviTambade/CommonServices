@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { AddressesService } from '../addresses.service';
+import { LocationService } from '../location.service';
 import { NgForm } from '@angular/forms';
-import { Location } from 'src/app/location';
+import { Location } from '../location'; 
 
 @Component({
-  selector: 'app-update-address',
-  templateUrl: './update-address.component.html',
-  styleUrls: ['./update-address.component.css']
+  selector: 'app-update-location',
+  templateUrl: './update-location.component.html',
+  styleUrls: ['./update-location.component.css']
 })
-export class UpdateAddressComponent  {
- 
-  address:Location={
+export class UpdateLocationComponent {
+  address:Location =
+  {
     userId: 3,
     latitude: '18.535317',
     longitude: '9.595334',
@@ -20,7 +20,7 @@ export class UpdateAddressComponent  {
 
   status: boolean | undefined;
 
-  constructor(private svc:AddressesService){}
+  constructor(private svc:LocationService){}
 
   onUpdate(form:NgForm){
 //    this.address.pinCode= form.value.pincode;
@@ -31,5 +31,4 @@ export class UpdateAddressComponent  {
 //       console.log(res);
 // });
 }
-
 }
