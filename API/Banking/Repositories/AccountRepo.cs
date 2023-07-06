@@ -56,7 +56,7 @@ public class AccountRepo:IAccountRepo{
                     double Balance = double.Parse(reader["balance"].ToString());
                     
                    //DateTime date = reader["registereddate"].ToString();
-                    int custId = int.Parse(reader["customerid"].ToString());
+                    int peopleId = int.Parse(reader["peopleid"].ToString());
                     acctlist.Add(new Account()
                     {
                         Id = id,
@@ -64,7 +64,7 @@ public class AccountRepo:IAccountRepo{
                         AcctType = acctType,
                         IFSCCode = ifscCode,
                         Balance = Balance,
-                        CustomerId = custId
+                        PeopleId = peopleId
                     });
                 }
                 reader.Close();
@@ -110,7 +110,7 @@ public class AccountRepo:IAccountRepo{
                 double Balance = double.Parse(reader["balance"].ToString());
                     
                    //DateTime date = reader["registereddate"].ToString();
-                int custId = int.Parse(reader["peopleid"].ToString());
+                int peopleId = int.Parse(reader["peopleid"].ToString());
                 acct = new Account
                 {
                         Id = id,
@@ -118,7 +118,7 @@ public class AccountRepo:IAccountRepo{
                         AcctType = acctType,
                         IFSCCode = ifscCode,
                         Balance = Balance,
-                        CustomerId = custId
+                        PeopleId = peopleId
                 };
             }
 
@@ -159,7 +159,7 @@ public class AccountRepo:IAccountRepo{
                 double Balance = double.Parse(reader["balance"].ToString());
                     
                    //DateTime date = reader["registereddate"].ToString();
-                int custId = int.Parse(reader["customerid"].ToString());
+                int peopleId = int.Parse(reader["peopleid"].ToString());
                 acct = new Account
                 {
                         Id = id,
@@ -167,7 +167,7 @@ public class AccountRepo:IAccountRepo{
                         AcctType = acctType,
                         IFSCCode = ifscCode,
                         Balance = Balance,
-                        CustomerId = custId
+                        PeopleId = peopleId
                 };
             }
 
@@ -246,10 +246,10 @@ public class AccountRepo:IAccountRepo{
         con.ConnectionString = _conString;
         try
         {
-            string query = "Update accounts SET acctnumber =@acctNumber,accttype=@acctType,ifsccode =@ifscCode,balance=@balance,customerid=@customerid WHERE id=@Id";
+            string query = "Update accounts SET acctnumber =@acctNumber,accttype=@acctType,ifsccode =@ifscCode,balance=@balance,peopleid=@peopleid WHERE id=@Id";
             System.Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@customerid", acct.CustomerId);
+            command.Parameters.AddWithValue("@peopleid", acct.PeopleId);
             command.Parameters.AddWithValue("@acctNumber", acct.AcctNumber);
             command.Parameters.AddWithValue("@acctType", acct.AcctType);
             command.Parameters.AddWithValue("@ifscCode", acct.IFSCCode);
