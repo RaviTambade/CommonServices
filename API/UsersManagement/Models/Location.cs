@@ -1,6 +1,6 @@
 namespace PersonalInfoAPI.Models;
 
-public class Address 
+public class Location 
 {
     public int Id {get; set;}
     public int PersonId {get; set;}
