@@ -18,34 +18,21 @@ public class CredentialRepository : ICredentialRepository
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
 
-    public bool Validate(Credential credential)
+       public AuthenticateResponse Authenticate(AuthenticateRequest request)
     {
-        bool status = false;
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
+        var credential = GetCredentials(request);
+        
+        if (credential == null)
         {
-            string query =
-                "SELECT EXISTS(SELECT * FROM credentials WHERE contactnumber=@contactNumber AND password=@password)";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@contactNumber", credential.ContactNumber);
-            cmd.Parameters.AddWithValue("@password", credential.Password);
-            con.Open();
-            long result = (long)cmd.ExecuteScalar();
-            if (result == 1)
-            {
-                status = true;
-            }
+            return null;
         }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return status;
+
+        var token =  generateJwtToken(credential);
+        return new AuthenticateResponse(token);
     }
+
+   
+
 
     public bool Register(Credential credential)
     {
@@ -163,18 +150,7 @@ public class CredentialRepository : ICredentialRepository
         return status;
     }
 
-    public AuthenticateResponse Authenticate(AuthenticateRequest request)
-    {
-        var credential = GetCredentials(request);
-        
-        if (credential == null)
-        {
-            return null;
-        }
-
-        var token =  generateJwtToken(credential);
-        return new AuthenticateResponse(token);
-    }
+ 
     private string generateJwtToken(Credential credential)
     {
         //token will expire after one hour 

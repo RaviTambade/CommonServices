@@ -3,11 +3,10 @@ using AuthenticationAPI.Models;
 namespace AuthenticationAPI.Repositories.Interfaces;
 
 public interface ICredentialRepository{
-    bool Validate(Credential credential); 
+    AuthenticateResponse Authenticate(AuthenticateRequest request);
     bool Register(Credential credential);
     bool UpdatePassword(ChangePassword credential);
     bool UpdateContactNumber(ChangeContactNumber credential);
     bool Delete(int id);
-    AuthenticateResponse Authenticate(AuthenticateRequest request);
 
 }
