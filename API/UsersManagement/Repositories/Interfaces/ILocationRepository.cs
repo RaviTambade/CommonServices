@@ -1,6 +1,6 @@
-using PersonalInfoAPI.Models;
+using UsersManagement.Models;
 
-namespace PersonalInfoAPI.Repositories.Interfaces;
+namespace UsersManagement.Repositories.Interfaces;
 
 public interface ILocationRepository
 {

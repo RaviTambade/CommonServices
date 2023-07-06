@@ -8,7 +8,7 @@ import { Location } from './location';
 })
 export class LocationService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {}
 
   updateAddress(address:Location):Observable<any>{
     let url ="http://localhost:5102/api/location/";

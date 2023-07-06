@@ -1,7 +1,7 @@
-using PersonalInfoAPI.Models;
-using PersonalInfoAPI.Repositories.Interfaces;
+using UsersManagement.Models;
+using UsersManagement.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
-namespace PersonalInfoAPI.Repositories;
+namespace UsersManagement.Repositories;
 
 public class LocationRepository : ILocationRepository
 {

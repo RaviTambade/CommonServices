@@ -1,8 +1,8 @@
-using PersonalInfoAPI.Models;
-using PersonalInfoAPI.Repositories.Interfaces;
-using PersonalInfoAPI.Services.Interfaces;
+using UsersManagement.Models;
+using UsersManagement.Repositories.Interfaces;
+using UsersManagement.Services.Interfaces;
 
-namespace PersonalInfoAPI.Services;
+namespace UsersManagement.Services;
 
 public class LocationService : ILocationService
 {
