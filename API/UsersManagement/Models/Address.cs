@@ -1,4 +1,4 @@
-namespace PersonalInfoAPI.Models;
+namespace UsersManagement.Models;
 
 public class Address 
 {

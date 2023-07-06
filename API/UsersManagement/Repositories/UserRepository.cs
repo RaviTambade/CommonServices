@@ -1,24 +1,24 @@
-using PersonalInfoAPI.Models;
-using PersonalInfoAPI.Repositories.Interfaces;
+using UsersManagement.Models;
+using UsersManagement.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
 using System.Globalization;
 
-namespace PersonalInfoAPI.Repositories;
+namespace UsersManagement.Repositories;
 
-public class PeopleRepository : IPeopleRepository
+public class UserRepository : IUserRepository
 {
     private readonly IConfiguration _configuration;
 
     private readonly string _constring;
 
-    public PeopleRepository(IConfiguration configuration)
+    public UserRepository(IConfiguration configuration)
     {
 
         _configuration = configuration;
         _constring = this._configuration.GetConnectionString("DefaultConnection");
     }
 
-    public async Task<bool> AddPerson(People people)
+    public async Task<bool> AddUser(User user)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -26,17 +26,17 @@ public class PeopleRepository : IPeopleRepository
 
         try
         {
-            string birthDateString = people.BirthDate.ToString("yyyy-MM-dd");
-            string query = "Insert Into peoples(aadharid,firstname,lastname,birthdate,gender,email,contactnumber) Values(@aadharId,@firstName,@lastName,@birthDate,@gender,@email,@contactNumber)";
+            string birthDateString = user.BirthDate.ToString("yyyy-MM-dd");
+            string query = "Insert Into users(aadharid,firstname,lastname,birthdate,gender,email,contactnumber) Values(@aadharId,@firstName,@lastName,@birthDate,@gender,@email,@contactNumber)";
             MySqlCommand command = new MySqlCommand(query, con);
             await con.OpenAsync();
-            command.Parameters.AddWithValue("@aadharId", people.AadharId);
-            command.Parameters.AddWithValue("@firstName", people.FirstName);
-            command.Parameters.AddWithValue("@lastName", people.LastName);
+            command.Parameters.AddWithValue("@aadharId", user.AadharId);
+            command.Parameters.AddWithValue("@firstName", user.FirstName);
+            command.Parameters.AddWithValue("@lastName", user.LastName);
             command.Parameters.AddWithValue("@birthDate", birthDateString);
-            command.Parameters.AddWithValue("@gender", people.Gender);
-            command.Parameters.AddWithValue("@email", people.Email);
-            command.Parameters.AddWithValue("@contactNumber", people.ContactNumber);
+            command.Parameters.AddWithValue("@gender", user.Gender);
+            command.Parameters.AddWithValue("@email", user.Email);
+            command.Parameters.AddWithValue("@contactNumber", user.ContactNumber);
             int rowsAffected = command.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -54,7 +54,7 @@ public class PeopleRepository : IPeopleRepository
         return status;
     }
 
-    public async Task<bool> UpdatePerson(int id,People people)
+    public async Task<bool> UpdateUser(int id,User user)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -62,19 +62,19 @@ public class PeopleRepository : IPeopleRepository
 
         try
         {
-            string birthDateString = people.BirthDate.ToString("yyyy-MM-dd");
-            string query = "Update peoples set aadharid=@aadharId,firstname=@firstName,lastname=@lastName,birthdate=@birthDate,gender=@gender,email=@email,contactnumber=@contactNumber where id=@Id";
+            string birthDateString = user.BirthDate.ToString("yyyy-MM-dd");
+            string query = "Update users set aadharid=@aadharId,firstname=@firstName,lastname=@lastName,birthdate=@birthDate,gender=@gender,email=@email,contactnumber=@contactNumber where id=@Id";
             Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
             await con.OpenAsync();
-            command.Parameters.AddWithValue("@aadharId", people.AadharId);
-            command.Parameters.AddWithValue("@firstName", people.FirstName);
-            command.Parameters.AddWithValue("@lastName", people.LastName);
+            command.Parameters.AddWithValue("@aadharId", user.AadharId);
+            command.Parameters.AddWithValue("@firstName", user.FirstName);
+            command.Parameters.AddWithValue("@lastName", user.LastName);
             command.Parameters.AddWithValue("@birthDate", birthDateString);
-            command.Parameters.AddWithValue("@gender", people.Gender);
-            command.Parameters.AddWithValue("@email", people.Email);
+            command.Parameters.AddWithValue("@gender", user.Gender);
+            command.Parameters.AddWithValue("@email", user.Email);
             command.Parameters.AddWithValue("@Id", id);
-            command.Parameters.AddWithValue("@contactNumber", people.ContactNumber);
+            command.Parameters.AddWithValue("@contactNumber", user.ContactNumber);
             int rowsAffected = command.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -92,14 +92,14 @@ public class PeopleRepository : IPeopleRepository
         return status;
     }
 
-    public async Task<List<People>> GetAllPeoples()
+    public async Task<List<User>> GetAllUsers()
     {
-            List<People> peoples = new List<People>();
+            List<User> peoples = new List<User>();
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = _constring;
             try
             {
-                string query = "select * from peoples";
+                string query = "select * from users";
                 MySqlCommand cmd = new MySqlCommand(query,con);
                 await con.OpenAsync();
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -115,7 +115,7 @@ public class PeopleRepository : IPeopleRepository
                     string? email = reader["email"].ToString();
                     string? contactNumber = reader["contactnumber"].ToString();
 
-                    People people = new People()
+                    User people = new User()
                     {
                         Id = id,
                         AadharId = aadharId,
@@ -139,13 +139,13 @@ public class PeopleRepository : IPeopleRepository
             }
             return peoples;
     }
-    public async Task<People> GetDetails(string addharid){
+    public async Task<User> GetDetails(string addharid){
       
-          People people =new People();
+          User people =new User();
        MySqlConnection con = new MySqlConnection();
        con.ConnectionString= _constring;
        try{
-        string query = "select * from peoples where aadharid=@AadharId";
+        string query = "select * from users where aadharid=@AadharId";
         MySqlCommand command = new MySqlCommand(query,con);
         command.Parameters.AddWithValue("@AadharId",addharid);
         await con.OpenAsync();
@@ -162,7 +162,7 @@ public class PeopleRepository : IPeopleRepository
                     string? email = reader["email"].ToString();
                     string? contactNumber = reader["contactnumber"].ToString();
 
-                     people =  new People()
+                     people =  new User()
                     {
                         Id = id,
                         AadharId = aadharId,
@@ -188,16 +188,16 @@ public class PeopleRepository : IPeopleRepository
 
     }
 
-     public async Task<People> GetPeople(int peopleId)
+     public async Task<User> GetUser(int userId)
     {
-            People people=new People();
+            User people=new User();
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = _constring;
             try
             {
-                string query = "select * from peoples where id=@peopleId";
+                string query = "select * from users where id=@userId";
                 MySqlCommand cmd = new MySqlCommand(query,con);
-                cmd.Parameters.AddWithValue("@peopleId",peopleId);
+                cmd.Parameters.AddWithValue("@userId",userId);
                 await con.OpenAsync();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 while(await reader.ReadAsync())
@@ -211,7 +211,7 @@ public class PeopleRepository : IPeopleRepository
                     string? gender = reader["gender"].ToString();
                     string? email = reader["email"].ToString();
                     string? contactNumber = reader["contactnumber"].ToString();
-                    people = new People()
+                    people = new User()
                     {
                         Id = id,
                         AadharId = aadharId,
@@ -236,7 +236,7 @@ public class PeopleRepository : IPeopleRepository
     }
 
 
-       public async Task<bool> DeletePeople(string addharid)
+       public async Task<bool> DeleteUser(string addharid)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -245,7 +245,7 @@ public class PeopleRepository : IPeopleRepository
         try
         {
             //string birthDateString = people.BirthDate.ToString("yyyy-MM-dd");
-            string query = "Delete from peoples where aadharid=@AadharId";
+            string query = "Delete from users where aadharid=@AadharId";
             Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@AadharId",addharid);
@@ -267,7 +267,7 @@ public class PeopleRepository : IPeopleRepository
         return status;
     }
 
-       public async Task<bool> DeletePeoplebyId(int peopleId)
+       public async Task<bool> DeleteUserbyId(int userId)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -275,10 +275,10 @@ public class PeopleRepository : IPeopleRepository
 
         try
         {
-            string query = "Delete from peoples where id=@PeopleId";
+            string query = "Delete from users where id=@userId";
             Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@PeopleId",peopleId);
+            command.Parameters.AddWithValue("@userId",userId);
             await con.OpenAsync();
             int rowsAffected = command.ExecuteNonQuery();
             if (rowsAffected > 0)

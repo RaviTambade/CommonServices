@@ -1,6 +1,6 @@
-    namespace PersonalInfoAPI.Models;
+    namespace UsersManagement.Models;
 
-public class People{
+public class User{
 
     public int Id{get; set;}
     public string FirstName{get; set;}
