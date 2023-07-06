@@ -13,10 +13,6 @@ public class CredentialService : ICredentialService
         _credentialRepository = credentialRepository;
     }
 
-    public bool Validate(Credential credential)
-    {
-        return _credentialRepository.Validate(credential);
-    }
 
     public bool Register(Credential credential)
     {
