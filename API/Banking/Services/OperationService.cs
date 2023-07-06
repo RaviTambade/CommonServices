@@ -57,8 +57,8 @@ public class OperationsService:IOperationsService
         throw new NotImplementedException();
     }
 
-    public List<Operation> GetByMode(char Mode)
+    public List<Operation> GetByMode(char mode)
     {
-        throw new NotImplementedException();
+      return _repo.GetByMode(mode);
     }
 }

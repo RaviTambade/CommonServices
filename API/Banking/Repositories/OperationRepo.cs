@@ -209,7 +209,7 @@ public class OperationRepo:IOperationRepo{
 
                     
                 }
-
+reader.Close();
         }
         catch (Exception e)
         {

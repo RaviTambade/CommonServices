@@ -3,13 +3,19 @@ DROP DATABASE IF EXISTS  BankingDB;
 CREATE DATABASE BankingDB;
 USE BankingDB;
 
+CREATE TABLE customers(id INT AUTO_INCREMENT PRIMARY KEY,
+                       customerid INT NOT NULL UNIQUE,
+                       userorcorporateid INT NOT NULL,
+                       usertype ENUM("C","P") NOT NULL
+                       );
 CREATE TABLE accounts(id INT PRIMARY KEY AUTO_INCREMENT,
 					  acctnumber VARCHAR(20) NOT NULL,
                       accttype ENUM('savings','business','current'),
                       ifsccode VARCHAR(20),
                       balance DOUBLE,
                       registereddate DATE ,
-                      peopleid INT NOT NULL
+                      customerid INT NOT NULL,
+                      CONSTRAINT fk_customerid FOREIGN KEY(customerid) REFERENCES customers(id) ON UPDATE CASCADE ON DELETE CASCADE
                       );
                       
 CREATE TABLE operations(operationid INT PRIMARY KEY AUTO_INCREMENT,

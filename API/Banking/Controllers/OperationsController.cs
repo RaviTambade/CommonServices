@@ -4,7 +4,7 @@ using ServicesLib;
 namespace OperationsServices.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("/api/[Controller]")]
 public class OperationsController : ControllerBase
 {
 
@@ -50,8 +50,8 @@ public  Operation GetOperationByAccountNumber(string acctNumber)
 */
 
 [HttpGet]
-[Route("operationsbymode")]
-    List<Operation> GetOperations(char mode)
+[Route("{mode}")]
+  public  List<Operation> GetOperations(char mode)
     {
         List<Operation> operations=_svc.GetByMode(mode);
         return operations;
