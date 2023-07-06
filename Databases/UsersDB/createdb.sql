@@ -12,9 +12,8 @@ CREATE TABLE users(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                      contactnumber VARCHAR(40));
                      
 CREATE TABLE  locations (id INT PRIMARY KEY AUTO_INCREMENT,
-						userid int,constraint fk_users_addresses foreign key(personid) references users(id) on update cascade on delete cascade,
+						userid int,constraint fk_users_addresses foreign key(userid) references users(id) on update cascade on delete cascade,
 						longitude varchar(30),
                         latitude varchar(30),
                         landmark varchar(30),
 						pincode varchar(30));
-                     
