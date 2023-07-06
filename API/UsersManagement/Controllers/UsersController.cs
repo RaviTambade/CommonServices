@@ -18,9 +18,9 @@ public class UsersController: ControllerBase{
     [HttpPost]
     [Route("adduser")]
 
-    public async Task<bool> AddUser(User user)
+    public async Task<bool> Add(User user)
     {
-        bool status = await _svc.AddUser(user);
+        bool status = await _svc.Add(user);
         return status;
 
     }
@@ -28,9 +28,9 @@ public class UsersController: ControllerBase{
     [HttpPut]
     [Route("updateuser/{id}")]
 
-    public async Task<bool> UpdateUser(int id,User user)
+    public async Task<bool> Update(int id,User user)
     {
-        bool status = await _svc.UpdateUser(id,user);
+        bool status = await _svc.Update(id,user);
         return status;
 
     }
@@ -38,9 +38,9 @@ public class UsersController: ControllerBase{
     [HttpGet]
     [Route("getall")]
 
-    public async Task<List<User>> GetAllUsers()
+    public async Task<List<User>> GetAll()
     {
-        List<User> peoples = await _svc.GetAllUsers();
+        List<User> peoples = await _svc.GetAll();
         return peoples;
     }
 
@@ -49,33 +49,33 @@ public class UsersController: ControllerBase{
     [HttpGet]
     [Route("getDetails/{aaddharid}")]
 
-    public async Task<User> GetDetails(string aaddharid)
+    public async Task<User> GetDetails(string aadharid)
     {
-        User people = await _svc.GetDetails(aaddharid);
+        User people = await _svc.GetDetails(aadharid);
         return people;
     }
 
 
     [HttpDelete]
-    [Route("DeleteUser/{aaddharid}")]
+    [Route("DeleteUser/{aadharid}")]
 
-    public async Task<bool> DeleteUser(string aaddharid)
+    public async Task<bool> Delete(string aadharid)
     {
-        bool status = await _svc.DeleteUser(aaddharid);
+        bool status = await _svc.DeleteByAadharId(aadharid);
         return status;
     }
 
     [HttpGet]
     [Route("{userId}")]
-    public async Task<User> GetUser(int userId){
-        return await _svc.GetUser(userId);
+    public async Task<User> GetbyId(int userId){
+        return await _svc.GetById(userId);
     }
 
 
     [HttpDelete]
     [Route("{userId}")]
-   public async Task<bool> DeleteUserbyId(int userId){
-         return await _svc.DeleteUserbyId(userId);
+   public async Task<bool> DeletebyId(int userId){
+         return await _svc.DeletebyId(userId);
    } 
 
 

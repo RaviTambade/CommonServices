@@ -12,17 +12,17 @@ public class UserService:IUserService{
     }
 
 
-    public async Task<List<User>> GetAllUsers() => await _repo.GetAllUsers();
+    public async Task<List<User>> GetAll() => await _repo.GetAll();
 
-    public async Task<bool> AddUser(User user)=> await _repo.AddUser(user);
+    public async Task<bool> Add(User user)=> await _repo.Add(user);
 
-    public async Task<bool> UpdateUser(int id,User user)=> await _repo.UpdateUser(id,user);
+    public async Task<bool> Update(int id,User user)=> await _repo.Update(id,user);
 
-    public async Task<User> GetDetails(string adharid) => await _repo.GetDetails(adharid);
+    public async Task<User> GetDetails(string aadharid) => await _repo.GetDetails(aadharid);
 
-   public async Task<bool> DeleteUser(string aaddharid)=> await _repo.DeleteUser(aaddharid);
-    public async Task<User> GetUser(int userId)=>await _repo.GetUser(userId);
-   public async Task<bool> DeleteUserbyId(int userId)=> await _repo.DeleteUserbyId(userId);
+   public async Task<bool> DeleteByAadharId(string aadharid)=> await _repo.DeleteByAadharId(aadharid);
+    public async Task<User> GetById(int userId)=>await _repo.GetById(userId);
+   public async Task<bool> DeletebyId(int userId)=> await _repo.DeletebyId(userId);
 
     
 
