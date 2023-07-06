@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using AuthenticationAPI.Models;
 using AuthenticationAPI.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace AuthenticationAPI.Controllers;
 
@@ -17,33 +18,33 @@ public class CredentialController : ControllerBase
 
 
     [HttpPost("authenticate")]
-    public  AuthenticateResponse Authenticate([FromBody] AuthenticateRequest request)
+    public async Task<AuthenticateResponse> Authenticate([FromBody] AuthenticateRequest request)
     {
-        var token = _service.Authenticate(request);
+        var token = await _service.Authenticate(request);
         return token;
     }
 
     [HttpPost("register")]
-    public bool Register(Credential credential)
+    public async Task<bool> Register(Credential credential)
     {
-        return _service.Register(credential);
+        return await _service.Register(credential);
     }
 
     [HttpPut("updatecontactnumber")]
-     public bool UpdateContactNumber(ChangeContactNumber credential)
+     public async Task<bool> UpdateContactNumber(ChangeContactNumber credential)
     {
-        return _service.UpdateContactNumber(credential);
+        return await _service.UpdateContactNumber(credential);
     }
 
     [HttpPut("updatepassword")]
-    public bool UpdatePassword(ChangePassword credential)
+    public async Task<bool> UpdatePassword(ChangePassword credential)
     {
-        return _service.UpdatePassword(credential);
+        return await _service.UpdatePassword(credential);
     }
 
     [HttpDelete("{id}")]
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        return _service.Delete(id);
+        return await _service.Delete(id);
     }
 }
