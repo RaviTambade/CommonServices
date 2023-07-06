@@ -20,9 +20,9 @@ public class AddressRepository : IAddressRepository
        con.ConnectionString = _conString;
        try
        {
-        string query = "INSERT INTO addresses (personId, longitude, latitude, landmark, pincode) VALUES (@personId, @longitude, @latitude, @landMark, @pinCode)";
+        string query = "INSERT INTO locations (userId, longitude, latitude, landmark, pincode) VALUES (@userId, @longitude, @latitude, @landMark, @pinCode)";
         MySqlCommand cmd = new MySqlCommand(query, con);
-        cmd.Parameters.AddWithValue("@personId",theAddress.PersonId);
+        cmd.Parameters.AddWithValue("@userId",theAddress.UserId);
         cmd.Parameters.AddWithValue("@longitude",theAddress.Longitude);
         cmd.Parameters.AddWithValue("@latitude",theAddress.Latitude);
         cmd.Parameters.AddWithValue("@landMark",theAddress.LandMark);
@@ -52,7 +52,7 @@ public class AddressRepository : IAddressRepository
         con.ConnectionString = _conString;
         try
         {
-            string query = "UPDATE addresses SET pincode = @pinCode, longitude = @langitude, latitude = @latitude, landmark = @landMark  WHERE id = @id";
+            string query = "UPDATE locations SET pincode = @pinCode, longitude = @langitude, latitude = @latitude, landmark = @landMark  WHERE id = @id";
             MySqlCommand cmd = new MySqlCommand(query,con);
             cmd.Parameters.AddWithValue("@pinCode",theAddress.PinCode);
             cmd.Parameters.AddWithValue("@langitude",theAddress.Longitude);
