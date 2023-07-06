@@ -24,25 +24,25 @@ export class UserService {
   }
 
   getUser(id:number):Observable<any>{
-    let url="http://localhost:5102/api/peoples/" +id
+    let url="http://localhost:5102/api/users/" +id
     return this.httpClient.get<any>(url)
   }
   
   getallUser():Observable<any>{
-    let url="http://localhost:5102/api/peoples/getall"
+    let url="http://localhost:5102/api/users/getall"
     this.httpClient.get<any[]>(url).subscribe(
       (response) => {
-        this.personalInfoSubject.next(response);
+        this.userSubject.next(response);
       },
       (error) => {
         console.log('Error occurred:', error);
       }
     );
-    return this.personalInfoSubject.asObservable();
+    return this.userSubject.asObservable();
   }
 
-  removePersonalInfo(peopleId:number):Observable<any>{
-    let url="http://localhost:5102/api/peoples/" +peopleId 
+  removeUser(userId:number):Observable<any>{
+    let url="http://localhost:5102/api/users/" +userId 
     return this.httpClient.delete<any>(url)
   }
 }

@@ -22,6 +22,7 @@ export class AddLocationComponent {
 
  
   onInsert(form:NgForm){
+<<<<<<< HEAD:UI/src/app/location/add-location/add-location.component.ts
    this.address.pinCode= form.value.pincode;
    this.address.landMark=form.value.landmark;
    console.log(this.address);
@@ -29,4 +30,14 @@ export class AddLocationComponent {
       console.log(res);
     });
   }
+=======
+//    this.address.pinCode= form.value.pincode;
+//    this.address.landMark=form.value.landmark;
+//    console.log(this.address);
+//      this.svc.addAddress(this.address).subscribe((res) => {
+//       console.log(res);
+// });
+}
+  
+>>>>>>> e3ab7575143a93759349348abbe9024345220c2d:UI/src/app/addresses/add-address/add-address.component.ts
 }

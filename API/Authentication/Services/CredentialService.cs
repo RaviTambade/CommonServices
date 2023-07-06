@@ -8,34 +8,34 @@ public class CredentialService : ICredentialService
 {
     private readonly ICredentialRepository _credentialRepository;
 
-    public CredentialService(ICredentialRepository credentialRepository)
+    public  CredentialService(ICredentialRepository credentialRepository)
     {
         _credentialRepository = credentialRepository;
     }
 
 
-    public bool Register(Credential credential)
+    public async Task<bool> Register(Credential credential)
     {
-        return _credentialRepository.Register(credential);
+        return await _credentialRepository.Register(credential);
     }
 
-    public bool UpdateContactNumber(ChangeContactNumber credential)
+    public async Task<bool> UpdateContactNumber(ChangeContactNumber credential)
     {
-        return _credentialRepository.UpdateContactNumber(credential);
+        return await _credentialRepository.UpdateContactNumber(credential);
     }
 
-    public bool UpdatePassword(ChangePassword credential)
+    public async Task<bool> UpdatePassword(ChangePassword credential)
     {
-        return _credentialRepository.UpdatePassword(credential);
+        return await _credentialRepository.UpdatePassword(credential);
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        return _credentialRepository.Delete(id);
+        return await _credentialRepository.Delete(id);
     }
 
-    public AuthenticateResponse Authenticate(AuthenticateRequest request)
+    public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
     {
-       return _credentialRepository.Authenticate(request);
+       return await _credentialRepository.Authenticate(request);
     }
 }

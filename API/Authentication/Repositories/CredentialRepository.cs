@@ -12,29 +12,29 @@ public class CredentialRepository : ICredentialRepository
     private readonly IConfiguration _configuration;
     private readonly string _conString;
 
-    public CredentialRepository(IConfiguration configuration)
+    public  CredentialRepository(IConfiguration configuration)
     {
         _configuration = configuration;
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
 
-       public AuthenticateResponse Authenticate(AuthenticateRequest request)
+       public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
     {
-        var credential = GetCredentials(request);
+        var credential =await GetCredentials(request);
         
         if (credential == null)
         {
             return null;
         }
 
-        var token =  generateJwtToken(credential);
-        return new AuthenticateResponse(token);
+        var token = await generateJwtToken(credential);
+        return  new AuthenticateResponse(token);
     }
 
    
 
 
-    public bool Register(Credential credential)
+    public async Task<bool> Register(Credential credential)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -45,7 +45,7 @@ public class CredentialRepository : ICredentialRepository
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@contactNumber", credential.ContactNumber);
             cmd.Parameters.AddWithValue("@password", credential.Password);
-            con.Open();
+           await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -58,12 +58,12 @@ public class CredentialRepository : ICredentialRepository
         }
         finally
         {
-            con.Close();
+           await con.CloseAsync();
         }
         return status;
     }
 
-    public bool UpdateContactNumber(ChangeContactNumber credential)
+    public async Task<bool> UpdateContactNumber(ChangeContactNumber credential)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -75,7 +75,7 @@ public class CredentialRepository : ICredentialRepository
             cmd.Parameters.AddWithValue("@oldContactNumber", credential.OldContactNumber);
             cmd.Parameters.AddWithValue("@newContactNumber", credential.NewContactNumber);
             cmd.Parameters.AddWithValue("@password", credential.Password);
-            con.Open();
+           await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -88,12 +88,12 @@ public class CredentialRepository : ICredentialRepository
         }
         finally
         {
-            con.Close();
+           await con.CloseAsync();
         }
         return status;
     }
 
-    public bool UpdatePassword(ChangePassword credential)
+    public async Task<bool> UpdatePassword(ChangePassword credential)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -105,7 +105,7 @@ public class CredentialRepository : ICredentialRepository
             cmd.Parameters.AddWithValue("@contactNumber", credential.ContactNumber);
             cmd.Parameters.AddWithValue("@oldPassword", credential.OldPassword);
             cmd.Parameters.AddWithValue("@newPassword", credential.NewPassword);
-            con.Open();
+           await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -118,12 +118,12 @@ public class CredentialRepository : ICredentialRepository
         }
         finally
         {
-            con.Close();
+           await con.CloseAsync();
         }
         return status;
     }
 
-    public bool Delete(int id)
+    public async Task<bool> Delete(int id)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -132,7 +132,7 @@ public class CredentialRepository : ICredentialRepository
             string query = "DELETE FROM credentials WHERE id=@credentialId";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@credentialId", id);
-            con.Open();
+           await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
@@ -145,20 +145,20 @@ public class CredentialRepository : ICredentialRepository
         }
         finally
         {
-            con.Close();
+           await con.CloseAsync();
         }
         return status;
     }
 
  
-    private string generateJwtToken(Credential credential)
+    private  async Task<string> generateJwtToken(Credential credential)
     {
         //token will expire after one hour 
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = System.Text.Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Secret"));
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(AllClaims(credential)),
+            Subject = new ClaimsIdentity(await AllClaims(credential)),
             Expires = DateTime.UtcNow.AddHours(1),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
        SecurityAlgorithms.HmacSha256Signature)
@@ -166,7 +166,7 @@ public class CredentialRepository : ICredentialRepository
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
     }
-    private List<Claim> AllClaims(Credential credential)
+    private async Task<List<Claim>> AllClaims(Credential credential)
       {
         List<Claim> claims = new List<Claim>
         {
@@ -176,7 +176,7 @@ public class CredentialRepository : ICredentialRepository
         return claims;
     }
 
-    private Credential? GetCredentials(AuthenticateRequest request)
+    private async Task<Credential?> GetCredentials(AuthenticateRequest request)
     {
          Credential credential = null;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -187,9 +187,9 @@ public class CredentialRepository : ICredentialRepository
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@contactNumber", request.ContactNumber);
             cmd.Parameters.AddWithValue("@password", request.Password);
-            con.Open();
+           await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
-            if (reader.Read())
+            if ( await reader.ReadAsync())
             {
                 string contactNumber = reader["contactnumber"].ToString();
                 string password = reader["password"].ToString();

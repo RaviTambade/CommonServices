@@ -1,5 +1,5 @@
 
-<app-getpersonalinfo [userId]="userId" (sendUser)="receiveUser($event)" hidden></app-getpersonalinfo>
+<app-getuser [userId]="userId" (sendUser)="receiveUser($event)" hidden></app-getuser>
 <div *ngIf="user">
     <div class="container">
         <table class="table table-striped">
