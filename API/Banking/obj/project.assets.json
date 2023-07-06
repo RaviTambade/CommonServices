@@ -2165,11 +2165,16 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\naval\\.nuget\\packages\\": {}
+=======
+    "C:\\Users\\shree\\.nuget\\packages\\": {}
+>>>>>>> 88b796b54929c0e8e5bb3c4bd68d2d66e105f609
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "D:\\CommonServices\\API\\Banking\\BankingService.csproj",
       "projectName": "BankingService",
       "projectPath": "D:\\CommonServices\\API\\Banking\\BankingService.csproj",
@@ -2178,6 +2183,17 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\naval\\AppData\\Roaming\\NuGet\\NuGet.Config"
+=======
+      "projectUniqueName": "C:\\Users\\shree\\Desktop\\CommonServices\\API\\Banking\\BankingService.csproj",
+      "projectName": "BankingService",
+      "projectPath": "C:\\Users\\shree\\Desktop\\CommonServices\\API\\Banking\\BankingService.csproj",
+      "packagesPath": "C:\\Users\\shree\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\shree\\Desktop\\CommonServices\\API\\Banking\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\shree\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+>>>>>>> 88b796b54929c0e8e5bb3c4bd68d2d66e105f609
       ],
       "originalTargetFrameworks": [
         "net7.0"

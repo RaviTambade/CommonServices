@@ -1,106 +1,89 @@
-using Microsoft.AspNetCore.Mvc;
 using EntityLib;
+using Microsoft.AspNetCore.Mvc;
 using ServicesLib;
 namespace OperationsServices.Controllers;
 
 [ApiController]
-[Route("/api/[Controller]")]
+[Route("/api/banking")]
 public class OperationsController : ControllerBase
 {
 
     private readonly IOperationsService _svc;
     public OperationsController(IOperationsService svc)
     {
-        _svc=svc;
+        _svc = svc;
     }
 
-   
-//Get all Operations in bank
-//[Route("banking/operations/")]
- [HttpGet]
-[Route("operations")]
- public List<Operation> GetAllOperations()
+    [HttpGet]
+    [Route("operations")]
+    public List<Operation> GetAll()
     {
-        List<Operation> operations= _svc.GetAll();
+        List<Operation> operations = _svc.GetAll();
         return operations;
-    }    
-    
-
-//http:localhost:5656/account/56756/completestatement
-[HttpGet]
-//[Route("account/{acctNumber}/statement")]
-[Route("operationsbyaccountnumber/{acctNumber}")]
-public  Operation GetOperationByAccountNumber(string acctNumber)
-    {
-        Operation opeartion=_svc.GetByAccountNumber(acctNumber);
-        return opeartion;
-   
     }
 
-
-
-
-//http:localhost:5656/account/56756/mode/credit/statement
-//get statement of account number which are credited
-//[Route("banking/accounts/{acctNumber}/mode/{mode}/statement")]
-
-/*
-
-
-*/
-
-[HttpGet]
-[Route("{mode}")]
-  public  List<Operation> GetOperations(char mode)
+      [HttpGet]
+    [Route("operations/mode/{mode}")]
+    public List<Operation> GetAll(string mode)
     {
-        List<Operation> operations=_svc.GetByMode(mode);
+        Console.WriteLine(mode);
+        List<Operation> operations = _svc.GetByMode(mode);
         return operations;
-    }    
-   
+    }
 
-
-
-
-//[Route("banking/operations/{operationid}")]
-   [HttpGet]
-   [Route("operationsbyid")]
-    Operation GetOperationDetails(int id)
+    [HttpGet]
+    [Route("accounts/{acctNumber}/operations")]
+    public List<Operation> GetByAccountNumber(string acctNumber)
     {
-        Operation opr  = _svc.GetById(id);
+        Console.WriteLine(acctNumber);
+        List<Operation> operations = _svc.GetByAccountNumber(acctNumber);
+        return operations;
+    }
+
+  
+
+    [HttpGet]
+    [Route("operations/{id}")]
+    public Operation GetById(int id)
+    {
+        Operation opr = _svc.GetById(id);
         return opr;
     }
-    
-    
-    //[Route("banking/operations/{operationid}")]
-    [HttpDelete]
-    [Route("Delete")]
-     public bool Delete(string acctNumber)
+
+    [HttpGet]
+    [Route("accounts/{acctnumber}/operations/mode/{mode}")]
+    public List<Operation> Get(int acctNumber,string mode)
     {
-        bool status=_svc.Delete(acctNumber);
+    Console.WriteLine(mode);
+    Console.WriteLine(acctNumber);
+        List<Operation> operations = _svc.GetByMode(mode);
+        return operations;
+    }
+
+    [HttpDelete]
+    [Route("accounts/{acctNumber}/operations")]
+    public bool Delete(string acctNumber)
+    {
+        bool status = _svc.Delete(acctNumber);
         return status;
     }
-    
 
-
-    // HTTP Verb: POST   url: http://banking/operaionts
-    //body: operation object
-    //[Route("banking/operations")]
     [HttpPost]
-     [Route("Insert")]
-     public bool Insert(Operation opr)
+    [Route("operations")]
+    public bool Insert(Operation opr)
     {
-        bool status=_svc.Insert(opr);
-         return status;
+        bool status = _svc.Insert(opr);
+        return status;
     }
 
     // HTTP Verb: PUT   url: http://banking/operaionts/456545
     //body: operation object
     //[Route("banking/operations/{operationid}")]
     [HttpPut]
-    [Route("Update")]
-   public  bool Update(Operation opr)
+    [Route("operations")]
+    public bool Update(Operation opr)
     {
-        bool status=_svc.Update(opr);
-         return status;
+        bool status = _svc.Update(opr);
+        return status;
     }
 }

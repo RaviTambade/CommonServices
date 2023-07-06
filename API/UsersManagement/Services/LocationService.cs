@@ -4,11 +4,11 @@ using UsersManagement.Services.Interfaces;
 
 namespace UsersManagement.Services;
 
-public class AddressService : IAddressService
+public class LocationService : ILocationService
 {
-    private readonly IAddressRepository _repo;
+    private readonly ILocationRepository _repo;
 
-    public AddressService(IAddressRepository repo)
+    public LocationService(ILocationRepository repo)
     {
         _repo = repo;
     }
