@@ -18,7 +18,7 @@ public class UserRepository : IUserRepository
         _constring = this._configuration.GetConnectionString("DefaultConnection");
     }
 
-    public async Task<bool> AddUser(User user)
+    public async Task<bool> Add(User user)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -54,7 +54,7 @@ public class UserRepository : IUserRepository
         return status;
     }
 
-    public async Task<bool> UpdateUser(int id,User user)
+    public async Task<bool> Update(int id,User user)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -92,7 +92,7 @@ public class UserRepository : IUserRepository
         return status;
     }
 
-    public async Task<List<User>> GetAllUsers()
+    public async Task<List<User>> GetAll()
     {
             List<User> peoples = new List<User>();
             MySqlConnection con = new MySqlConnection();
@@ -139,7 +139,7 @@ public class UserRepository : IUserRepository
             }
             return peoples;
     }
-    public async Task<User> GetDetails(string addharid){
+    public async Task<User> GetDetails(string aadharid){
       
           User people =new User();
        MySqlConnection con = new MySqlConnection();
@@ -147,7 +147,7 @@ public class UserRepository : IUserRepository
        try{
         string query = "select * from users where aadharid=@AadharId";
         MySqlCommand command = new MySqlCommand(query,con);
-        command.Parameters.AddWithValue("@AadharId",addharid);
+        command.Parameters.AddWithValue("@AadharId",aadharid);
         await con.OpenAsync();
          MySqlDataReader reader = command.ExecuteReader();
             if(await reader.ReadAsync())
@@ -188,7 +188,7 @@ public class UserRepository : IUserRepository
 
     }
 
-     public async Task<User> GetUser(int userId)
+     public async Task<User> GetById(int userId)
     {
             User people=new User();
             MySqlConnection con = new MySqlConnection();
@@ -236,7 +236,7 @@ public class UserRepository : IUserRepository
     }
 
 
-       public async Task<bool> DeleteUser(string addharid)
+       public async Task<bool> DeleteByAadharId(string aadharid)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -248,7 +248,7 @@ public class UserRepository : IUserRepository
             string query = "Delete from users where aadharid=@AadharId";
             Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@AadharId",addharid);
+            command.Parameters.AddWithValue("@AadharId",aadharid);
             await con.OpenAsync();
             int rowsAffected = command.ExecuteNonQuery();
             if (rowsAffected > 0)
@@ -267,7 +267,7 @@ public class UserRepository : IUserRepository
         return status;
     }
 
-       public async Task<bool> DeleteUserbyId(int userId)
+       public async Task<bool> DeletebyId(int userId)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
