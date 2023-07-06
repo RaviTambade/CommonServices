@@ -15,11 +15,6 @@ public class CredentialController : ControllerBase
         _service = service;
     }
 
-    [HttpPost("validate")]
-    public bool Validate(Credential credential)
-    {
-        return _service.Validate(credential);
-    }
 
     [HttpPost("authenticate")]
     public  AuthenticateResponse Authenticate([FromBody] AuthenticateRequest request)
