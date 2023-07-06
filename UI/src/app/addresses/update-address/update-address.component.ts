@@ -23,13 +23,13 @@ export class UpdateAddressComponent  {
   constructor(private svc:AddressesService){}
 
   onUpdate(form:NgForm){
-   this.address.pinCode= form.value.pincode;
-   this.address.landMark=form.value.landmark;
-   console.log(this.address);
-     this.svc.updateAddress(this.address).subscribe((res) => {
-      this.status = res;
-      console.log(res);
-});
+//    this.address.pinCode= form.value.pincode;
+//    this.address.landMark=form.value.landmark;
+//    console.log(this.address);
+//      this.svc.updateAddress(this.address).subscribe((res) => {
+//       this.status = res;
+//       console.log(res);
+// });
 }
 
 }

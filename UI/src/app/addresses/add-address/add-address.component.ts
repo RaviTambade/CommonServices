@@ -22,12 +22,12 @@ export class AddAddressComponent {
 
  
   onInsert(form:NgForm){
-   this.address.pinCode= form.value.pincode;
-   this.address.landMark=form.value.landmark;
-   console.log(this.address);
-     this.svc.addAddress(this.address).subscribe((res) => {
-      console.log(res);
-});
+//    this.address.pinCode= form.value.pincode;
+//    this.address.landMark=form.value.landmark;
+//    console.log(this.address);
+//      this.svc.addAddress(this.address).subscribe((res) => {
+//       console.log(res);
+// });
 }
   
 }
