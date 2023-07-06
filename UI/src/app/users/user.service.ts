@@ -24,11 +24,11 @@ export class UserService {
   }
 
   getUser(id:number):Observable<any>{
-let url="http://localhost:5102/api/peoples/" +id
-return this.httpClient.get<any>(url)
+    let url="http://localhost:5102/api/peoples/" +id
+    return this.httpClient.get<any>(url)
   }
   
-  getallPersonalInfo():Observable<any>{
+  getallUser():Observable<any>{
     let url="http://localhost:5102/api/peoples/getall"
     this.httpClient.get<any[]>(url).subscribe(
       (response) => {

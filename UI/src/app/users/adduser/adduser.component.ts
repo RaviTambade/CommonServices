@@ -6,5 +6,25 @@ import { Component } from '@angular/core';
   styleUrls: ['./adduser.component.css']
 })
 export class AdduserComponent {
+  user: User;
+  constructor(private svc: UserService) {
+    this.user = {
+      id: 0,
+      aadharId: '',
+      firstName: '',
+      lastName: '',
+      birthDate: '',
+      gender: '',
+      email: '',
+      contactNumber: ''
+    }
+  }
 
+  ngOnInit(): void {
+  }
+  addUser() {
+    this.svc.addUser(this.user).subscribe((response) => {
+    console.log(response)
+    })
+  }
 }
