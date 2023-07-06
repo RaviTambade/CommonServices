@@ -1,9 +1,9 @@
-using PersonalInfoAPI.Models;
+using UsersManagement.Models;
 
-namespace PersonalInfoAPI.Repositories.Interfaces;
+namespace UsersManagement.Repositories.Interfaces;
 
 public interface IAddressRepository
 {
-    bool Insert(Address theAddress);
-    bool Update(Address theAddress);
+    Task<bool> Insert(Location theAddress);
+    Task<bool> Update(Location theAddress);
 }

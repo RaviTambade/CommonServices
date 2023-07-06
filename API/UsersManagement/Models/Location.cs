@@ -1,9 +1,9 @@
-namespace PersonalInfoAPI.Models;
+namespace UsersManagement.Models;
 
-public class Address 
+public class Location 
 {
     public int Id {get; set;}
-    public int PersonId {get; set;}
+    public int UserId {get; set;}
     public string? Longitude {get; set;}
     public string? Latitude {get; set;}
     public string? LandMark {get; set;}

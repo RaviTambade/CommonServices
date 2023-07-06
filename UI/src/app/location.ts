@@ -1,6 +1,6 @@
-export class Addresses{
+export class Location{
     constructor(
-        public personId:number,
+        public userId:number,
         public latitude:string,
         public longitude:string,
         public landMark:string,

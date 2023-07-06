@@ -17,15 +17,15 @@ namespace PersonalInfoAPI.Controllers;
         }
 
         [HttpPost]
-        public bool Insert([FromBody] Address theAddress)
+        public async Task<bool> Insert([FromBody] Location theAddress)
         {
-            bool status = _addresssrv.Insert(theAddress);
+            bool status = await _addresssrv.Insert(theAddress);
             return status;
         }
         [HttpPut]
-        public bool Update(Address theAddress)
+        public async Task<bool> Update(Location theAddress)
         {
-            bool status = _addresssrv.Update(theAddress);
+            bool status = await _addresssrv.Update(theAddress);
             return status;
         }
     }

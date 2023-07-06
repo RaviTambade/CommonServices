@@ -1,8 +1,8 @@
-using PersonalInfoAPI.Models;
-using PersonalInfoAPI.Repositories.Interfaces;
-using PersonalInfoAPI.Services.Interfaces;
+using UsersManagement.Models;
+using UsersManagement.Repositories.Interfaces;
+using UsersManagement.Services.Interfaces;
 
-namespace PersonalInfoAPI.Services;
+namespace UsersManagement.Services;
 
 public class AddressService : IAddressService
 {
@@ -13,13 +13,13 @@ public class AddressService : IAddressService
         _repo = repo;
     }
 
-    public bool Insert(Address theAddress)
+    public async Task<bool> Insert(Location theAddress)
     {
-        return _repo.Insert(theAddress);
+        return await _repo.Insert(theAddress);
     }
 
-    public bool Update(Address theAddress)
+    public async Task<bool> Update(Location theAddress)
     {
-         return _repo.Update(theAddress);
+        return await _repo.Update(theAddress);
     }
 } 
