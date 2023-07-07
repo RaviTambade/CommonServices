@@ -1,8 +1,7 @@
 using UsersManagement.Models;
 using Microsoft.AspNetCore.Mvc;
 using UsersManagement.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-
+using UsersManagement.Helpers;
 namespace UsersManagement.Controller;
 
 [ApiController]
@@ -27,9 +26,10 @@ public class UsersController: ControllerBase{
 
     }
 
+
+    [Authorize]
     [HttpPut]
     [Route("users/{id}")]
-    [Authorize]
     public async Task<bool> Update(int id,User user)
     {   
         

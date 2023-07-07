@@ -42,9 +42,8 @@ app.UseCors(x => x.AllowAnyOrigin()
                     .AllowAnyHeader());
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors(MyAllowSpecificOrigins);
 
 app.UseMiddleware<JwtMiddleware>();
 

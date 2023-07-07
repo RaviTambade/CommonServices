@@ -1,3 +1,4 @@
+-- Active: 1678339848098@@127.0.0.1@3306@credentialsdb
 DROP DATABASE IF EXISTS credentialsDB;
 CREATE DATABASE  credentialsDB;
 USE credentialsDB;
