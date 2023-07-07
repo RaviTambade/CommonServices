@@ -22,7 +22,7 @@ public class OperationsController : ControllerBase
         return operations;
     }
 
-      [HttpGet]
+    [HttpGet]
     [Route("operations/mode/{mode}")]
     public List<Operation> GetAll(string mode)
     {
