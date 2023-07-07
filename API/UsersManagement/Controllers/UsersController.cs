@@ -1,6 +1,7 @@
-    using UsersManagement.Models;
+using UsersManagement.Models;
 using Microsoft.AspNetCore.Mvc;
 using UsersManagement.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UsersManagement.Controller;
 
@@ -28,9 +29,10 @@ public class UsersController: ControllerBase{
 
     [HttpPut]
     [Route("users/{id}")]
-
+    [Authorize]
     public async Task<bool> Update(int id,User user)
-    {
+    {   
+        
         bool status = await _svc.Update(id,user);
         return status;
 
