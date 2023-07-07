@@ -14,7 +14,7 @@ public class FundsTransferController: ControllerBase
 {
 
     private readonly IPaymentGatewayService _svc;
-    public FundTsransferController(IPaymentGatewayService svc)
+    public FundsTransferController(IPaymentGatewayService svc)
     {
         _svc = svc;
     }
