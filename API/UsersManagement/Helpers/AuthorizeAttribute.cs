@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace AuthenticationAPI.Helpers
+namespace UsersManagement.Helpers
 {
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
