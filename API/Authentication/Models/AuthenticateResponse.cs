@@ -4,12 +4,13 @@ namespace AuthenticationAPI.Models
     {
         public string? Token { get; set; }   
 
-
-        public AuthenticateResponse(string token){
-            this.Token=token;        
+        public AuthenticateResponse(string token)
+        {
+            this.Token = token;
+        }
     }
     }
 
 
     
-}
+
