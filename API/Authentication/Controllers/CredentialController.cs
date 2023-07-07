@@ -17,9 +17,9 @@ public class CredentialController : ControllerBase
         _service = service;
     }
 
-//http://localhost:5664/api/authentication/login
-//http://localhost:56455/authentication/signin
- //http:localhost:56455/membership/signin
+    //http://localhost:5664/api/authentication/login
+    //http://localhost:56455/authentication/signin
+    //http:localhost:56455/membership/signin
     [HttpPost]
     [Route("signin")]
     public async Task<AuthenticateResponse> Authenticate([FromBody] AuthenticateRequest request)
@@ -28,32 +28,30 @@ public class CredentialController : ControllerBase
         return token;
     }
 
- //http:localhost:56455/authentication/register
+    //http:localhost:56455/authentication/register
     [HttpPost("register")]
     public async Task<bool> Register(Credential credential)
     {
         return await _service.Register(credential);
     }
 
-     //http:localhost:56455/authentication/update/contactnumber
-    [Authorize]   
+    //http:localhost:56455/authentication/update/contactnumber
+    [Authorize]
     [HttpPut("update/contactnumber")]
-     public async Task<bool> UpdateContactNumber(ContactNumberDetails credential)
-    {   
-        string? contactNumber= (string?) HttpContext.Items["contactNumber"];
+    public async Task<bool> UpdateContactNumber(ContactNumberDetails credential)
+    {
+        string? contactNumber = (string?)HttpContext.Items["contactNumber"];
 
-        return await _service.UpdateContactNumber(contactNumber,credential);
+        return await _service.UpdateContactNumber(contactNumber, credential);
     }
 
-
-
-       //http:localhost:56455/authentication/resetpassword
-    [Authorize]   
+    //http:localhost:56455/authentication/resetpassword
+    [Authorize]
     [HttpPut("resetpassword")]
     public async Task<bool> Update(PasswordDetails passwordDetails)
-    { 
-        string? contactNumber= (string?) HttpContext.Items["contactNumber"];
-        return await _service.UpdatePassword(contactNumber,passwordDetails);
+    {
+        string? contactNumber = (string?)HttpContext.Items["contactNumber"];
+        return await _service.UpdatePassword(contactNumber, passwordDetails);
     }
 
     [HttpDelete("contactnumber/{id}")]
@@ -62,3 +60,4 @@ public class CredentialController : ControllerBase
         return await _service.Delete(id);
     }
 }
+
