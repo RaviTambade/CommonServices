@@ -2,6 +2,7 @@ using UsersManagement.Repositories.Interfaces;
 using UsersManagement.Repositories;
 using UsersManagement.Services.Interfaces;
 using UsersManagement.Services;
+using UsersManagement.Helpers;
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -44,6 +45,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.UseCors(MyAllowSpecificOrigins);
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
 
