@@ -6,7 +6,9 @@
 
 // namespace PersonalInfoAPI.Controllers;
 
-<<<<<<< HEAD:API/UsersManagement/Controllers/LocationController.cs
+
+
+    //http://localhost:5676/api/locations/567456
     [ApiController]
     [Route("/api/[controller]")]
     public class LocationController : ControllerBase
@@ -16,17 +18,9 @@
         {
             _addresssrv = service;
         }
-=======
-//     [ApiController]
-//     [Route("/api/[controller]")]
-//     public class AddressesController : ControllerBase
-//     {
-//         private readonly IAddressService _addresssrv;
-//         public AddressesController(IAddressService service)
-//         {
-//             _addresssrv = service;
-//         }
->>>>>>> 7c71f1e3436060ebd0daa35e3252dd9c24f72470:API/UsersManagement/Controllers/AddressesController.cs
+
+
+            // HTTP POST: http://localhost:5676/api/locations/567456
 
 //         [HttpPost]
 //         public async Task<bool> Insert([FromBody] Location theAddress)
@@ -34,6 +28,12 @@
 //             bool status = await _addresssrv.Insert(theAddress);
 //             return status;
 //         }
+
+
+// HTTP PUT: http://localhost:5676/api/locations/567456
+
+
+
 //         [HttpPut]
 //         public async Task<bool> Update(Location theAddress)
 //         {

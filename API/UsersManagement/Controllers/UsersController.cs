@@ -5,7 +5,7 @@ using UsersManagement.Services.Interfaces;
 namespace UsersManagement.Controller;
 
 [ApiController]
-[Route("/api/[Controller]")]
+[Route("/api")]
 public class UsersController: ControllerBase{
 
     private readonly IUserService _svc;
@@ -15,6 +15,7 @@ public class UsersController: ControllerBase{
        _svc=svc;
     }
 
+    // POST http://localhost:/api/users
     [HttpPost]
     [Route("adduser")]
 
@@ -35,15 +36,19 @@ public class UsersController: ControllerBase{
 
     }
 
+
+   //GET http://localhost:/api/users
     [HttpGet]
     [Route("getall")]
-
     public async Task<List<User>> GetAll()
     {
         List<User> peoples = await _svc.GetAll();
         return peoples;
     }
 
+
+
+   // GET http://localhost:/api/users/aadhar/76545656
 
 
     [HttpGet]
@@ -56,6 +61,7 @@ public class UsersController: ControllerBase{
     }
 
 
+   // HTTPDELETE  http://localhost:/api/users/aadhar/76545656
     [HttpDelete]
     [Route("DeleteUser/{aadharid}")]
 
@@ -65,6 +71,9 @@ public class UsersController: ControllerBase{
         return status;
     }
 
+
+//These two REST API action methods are not required
+/*
     [HttpGet]
     [Route("{userId}")]
     public async Task<User> GetbyId(int userId){
@@ -78,5 +87,6 @@ public class UsersController: ControllerBase{
          return await _svc.DeletebyId(userId);
    } 
 
+*/
 
 }
