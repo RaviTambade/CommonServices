@@ -9,15 +9,15 @@
 
 
     //http://localhost:5676/api/locations/567456
-    [ApiController]
-    [Route("/api/[controller]")]
-    public class LocationController : ControllerBase
-    {
-        private readonly ILocationService _addresssrv;
-        public LocationController(ILocationService service)
-        {
-            _addresssrv = service;
-        }
+    // [ApiController]
+    // [Route("/api/[controller]")]
+    // public class LocationController : ControllerBase
+    // {
+    //     private readonly ILocationService _addresssrv;
+    //     public LocationController(ILocationService service)
+    //     {
+    //         _addresssrv = service;
+    //     }
 
 
             // HTTP POST: http://localhost:5676/api/locations/567456
