@@ -2,11 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using AuthenticationAPI.Models;
 using AuthenticationAPI.Services.Interfaces;
 using System.Threading.Tasks;
+using AuthenticationAPI.Helpers;
 
 namespace AuthenticationAPI.Controllers;
 
 [ApiController]
-[Route("/api")]
+[Route("/api/authentication")]
 public class CredentialController : ControllerBase
 {
     private readonly ICredentialService _service;
@@ -19,8 +20,8 @@ public class CredentialController : ControllerBase
 //http://localhost:5664/api/authentication/login
 //http://localhost:56455/authentication/signin
  //http:localhost:56455/membership/signin
-    [Route]
-    [HttpPost("authenticate")]
+    [HttpPost]
+    [Route("signin")]
     public async Task<AuthenticateResponse> Authenticate([FromBody] AuthenticateRequest request)
     {
         var token = await _service.Authenticate(request);
@@ -35,26 +36,27 @@ public class CredentialController : ControllerBase
     }
 
      //http:localhost:56455/authentication/update/contactnumber
-    [HttpPut("updatecontactnumber")]
-     public async Task<bool> UpdateContactNumber(ChangeContactNumber credential)
-    {
-        //retrive existing authorized users contact numbers from token
-        // return await _service.UpdateContactNumber( oldContactNumber, newContactNumber)
-        return await _service.UpdateContactNumber(credential);
+    [Authorize]   
+    [HttpPut("update/contactnumber")]
+     public async Task<bool> UpdateContactNumber(ContactNumberDetails credential)
+    {   
+        string? contactNumber= (string?) HttpContext.Items["contactNumber"];
+
+        return await _service.UpdateContactNumber(contactNumber,credential);
     }
 
 
 
-       //http:localhost:56455/authentication/contactnumber/9881735801/resetpassword/
-    [Authorize]
-    [HttpPut("updatepassword")]
-    
-    public async Task<bool> Update(string contactNumber,PasswordDetails passwordDetails)
-    {
-        return await _service.UpdatePassword(passwordDetails);
+       //http:localhost:56455/authentication/resetpassword
+    [Authorize]   
+    [HttpPut("resetpassword")]
+    public async Task<bool> Update(PasswordDetails passwordDetails)
+    { 
+        string? contactNumber= (string?) HttpContext.Items["contactNumber"];
+        return await _service.UpdatePassword(contactNumber,passwordDetails);
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("contactnumber/{id}")]
     public async Task<bool> Delete(int id)
     {
         return await _service.Delete(id);
