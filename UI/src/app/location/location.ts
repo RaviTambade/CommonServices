@@ -6,6 +6,4 @@ export class Location{
         public landMark:string,
         public pinCode:string,
    ){}
-
-
 }

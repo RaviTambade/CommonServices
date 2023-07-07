@@ -33,5 +33,12 @@ app.UseCors(x => x.AllowAnyOrigin()
 app.UseAuthorization();
 
 app.MapControllers();
+// app.MapControllerRoute(name: "mode",
+//                // pattern: "operations/{mode}",
+//                pattern: "{controller=Home}/{action=Index}/{mode?}");
+
+
+// app.MapControllerRoute(name: "default",
+//                pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

@@ -1,5 +1,5 @@
 
-
+SELECT * FROM customers;
 select * from accounts;
 SELECT @transactionId;
 SELECT * FROM operations;
