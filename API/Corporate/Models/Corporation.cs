@@ -1,8 +1,8 @@
 namespace Corporate.Models;
-public class Corporate{
+public class Corporation{
 public int Id{get;set;}
-public string CompanyName{get;set;}
+public string Name{get;set;}
 public string ContactNumber{get;set;}
 public string Email{get;set;}
-public string ContactPersonn{get;set;}
+public string PersonId{get;set;}
 }
