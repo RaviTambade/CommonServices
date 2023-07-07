@@ -6,8 +6,8 @@ USE BankingDB;
 
 CREATE TABLE customers(id INT AUTO_INCREMENT PRIMARY KEY,
                        customerid INT NOT NULL UNIQUE,
-                       userorcorporateid INT NOT NULL,
-                       usertype ENUM("C","P") NOT NULL
+                       dependancyid INT NOT NULL,
+                       usertype ENUM("corporation","person") NOT NULL
                        );
 CREATE TABLE accounts(id INT PRIMARY KEY AUTO_INCREMENT,
 					  acctnumber VARCHAR(20) NOT NULL,
