@@ -17,7 +17,7 @@ public class UsersController: ControllerBase{
 
     // POST http://localhost:/api/users
     [HttpPost]
-    [Route("adduser")]
+    [Route("users")]
 
     public async Task<bool> Add(User user)
     {
@@ -27,7 +27,7 @@ public class UsersController: ControllerBase{
     }
 
     [HttpPut]
-    [Route("updateuser/{id}")]
+    [Route("users/{id}")]
 
     public async Task<bool> Update(int id,User user)
     {
@@ -39,7 +39,7 @@ public class UsersController: ControllerBase{
 
    //GET http://localhost:/api/users
     [HttpGet]
-    [Route("getall")]
+    [Route("users")]
     public async Task<List<User>> GetAll()
     {
         List<User> peoples = await _svc.GetAll();
@@ -52,7 +52,7 @@ public class UsersController: ControllerBase{
 
 
     [HttpGet]
-    [Route("getDetails/{aaddharid}")]
+    [Route("users/aadhar/{aadharid}")]
 
     public async Task<User> GetDetails(string aadharid)
     {
@@ -63,7 +63,7 @@ public class UsersController: ControllerBase{
 
    // HTTPDELETE  http://localhost:/api/users/aadhar/76545656
     [HttpDelete]
-    [Route("DeleteUser/{aadharid}")]
+    [Route("users/aadhar/{aadharid}")]
 
     public async Task<bool> Delete(string aadharid)
     {
