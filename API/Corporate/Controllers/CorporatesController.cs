@@ -6,7 +6,7 @@ namespace Corporate.Controllers;
 
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/corporates")]
 public class CorporatesController : ControllerBase
 {
 
@@ -18,7 +18,7 @@ public class CorporatesController : ControllerBase
     }
 
     [HttpGet]
-    [Route("corporates")]
+    [Route("")]
     public async Task<List<Corporation>> GetAll()
     {
         List<Corporation> corporates =await _svs.GetAll();
@@ -26,7 +26,7 @@ public class CorporatesController : ControllerBase
     }
 
     [HttpGet]
-    [Route("corporate/{id}")]
+    [Route("{id}")]
     public async Task<Corporation> Get(int id)
     {
         Corporation corporate =await _svs.GetById(id);
@@ -35,7 +35,7 @@ public class CorporatesController : ControllerBase
 
 
     [HttpPost]
-    [Route("corporate")]
+    [Route("add")]
     public async Task<bool> Insert([FromBody] Corporation corporate)
     {
         bool status =await _svs.Insert(corporate);
@@ -44,7 +44,7 @@ public class CorporatesController : ControllerBase
 
         //remove all items from cart 
     [HttpPut]
-    [Route("corporate/{id}")]
+    [Route("update/{id}")]
     public async Task<bool> Update(int id,Corporation corporate)
     {
         bool status =await _svs.Update(id,corporate);
@@ -53,7 +53,7 @@ public class CorporatesController : ControllerBase
 
     //delete cartitem
     [HttpDelete]
-    [Route("corporate/{id}")]
+    [Route("remove/{id}")]
     public async Task<bool> Delete(int id)
     {
         bool status =await _svs.Delete(id);
