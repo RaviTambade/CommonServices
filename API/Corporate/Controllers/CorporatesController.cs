@@ -18,7 +18,6 @@ public class CorporatesController : ControllerBase
     }
 
     [HttpGet]
-    [Route("")]
     public async Task<List<Corporation>> GetAll()
     {
         List<Corporation> corporates =await _svs.GetAll();
@@ -35,31 +34,26 @@ public class CorporatesController : ControllerBase
 
 
     [HttpPost]
-    [Route("add")]
     public async Task<bool> Insert([FromBody] Corporation corporate)
     {
         bool status =await _svs.Insert(corporate);
         return status;
     }
 
-        //remove all items from cart 
     [HttpPut]
-    [Route("update/{id}")]
+    [Route("{id}")]
     public async Task<bool> Update(int id,Corporation corporate)
     {
         bool status =await _svs.Update(id,corporate);
         return status;
     }
 
-    //delete cartitem
     [HttpDelete]
-    [Route("remove/{id}")]
+    [Route("{id}")]
     public async Task<bool> Delete(int id)
     {
         bool status =await _svs.Delete(id);
         return status;
     }
-
-
 
 }
