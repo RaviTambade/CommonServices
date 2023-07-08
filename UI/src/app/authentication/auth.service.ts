@@ -10,26 +10,28 @@ import { UpdateContact } from './update-contact';
 })
 export class AuthService {
 
-  constructor(private svc:HttpClient) { }
+  constructor(private svc: HttpClient) { }
 
-  validate(credential:Credential):Observable<boolean>{
-    let url="http://localhost:5077/api/credential/validate";
-    return this.svc.post<any>(url,credential);
+  validate(credential: Credential): Observable<any> {
+    let url = "http://localhost:5077/api/authentication/signin";
+    return this.svc.post<any>(url, credential);
   }
 
-  register(credential:Credential):Observable<boolean>{
+  register(credential: Credential): Observable<boolean> {
 
-    let url="http://localhost:5077/api/credential/register";
-    return this.svc.post<any>(url,credential);
+    let url = "http://localhost:5077/api/authentication/register";
+    return this.svc.post<any>(url, credential);
   }
 
-  updatePassword(credential:UpdatePassword):Observable<boolean>{
-    let url="http://localhost:5077/api/credential/updatepassword";
-    return this.svc.put<any>(url,credential);
+  updatePassword(credential: UpdatePassword): Observable<boolean> {
+    let url = "http://localhost:5077/api/authentication/update/password";
+    const token = localStorage.getItem("jwt")
+      const header = { "Authorization": "Bearer " + token }
+    return this.svc.put<any>(url, credential,{headers:header});
   }
 
-  updateContact(credential:UpdateContact):Observable<boolean>{
-    let url="http://localhost:5077/api/credential/updatecontactnumber";
-    return this.svc.put<any>(url,credential);
+  updateContact(credential: UpdateContact): Observable<boolean> {
+    let url = "http://localhost:5077/api/authentication/update/contactnumber";
+    return this.svc.put<any>(url, credential);
   }
 }

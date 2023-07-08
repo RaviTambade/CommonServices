@@ -45,9 +45,9 @@ public class CredentialController : ControllerBase
         return await _service.UpdateContactNumber(contactNumber, credential);
     }
 
-    //http:localhost:56455/authentication/resetpassword
+    //http:localhost:56455/authentication/update/password
     [Authorize]
-    [HttpPut("resetpassword")]
+    [HttpPut("update/password")]
     public async Task<bool> Update(PasswordDetails passwordDetails)
     {
         string? contactNumber = (string?)HttpContext.Items["contactNumber"];
