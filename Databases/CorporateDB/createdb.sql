@@ -9,6 +9,6 @@ CREATE TABLE corporations(
         name VARCHAR(30) NOT NULL,
         contactnumber VARCHAR(30) NOT NULL UNIQUE,
         email VARCHAR(30) NOT NULL,
-        personid VARCHAR(30) NOT NULL UNIQUE
+        personid VARCHAR(30) NOT NULL 
     );
     

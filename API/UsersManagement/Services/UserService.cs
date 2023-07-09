@@ -24,6 +24,6 @@ public class UserService:IUserService{
     public async Task<User> GetById(int userId)=>await _repo.GetById(userId);
    public async Task<bool> DeletebyId(int userId)=> await _repo.DeletebyId(userId);
 
-    
+    public async Task<User> GetUserByContact(string contactNumber) => await _repo.GetUserByContact(contactNumber);
 
 }
