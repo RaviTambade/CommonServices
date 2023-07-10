@@ -191,6 +191,30 @@ public class UserRepository : IUserRepository
         return people;
     }
 
+    public async Task<long> GetIdByContactNumber(string contactNumber)
+    {
+        long userId = 0;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+        try
+        {
+            string query = "select * from users where contactnumber=@contactNumber";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@contactNumber", contactNumber);
+            await con.OpenAsync();
+            userId =  Convert.ToInt64(command.ExecuteScalar()); 
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return userId;
+    }
+
     public async Task<User> GetUserByContact(string contactNumber)
     {
         User user = new User();

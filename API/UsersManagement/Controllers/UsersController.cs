@@ -67,8 +67,14 @@ public class UsersController : ControllerBase
     [Route("users/contact/{contactNumber}")]
     public async Task<User> GetUserByContact(string contactNumber)
     {
-        User user = await _svc.GetUserByContact(contactNumber);
-        return user;
+        return await _svc.GetUserByContact(contactNumber);
+    }
+
+    [HttpGet]
+    [Route("users/userid/{contactNumber}")]
+    public async Task<long> GetIdByContactNumber(string contactNumber)
+    {
+        return await _svc.GetIdByContactNumber(contactNumber);
     }
 
     //These two REST API action methods are not required
