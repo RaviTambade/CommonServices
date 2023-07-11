@@ -71,6 +71,13 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
+    [Route("users/name/{userId}")]
+    public async Task<List<UserNameWithId>> GetUserNameById(string userId)
+    {
+        return await _svc.GetUserNameById(userId);
+    }
+
+    [HttpGet]
     [Route("users/userid/{contactNumber}")]
     public async Task<long> GetIdByContactNumber(string contactNumber)
     {

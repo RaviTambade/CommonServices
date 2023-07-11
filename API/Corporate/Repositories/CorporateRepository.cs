@@ -106,11 +106,11 @@ public class CorporateRepository : ICorporateRepository
         con.ConnectionString = _conString;
         try
         {
-            string query = $"SELECT * FROM corporations where id IN ({id}) ";
+            string query = $"SELECT id,name FROM corporations where id IN ({id}) ";
             // string query = $"SELECT * FROM corporations where id IN (@ids) ";
             System.Console.WriteLine(query);
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@ids", id);
+            // cmd.Parameters.AddWithValue("@ids", id);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())

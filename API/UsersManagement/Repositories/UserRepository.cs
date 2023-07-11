@@ -142,6 +142,41 @@ public class UserRepository : IUserRepository
         return peoples;
     }
 
+    public async Task<List<UserNameWithId>> GetUserNameById(string userId)
+    {
+        List<UserNameWithId> userList = new();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+        try
+        {
+            string query = $"select id,firstname,lastname from users where id IN ({userId})";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int id = int.Parse(reader["id"].ToString());
+                string? firstName = reader["firstname"].ToString();
+                string? lastName = reader["lastname"].ToString();
+
+                userList.Add(new UserNameWithId(){
+                      Id = id,
+                      Name=$"{firstName} {lastName}"
+                });
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return userList;
+    }
+
     public async Task<User> GetDetails(string aadharid)
     {
         User people = new User();
@@ -202,7 +237,7 @@ public class UserRepository : IUserRepository
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@contactNumber", contactNumber);
             await con.OpenAsync();
-            userId =  Convert.ToInt64(command.ExecuteScalar()); 
+            userId = Convert.ToInt64(command.ExecuteScalar());
         }
         catch (Exception e)
         {
