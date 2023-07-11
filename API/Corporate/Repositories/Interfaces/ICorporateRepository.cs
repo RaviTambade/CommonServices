@@ -7,6 +7,8 @@ namespace  Corporate.Repositories.Interfaces;
 public interface ICorporateRepository{
     Task<List<Corporation>> GetAll();
     Task<Corporation> GetById(int id);
+    Task<List<CorporateNameWithId>> GetNames(string id);
+
     Task<bool> Insert(Corporation corporate);
     Task<bool> Update(int id, Corporation corporate);
     Task<bool> Delete(int id);
