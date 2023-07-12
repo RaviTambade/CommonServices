@@ -21,7 +21,7 @@ SET tooperationid=LAST_INSERT_ID();
 UPDATE accounts SET balance=toaccountbalance+amount WHERE id=toaccountid;
 INSERT INTO transactions (fromoperationid,tooperationid) VALUES (fromoperationid,tooperationid);
 SET transactionId=LAST_INSERT_ID();
-END 
-$$ DELIMITER 
+END $$ 
+DELIMITER; 
 
 
