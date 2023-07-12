@@ -1,2 +1,2 @@
 
-SELECT * FROM corporate;
+SELECT * FROM corporations;
