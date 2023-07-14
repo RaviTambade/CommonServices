@@ -5,11 +5,8 @@ using API.Services.Interfaces;
 
 namespace PaymentGateWayService.Controllers;
 
-//Authorized attribute for each action method
-
-//http://localhost:898454/api/paymentgatway
 [ApiController]
-[Route("[controller]")]
+[Route("/api/fundstransfer")]
 public class FundsTransferController: ControllerBase
 {
 
@@ -19,7 +16,6 @@ public class FundsTransferController: ControllerBase
         _svc = svc;
     }
 
-    // HTTP: POST http://localhost:898454/api/paymentgatway
     [HttpPost]
     public int PaymentGateWay([FromBody] PaymentGateWay info)
     {

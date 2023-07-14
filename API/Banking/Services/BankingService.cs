@@ -27,6 +27,10 @@ public class BankingService : IBankingService
         return account;
     }
 
+     public AccountInfo GetAccountInfo(CustomerDependancyCondition condition)
+    {
+       return _repo.GetAccountInfo(condition);
+    }
 
     public Account GetById(int id)
      {
