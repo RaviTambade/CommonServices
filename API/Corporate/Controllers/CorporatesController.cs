@@ -32,6 +32,13 @@ public class CorporatesController : ControllerBase
     }
 
     [HttpGet]
+    [Route("person/{personId}")]
+    public async Task<int> GetCorporateIdByPersonId(int personId)
+    {
+        return await _svc.GetCorporateIdByPersonId(personId);
+    }
+
+    [HttpGet]
     [Route("names/{id}")]
     public async Task<List<CorporateNameWithId>> GetNames(string id)
     {

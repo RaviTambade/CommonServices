@@ -282,7 +282,7 @@ public class AccountRepo : IAccountRepo
         return status;
     }
 
-    public AccountInfo GetAccountInfo(CustomerDependancyCondition condition)
+    public async Task<AccountInfo> GetAccountInfo(CustomerDependancyCondition condition)
     {
         AccountInfo acct = null;
 
@@ -298,16 +298,18 @@ public class AccountRepo : IAccountRepo
             command.Parameters.AddWithValue("@id", condition.DependancyId);
             command.Parameters.AddWithValue("@usertype", condition.Usertype);
             Console.WriteLine(query);
-            con.Open();
+            await con.OpenAsync();
 
-            MySqlDataReader reader = command.ExecuteReader();
-            if (reader.Read())
+            MySqlDataReader reader =  command.ExecuteReader();
+            if ( await reader.ReadAsync())
             {
                 string acctNum = reader["acctnumber"].ToString();
                 string ifscCode = reader["ifsccode"].ToString();
 
                 acct = new AccountInfo { AccountNumber = acctNum, IFSCCode = ifscCode, };
             }
+
+            await reader.CloseAsync();
         }
         catch (Exception e)
         {
@@ -315,7 +317,7 @@ public class AccountRepo : IAccountRepo
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
         }
         return acct;
     }

@@ -11,10 +11,10 @@ builder.Services.AddCors();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IAccountRepo, AccountRepo>();
-builder.Services.AddScoped<IBankingService, BankingService>();
-builder.Services.AddScoped<IOperationRepo, OperationRepo>();
-builder.Services.AddScoped<IOperationsService, OperationsService>();
+builder.Services.AddTransient<IAccountRepo, AccountRepo>();
+builder.Services.AddTransient<IBankingService, BankingService>();
+builder.Services.AddTransient<IOperationRepo, OperationRepo>();
+builder.Services.AddTransient<IOperationsService, OperationsService>();
 
 var app = builder.Build();
 

@@ -32,7 +32,7 @@ public class CorporateRepository : ICorporateRepository
                 string name = reader["name"].ToString();
                 string contactnumber = reader["contactnumber"].ToString();
                 string email = reader["email"].ToString();
-                string personid = reader["personid"].ToString();
+                int personid = int.Parse(reader["personid"].ToString());
 
                 Corporation corporate = new Corporation
                 {
@@ -75,8 +75,7 @@ public class CorporateRepository : ICorporateRepository
                 string name = reader["name"].ToString();
                 string contactnumber = reader["contactnumber"].ToString();
                 string email = reader["email"].ToString();
-                string personid = reader["personid"].ToString();
-
+                int personid = int.Parse(reader["personid"].ToString());
                 corporate = new Corporation
                 {
                     Id = cid,
@@ -117,7 +116,7 @@ public class CorporateRepository : ICorporateRepository
             {
                 int cid = int.Parse(reader["id"].ToString());
                 string name = reader["name"].ToString();
-                list.Add(new CorporateNameWithId() { Id = cid, Name = name, });
+                list.Add(new CorporateNameWithId() { Id = cid, Name = name });
             }
             await reader.CloseAsync();
         }
@@ -130,6 +129,35 @@ public class CorporateRepository : ICorporateRepository
             await con.CloseAsync();
         }
         return list;
+    }
+
+    public async Task<int> GetCorporateIdByPersonId(int personId)
+    {
+        int corporateId = 0;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+        try
+        {
+            string query = "SELECT MAX(id) AS id FROM corporations where personid=@personid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@personid", personId);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            if (await reader.ReadAsync())
+            {
+                corporateId = int.Parse(reader["id"].ToString());
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return corporateId;
     }
 
     public async Task<bool> Insert(Corporation corporate)

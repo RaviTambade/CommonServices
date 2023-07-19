@@ -33,9 +33,9 @@ public class BankAccountsController : ControllerBase
 
     [HttpPost]
     [Route("details")]
-    public AccountInfo GetAccountInfo(CustomerDependancyCondition condition)
+    public async Task<AccountInfo> GetAccountInfo(CustomerDependancyCondition condition)
     {
-        return _svc.GetAccountInfo(condition);
+        return await _svc.GetAccountInfo(condition);
     }
 
     [HttpPut]
