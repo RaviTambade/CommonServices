@@ -43,6 +43,13 @@ public class UsersController : ControllerBase
         return peoples;
     }
 
+    [HttpGet]
+    [Route("users/{userId}")]
+    public async Task<User> GetbyId(int userId)
+    {
+        return await _svc.GetById(userId);
+    }
+
     // GET http://localhost:/api/users/aadhar/76545656
 
 
@@ -86,13 +93,6 @@ public class UsersController : ControllerBase
 
     //These two REST API action methods are not required
     /*
-        [HttpGet]
-        [Route("{userId}")]
-        public async Task<User> GetbyId(int userId){
-            return await _svc.GetById(userId);
-        }
-    
-    
         [HttpDelete]
         [Route("{userId}")]
        public async Task<bool> DeletebyId(int userId){

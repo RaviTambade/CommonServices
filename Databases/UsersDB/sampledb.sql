@@ -1,3 +1,4 @@
+-- Active: 1678339848098@@127.0.0.1@3306@usersdb
 INSERT INTO users(aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("580408011566","Pragati","Bangar","2000-12-18","Female","bangarpragati11@gmail.com","1245987456");
 INSERT INTO users(aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("580408011562","Abhay","Navale","2000-12-08","male","navaleabhay11@gmail.com","8456123654");
 INSERT INTO users(aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("58040801153","Akash","Ajab","2000-12-28","male","ajabakash11@gmail.com","7758983095");
@@ -8,6 +9,8 @@ INSERT INTO users(aadharid,firstname,lastname,birthdate,gender,email,contactnumb
 INSERT INTO users(aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("58040801158","Ram","Bajare","1980-04-07","male","rambajare@gmail.com","8767098245");
 INSERT INTO users(aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("58040801159","Dadabhau","Navle","1980-04-07","male","dadabhaunavle@gmail.com","9978234578");
 INSERT INTO users(aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("58040801160","Maruti","Shinde","1980-04-07","male","marutidhinde@gmail.com","8841235696");
+INSERT INTO users(aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("76787954565","Vishal","Kudale","1960-04-07","male","vishalkudle@gmail.com","9090909090");
+
 
 
 
