@@ -12,6 +12,7 @@ public interface ICorporateRepository
     Task<Corporation> GetById(int id);
     Task<List<CorporateNameWithId>> GetNames(string id);
     Task<int> GetCorporateIdByPersonId(int personId);
+    Task<Corporation> GetByName(string name);
     Task<bool> Insert(Corporation corporate);
     Task<bool> Update(int id, Corporation corporate);
     Task<bool> Delete(int id);

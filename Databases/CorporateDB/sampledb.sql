@@ -7,4 +7,8 @@ INSERT INTO corporations VALUES(DEFAULT,"Wetalbuwa Hundekari","9000978676","Wetl
 INSERT INTO corporations VALUES(DEFAULT,"Navle Transports","9075966080","navle@gmail.com",9);
 INSERT INTO corporations VALUES(DEFAULT,"Zatka Company","7841023652","shinde123@gmail.com",10);
 INSERT INTO corporations VALUES(DEFAULT,"Hemantkumar vegetables","9090909090","hemant123@gmail.com",11);
+INSERT INTO corporations VALUES(DEFAULT,"thorat Company","9089898989","hemant123@gmail.com",12);
+INSERT INTO corporations VALUES(DEFAULT,"Kale Company","8909090909","hemant123@gmail.com",13);
+INSERT INTO corporations VALUES(DEFAULT,"Totre Company","9889898989","hemant123@gmail.com",14);
+
 

@@ -253,4 +253,44 @@ public class CorporateRepository : ICorporateRepository
         }
         return status;
     }
+    public async Task<Corporation> GetByName(string name)
+    {
+        Corporation corporate = null;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+        try
+        {
+            string query = "SELECT * FROM corporations WHERE name=@name";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@name", name);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int cid = int.Parse(reader["id"].ToString());
+                string cname = reader["name"].ToString();
+                string contactnumber = reader["contactnumber"].ToString();
+                string email = reader["email"].ToString();
+                int personid = int.Parse(reader["personid"].ToString());
+                corporate = new Corporation
+                {
+                    Id = cid,
+                    Name = cname,
+                    ContactNumber = contactnumber,
+                    Email = email,
+                    PersonId = personid
+                };
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return corporate;
+    }
 }

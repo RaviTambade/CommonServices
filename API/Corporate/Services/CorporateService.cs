@@ -30,4 +30,6 @@ public class CorporateService : ICorporateService
         await _repo.Update(id, corporate);
 
     public async Task<bool> Delete(int id) => await _repo.Delete(id);
+
+    public async Task<Corporation> GetByName(string name)=>await _repo.GetByName(name);
 }

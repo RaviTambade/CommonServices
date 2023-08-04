@@ -67,4 +67,14 @@ public class CorporatesController : ControllerBase
         bool status = await _svc.Delete(id);
         return status;
     }
+
+
+
+    [HttpGet]
+    [Route("{name}/details")]
+    public async Task<Corporation> GetByName(string name)
+    {
+       return await _svc.GetByName(name);
+    }
+
 }

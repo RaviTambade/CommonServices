@@ -10,3 +10,7 @@ INSERT INTO credentials (contactnumber,password) VALUES ('8767098245','password'
 INSERT INTO credentials (contactnumber,password) VALUES ('9978234578','password');
 INSERT INTO credentials (contactnumber,password) VALUES ('8841235696','password');
 INSERT INTO credentials (contactnumber,password) VALUES ('9090909090','password');
+INSERT INTO credentials (contactnumber,password) VALUES ('9089898989','password');
+INSERT INTO credentials (contactnumber,password) VALUES ('8909090909','password');
+INSERT INTO credentials (contactnumber,password) VALUES ('9889898989','password');
+
