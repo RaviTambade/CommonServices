@@ -60,4 +60,9 @@ public class OperationsService:IOperationsService
     {
       return  _repo.GetByMode(mode);
     }
+
+    public List<Statement> GetStatement(string acctNumber)
+    {
+       return _repo.GetStatement(acctNumber);
+    }
 }

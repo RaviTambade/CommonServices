@@ -40,6 +40,13 @@ public class OperationsController : ControllerBase
         return operations;
     }
 
+     [HttpGet]
+    [Route("accounts/{acctNumber}/statement")]
+    public List<Statement> GetStatement(string acctNumber)
+    {
+        return _svc.GetStatement(acctNumber);
+    }
+
   
 
     [HttpGet]
