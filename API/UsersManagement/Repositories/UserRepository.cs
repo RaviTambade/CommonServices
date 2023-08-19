@@ -27,9 +27,10 @@ public class UserRepository : IUserRepository
         {
             string birthDateString = user.BirthDate.ToString("yyyy-MM-dd");
             string query =
-                "Insert Into users(aadharid,firstname,lastname,birthdate,gender,email,contactnumber) Values(@aadharId,@firstName,@lastName,@birthDate,@gender,@email,@contactNumber)";
+                "Insert Into users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) Values(@imageurl,@aadharId,@firstName,@lastName,@birthDate,@gender,@email,@contactNumber)";
             MySqlCommand command = new MySqlCommand(query, con);
             await con.OpenAsync();
+            command.Parameters.AddWithValue("@imageurl", user.ImageUrl);
             command.Parameters.AddWithValue("@aadharId", user.AadharId);
             command.Parameters.AddWithValue("@firstName", user.FirstName);
             command.Parameters.AddWithValue("@lastName", user.LastName);
@@ -107,6 +108,7 @@ public class UserRepository : IUserRepository
             while (await reader.ReadAsync())
             {
                 int id = int.Parse(reader["id"].ToString());
+                string? imageUrl = reader["imageurl"].ToString();
                 string? aadharId = reader["aadharid"].ToString();
                 string? firstName = reader["firstname"].ToString();
                 string? lastName = reader["lastname"].ToString();
@@ -119,6 +121,7 @@ public class UserRepository : IUserRepository
                 User people = new User()
                 {
                     Id = id,
+                    ImageUrl=imageUrl,
                     AadharId = aadharId,
                     FirstName = firstName,
                     LastName = lastName,
@@ -192,6 +195,7 @@ public class UserRepository : IUserRepository
             if (await reader.ReadAsync())
             {
                 int id = int.Parse(reader["id"].ToString());
+                string? imageUrl = reader["imageurl"].ToString();
                 string? aadharId = reader["aadharid"].ToString();
                 string? firstName = reader["firstname"].ToString();
                 string? lastName = reader["lastname"].ToString();
@@ -204,6 +208,7 @@ public class UserRepository : IUserRepository
                 people = new User()
                 {
                     Id = id,
+                    ImageUrl=imageUrl,
                     AadharId = aadharId,
                     FirstName = firstName,
                     LastName = lastName,
@@ -265,6 +270,7 @@ public class UserRepository : IUserRepository
             if (await reader.ReadAsync())
             {
                 int id = int.Parse(reader["id"].ToString());
+                string? imageUrl = reader["imageurl"].ToString();
                 string? aadharId = reader["aadharid"].ToString();
                 string? firstName = reader["firstname"].ToString();
                 string? lastName = reader["lastname"].ToString();
@@ -277,6 +283,7 @@ public class UserRepository : IUserRepository
                 user = new User()
                 {
                     Id = id,
+                    ImageUrl=imageUrl,
                     AadharId = aadharId,
                     FirstName = firstName,
                     LastName = lastName,
@@ -314,6 +321,7 @@ public class UserRepository : IUserRepository
             while (await reader.ReadAsync())
             {
                 int id = int.Parse(reader["id"].ToString());
+                string? imageUrl = reader["imageurl"].ToString();
                 string? aadharId = reader["aadharid"].ToString();
                 string? firstName = reader["firstname"].ToString();
                 string? lastName = reader["lastname"].ToString();
@@ -325,6 +333,7 @@ public class UserRepository : IUserRepository
                 people = new User()
                 {
                     Id = id,
+                    ImageUrl=imageUrl,
                     AadharId = aadharId,
                     FirstName = firstName,
                     LastName = lastName,

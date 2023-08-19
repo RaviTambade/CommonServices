@@ -2,6 +2,7 @@ using UsersManagement.Models;
 using Microsoft.AspNetCore.Mvc;
 using UsersManagement.Services.Interfaces;
 using UsersManagement.Helpers;
+using System.Net.Http.Headers;
 
 namespace UsersManagement.Controller;
 
@@ -91,6 +92,39 @@ public class UsersController : ControllerBase
         return await _svc.GetIdByContactNumber(contactNumber);
     }
 
+    [HttpPost, DisableRequestSizeLimit]
+    [Route("fileupload/{fileName}")]
+    public IActionResult Upload(string fileName)
+    {
+        try
+        {
+            var file = Request.Form.Files[0];
+            if(file.Length <= 0){
+                return BadRequest();
+            }
+            string filePath=GetFilePath(fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                return Ok(new { filePath });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex}");
+        }
+    }
+
+    public static string GetFilePath(string fileName){
+        var pathToSave=Path.Combine(Directory.GetCurrentDirectory(),"wwwroot");
+        var filePath=Path.Combine(pathToSave,fileName);
+        return filePath;
+
+    }
+
+}
+
     //These two REST API action methods are not required
     /*
         [HttpDelete]
@@ -100,4 +134,4 @@ public class UsersController : ControllerBase
        }
     
     */
-}
+

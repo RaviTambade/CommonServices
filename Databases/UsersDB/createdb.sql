@@ -4,6 +4,7 @@ CREATE DATABASE usersdb;
 USE usersdb;
 
 CREATE TABLE users(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                     imageurl VARCHAR(50),
                      aadharid VARCHAR(30) NOT NULL UNIQUE,
                      firstname VARCHAR(50),
                      lastname VARCHAR(50),
