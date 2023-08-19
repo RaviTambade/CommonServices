@@ -5,6 +5,7 @@ public interface IOperationRepo
 {
     List<Operation> GetAll();    
     List<Operation> GetByAccountNumber(string acctNumber);
+    List<Statement> GetStatement(string acctNumber);
     bool Delete(string acctNumber);
     bool Insert(Operation opr);
     bool Update(Operation opr);   
