@@ -4,6 +4,7 @@ namespace UsersManagement.Repositories.Interfaces;
 
 public interface IUserRepository
 {
+
     Task<List<User>> GetAll();
     Task<bool> Add(User user);
     Task<User> GetUserByContact(string contactNumber);
@@ -14,4 +15,6 @@ public interface IUserRepository
     Task<User> GetById(int userId);
     Task<bool> DeleteByAadharId(string aadharid);
     Task<bool> DeletebyId(int userId);
+    Task<UserProfile> GetUserProfile(int userId);
+
 }

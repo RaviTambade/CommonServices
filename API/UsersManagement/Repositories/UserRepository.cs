@@ -416,4 +416,57 @@ public class UserRepository : IUserRepository
         }
         return status;
     }
+
+        public async Task<UserProfile> GetUserProfile(int userId)
+        {
+        UserProfile people = new();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+        try
+        {
+            string query = "SELECT * FROM users CROSS JOIN locations ON users.id = locations.userid WHERE locations.userid=@userId ";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@userId", userId);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+    //              string birthDateString = reader.GetString("birthdate");
+    // DateOnly birthDate = DateOnly.ParseExact(birthDateString, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
+                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+                people = new(){
+                    User = new User
+        {
+            Id = reader.GetInt32("id"),
+            ImageUrl = reader.GetString("imageurl"),
+            AadharId = reader.GetString("aadharid"),
+            FirstName = reader.GetString("firstname"),
+            LastName = reader.GetString("lastname"),
+            BirthDate = new DateOnly(dateOnlyBirthDate.Year, dateOnlyBirthDate.Month, dateOnlyBirthDate.Day), 
+            Gender = reader.GetString("gender"),
+            Email = reader.GetString("email"),
+            ContactNumber = reader.GetString("contactnumber")
+        },
+        Location = new Location
+        {
+            Longitude = reader.GetString("longitude"),
+            Latitude = reader.GetString("latitude"),
+            LandMark = reader.GetString("landmark"),
+            PinCode = reader.GetString("pincode")
+        }
+                };
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return people;
+    }
 }

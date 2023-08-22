@@ -80,9 +80,9 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     [Route("users/name/{userId}")]
-    public async Task<List<UserNameWithId>> GetUserNameById(string userId)
+    public async Task<List<UserNameWithId>> GetUserNameById(string  userId)
     {
-        return await _svc.GetUserNameById(userId);
+        return await _svc.GetUserNameById( userId);
     }
 
     [HttpGet]
@@ -90,6 +90,14 @@ public class UsersController : ControllerBase
     public async Task<long> GetIdByContactNumber(string contactNumber)
     {
         return await _svc.GetIdByContactNumber(contactNumber);
+    }
+    
+    [HttpGet]
+    [Route("users/userprofile/{userId}")]
+    public async Task<UserProfile> GetUserProfile(int userId)
+    {
+        UserProfile peoples = await _svc.GetUserProfile(userId);
+        return peoples;
     }
 
     [HttpPost, DisableRequestSizeLimit]
