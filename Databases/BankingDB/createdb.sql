@@ -38,12 +38,13 @@ CREATE TABLE transactions(id INT PRIMARY KEY AUTO_INCREMENT,
                     
 CREATE TABLE loan(loanid INT PRIMARY KEY AUTO_INCREMENT,
 						amount DOUBLE,
-                        loansanctiondate DATETIME ,
+                        loansanctiondate DATE ,
                         duration INT,
                         intrestrate DOUBLE,
 						acctId INT NOT NULL,
 						CONSTRAINT fk_acctId FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE
                         );
+ALTER TABLE loan MODIFY loansanctiondate DATE;
                        
 CREATE TABLE loanorder(loanorderid INT PRIMARY KEY AUTO_INCREMENT,
 						amount DOUBLE,                        

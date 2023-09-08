@@ -49,7 +49,7 @@ public class LoanRepo : ILoanRepo
             {
                 int loanId = int.Parse(reader["loanid"].ToString());
                 double amount = double.Parse(reader["amount"].ToString());
-               // DateTime loanSanctionDate = reader["loansanctiondate"].ToString();
+                DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
                 int duration=int.Parse(reader["duration"].ToString());
                 double intrestRate = double.Parse(reader["intrestrate"].ToString());           
 
@@ -59,9 +59,10 @@ public class LoanRepo : ILoanRepo
                     {
                         LoanId = loanId,
                         Amount = amount,
-                        //LoanSanctionDate = loanSanctionDate,
+                        LoanSanctionDate = loanSanctionDate,
                         Duration = duration,
-                        IntrestRate = intrestRate
+                        IntrestRate = intrestRate,
+                        AccountId=acctId
                         
                     }
                 );
@@ -84,5 +85,147 @@ public class LoanRepo : ILoanRepo
         return loanlist;
     }
 
-    
+    public Loan GetByAccountId(int accountId)
+    {
+        Loan loan = null;
+
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+        try
+        {
+            string query = "SELECT * FROM loan WHERE acctId=" + accountId;
+            con.Open();
+            MySqlCommand command = new MySqlCommand(query, con);
+            MySqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                int loanId = int.Parse(reader["loanid"].ToString());
+                double amount = double.Parse(reader["amount"].ToString());
+                DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
+                int duration=int.Parse(reader["duration"].ToString());
+                double intrestRate = double.Parse(reader["intrestrate"].ToString());          
+                int acctId = int.Parse(reader["acctId"].ToString());
+
+
+                loan = new Loan
+                {
+                    LoanId = loanId,
+                    Amount = amount,
+                    LoanSanctionDate = loanSanctionDate,
+                    Duration = duration,
+                    IntrestRate = intrestRate,
+                    AccountId=acctId
+                };
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return loan;
+    }
+
+     public bool Insert(Loan loan)
+    {
+        //Console.WriteLine("LoanSanctionDate"+loan.LoanSanctionDate);
+        string loanSanctionDate=loan.LoanSanctionDate.ToString("yyyy-MM-dd");
+        bool status = false;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+        try
+        {
+            string query =
+                "INSERT INTO loan(amount,loansanctiondate,duration,intrestrate,acctId) VALUES(@amount,@loansanctiondate,@duration,@intrestrate,@acctId)";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@amount", loan.Amount);
+            command.Parameters.AddWithValue("@loansanctiondate", loanSanctionDate);
+            command.Parameters.AddWithValue("@duration", loan.Duration);
+            command.Parameters.AddWithValue("@intrestrate", loan.IntrestRate);
+            command.Parameters.AddWithValue("@acctId", loan.AccountId);
+
+            con.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+            Console.WriteLine("rowsAffected", rowsAffected);
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return status;
+    }
+
+     public bool Delete(int loanId)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+        try
+        {
+            string query = "DELETE FROM loan WHERE loanid=" + loanId;
+            MySqlCommand command = new MySqlCommand(query, con);
+            //if(con.State == ConnectionState.Closed)
+            con.Open();
+            command.ExecuteNonQuery();
+            status = true;
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return status;
+    }
+
+     public bool Update(Loan loan)
+    {
+        string loanSanctionDate=loan.LoanSanctionDate.ToString("yyyy-MM-dd");
+        bool status = false;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+        try
+        {
+            string query =
+                "Update loan SET amount =@amount,loansanctiondate=@loansanctiondate,duration =@duration,intrestrate=@intrestrate,acctId=@acctId WHERE loanid=@loanid";
+            System.Console.WriteLine(query);
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@amount", loan.Amount);
+            command.Parameters.AddWithValue("@loansanctiondate",loanSanctionDate);
+            command.Parameters.AddWithValue("@duration", loan.Duration);
+            command.Parameters.AddWithValue("@intrestrate", loan.IntrestRate);            
+            command.Parameters.AddWithValue("@acctId", loan.AccountId);
+            command.Parameters.AddWithValue("@loanid",loan.LoanId);
+            con.Open();
+            int rowsAffected = command.ExecuteNonQuery();
+            Console.WriteLine("No of rows  affected " + rowsAffected);
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return status;
+    }
+
 }
