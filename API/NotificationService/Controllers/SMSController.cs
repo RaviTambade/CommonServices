@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Transflower.NotifiactionService.Helpers;
 using Transflower.NotifiactionService.Models;
 using Transflower.NotifiactionService.Services.Interfaces;
 

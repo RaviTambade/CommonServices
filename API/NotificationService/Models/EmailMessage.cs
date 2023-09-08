@@ -6,7 +6,6 @@ public class EmailMessage
     public string Subject { get; set; }
     public string Body { get; set; }
 
-
     public EmailMessage(List<string> to, string subject, string body)
     {
         To = to;
