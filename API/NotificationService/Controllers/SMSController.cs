@@ -2,9 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Transflower.NotifiactionService.Helpers;
 using Transflower.NotifiactionService.Models;
-using Twilio.Clients;
-using Twilio.Rest.Api.V2010.Account;
-using Twilio.Types;
+using Transflower.NotifiactionService.Services.Interfaces;
+
 
 namespace Transflower.NotifiactionService.Controllers;
 
@@ -12,27 +11,19 @@ namespace Transflower.NotifiactionService.Controllers;
 [Route("[controller]")]
 public class SmsController : ControllerBase
 {
-    private readonly ITwilioRestClient _client;
-    private readonly TwilioConfiguration _twilioConfiguration;
+    private readonly ISMSSender _smsSender;
 
     public SmsController(
-        ITwilioRestClient client,
-        IOptions<TwilioConfiguration> twilioConfiguration
+        ISMSSender smsSender
     )
     {
-        _client = client;
-        _twilioConfiguration = twilioConfiguration.Value;
+        _smsSender = smsSender;
     }
 
     [HttpPost]
-    public  IActionResult SendMessage(SMSMessage model)
+    public IActionResult SendMessage(SMSMessage message)
     {
-        var message = MessageResource.Create(
-            to: new PhoneNumber(model.To),
-            from: new PhoneNumber(_twilioConfiguration.PhoneNumber),
-            body: model.MessageText,
-            client: _client
-        );
+        _smsSender.SendMessage(message);
         return Ok("Success");
     }
 }

@@ -9,6 +9,7 @@ CREATE TABLE customers(id INT AUTO_INCREMENT PRIMARY KEY,
                        dependancyid INT NOT NULL,
                        usertype ENUM("corporation","person") NOT NULL
                        );
+                       
 CREATE TABLE accounts(id INT PRIMARY KEY AUTO_INCREMENT,
 					  acctnumber VARCHAR(20) NOT NULL,
                       accttype ENUM('savings','business','current'),
@@ -27,13 +28,39 @@ CREATE TABLE operations(operationid INT PRIMARY KEY AUTO_INCREMENT,
                       operationdate DATETIME ,
                       operationmode CHAR
                       );
+                      
+CREATE TABLE transactions(id INT PRIMARY KEY AUTO_INCREMENT,
+					fromoperationid INT NOT NULL,
+					tooperationid INT NOT NULL,
+					CONSTRAINT fk_operationid FOREIGN KEY(fromoperationid) REFERENCES operations(operationid) ON UPDATE CASCADE ON DELETE CASCADE,
+					CONSTRAINT fk_rooperationid FOREIGN KEY(tooperationid) REFERENCES operations(operationid) ON UPDATE CASCADE ON DELETE CASCADE
+					);                    
+                    
+CREATE TABLE loan(loanid INT PRIMARY KEY AUTO_INCREMENT,
+						amount DOUBLE,
+                        loansanctiondate DATE ,
+                        duration INT,
+                        intrestrate DOUBLE,
+						acctId INT NOT NULL,
+						CONSTRAINT fk_acctId FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE
+                        );
+ALTER TABLE loan MODIFY loansanctiondate DATE;
+                       
+CREATE TABLE loanorder(loanorderid INT PRIMARY KEY AUTO_INCREMENT,
+						amount DOUBLE,                        
+						loanid INT NOT NULL,
+						CONSTRAINT fk_loanId FOREIGN KEY(loanid) REFERENCES loan(loanid) ON UPDATE CASCADE ON DELETE CASCADE
+						);  
 
-CREATE TABLE
-    transactions(
-        id INT PRIMARY KEY AUTO_INCREMENT,
-        fromoperationid INT NOT NULL,
-        tooperationid INT NOT NULL,
-        CONSTRAINT fk_operationid FOREIGN KEY(fromoperationid) REFERENCES operations(operationid) ON UPDATE CASCADE ON DELETE CASCADE,
-        CONSTRAINT fk_rooperationid FOREIGN KEY(tooperationid) REFERENCES operations(operationid) ON UPDATE CASCADE ON DELETE CASCADE
-    );
+                    
+CREATE TABLE installment(installmentid INT PRIMARY KEY AUTO_INCREMENT,
+						amount DOUBLE,
+						InstallmentDate DATETIME ,
+                        loanorderid INT NOT NULL,
+						CONSTRAINT fk_loanorderId FOREIGN KEY(loanorderid) REFERENCES loanorder(loanorderid) ON UPDATE CASCADE ON DELETE CASCADE						
+						);
+
+                      
+                      
+
 
