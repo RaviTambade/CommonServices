@@ -42,26 +42,23 @@ CREATE TABLE loan(loanid INT PRIMARY KEY AUTO_INCREMENT,
                         duration INT,
                         intrestrate DOUBLE,
 						acctId INT NOT NULL,
-						CONSTRAINT fk_acctId FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE,
-                       acctnumber VARCHAR(20) NOT NULL
-                       );   
+						CONSTRAINT fk_acctId FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE
+                        );
                        
 CREATE TABLE loanorder(loanorderid INT PRIMARY KEY AUTO_INCREMENT,
 						amount DOUBLE,                        
-						acctId INT NOT NULL,
-						CONSTRAINT fk_acctId FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE,
-                       acctnumber VARCHAR(20) NOT NULL
-                       );         
+						loanid INT NOT NULL,
+						CONSTRAINT fk_loanId FOREIGN KEY(loanid) REFERENCES loan(loanid) ON UPDATE CASCADE ON DELETE CASCADE
+						);  
+
                     
 CREATE TABLE installment(installmentid INT PRIMARY KEY AUTO_INCREMENT,
-						acctId INT NOT NULL,
-						CONSTRAINT fk_acctId FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE,
-						acctnumber VARCHAR(20) NOT NULL,
 						amount DOUBLE,
 						InstallmentDate DATETIME ,
-                        loanid INT NOT NULL,
-						CONSTRAINT fk_acctId FOREIGN KEY(loanid) REFERENCES loan(loanid) ON UPDATE CASCADE ON DELETE CASCADE						
+                        loanorderid INT NOT NULL,
+						CONSTRAINT fk_loanorderId FOREIGN KEY(loanorderid) REFERENCES loanorder(loanorderid) ON UPDATE CASCADE ON DELETE CASCADE						
 						);
+
                       
                       
 

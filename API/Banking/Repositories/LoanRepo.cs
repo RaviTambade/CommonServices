@@ -49,9 +49,9 @@ public class LoanRepo : ILoanRepo
             {
                 int loanId = int.Parse(reader["loanid"].ToString());
                 double amount = double.Parse(reader["amount"].ToString());
-                DateTime loanSanctionDate = reader["loansanctiondate"].ToString();
+               // DateTime loanSanctionDate = reader["loansanctiondate"].ToString();
                 int duration=int.Parse(reader["duration"].ToString());
-                double intrestRate = double.Parse(reader["intrestrate"].ToString();           
+                double intrestRate = double.Parse(reader["intrestrate"].ToString());           
 
                 int acctId = int.Parse(reader["acctId"].ToString());
                 loanlist.Add(
@@ -59,7 +59,7 @@ public class LoanRepo : ILoanRepo
                     {
                         LoanId = loanId,
                         Amount = amount,
-                        LoanSanctionDate = loanSanctionDate,
+                        //LoanSanctionDate = loanSanctionDate,
                         Duration = duration,
                         IntrestRate = intrestRate
                         
