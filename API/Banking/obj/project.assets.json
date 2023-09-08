@@ -1583,8 +1583,7 @@
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
         "system.runtime.4.3.0.nupkg.sha512",
-        "system.runtime.nuspec",
-        "yrdv55ob.pyx"
+        "system.runtime.nuspec"
       ]
     },
     "System.Runtime.CompilerServices.Unsafe/6.0.0": {
@@ -2165,40 +2164,27 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-    "C:\\Users\\naval\\.nuget\\packages\\": {}
-=======
-    "C:\\Users\\shree\\.nuget\\packages\\": {}
->>>>>>> 88b796b54929c0e8e5bb3c4bd68d2d66e105f609
+    "C:\\Users\\dell\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "D:\\CommonServices\\API\\Banking\\BankingService.csproj",
+      "projectUniqueName": "C:\\Users\\dell\\Desktop\\bl\\CommonServices\\API\\Banking\\BankingService.csproj",
       "projectName": "BankingService",
-      "projectPath": "D:\\CommonServices\\API\\Banking\\BankingService.csproj",
-      "packagesPath": "C:\\Users\\naval\\.nuget\\packages\\",
-      "outputPath": "D:\\CommonServices\\API\\Banking\\obj\\",
+      "projectPath": "C:\\Users\\dell\\Desktop\\bl\\CommonServices\\API\\Banking\\BankingService.csproj",
+      "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dell\\Desktop\\bl\\CommonServices\\API\\Banking\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\naval\\AppData\\Roaming\\NuGet\\NuGet.Config"
-=======
-      "projectUniqueName": "C:\\Users\\shree\\Desktop\\CommonServices\\API\\Banking\\BankingService.csproj",
-      "projectName": "BankingService",
-      "projectPath": "C:\\Users\\shree\\Desktop\\CommonServices\\API\\Banking\\BankingService.csproj",
-      "packagesPath": "C:\\Users\\shree\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\shree\\Desktop\\CommonServices\\API\\Banking\\obj\\",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\shree\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
->>>>>>> 88b796b54929c0e8e5bb3c4bd68d2d66e105f609
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2249,8 +2235,16 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\dell\\Desktop\\bl\\CommonServices\\API\\Banking\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
