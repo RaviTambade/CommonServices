@@ -44,8 +44,7 @@ public class LocationRepository : ILocationRepository
        }
        return status;
     }
-
-    public async Task<bool> Update(Location theAddress)
+    public async Task<bool> Update(int id, Location theAddress)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -58,7 +57,7 @@ public class LocationRepository : ILocationRepository
             cmd.Parameters.AddWithValue("@langitude",theAddress.Longitude);
             cmd.Parameters.AddWithValue("@latitude",theAddress.Latitude);
             cmd.Parameters.AddWithValue("@landMark",theAddress.LandMark);
-            cmd.Parameters.AddWithValue("@id",theAddress.Id);
+            cmd.Parameters.AddWithValue("@id",id);
             await con.OpenAsync();
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)

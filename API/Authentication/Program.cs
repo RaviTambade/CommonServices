@@ -2,7 +2,7 @@ using AuthenticationAPI.Repositories.Interfaces;
 using AuthenticationAPI.Repositories;
 using AuthenticationAPI.Services.Interfaces;
 using AuthenticationAPI.Services;
-
+using AuthenticationAPI.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +28,10 @@ app.UseHttpsRedirection();
 app.UseCors(x => x.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
 

@@ -315,10 +315,51 @@ public class OperationRepo:IOperationRepo{
         }
         return status;
 
-    }        
+    }
 
-
-
+    public List<Statement> GetStatement(string acctNumber)
+    {
+        List<Statement> statements = new();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+        try
+        {
+            string query = @"SELECT o.amount, o.operationdate, o.operationmode,
+                            ( SELECT SUM(CASE
+                                        WHEN o2.operationmode = 'D' THEN o2.amount
+                                        WHEN o2.operationmode = 'W' THEN -o2.amount
+                                        ELSE 0 END )FROM operations o2
+                                WHERE o2.acctId = o.acctId AND (o2.operationid <= o.operationid))AS balance
+                        FROM operations o
+                        JOIN accounts a ON o.acctId = a.id
+                        WHERE a.acctnumber = @acctnumber
+                        ORDER BY o.operationdate, o.operationid";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@acctnumber",acctNumber);
+            con.Open();
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {  
+                    statements.Add(new Statement()
+                    {
+                        Amount = reader.GetDouble("amount") ,
+                        Date= reader.GetDateTime("operationdate"),
+                        Mode= reader.GetString("operationmode"),
+                        Balance=reader.GetDouble("balance")
+                    });
+                }
+           reader.Close();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return statements;
+    }
 }
     
     

@@ -13,7 +13,6 @@ public class UserRepository : IUserRepository
 
     public UserRepository(IConfiguration configuration)
     {
-
         _configuration = configuration;
         _constring = this._configuration.GetConnectionString("DefaultConnection");
     }
@@ -27,9 +26,11 @@ public class UserRepository : IUserRepository
         try
         {
             string birthDateString = user.BirthDate.ToString("yyyy-MM-dd");
-            string query = "Insert Into users(aadharid,firstname,lastname,birthdate,gender,email,contactnumber) Values(@aadharId,@firstName,@lastName,@birthDate,@gender,@email,@contactNumber)";
+            string query =
+                "Insert Into users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) Values(@imageurl,@aadharId,@firstName,@lastName,@birthDate,@gender,@email,@contactNumber)";
             MySqlCommand command = new MySqlCommand(query, con);
             await con.OpenAsync();
+            command.Parameters.AddWithValue("@imageurl", user.ImageUrl);
             command.Parameters.AddWithValue("@aadharId", user.AadharId);
             command.Parameters.AddWithValue("@firstName", user.FirstName);
             command.Parameters.AddWithValue("@lastName", user.LastName);
@@ -54,7 +55,7 @@ public class UserRepository : IUserRepository
         return status;
     }
 
-    public async Task<bool> Update(int id,User user)
+    public async Task<bool> Update(int id, User user)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -63,7 +64,8 @@ public class UserRepository : IUserRepository
         try
         {
             string birthDateString = user.BirthDate.ToString("yyyy-MM-dd");
-            string query = "Update users set aadharid=@aadharId,firstname=@firstName,lastname=@lastName,birthdate=@birthDate,gender=@gender,email=@email,contactnumber=@contactNumber where id=@Id";
+            string query =
+                "Update users set aadharid=@aadharId,firstname=@firstName,lastname=@lastName,birthdate=@birthDate,gender=@gender,email=@email,contactnumber=@contactNumber where id=@Id";
             Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
             await con.OpenAsync();
@@ -94,149 +96,302 @@ public class UserRepository : IUserRepository
 
     public async Task<List<User>> GetAll()
     {
-            List<User> peoples = new List<User>();
-            MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = _constring;
-            try
+        List<User> peoples = new List<User>();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+        try
+        {
+            string query = "select * from users";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
             {
-                string query = "select * from users";
-                MySqlCommand cmd = new MySqlCommand(query,con);
-                await con.OpenAsync();
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while(await reader.ReadAsync())
+                int id = int.Parse(reader["id"].ToString());
+                string? imageUrl = reader["imageurl"].ToString();
+                string? aadharId = reader["aadharid"].ToString();
+                string? firstName = reader["firstname"].ToString();
+                string? lastName = reader["lastname"].ToString();
+                DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
+                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+                string? gender = reader["gender"].ToString();
+                string? email = reader["email"].ToString();
+                string? contactNumber = reader["contactnumber"].ToString();
+
+                User people = new User()
                 {
-                    int id = int.Parse(reader["id"].ToString());
-                    string? aadharId = reader["aadharid"].ToString();
-                    string? firstName = reader["firstname"].ToString();
-                    string? lastName = reader["lastname"].ToString();
-                    DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
-                    DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);      
-                    string? gender = reader["gender"].ToString();
-                    string? email = reader["email"].ToString();
-                    string? contactNumber = reader["contactnumber"].ToString();
-
-                    User people = new User()
-                    {
-                        Id = id,
-                        AadharId = aadharId,
-                        FirstName = firstName,
-                        LastName = lastName,
-                        BirthDate = dateOnlyBirthDate,
-                        Gender = gender,
-                        Email = email,
-                        ContactNumber = contactNumber
-
-                    };
-                    peoples.Add(people);
-                }
-                await reader.CloseAsync();
+                    Id = id,
+                    ImageUrl=imageUrl,
+                    AadharId = aadharId,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    BirthDate = dateOnlyBirthDate,
+                    Gender = gender,
+                    Email = email,
+                    ContactNumber = contactNumber
+                };
+                peoples.Add(people);
             }
-            catch(Exception e){
-                throw e;
-            }
-            finally{
-                await con.CloseAsync();
-            }
-            return peoples;
-    }
-    public async Task<User> GetDetails(string aadharid){
-      
-          User people =new User();
-       MySqlConnection con = new MySqlConnection();
-       con.ConnectionString= _constring;
-       try{
-        string query = "select * from users where aadharid=@AadharId";
-        MySqlCommand command = new MySqlCommand(query,con);
-        command.Parameters.AddWithValue("@AadharId",aadharid);
-        await con.OpenAsync();
-         MySqlDataReader reader = command.ExecuteReader();
-            if(await reader.ReadAsync())
-                {
-                    int id = int.Parse(reader["id"].ToString());
-                    string? aadharId = reader["aadharid"].ToString();
-                    string? firstName = reader["firstname"].ToString();
-                    string? lastName = reader["lastname"].ToString();
-                    DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
-                    DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
-                    string? gender = reader["gender"].ToString();
-                    string? email = reader["email"].ToString();
-                    string? contactNumber = reader["contactnumber"].ToString();
-
-                     people =  new User()
-                    {
-                        Id = id,
-                        AadharId = aadharId,
-                        FirstName = firstName,
-                        LastName = lastName,
-                        BirthDate = dateOnlyBirthDate,
-                        Gender = gender,
-                        Email = email,
-                        ContactNumber = contactNumber
-
-                    };
-                }
-                await reader.CloseAsync();
-       }
-
-       catch(Exception e){
-                throw e;
-            }
-            finally{
-                await con.CloseAsync();
-            }
-            return people;
-
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return peoples;
     }
 
-     public async Task<User> GetById(int userId)
+    public async Task<List<UserNameWithId>> GetUserNameById(string userId)
     {
-            User people=new User();
-            MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = _constring;
-            try
+        List<UserNameWithId> userList = new();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+        try
+        {
+            string query = $"select id,firstname,lastname from users where id IN ({userId})";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
             {
-                string query = "select * from users where id=@userId";
-                MySqlCommand cmd = new MySqlCommand(query,con);
-                cmd.Parameters.AddWithValue("@userId",userId);
-                await con.OpenAsync();
-                MySqlDataReader reader = cmd.ExecuteReader();
-                while(await reader.ReadAsync())
-                {
-                    int id = int.Parse(reader["id"].ToString());
-                    string? aadharId = reader["aadharid"].ToString();
-                    string? firstName = reader["firstname"].ToString();
-                    string? lastName = reader["lastname"].ToString();
-                    DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
-                    DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);      
-                    string? gender = reader["gender"].ToString();
-                    string? email = reader["email"].ToString();
-                    string? contactNumber = reader["contactnumber"].ToString();
-                    people = new User()
-                    {
-                        Id = id,
-                        AadharId = aadharId,
-                        FirstName = firstName,
-                        LastName = lastName,
-                        BirthDate = dateOnlyBirthDate,
-                        Gender = gender,
-                        Email = email,
-                        ContactNumber = contactNumber
+                int id = int.Parse(reader["id"].ToString());
+                string? firstName = reader["firstname"].ToString();
+                string? lastName = reader["lastname"].ToString();
 
-                    };
-                }
-                await reader.CloseAsync();
+                userList.Add(new UserNameWithId(){
+                      Id = id,
+                      Name=$"{firstName} {lastName}"
+                });
             }
-            catch(Exception e){
-                throw e;
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return userList;
+    }
+  public async Task<UserNameWithId> GetUserName(string contactNumber)
+    {
+        UserNameWithId userName = null;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+        try
+        {
+            string query = $"select id,firstname,lastname from users where contactnumber=@contactNumber";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@contactNumber",contactNumber);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            if (await reader.ReadAsync())
+            {
+                int id = int.Parse(reader["id"].ToString());
+                string? firstName = reader["firstname"].ToString();
+                string? lastName = reader["lastname"].ToString();
+
+               userName=new UserNameWithId(){
+                      Id = id,
+                      Name=$"{firstName} {lastName}"
+                };
             }
-            finally{
-                await con.CloseAsync();
-            }
-            return people;
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return userName;
     }
 
+    public async Task<User> GetDetails(string aadharid)
+    {
+        User people = new User();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+        try
+        {
+            string query = "select * from users where aadharid=@AadharId";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@AadharId", aadharid);
+            await con.OpenAsync();
+            MySqlDataReader reader = command.ExecuteReader();
+            if (await reader.ReadAsync())
+            {
+                int id = int.Parse(reader["id"].ToString());
+                string? imageUrl = reader["imageurl"].ToString();
+                string? aadharId = reader["aadharid"].ToString();
+                string? firstName = reader["firstname"].ToString();
+                string? lastName = reader["lastname"].ToString();
+                DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
+                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+                string? gender = reader["gender"].ToString();
+                string? email = reader["email"].ToString();
+                string? contactNumber = reader["contactnumber"].ToString();
 
-       public async Task<bool> DeleteByAadharId(string aadharid)
+                people = new User()
+                {
+                    Id = id,
+                    ImageUrl=imageUrl,
+                    AadharId = aadharId,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    BirthDate = dateOnlyBirthDate,
+                    Gender = gender,
+                    Email = email,
+                    ContactNumber = contactNumber
+                };
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return people;
+    }
+
+    public async Task<long> GetIdByContactNumber(string contactNumber)
+    {
+        long userId = 0;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+        try
+        {
+            string query = "select * from users where contactnumber=@contactNumber";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@contactNumber", contactNumber);
+            await con.OpenAsync();
+            userId = Convert.ToInt64(command.ExecuteScalar());
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return userId;
+    }
+
+    public async Task<User> GetUserByContact(string contactNumber)
+    {
+        User user = new User();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+        try
+        {
+            string query = "select * from users where contactnumber=@contactNumber";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@contactNumber", contactNumber);
+            await con.OpenAsync();
+            MySqlDataReader reader = command.ExecuteReader();
+            if (await reader.ReadAsync())
+            {
+                int id = int.Parse(reader["id"].ToString());
+                string? imageUrl = reader["imageurl"].ToString();
+                string? aadharId = reader["aadharid"].ToString();
+                string? firstName = reader["firstname"].ToString();
+                string? lastName = reader["lastname"].ToString();
+                DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
+                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+                string? gender = reader["gender"].ToString();
+                string? email = reader["email"].ToString();
+                string? contact = reader["contactnumber"].ToString();
+
+                user = new User()
+                {
+                    Id = id,
+                    ImageUrl=imageUrl,
+                    AadharId = aadharId,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    BirthDate = dateOnlyBirthDate,
+                    Gender = gender,
+                    Email = email,
+                    ContactNumber = contact
+                };
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return user;
+    }
+
+    public async Task<User> GetById(int userId)
+    {
+        User people = new User();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+        try
+        {
+            string query = "select * from users where id=@userId";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@userId", userId);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+                int id = int.Parse(reader["id"].ToString());
+                string? imageUrl = reader["imageurl"].ToString();
+                string? aadharId = reader["aadharid"].ToString();
+                string? firstName = reader["firstname"].ToString();
+                string? lastName = reader["lastname"].ToString();
+                DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
+                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+                string? gender = reader["gender"].ToString();
+                string? email = reader["email"].ToString();
+                string? contactNumber = reader["contactnumber"].ToString();
+                people = new User()
+                {
+                    Id = id,
+                    ImageUrl=imageUrl,
+                    AadharId = aadharId,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    BirthDate = dateOnlyBirthDate,
+                    Gender = gender,
+                    Email = email,
+                    ContactNumber = contactNumber
+                };
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return people;
+    }
+
+    public async Task<bool> DeleteByAadharId(string aadharid)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -248,7 +403,7 @@ public class UserRepository : IUserRepository
             string query = "Delete from users where aadharid=@AadharId";
             Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@AadharId",aadharid);
+            command.Parameters.AddWithValue("@AadharId", aadharid);
             await con.OpenAsync();
             int rowsAffected = command.ExecuteNonQuery();
             if (rowsAffected > 0)
@@ -267,7 +422,7 @@ public class UserRepository : IUserRepository
         return status;
     }
 
-       public async Task<bool> DeletebyId(int userId)
+    public async Task<bool> DeletebyId(int userId)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -278,7 +433,7 @@ public class UserRepository : IUserRepository
             string query = "Delete from users where id=@userId";
             Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@userId",userId);
+            command.Parameters.AddWithValue("@userId", userId);
             await con.OpenAsync();
             int rowsAffected = command.ExecuteNonQuery();
             if (rowsAffected > 0)
@@ -295,5 +450,58 @@ public class UserRepository : IUserRepository
             await con.CloseAsync();
         }
         return status;
+    }
+
+        public async Task<UserProfile> GetUserProfile(int userId)
+        {
+        UserProfile people = new();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+        try
+        {
+            string query = "SELECT * FROM users CROSS JOIN locations ON users.id = locations.userid WHERE locations.userid=@userId ";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@userId", userId);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (await reader.ReadAsync())
+            {
+    //              string birthDateString = reader.GetString("birthdate");
+    // DateOnly birthDate = DateOnly.ParseExact(birthDateString, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
+                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+                people = new(){
+                    User = new User
+        {
+            Id = reader.GetInt32("id"),
+            ImageUrl = reader.GetString("imageurl"),
+            AadharId = reader.GetString("aadharid"),
+            FirstName = reader.GetString("firstname"),
+            LastName = reader.GetString("lastname"),
+            BirthDate = new DateOnly(dateOnlyBirthDate.Year, dateOnlyBirthDate.Month, dateOnlyBirthDate.Day), 
+            Gender = reader.GetString("gender"),
+            Email = reader.GetString("email"),
+            ContactNumber = reader.GetString("contactnumber")
+        },
+        Location = new Location
+        {
+            Longitude = reader.GetString("longitude"),
+            Latitude = reader.GetString("latitude"),
+            LandMark = reader.GetString("landmark"),
+            PinCode = reader.GetString("pincode")
+        }
+                };
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return people;
     }
 }

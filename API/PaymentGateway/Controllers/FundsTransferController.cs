@@ -6,12 +6,12 @@ using API.Services.Interfaces;
 namespace PaymentGateWayService.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class FundTransferController: ControllerBase
+[Route("/api/fundstransfer")]
+public class FundsTransferController: ControllerBase
 {
 
     private readonly IPaymentGatewayService _svc;
-    public FundTransferController(IPaymentGatewayService svc)
+    public FundsTransferController(IPaymentGatewayService svc)
     {
         _svc = svc;
     }

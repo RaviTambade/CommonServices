@@ -18,8 +18,8 @@ public class LocationService : ILocationService
         return await _repo.Insert(theAddress);
     }
 
-    public async Task<bool> Update(Location theAddress)
+    public async Task<bool> Update(int id, Location theAddress)
     {
-        return await _repo.Update(theAddress);
+        return await _repo.Update(id, theAddress);
     }
 } 

@@ -1,18 +1,22 @@
-using  ServicesLib;
+using ServicesLib;
 using RepoLib;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddCors();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IAccountRepo,AccountRepo>();
-builder.Services.AddScoped<IBankingService, BankingService>();
-builder.Services.AddScoped<IOperationRepo,OperationRepo>();
-builder.Services.AddScoped<IOperationsService, OperationsService>();
+builder.Services.AddTransient<IAccountRepo, AccountRepo>();
+builder.Services.AddTransient<IBankingService, BankingService>();
+builder.Services.AddTransient<IOperationRepo, OperationRepo>();
+builder.Services.AddTransient<IOperationsService, OperationsService>();
+builder.Services.AddTransient<ILoanRepo, LoanRepo>();
+builder.Services.AddTransient<ILoanService,LoanService>();
 
 var app = builder.Build();
 
@@ -25,20 +29,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-app.UseCors(x => x.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader());
-                   
 app.UseAuthorization();
 
 app.MapControllers();
-// app.MapControllerRoute(name: "mode",
-//                // pattern: "operations/{mode}",
-//                pattern: "{controller=Home}/{action=Index}/{mode?}");
-
-
-// app.MapControllerRoute(name: "default",
-//                pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

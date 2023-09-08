@@ -9,27 +9,21 @@ import { Credential } from '../credential';
 })
 export class LoginComponent {
 
- 
-  credential:Credential={
+
+  credential: Credential = {
     contactNumber: '',
     password: ''
   }
-  
-  constructor(private svc:AuthService){}
 
-  onLogin(form:any){
+  constructor(private svc: AuthService) { }
+
+  onLogin(form: any) {
     console.log(form);
-    this.svc.validate(form).subscribe((response)=>{
-          console.log(response);
-          
-          if(response){
-            alert("Login sucessfull")
-            window.location.reload();
-          }
-          else
-          {
-            alert("Login Failed")
-          }
-        })
+    this.svc.validate(form).subscribe((response) => {
+      console.log(response);
+      localStorage.setItem("jwt",response.token)
+      alert("Login sucessfull")
+
+    })
   }
 }

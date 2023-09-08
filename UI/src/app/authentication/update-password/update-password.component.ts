@@ -9,7 +9,6 @@ import { UpdatePassword } from '../update-password';
 })
 export class UpdatePasswordComponent {
  credential:UpdatePassword={
-   contactNumber: '',
    oldPassword: '',
    newPassword: ''
  }
@@ -17,7 +16,7 @@ export class UpdatePasswordComponent {
   constructor(private svc:AuthService){}
   
   onUpdatePassword(form: any) {
-    if(this.credential.contactNumber=='' || this.credential.newPassword=='' ||this.credential.oldPassword==''  ){
+    if( this.credential.newPassword=='' ||this.credential.oldPassword==''  ){
       alert("please give valid contact or password")
       return;
     }

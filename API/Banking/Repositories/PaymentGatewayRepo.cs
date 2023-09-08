@@ -22,7 +22,7 @@ public class PaymentGatewayRepo:IPaymentGatewayRepo{
         //Create Command Object
         try{
             con.Open();
-            MySqlCommand cmd = new MySqlCommand("fundtransfer", con as MySqlConnection);
+            MySqlCommand cmd = new MySqlCommand("fundtransfer", con);
             cmd.CommandType=CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@fromaccountnumber",info.FromAcct);
             cmd.Parameters.AddWithValue("@toaccountnumber",info.ToAcct);

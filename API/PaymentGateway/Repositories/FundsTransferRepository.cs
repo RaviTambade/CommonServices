@@ -9,8 +9,8 @@ namespace API.Repositories;
 //Saving and Restoring logic into json file
 public class PaymentGatewayRepo:IPaymentGatewayRepo
 {
-    private IConfiguration _configuration;
-    private string _conString;
+    private readonly IConfiguration _configuration;
+    private readonly string _conString;
     public PaymentGatewayRepo(IConfiguration configuration)
     {
         _configuration = configuration;
@@ -18,7 +18,7 @@ public class PaymentGatewayRepo:IPaymentGatewayRepo
     }
     public int FundTransfer(PaymentGateWay info)
     {
-        int transactionId=0;
+        int transactionId;
         MySqlConnection con = new MySqlConnection(_conString);
         //Create Command Object
         try{
@@ -34,6 +34,8 @@ public class PaymentGatewayRepo:IPaymentGatewayRepo
             cmd.Parameters["@transactionId"].Direction=ParameterDirection.Output;
             int rowsAffected = cmd.ExecuteNonQuery();
             transactionId=(int)cmd.Parameters["@transactionId"].Value;
+            Console.WriteLine("-->transactionId"+transactionId);
+            Console.WriteLine("-->rowsAffected"+rowsAffected);
         }
         catch (Exception e)
         {

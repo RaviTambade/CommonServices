@@ -1,8 +1,10 @@
+-- Active: 1678339848098@@127.0.0.1@3306@usersdb
 DROP DATABASE IF EXISTS usersdb;
 CREATE DATABASE usersdb;
 USE usersdb;
 
 CREATE TABLE users(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                     imageurl VARCHAR(50),
                      aadharid VARCHAR(30) NOT NULL UNIQUE,
                      firstname VARCHAR(50),
                      lastname VARCHAR(50),

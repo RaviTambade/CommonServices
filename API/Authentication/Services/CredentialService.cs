@@ -19,14 +19,14 @@ public class CredentialService : ICredentialService
         return await _credentialRepository.Register(credential);
     }
 
-    public async Task<bool> UpdateContactNumber(ChangeContactNumber credential)
+    public async Task<bool> UpdateContactNumber(string contactNumber,ContactNumberDetails credential)
     {
-        return await _credentialRepository.UpdateContactNumber(credential);
+        return await _credentialRepository.UpdateContactNumber(contactNumber,credential);
     }
 
-    public async Task<bool> UpdatePassword(ChangePassword credential)
+    public async Task<bool> UpdatePassword( string contactNumber ,PasswordDetails credential)
     {
-        return await _credentialRepository.UpdatePassword(credential);
+        return await _credentialRepository.UpdatePassword(contactNumber,credential);
     }
 
     public async Task<bool> Delete(int id)

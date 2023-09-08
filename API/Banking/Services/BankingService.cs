@@ -27,6 +27,10 @@ public class BankingService : IBankingService
         return account;
     }
 
+     public async  Task<AccountInfo> GetAccountInfo(CustomerDependancyCondition condition)
+    {
+       return await _repo.GetAccountInfo(condition);
+    }
 
     public Account GetById(int id)
      {
@@ -47,7 +51,7 @@ public class BankingService : IBankingService
     public bool Update(Account acct)
     {
         bool status=_repo.Update(acct);
-         return status;
+        return status;
     }
     
 }
