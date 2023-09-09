@@ -179,6 +179,41 @@ public class UserRepository : IUserRepository
         }
         return userList;
     }
+  public async Task<UserNameWithId> GetUserName(string contactNumber)
+    {
+        UserNameWithId userName = null;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _constring;
+        try
+        {
+            string query = $"select id,firstname,lastname from users where contactnumber=@contactNumber";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@contactNumber",contactNumber);
+            await con.OpenAsync();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            if (await reader.ReadAsync())
+            {
+                int id = int.Parse(reader["id"].ToString());
+                string? firstName = reader["firstname"].ToString();
+                string? lastName = reader["lastname"].ToString();
+
+               userName=new UserNameWithId(){
+                      Id = id,
+                      Name=$"{firstName} {lastName}"
+                };
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return userName;
+    }
 
     public async Task<User> GetDetails(string aadharid)
     {

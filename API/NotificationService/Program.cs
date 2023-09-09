@@ -11,6 +11,7 @@ builder.Services.Configure<EmailConfiguration>(
 );
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<ISMSSender, TwilioClient>();
+builder.Services.AddScoped<INotificationSender, NotifiactionSender>();
 builder.Services.Configure<TwilioConfiguration>(builder.Configuration.GetSection("Twilio"));
 builder.Services.AddHttpClient<ITwilioRestClient, TwilioClient>();
 builder.Services.AddControllers();

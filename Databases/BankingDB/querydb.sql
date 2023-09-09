@@ -1,9 +1,13 @@
 
 
+<<<<<<< HEAD
+=======
 SELECT * FROM customers;
+>>>>>>> 12cb5fd88e0ee81f81ec96dde30586f2da73d1af
 select * from accounts;
 SELECT @transactionId;
 SELECT * FROM operations;
+
 SELECT * FROM transactions;
 SELECT * FROM accounts;
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",1000,@transactionId);

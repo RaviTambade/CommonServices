@@ -30,6 +30,8 @@ public class UserService : IUserService
 
     public async Task<List<UserNameWithId>> GetUserNameById(string userId) =>
         await _repo.GetUserNameById(userId);
+    public async Task<UserNameWithId> GetUserName(string contactNumber) =>
+        await _repo.GetUserName(contactNumber);
 
     public async Task<User> GetUserByContact(string contactNumber) =>
         await _repo.GetUserByContact(contactNumber);
