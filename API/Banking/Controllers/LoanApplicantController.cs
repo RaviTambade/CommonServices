@@ -20,6 +20,7 @@ public class LoanApplicantController : ControllerBase
     public bool Insert(LoanApplicants applicant)
     {
         Console.WriteLine("ADHAR ID CONTROLLER : "+ applicant.AadharId);
+        Console.WriteLine("ADHAR ID CONTROLLER : "+ applicant.ToString());
         bool status = _svc.Insert(applicant);
         return status;
     }  

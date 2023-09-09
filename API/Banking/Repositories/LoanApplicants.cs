@@ -28,7 +28,7 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
         try
         {
             string query =
-                "INSERT INTO loanapplicants(accountid,firstname,middlename,lastname,birthdate,gender,contactnumber,email,address,adharid,panid,loantype) VALUES(@Accountid,@Firstname,@Middlename,@Lastname,@Birthdate,@Gender,@Contactnumber,@Email,@Address,@Adharid,@Panid,@Loantype)";
+                "INSERT INTO loanapplicants(accountid,firstname,middlename,lastname,birthdate,gender,contactnumber,email,address,aadharid,panid,loantype) VALUES(@Accountid,@Firstname,@Middlename,@Lastname,@Birthdate,@Gender,@Contactnumber,@Email,@Address,@Aadharid,@Panid,@Loantype)";
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@Accountid", applicant.AccountId);
             command.Parameters.AddWithValue("@Firstname", applicant.FirstName);
@@ -39,7 +39,7 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
             command.Parameters.AddWithValue("@Contactnumber", applicant.ContactNumber);
             command.Parameters.AddWithValue("@Email", applicant.Email);
             command.Parameters.AddWithValue("@Address", applicant.Address);
-            command.Parameters.AddWithValue("@Adharid", applicant.AadharId);
+            command.Parameters.AddWithValue("@Aadharid", applicant.AadharId);
             command.Parameters.AddWithValue("@Panid", applicant.PanId);
             command.Parameters.AddWithValue("@Loantype", applicant.LoanType);
             
