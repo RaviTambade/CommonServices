@@ -25,7 +25,12 @@ public class LoanApplicantController : ControllerBase
     [HttpPost]
     public bool Insert(LoanApplicants applicant)
     {
+<<<<<<< HEAD
         Console.WriteLine("Amount CONTROLLER : "+ applicant.Amount);
+=======
+        Console.WriteLine("ADHAR ID CONTROLLER : "+ applicant.AadharId);
+        Console.WriteLine("ADHAR ID CONTROLLER : "+ applicant.ToString());
+>>>>>>> 93a4fa34feb3b14e0953e49a9b3a34dc40cb29b6
         bool status = _svc.Insert(applicant);
         return status;
     }     

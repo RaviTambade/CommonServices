@@ -29,7 +29,11 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
         try
         {
             string query =
+<<<<<<< HEAD
             "INSERT INTO loanapplicants(accountid,firstname,middlename,lastname,birthdate,gender,contactnumber,email,address,adharid,panid,loantype,status,amount) VALUES(@Accountid,@Firstname,@Middlename,@Lastname,@Birthdate,@Gender,@Contactnumber,@Email,@Address,@Adharid,@Panid,@Loantype,@Status,@Amount)";
+=======
+                "INSERT INTO loanapplicants(accountid,firstname,middlename,lastname,birthdate,gender,contactnumber,email,address,aadharid,panid,loantype) VALUES(@Accountid,@Firstname,@Middlename,@Lastname,@Birthdate,@Gender,@Contactnumber,@Email,@Address,@Aadharid,@Panid,@Loantype)";
+>>>>>>> 93a4fa34feb3b14e0953e49a9b3a34dc40cb29b6
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@Accountid", applicant.AccountId);
             command.Parameters.AddWithValue("@Firstname", applicant.FirstName);
@@ -40,7 +44,7 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
             command.Parameters.AddWithValue("@Contactnumber", applicant.ContactNumber);
             command.Parameters.AddWithValue("@Email", applicant.Email);
             command.Parameters.AddWithValue("@Address", applicant.Address);
-            command.Parameters.AddWithValue("@Adharid", applicant.AadharId);
+            command.Parameters.AddWithValue("@Aadharid", applicant.AadharId);
             command.Parameters.AddWithValue("@Panid", applicant.PanId);
             command.Parameters.AddWithValue("@Loantype", applicant.LoanType);
              command.Parameters.AddWithValue("@Status", applicant.Status);
