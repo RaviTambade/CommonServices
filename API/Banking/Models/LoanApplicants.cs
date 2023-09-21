@@ -15,6 +15,8 @@ namespace EntityLib
         public string? AadharId {get; set;}
         public string? PanId {get; set;}
         public string? LoanType {get; set;}
+        public double Amount{get;set;}
+        public string Status{get;set;}
             
     }
 }

@@ -59,4 +59,5 @@ public class BankAccountsController : ControllerBase
         bool stauts = _svc.Delete(accountNumber);
         return stauts;
     }
+    
 }

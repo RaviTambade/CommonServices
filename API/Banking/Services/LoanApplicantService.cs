@@ -12,11 +12,26 @@ public class LoanApplicantService : ILoanApplicantService
         _repo = repo;
     }  
     
+    public List<LoanApplicants> GetAll()
+    {
+        List<LoanApplicants> loanapplicants=new List<LoanApplicants>();
+        loanapplicants=_repo.GetAll();
+        return loanapplicants;
+    }  
     public bool Insert(LoanApplicants applicant)
     {
-        Console.WriteLine("ADHAR ID SERVICE : "+ applicant.AadharId);
+        Console.WriteLine("Amount IN SERVICE : "+ applicant.Amount);
         bool status=_repo.Insert(applicant);
         return status;
     }   
+
+    public bool Delete(int applicantId)
+    {
+        bool status=_repo.Delete(applicantId);
+        return status;
+    }
+    
+
+
     
 }

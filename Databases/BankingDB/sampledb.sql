@@ -21,10 +21,9 @@ INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,custome
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('56423234235','savings','AXIS0000296',2352500,'2021-11-11',1);
 SELECT * FROM accounts;
 
-INSERT INTO loan(loanid,amount,loansanctiondate,duration,intrestrate,acctId)VALUES(100,'100000','2023-09-08',15,11.58,1);
+INSERT INTO loan(loanid,amount,loansanctiondate,duration,intrestrate,acctId)VALUES(100,'100000','2023-09-08',15,11.58,3);
 INSERT INTO loan(amount,loansanctiondate,duration,intrestrate,acctId)VALUES('50000','2023-01-31',15,11.58,6);
 INSERT INTO loan(amount,loansanctiondate,duration,intrestrate,acctId)VALUES('75000','2023-03-25',15,15.23,4);
-
-
 SELECT * FROM loan;
 
+show tables;

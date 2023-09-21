@@ -16,12 +16,27 @@ public class LoanApplicantController : ControllerBase
         _svc = svc;
     }    
 
+    [HttpGet]
+    public IEnumerable<LoanApplicants> GetAll()
+    {
+        IEnumerable<LoanApplicants> applicants = _svc.GetAll();
+        return applicants;
+    }
     [HttpPost]
     public bool Insert(LoanApplicants applicant)
     {
-        Console.WriteLine("ADHAR ID CONTROLLER : "+ applicant.AadharId);
+        Console.WriteLine("Amount CONTROLLER : "+ applicant.Amount);
         bool status = _svc.Insert(applicant);
         return status;
-    }  
-    
+    }     
+
+    [HttpDelete]
+    [Route("{id}")]
+    public bool Delete(int id)
+    {
+        bool stauts = _svc.Delete(id);
+        return stauts;
+    }
+
+
 }

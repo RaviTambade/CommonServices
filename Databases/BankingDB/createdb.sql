@@ -72,14 +72,15 @@ CREATE TABLE installment(installmentid INT PRIMARY KEY AUTO_INCREMENT,
                         contactnumber VARCHAR(10),
                         email VARCHAR(60),
                         address VARCHAR(150),
-                        adharid  VARCHAR(16),
+                        adharid  VARCHAR(25),
                         panid  VARCHAR(10) ,
                         loantype ENUM("home","personal","bussiness")
                         );
                         
-ALTER TABLE loanapplicants MODIFY adharid VARCHAR(25);
-                        
-                        
+/*ALTER TABLE loanapplicants MODIFY adharid VARCHAR(25);*/
+drop table loanapplicants;
+ 
+select * from loan;
 select * from loanapplicants
                         
                         
