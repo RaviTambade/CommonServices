@@ -1,4 +1,4 @@
--- Active: 1678339848098@@127.0.0.1@3306@usersdb
+-- Active: 1682349138553@@127.0.0.1@3306@usersdb
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","580408011566","Pragati","Bangar","2000-12-18","Female","bangarpragati11@gmail.com","1245987456");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","580408011562","Abhay","Navale","2000-12-08","male","navaleabhay11@gmail.com","8456123654");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","58040801153","Akash","Ajab","2000-12-28","male","ajabakash11@gmail.com","7758983095");
@@ -21,3 +21,14 @@ INSERT INTO locations(userid,longitude, latitude, landmark, pincode)VALUES (2, "
 INSERT INTO locations(userid,longitude, latitude, landmark, pincode)VALUES (3, "9.595334","18.535317","Taj Hotel", "521411" );
 INSERT INTO locations(userid,longitude, latitude, landmark, pincode)VALUES (3, "9.595334","18.535317","Taj BeautiParal", "521418" );
                   
+INSERT INTO 
+addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES
+   (1, 'Manchar','near gujrathi hospital', 'Manchar','Maharashtra','9878129345','410503');
+
+INSERT INTO 
+addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES
+   (2, 'Pargaon tarfe khead','chikhalewasti', '','Maharashtra','9075966080','410512');
+
+INSERT INTO 
+addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES
+   (3, 'Kudalwadi','near ganesh mandir', '','Maharashtra','7845612651','410512');                  
