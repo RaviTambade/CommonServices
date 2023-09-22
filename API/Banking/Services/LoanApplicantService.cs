@@ -32,6 +32,11 @@ public class LoanApplicantService : ILoanApplicantService
     }
     
 
-
+    public LoanApplicants GetById(int laonapplicantId)
+    {
+        LoanApplicants loanapplicant=new LoanApplicants();
+        loanapplicant=_repo.GetById(laonapplicantId);
+        return loanapplicant;
+    }
     
 }

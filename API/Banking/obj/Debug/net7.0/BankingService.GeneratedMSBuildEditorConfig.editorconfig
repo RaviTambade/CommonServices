@@ -9,17 +9,9 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BankingService
 build_property.RootNamespace = BankingService
-<<<<<<< HEAD
-build_property.ProjectDir = d:\DotNet\CommonServices\CommonServices\API\Banking\
+build_property.ProjectDir = D:\DotNet\CommonServices\CommonServices\API\Banking\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = d:\DotNet\CommonServices\CommonServices\API\Banking
-=======
-build_property.ProjectDir = G:\TAP\MyProjectBanking\CommonServices\API\Banking\
-build_property.RazorLangVersion = 7.0
-build_property.SupportLocalizedComponentNames = 
-build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = G:\TAP\MyProjectBanking\CommonServices\API\Banking
->>>>>>> 93a4fa34feb3b14e0953e49a9b3a34dc40cb29b6
+build_property.MSBuildProjectDirectory = D:\DotNet\CommonServices\CommonServices\API\Banking
 build_property._RazorSourceGeneratorDebug = 

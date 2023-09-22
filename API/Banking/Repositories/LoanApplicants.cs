@@ -29,11 +29,7 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
         try
         {
             string query =
-<<<<<<< HEAD
             "INSERT INTO loanapplicants(accountid,firstname,middlename,lastname,birthdate,gender,contactnumber,email,address,adharid,panid,loantype,status,amount) VALUES(@Accountid,@Firstname,@Middlename,@Lastname,@Birthdate,@Gender,@Contactnumber,@Email,@Address,@Adharid,@Panid,@Loantype,@Status,@Amount)";
-=======
-                "INSERT INTO loanapplicants(accountid,firstname,middlename,lastname,birthdate,gender,contactnumber,email,address,aadharid,panid,loantype) VALUES(@Accountid,@Firstname,@Middlename,@Lastname,@Birthdate,@Gender,@Contactnumber,@Email,@Address,@Aadharid,@Panid,@Loantype)";
->>>>>>> 93a4fa34feb3b14e0953e49a9b3a34dc40cb29b6
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@Accountid", applicant.AccountId);
             command.Parameters.AddWithValue("@Firstname", applicant.FirstName);
@@ -183,5 +179,75 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
             }
         }
         return applicantslist;
+    }
+
+    public LoanApplicants GetById(int laonapplicantId)
+    {
+        LoanApplicants applicant = null;
+
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+        try
+        {
+            string query = "SELECT * FROM loanapplicants WHERE applicatid=" + laonapplicantId;
+            con.Open();
+            MySqlCommand command = new MySqlCommand(query, con);
+            MySqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                int id = int.Parse(reader["applicatid"].ToString());
+
+                int acctid = int.Parse((reader["accountid"]).ToString());
+
+                string fname = reader["firstname"].ToString();
+
+                string mname = reader["middlename"].ToString();
+
+                string lname = reader["lastname"].ToString();
+
+                 DateTime bDate = DateTime.Parse(reader["birthdate"].ToString());
+                 DateOnly FormatDate = DateOnly.FromDateTime(bDate);
+                
+                //DateTime date = DateTime.ParseExact("01-01-2022", "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                string gender = reader["gender"].ToString();
+                string contact = reader["contactnumber"].ToString();
+                string email = reader["email"].ToString();
+                string address = reader["address"].ToString();
+                string aadharID = reader["adharid"].ToString();
+                string panID = reader["panid"].ToString();
+                string loanType = reader["loantype"].ToString();
+                string status = reader["status"].ToString();
+                double amount = double.Parse(reader["amount"].ToString());
+                applicant = new LoanApplicants
+                {
+                     ApplicantId = id,
+                        AccountId = acctid,
+                        FirstName = fname,
+                        MiddleName = mname,
+                        LastName = lname,
+                        BirthDate=FormatDate,
+                        Gender=gender,
+                        ContactNumber = contact,
+                        Email = email,
+                        Address=address,
+                        AadharId = aadharID,
+                        PanId = panID,
+                        LoanType = loanType,
+                        Status = status,
+                        Amount = amount
+                };
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return applicant;
+
+        
     }
 }
