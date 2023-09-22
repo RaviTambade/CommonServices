@@ -61,6 +61,29 @@ CREATE TABLE installment(installmentid INT PRIMARY KEY AUTO_INCREMENT,
 						);
 
                       
-                      
+ CREATE TABLE  loanapplicants( applicatid INT PRIMARY KEY AUTO_INCREMENT,
+						accountid INT NOT NULL,
+                        CONSTRAINT fk_accountid FOREIGN KEY (accountid) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE,
+                        firstname VARCHAR(50),
+                        middlename VARCHAR(50),
+                        lastname VARCHAR(50),
+                        birthdate DATE,
+                        gender ENUM("male","female") NOT NULL,
+                        contactnumber VARCHAR(10),
+                        email VARCHAR(60),
+                        address VARCHAR(150),
+                        adharid  VARCHAR(25),
+                        panid  VARCHAR(10) ,
+                        loantype ENUM("home","personal","bussiness")
+                        );
+                        
+/*ALTER TABLE loanapplicants MODIFY adharid VARCHAR(25);*/
+drop table loanapplicants;
+ 
+select * from loan;
+select * from loanapplicants
+                        
+                        
+						
 
 
