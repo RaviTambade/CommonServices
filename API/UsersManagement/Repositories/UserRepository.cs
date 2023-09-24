@@ -14,7 +14,8 @@ public class UserRepository : IUserRepository
     public UserRepository(IConfiguration configuration)
     {
         _configuration = configuration;
-        _constring = this._configuration.GetConnectionString("DefaultConnection");
+        _constring = this._configuration.GetConnectionString("DefaultConnection")??
+        throw new ArgumentNullException(nameof(_constring));
     }
 
     public async Task<bool> Add(User user)

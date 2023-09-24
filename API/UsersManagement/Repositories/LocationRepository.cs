@@ -6,7 +6,7 @@ namespace UsersManagement.Repositories;
 public class LocationRepository : ILocationRepository
 {
     private IConfiguration _configuration;
-    private string _conString;
+    private readonly string _conString;
     public LocationRepository(IConfiguration configuration)
     {
         _configuration = configuration;
