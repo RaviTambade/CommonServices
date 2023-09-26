@@ -18,39 +18,44 @@ public class AddressRepository : IAddressRepository
             ?? throw new ArgumentNullException(nameof(_connectionString));
     }
 
-    public async Task<List<Address>> GetAddresses(int userId)
+    public async Task<List<AddressInfo>> GetAddresses(int userId)
     {
-        List<Address> addresses = new List<Address>();
+        List<AddressInfo> addresses = new List<AddressInfo>();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _connectionString;
         try
         {
-            string query = "select * from addresses where userid=@userid";
+            string query =
+                @"SELECT addresses.id, addresses.area,addresses.landmark,addresses.city,
+            addresses.state,addresses.alternatecontactnumber,addresses.pincode,users.contactnumber,
+            CONCAT(users.firstname, ' ', users.lastname) as name  FROM addresses
+            INNER JOIN users on addresses.userid=users.id
+            WHERE users.id=@userid";
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@userid", userId);
             await con.OpenAsync();
             MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())
             {
-                
-                Address address  = new Address()
+                AddressInfo address = new AddressInfo()
                 {
-                    Id=reader.GetInt32("id"),
-                    UserId=reader.GetInt32("userid"),
-                    Area=reader.GetString("area"),
-                    LandMark=reader.GetString("landmark"),
-                    City=reader.GetString("city"),
-                    State=reader.GetString("state"),
-                    AlternateContactNumber=reader.GetString("alternatecontactnumber"),
-                    PinCode=reader.GetString("pincode"),  
+                    Id = reader.GetInt32("id"),
+                    Area = reader.GetString("area"),
+                    LandMark = reader.GetString("landmark"),
+                    City = reader.GetString("city"),
+                    State = reader.GetString("state"),
+                    AlternateContactNumber = reader.GetString("alternatecontactnumber"),
+                    PinCode = reader.GetString("pincode"),
+                    Name = reader.GetString("name"),
+                    ContactNumber = reader.GetString("contactNumber"),
                 };
-               addresses.Add(address);
+                addresses.Add(address);
             }
             await reader.CloseAsync();
         }
-        catch (Exception )
+        catch (Exception)
         {
-            throw ;
+            throw;
         }
         finally
         {
@@ -97,5 +102,50 @@ public class AddressRepository : IAddressRepository
             await con.CloseAsync();
         }
         return status;
+    }
+
+    public async Task<AddressInfo?> GetAddressInfo(int addressId)
+    {
+        AddressInfo? address = null;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _connectionString;
+        try
+        {
+            string query =
+                @"SELECT addresses.id, addresses.area,addresses.landmark,addresses.city,
+            addresses.state,addresses.alternatecontactnumber,addresses.pincode,users.contactnumber,
+            CONCAT(users.firstname, ' ', users.lastname) as name  FROM addresses
+            INNER JOIN users on addresses.userid=users.id
+            WHERE addresses.id=@addressId";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@addressId", addressId);
+            await con.OpenAsync();
+            MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+            if (await reader.ReadAsync())
+            {
+                address = new AddressInfo()
+                {
+                    Id = reader.GetInt32("id"),
+                    Area = reader.GetString("area"),
+                    LandMark = reader.GetString("landmark"),
+                    City = reader.GetString("city"),
+                    State = reader.GetString("state"),
+                    AlternateContactNumber = reader.GetString("alternatecontactnumber"),
+                    PinCode = reader.GetString("pincode"),
+                    Name = reader.GetString("name"),
+                    ContactNumber = reader.GetString("contactNumber"),
+                };
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return address;
     }
 }

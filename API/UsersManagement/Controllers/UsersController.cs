@@ -97,13 +97,7 @@ public class UsersController : ControllerBase
         return await _svc.GetIdByContactNumber(contactNumber);
     }
     
-    [HttpGet]
-    [Route("users/userprofile/{userId}")]
-    public async Task<UserProfile> GetUserProfile(int userId)
-    {
-        UserProfile peoples = await _svc.GetUserProfile(userId);
-        return peoples;
-    }
+
 
     [HttpPost, DisableRequestSizeLimit]
     [Route("fileupload/{fileName}")]

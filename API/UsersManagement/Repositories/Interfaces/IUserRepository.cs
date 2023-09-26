@@ -16,6 +16,5 @@ public interface IUserRepository
     Task<User> GetById(int userId);
     Task<bool> DeleteByAadharId(string aadharid);
     Task<bool> DeletebyId(int userId);
-    Task<UserProfile> GetUserProfile(int userId);
 
 }

@@ -38,7 +38,4 @@ public class UserService : IUserService
 
     public async Task<long> GetIdByContactNumber(string contactNumber) =>
         await _repo.GetIdByContactNumber(contactNumber);
-
-    public async Task<UserProfile> GetUserProfile(int userId) =>
-        await _repo.GetUserProfile(userId);
 }

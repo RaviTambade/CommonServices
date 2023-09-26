@@ -4,7 +4,7 @@ namespace UsersManagement.Repositories.Interfaces;
 
 public interface IAddressRepository
 {
-    Task<List<Address>> GetAddresses(int userId);
-
+    Task<List<AddressInfo>> GetAddresses(int userId);
+    Task<AddressInfo?> GetAddressInfo(int addressId);
     Task<bool> Add(Address address);
 }

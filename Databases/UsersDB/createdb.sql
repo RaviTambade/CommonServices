@@ -13,12 +13,6 @@ CREATE TABLE users(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                      email VARCHAR(40),
                      contactnumber VARCHAR(40));
                      
-CREATE TABLE  locations (id INT PRIMARY KEY AUTO_INCREMENT,
-						userid int,constraint fk_users_addresses foreign key(userid) references users(id) on update cascade on delete cascade,
-						longitude varchar(30),
-                        latitude varchar(30),
-                        landmark varchar(30),
-						pincode varchar(30));
 
 CREATE TABLE addresses (
                         id INT PRIMARY KEY AUTO_INCREMENT,
@@ -28,5 +22,4 @@ CREATE TABLE addresses (
                         city varchar(20) NOT NULL,
                         state varchar(20) NOT NULL,
                         alternatecontactnumber varchar(20),
-						pincode varchar(10) NOT NULL
-);
+						pincode varchar(10) NOT NULL);

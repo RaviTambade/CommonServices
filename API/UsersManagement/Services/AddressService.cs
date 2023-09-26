@@ -18,8 +18,13 @@ public class AddressService : IAddressService
         return await _repository.Add(address);
     }
 
-    public async Task<List<Address>> GetAddresses(int userId)
+    public async Task<List<AddressInfo>> GetAddresses(int userId)
     {
         return await _repository.GetAddresses(userId);
+    }
+
+    public async Task<AddressInfo?> GetAddressInfo(int addressId)
+    {
+        return await _repository.GetAddressInfo(addressId);
     }
 }

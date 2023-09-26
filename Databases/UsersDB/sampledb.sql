@@ -16,11 +16,7 @@ INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,co
 
 
 
-INSERT INTO locations(userid,longitude, latitude, landmark, pincode)VALUES (1, "9.595334","18.535317","bazar peth", "415612" );
-INSERT INTO locations(userid,longitude, latitude, landmark, pincode)VALUES (2, "9.595334","18.535317","Rest House", "412452" );
-INSERT INTO locations(userid,longitude, latitude, landmark, pincode)VALUES (3, "9.595334","18.535317","Taj Hotel", "521411" );
-INSERT INTO locations(userid,longitude, latitude, landmark, pincode)VALUES (3, "9.595334","18.535317","Taj BeautiParal", "521418" );
-                  
+          
 INSERT INTO 
 addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES
    (1, 'Manchar','near gujrathi hospital', 'Manchar','Maharashtra','9878129345','410503');

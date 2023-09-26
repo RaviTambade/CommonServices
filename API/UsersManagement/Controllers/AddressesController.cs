@@ -16,9 +16,15 @@ public class AddressesController : ControllerBase
     }
 
     [HttpGet("{userId}")]
-    public async Task<List<Address>> GetAddresses(int userId)
+    public async Task<List<AddressInfo>> GetAddresses(int userId)
     {
         return await _service.GetAddresses(userId);
+    }
+
+    [HttpGet("details/{addressId}")]
+    public async Task<AddressInfo?> GetAddressInfo(int addressId)
+    {
+        return await _service.GetAddressInfo(addressId);
     }
 
     [HttpPost]
