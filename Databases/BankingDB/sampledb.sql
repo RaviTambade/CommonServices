@@ -9,7 +9,8 @@ INSERT INTO customers(id,customerid,dependancyid,usertype) VALUES(7,7,2,"person"
 INSERT INTO customers(customerid,dependancyid,usertype) VALUES(8,3,"person");
 INSERT INTO customers(customerid,dependancyid,usertype) VALUES(9,4,"person");
 INSERT INTO customers(customerid,dependancyid,usertype) VALUES(10,5,"person");
-SELECT * FROM customers;
+INSERT INTO customers(id,customerid,dependancyid,usertype) VALUES(14,14,14,"corporation");
+
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('39025546601','business','MAHB0000286',200000,'2023-03-01',1);
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('39025546612','savings','BARBO0000286',225700,'2023-03-04',2);        
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('12656767876','savings','AXIS0000296',2352500,'2021-07-01',3);   
@@ -19,6 +20,8 @@ INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,custome
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('56423234233','savings','AXIS0000296',2352500,'2021-11-11',7);
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('56423234234','savings','BARBO0000286',2352500,'2021-11-11',1);
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('56423234235','savings','AXIS0000296',2352500,'2021-11-11',1);
+INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid) VALUES('5642999999','business','AXIS0000296',2352620,'2021-11-11',14);
+INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid) VALUES('7758983095','business','AXIS0000296',2352620,'2021-11-11',8);
 SELECT * FROM accounts;
 
 INSERT INTO loan(loanid,amount,loansanctiondate,duration,intrestrate,acctId)VALUES(100,'100000','2023-09-08',15,11.58,3);

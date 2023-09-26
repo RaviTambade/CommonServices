@@ -1,9 +1,5 @@
 
 
-<<<<<<< HEAD
-=======
-SELECT * FROM customers;
->>>>>>> 12cb5fd88e0ee81f81ec96dde30586f2da73d1af
 select * from accounts;
 SELECT @transactionId;
 SELECT * FROM operations;
