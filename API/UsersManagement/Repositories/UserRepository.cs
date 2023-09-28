@@ -45,9 +45,9 @@ public class UserRepository : IUserRepository
                 status = true;
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -84,9 +84,9 @@ public class UserRepository : IUserRepository
                 status = true;
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -135,9 +135,9 @@ public class UserRepository : IUserRepository
             }
             await reader.CloseAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -146,15 +146,16 @@ public class UserRepository : IUserRepository
         return peoples;
     }
 
-    public async Task<List<UserNameWithId>> GetUserNameById(string userId)
+    public async Task<List<UserNameWithId>> GetUserNameById(string userIdString)
     {
         List<UserNameWithId> userList = new();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _constring;
         try
         {
-            string query = $"select id,firstname,lastname from users where id IN ({userId})";
+            string query = $"select id,firstname,lastname from users where id IN ({userIdString})";
             MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@userIdString",userIdString);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
@@ -170,9 +171,9 @@ public class UserRepository : IUserRepository
             }
             await reader.CloseAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -205,9 +206,9 @@ public class UserRepository : IUserRepository
             }
             await reader.CloseAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -256,9 +257,9 @@ public class UserRepository : IUserRepository
             }
             await reader.CloseAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -280,9 +281,9 @@ public class UserRepository : IUserRepository
             await con.OpenAsync();
             userId = Convert.ToInt64(command.ExecuteScalar());
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -331,9 +332,9 @@ public class UserRepository : IUserRepository
             }
             await reader.CloseAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -381,9 +382,9 @@ public class UserRepository : IUserRepository
             }
             await reader.CloseAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -412,9 +413,9 @@ public class UserRepository : IUserRepository
                 status = true;
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -442,9 +443,9 @@ public class UserRepository : IUserRepository
                 status = true;
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {

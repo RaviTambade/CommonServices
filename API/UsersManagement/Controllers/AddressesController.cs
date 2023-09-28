@@ -32,4 +32,10 @@ public class AddressesController : ControllerBase
     {
         return await _service.Add(address);
     }
+
+    [HttpPost("nearest")]
+    public async Task<int> GetNearestAddressId([FromBody] AddressIdRequest request)
+    {
+        return await _service.GetNearestAddressId(request);
+    }
 }

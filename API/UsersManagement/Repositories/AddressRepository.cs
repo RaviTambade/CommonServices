@@ -148,4 +148,52 @@ public class AddressRepository : IAddressRepository
         }
         return address;
     }
+
+    public async Task<int> GetNearestAddressId(AddressIdRequest request)
+    {
+        List<AddressDistance> distances = new();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _connectionString;
+        try
+        {
+            string query =
+                $"SELECT id AS addressid,pincode,CalculateDistanceByAddress(@addressId, id) AS distance FROM addresses WHERE id IN ({request.StoreAddressIdString})";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@addressId", request.AddressId);
+            await con.OpenAsync();
+            MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                AddressDistance data = new AddressDistance()
+                {
+                    Id = reader.GetInt32("addressid"),
+                    PinCode = reader.GetString("pincode"),
+                    Distance = reader.GetDecimal("distance"),
+                };
+
+                if (data.Distance == 0)
+                {
+                    return data.Id;
+                }
+
+                distances.Add(data);
+            }
+            await reader.CloseAsync();
+            foreach (var d in distances)
+            {
+                Console.WriteLine(d.Distance);
+            }
+
+            int? id = distances.MinBy(ad => ad.Distance)?.Id;
+            return id ?? 0;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+    }
 }

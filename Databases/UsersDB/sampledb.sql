@@ -14,8 +14,6 @@ INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,co
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","76787912365","Vishal","Kale","1964-04-07","male","vishalkale@gmail.com","8909090909");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","76734554565","Vishal","Totre","1963-04-07","male","vishaltotre@gmail.com","9889898989");
 
-
-
           
 INSERT INTO 
 addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES
@@ -27,4 +25,10 @@ addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES
 
 INSERT INTO 
 addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES
-   (3, 'Kudalwadi','near ganesh mandir', '','Maharashtra','7845612651','410512');                  
+   (3, 'Kudalwadi','near ganesh mandir', '','Maharashtra','7845612651','410512');  
+
+INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES
+(3,'pargaon tarfe khed','gavthan','pargaon tarfe khed','Maharashtra','9021314562','410512');     
+
+INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES
+(4,'rajgurunagar',' near water tank','rajgurunagar','Maharashtra','7846652136','410505');  
