@@ -16,7 +16,7 @@ INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,co
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","76734554569","Ramesh","Kamble","1983-04-07","male","rameshkamble12@gmail.com","9945612032");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","76734554570","Omkar","Ghule","1999-04-08","male","ghuleomkar@gmail.com","9922456138");
 
-
+SELECT contactnumber FROM users;
 INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, email, contactnumber) 
 VALUES 
   ("SnehalPatil.jpg", "678912345678", "Snehal", "Patil", "1995-09-15", "female", "snehal.patil@gmail.com", "9988776655");
