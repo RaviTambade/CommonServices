@@ -42,7 +42,7 @@ END;
 //
 
 DELIMITER ;
--- DROP Function CalculateDistanceByAddress;
+ -- DROP Function CalculateDistanceByAddress;
 SELECT CalculateDistanceByAddress('1', '5') AS distance_in_km;
 explain SELECT * FROM indiapincodes WHERE pincode='410503';
 
