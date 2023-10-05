@@ -1,15 +1,16 @@
+-- Active: 1678359546568@@127.0.0.1@3306@bankingdb
 /* don't change sequence of any records*/
-INSERT INTO customers(id,customerid,dependancyid,usertype) VALUES(1,1,1,"corporation");
-INSERT INTO customers(customerid,dependancyid,usertype) VALUES(2,2,"corporation");
-INSERT INTO customers(customerid,dependancyid,usertype) VALUES(3,3,"corporation");
-INSERT INTO customers(customerid,dependancyid,usertype) VALUES(4,4,"corporation");
-INSERT INTO customers(id,customerid,dependancyid,usertype) VALUES(5,5,7,"corporation"); 
-INSERT INTO customers(id,customerid,dependancyid,usertype) VALUES(6,6,6,"corporation");
-INSERT INTO customers(id,customerid,dependancyid,usertype) VALUES(7,7,2,"person");  
-INSERT INTO customers(customerid,dependancyid,usertype) VALUES(8,3,"person");
-INSERT INTO customers(customerid,dependancyid,usertype) VALUES(9,4,"person");
-INSERT INTO customers(customerid,dependancyid,usertype) VALUES(10,5,"person");
-INSERT INTO customers(id,customerid,dependancyid,usertype) VALUES(14,14,14,"corporation");
+INSERT INTO customers(id,customerid,dependencyid,usertype) VALUES(1,1,1,"corporation");
+INSERT INTO customers(customerid,dependencyid,usertype) VALUES(2,2,"corporation");
+INSERT INTO customers(customerid,dependencyid,usertype) VALUES(3,3,"corporation");
+INSERT INTO customers(customerid,dependencyid,usertype) VALUES(4,4,"corporation");
+INSERT INTO customers(id,customerid,dependencyid,usertype) VALUES(5,5,7,"corporation"); 
+INSERT INTO customers(id,customerid,dependencyid,usertype) VALUES(6,6,6,"corporation");
+INSERT INTO customers(id,customerid,dependencyid,usertype) VALUES(7,7,2,"person");  
+INSERT INTO customers(customerid,dependencyid,usertype) VALUES(8,3,"person");
+INSERT INTO customers(customerid,dependencyid,usertype) VALUES(9,4,"person");
+INSERT INTO customers(customerid,dependencyid,usertype) VALUES(10,5,"person");
+INSERT INTO customers(id,customerid,dependencyid,usertype) VALUES(14,14,14,"corporation");
 
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('39025546601','business','MAHB0000286',200000,'2023-03-01',1);
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('39025546612','savings','BARBO0000286',225700,'2023-03-04',2);        

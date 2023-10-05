@@ -1,3 +1,4 @@
+-- Active: 1678359546568@@127.0.0.1@3306@bankingdb
 
 
 select * from accounts;
@@ -69,5 +70,7 @@ WHERE a.acctnumber = '45656577687'
 ORDER BY o.operationdate, o.operationid;
 
 
-
+SELECT acctnumber,ifsccode from accounts
+                 JOIN customers ON accounts.customerid = customers.customerid
+                 WHERE customers.dependancyid=2 AND customers.usertype='corporation';
 

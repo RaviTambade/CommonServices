@@ -1,4 +1,4 @@
--- Active: 1682349138553@@127.0.0.1@3306@bankingdb
+-- Active: 1678359546568@@127.0.0.1@3306@bankingdb
 DROP DATABASE IF EXISTS  BankingDB;
 
 CREATE DATABASE BankingDB;
@@ -6,7 +6,7 @@ USE BankingDB;
 
 CREATE TABLE customers(id INT AUTO_INCREMENT PRIMARY KEY,
                        customerid INT NOT NULL UNIQUE,
-                       dependancyid INT NOT NULL,
+                       dependencyid INT NOT NULL,
                        usertype ENUM("corporation","person") NOT NULL
                        );
                        

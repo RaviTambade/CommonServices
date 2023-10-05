@@ -293,9 +293,9 @@ public class AccountRepo : IAccountRepo
             string query =
                 "SELECT acctnumber,ifsccode from accounts"
                 + " JOIN customers ON accounts.customerid = customers.customerid"
-                + " WHERE customers.dependancyid=@id AND customers.usertype=@usertype";
+                + " WHERE customers.dependencyid=@id AND customers.usertype=@usertype";
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@id", condition.DependancyId);
+            command.Parameters.AddWithValue("@id", condition.DependencyId);
             command.Parameters.AddWithValue("@usertype", condition.Usertype);
             Console.WriteLine(query);
             await con.OpenAsync();
