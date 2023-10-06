@@ -1,4 +1,4 @@
--- Active: 1682349138553@@127.0.0.1@3306@usersdb
+-- Active: 1678359546568@@127.0.0.1@3306@usersdb
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","580408011566","Pragati","Bangar","2000-12-18","Female","bangarpragati11@gmail.com","1245987456");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","580408011562","Abhay","Navale","2000-12-08","male","navaleabhay11@gmail.com","8456123654");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","58040801153","Akash","Ajab","2000-12-28","male","ajabakash11@gmail.com","7758983095");
@@ -16,7 +16,6 @@ INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,co
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","76734554569","Ramesh","Kamble","1983-04-07","male","rameshkamble12@gmail.com","9945612032");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber) VALUES("AkshayTanpure.jpg","76734554570","Omkar","Ghule","1999-04-08","male","ghuleomkar@gmail.com","9922456138");
 
-SELECT contactnumber FROM users;
 INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, email, contactnumber) 
 VALUES 
   ("SnehalPatil.jpg", "678912345678", "Snehal", "Patil", "1995-09-15", "female", "snehal.patil@gmail.com", "9988776655");

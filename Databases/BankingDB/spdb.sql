@@ -1,4 +1,4 @@
--- Active: 1682349138553@@127.0.0.1@3306@bankingdb
+-- Active: 1678359546568@@127.0.0.1@3306@bankingdb
 DELIMITER $$
 CREATE PROCEDURE fundtransfer(IN fromaccountnumber VARCHAR(20),IN toaccountnumber VARCHAR(20),
                              IN fromifsccode VARCHAR(20),IN toifsccode VARCHAR(20),

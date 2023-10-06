@@ -1,5 +1,5 @@
--- Active: 1682349138553@@127.0.0.1@3306@usersdb
-DELIMITER //
+-- Active: 1678359546568@@127.0.0.1@3306@usersdb
+
 
 CREATE FUNCTION CalculateDistanceByAddress(
     addressid1 INT,
@@ -39,13 +39,8 @@ BEGIN
     SET c = 2 * ATAN2(SQRT(a), SQRT(1 - a));
     RETURN R * c ; -- Distance in kilometers
 END;
-//
 
-DELIMITER ;
- -- DROP Function CalculateDistanceByAddress;
+
+--  DROP Function CalculateDistanceByAddress;
 SELECT CalculateDistanceByAddress('1', '5') AS distance_in_km;
-explain SELECT * FROM indiapincodes WHERE pincode='410503';
-
-SELECT id AS addressid,pincode,CalculateDistanceByAddress(2, id) AS distance
-FROM addresses WHERE id IN (3,1,4,5);
 
