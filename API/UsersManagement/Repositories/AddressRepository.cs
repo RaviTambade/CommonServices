@@ -157,7 +157,7 @@ public class AddressRepository : IAddressRepository
         try
         {
             string query =
-                $"SELECT id AS addressid,pincode,CalculateDistanceByAddress(@addressId, id) AS distance FROM addresses WHERE id IN ({request.StoreAddressIdString})";
+                $"SELECT id AS addressid,pincode,CalculateDistanceByAddress(@addressId, id) AS distance FROM addresses WHERE id IN ({request.AddressIdString})";
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@addressId", request.AddressId);
             await con.OpenAsync();
