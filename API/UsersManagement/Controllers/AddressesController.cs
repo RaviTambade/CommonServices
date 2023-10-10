@@ -26,6 +26,11 @@ public class AddressesController : ControllerBase
     {
         return await _service.GetAddressInfo(addressId);
     }
+    [HttpGet("info/{addressIdString}")]
+   public async Task<List<AddressInfo>> GetAddressesInformationFromId(string addressIdString)
+    {
+        return await _service.GetAddressesInformationFromId(addressIdString);
+    }
 
     [HttpPost]
     public async Task<bool> Add(Address address)

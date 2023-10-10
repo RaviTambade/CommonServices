@@ -149,6 +149,52 @@ public class AddressRepository : IAddressRepository
         return address;
     }
 
+    
+    public async Task<List<AddressInfo>> GetAddressesInformationFromId(string addressIdString)
+    {
+        List<AddressInfo> addresses = new();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _connectionString;
+        try
+        {
+            string query =
+                @$"SELECT addresses.id, addresses.area,addresses.landmark,addresses.city,
+            addresses.state,addresses.alternatecontactnumber,addresses.pincode,users.contactnumber,
+            CONCAT(users.firstname, ' ', users.lastname) as name  FROM addresses
+            INNER JOIN users on addresses.userid=users.id
+            WHERE addresses.id IN ({addressIdString})";
+            MySqlCommand command = new MySqlCommand(query, con);
+            await con.OpenAsync();
+            MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                AddressInfo address = new AddressInfo()
+                {
+                    Id = reader.GetInt32("id"),
+                    Area = reader.GetString("area"),
+                    LandMark = reader.GetString("landmark"),
+                    City = reader.GetString("city"),
+                    State = reader.GetString("state"),
+                    AlternateContactNumber = reader.GetString("alternatecontactnumber"),
+                    PinCode = reader.GetString("pincode"),
+                    Name = reader.GetString("name"),
+                    ContactNumber = reader.GetString("contactNumber"),
+                };
+                addresses.Add(address);
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return addresses;
+    }
+
     public async Task<int> GetNearestAddressId(AddressIdRequest request)
     {
         List<AddressDistance> distances = new();

@@ -23,6 +23,11 @@ public class AddressService : IAddressService
         return await _repository.GetAddresses(userId);
     }
 
+    public async Task<List<AddressInfo>> GetAddressesInformationFromId(string addressIdString)
+    {
+        return await _repository.GetAddressesInformationFromId(addressIdString);
+    }
+
     public async Task<AddressInfo?> GetAddressInfo(int addressId)
     {
         return await _repository.GetAddressInfo(addressId);
