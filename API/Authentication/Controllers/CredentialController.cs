@@ -36,7 +36,7 @@ public class CredentialController : ControllerBase
     }
 
     //http:localhost:56455/authentication/update/contactnumber
-    [Authorize]
+    // [Authorize]
     [HttpPut("update/contactnumber")]
     public async Task<bool> UpdateContactNumber(ContactNumberDetails credential)
     {
@@ -46,11 +46,12 @@ public class CredentialController : ControllerBase
     }
 
     //http:localhost:56455/authentication/update/password
-    [Authorize]
+    // [Authorize]
     [HttpPut("update/password")]
     public async Task<bool> Update(PasswordDetails passwordDetails)
     {
         string? contactNumber = (string?)HttpContext.Items["contactNumber"];
+        Console.WriteLine(contactNumber);
         return await _service.UpdatePassword(contactNumber, passwordDetails);
     }
 

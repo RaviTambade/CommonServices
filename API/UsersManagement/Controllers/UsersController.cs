@@ -24,7 +24,7 @@ public class UsersController : ControllerBase
         return status;
     }
 
-    [Authorize]
+    // [Authorize]
     [HttpPut]
     [Route("{id}")]
     public async Task<bool> Update(int id, User user)

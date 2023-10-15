@@ -66,7 +66,7 @@ public class UserRepository : IUserRepository
         {
             string birthDateString = user.BirthDate.ToString("yyyy-MM-dd");
             string query =
-                "Update users set aadharid=@aadharId,firstname=@firstName,lastname=@lastName,birthdate=@birthDate,gender=@gender,email=@email,contactnumber=@contactNumber where id=@Id";
+                "Update users set aadharid=@aadharId, imageurl=@imageUrl,firstname=@firstName,lastname=@lastName,birthdate=@birthDate,gender=@gender,email=@email,contactnumber=@contactNumber where id=@Id";
             Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
             await con.OpenAsync();
@@ -76,6 +76,7 @@ public class UserRepository : IUserRepository
             command.Parameters.AddWithValue("@birthDate", birthDateString);
             command.Parameters.AddWithValue("@gender", user.Gender);
             command.Parameters.AddWithValue("@email", user.Email);
+            command.Parameters.AddWithValue("@imageUrl", user.ImageUrl);
             command.Parameters.AddWithValue("@Id", id);
             command.Parameters.AddWithValue("@contactNumber", user.ContactNumber);
             int rowsAffected = command.ExecuteNonQuery();
