@@ -16,7 +16,6 @@ builder.Services.AddScoped<ICredentialService,CredentialService>();
 builder.Services.AddScoped<ICredentialRepository,CredentialRepository>();
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -30,9 +29,7 @@ app.UseCors(x => x.AllowAnyOrigin()
                     .AllowAnyHeader());
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseMiddleware<JwtMiddleware>();
-
 app.MapControllers();
 
 app.Run();
