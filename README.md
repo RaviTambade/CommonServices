@@ -49,13 +49,13 @@ Using a browser it's possible to interact with the REST apis with Swagger:
 
 http://localhost:8090/swagger-ui.html
 
-![Swagger](https://github.com/andreagiassi/microservice-rbac-user-management/blob/master/src/main/resources/images/swagger.png "Swagger interface")
+<img src="/images/swaggermembershiprolesmgmt.png"/>
 
 Another alternative is to using an external tool, for example Postman (https://www.postman.com/).
 
 This project contains also the Postman export file with all the configured test calls:
 
-![Swagger](https://github.com/andreagiassi/microservice-rbac-user-management/blob/master/src/main/resources/images/postman.png "Swagger interface")
+<img src="/images/postman.png"/>
 
 ## Quick Start
 
