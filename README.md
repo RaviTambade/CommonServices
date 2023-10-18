@@ -111,26 +111,22 @@ Everything should be up and running :)
 >You can also setup and work on this project without to consider to use Docker.
 You will just launch the Spring Boot application targeting the MySql database (on localhost or on a remote one).
 
-Install Java 8 JDK.
+- Install Dotnet core 8.0.
 
-Set up your MySql instance and create the empty database "users":
+- Set up your MySql instance and create the empty database "users":
 
     CREATE DATABASE IF NOT EXISTS users;
 
-Create and grant a new MySql user on the "users" database.
+- Create and grant a new MySql user on the "users" database.
 
-Open the application.properties file located in /src/main/resources.
+- Open the appsettings.json file.
 
 Target your localhost MySql database:
 
-    connectionstring=jdbc:mysql://localhost:3306/users?useSSL=false&allowPublicKeyRetrieval=true
+    connectionstring=mysql://localhost:3306/users?useSSL=false&allowPublicKeyRetrieval=true
 
-Set the username and password of the MySql's user:
 
-    spring.datasource.username=yourMySqlUser
-    spring.datasource.password=yourMySqlUserStrongPassword
-
-Execute the microservice code using Maven:
+Execute the microservice code using Dotnet CLI command:
 
     ./dotnet run
     
@@ -168,8 +164,6 @@ Set the username and password of the MySql's user:
 Disable the demo data setting as below:
 
     # enable initialization using schema.sql and data.sql
-    
-
 
 
 >If you need, you can launch the microservice and using Swagger to call the rest endpoint /users/rbac/salt
