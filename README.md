@@ -63,7 +63,7 @@ This project contains also the Postman export file with all the configured test 
 >Thanks to Docker it’s easy to create scalable and manageable applications built of microservices.
 
 The project is designed to use two containers:
-* one Java microservice
+* one asp.net core microservice
 * one MySql database
 
 The Docker environment is necessary in order to work with the containers and the setup depends about your Os.
