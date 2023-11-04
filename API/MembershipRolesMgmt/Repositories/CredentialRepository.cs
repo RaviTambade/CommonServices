@@ -1,11 +1,14 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using AuthenticationAPI.Models;
-using AuthenticationAPI.Repositories.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 using MySql.Data.MySqlClient;
+using Transflower.MembershipRolesMgmt.Models.Entities;
+using Transflower.MembershipRolesMgmt.Models.Requests;
+using Transflower.MembershipRolesMgmt.Models.Responses;
+using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
+using Claim = Transflower.MembershipRolesMgmt.Models.Requests.Claim;
 
-namespace MembershipRolesMgmt.Repositories;
+namespace Transflower.MembershipRolesMgmt.Repositories;
 
 public class CredentialRepository : ICredentialRepository
 {
@@ -18,17 +21,17 @@ public class CredentialRepository : ICredentialRepository
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
 
-    public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
+    public async Task<AuthToken> Authenticate(Claim claim)
     {
-        var credential = await GetCredentials(request);
+        var credential = await GetCredentials(claim);
 
-        if (credential == null)
+        if (credential is null)
         {
             return null;
         }
 
-        var token = await generateJwtToken(credential);
-        return new AuthenticateResponse(token);
+        var jwtToken = await generateJwtToken(credential);
+        return new AuthToken(jwtToken);
     }
 
     public async Task<bool> Register(Credential credential)
@@ -165,17 +168,17 @@ public class CredentialRepository : ICredentialRepository
         return tokenHandler.WriteToken(token);
     }
 
-    private async Task<List<Claim>> AllClaims(Credential credential)
+    private async Task<List<System.Security.Claims.Claim>> AllClaims(Credential credential)
     {
-        List<Claim> claims = new List<Claim>
+        List<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>
         {
-            new Claim("contactNumber", credential.ContactNumber)
+            new System.Security.Claims.Claim("contactNumber", credential.ContactNumber)
         };
 
         return claims;
     }
 
-    private async Task<Credential?> GetCredentials(AuthenticateRequest request)
+    private async Task<Credential?> GetCredentials(Claim request)
     {
         Credential credential = null;
         MySqlConnection con = new MySqlConnection(_conString);

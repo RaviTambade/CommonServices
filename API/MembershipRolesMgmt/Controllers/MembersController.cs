@@ -1,16 +1,18 @@
-using UsersManagement.Models;
-using Microsoft.AspNetCore.Mvc;
-using UsersManagement.Services.Interfaces;
-using UsersManagement.Helpers;
 
-namespace MembershipRolesMgmt.Controllers;
+
+using Microsoft.AspNetCore.Mvc;
+using Transflower.MembershipRolesMgmt.Models.Entities;
+using Transflower.MembershipRolesMgmt.Models.Responses;
+using Transflower.MembershipRolesMgmt.Services.Interfaces;
+
+namespace Transflower.MembershipRolesMgmt.Controllers;
 [ApiController]
 [Route("/api/users")]
 public class MembersController : ControllerBase
 {
     private readonly IUserService _svc;
 
-    public UsersController(IUserService svc)
+    public MembersController(IUserService svc)
     {
         _svc = svc;
     }

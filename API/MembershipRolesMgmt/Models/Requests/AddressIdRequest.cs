@@ -1,8 +1,7 @@
 namespace Transflower.MembershipRolesMgmt.Models.Requests;
+
+public class AddressIdRequest
 {
-    public class AddressIdRequest
-    {
-        public int AddressId { get; set; }
-        public string? AddressIdString { get; set; }
-    }
+    public int AddressId { get; set; }
+    public string? AddressIdString { get; set; }
 }

@@ -1,10 +1,9 @@
 
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace MembershipRolesMgmt.Helpers
+namespace Transflower.MembershipRolesMgmt.Helpers
 {
     public class JwtMiddleware
     {

@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using MembershipRolesMgmt.Models;
-using MembershipRolesMgmt.Services.Interfaces;
-using MembershipRolesMgmt.Helpers;
+using Transflower.MembershipRolesMgmt.Models;
+using Transflower.MembershipRolesMgmt.Services.Interfaces;
+using Transflower.MembershipRolesMgmt.Helpers;
+using Transflower.MembershipRolesMgmt.Models.Responses;
+using Transflower.MembershipRolesMgmt.Models.Requests;
+using Transflower.MembershipRolesMgmt.Models.Entities;
 
-namespace MembershipRolesMgmt.Controllers;
+namespace Transflower.MembershipRolesMgmt.Controllers;
 
 [ApiController]
 [Route("/api/auth")]
@@ -12,14 +15,14 @@ public class AuthController : ControllerBase
 {
     private readonly ICredentialService _service;
 
-    public CredentialController(ICredentialService service)
+    public AuthController(ICredentialService service)
     {
         _service = service;
     }
 
     [HttpPost]
     [Route("signin")]
-    public async Task<AuthenticateResponse> Authenticate([FromBody] AuthenticateRequest request)
+    public async Task<AuthToken> Authenticate([FromBody] Claim request)
     {
         var token = await _service.Authenticate(request);
         return token;

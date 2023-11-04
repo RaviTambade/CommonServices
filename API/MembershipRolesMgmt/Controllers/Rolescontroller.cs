@@ -1,10 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using AuthenticationAPI.Models;
-using AuthenticationAPI.Services.Interfaces;
-using System.Threading.Tasks;
-using AuthenticationAPI.Helpers;
-namespace MembershipRolesMgmt.Controllers;
-
+using Transflower.MembershipRolesMgmt.Models.Entities;
+using Transflower.MembershipRolesMgmt.Services.Interfaces;
+namespace Transflower.MembershipRolesMgmt.Controllers;
 
 [ApiController]
 [Route("/api/authentication")]
@@ -24,7 +21,7 @@ public class RolesController : ControllerBase
     }
 
     [HttpGet("{userRoleId}")]
-    public async Task<UserRole?> GetById(int userRoleId)
+    public async Task<Role?> GetById(int userRoleId)
     {
         return await _service.GetById(userRoleId);
     }

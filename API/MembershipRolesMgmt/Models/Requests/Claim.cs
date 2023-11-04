@@ -1,7 +1,7 @@
 namespace Transflower.MembershipRolesMgmt.Models.Requests;
 
-public class ContactNumberDetails
+public class Claim
 {
-    public string? NewContactNumber { get; set; }
+    public string? ContactNumber { get; set; }
     public string? Password { get; set; }
 }

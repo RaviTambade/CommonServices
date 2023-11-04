@@ -1,6 +1,7 @@
 using Transflower.MembershipRolesMgmt.Models;
+using Transflower.MembershipRolesMgmt.Models.Entities;
 namespace Transflower.MembershipRolesMgmt.Repositories.Interfaces;
-public interface IUserRoleRepository
+public interface IRoleRepository
 {
     Task<List<UserRole>> GetAll();
     Task<Role?> GetById(int userRoleId);

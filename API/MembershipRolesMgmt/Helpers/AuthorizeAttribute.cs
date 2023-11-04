@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace MembershipRolesMgmt.Helpers
+namespace Transflower.MembershipRolesMgmt.Helpers
 {
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]

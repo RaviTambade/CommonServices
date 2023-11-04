@@ -1,8 +1,11 @@
-using MembershipRolesMgmt.Services.Interfaces;
-using MembershipRolesMgmt.Repositories.Interfaces;
-using MembershipRolesMgmt.Models;
 
-namespace MembershipRolesMgmt.Services;
+using Transflower.MembershipRolesMgmt.Models.Entities;
+using Transflower.MembershipRolesMgmt.Models.Requests;
+using Transflower.MembershipRolesMgmt.Models.Responses;
+using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
+using Transflower.MembershipRolesMgmt.Services.Interfaces;
+
+namespace Transflower.MembershipRolesMgmt.Services;
 
 public class CredentialService : ICredentialService
 {
@@ -34,7 +37,7 @@ public class CredentialService : ICredentialService
         return await _credentialRepository.Delete(id);
     }
 
-    public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
+    public async Task<AuthToken> Authenticate(Claim request)
     {
        return await _credentialRepository.Authenticate(request);
     }
