@@ -10,4 +10,7 @@ public class Role
 
     [Column("name")]
     public string? Name { get; set; }
+
+    [Column("lob")]
+    public string? lob { get; set; }
 }

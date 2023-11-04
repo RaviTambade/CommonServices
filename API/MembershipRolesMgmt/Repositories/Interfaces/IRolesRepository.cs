@@ -4,7 +4,7 @@ namespace Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 public interface IRoleRepository
 {
     Task<List<UserRole>> GetAll();
-    Task<Role?> GetById(int userRoleId);
+    Task<Role> GetById(int userRoleId);
     Task<List<string>> GetUsersId(string role);
     Task<List<string>> GetRolesByUserId(int userId);
     Task<bool> Insert(UserRole userRole);

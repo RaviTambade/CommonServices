@@ -3,11 +3,9 @@ using Transflower.MembershipRolesMgmt.Repositories;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Transflower.MembershipRolesMgmt.Services;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddScoped<IAddressService,AddressService>();
