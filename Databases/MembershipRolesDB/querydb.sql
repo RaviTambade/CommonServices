@@ -1,3 +1,3 @@
--- Active: 1682349138553@@127.0.0.1@3306@credentialsdb
+-- Active: 1694968636816@@127.0.0.1@3306@membershipprofilesdb
 
-SELECT * FROM credentials;
+SELECT * FROM roles;
