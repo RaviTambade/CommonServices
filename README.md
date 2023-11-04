@@ -49,13 +49,21 @@ Using a browser it's possible to interact with the REST apis with Swagger:
 
 http://localhost:8090/swagger-ui.html
 
+<<<<<<< HEAD
 ![Swagger](https://github.com/andreagiassi/microservice-rbac-user-management/blob/master/src/main/resources/images/swagger.png "Swagger interface")
+=======
+<img src="/images/swaggermembershiprolesmgmt.png"/>
+>>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
 
 Another alternative is to using an external tool, for example Postman (https://www.postman.com/).
 
 This project contains also the Postman export file with all the configured test calls:
 
+<<<<<<< HEAD
 ![Swagger](https://github.com/andreagiassi/microservice-rbac-user-management/blob/master/src/main/resources/images/postman.png "Swagger interface")
+=======
+<img src="/images/postman.png"/>
+>>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
 
 ## Quick Start
 
@@ -63,7 +71,11 @@ This project contains also the Postman export file with all the configured test 
 >Thanks to Docker it’s easy to create scalable and manageable applications built of microservices.
 
 The project is designed to use two containers:
+<<<<<<< HEAD
 * one Java microservice
+=======
+* one asp.net core microservice
+>>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
 * one MySql database
 
 The Docker environment is necessary in order to work with the containers and the setup depends about your Os.
@@ -111,6 +123,7 @@ Everything should be up and running :)
 >You can also setup and work on this project without to consider to use Docker.
 You will just launch the Spring Boot application targeting the MySql database (on localhost or on a remote one).
 
+<<<<<<< HEAD
 Install Java 8 JDK.
 
 Set up your MySql instance and create the empty database "users":
@@ -131,6 +144,24 @@ Set the username and password of the MySql's user:
     spring.datasource.password=yourMySqlUserStrongPassword
 
 Execute the microservice code using Maven:
+=======
+- Install Dotnet core 8.0.
+
+- Set up your MySql instance and create the empty database "users":
+
+    CREATE DATABASE IF NOT EXISTS users;
+
+- Create and grant a new MySql user on the "users" database.
+
+- Open the appsettings.json file.
+
+Target your localhost MySql database:
+
+    connectionstring=mysql://localhost:3306/users?useSSL=false&allowPublicKeyRetrieval=true
+
+
+Execute the microservice code using Dotnet CLI command:
+>>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
 
     ./dotnet run
     
@@ -168,8 +199,11 @@ Set the username and password of the MySql's user:
 Disable the demo data setting as below:
 
     # enable initialization using schema.sql and data.sql
+<<<<<<< HEAD
     
 
+=======
+>>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
 
 
 >If you need, you can launch the microservice and using Swagger to call the rest endpoint /users/rbac/salt
@@ -188,8 +222,11 @@ http://localhost:8090/swagger-ui.html
 
 Restarting the db or the microservices should not affect the persistence of your RBAC configuration.
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
 #### Author
 This project has been created in October 2023 by Pragati Bangar.
 
@@ -198,5 +235,9 @@ Since 2022, Pragati is working in the Transflower as intern and she is contribut
  to the success of several solutions and products at Transflower.
 
 About me:
+<<<<<<< HEAD
 https://www.linkedin.com/in/bangarpragati/
 
+=======
+https://www.linkedin.com/in/bangarpragati/
+>>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
