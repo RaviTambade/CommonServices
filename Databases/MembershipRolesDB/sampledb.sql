@@ -1,4 +1,4 @@
--- Active: 1694968636816@@127.0.0.1@3306@membershipprofilesdb
+-- Active: 1678359546568@@127.0.0.1@3306@membershiprolesdb
 INSERT INTO credentials (contactnumber,password) VALUES ('1245987456','password');
 INSERT INTO credentials (contactnumber,password) VALUES ('8456123654','12345678');
 INSERT INTO credentials (contactnumber,password) VALUES ('8752312210','password');
@@ -255,7 +255,7 @@ INSERT INTO roles(name,lob) VALUES("Supervisor",'Inventory Management');
 INSERT INTO roles(name,lob) VALUES("Store Worker",'Inventory Management');
 INSERT INTO roles(name,lob) VALUES("Supervisor Incharge",'Inventory Management');
 
-INSERT INTO roles(name,lob) VALUES ('Shop Owner','EKrushi');
+INSERT INTO roles(name,lob) VALUES ('Store Owner','EKrushi');
 INSERT INTO roles(name,lob) VALUES ('Customer','EKrushi');
 INSERT INTO roles(name,lob) VALUES ('Supplier','EKrushi');
 INSERT INTO roles(name,lob) VALUES ('Shipper','EKrushi');
@@ -297,4 +297,45 @@ INSERT INTO userroles(userid,roleid) VALUES (20,4);
 INSERT INTO userroles(userid,roleid) VALUES (21,4);
 INSERT INTO userroles(userid,roleid) VALUES (22,4);
 insert into userroles(userid,roleid)values(23,4);
+
+
+INSERT INTO userroles(userid,roleid) VALUES (1,10);
+INSERT INTO userroles(userid,roleid) VALUES (4,10);
+INSERT INTO userroles(userid,roleid) VALUES (28,10);
+INSERT INTO userroles(userid,roleid) VALUES (29,10);
+INSERT INTO userroles(userid,roleid) VALUES (30,10);
+
+INSERT INTO userroles(userid,roleid) VALUES (2,11);
+INSERT INTO userroles(userid,roleid) VALUES (3,11);
+INSERT INTO userroles(userid,roleid) VALUES (15,11);
+INSERT INTO userroles(userid,roleid) VALUES (16,11);
+INSERT INTO userroles(userid,roleid) VALUES (17,11);
+INSERT INTO userroles(userid,roleid) VALUES (18,11);
+INSERT INTO userroles(userid,roleid) VALUES (19,11);
+INSERT INTO userroles(userid,roleid) VALUES (20,11);
+INSERT INTO userroles(userid,roleid) VALUES (21,11);
+INSERT INTO userroles(userid,roleid) VALUES (22,11);
+INSERT INTO userroles(userid,roleid) VALUES (23,11);
+INSERT INTO userroles(userid,roleid) VALUES (24,11);
+INSERT INTO userroles(userid,roleid) VALUES (25,11);
+INSERT INTO userroles(userid,roleid) VALUES (26,11);
+INSERT INTO userroles(userid,roleid) VALUES (27,11);
+
+INSERT INTO userroles(userid,roleid) VALUES (12,12);
+INSERT INTO userroles(userid,roleid) VALUES (13,12);
+
+INSERT INTO userroles(userid,roleid) VALUES (31,13);
+INSERT INTO userroles(userid,roleid) VALUES (32,13);
+INSERT INTO userroles(userid,roleid) VALUES (33,13);
+INSERT INTO userroles(userid,roleid) VALUES (34,13);
+INSERT INTO userroles(userid,roleid) VALUES (35,13);
+
+
+INSERT INTO userroles(userid,roleid) VALUES (8,14);
+INSERT INTO userroles(userid,roleid) VALUES (9,14);
+INSERT INTO userroles(userid,roleid) VALUES (36,14);
+INSERT INTO userroles(userid,roleid) VALUES (37,14);
+INSERT INTO userroles(userid,roleid) VALUES (38,14);
+INSERT INTO userroles(userid,roleid) VALUES (39,14);
+INSERT INTO userroles(userid,roleid) VALUES (40,14);
 

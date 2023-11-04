@@ -1,7 +1,7 @@
--- Active: 1694968636816@@127.0.0.1@3306@membershipprofilesdb
-DROP DATABASE IF EXISTS MembershipProfilesDB;
-CREATE DATABASE  MembershipProfilesDB;
-USE MembershipProfilesDB;
+-- Active: 1678359546568@@127.0.0.1@3306@membershiprolesdb
+DROP DATABASE IF EXISTS MembershipRolesDB;
+CREATE DATABASE  MembershipRolesDB;
+USE MembershipRolesDB;
 CREATE TABLE credentials(id INT PRIMARY KEY AUTO_INCREMENT,
                          contactnumber  VARCHAR(15) UNIQUE,
                          password VARCHAR(25), 
