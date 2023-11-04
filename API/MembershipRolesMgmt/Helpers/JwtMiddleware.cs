@@ -1,6 +1,7 @@
 
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Transflower.MembershipRolesMgmt.Helpers
@@ -8,29 +9,28 @@ namespace Transflower.MembershipRolesMgmt.Helpers
     public class JwtMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IConfiguration _configuration;
+        private readonly AppSettings _appSettings;
 
-
-        public JwtMiddleware(RequestDelegate next,IConfiguration configuration)
+        public JwtMiddleware(RequestDelegate next, IOptions<AppSettings> appSettings)
         {
             _next = next;
-            _configuration = configuration; 
+            _appSettings = appSettings.Value;
         }
 
         public async Task Invoke(HttpContext context)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             if (token != null)
-                attachUserToContext(context, token);
+                AttachUserToContext(context, token);
             await _next(context);
         }
 
-        private void attachUserToContext(HttpContext context,  string token)
+        private void AttachUserToContext(HttpContext context,  string token)
         {
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Secret"));
+                var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
@@ -45,6 +45,9 @@ namespace Transflower.MembershipRolesMgmt.Helpers
                 var contactNumber=jwtToken.Claims.First(x => x.Type == "contactNumber").Value;
 
                 context.Items["contactNumber"] = contactNumber;
+
+                 var userRoles = jwtToken.Claims.Where(x => x.Type == "roles").Select(c => c.Value).ToList();
+                context.Items["userRoles"] = userRoles;
             }
             catch (Exception e)
             {

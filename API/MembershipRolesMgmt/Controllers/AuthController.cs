@@ -1,8 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using Transflower.MembershipRolesMgmt.Models;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
-using Transflower.MembershipRolesMgmt.Helpers;
 using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Models.Requests;
 using Transflower.MembershipRolesMgmt.Models.Entities;
@@ -22,9 +19,9 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("signin")]
-    public async Task<AuthToken> Authenticate([FromBody] Claim request)
+    public async Task<AuthToken> Authenticate([FromBody] Claim claim)
     {
-        var token = await _service.Authenticate(request);
+        var token = await _service.Authenticate(claim);
         return token;
     }
 
@@ -38,7 +35,7 @@ public class AuthController : ControllerBase
     [HttpPut("update/contactnumber")]
     public async Task<bool> UpdateContactNumber(ContactNumberDetails credential)
     {
-        string? contactNumber = (string?)HttpContext.Items["contactNumber"];
+        string contactNumber = (string)HttpContext.Items["contactNumber"];
 
         return await _service.UpdateContactNumber(contactNumber, credential);
     }
