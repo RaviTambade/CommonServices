@@ -14,7 +14,8 @@ public class UserRepository : IUserRepository
     public UserRepository(IConfiguration configuration)
     {
         _configuration = configuration;
-        _constring = this._configuration.GetConnectionString("DefaultConnection");
+        _constring = this._configuration.GetConnectionString("DefaultConnection")??
+        throw new ArgumentNullException(nameof(_constring));
     }
 
     public async Task<bool> Add(User user)
@@ -44,9 +45,9 @@ public class UserRepository : IUserRepository
                 status = true;
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -65,7 +66,7 @@ public class UserRepository : IUserRepository
         {
             string birthDateString = user.BirthDate.ToString("yyyy-MM-dd");
             string query =
-                "Update users set aadharid=@aadharId,firstname=@firstName,lastname=@lastName,birthdate=@birthDate,gender=@gender,email=@email,contactnumber=@contactNumber where id=@Id";
+                "Update users set aadharid=@aadharId, imageurl=@imageUrl,firstname=@firstName,lastname=@lastName,birthdate=@birthDate,gender=@gender,email=@email,contactnumber=@contactNumber where id=@Id";
             Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
             await con.OpenAsync();
@@ -75,6 +76,7 @@ public class UserRepository : IUserRepository
             command.Parameters.AddWithValue("@birthDate", birthDateString);
             command.Parameters.AddWithValue("@gender", user.Gender);
             command.Parameters.AddWithValue("@email", user.Email);
+            command.Parameters.AddWithValue("@imageUrl", user.ImageUrl);
             command.Parameters.AddWithValue("@Id", id);
             command.Parameters.AddWithValue("@contactNumber", user.ContactNumber);
             int rowsAffected = command.ExecuteNonQuery();
@@ -83,9 +85,9 @@ public class UserRepository : IUserRepository
                 status = true;
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -134,9 +136,9 @@ public class UserRepository : IUserRepository
             }
             await reader.CloseAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -145,15 +147,16 @@ public class UserRepository : IUserRepository
         return peoples;
     }
 
-    public async Task<List<UserNameWithId>> GetUserNameById(string userId)
+    public async Task<List<UserNameWithId>> GetUserNameById(string userIdString)
     {
         List<UserNameWithId> userList = new();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _constring;
         try
         {
-            string query = $"select id,firstname,lastname from users where id IN ({userId})";
+            string query = $"select id,firstname,lastname from users where id IN ({userIdString})";
             MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@userIdString",userIdString);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
@@ -169,9 +172,9 @@ public class UserRepository : IUserRepository
             }
             await reader.CloseAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -204,9 +207,9 @@ public class UserRepository : IUserRepository
             }
             await reader.CloseAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -255,9 +258,9 @@ public class UserRepository : IUserRepository
             }
             await reader.CloseAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -279,9 +282,9 @@ public class UserRepository : IUserRepository
             await con.OpenAsync();
             userId = Convert.ToInt64(command.ExecuteScalar());
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -330,9 +333,9 @@ public class UserRepository : IUserRepository
             }
             await reader.CloseAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -380,9 +383,9 @@ public class UserRepository : IUserRepository
             }
             await reader.CloseAsync();
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -411,9 +414,9 @@ public class UserRepository : IUserRepository
                 status = true;
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
@@ -441,67 +444,14 @@ public class UserRepository : IUserRepository
                 status = true;
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            throw e;
+            throw;
         }
         finally
         {
             await con.CloseAsync();
         }
         return status;
-    }
-
-        public async Task<UserProfile> GetUserProfile(int userId)
-        {
-        UserProfile people = new();
-        MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _constring;
-        try
-        {
-            string query = "SELECT * FROM users CROSS JOIN locations ON users.id = locations.userid WHERE locations.userid=@userId ";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@userId", userId);
-            await con.OpenAsync();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            while (await reader.ReadAsync())
-            {
-    //              string birthDateString = reader.GetString("birthdate");
-    // DateOnly birthDate = DateOnly.ParseExact(birthDateString, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
-                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
-                people = new(){
-                    User = new User
-        {
-            Id = reader.GetInt32("id"),
-            ImageUrl = reader.GetString("imageurl"),
-            AadharId = reader.GetString("aadharid"),
-            FirstName = reader.GetString("firstname"),
-            LastName = reader.GetString("lastname"),
-            BirthDate = new DateOnly(dateOnlyBirthDate.Year, dateOnlyBirthDate.Month, dateOnlyBirthDate.Day), 
-            Gender = reader.GetString("gender"),
-            Email = reader.GetString("email"),
-            ContactNumber = reader.GetString("contactnumber")
-        },
-        Location = new Location
-        {
-            Longitude = reader.GetString("longitude"),
-            Latitude = reader.GetString("latitude"),
-            LandMark = reader.GetString("landmark"),
-            PinCode = reader.GetString("pincode")
-        }
-                };
-            }
-            await reader.CloseAsync();
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally
-        {
-            await con.CloseAsync();
-        }
-        return people;
     }
 }

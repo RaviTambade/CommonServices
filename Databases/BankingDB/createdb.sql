@@ -1,4 +1,4 @@
--- Active: 1678339848098@@127.0.0.1@3306@bankingdb
+-- Active: 1678359546568@@127.0.0.1@3306@bankingdb
 DROP DATABASE IF EXISTS  BankingDB;
 
 CREATE DATABASE BankingDB;
@@ -6,8 +6,13 @@ USE BankingDB;
 
 CREATE TABLE customers(id INT AUTO_INCREMENT PRIMARY KEY,
                        customerid INT NOT NULL UNIQUE,
-                       dependancyid INT NOT NULL,
+<<<<<<< HEAD
+                       dependecyid INT NOT NULL,
+                       usertype ENUM("C","P") NOT NULL
+=======
+                       dependencyid INT NOT NULL,
                        usertype ENUM("corporation","person") NOT NULL
+>>>>>>> ed488448def08a1d58e7e582604a607b024bdbab
                        );
                        
 CREATE TABLE accounts(id INT PRIMARY KEY AUTO_INCREMENT,
@@ -42,7 +47,7 @@ CREATE TABLE loan(loanid INT PRIMARY KEY AUTO_INCREMENT,
                         duration INT,
                         intrestrate DOUBLE,
 						acctId INT NOT NULL,
-						CONSTRAINT fk_acctId FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE
+						CONSTRAINT fk_acctId2 FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE
                         );
 ALTER TABLE loan MODIFY loansanctiondate DATE;
                        
@@ -72,15 +77,12 @@ CREATE TABLE installment(installmentid INT PRIMARY KEY AUTO_INCREMENT,
                         contactnumber VARCHAR(10),
                         email VARCHAR(60),
                         address VARCHAR(150),
-                        adharid  VARCHAR(16),
+                        adharid  VARCHAR(25),
                         panid  VARCHAR(10) ,
                         loantype ENUM("home","personal","bussiness")
                         );
                         
-ALTER TABLE loanapplicants MODIFY adharid VARCHAR(25);
-                        
-                        
-select * from loanapplicants
+/*ALTER TABLE loanapplicants MODIFY adharid VARCHAR(25);*/
                         
                         
 						

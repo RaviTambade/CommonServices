@@ -1,0 +1,27 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+<<<<<<< HEAD:API/Banking/obj/Debug/net7.0/BankingService.GeneratedMSBuildEditorConfig.editorconfig
+build_property.RootNamespace = BankingService
+build_property.RootNamespace = BankingService
+build_property.ProjectDir = c:\projects\CommonServices\API\Banking\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = c:\projects\CommonServices\API\Banking
+=======
+build_property.RootNamespace = PaymentGateWay
+build_property.RootNamespace = PaymentGateWay
+build_property.ProjectDir = d:\Ravi\TAP\TAP\CommonServices\API\PaymentGateway\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = d:\Ravi\TAP\TAP\CommonServices\API\PaymentGateway
+>>>>>>> b7e6135db366b502a17b6205f8a537a821fa24a7:API/PaymentGateway/obj/Debug/net7.0/PaymentGateWay.GeneratedMSBuildEditorConfig.editorconfig
+build_property._RazorSourceGeneratorDebug = 
