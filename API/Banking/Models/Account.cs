@@ -4,7 +4,6 @@ public class Account
 {
     //autoincrement id
     public int Id{ get; set; }
-    public int PeopleId{get; set;} 
     public int CustomerId{get; set;}   
     public string? AcctNumber{ get; set; }
     public string? AcctType{get;set;}

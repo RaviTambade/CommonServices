@@ -22,7 +22,7 @@ public class OperationsController : ControllerBase
         return operations;
     }
 
-      [HttpGet]
+    [HttpGet]
     [Route("operations/mode/{mode}")]
     public List<Operation> GetAll(string mode)
     {
@@ -38,6 +38,13 @@ public class OperationsController : ControllerBase
         Console.WriteLine(acctNumber);
         List<Operation> operations = _svc.GetByAccountNumber(acctNumber);
         return operations;
+    }
+
+     [HttpGet]
+    [Route("accounts/{acctNumber}/statement")]
+    public List<Statement> GetStatement(string acctNumber)
+    {
+        return _svc.GetStatement(acctNumber);
     }
 
   
