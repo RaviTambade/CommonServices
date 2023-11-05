@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
+
 namespace Transflower.MembershipRolesMgmt.Controllers;
 
 [ApiController]
@@ -14,10 +15,17 @@ public class RolesController : ControllerBase
         _service = service;
     }
 
-    [HttpGet]
+     [HttpGet("userid")]
     public async Task<List<UserRole>> GetAll()
     {
         return await _service.GetAll();
+    }
+
+
+    [HttpGet("members")]
+    public async Task<List<Role>> GetRoles()
+    {
+        return await _service.GetRoles();
     }
 
     [HttpGet("{userRoleId}")]

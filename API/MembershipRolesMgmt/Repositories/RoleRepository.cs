@@ -26,6 +26,19 @@ public class RoleRepository : IRoleRepository
         }
     }
 
+
+ public async Task<List<Role>> GetRoles()
+    {
+        try
+        {
+            var userRoles = await _context.Roles.ToListAsync();
+            return userRoles;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
     public async Task<Role> GetById(int userRoleId)
     {
         try

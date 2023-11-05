@@ -1,7 +1,6 @@
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Transflower.MembershipRolesMgmt.Models.Entities;
-using Transflower.MembershipRolesMgmt.Models.Entities;
 namespace Transflower.MembershipRolesMgmt.Services;
 public class RoleService : IRoleService
 {
@@ -15,6 +14,12 @@ public class RoleService : IRoleService
     public async Task<List<UserRole>> GetAll()
     {
         return await _repository.GetAll();
+    }
+
+
+     public async Task<List<Role>> GetRoles()
+    {
+        return await _repository.GetRoles();
     }
 
     public async Task<Role?> GetById(int userRoleId)
