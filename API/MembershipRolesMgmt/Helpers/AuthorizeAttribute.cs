@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -8,19 +9,37 @@ namespace Transflower.MembershipRolesMgmt.Helpers
     {
         public string? Roles { get; set; }
 
+        public AuthorizeAttribute(string? roles)
+        {
+            Roles = roles;
+        }
+
+        public AuthorizeAttribute()
+        {
+        }
+
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            if (this.Roles is null)
+
+            var allowAnonymous=context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any();
+
+            if(allowAnonymous){
+                return;
+            }
+
+
+            string? userId = (string?)context.HttpContext.Items["userId"];
+            var userRoles = (List<string>?)context.HttpContext.Items["userRoles"];
+            bool status = false;
+
+            if (this.Roles is null && userId is not null)
             {
                 return;
             }
 
-            var userRoles = (List<string>?)context.HttpContext.Items["userRoles"];
-            bool status = false;
-
-            if (userRoles is not null)
+            if (userRoles is not null && Roles is not null)
             {
-                List<string> requiredRoles = this.Roles.Split(',').ToList();
+                List<string> requiredRoles = Roles.Split(',').ToList();
                 bool result = requiredRoles.Intersect(userRoles).Count() >= 1;
                 if (result)
                 {
@@ -28,7 +47,7 @@ namespace Transflower.MembershipRolesMgmt.Helpers
                 }
             }
 
-            if (status == false )
+            if (status == false || userId is null)
             {
                 context.Result = new JsonResult(new { message = "Unauthorized" })
                 {

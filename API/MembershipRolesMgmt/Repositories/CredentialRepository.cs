@@ -16,12 +16,12 @@ public class CredentialRepository : ICredentialRepository
 {
     private readonly IConfiguration _configuration;
     private readonly string _conString;
-    private readonly AppSettings _appSettings;
+    private readonly JwtSettings _jwtSettings;
 
-    public CredentialRepository(IConfiguration configuration, IOptions<AppSettings> appSettings)
+    public CredentialRepository(IConfiguration configuration, IOptions<JwtSettings> jwtSettings)
     {
         _configuration = configuration;
-        _appSettings = appSettings.Value;
+        _jwtSettings = jwtSettings.Value;
         _conString =
             this._configuration.GetConnectionString("DefaultConnection")
             ?? throw new ArgumentException(nameof(_conString));
@@ -160,7 +160,7 @@ public class CredentialRepository : ICredentialRepository
     {
         //token will expire after one hour
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = System.Text.Encoding.ASCII.GetBytes(_appSettings.Secret);
+        var key = System.Text.Encoding.ASCII.GetBytes(_jwtSettings.Secret);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(await AllClaims(credential)),
@@ -176,10 +176,18 @@ public class CredentialRepository : ICredentialRepository
 
     private async Task<List<System.Security.Claims.Claim>> AllClaims(Credential credential)
     {
-        var roles = await GetRolesOfUser(credential.ContactNumber);
+        var rolesTask = GetRolesOfUser(credential.ContactNumber);
+        var userIdTask = GetUserIdByContactNumber(credential.ContactNumber);
+
+        await Task.WhenAll(rolesTask, userIdTask);
+
+        List<string> roles = await rolesTask;
+        int userId = await userIdTask;
+
         List<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>
         {
             new System.Security.Claims.Claim("contactNumber", credential.ContactNumber),
+            new System.Security.Claims.Claim("userId", userId.ToString()),
         };
 
         foreach (var role in roles)

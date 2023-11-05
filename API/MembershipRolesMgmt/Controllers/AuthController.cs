@@ -3,9 +3,10 @@ using Transflower.MembershipRolesMgmt.Services.Interfaces;
 using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Models.Requests;
 using Transflower.MembershipRolesMgmt.Models.Entities;
+using AuthorizeAttribute = Transflower.MembershipRolesMgmt.Helpers.AuthorizeAttribute;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Transflower.MembershipRolesMgmt.Controllers;
-
 [ApiController]
 [Route("/api/auth")]
 public class AuthController : ControllerBase
@@ -15,8 +16,8 @@ public class AuthController : ControllerBase
     public AuthController(ICredentialService service)
     {
         _service = service;
-    }
-
+    } 
+    // [AllowAnonymous]
     [HttpPost]
     [Route("signin")]
     public async Task<AuthToken> Authenticate([FromBody] Claim claim)

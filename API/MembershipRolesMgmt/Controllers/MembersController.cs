@@ -36,7 +36,7 @@ public class MembersController : ControllerBase
     }
 
     //GET http://localhost:/api/users
-    [Authorize(Roles="Director")]
+    [Authorize]
     [HttpGet]
     public async Task<List<User>> GetAll()
     {

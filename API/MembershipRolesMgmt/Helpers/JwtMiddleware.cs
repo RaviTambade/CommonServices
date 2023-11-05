@@ -9,12 +9,12 @@ namespace Transflower.MembershipRolesMgmt.Helpers
     public class JwtMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly AppSettings _appSettings;
+        private readonly JwtSettings _JwtSettings;
 
-        public JwtMiddleware(RequestDelegate next, IOptions<AppSettings> appSettings)
+        public JwtMiddleware(RequestDelegate next, IOptions<JwtSettings> JwtSettings)
         {
             _next = next;
-            _appSettings = appSettings.Value;
+            _JwtSettings = JwtSettings.Value;
         }
 
         public async Task Invoke(HttpContext context)
@@ -30,7 +30,7 @@ namespace Transflower.MembershipRolesMgmt.Helpers
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+                var key = Encoding.ASCII.GetBytes(_JwtSettings.Secret);
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
@@ -43,10 +43,11 @@ namespace Transflower.MembershipRolesMgmt.Helpers
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var contactNumber=jwtToken.Claims.First(x => x.Type == "contactNumber").Value;
+                var userId=jwtToken.Claims.First(x => x.Type == "userId").Value;
+                var userRoles = jwtToken.Claims.Where(x => x.Type == "roles").Select(c => c.Value).ToList();
 
+                context.Items["userId"] = userId;
                 context.Items["contactNumber"] = contactNumber;
-
-                 var userRoles = jwtToken.Claims.Where(x => x.Type == "roles").Select(c => c.Value).ToList();
                 context.Items["userRoles"] = userRoles;
             }
             catch (Exception e)
