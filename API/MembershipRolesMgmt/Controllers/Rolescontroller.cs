@@ -40,18 +40,18 @@ public class RolesController : ControllerBase
         return await _service.GetRolesByUserId(userId);
     }
 
-    [HttpPost]
-    public async Task<bool> Insert(UserRole userRole)
-    {
-        return await _service.Insert(userRole);
-    }
+  
 
     [HttpGet("usersid/{role}")]
     public async Task<List<string>> GetUsersId(string role)
     {
         return await _service.GetUsersId(role);
     }
-
+  [HttpPost]
+    public async Task<bool> Create(UserRole userRole)
+    {
+        return await _service.Insert(userRole);
+    }
     [HttpPut]
     public async Task<bool> Update(UserRole userRole)
     {
