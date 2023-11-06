@@ -36,7 +36,7 @@ public class CredentialRepository : ICredentialRepository
             return new AuthToken("");
         }
 
-        var jwtToken = await generateJwtToken(credential);
+        var jwtToken = await GenerateJwtToken(credential);
         return new AuthToken(jwtToken);
     }
 

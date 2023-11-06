@@ -3,8 +3,6 @@ using Transflower.MembershipRolesMgmt.Services.Interfaces;
 using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Models.Requests;
 using Transflower.MembershipRolesMgmt.Models.Entities;
-using AuthorizeAttribute = Transflower.MembershipRolesMgmt.Helpers.AuthorizeAttribute;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Transflower.MembershipRolesMgmt.Controllers;
 [ApiController]
@@ -27,9 +25,9 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<bool> InsertCrednetial(Credential credential)
+    public async Task<bool> Insert(Credential credential)
     {
-        return await _service.Register(credential);
+        return await _service.Insert(credential);
     }
 
     // [Authorize]
@@ -38,7 +36,7 @@ public class AuthController : ControllerBase
     {
         string currentContactNumber = (string)HttpContext.Items["contactNumber"];
 
-        return await _service.UpdateContactNumber(currentContactNumber, details);
+        return await _service.Update(currentContactNumber, details);
     }
 
 
@@ -48,7 +46,7 @@ public class AuthController : ControllerBase
     {
         string? contactNumber = (string?)HttpContext.Items["contactNumber"];
         Console.WriteLine(contactNumber);
-        return await _service.UpdatePassword(contactNumber, passwordDetails);
+        return await _service.Update(contactNumber, passwordDetails);
     }
 
     [HttpDelete("contactnumber/{id}")]

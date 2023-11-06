@@ -314,7 +314,7 @@ public class UserRepository : IUserRepository
         }
         return users;
     }
-    public async Task<UserDetails> GetUserDeatilsByContactNumber(string contactNumber)
+    public async Task<UserDetails> GetUserDetailsByContactNumber(string contactNumber)
     {
         UserDetails userName = null;
         MySqlConnection con = new MySqlConnection();
@@ -349,4 +349,5 @@ public class UserRepository : IUserRepository
         }
         return userName;
     }
-    }
+
+}

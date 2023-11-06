@@ -34,40 +34,22 @@ public class UsersController : ControllerBase
     }
 
     //GET http://localhost:/api/users
-    [Authorize]
+    // [Authorize]
     [HttpGet]
-    public async Task<List<User>> GetAll()
+    public async Task<List<User>> GetAllUsers()
     {
-        List<User> peoples = await _svc.GetAll();
-        return peoples;
+        List<User> users = await _svc.GetAllUsers();
+        return users;
     }
 
     [HttpGet]
     [Route("{userId}")]
-    public async Task<User> GetbyId(int userId)
+    public async Task<User> GetUser(int userId)
     {
-        return await _svc.GetById(userId);
+        return await _svc.GetUser(userId);
     }
 
-    // GET http://localhost:/api/users/aadhar/76545656
 
-
-    [HttpGet]
-    [Route("aadhar/{aadharid}")]
-    public async Task<User> GetDetails(string aadharid)
-    {
-        User people = await _svc.GetDetails(aadharid);
-        return people;
-    }
-
-    // HTTPDELETE  http://localhost:/api/users/aadhar/76545656
-    [HttpDelete]
-    [Route("aadhar/{aadharid}")]
-    public async Task<bool> Delete(string aadharid)
-    {
-        bool status = await _svc.DeleteByAadharId(aadharid);
-        return status;
-    }
 
     [HttpGet]
     [Route("contact/{contactNumber}")]
@@ -77,24 +59,24 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    [Route("name/{userIdString}")]
-    public async Task<List<UserFullName>> GetUsersDetail(string ids)
+    [Route("name/{ids}")]
+    public async Task<List<UserDetails>> GetUsersDetail(string ids)
     {
-        return await _svc.GetUserNameById(ids);
+        return await _svc.GetUsersDetails(ids);
     }
 
     [HttpGet]
     [Route("username/{contactNumber}")]
-    public async Task<UserFullName> GetUserName(string contactNumber)
+    public async Task<UserDetails> GetUserDetailsByContactNumber(string contactNumber)
     {
-        return await _svc.GetUserName(contactNumber);
+        return await _svc.GetUserDetailsByContactNumber(contactNumber);
     }
 
-    [HttpGet]
-    [Route("userid/{contactNumber}")]
-    public async Task<long> GetIdByContactNumber(string contactNumber)
+     [HttpDelete]
+    [Route("DeleteUser/{userId}")]
+    public async Task<bool> Delete(int userId)
     {
-        return await _svc.GetIdByContactNumber(contactNumber);
+        return await _svc.Delete(userId);
     }
 
 
