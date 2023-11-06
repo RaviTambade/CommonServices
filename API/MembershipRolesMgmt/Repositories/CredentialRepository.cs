@@ -40,144 +40,6 @@ public class CredentialRepository : ICredentialRepository
         return new AuthToken(jwtToken);
     }
 
-    public async Task<bool> Insert(Credential credential)
-    {
-        bool status = false;
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query =
-                "INSERT INTO credentials(contactnumber,password)VALUES(@contactNumber,@password)";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@contactNumber", credential.ContactNumber);
-            cmd.Parameters.AddWithValue("@password", credential.Password);
-            await con.OpenAsync();
-            int rowsAffected = await cmd.ExecuteNonQueryAsync();
-            if (rowsAffected > 0)
-            {
-                status = true;
-            }
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            await con.CloseAsync();
-        }
-        return status;
-    }
-
-    //Update contactNumber
-    public async Task<bool> Update(string oldContactNumber, ContactNumberDetails details)
-    {
-        bool status = false;
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query =
-                "UPDATE credentials SET contactnumber=@newContactNumber  WHERE password=@password AND contactnumber=@oldContactNumber";
-           
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@oldContactNumber", oldContactNumber);
-            cmd.Parameters.AddWithValue("@newContactNumber", details.NewContactNumber);
-            cmd.Parameters.AddWithValue("@password", details.Password);
-           
-            await con.OpenAsync();
-            int rowsAffected = await cmd.ExecuteNonQueryAsync();
-            if (rowsAffected > 0)
-            {
-                status = true;
-            }
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            await con.CloseAsync();
-        }
-        return status;
-    }
-
-    //Update Password
-    public async Task<bool> Update(string contactNumber, PasswordDetails details)
-    {
-        bool status = false;
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query =
-                "UPDATE credentials SET password=@newPassword  WHERE password=@oldpassword AND contactnumber=@contactNumber";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@contactNumber", contactNumber);
-            cmd.Parameters.AddWithValue("@oldPassword", details.OldPassword);
-            cmd.Parameters.AddWithValue("@newPassword", details.NewPassword);
-            await con.OpenAsync();
-            int rowsAffected = await cmd.ExecuteNonQueryAsync();
-            if (rowsAffected > 0)
-            {
-                status = true;
-            }
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            await con.CloseAsync();
-        }
-        return status;
-    }
-
-    public async Task<bool> Delete(int id)
-    {
-        bool status = false;
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "DELETE FROM credentials WHERE id=@credentialId";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@credentialId", id);
-            await con.OpenAsync();
-            int rowsAffected = await cmd.ExecuteNonQueryAsync();
-            if (rowsAffected > 0)
-            {
-                status = true;
-            }
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            await con.CloseAsync();
-        }
-        return status;
-    }
-
-    private async Task<string> GenerateJwtToken(Credential credential)
-    {
-        //token will expire after one hour
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = System.Text.Encoding.ASCII.GetBytes(_jwtSettings.Secret);
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(await AllClaims(credential)),
-            Expires = DateTime.UtcNow.AddHours(1),
-            SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature
-            )
-        };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);
-    }
-
     private async Task<List<System.Security.Claims.Claim>> AllClaims(Credential credential)
     {
         var rolesTask = GetRolesOfUser(credential.ContactNumber);
@@ -201,7 +63,23 @@ public class CredentialRepository : ICredentialRepository
 
         return claims;
     }
-
+    private async Task<string> GenerateJwtToken(Credential credential)
+    {
+        //token will expire after one hour
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = System.Text.Encoding.ASCII.GetBytes(_jwtSettings.Secret);
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(await AllClaims(credential)),
+            Expires = DateTime.UtcNow.AddHours(1),
+            SigningCredentials = new SigningCredentials(
+                new SymmetricSecurityKey(key),
+                SecurityAlgorithms.HmacSha256Signature
+            )
+        };
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
+    }
     private async Task<Credential?> GetCredentials(Claim claim)
     {
         Credential? credential = null;
@@ -290,4 +168,127 @@ public class CredentialRepository : ICredentialRepository
         }
         return userId;
     }
+
+    public async Task<bool> Insert(Credential credential)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query =
+                "INSERT INTO credentials(contactnumber,password)VALUES(@contactNumber,@password)";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@contactNumber", credential.ContactNumber);
+            cmd.Parameters.AddWithValue("@password", credential.Password);
+            await con.OpenAsync();
+            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
+
+    //Update contactNumber
+    public async Task<bool> Update(string oldContactNumber, ContactNumberDetails details)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query =
+                "UPDATE credentials SET contactnumber=@newContactNumber  WHERE password=@password AND contactnumber=@oldContactNumber";
+
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@oldContactNumber", oldContactNumber);
+            cmd.Parameters.AddWithValue("@newContactNumber", details.NewContactNumber);
+            cmd.Parameters.AddWithValue("@password", details.Password);
+
+            await con.OpenAsync();
+            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
+    //Update Password
+    public async Task<bool> Update(string contactNumber, PasswordDetails details)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query =
+                "UPDATE credentials SET password=@newPassword  WHERE password=@oldpassword AND contactnumber=@contactNumber";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@contactNumber", contactNumber);
+            cmd.Parameters.AddWithValue("@oldPassword", details.OldPassword);
+            cmd.Parameters.AddWithValue("@newPassword", details.NewPassword);
+            await con.OpenAsync();
+            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
+
+    public async Task<bool> Delete(int id)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query = "DELETE FROM credentials WHERE id=@credentialId";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@credentialId", id);
+            await con.OpenAsync();
+            int rowsAffected = await cmd.ExecuteNonQueryAsync();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
+
+
+
+
 }
