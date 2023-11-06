@@ -10,7 +10,6 @@ public interface IUserRepository
     Task<List<User>> GetAllUsers();
     Task<User> GetUser(int userId);
     Task<User> GetUserByContact(string contactNumber);
-
     Task<List<UserDetails>> GetUsersDetails(string ids);
     Task<UserDetails> GetUserDetailsByContactNumber(string contactNumber);
     Task<bool> Update(int id, User user);

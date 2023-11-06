@@ -17,19 +17,14 @@ public class UserService : IUserService
     }
 
     public async Task<List<User>> GetAllUsers() => await _repo.GetAllUsers();
-
-    public async Task<bool> Add(User user) => await _repo.Add(user);
-
-    public async Task<bool> Update(int id, User user) => await _repo.Update(id, user);
-    public async Task<User> GetUserByContact(string contactNumber) =>
-        await _repo.GetUserByContact(contactNumber);
-
-
     public async Task<User> GetUser(int userId) =>await _repo.GetUser(userId);
-
+    public async Task<User> GetUserByContact(string contactNumber) => await _repo.GetUserByContact(contactNumber);
+    public async Task<List<UserDetails>> GetUsersDetails(string ids)=> await _repo.GetUsersDetails(ids);
+    public async Task<UserDetails> GetUserDetailsByContactNumber(string contactNumber)=> await _repo.GetUserDetailsByContactNumber(contactNumber);
+    public async Task<bool> Add(User user) => await _repo.Add(user);
+    public async Task<bool> Update(int id, User user) => await _repo.Update(id, user);
     public async Task<bool> Delete(int userId)=>await _repo.Delete(userId);
 
-    public async Task<List<UserDetails>> GetUsersDetails(string ids)=> await _repo.GetUsersDetails(ids);
-
-    public async Task<UserDetails> GetUserDetailsByContactNumber(string contactNumber)=> await _repo.GetUserDetailsByContactNumber(contactNumber);
+    
+   
 }
