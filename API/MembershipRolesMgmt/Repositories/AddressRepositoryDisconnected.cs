@@ -25,20 +25,20 @@ public class AddressRepository : IAddressRepository
         List<AddressInfo> addresses = new List<AddressInfo>();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _connectionString;
-
-        string query =
-            @"SELECT addresses.id, addresses.area,addresses.landmark,addresses.city,
+        try
+        {
+            string query =
+                @"SELECT addresses.id, addresses.area,addresses.landmark,addresses.city,
             addresses.state,addresses.alternatecontactnumber,addresses.pincode,users.contactnumber,
             CONCAT(users.firstname, ' ', users.lastname) as name  FROM addresses
             INNER JOIN users on addresses.userid=users.id
             WHERE users.id=@userid";
-        MySqlCommand command = new MySqlCommand(query, con);
-        command.Parameters.AddWithValue("@userid", userId);
-        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
-        DataSet dataSet = new DataSet();
-        try
-        {
-            dataAdapter.Fill(dataSet);
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@userid", userId);
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
+            DataSet dataSet = new DataSet();
+
+            await dataAdapter.FillAsync(dataSet);
             DataTable dataTable = dataSet.Tables[0];
             foreach (DataRow dataRow in dataTable.Rows)
             {
@@ -77,32 +77,30 @@ public class AddressRepository : IAddressRepository
             CONCAT(users.firstname, ' ', users.lastname) as name  FROM addresses
             INNER JOIN users on addresses.userid=users.id
             WHERE addresses.id=@addressId";
+
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@addressId", addressId);
             MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
             DataSet dataSet = new DataSet();
-            dataAdapter.Fill(dataSet);
+            await dataAdapter.FillAsync(dataSet);
 
-            DataTable dataTable = dataSet.Tables[0];
-
-            DataColumn[] keyColumn = new DataColumn[1];
-            keyColumn[0] = dataTable.Columns["id"];
-            dataTable.PrimaryKey = keyColumn;
-
-            DataRow dataRow = dataTable.Rows.Find(addressId);
-
-            address = new AddressInfo()
+            if (dataSet.Tables[0].Rows.Count > 0)
             {
-                Id = int.Parse(dataRow["id"].ToString()),
-                Area = dataRow["area"].ToString(),
-                LandMark = dataRow["landmark"].ToString(),
-                City = dataRow["city"].ToString(),
-                State = dataRow["state"].ToString(),
-                AlternateContactNumber = dataRow["alternatecontactnumber"].ToString(),
-                PinCode = dataRow["pincode"].ToString(),
-                Name = dataRow["name"].ToString(),
-                ContactNumber = dataRow["contactnumber"].ToString(),
-            };
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                address = new AddressInfo()
+                {
+                    Id = int.Parse(dataRow["id"].ToString()),
+                    Area = dataRow["area"].ToString(),
+                    LandMark = dataRow["landmark"].ToString(),
+                    City = dataRow["city"].ToString(),
+                    State = dataRow["state"].ToString(),
+                    AlternateContactNumber = dataRow["alternatecontactnumber"].ToString(),
+                    PinCode = dataRow["pincode"].ToString(),
+                    Name = dataRow["name"].ToString(),
+                    ContactNumber = dataRow["contactnumber"].ToString(),
+                };
+            }
         }
         catch (Exception)
         {
@@ -128,7 +126,7 @@ public class AddressRepository : IAddressRepository
         DataSet dataSet = new DataSet();
         try
         {
-            dataAdapter.Fill(dataSet);
+            await dataAdapter.FillAsync(dataSet);
             DataTable dataTable = dataSet.Tables[0];
             foreach (DataRow dataRow in dataTable.Rows)
             {
@@ -159,22 +157,22 @@ public class AddressRepository : IAddressRepository
         List<AddressDistance> distances = new();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _connectionString;
-       
-            string query =
-                $"SELECT id AS addressid,pincode,CalculateDistanceByAddress(@addressId, id) AS distance FROM addresses WHERE id IN ({request.AddressIds})";
-            MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@addressId", request.AddressId);
-            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
-            DataSet dataSet = new DataSet();
-            try
-            {
-            dataAdapter.Fill(dataSet);
+
+        string query =
+            $"SELECT id AS addressid,pincode,CalculateDistanceByAddress(@addressId, id) AS distance FROM addresses WHERE id IN ({request.AddressIds})";
+        MySqlCommand command = new MySqlCommand(query, con);
+        command.Parameters.AddWithValue("@addressId", request.AddressId);
+        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
+        DataSet dataSet = new DataSet();
+        try
+        {
+            await dataAdapter.FillAsync(dataSet);
             DataTable dataTable = dataSet.Tables[0];
             foreach (DataRow dataRow in dataTable.Rows)
             {
                 AddressDistance data = new AddressDistance()
                 {
-                    Id =  int.Parse(dataRow["addressid"].ToString()),
+                    Id = int.Parse(dataRow["addressid"].ToString()),
                     PinCode = dataRow["pincode"].ToString(),
                     Distance = decimal.Parse(dataRow["distance"].ToString()),
                 };
@@ -199,31 +197,29 @@ public class AddressRepository : IAddressRepository
         bool status = false;
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _connectionString;
-
-        MySqlCommand command = new MySqlCommand();
-        command.CommandText = "SELECT * FROM addresses";
-        command.Connection = con;
-
-        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
-        DataSet dataSet = new DataSet();
-
         try
         {
+            string query =
+                @"INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) 
+            VALUES(@userid, @area,@landmark, @city,@state,@alternatecontactnumber,@pincode)";
+            MySqlCommand command = new MySqlCommand(query, con);
+            await con.OpenAsync();
+            command.Parameters.AddWithValue("@userid", address.UserId);
+            command.Parameters.AddWithValue("@area", address.Area);
+            command.Parameters.AddWithValue("@landmark", address.LandMark);
+            command.Parameters.AddWithValue("@city", address.City);
+            command.Parameters.AddWithValue("@state", address.State);
+            command.Parameters.AddWithValue(
+                "@alternatecontactnumber",
+                address.AlternateContactNumber
+            );
+            command.Parameters.AddWithValue("@pincode", address.PinCode);
+
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
+            DataSet dataSet = new DataSet();
+
             MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
-            dataAdapter.Fill(dataSet);
-            DataTable dataTable = dataSet.Tables[0];
-
-            DataRow row = dataTable.NewRow();
-            row["userid"] = address.UserId;
-            row["area"] = address.Area;
-            row["landmark"] = address.LandMark;
-            row["city"] = address.City;
-            row["state"] = address.State;
-             row["pincode"] = address.PinCode;
-            row["alternatecontactnumber"] = address.AlternateContactNumber;
-
-            dataTable.Rows.Add(row);
-            dataAdapter.Update(dataSet);
+            await dataAdapter.FillAsync(dataSet);
             status = true;
         }
         catch (Exception)
