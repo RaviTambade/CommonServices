@@ -349,5 +349,4 @@ public class UserRepository : IUserRepository
         }
         return userName;
     }
-
 }

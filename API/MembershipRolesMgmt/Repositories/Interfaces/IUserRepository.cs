@@ -8,12 +8,12 @@ public interface IUserRepository
 {
 
     Task<List<User>> GetAllUsers();
-    Task<bool> Add(User user);
-    Task<User> GetUserByContact(string contactNumber);
-    Task<bool> Update(int id, User user);
     Task<User> GetUser(int userId);
-    Task<bool> Delete(int userId);
+    Task<User> GetUserByContact(string contactNumber);
+
     Task<List<UserDetails>> GetUsersDetails(string ids);
     Task<UserDetails> GetUserDetailsByContactNumber(string contactNumber);
-
+    Task<bool> Update(int id, User user);
+    Task<bool> Delete(int userId); 
+    Task<bool> Add(User user);
 }
