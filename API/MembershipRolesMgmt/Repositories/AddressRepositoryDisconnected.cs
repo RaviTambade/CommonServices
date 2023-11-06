@@ -4,7 +4,7 @@ using Transflower.MembershipRolesMgmt.Models.Requests;
 using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 
-namespace Transflower.MembershipRolesMgmt.Repositories;
+namespace Transflower.MembershipRolesMgmt.Repositories.Disconnected;
 
 public class AddressRepository : IAddressRepository
 {
@@ -34,7 +34,7 @@ public class AddressRepository : IAddressRepository
             WHERE users.id=@userid";
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@userid", userId);
-            await con.OpenAsync();
+           /* await con.OpenAsync();
             MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())
             {
