@@ -16,8 +16,7 @@ public class UsersController : ControllerBase
         _svc = svc;
     }
 
-
-     [HttpGet]
+    [HttpGet]
     public async Task<List<User>> GetAllUsers()
     {
         List<User> users = await _svc.GetAllUsers();
@@ -31,8 +30,19 @@ public class UsersController : ControllerBase
         return await _svc.GetUser(userId);
     }
 
+    [HttpGet("usersid/{role}")]
+    public async Task<List<int>> GetUsersId(string role)
+    {
+        return await _svc.GetUsersId(role);
+    }
 
+    [HttpGet("roles/{userId}")]
+    public async Task<List<string>> GetRolesByUserId(int userId)
+    {
+        return await _svc.GetRolesByUserId(userId);
+    }
 
+    
     [HttpGet]
     [Route("contact/{contactNumber}")]
     public async Task<User> GetUserByContact(string contactNumber)
@@ -53,8 +63,7 @@ public class UsersController : ControllerBase
     {
         return await _svc.GetUserDetailsByContactNumber(contactNumber);
     }
-
-    
+ 
     // POST http://localhost:/api/users
     [HttpPost]
     public async Task<bool> Add(User user)
@@ -72,15 +81,10 @@ public class UsersController : ControllerBase
         return status;
     }
 
-  
-   
-
-     [HttpDelete]
+    [HttpDelete]
     [Route("DeleteUser/{userId}")]
     public async Task<bool> Delete(int userId)
     {
         return await _svc.Delete(userId);
     }
-
-
 }

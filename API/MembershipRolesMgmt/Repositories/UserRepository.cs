@@ -119,6 +119,64 @@ public async Task<User> GetUser(int userId)
         }
         return people;
     }
+
+     public async Task<List<string>> GetRolesByUserId(int userId)
+    {
+        List<string> roles = new();
+        MySqlConnection con = new MySqlConnection(_constring);
+        try
+        {
+            string query = "select name from roles inner join userroles on roles.id=userroles.roleid where userroles.userid=@userId";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@userId", userId);
+            await con.OpenAsync();
+            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                roles.Add(reader.GetString("name"));
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return roles;     
+    }
+
+    public async Task<List<int>> GetUsersId(string roleName)
+    {
+        List<int> userIds = new();
+        MySqlConnection con = new MySqlConnection(_constring);
+        try
+        {
+            string query = "select users.id  from users inner join userroles on users.id=userroles.userid inner join roles on roles.id=userroles.roleid where roles.name=@roleName";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@roleName", roleName);
+            await con.OpenAsync();
+            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+            {
+                int userId = int.Parse(reader["id"].ToString());
+                userIds.Add(userId);
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return userIds;   
+    }
+
 public async Task<User> GetUserByContact(string contactNumber)
     {
         User user = new User();
@@ -168,46 +226,6 @@ public async Task<User> GetUserByContact(string contactNumber)
             await con.CloseAsync();
         }
         return user;
-    }
-
-
-    public async Task<List<string>> GetRolesByUserId(int userId)
-    {
-        try
-        {
-            var roles = await (
-                from role in _context.Roles
-                join userRoles in _context.UserRoles on role.Id equals userRoles.RoleId
-                where userRoles.UserId == userId
-                select role.Name
-            ).ToListAsync();
-            return roles;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-    }
-
-    public async Task<List<string>> GetUsersId(string roleName)
-    {
-        try
-        {
-            List<int> userIds = await (
-                from role in _context.Roles
-                join userRoles in _context.UserRoles on role.Id equals userRoles.RoleId
-                where role.Name == roleName
-                select userRoles.UserId
-            ).ToListAsync();
-
-            string userIdString = string.Join(",", userIds);
-            List<string> userIdStringList = new List<string> { userIdString };
-            return userIdStringList;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
     }
 
 public async Task<List<UserDetails>> GetUsersDetails(string ids)

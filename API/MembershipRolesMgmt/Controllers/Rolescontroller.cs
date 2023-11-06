@@ -34,20 +34,7 @@ public class RolesController : ControllerBase
         return await _service.GetById(userRoleId);
     }
 
-    [HttpGet("roles/{userId}")]
-    public async Task<List<string>> GetRolesByUserId(int userId)
-    {
-        return await _service.GetRolesByUserId(userId);
-    }
-
-  
-
-    [HttpGet("usersid/{role}")]
-    public async Task<List<string>> GetUsersId(string role)
-    {
-        return await _service.GetUsersId(role);
-    }
-  [HttpPost]
+    [HttpPost]
     public async Task<bool> Create(UserRole userRole)
     {
         return await _service.Insert(userRole);
@@ -63,7 +50,5 @@ public class RolesController : ControllerBase
     {
         return await _service.Delete(userRoleId);
     }
-
-   
 }
 

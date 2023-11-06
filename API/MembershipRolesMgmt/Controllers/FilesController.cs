@@ -38,7 +38,7 @@ public class FilesController : ControllerBase
         }
     }
 
-      [HttpPost, DisableRequestSizeLimit]
+    [HttpPost, DisableRequestSizeLimit]
     [Route("filedownload/{fileName}")]
     public IActionResult DownLoad(string fileName)
     {
