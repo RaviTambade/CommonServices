@@ -42,7 +42,6 @@ public class UsersController : ControllerBase
         return await _svc.GetRolesByUserId(userId);
     }
 
-    
     [HttpGet]
     [Route("contact/{contactNumber}")]
     public async Task<User> GetUserByContact(string contactNumber)
