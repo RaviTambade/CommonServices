@@ -35,8 +35,8 @@ public class AddressService : IAddressService
         return await _repository.GetNearestAddressId(request);
     }
 
-    public async Task<bool> Create(Address address)
+    public async Task<bool> Insert(Address address)
     {
-        return await _repository.Create(address);
+        return await _repository.Insert(address);
     }
 }

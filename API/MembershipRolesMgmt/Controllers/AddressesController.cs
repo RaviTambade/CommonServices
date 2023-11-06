@@ -44,6 +44,6 @@ public class AddressesController : ControllerBase
     [HttpPost]
     public async Task<bool> Create(Address address)
     {
-        return await _service.Create(address);
+        return await _service.Insert(address);
     }
 }

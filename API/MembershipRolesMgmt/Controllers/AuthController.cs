@@ -25,14 +25,14 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<bool> Insert(Credential credential)
+    public async Task<bool> Create(Credential credential)
     {
         return await _service.Insert(credential);
     }
 
     // [Authorize]
     [HttpPut("update/contactnumber")]
-    public async Task<bool> UpdateContactNumber(ContactNumberDetails details)
+    public async Task<bool> Update(ContactNumberDetails details)
     {
         string currentContactNumber = (string)HttpContext.Items["contactNumber"];
 

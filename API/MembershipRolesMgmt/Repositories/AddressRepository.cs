@@ -197,7 +197,7 @@ public class AddressRepository : IAddressRepository
             await con.CloseAsync();
         }
     }
-    public async Task<bool> Create(Address address)
+    public async Task<bool> Insert(Address address)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();

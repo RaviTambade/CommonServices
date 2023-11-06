@@ -12,5 +12,5 @@ public interface IAddressRepository
     Task<List<AddressInfo>> GetAddressesInformation(string addressIds);
     Task<AddressInfo?> GetAddress(int addressId);
     Task<int> GetNearestAddressId(AddressIdRequest request);
-    Task<bool> Create(Address address);
+    Task<bool> Insert(Address address);
 }
