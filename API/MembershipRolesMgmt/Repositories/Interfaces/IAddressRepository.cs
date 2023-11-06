@@ -8,10 +8,9 @@ namespace Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 
 public interface IAddressRepository
 {
-    Task<List<AddressInfo>> GetAddresses(int userId);
-    Task<List<AddressInfo>> GetAddressesInformationFromId(string addressIdString);
-    Task<AddressInfo?> GetAddressInfo(int addressId);
-    Task<bool> Add(Address address);
+    Task<List<AddressInfo>> GetAddressesofUser(int userId);
+    Task<List<AddressInfo>> GetAddressesInformation(string addressIds);
+    Task<AddressInfo?> GetAddress(int addressId);
     Task<int> GetNearestAddressId(AddressIdRequest request);
-
+    Task<bool> Create(Address address);
 }
