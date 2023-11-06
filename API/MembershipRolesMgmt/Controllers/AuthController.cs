@@ -20,25 +20,25 @@ public class AuthController : ControllerBase
     // [AllowAnonymous]
     [HttpPost]
     [Route("signin")]
-    public async Task<AuthToken> Authenticate([FromBody] Claim claim)
+    public async Task<AuthToken> SignIn([FromBody] Claim claim)
     {
         var token = await _service.Authenticate(claim);
         return token;
     }
 
     [HttpPost("register")]
-    public async Task<bool> Register(Credential credential)
+    public async Task<bool> InsertCrednetial(Credential credential)
     {
         return await _service.Register(credential);
     }
 
     // [Authorize]
     [HttpPut("update/contactnumber")]
-    public async Task<bool> UpdateContactNumber(ContactNumberDetails credential)
+    public async Task<bool> UpdateContactNumber(ContactNumberDetails details)
     {
-        string contactNumber = (string)HttpContext.Items["contactNumber"];
+        string currentContactNumber = (string)HttpContext.Items["contactNumber"];
 
-        return await _service.UpdateContactNumber(contactNumber, credential);
+        return await _service.UpdateContactNumber(currentContactNumber, details);
     }
 
 

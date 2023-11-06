@@ -40,7 +40,7 @@ public class CredentialRepository : ICredentialRepository
         return new AuthToken(jwtToken);
     }
 
-    public async Task<bool> Register(Credential credential)
+    public async Task<bool> Insert(Credential credential)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -69,7 +69,8 @@ public class CredentialRepository : ICredentialRepository
         return status;
     }
 
-    public async Task<bool> UpdateContactNumber(string contactNumber, ContactNumberDetails details)
+    //Update contactNumber
+    public async Task<bool> Update(string oldContactNumber, ContactNumberDetails details)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -77,10 +78,12 @@ public class CredentialRepository : ICredentialRepository
         {
             string query =
                 "UPDATE credentials SET contactnumber=@newContactNumber  WHERE password=@password AND contactnumber=@oldContactNumber";
+           
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@oldContactNumber", contactNumber);
+            cmd.Parameters.AddWithValue("@oldContactNumber", oldContactNumber);
             cmd.Parameters.AddWithValue("@newContactNumber", details.NewContactNumber);
             cmd.Parameters.AddWithValue("@password", details.Password);
+           
             await con.OpenAsync();
             int rowsAffected = await cmd.ExecuteNonQueryAsync();
             if (rowsAffected > 0)
@@ -99,7 +102,8 @@ public class CredentialRepository : ICredentialRepository
         return status;
     }
 
-    public async Task<bool> UpdatePassword(string contactNumber, PasswordDetails details)
+    //Update Password
+    public async Task<bool> Update(string contactNumber, PasswordDetails details)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -156,7 +160,7 @@ public class CredentialRepository : ICredentialRepository
         return status;
     }
 
-    private async Task<string> generateJwtToken(Credential credential)
+    private async Task<string> GenerateJwtToken(Credential credential)
     {
         //token will expire after one hour
         var tokenHandler = new JwtSecurityTokenHandler();

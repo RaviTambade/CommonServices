@@ -1,5 +1,3 @@
-
-
 using Microsoft.AspNetCore.Mvc;
 using Transflower.MembershipRolesMgmt.Helpers;
 using Transflower.MembershipRolesMgmt.Models.Entities;
@@ -9,11 +7,11 @@ using Transflower.MembershipRolesMgmt.Services.Interfaces;
 namespace Transflower.MembershipRolesMgmt.Controllers;
 [ApiController]
 [Route("/api/users")]
-public class MembersController : ControllerBase
+public class UsersController : ControllerBase
 {
     private readonly IUserService _svc;
 
-    public MembersController(IUserService svc)
+    public UsersController(IUserService svc)
     {
         _svc = svc;
     }
@@ -80,14 +78,14 @@ public class MembersController : ControllerBase
 
     [HttpGet]
     [Route("name/{userIdString}")]
-    public async Task<List<UserNameWithId>> GetUserNameById(string userIdString)
+    public async Task<List<UserFullName>> GetUsersDetail(string ids)
     {
-        return await _svc.GetUserNameById(userIdString);
+        return await _svc.GetUserNameById(ids);
     }
 
     [HttpGet]
     [Route("username/{contactNumber}")]
-    public async Task<UserNameWithId> GetUserName(string contactNumber)
+    public async Task<UserFullName> GetUserName(string contactNumber)
     {
         return await _svc.GetUserName(contactNumber);
     }
@@ -99,35 +97,5 @@ public class MembersController : ControllerBase
         return await _svc.GetIdByContactNumber(contactNumber);
     }
 
-    [HttpPost, DisableRequestSizeLimit]
-    [Route("fileupload/{fileName}")]
-    public IActionResult Upload(string fileName)
-    {
-        try
-        {
-            var file = Request.Form.Files[0];
-            if (file.Length <= 0)
-            {
-                return BadRequest();
-            }
-            string filePath = GetFilePath(fileName);
 
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                file.CopyTo(stream);
-            }
-            return Ok(new { filePath });
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Internal server error: {ex}");
-        }
-    }
-
-    private static string GetFilePath(string fileName)
-    {
-        var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-        var filePath = Path.Combine(pathToSave, fileName);
-        return filePath;
-    }
 }
