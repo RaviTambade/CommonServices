@@ -11,25 +11,29 @@ public class CredentialService : ICredentialService
 {
     private readonly ICredentialRepository _credentialRepository;
 
-    public  CredentialService(ICredentialRepository credentialRepository)
+    public CredentialService(ICredentialRepository credentialRepository)
     {
         _credentialRepository = credentialRepository;
     }
 
+    public async Task<AuthToken> Authenticate(Claim request)
+    {
+        return await _credentialRepository.Authenticate(request);
+    }
 
     public async Task<bool> Insert(Credential credential)
     {
         return await _credentialRepository.Insert(credential);
     }
 
-    public async Task<bool> Update(string contactNumber,ContactNumberDetails credential)
+    public async Task<bool> Update(string contactNumber, ContactNumberDetails credential)
     {
-        return await _credentialRepository.Update(contactNumber,credential);
+        return await _credentialRepository.Update(contactNumber, credential);
     }
 
-    public async Task<bool> Update( string contactNumber ,PasswordDetails credential)
+    public async Task<bool> Update(string contactNumber, PasswordDetails credential)
     {
-        return await _credentialRepository.Update(contactNumber,credential);
+        return await _credentialRepository.Update(contactNumber, credential);
     }
 
     public async Task<bool> Delete(int id)
@@ -37,8 +41,5 @@ public class CredentialService : ICredentialService
         return await _credentialRepository.Delete(id);
     }
 
-    public async Task<AuthToken> Authenticate(Claim request)
-    {
-       return await _credentialRepository.Authenticate(request);
-    }
+
 }
