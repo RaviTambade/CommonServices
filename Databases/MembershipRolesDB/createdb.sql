@@ -1,4 +1,4 @@
--- Active: 1678359546568@@127.0.0.1@3306@membershiprolesdb
+-- Active: 1694968636816@@127.0.0.1@3306@membershipprofilesdb
 DROP DATABASE IF EXISTS MembershipRolesDB;
 CREATE DATABASE  MembershipRolesDB;
 USE MembershipRolesDB;
