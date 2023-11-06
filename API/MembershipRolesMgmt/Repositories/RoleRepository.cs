@@ -52,45 +52,6 @@ public class RoleRepository : IRoleRepository
         }
     }
 
-    public async Task<List<string>> GetRolesByUserId(int userId)
-    {
-        try
-        {
-            var roles = await (
-                from role in _context.Roles
-                join userRoles in _context.UserRoles on role.Id equals userRoles.RoleId
-                where userRoles.UserId == userId
-                select role.Name
-            ).ToListAsync();
-            return roles;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-    }
-
-    public async Task<List<string>> GetUsersId(string roleName)
-    {
-        try
-        {
-            List<int> userIds = await (
-                from role in _context.Roles
-                join userRoles in _context.UserRoles on role.Id equals userRoles.RoleId
-                where role.Name == roleName
-                select userRoles.UserId
-            ).ToListAsync();
-
-            string userIdString = string.Join(",", userIds);
-            List<string> userIdStringList = new List<string> { userIdString };
-            return userIdStringList;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-    }
-
     public async Task<bool> Insert(UserRole userRole)
     {
         bool status = false;
