@@ -39,7 +39,8 @@ public class CredentialRepository : ICredentialRepository
         var jwtToken = await GenerateJwtToken(credential);
         return new AuthToken(jwtToken);
     }
-   public async Task<bool> Insert(Credential credential)
+
+    public async Task<bool> Insert(Credential credential)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -68,8 +69,7 @@ public class CredentialRepository : ICredentialRepository
         return status;
     }
 
-
-       //Update contactNumber
+    //Update contactNumber
     public async Task<bool> Update(string oldContactNumber, ContactNumberDetails details)
     {
         bool status = false;
@@ -101,6 +101,7 @@ public class CredentialRepository : ICredentialRepository
         }
         return status;
     }
+
     //Update Password
     public async Task<bool> Update(string contactNumber, PasswordDetails details)
     {
@@ -159,7 +160,7 @@ public class CredentialRepository : ICredentialRepository
         return status;
     }
 
- private async Task<List<System.Security.Claims.Claim>> AllClaims(Credential credential)
+    private async Task<List<System.Security.Claims.Claim>> AllClaims(Credential credential)
     {
         var rolesTask = GetRolesOfUser(credential.ContactNumber);
         var userIdTask = GetUserIdByContactNumber(credential.ContactNumber);
@@ -182,6 +183,7 @@ public class CredentialRepository : ICredentialRepository
 
         return claims;
     }
+
     private async Task<string> GenerateJwtToken(Credential credential)
     {
         //token will expire after one hour
@@ -199,6 +201,7 @@ public class CredentialRepository : ICredentialRepository
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
     }
+
     private async Task<Credential?> GetCredentials(Claim claim)
     {
         Credential? credential = null;
@@ -287,5 +290,4 @@ public class CredentialRepository : ICredentialRepository
         }
         return userId;
     }
-
 }

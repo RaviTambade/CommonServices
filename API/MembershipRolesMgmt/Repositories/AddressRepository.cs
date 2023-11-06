@@ -4,7 +4,6 @@ using Transflower.MembershipRolesMgmt.Models.Requests;
 using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 
-
 namespace Transflower.MembershipRolesMgmt.Repositories;
 
 public class AddressRepository : IAddressRepository
@@ -110,7 +109,7 @@ public class AddressRepository : IAddressRepository
         }
         return address;
     }
- 
+
     public async Task<List<AddressInfo>> GetAddressesInformation(string addressIds)
     {
         List<AddressInfo> addresses = new();
@@ -155,6 +154,7 @@ public class AddressRepository : IAddressRepository
         }
         return addresses;
     }
+
     public async Task<int> GetNearestAddressId(AddressIdRequest request)
     {
         List<AddressDistance> distances = new();
@@ -197,6 +197,7 @@ public class AddressRepository : IAddressRepository
             await con.CloseAsync();
         }
     }
+
     public async Task<bool> Insert(Address address)
     {
         bool status = false;
@@ -236,5 +237,4 @@ public class AddressRepository : IAddressRepository
         }
         return status;
     }
-
 }
