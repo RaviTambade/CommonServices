@@ -5,6 +5,7 @@ using Transflower.MembershipRolesMgmt.Models.Requests;
 using Transflower.MembershipRolesMgmt.Models.Entities;
 
 namespace Transflower.MembershipRolesMgmt.Controllers;
+
 [ApiController]
 [Route("/api/auth")]
 public class AuthController : ControllerBase
@@ -14,7 +15,8 @@ public class AuthController : ControllerBase
     public AuthController(ICredentialService service)
     {
         _service = service;
-    } 
+    }
+
     // [AllowAnonymous]
     [HttpPost]
     [Route("signin")]
@@ -25,20 +27,19 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<bool> Insert(Credential credential)
+    public async Task<bool> Create(Credential credential)
     {
         return await _service.Insert(credential);
     }
 
     // [Authorize]
     [HttpPut("update/contactnumber")]
-    public async Task<bool> UpdateContactNumber(ContactNumberDetails details)
+    public async Task<bool> Update(ContactNumberDetails details)
     {
         string currentContactNumber = (string)HttpContext.Items["contactNumber"];
 
         return await _service.Update(currentContactNumber, details);
     }
-
 
     // [Authorize]
     [HttpPut("update/password")]

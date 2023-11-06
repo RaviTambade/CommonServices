@@ -1,4 +1,4 @@
--- Active: 1678359546568@@127.0.0.1@3306@bankingdb
+-- Active: 1696576841746@@127.0.0.1@3306@bankingdb
 DROP DATABASE IF EXISTS  BankingDB;
 
 CREATE DATABASE BankingDB;
@@ -6,13 +6,8 @@ USE BankingDB;
 
 CREATE TABLE customers(id INT AUTO_INCREMENT PRIMARY KEY,
                        customerid INT NOT NULL UNIQUE,
-<<<<<<< HEAD
-                       dependecyid INT NOT NULL,
-                       usertype ENUM("C","P") NOT NULL
-=======
                        dependencyid INT NOT NULL,
                        usertype ENUM("corporation","person") NOT NULL
->>>>>>> ed488448def08a1d58e7e582604a607b024bdbab
                        );
                        
 CREATE TABLE accounts(id INT PRIMARY KEY AUTO_INCREMENT,
@@ -82,7 +77,6 @@ CREATE TABLE installment(installmentid INT PRIMARY KEY AUTO_INCREMENT,
                         loantype ENUM("home","personal","bussiness")
                         );
                         
-/*ALTER TABLE loanapplicants MODIFY adharid VARCHAR(25);*/
                         
                         
 						

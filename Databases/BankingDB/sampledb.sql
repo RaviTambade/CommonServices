@@ -1,4 +1,4 @@
--- Active: 1678359546568@@127.0.0.1@3306@bankingdb
+-- Active: 1696576841746@@127.0.0.1@3306@bankingdb
 /* don't change sequence of any records*/
 INSERT INTO customers(id,customerid,dependencyid,usertype) VALUES(1,1,1,"corporation");
 INSERT INTO customers(customerid,dependencyid,usertype) VALUES(2,2,"corporation");
@@ -95,7 +95,6 @@ INSERT INTO accounts(acctnumber, accttype, ifsccode, balance, registereddate, cu
 ('9999444433', 'savings', 'SBI0000789', 96000, '2022-11-06', 44),
 ('1111444455', 'savings', 'AXIS0000789', 52000, '2022-12-19', 45);
 
-SELECT * FROM accounts;
 
 INSERT INTO loan(loanid,amount,loansanctiondate,duration,intrestrate,acctId)VALUES(100,'100000','2023-09-08',15,11.58,3);
 INSERT INTO loan(amount,loansanctiondate,duration,intrestrate,acctId)VALUES('50000','2023-01-31',15,11.58,6);

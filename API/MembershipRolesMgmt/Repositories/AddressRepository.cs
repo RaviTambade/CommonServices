@@ -4,13 +4,11 @@ using Transflower.MembershipRolesMgmt.Models.Requests;
 using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 
-
 namespace Transflower.MembershipRolesMgmt.Repositories;
 
 public class AddressRepository : IAddressRepository
 {
     private readonly IConfiguration _configuration;
-
     private readonly string _connectionString;
 
     public AddressRepository(IConfiguration configuration)
@@ -21,7 +19,7 @@ public class AddressRepository : IAddressRepository
             ?? throw new ArgumentNullException(nameof(_connectionString));
     }
 
-    public async Task<List<AddressInfo>> GetAddresses(int userId)
+    public async Task<List<AddressInfo>> GetAddressesofUser(int userId)
     {
         List<AddressInfo> addresses = new List<AddressInfo>();
         MySqlConnection con = new MySqlConnection();
@@ -67,47 +65,7 @@ public class AddressRepository : IAddressRepository
         return addresses;
     }
 
-    public async Task<bool> Add(Address address)
-    {
-        bool status = false;
-        MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _connectionString;
-
-        try
-        {
-            string query =
-                @"INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) 
-            VALUES(@userid, @area,@landmark, @city,@state,@alternatecontactnumber,@pincode)";
-            MySqlCommand command = new MySqlCommand(query, con);
-            await con.OpenAsync();
-            command.Parameters.AddWithValue("@userid", address.UserId);
-            command.Parameters.AddWithValue("@area", address.Area);
-            command.Parameters.AddWithValue("@landmark", address.LandMark);
-            command.Parameters.AddWithValue("@city", address.City);
-            command.Parameters.AddWithValue("@state", address.State);
-            command.Parameters.AddWithValue(
-                "@alternatecontactnumber",
-                address.AlternateContactNumber
-            );
-            command.Parameters.AddWithValue("@pincode", address.PinCode);
-            int rowsAffected = await command.ExecuteNonQueryAsync();
-            if (rowsAffected > 0)
-            {
-                status = true;
-            }
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            await con.CloseAsync();
-        }
-        return status;
-    }
-
-    public async Task<AddressInfo?> GetAddressInfo(int addressId)
+    public async Task<AddressInfo?> GetAddress(int addressId)
     {
         AddressInfo? address = null;
         MySqlConnection con = new MySqlConnection();
@@ -152,8 +110,7 @@ public class AddressRepository : IAddressRepository
         return address;
     }
 
-    
-    public async Task<List<AddressInfo>> GetAddressesInformationFromId(string addressIdString)
+    public async Task<List<AddressInfo>> GetAddressesInformation(string addressIds)
     {
         List<AddressInfo> addresses = new();
         MySqlConnection con = new MySqlConnection();
@@ -165,7 +122,7 @@ public class AddressRepository : IAddressRepository
             addresses.state,addresses.alternatecontactnumber,addresses.pincode,users.contactnumber,
             CONCAT(users.firstname, ' ', users.lastname) as name  FROM addresses
             INNER JOIN users on addresses.userid=users.id
-            WHERE addresses.id IN ({addressIdString})";
+            WHERE addresses.id IN ({addressIds})";
             MySqlCommand command = new MySqlCommand(query, con);
             await con.OpenAsync();
             MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
@@ -206,7 +163,7 @@ public class AddressRepository : IAddressRepository
         try
         {
             string query =
-                $"SELECT id AS addressid,pincode,CalculateDistanceByAddress(@addressId, id) AS distance FROM addresses WHERE id IN ({request.AddressIdString})";
+                $"SELECT id AS addressid,pincode,CalculateDistanceByAddress(@addressId, id) AS distance FROM addresses WHERE id IN ({request.AddressIds})";
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@addressId", request.AddressId);
             await con.OpenAsync();
@@ -228,11 +185,6 @@ public class AddressRepository : IAddressRepository
                 distances.Add(data);
             }
             await reader.CloseAsync();
-            foreach (var d in distances)
-            {
-                Console.WriteLine(d.Distance);
-            }
-
             int? id = distances.MinBy(ad => ad.Distance)?.Id;
             return id ?? 0;
         }
@@ -244,5 +196,45 @@ public class AddressRepository : IAddressRepository
         {
             await con.CloseAsync();
         }
+    }
+
+    public async Task<bool> Insert(Address address)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _connectionString;
+
+        try
+        {
+            string query =
+                @"INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) 
+            VALUES(@userid, @area,@landmark, @city,@state,@alternatecontactnumber,@pincode)";
+            MySqlCommand command = new MySqlCommand(query, con);
+            await con.OpenAsync();
+            command.Parameters.AddWithValue("@userid", address.UserId);
+            command.Parameters.AddWithValue("@area", address.Area);
+            command.Parameters.AddWithValue("@landmark", address.LandMark);
+            command.Parameters.AddWithValue("@city", address.City);
+            command.Parameters.AddWithValue("@state", address.State);
+            command.Parameters.AddWithValue(
+                "@alternatecontactnumber",
+                address.AlternateContactNumber
+            );
+            command.Parameters.AddWithValue("@pincode", address.PinCode);
+            int rowsAffected = await command.ExecuteNonQueryAsync();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
     }
 }

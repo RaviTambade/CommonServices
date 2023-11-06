@@ -1,4 +1,6 @@
--- Active: 1694968636816@@127.0.0.1@3306@membershipprofilesdb
+
+-- Active: 1694968636816@@127.0.0.1@3306@membershipprofiles
+
 INSERT INTO credentials (contactnumber,password) VALUES ('1245987456','password');
 INSERT INTO credentials (contactnumber,password) VALUES ('8456123654','12345678');
 INSERT INTO credentials (contactnumber,password) VALUES ('8752312210','password');

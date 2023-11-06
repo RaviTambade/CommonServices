@@ -1,4 +1,3 @@
-
 using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Models.Requests;
 using Transflower.MembershipRolesMgmt.Models.Responses;
@@ -40,6 +39,4 @@ public class CredentialService : ICredentialService
     {
         return await _credentialRepository.Delete(id);
     }
-
-
 }

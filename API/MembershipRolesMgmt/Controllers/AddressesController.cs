@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Models.Requests;
@@ -19,31 +18,32 @@ public class AddressesController : ControllerBase
     }
 
     [HttpGet("{userId}")]
-    public async Task<List<AddressInfo>> GetAddresses(int userId)
+    public async Task<List<AddressInfo>> GetAddressesofUser(int userId)
     {
-        return await _service.GetAddresses(userId);
+        return await _service.GetAddressesofUser(userId);
+    }
+
+    [HttpGet("info/{addressIds}")]
+    public async Task<List<AddressInfo>> GetAddressesInformation(string addressIds)
+    {
+        return await _service.GetAddressesInformation(addressIds);
     }
 
     [HttpGet("details/{addressId}")]
-    public async Task<AddressInfo?> GetAddressInfo(int addressId)
+    public async Task<AddressInfo?> GetAddress(int addressId)
     {
-        return await _service.GetAddressInfo(addressId);
-    }
-    [HttpGet("info/{addressIdString}")]
-   public async Task<List<AddressInfo>> GetAddressesInformationFromId(string addressIdString)
-    {
-        return await _service.GetAddressesInformationFromId(addressIdString);
-    }
-
-    [HttpPost]
-    public async Task<bool> Add(Address address)
-    {
-        return await _service.Add(address);
+        return await _service.GetAddress(addressId);
     }
 
     [HttpPost("nearest")]
     public async Task<int> GetNearestAddressId([FromBody] AddressIdRequest request)
     {
         return await _service.GetNearestAddressId(request);
+    }
+
+    [HttpPost]
+    public async Task<bool> Create(Address address)
+    {
+        return await _service.Insert(address);
     }
 }
