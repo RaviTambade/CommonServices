@@ -4,7 +4,7 @@ using Transflower.MembershipRolesMgmt.Models.Requests;
 using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 
-namespace Transflower.MembershipRolesMgmt.Repositories;
+namespace Transflower.MembershipRolesMgmt.Repositories.Connected;
 
 public class AddressRepository : IAddressRepository
 {
