@@ -1,8 +1,9 @@
+-- Active: 1696576841746@@127.0.0.1@3306@membershiprolesdb
 DROP DATABASE IF EXISTS MembershipRolesDB;
 CREATE DATABASE  MembershipRolesDB;
 USE MembershipRolesDB;
 
-CREATE TABLE users(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE users( id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                      imageurl VARCHAR(50),
                      aadharid VARCHAR(30) NOT NULL UNIQUE,
                      firstname VARCHAR(50),
@@ -13,7 +14,7 @@ CREATE TABLE users(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                      contactnumber VARCHAR(40),
                      password VARCHAR(25), 
                      createdon DATETIME DEFAULT CURRENT_TIMESTAMP,
-                     modifiedon DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);
+                     modifiedon DATETIME DEFAULT CURRENT_TIMESTAMP);
                      
 
 CREATE TABLE addresses (
