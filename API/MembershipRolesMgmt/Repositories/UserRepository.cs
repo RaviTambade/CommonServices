@@ -4,7 +4,7 @@ using System.Globalization;
 using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
-
+using Claim = Transflower.MembershipRolesMgmt.Models.Requests.Claim;
 namespace Transflower.MembershipRolesMgmt.Repositories;
 
 public class UserRepository : IUserRepository
@@ -119,6 +119,41 @@ public async Task<User> GetUser(int userId)
         }
         return people;
     }
+
+
+private async Task<User?> GetUser(Claim claim)
+    {
+         User user=null;
+      
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
+        {
+            string query =
+                "SELECT * FROM credentials WHERE contactnumber=@contactNumber AND BINARY password=@password";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@contactNumber", claim.ContactNumber);
+            cmd.Parameters.AddWithValue("@password", claim.Password);
+            await con.OpenAsync();
+            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
+            if (await reader.ReadAsync())
+            {   
+                user= await GetUserByContact(claim.ContactNumber);
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return user;
+    }
+
+    
+
 
      public async Task<List<string>> GetRolesByUserId(int userId)
     {

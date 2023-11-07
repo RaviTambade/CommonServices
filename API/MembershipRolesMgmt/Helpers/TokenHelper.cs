@@ -6,42 +6,20 @@ using Microsoft.IdentityModel.Tokens;
 using Transflower.MembershipRolesMgmt.Helpers;
 using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
+using Transflower.MembershipRolesMgmt.Services.Interfaces;
 
 public class TokenHelper{
+    private  readonly IRoleService  _roleService;
+    private IConfiguration _configuration;
 
-  private  readonly IRoleRepository _roleRepository;
- private readonly JwtSettings _jwtSettings;
-
-
-    public TokenHelper(IOptions<JwtSettings> jwtSettings,IRoleRepository  roleRepository)
+    public TokenHelper(IConfiguration configuration,IRoleService _roleService)
     {
-        _jwtSettings = jwtSettings.Value;
-        _roleRepository=roleRepository;
+        _configuration=configuration;
     }
-
- public async Task<string> GenerateJwtToken(User user)
-    {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = System.Text.Encoding.ASCII.GetBytes(_jwtSettings.Secret);
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(await GetAllClaims(user)),
-            Expires = DateTime.UtcNow.AddDays(7),
-            SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature
-            )
-        };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);
-    }
-
-
 
      private async Task<List<System.Security.Claims.Claim>> GetAllClaims(User user)
     {
-        List<Role> roles =  await _roleRepository.GetRolesOfUser(user.Id);
-
+        List<Role> roles =  await _roleService.GetRolesOfUser(user.Id);
         List<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>
         {
             new System.Security.Claims.Claim("contactNumber", user.ContactNumber),
@@ -57,4 +35,20 @@ public class TokenHelper{
     }
 
 
+    public async Task<string> GenerateJwtToken(User user)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = System.Text.Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Secret"));
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(await GetAllClaims(user)),
+            Expires = DateTime.UtcNow.AddDays(7),
+            SigningCredentials = new SigningCredentials(
+                new SymmetricSecurityKey(key),
+                SecurityAlgorithms.HmacSha256Signature
+            )
+        };
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
+    }    
 }

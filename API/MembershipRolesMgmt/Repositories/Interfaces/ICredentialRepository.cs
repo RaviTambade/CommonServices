@@ -7,7 +7,7 @@ namespace Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 
 public interface ICredentialRepository
 {
-    Task<AuthToken> Authenticate(Claim claim);
+    Task<bool> Authenticate(Claim claim);
     Task<bool> Insert(Credential credential);
     Task<bool> Update(string contactNumber, PasswordDetails credential);
     Task<bool> Update(string contactNumber, ContactNumberDetails credential);

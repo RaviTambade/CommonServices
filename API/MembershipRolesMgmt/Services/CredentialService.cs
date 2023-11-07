@@ -15,9 +15,9 @@ public class CredentialService : ICredentialService
         _credentialRepository = credentialRepository;
     }
 
-    public async Task<AuthToken> Authenticate(Claim request)
+    public async Task<bool> Authenticate(Claim claim)
     {
-        return await _credentialRepository.Authenticate(request);
+        return await _credentialRepository.Authenticate(claim);
     }
 
     public async Task<bool> Insert(Credential credential)

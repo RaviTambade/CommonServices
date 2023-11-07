@@ -26,17 +26,43 @@ public class CredentialRepository : ICredentialRepository
             ?? throw new ArgumentException(nameof(_conString));
     }
 
-    public async Task<AuthToken> Authenticate(Claim claim)
+    public async Task<bool> Authenticate(Claim claim)
     {
-        var credential = await GetCredentials(claim);
-
-        if (credential is null)
+        bool status=false;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
         {
-            return new AuthToken("");
-        }
+            string query =
+                "SELECT * FROM credentials WHERE contactnumber=@contactNumber AND BINARY password=@password";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@contactNumber", claim.ContactNumber);
+            cmd.Parameters.AddWithValue("@password", claim.Password);
+            await con.OpenAsync();
+            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
+            if (await reader.ReadAsync())
+            {   
 
-        var jwtToken = await GenerateJwtToken(credential);
-        return new AuthToken(jwtToken);
+                status=true;
+
+
+               /*UserRepository repo=new UserRepository(_configuration);
+
+                User user=await repo.GetUserByContact(claim.ContactNumber);
+                TokenHelper tokenHelper=new TokenHelper();
+                jwtToken = await tokenHelper.GenerateJwtToken(user);
+               */ 
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return status;
     }
 
 
@@ -164,39 +190,6 @@ public class CredentialRepository : ICredentialRepository
    
    
 
-    private async Task<Credential?> GetCredentials(Claim claim)
-    {
-        Credential? credential = null;
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query =
-                "SELECT * FROM credentials WHERE contactnumber=@contactNumber AND BINARY password=@password";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@contactNumber", claim.ContactNumber);
-            cmd.Parameters.AddWithValue("@password", claim.Password);
-            await con.OpenAsync();
-            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
-            if (await reader.ReadAsync())
-            {
-                credential = new Credential()
-                {
-                    ContactNumber = reader.GetString("contactnumber"),
-                    Password = reader.GetString("password"),
-                };
-            }
-            await reader.CloseAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return credential;
-    }
 
     
 }

@@ -11,11 +11,18 @@ namespace Transflower.MembershipRolesMgmt.Controllers;
 [Route("/api/auth")]
 public class AuthController : ControllerBase
 {
-    private readonly ICredentialService _service;
+    
+     private IConfiguration _configuration;
 
-    public AuthController(ICredentialService service)
+    private readonly ICredentialService _credentialService;
+    private readonly IRoleService _roleService;
+     private readonly IUserService _userService;
+    public AuthController(IConfiguration configuration,ICredentialService credentialService,IRoleService roleService,IUserService userService)
     {
-        _service = service;
+        _credentialService = credentialService;
+        _roleService = roleService;
+        _configuration=configuration;
+        _userService=userService;
     }
 
     // [AllowAnonymous]
@@ -23,8 +30,14 @@ public class AuthController : ControllerBase
     [Route("signin")]
     public async Task<AuthToken> SignIn([FromBody] Claim claim)
     {
-        var token = await _service.Authenticate(claim);
-        return token;
+        string  strJwtToken="";
+        var status = await _credentialService.Authenticate(claim);
+        if(status){
+            User user= await _userService.GetUserByContact(claim.ContactNumber);
+            TokenHelper helper=new TokenHelper(_configuration,_roleService);
+            strJwtToken= await helper.GenerateJwtToken(user);
+        }
+        return new AuthToken(strJwtToken);
     }
 
     [HttpPost("register")]
