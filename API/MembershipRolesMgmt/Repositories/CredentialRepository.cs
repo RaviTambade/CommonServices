@@ -16,12 +16,11 @@ public class CredentialRepository : ICredentialRepository
 {
     private readonly IConfiguration _configuration;
     private readonly string _conString;
-    private readonly JwtSettings _jwtSettings;
+   
 
     public CredentialRepository(IConfiguration configuration, IOptions<JwtSettings> jwtSettings)
     {
         _configuration = configuration;
-        _jwtSettings = jwtSettings.Value;
         _conString =
             this._configuration.GetConnectionString("DefaultConnection")
             ?? throw new ArgumentException(nameof(_conString));
@@ -39,6 +38,8 @@ public class CredentialRepository : ICredentialRepository
         var jwtToken = await GenerateJwtToken(credential);
         return new AuthToken(jwtToken);
     }
+
+
 
     public async Task<bool> Insert(Credential credential)
     {
@@ -160,41 +161,8 @@ public class CredentialRepository : ICredentialRepository
         return status;
     }
 
-    private async Task<List<System.Security.Claims.Claim>> AllClaims(Credential credential)
-    {
-        int userId = await GetUserIdByContactNumber(credential.ContactNumber);
-        List<string> roles =  await GetRolesOfUser(userId);
-
-        List<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>
-        {
-            new System.Security.Claims.Claim("contactNumber", credential.ContactNumber),
-            new System.Security.Claims.Claim("userId", userId.ToString()),
-        };
-
-        foreach (var role in roles)
-        {
-            claims.Add(new System.Security.Claims.Claim("roles", role));
-        }
-
-        return claims;
-    }
-
-    private async Task<string> GenerateJwtToken(Credential credential)
-    {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = System.Text.Encoding.ASCII.GetBytes(_jwtSettings.Secret);
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(await AllClaims(credential)),
-            Expires = DateTime.UtcNow.AddDays(7),
-            SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature
-            )
-        };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);
-    }
+   
+   
 
     private async Task<Credential?> GetCredentials(Claim claim)
     {
@@ -230,58 +198,5 @@ public class CredentialRepository : ICredentialRepository
         return credential;
     }
 
-    private async Task<List<string>> GetRolesOfUser(int userId)
-    {
-        List<string> roles = new();
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query =
-                @"SELECT roles.name,roles.lob FROM roles INNER JOIN userroles on userroles.roleid = roles.id
-                  INNER JOIN  users ON users.id=userroles.userid
-                 WHERE users.id=@userid"; //and  lob='Ekrushi
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@userid", userId);
-            await con.OpenAsync();
-            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
-            {
-                roles.Add(reader.GetString("name"));
-            }
-            await reader.CloseAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return roles;
-    }
-
-    private async Task<int> GetUserIdByContactNumber(string contactNumber)
-    {
-        int userId = 0;
-        MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _conString;
-        try
-        {
-            string query = "select id from users where contactnumber=@contactNumber";
-            MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@contactNumber", contactNumber);
-            await con.OpenAsync();
-            userId = Convert.ToInt32(await command.ExecuteScalarAsync());
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            await con.CloseAsync();
-        }
-        return userId;
-    }
+    
 }
