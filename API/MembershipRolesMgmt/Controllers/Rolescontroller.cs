@@ -5,7 +5,7 @@ using Transflower.MembershipRolesMgmt.Services.Interfaces;
 namespace Transflower.MembershipRolesMgmt.Controllers;
 
 [ApiController]
-[Route("/api/authentication")]
+[Route("/api/roles")]
 public class RolesController : ControllerBase
 {
      private readonly IRoleService _service;
@@ -26,6 +26,13 @@ public class RolesController : ControllerBase
     public async Task<List<Role>> GetRoles()
     {
         return await _service.GetRoles();
+    }
+
+
+    [HttpGet("userrole")]
+    public async Task<List<Role>> GetRolesOfUser(int userId)
+    {
+        return await _service.GetRolesOfUser(userId);
     }
 
     [HttpGet("{userRoleId}")]

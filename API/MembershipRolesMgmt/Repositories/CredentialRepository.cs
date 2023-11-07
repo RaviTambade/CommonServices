@@ -16,29 +16,56 @@ public class CredentialRepository : ICredentialRepository
 {
     private readonly IConfiguration _configuration;
     private readonly string _conString;
-    private readonly JwtSettings _jwtSettings;
+   
 
     public CredentialRepository(IConfiguration configuration, IOptions<JwtSettings> jwtSettings)
     {
         _configuration = configuration;
-        _jwtSettings = jwtSettings.Value;
         _conString =
             this._configuration.GetConnectionString("DefaultConnection")
             ?? throw new ArgumentException(nameof(_conString));
     }
 
-    public async Task<AuthToken> Authenticate(Claim claim)
+    public async Task<bool> Authenticate(Claim claim)
     {
-        var credential = await GetCredentials(claim);
-
-        if (credential is null)
+        bool status=false;
+        MySqlConnection con = new MySqlConnection(_conString);
+        try
         {
-            return new AuthToken("");
-        }
+            string query =
+                "SELECT * FROM credentials WHERE contactnumber=@contactNumber AND BINARY password=@password";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@contactNumber", claim.ContactNumber);
+            cmd.Parameters.AddWithValue("@password", claim.Password);
+            await con.OpenAsync();
+            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
+            if (await reader.ReadAsync())
+            {   
 
-        var jwtToken = await GenerateJwtToken(credential);
-        return new AuthToken(jwtToken);
+                status=true;
+
+
+               /*UserRepository repo=new UserRepository(_configuration);
+
+                User user=await repo.GetUserByContact(claim.ContactNumber);
+                TokenHelper tokenHelper=new TokenHelper();
+                jwtToken = await tokenHelper.GenerateJwtToken(user);
+               */ 
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            con.Close();
+        }
+        return status;
     }
+
+
 
     public async Task<bool> Insert(Credential credential)
     {
@@ -160,134 +187,9 @@ public class CredentialRepository : ICredentialRepository
         return status;
     }
 
-    private async Task<List<System.Security.Claims.Claim>> AllClaims(Credential credential)
-    {
-        var rolesTask = GetRolesOfUser(credential.ContactNumber);
-        var userIdTask = GetUserIdByContactNumber(credential.ContactNumber);
+   
+   
 
-        await Task.WhenAll(rolesTask, userIdTask);
 
-        List<string> roles = await rolesTask;
-        int userId = await userIdTask;
-
-        List<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>
-        {
-            new System.Security.Claims.Claim("contactNumber", credential.ContactNumber),
-            new System.Security.Claims.Claim("userId", userId.ToString()),
-        };
-
-        foreach (var role in roles)
-        {
-            claims.Add(new System.Security.Claims.Claim("roles", role));
-        }
-
-        return claims;
-    }
-
-    private async Task<string> GenerateJwtToken(Credential credential)
-    {
-        //token will expire after one hour
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = System.Text.Encoding.ASCII.GetBytes(_jwtSettings.Secret);
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(await AllClaims(credential)),
-            Expires = DateTime.UtcNow.AddHours(1),
-            SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature
-            )
-        };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);
-    }
-
-    private async Task<Credential?> GetCredentials(Claim claim)
-    {
-        Credential? credential = null;
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query =
-                "SELECT * FROM credentials WHERE contactnumber=@contactNumber AND BINARY password=@password";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@contactNumber", claim.ContactNumber);
-            cmd.Parameters.AddWithValue("@password", claim.Password);
-            await con.OpenAsync();
-            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
-            if (await reader.ReadAsync())
-            {
-                credential = new Credential()
-                {
-                    ContactNumber = reader.GetString("contactnumber"),
-                    Password = reader.GetString("password"),
-                };
-            }
-            await reader.CloseAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return credential;
-    }
-
-    private async Task<List<string>> GetRolesOfUser(string contactNumber)
-    {
-        List<string> roles = new();
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query =
-                @"SELECT roles.name,roles.lob FROM roles INNER JOIN userroles on userroles.roleid = roles.id
-                  INNER JOIN  users ON users.id=userroles.userid
-                 WHERE users.contactnumber=@contactNumber"; //and  lob='Ekrushi
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@contactNumber", contactNumber);
-            await con.OpenAsync();
-            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
-            {
-                roles.Add(reader.GetString("name"));
-            }
-            await reader.CloseAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return roles;
-    }
-
-    private async Task<int> GetUserIdByContactNumber(string contactNumber)
-    {
-        int userId = 0;
-        MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _conString;
-        try
-        {
-            string query = "select id from users where contactnumber=@contactNumber";
-            MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@contactNumber", contactNumber);
-            await con.OpenAsync();
-            userId = Convert.ToInt32(await command.ExecuteScalarAsync());
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            await con.CloseAsync();
-        }
-        return userId;
-    }
+    
 }

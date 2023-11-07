@@ -1,14 +1,36 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Transflower.MembershipRolesMgmt.Models.Entities;
 
-public class User{
+[Table("users")]
+public class User
+{
+    [Key]
+    [Column("id")]
+    public int Id { get; set; }
 
-    public int Id{get; set;}
-    public string? ImageUrl{get; set;}
-    public string? FirstName{get; set;}
-    public string? LastName{get; set;}
-    public DateOnly BirthDate{get; set;}
-    public string? AadharId {get; set;}
-    public string? Gender {get; set;}
-    public string? Email {get; set;}
-    public string? ContactNumber {get; set;}
+    [Column("imageurl")]
+    public string? ImageUrl { get; set; }
+
+    [Column("firstname")]
+    public string? FirstName { get; set; }
+
+    [Column("lastname")]
+    public string? LastName { get; set; }
+
+    [Column("birthdate")]
+    public DateOnly BirthDate { get; set; }
+
+    [Column(" aadharid")]
+    public string? AadharId { get; set; }
+
+    [Column("gender")]
+    public string? Gender { get; set; }
+
+    [Column("email")]
+    public string? Email { get; set; }
+
+    [Column("contactnumber")]
+    public string? ContactNumber { get; set; }
 }

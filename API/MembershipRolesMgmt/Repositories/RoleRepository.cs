@@ -2,10 +2,14 @@ using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Transflower.MembershipRolesMgmt.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
+
+
 namespace Transflower.MembershipRolesMgmt.Repositories;
 
 public class RoleRepository : IRoleRepository
 {
+    private readonly IConfiguration _configuration;
+    private readonly string _conString;
     private readonly RoleContext _context;
 
     public RoleRepository(RoleContext context)
@@ -26,8 +30,7 @@ public class RoleRepository : IRoleRepository
         }
     }
 
-
- public async Task<List<Role>> GetRoles()
+    public async Task<List<Role>> GetRoles()
     {
         try
         {
@@ -39,6 +42,27 @@ public class RoleRepository : IRoleRepository
             throw;
         }
     }
+
+    public async Task<List<Role>> GetRolesOfUser(int userId)
+    {
+        try
+        {
+            var roles = await (
+                from role in _context.Roles
+                join userrole in _context.UserRoles on role.Id equals userrole.RoleId
+                join user in _context.Users on userrole.UserId equals user.Id
+                where user.Id == userId
+                select role
+            ).ToListAsync();
+
+            return roles;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
     public async Task<Role> GetById(int userRoleId)
     {
         try
@@ -111,6 +135,4 @@ public class RoleRepository : IRoleRepository
         int rowsAffected = await _context.SaveChangesAsync();
         return rowsAffected > 0;
     }
-
-   
 }
