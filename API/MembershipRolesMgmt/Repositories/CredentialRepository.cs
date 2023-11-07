@@ -162,13 +162,8 @@ public class CredentialRepository : ICredentialRepository
 
     private async Task<List<System.Security.Claims.Claim>> AllClaims(Credential credential)
     {
-        var rolesTask = GetRolesOfUser(credential.ContactNumber);
-        var userIdTask = GetUserIdByContactNumber(credential.ContactNumber);
-
-        await Task.WhenAll(rolesTask, userIdTask);
-
-        List<string> roles = await rolesTask;
-        int userId = await userIdTask;
+        int userId = await GetUserIdByContactNumber(credential.ContactNumber);
+        List<string> roles =  await GetRolesOfUser(userId);
 
         List<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>
         {
@@ -186,13 +181,12 @@ public class CredentialRepository : ICredentialRepository
 
     private async Task<string> GenerateJwtToken(Credential credential)
     {
-        //token will expire after one hour
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = System.Text.Encoding.ASCII.GetBytes(_jwtSettings.Secret);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(await AllClaims(credential)),
-            Expires = DateTime.UtcNow.AddHours(1),
+            Expires = DateTime.UtcNow.AddDays(7),
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature
@@ -236,7 +230,7 @@ public class CredentialRepository : ICredentialRepository
         return credential;
     }
 
-    private async Task<List<string>> GetRolesOfUser(string contactNumber)
+    private async Task<List<string>> GetRolesOfUser(int userId)
     {
         List<string> roles = new();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -245,9 +239,9 @@ public class CredentialRepository : ICredentialRepository
             string query =
                 @"SELECT roles.name,roles.lob FROM roles INNER JOIN userroles on userroles.roleid = roles.id
                   INNER JOIN  users ON users.id=userroles.userid
-                 WHERE users.contactnumber=@contactNumber"; //and  lob='Ekrushi
+                 WHERE users.id=@userid"; //and  lob='Ekrushi
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@contactNumber", contactNumber);
+            cmd.Parameters.AddWithValue("@userid", userId);
             await con.OpenAsync();
             MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
             while (await reader.ReadAsync())

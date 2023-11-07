@@ -7,19 +7,9 @@ using Transflower.MembershipRolesMgmt.Repositories.Contexts;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Transflower.MembershipRolesMgmt.Services;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
-var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(MyAllowSpecificOrigins,
-                          policy =>
-                          {
-                              policy.WithOrigins("http://localhost:4200")
-                                                  .AllowAnyHeader()
-                                                  .AllowAnyMethod();
-                          });
-});
+builder.Services.AddCors();
 
 // Add servic'es to the container.
 builder.Services.AddDbContext<RoleContext>(
@@ -52,8 +42,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 app.UseStaticFiles();
 app.UseMiddleware<JwtMiddleware>();
-app.UseCors(MyAllowSpecificOrigins);
 app.MapControllers();
 app.Run();

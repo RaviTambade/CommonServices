@@ -3,6 +3,7 @@ using Transflower.MembershipRolesMgmt.Services.Interfaces;
 using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Models.Requests;
 using Transflower.MembershipRolesMgmt.Models.Entities;
+using Transflower.MembershipRolesMgmt.Helpers;
 
 namespace Transflower.MembershipRolesMgmt.Controllers;
 
@@ -32,7 +33,7 @@ public class AuthController : ControllerBase
         return await _service.Insert(credential);
     }
 
-    // [Authorize]
+    [Authorize]
     [HttpPut("update/contactnumber")]
     public async Task<bool> Update(ContactNumberDetails details)
     {
@@ -41,7 +42,7 @@ public class AuthController : ControllerBase
         return await _service.Update(currentContactNumber, details);
     }
 
-    // [Authorize]
+    [Authorize]
     [HttpPut("update/password")]
     public async Task<bool> Update(PasswordDetails passwordDetails)
     {

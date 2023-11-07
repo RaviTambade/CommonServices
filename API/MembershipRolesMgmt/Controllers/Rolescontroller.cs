@@ -5,7 +5,7 @@ using Transflower.MembershipRolesMgmt.Services.Interfaces;
 namespace Transflower.MembershipRolesMgmt.Controllers;
 
 [ApiController]
-[Route("/api/authentication")]
+[Route("/api/roles")]
 public class RolesController : ControllerBase
 {
      private readonly IRoleService _service;
