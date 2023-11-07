@@ -46,33 +46,4 @@ public class AuthController : ControllerBase
         return new AuthToken(strJwtToken);
     }
 
-    [HttpPost("register")]
-    public async Task<bool> Create(Credential credential)
-    {
-        return await _credentialService.Insert(credential);
-    }
-
-    [Authorize]
-    [HttpPut("update/contactnumber")]
-    public async Task<bool> Update(ContactNumberDetails details)
-    {
-        string currentContactNumber = (string)HttpContext.Items["contactNumber"];
-
-        return await _credentialService.Update(currentContactNumber, details);
-    }
-
-    [Authorize]
-    [HttpPut("update/password")]
-    public async Task<bool> Update(PasswordDetails passwordDetails)
-    {
-        string? contactNumber = (string?)HttpContext.Items["contactNumber"];
-        Console.WriteLine(contactNumber);
-        return await _credentialService.Update(contactNumber, passwordDetails);
-    }
-
-    [HttpDelete("contactnumber/{id}")]
-    public async Task<bool> Delete(int id)
-    {
-        return await _credentialService.Delete(id);
-    }
 }
