@@ -28,11 +28,11 @@ builder.Services.AddScoped<ICredentialService,CredentialService>();
 builder.Services.AddScoped<IUserRepository,UserRepository>();
 builder.Services.AddScoped<IAddressRepository,AddressRepository>();
 builder.Services.AddScoped<ICredentialRepository,CredentialRepository>();
-builder.Services.AddOptions<JwtSettings>().BindConfiguration("JWT").ValidateDataAnnotations().ValidateOnStart();
 builder.Services.AddScoped<IRoleService,RoleService>();
 builder.Services.AddScoped<IRoleRepository,RoleRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddOptions<JwtSettings>().BindConfiguration("JWT").ValidateDataAnnotations().ValidateOnStart();
 
 var app = builder.Build();
 

@@ -2,12 +2,12 @@ using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Transflower.MembershipRolesMgmt.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.MySqlClient;
+
+
 namespace Transflower.MembershipRolesMgmt.Repositories;
 
 public class RoleRepository : IRoleRepository
 {
-
     private readonly IConfiguration _configuration;
     private readonly string _conString;
     private readonly RoleContext _context;
@@ -30,8 +30,7 @@ public class RoleRepository : IRoleRepository
         }
     }
 
-
- public async Task<List<Role>> GetRoles()
+    public async Task<List<Role>> GetRoles()
     {
         try
         {
@@ -44,45 +43,24 @@ public class RoleRepository : IRoleRepository
         }
     }
 
-   
     public async Task<List<Role>> GetRolesOfUser(int userId)
     {
-        List<Role> roles = new();
-        MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query =
-                @"SELECT * FROM roles INNER JOIN userroles on userroles.roleid = roles.id
-                  INNER JOIN  users ON users.id=userroles.userid
-                 WHERE users.id=@userid"; //and  lob='Ekrushi
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@userid", userId);
-            await con.OpenAsync();
-            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
-            {
-                
-               int roleId=int.Parse(reader["id"].ToString());
-               string roleName= reader["name"].ToString();
-               string lob=reader["lob"].ToString();
-               Role role = new Role(){
-                Id=roleId,
-                Name=roleName,
-                Lob=lob
-               };
-               roles.Add(role);
-            }
-            await reader.CloseAsync();
+            var roles = await (
+                from role in _context.Roles
+                join userrole in _context.UserRoles on role.Id equals userrole.RoleId
+                join user in _context.Users on userrole.UserId equals user.Id
+                where user.Id == userId
+                select role
+            ).ToListAsync();
+
+            return roles;
         }
         catch (Exception)
         {
             throw;
         }
-        finally
-        {
-            con.Close();
-        }
-        return roles;
     }
 
     public async Task<Role> GetById(int userRoleId)
@@ -157,8 +135,4 @@ public class RoleRepository : IRoleRepository
         int rowsAffected = await _context.SaveChangesAsync();
         return rowsAffected > 0;
     }
-
-
-   
-   
 }

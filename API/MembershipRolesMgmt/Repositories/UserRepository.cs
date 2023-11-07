@@ -11,20 +11,20 @@ public class UserRepository : IUserRepository
 {
     private readonly IConfiguration _configuration;
 
-    private readonly string _constring;
+    private readonly string _conString;
 
     public UserRepository(IConfiguration configuration)
     {
         _configuration = configuration;
-        _constring = this._configuration.GetConnectionString("DefaultConnection")??
-        throw new ArgumentNullException(nameof(_constring));
+        _conString = this._configuration.GetConnectionString("DefaultConnection")??
+        throw new ArgumentNullException(nameof(_conString));
     }
 
 public async Task<List<User>> GetAllUsers()
     {
         List<User> peoples = new List<User>();
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _constring;
+        con.ConnectionString = _conString;
         try
         {
             string query = "select * from users";
@@ -74,7 +74,7 @@ public async Task<User> GetUser(int userId)
     {
         User people = new User();
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _constring;
+        con.ConnectionString = _conString;
         try
         {
             string query = "select * from users where id=@userId";
@@ -158,7 +158,7 @@ private async Task<User?> GetUser(Claim claim)
      public async Task<List<string>> GetRolesByUserId(int userId)
     {
         List<string> roles = new();
-        MySqlConnection con = new MySqlConnection(_constring);
+        MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query = "select name from roles inner join userroles on roles.id=userroles.roleid where userroles.userid=@userId";
@@ -186,7 +186,7 @@ private async Task<User?> GetUser(Claim claim)
     public async Task<List<int>> GetUsersId(string roleName)
     {
         List<int> userIds = new();
-        MySqlConnection con = new MySqlConnection(_constring);
+        MySqlConnection con = new MySqlConnection(_conString);
         try
         {
             string query = "select users.id  from users inner join userroles on users.id=userroles.userid inner join roles on roles.id=userroles.roleid where roles.name=@roleName";
@@ -216,7 +216,7 @@ public async Task<User> GetUserByContact(string contactNumber)
     {
         User user = new User();
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _constring;
+        con.ConnectionString = _conString;
         try
         {
             string query = "select * from users where contactnumber=@contactNumber";
@@ -267,7 +267,7 @@ public async Task<List<UserDetails>> GetUsersDetails(string ids)
     {
         List<UserDetails> users = new();
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _constring;
+        con.ConnectionString = _conString;
         try
         {
             string query = $"select id,firstname,lastname from users where id IN ({ids})";
@@ -305,7 +305,7 @@ public async Task<UserDetails> GetUserDetailsByContactNumber(string contactNumbe
     {
         UserDetails userName = null;
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _constring;
+        con.ConnectionString = _conString;
         try
         {
             string query = $"select id,firstname,lastname from users where contactnumber=@contactNumber";
@@ -340,7 +340,7 @@ public async Task<bool> Add(User user)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _constring;
+        con.ConnectionString = _conString;
 
         try
         {
@@ -377,7 +377,7 @@ public async Task<bool> Update(int id, User user)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _constring;
+        con.ConnectionString = _conString;
 
         try
         {
@@ -416,7 +416,7 @@ public async Task<bool> Delete(int userId)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _constring;
+        con.ConnectionString = _conString;
 
         try
         {

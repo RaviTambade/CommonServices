@@ -12,23 +12,25 @@ public class TokenHelper{
     private  readonly IRoleService  _roleService;
     private IConfiguration _configuration;
 
-    public TokenHelper(IConfiguration configuration,IRoleService _roleService)
+    public TokenHelper(IConfiguration configuration,IRoleService roleService)
     {
         _configuration=configuration;
+        _roleService=roleService;
+
     }
 
-     private async Task<List<System.Security.Claims.Claim>> GetAllClaims(User user)
+     private async Task<List<Claim>> GetAllClaims(User user)
     {
         List<Role> roles =  await _roleService.GetRolesOfUser(user.Id);
-        List<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>
+        List<Claim> claims = new List<Claim>
         {
-            new System.Security.Claims.Claim("contactNumber", user.ContactNumber),
-            new System.Security.Claims.Claim("userId", user.Id.ToString()),
+            new Claim("contactNumber", user.ContactNumber),
+            new Claim("userId", user.Id.ToString()),
         };
 
         foreach (var role in roles)
         {
-            claims.Add(new System.Security.Claims.Claim("roles", role.Name));
+            claims.Add(new Claim("roles", role.Name));
         }
 
         return claims;
@@ -38,7 +40,7 @@ public class TokenHelper{
     public async Task<string> GenerateJwtToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = System.Text.Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Secret"));
+        var key = System.Text.Encoding.ASCII.GetBytes(_configuration.GetValue<string>("JWT:Secret"));
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(await GetAllClaims(user)),
