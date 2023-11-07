@@ -19,9 +19,9 @@ public class AddressRepository : IAddressRepository
             ?? throw new ArgumentNullException(nameof(_connectionString));
     }
 
-    public async Task<List<AddressInfo>> GetAddressesofUser(int userId)
+    public async Task<List<Address>> GetAddressesofUser(int userId)
     {
-        List<AddressInfo> addresses = new List<AddressInfo>();
+        List<> addresses = new List<AddressInfo>();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _connectionString;
         try

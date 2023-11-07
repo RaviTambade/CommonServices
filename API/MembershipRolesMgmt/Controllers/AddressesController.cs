@@ -18,25 +18,25 @@ public class AddressesController : ControllerBase
     }
 
     [HttpGet("{userId}")]
-    public async Task<List<AddressInfo>> GetAddressesofUser(int userId)
+    public async Task<List<Address>> GetAddressesofUser(int userId)
     {
         return await _service.GetAddressesofUser(userId);
     }
 
     [HttpGet("info/{addressIds}")]
-    public async Task<List<AddressInfo>> GetAddressesInformation(string addressIds)
+    public async Task<List<Address>> GetAddressesInformation(string addressIds)
     {
         return await _service.GetAddressesInformation(addressIds);
     }
 
     [HttpGet("details/{addressId}")]
-    public async Task<AddressInfo?> GetAddress(int addressId)
+    public async Task<Address?> GetAddress(int addressId)
     {
         return await _service.GetAddress(addressId);
     }
 
     [HttpPost("nearest")]
-    public async Task<int> GetNearestAddressId([FromBody] AddressIdRequest request)
+    public async Task<int> GetNearestAddress([FromBody] AddressIdRequest request)
     {
         return await _service.GetNearestAddressId(request);
     }

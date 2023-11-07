@@ -10,8 +10,8 @@ public interface IUserRepository
 
     Task<List<User>> GetAllUsers();
     Task<User> GetUser(int userId);
-    Task<List<int>> GetUsersId(string role);
-    Task<List<string>> GetRolesByUserId(int userId);
+    Task<List<User>> GetUsers(string role);
+  
     Task<User> GetUserByContact(string contactNumber);
     Task<List<UserDetails>> GetUsersDetails(string ids);
     Task<UserDetails> GetUserDetailsByContactNumber(string contactNumber);

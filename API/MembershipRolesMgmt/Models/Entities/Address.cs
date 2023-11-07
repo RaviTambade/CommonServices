@@ -8,6 +8,6 @@ public class Address
     public required string LandMark { get; set; }
     public string? City { get; set; }
     public required string State { get; set; }
-    public string? AlternateContactNumber { get; set; }
+    public string? UserAnotherContactNumber { get; set; }
     public required string PinCode { get; set; }
 }
