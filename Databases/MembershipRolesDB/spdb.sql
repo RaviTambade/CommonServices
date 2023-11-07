@@ -1,5 +1,4 @@
--- Active: 1685344824419@@127.0.0.1@3306@membershiprolesdb
-
+-- Active: 1696576841746@@127.0.0.1@3306@membershiprolesdb
 
 CREATE FUNCTION CalculateDistanceByAddress(
     addressid1 INT,
