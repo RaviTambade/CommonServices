@@ -22,8 +22,7 @@ public class UserService : IUserService
     public async Task<User> GetUserByContact(string contactNumber) => await _repo.GetUserByContact(contactNumber);
     public async Task<List<UserDetails>> GetUsersDetails(string ids)=> await _repo.GetUsersDetails(ids);
     public async Task<UserDetails> GetUserDetailsByContactNumber(string contactNumber)=> await _repo.GetUserDetailsByContactNumber(contactNumber);
-    public async Task<List<int>> GetUsersId(string role)=> await _repo.GetUsersId(role);
-    public async Task<List<string>> GetRolesByUserId(int userId)=> await _repo.GetRolesByUserId(userId); 
+    public async Task<List<User>> GetUsers(string role)=> await _repo.GetUsers(role);
     public async Task<bool> Add(User user) => await _repo.Add(user);
     public async Task<bool> Update(int id, User user) => await _repo.Update(id, user);
     public async Task<bool> Update(string contactNumber, ContactNumberDetails credential)=>  await _repo.Update(contactNumber, credential);

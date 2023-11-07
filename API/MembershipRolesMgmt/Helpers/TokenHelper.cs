@@ -21,7 +21,7 @@ public class TokenHelper{
 
      private async Task<List<Claim>> GetAllClaims(User user)
     {
-        List<Role> roles =  await _roleService.GetRolesOfUser(user.Id);
+        List<Role> roles =  await _roleService.GetRoles(user.Id);
         List<Claim> claims = new List<Claim>
         {
             new Claim("contactNumber", user.ContactNumber),

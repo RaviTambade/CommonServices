@@ -17,14 +17,14 @@ public class UserRepository : IUserRepository
     public UserRepository(IConfiguration configuration)
     {
         _configuration = configuration;
-        _conString = this._configuration.GetConnectionString("DefaultConnection")??
+        _conString = this._configuration.GetConnectionString("DefaultConnection") ??
         throw new ArgumentNullException(nameof(_conString));
     }
 
 
     public async Task<bool> Authenticate(Claim claim)
     {
-        bool status=false;
+        bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
@@ -36,17 +36,17 @@ public class UserRepository : IUserRepository
             await con.OpenAsync();
             MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
             if (await reader.ReadAsync())
-            {   
+            {
 
-                status=true;
+                status = true;
 
 
-               /*UserRepository repo=new UserRepository(_configuration);
+                /*UserRepository repo=new UserRepository(_configuration);
 
-                User user=await repo.GetUserByContact(claim.ContactNumber);
-                TokenHelper tokenHelper=new TokenHelper();
-                jwtToken = await tokenHelper.GenerateJwtToken(user);
-               */ 
+                 User user=await repo.GetUserByContact(claim.ContactNumber);
+                 TokenHelper tokenHelper=new TokenHelper();
+                 jwtToken = await tokenHelper.GenerateJwtToken(user);
+                */
             }
             await reader.CloseAsync();
         }
@@ -62,7 +62,7 @@ public class UserRepository : IUserRepository
     }
     public async Task<List<User>> GetAllUsers()
     {
-        List<User> peoples = new List<User>();
+        List<User> users = new List<User>();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
         try
@@ -87,10 +87,10 @@ public class UserRepository : IUserRepository
                 DateTime createdOn = DateTime.Parse(reader["createdon"].ToString());
                 DateTime modifiedOn = DateTime.Parse(reader["modifiedon"].ToString());
 
-                User people = new User()
+                User user = new User()
                 {
                     Id = id,
-                    ImageUrl=imageUrl,
+                    ImageUrl = imageUrl,
                     AadharId = aadharId,
                     FirstName = firstName,
                     LastName = lastName,
@@ -98,11 +98,11 @@ public class UserRepository : IUserRepository
                     Gender = gender,
                     Email = email,
                     ContactNumber = contactNumber,
-                    Password=password,
-                    CreatedOn=createdOn,
-                    ModifiedOn=modifiedOn
+                    Password = password,
+                    CreatedOn = createdOn,
+                    ModifiedOn = modifiedOn
                 };
-                peoples.Add(people);
+                users.Add(user);
             }
             await reader.CloseAsync();
         }
@@ -114,9 +114,9 @@ public class UserRepository : IUserRepository
         {
             await con.CloseAsync();
         }
-        return peoples;
+        return users;
     }
-public async Task<User> GetUser(int userId)
+    public async Task<User> GetUser(int userId)
     {
         User people = new User();
         MySqlConnection con = new MySqlConnection();
@@ -147,7 +147,7 @@ public async Task<User> GetUser(int userId)
                 people = new User()
                 {
                     Id = id,
-                    ImageUrl=imageUrl,
+                    ImageUrl = imageUrl,
                     AadharId = aadharId,
                     FirstName = firstName,
                     LastName = lastName,
@@ -155,9 +155,9 @@ public async Task<User> GetUser(int userId)
                     Gender = gender,
                     Email = email,
                     ContactNumber = contactNumber,
-                    Password=password,
-                    CreatedOn=createdOn,
-                    ModifiedOn=modifiedOn
+                    Password = password,
+                    CreatedOn = createdOn,
+                    ModifiedOn = modifiedOn
                 };
             }
             await reader.CloseAsync();
@@ -174,83 +174,50 @@ public async Task<User> GetUser(int userId)
     }
 
 
-private async Task<User?> GetUser(Claim claim)
+
+    public async Task<List<User>> GetUsers(string roleName)
     {
-         User user=null;
-      
+        List<User> users = new();
         MySqlConnection con = new MySqlConnection(_conString);
         try
         {
-            string query =
-                "SELECT * FROM users WHERE contactnumber=@contactNumber AND BINARY password=@password";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@contactNumber", claim.ContactNumber);
-            cmd.Parameters.AddWithValue("@password", claim.Password);
-            await con.OpenAsync();
-            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
-            if (await reader.ReadAsync())
-            {   
-                user= await GetUserByContact(claim.ContactNumber);
-            }
-            await reader.CloseAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return user;
-    }
-
-    
-
-
-     public async Task<List<string>> GetRolesByUserId(int userId)
-    {
-        List<string> roles = new();
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "select name from roles inner join userroles on roles.id=userroles.roleid where userroles.userid=@userId";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@userId", userId);
-            await con.OpenAsync();
-            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
-            while (await reader.ReadAsync())
-            {
-                roles.Add(reader.GetString("name"));
-            }
-            await reader.CloseAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            con.Close();
-        }
-        return roles;     
-    }
-
-    public async Task<List<int>> GetUsersId(string roleName)
-    {
-        List<int> userIds = new();
-        MySqlConnection con = new MySqlConnection(_conString);
-        try
-        {
-            string query = "select users.id  from users inner join userroles on users.id=userroles.userid inner join roles on roles.id=userroles.roleid where roles.name=@roleName";
+            string query = "select * from users inner join userroles on users.id=userroles.userid inner join roles on roles.id=userroles.roleid where roles.name=@roleName";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@roleName", roleName);
             await con.OpenAsync();
             MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
             while (await reader.ReadAsync())
             {
-                int userId = int.Parse(reader["id"].ToString());
-                userIds.Add(userId);
+                int id = int.Parse(reader["id"].ToString());
+                string? imageUrl = reader["imageurl"].ToString();
+                string? aadharId = reader["aadharid"].ToString();
+                string? firstName = reader["firstname"].ToString();
+                string? lastName = reader["lastname"].ToString();
+                DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
+                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+                string? gender = reader["gender"].ToString();
+                string? email = reader["email"].ToString();
+                string? contactNumber = reader["contactnumber"].ToString();
+                string? password = reader["password"].ToString();
+                DateTime createdOn = DateTime.Parse(reader["createdon"].ToString());
+                DateTime modifiedOn = DateTime.Parse(reader["modifiedon"].ToString());
+
+                User user = new User()
+                {
+                    Id = id,
+                    ImageUrl = imageUrl,
+                    AadharId = aadharId,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    BirthDate = dateOnlyBirthDate,
+                    Gender = gender,
+                    Email = email,
+                    ContactNumber = contactNumber,
+                    Password = password,
+                    CreatedOn = createdOn,
+                    ModifiedOn = modifiedOn
+                };
+                users.Add(user);
             }
             await reader.CloseAsync();
         }
@@ -262,10 +229,10 @@ private async Task<User?> GetUser(Claim claim)
         {
             con.Close();
         }
-        return userIds;   
+        return users;
     }
 
-public async Task<User> GetUserByContact(string contactNumber)
+    public async Task<User> GetUserByContact(string contactNumber)
     {
         User user = new User();
         MySqlConnection con = new MySqlConnection();
@@ -297,7 +264,7 @@ public async Task<User> GetUserByContact(string contactNumber)
                 user = new User()
                 {
                     Id = id,
-                    ImageUrl=imageUrl,
+                    ImageUrl = imageUrl,
                     AadharId = aadharId,
                     FirstName = firstName,
                     LastName = lastName,
@@ -305,9 +272,9 @@ public async Task<User> GetUserByContact(string contactNumber)
                     Gender = gender,
                     Email = email,
                     ContactNumber = contact,
-                    Password=password,
-                    CreatedOn=createdOn,
-                    ModifiedOn=modifiedOn
+                    Password = password,
+                    CreatedOn = createdOn,
+                    ModifiedOn = modifiedOn
                 };
             }
             await reader.CloseAsync();
@@ -323,7 +290,7 @@ public async Task<User> GetUserByContact(string contactNumber)
         return user;
     }
 
-public async Task<List<UserDetails>> GetUsersDetails(string ids)
+    public async Task<List<UserDetails>> GetUsersDetails(string ids)
     {
         List<UserDetails> users = new();
         MySqlConnection con = new MySqlConnection();
@@ -332,7 +299,7 @@ public async Task<List<UserDetails>> GetUsersDetails(string ids)
         {
             string query = $"select id,firstname,lastname from users where id IN ({ids})";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@userIdString",ids);
+            cmd.Parameters.AddWithValue("@userIdString", ids);
             await con.OpenAsync();
 
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -343,9 +310,10 @@ public async Task<List<UserDetails>> GetUsersDetails(string ids)
                 string? firstName = reader["firstname"].ToString();
                 string? lastName = reader["lastname"].ToString();
 
-                UserDetails theUser=new UserDetails(){
-                      Id = id,
-                      FullName=$"{firstName} {lastName}"
+                UserDetails theUser = new UserDetails()
+                {
+                    Id = id,
+                    FullName = $"{firstName} {lastName}"
                 };
                 users.Add(theUser);
             }
@@ -361,7 +329,7 @@ public async Task<List<UserDetails>> GetUsersDetails(string ids)
         }
         return users;
     }
-public async Task<UserDetails> GetUserDetailsByContactNumber(string contactNumber)
+    public async Task<UserDetails> GetUserDetailsByContactNumber(string contactNumber)
     {
         UserDetails userName = null;
         MySqlConnection con = new MySqlConnection();
@@ -370,7 +338,7 @@ public async Task<UserDetails> GetUserDetailsByContactNumber(string contactNumbe
         {
             string query = $"select id,firstname,lastname from users where contactnumber=@contactNumber";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@contactNumber",contactNumber);
+            cmd.Parameters.AddWithValue("@contactNumber", contactNumber);
             await con.OpenAsync();
             MySqlDataReader reader = cmd.ExecuteReader();
             if (await reader.ReadAsync())
@@ -379,9 +347,10 @@ public async Task<UserDetails> GetUserDetailsByContactNumber(string contactNumbe
                 string? firstName = reader["firstname"].ToString();
                 string? lastName = reader["lastname"].ToString();
 
-               userName=new UserDetails(){
-                      Id = id,
-                      FullName=$"{firstName} {lastName}"
+                userName = new UserDetails()
+                {
+                    Id = id,
+                    FullName = $"{firstName} {lastName}"
                 };
             }
             await reader.CloseAsync();
@@ -396,7 +365,7 @@ public async Task<UserDetails> GetUserDetailsByContactNumber(string contactNumbe
         }
         return userName;
     }
-public async Task<bool> Add(User user)
+    public async Task<bool> Add(User user)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -480,7 +449,7 @@ public async Task<bool> Add(User user)
         return status;
     }
 
-        public async Task<bool> Update(string oldContactNumber, ContactNumberDetails details)
+    public async Task<bool> Update(string oldContactNumber, ContactNumberDetails details)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_conString);
@@ -573,4 +542,4 @@ public async Task<bool> Add(User user)
 
 
 
-}   
+}

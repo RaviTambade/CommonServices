@@ -22,14 +22,9 @@ public class RoleService : IRoleService
         return await _repository.GetRoles();
     }
 
-     public async Task<List<Role>> GetRolesOfUser(int userId)
+     public async Task<List<Role>> GetRoles(int userId)
     {
-        return await _repository.GetRolesOfUser(userId);
-    }
-
-    public async Task<Role?> GetById(int userRoleId)
-    {
-        return await _repository.GetById(userRoleId);
+        return await _repository.GetRoles(userId);
     }
 
     public async Task<bool> Insert(UserRole userRole)

@@ -32,17 +32,12 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("usersid/{role}")]
-    public async Task<List<int>> GetUsersId(string role)
+    public async Task<List<User>> GetUsers(string role)
     {
-        return await _svc.GetUsersId(role);
+        return await _svc.GetUsers(role);
     }
 
-    [HttpGet("roles/{userId}")]
-    public async Task<List<string>> GetRolesByUserId(int userId)
-    {
-        return await _svc.GetRolesByUserId(userId);
-    }
-
+   
     [HttpGet]
     [Route("contact/{contactNumber}")]
     public async Task<User> GetUserByContact(string contactNumber)

@@ -1,4 +1,4 @@
--- Active: 1696576841746@@127.0.0.1@3306@membershiprolesdb
+-- Active: 1685344824419@@127.0.0.1@3306@membershiprolesdb
 
 
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","580408011566","Pragati","Bangar","2000-12-18","Female","bangarpragati11@gmail.com","1245987456","password");
@@ -44,38 +44,38 @@ INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, e
 
 
 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(1, 'Manchar','near gujrathi hospital', 'Manchar','Maharashtra','9878129345','410503');
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES (2, 'Pargaon tarfe khead','chikhalewasti', 'Pargaon tarfe khead','Maharashtra','9075966080','410512');
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(3, 'Kudalwadi','near ganesh mandir', 'Kudalwadi','Maharashtra','7845612651','410512');  
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(4,'rajgurunagar',' near water tank','rajgurunagar','Maharashtra','7846652136','410505'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(8, 'kurwandi','', 'kurwandi','Maharashtra','9045614880','410512');
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(9, 'sangli','', 'sangli','Maharashtra','7845698213','415301');  
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(15, 'bhavdi','near om agroservices', 'bhavdi','Maharashtra','9988224569','410512'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(16, 'awsari phata', 'next to gowardhan dairy','awsari','Maharashtra','8456124756','410503'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(17, 'manchar','pimplegaon pahata', 'pimplegaon pahata','Maharashtra','8457824756','410503'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES (18, 'vadgaon kashimbeg','', 'vadgaon kashimbeg','Maharashtra','8457889756','410503'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(19, 'sandbhorwadi','', 'sandbhorwadi','Maharashtra','9957889756','410505'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(20, 'rakshewadi','', 'rajgurunagar','Maharashtra','9978889756','410505'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES (21, 'chvanmala','', 'rajgurunagar','Maharashtra','9979456756','410505'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(22,'Ozar','near ganesh mandir','Ozar','Maharashtra','8974586231','410504');
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(23,'Pimperkhed','','Pimperkhed','Maharashtra','8974786231','410504');
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(24,'Nimgaon Sava','','Nimgaon Sava','Maharashtra','7974786231','410504');
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(25,'Yenere','near bus stand','Yenere','Maharashtra','9456794569','410502'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(26,'Rajur','','Rajur','Maharashtra','9456894569','410502'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(27,'Tambe','','Tambe','Maharashtra','9966894569','410502');
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(28,'narayangaon','near bus stand','narayangaon','Maharashtra','','410504');
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(29,'karegaon','gavthan','karegaon','Maharashtra','9410325697','410512');     
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(30,'junnar','near bus stand','junnar','Maharashtra','8456124569','410502'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(31,'narayangaon','near bus stand','narayangaon','Maharashtra','9512369786','410504');
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(32,'karegaon','gavthan','karegaon','Maharashtra','9945612879','410512');     
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES (33,'rajgurunagar',' ','rajgurunagar','Maharashtra','8582456912','410505');
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(34, 'manchar','bus stand', 'manchar','Maharashtra','9451236987','410503'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(35,'junnar','near bus stand','junnar','Maharashtra','8456124569','410502'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(36,'narayangaon','near bus stand','narayangaon','Maharashtra','9541236454','410504');
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(37,'karegaon','gavthan','karegaon','Maharashtra','9947612879','410512');     
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(38,'rajgurunagar',' ','rajgurunagar','Maharashtra','8592456912','410505');
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(39, 'manchar','bus stand', 'manchar','Maharashtra','9454236987','410503'); 
-INSERT INTO addresses(userid,area,landmark,city,state,alternatecontactnumber,pincode) VALUES(40,'junnar','near bus stand','junnar','Maharashtra','8456129569','410502'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(1, 'Manchar','near gujrathi hospital', 'Manchar','Maharashtra','410503');
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES (2, 'Pargaon tarfe khead','chikhalewasti', 'Pargaon tarfe khead','Maharashtra','410512');
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(3, 'Kudalwadi','near ganesh mandir', 'Kudalwadi','Maharashtra','410512');  
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(4,'rajgurunagar',' near water tank','rajgurunagar','Maharashtra','410505'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(8, 'kurwandi','', 'kurwandi','Maharashtra','410512');
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(9, 'sangli','', 'sangli','Maharashtra','415301');  
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(15, 'bhavdi','near om agroservices', 'bhavdi','Maharashtra','410512'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(16, 'awsari phata', 'next to gowardhan dairy','awsari','Maharashtra','410503'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(17, 'manchar','pimplegaon pahata', 'pimplegaon pahata','Maharashtra','410503'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES (18, 'vadgaon kashimbeg','', 'vadgaon kashimbeg','Maharashtra','410503'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(19, 'sandbhorwadi','', 'sandbhorwadi','Maharashtra','410505'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(20, 'rakshewadi','', 'rajgurunagar','Maharashtra','410505'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES (21, 'chvanmala','', 'rajgurunagar','Maharashtra','410505'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(22,'Ozar','near ganesh mandir','Ozar','Maharashtra','410504');
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(23,'Pimperkhed','','Pimperkhed','Maharashtra','410504');
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(24,'Nimgaon Sava','','Nimgaon Sava','Maharashtra','410504');
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(25,'Yenere','near bus stand','Yenere','Maharashtra','410502'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(26,'Rajur','','Rajur','Maharashtra','410502'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(27,'Tambe','','Tambe','Maharashtra','410502');
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(28,'narayangaon','near bus stand','narayangaon','Maharashtra','410504');
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(29,'karegaon','gavthan','karegaon','Maharashtra','410512');     
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(30,'junnar','near bus stand','junnar','Maharashtra','410502'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(31,'narayangaon','near bus stand','narayangaon','Maharashtra','410504');
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(32,'karegaon','gavthan','karegaon','Maharashtra','410512');     
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES (33,'rajgurunagar',' ','rajgurunagar','Maharashtra','410505');
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(34, 'manchar','bus stand', 'manchar','Maharashtra','410503'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(35,'junnar','near bus stand','junnar','Maharashtra','410502'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(36,'narayangaon','near bus stand','narayangaon','Maharashtra','410504');
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(37,'karegaon','gavthan','karegaon','Maharashtra','410512');     
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(38,'rajgurunagar',' ','rajgurunagar','Maharashtra','410505');
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(39, 'manchar','bus stand', 'manchar','Maharashtra','410503'); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode) VALUES(40,'junnar','near bus stand','junnar','Maharashtra','410502'); 
 
 
 INSERT INTO roles(name,lob)VALUES('Director','PMS');

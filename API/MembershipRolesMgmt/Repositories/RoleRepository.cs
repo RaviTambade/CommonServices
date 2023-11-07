@@ -43,7 +43,7 @@ public class RoleRepository : IRoleRepository
         }
     }
 
-    public async Task<List<Role>> GetRolesOfUser(int userId)
+    public async Task<List<Role>> GetRoles(int userId)
     {
         try
         {
@@ -63,18 +63,7 @@ public class RoleRepository : IRoleRepository
         }
     }
 
-    public async Task<Role> GetById(int userRoleId)
-    {
-        try
-        {
-            var userRole = await _context.Roles.FindAsync(userRoleId);
-            return userRole;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-    }
+   
 
     public async Task<bool> Insert(UserRole userRole)
     {

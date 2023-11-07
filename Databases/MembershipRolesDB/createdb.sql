@@ -1,4 +1,4 @@
--- Active: 1696576841746@@127.0.0.1@3306@membershiprolesdb
+-- Active: 1685344824419@@127.0.0.1@3306@membershiprolesdb
 DROP DATABASE IF EXISTS MembershipRolesDB;
 CREATE DATABASE  MembershipRolesDB;
 USE MembershipRolesDB;
@@ -24,7 +24,6 @@ CREATE TABLE addresses (
                         landmark varchar(50),
                         city varchar(20) NOT NULL,
                         state varchar(20) NOT NULL,
-                        alternatecontactnumber varchar(20),
 						pincode varchar(10) NOT NULL);
 
 

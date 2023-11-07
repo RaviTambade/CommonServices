@@ -15,26 +15,17 @@ public class AddressService : IAddressService
         _repository = repository;
     }
 
-    public async Task<List<AddressInfo>> GetAddressesofUser(int userId)
+    public async Task<List<Address>> GetAllAddresses(int userId)
     {
-        return await _repository.GetAddressesofUser(userId);
+        return await _repository.GetAllAddresses(userId);
     }
 
-    public async Task<List<AddressInfo>> GetAddressesInformation(string addressIdString)
+    public async Task<List<Address>> GetAllAddresses(string addressIds)
     {
-        return await _repository.GetAddressesInformation(addressIdString);
+        return await _repository.GetAllAddresses(addressIds);
     }
 
-    public async Task<AddressInfo?> GetAddress(int addressId)
-    {
-        return await _repository.GetAddress(addressId);
-    }
-
-    public async Task<int> GetNearestAddressId(AddressIdRequest request)
-    {
-        return await _repository.GetNearestAddressId(request);
-    }
-
+   
     public async Task<bool> Insert(Address address)
     {
         return await _repository.Insert(address);
