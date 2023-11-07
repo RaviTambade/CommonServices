@@ -97,12 +97,12 @@ INSERT INTO roles(name,lob) VALUES ('SubjectMatterExpert','EKrushi');
 
 
 
-INSERT INTO roles(name,lob)VALUES('collection manager','EAgro');
-INSERT INTO roles(name,lob)VALUES ('farmer','EAgro');
+ 
+INSERT INTO roles(name,lob)VALUES('farmer ','EAgro');
+INSERT INTO roles(name,lob)VALUES ('collection manager','EAgro');
 INSERT INTO roles(name,lob)VALUES('inspector','EAgro');
 INSERT INTO roles(name,lob)VALUES('transporter','EAgro');
-INSERT INTO roles(name,lob)VALUES('merchant','EAgro');
-    
+INSERT INTO roles(name,lob)VALUES('merchant','EAgro');   
 
 
 
