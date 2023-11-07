@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Transflower.MembershipRolesMgmt.Helpers;
 using Transflower.MembershipRolesMgmt.Models.Entities;
+using Transflower.MembershipRolesMgmt.Models.Requests;
 using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
 
@@ -77,6 +78,24 @@ public class UsersController : ControllerBase
     public async Task<bool> Update(int id, User user)
     {
         bool status = await _svc.Update(id, user);
+        return status;
+    }
+
+    [HttpPut]
+    [Route("updatepassword")]
+    public async Task<bool> Update(PasswordDetails details)
+    {
+        string currentContactNumber = (string)HttpContext.Items["contactnumber"];
+        bool status = await _svc.Update(currentContactNumber,details);
+        return status;
+    }
+
+    [HttpPut]
+    [Route("updatecontactnumber")]
+    public async Task<bool> Update(ContactNumberDetails credential)
+    {
+        string currentContactNumber = (string)HttpContext.Items["contactnumber"];
+        bool status = await _svc.Update(currentContactNumber,credential);
         return status;
     }
 

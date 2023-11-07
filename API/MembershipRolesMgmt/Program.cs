@@ -24,10 +24,8 @@ builder.Services.AddDbContext<RoleContext>(
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddScoped<IAddressService,AddressService>();
-builder.Services.AddScoped<ICredentialService,CredentialService>();
 builder.Services.AddScoped<IUserRepository,UserRepository>();
 builder.Services.AddScoped<IAddressRepository,AddressRepository>();
-builder.Services.AddScoped<ICredentialRepository,CredentialRepository>();
 builder.Services.AddScoped<IRoleService,RoleService>();
 builder.Services.AddScoped<IRoleRepository,RoleRepository>();
 builder.Services.AddEndpointsApiExplorer();

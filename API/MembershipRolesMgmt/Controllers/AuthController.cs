@@ -12,19 +12,15 @@ namespace Transflower.MembershipRolesMgmt.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IConfiguration _configuration;
-
-    private readonly ICredentialService _credentialService;
     private readonly IRoleService _roleService;
     private readonly IUserService _userService;
 
     public AuthController(
         IConfiguration configuration,
-        ICredentialService credentialService,
         IRoleService roleService,
         IUserService userService
     )
-    {
-        _credentialService = credentialService;
+    {     
         _roleService = roleService;
         _configuration = configuration;
         _userService = userService;
@@ -36,7 +32,7 @@ public class AuthController : ControllerBase
     public async Task<AuthToken> SignIn([FromBody] Claim claim)
     {
         string strJwtToken = "";
-        var status = await _credentialService.Authenticate(claim);
+        var status = await _userService.Authenticate(claim);
         if (status)
         {
             User user = await _userService.GetUserByContact(claim.ContactNumber);

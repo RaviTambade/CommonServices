@@ -1,4 +1,5 @@
 using Transflower.MembershipRolesMgmt.Models.Entities;
+using Transflower.MembershipRolesMgmt.Models.Requests;
 using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
@@ -14,6 +15,8 @@ public class UserService : IUserService
         _repo = repo;
     }
 
+    public async Task<bool> Authenticate(Claim claim)=> await _repo.Authenticate(claim);
+    
     public async Task<List<User>> GetAllUsers() => await _repo.GetAllUsers();
     public async Task<User> GetUser(int userId) =>await _repo.GetUser(userId);
     public async Task<User> GetUserByContact(string contactNumber) => await _repo.GetUserByContact(contactNumber);
@@ -23,7 +26,7 @@ public class UserService : IUserService
     public async Task<List<string>> GetRolesByUserId(int userId)=> await _repo.GetRolesByUserId(userId); 
     public async Task<bool> Add(User user) => await _repo.Add(user);
     public async Task<bool> Update(int id, User user) => await _repo.Update(id, user);
-    public async Task<bool> Delete(int userId)=>await _repo.Delete(userId);
-
-      
+    public async Task<bool> Update(string contactNumber, ContactNumberDetails credential)=>  await _repo.Update(contactNumber, credential);
+    public async Task<bool> Update(string contactNumber, PasswordDetails credential) => await _repo.Update(contactNumber, credential);  
+    public async Task<bool> Delete(int userId)=>await _repo.Delete(userId);    
 }

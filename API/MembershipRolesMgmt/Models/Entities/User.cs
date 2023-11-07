@@ -33,4 +33,13 @@ public class User
 
     [Column("contactnumber")]
     public string? ContactNumber { get; set; }
+
+    [Column("password")]
+    public string? Password { get; set; }
+
+    [Column("createdon")]
+    public DateTime CreatedOn  { get; set; }
+
+    [Column("modifiedon")]
+    public DateTime ModifiedOn{ get; set; }
 }
