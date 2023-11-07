@@ -85,7 +85,7 @@ public class UsersController : ControllerBase
     [Route("updatepassword")]
     public async Task<bool> Update(PasswordDetails details)
     {
-        string currentContactNumber = (string)HttpContext.Items["contactnumber"];
+        string currentContactNumber = (string?)HttpContext.Items["contactNumber"];
         bool status = await _svc.Update(currentContactNumber,details);
         return status;
     }
@@ -94,7 +94,7 @@ public class UsersController : ControllerBase
     [Route("updatecontactnumber")]
     public async Task<bool> Update(ContactNumberDetails credential)
     {
-        string currentContactNumber = (string)HttpContext.Items["contactnumber"];
+        string currentContactNumber = (string)HttpContext.Items["contactNumber"];
         bool status = await _svc.Update(currentContactNumber,credential);
         return status;
     }

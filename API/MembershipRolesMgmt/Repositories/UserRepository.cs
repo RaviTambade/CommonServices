@@ -487,7 +487,7 @@ public async Task<bool> Add(User user)
         try
         {
             string query =
-                "UPDATE credentials SET contactnumber=@newContactNumber  WHERE password=@password AND contactnumber=@oldContactNumber";
+                "UPDATE users SET contactnumber=@newContactNumber  WHERE password=@password AND contactnumber=@oldContactNumber";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@oldContactNumber", oldContactNumber);
             cmd.Parameters.AddWithValue("@newContactNumber", details.NewContactNumber);
@@ -519,7 +519,7 @@ public async Task<bool> Add(User user)
         try
         {
             string query =
-                "UPDATE credentials SET password=@newPassword  WHERE password=@oldpassword AND contactnumber=@contactNumber";
+                "UPDATE users SET password=@newPassword  WHERE password=@oldpassword AND contactnumber=@contactNumber";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@contactNumber", contactNumber);
             cmd.Parameters.AddWithValue("@oldPassword", details.OldPassword);
