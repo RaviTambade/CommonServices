@@ -21,8 +21,6 @@ public class AddressRepository : IAddressRepository
             ?? throw new ArgumentNullException(nameof(_connectionString));
     }
 
-  
-
     public async Task<List<Address>> GetAllAddresses(int userId)
     {
         List<Address> addresses = new List<Address>();
@@ -48,7 +46,7 @@ public class AddressRepository : IAddressRepository
                 Address address = new Address()
                 {
                     Id = int.Parse(dataRow["id"].ToString()),
-                    UserId = userId, 
+                    UserId = userId,
                     Area = dataRow["area"].ToString(),
                     LandMark = dataRow["landmark"].ToString(),
                     City = dataRow["city"].ToString(),
@@ -102,28 +100,26 @@ public class AddressRepository : IAddressRepository
 
     public async Task<bool> Update(int existingId, Address theAddress)
     {
-         bool status = false;
+        bool status = false;
         MySqlConnection con = new MySqlConnection(_connectionString);
+        MySqlCommand command = new MySqlCommand();
+        command.CommandText = "SELECT * FROM addresses";
+        command.Connection = con;
+        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
+        DataSet dataSet = new DataSet();
         try
         {
-            string query =
-                "UPDATE addresses SET area=@area , landmark=@landmark, city=@city,state=@state, pincode=@pincode ,addresstype=@addresstype WHERE id=@existingId ";
-            MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@existingId", theAddress.Id);
-            command.Parameters.AddWithValue("@userid", theAddress.UserId);
-            command.Parameters.AddWithValue("@area", theAddress.Area);
-            command.Parameters.AddWithValue("@landmark", theAddress.LandMark);
-            command.Parameters.AddWithValue("@city", theAddress.City);
-            command.Parameters.AddWithValue("@state", theAddress.State);
-            command.Parameters.AddWithValue("@pincode", theAddress.PinCode);
-            command.Parameters.AddWithValue("@addresstype", theAddress.AddressType);
-    
-            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
-            DataSet dataSet = new DataSet();
-
             MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
             await dataAdapter.FillAsync(dataSet);
-            dataAdapter.Update(dataSet);
+            DataTable dataTable = dataSet.Tables[0];
+            DataRow row = dataTable.Rows.Find(existingId);
+            row["area"] = theAddress.Area;
+            row["landmark"] = theAddress.LandMark;
+            row["city"] = theAddress.City;
+            row["state"] = theAddress.State;
+            row["addresstype"] = theAddress.AddressType;
+            row["pincode"] = theAddress.PinCode;
+            await dataAdapter.UpdateAsync(dataSet);
             status = true;
         }
         catch (Exception)
@@ -132,7 +128,8 @@ public class AddressRepository : IAddressRepository
         }
         return status;
     }
-      public async Task<bool> Delete(int existingId)
+
+    public async Task<bool> Delete(int existingId)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -140,15 +137,17 @@ public class AddressRepository : IAddressRepository
 
         try
         {
-            string query = "Delete from addresses where id=@existingId";
+            string query = "SELECT * FROM addresses";
             Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@existingId", existingId);
             MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
             DataSet dataSet = new DataSet();
-
             MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
             await dataAdapter.FillAsync(dataSet);
+            DataTable dataTable = dataSet.Tables[0];
+            DataRow dataRow = dataTable.Rows.Find(existingId);
+            dataRow.Delete();
+            await dataAdapter.UpdateAsync(dataSet);
             status = true;
         }
         catch (Exception)
