@@ -24,7 +24,8 @@ CREATE TABLE addresses (
                         landmark varchar(50),
                         city varchar(20) NOT NULL,
                         state varchar(20) NOT NULL,
-						pincode varchar(10) NOT NULL);
+						pincode varchar(10) NOT NULL,
+                        addresstype enum("Residential","Official","Billing"));
 
 
 
