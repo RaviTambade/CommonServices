@@ -7,11 +7,9 @@ namespace Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 
 public interface IUserRepository
 {
-
     Task<List<User>> GetAllUsers();
     Task<User> GetUser(int userId);
     Task<List<User>> GetUsers(string roleName);
-  
     Task<User> GetUserByContact(string contactNumber);
     Task<List<UserDetails>> GetUsersDetails(string ids);
     Task<UserDetails> GetUserDetailsByContactNumber(string contactNumber);
@@ -21,5 +19,4 @@ public interface IUserRepository
     Task<bool> Delete(int userId); 
     Task<bool> Add(User user);
     Task<bool> Authenticate(Claim claim);
-    
 }
