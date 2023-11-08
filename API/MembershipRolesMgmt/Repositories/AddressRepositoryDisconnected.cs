@@ -29,7 +29,7 @@ public class AddressRepository : IAddressRepository
         try
         {
             string query =
-                @"SELECT addresses.id, addresses.area,addresses.landmark,addresses.city,
+                @"SELECT addresses.id,addresses.addresstype,addresses.area,addresses.landmark,addresses.city,
             addresses.state,addresses.pincode,users.contactnumber,
             CONCAT(users.firstname, ' ', users.lastname) as name  FROM addresses
             INNER JOIN users on addresses.userid=users.id
@@ -54,6 +54,7 @@ public class AddressRepository : IAddressRepository
                     PinCode = dataRow["pincode"].ToString(),
                     Name = dataRow["name"].ToString(),
                     ContactNumber = dataRow["contactnumber"].ToString(),
+                    AddressType=dataRow["addresstype"].ToString(),
                 };
                 addresses.Add(address);
             }
@@ -112,6 +113,11 @@ public class AddressRepository : IAddressRepository
             MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
             await dataAdapter.FillAsync(dataSet);
             DataTable dataTable = dataSet.Tables[0];
+
+            DataColumn[] keycolumn = new DataColumn[1];
+            keycolumn[0] = dataTable.Columns["id"];
+            dataTable.PrimaryKey = keycolumn;
+
             DataRow row = dataTable.Rows.Find(existingId);
             row["area"] = theAddress.Area;
             row["landmark"] = theAddress.LandMark;
@@ -145,6 +151,9 @@ public class AddressRepository : IAddressRepository
             MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
             await dataAdapter.FillAsync(dataSet);
             DataTable dataTable = dataSet.Tables[0];
+             DataColumn[] keycolumn = new DataColumn[1];
+            keycolumn[0] = dataTable.Columns["id"];
+            dataTable.PrimaryKey = keycolumn;
             DataRow dataRow = dataTable.Rows.Find(existingId);
             dataRow.Delete();
             await dataAdapter.UpdateAsync(dataSet);
