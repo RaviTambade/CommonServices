@@ -23,16 +23,27 @@ public class AddressesController : ControllerBase
         return await _service.GetAllAddresses(userId);
     }
 
-    [HttpGet("info/{addressIds}")]
-    public async Task<List<Address>> GetAllAddresses(string addressIds)
-    {
-        return await _service.GetAllAddresses(addressIds);
-    }
-
 
     [HttpPost]
     public async Task<bool> Insert(Address address)
     {
         return await _service.Insert(address);
     }
+
+
+      [HttpPut("{existingId}")]
+    public async Task<bool> Update(int existingId, Address theAddress)
+    {
+        return await _service.Update(existingId,theAddress);
+    }
+
+
+      [HttpDelete ("{existingId}")]
+    public async Task<bool> Delete(int existingId)
+    {
+        return await _service.Delete(existingId);
+    }
+
+
+    
 }

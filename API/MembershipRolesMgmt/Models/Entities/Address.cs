@@ -11,5 +11,6 @@ public class Address
     public required string PinCode { get; set; }
     public  string Name {get ; set ;}
     public string ContactNumber{get ; set ;}
+    public string AddressType{get;set;}
     
 }

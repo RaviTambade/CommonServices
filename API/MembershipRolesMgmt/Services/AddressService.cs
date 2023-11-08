@@ -20,14 +20,20 @@ public class AddressService : IAddressService
         return await _repository.GetAllAddresses(userId);
     }
 
-    public async Task<List<Address>> GetAllAddresses(string addressIds)
-    {
-        return await _repository.GetAllAddresses(addressIds);
-    }
 
    
     public async Task<bool> Insert(Address address)
     {
         return await _repository.Insert(address);
+    }
+
+    public async Task<bool> Update(int existingId, Address theAddress)
+    {
+        return await _repository.Update(existingId,theAddress);
+    }
+
+    public async Task<bool> Delete(int existingId)
+    {
+       return await _repository.Delete(existingId);
     }
 }
