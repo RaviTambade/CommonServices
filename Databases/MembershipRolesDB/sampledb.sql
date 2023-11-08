@@ -1,3 +1,4 @@
+
 -- Active: 1694968636816@@127.0.0.1@3306@membershiprolesdb
 
 
@@ -173,3 +174,17 @@ INSERT INTO userroles(userid,roleid) VALUES (38,14);
 INSERT INTO userroles(userid,roleid) VALUES (39,14);
 INSERT INTO userroles(userid,roleid) VALUES (40,14);
 
+INSERT INTO userroles(userid,roleid)VALUES(1,16);
+INSERT INTO userroles(userid,roleid)VALUES(2,16);
+INSERT INTO userroles(userid,roleid)VALUES(3,16);
+INSERT INTO userroles(userid,roleid)VALUES(4,15);
+INSERT INTO userroles(userid,roleid)VALUES(5,15);
+INSERT INTO userroles(userid,roleid)VALUES(6,15);
+INSERT INTO userroles(userid,roleid)VALUES(7,18);
+INSERT INTO userroles(userid,roleid)VALUES(8,18);
+INSERT INTO userroles(userid,roleid)VALUES(9,18);
+INSERT INTO userroles(userid,roleid)VALUES(10,19);
+INSERT INTO userroles(userid,roleid)VALUES(11,19);
+INSERT INTO userroles(userid,roleid)VALUES(12,19);
+INSERT INTO userroles(userid,roleid)VALUES(13,17);
+INSERT INTO userroles(userid,roleid)VALUES(14,17);
