@@ -30,11 +30,11 @@ public class RoleRepository : IRoleRepository
         }
     }
 
-    public async Task<List<Role>> GetRoles()
+    public async Task<List<Role>> GetRoles(string lob)
     {
         try
         {
-            var userRoles = await _context.Roles.ToListAsync();
+            var userRoles = await _context.Roles.Where(r=>r.Lob ==lob).ToListAsync();
             return userRoles;
         }
         catch (Exception)
