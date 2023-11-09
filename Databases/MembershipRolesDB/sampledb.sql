@@ -1,4 +1,6 @@
--- Active: 1696576841746@@127.0.0.1@3306@membershiprolesdb
+
+-- Active: 1694968636816@@127.0.0.1@3306@membershiprolesdb
+
 
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","580408011566","Pragati","Bangar","2000-12-18","Female","bangarpragati11@gmail.com","1245987456","password");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","580408011562","Abhay","Navale","2000-12-08","male","navaleabhay11@gmail.com","8456123654","password");
