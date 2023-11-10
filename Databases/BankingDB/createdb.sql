@@ -1,4 +1,4 @@
--- Active: 1678339848098@@127.0.0.1@3306@bankingdb
+-- Active: 1696576841746@@127.0.0.1@3306@bankingdb
 DROP DATABASE IF EXISTS  BankingDB;
 
 CREATE DATABASE BankingDB;
@@ -6,7 +6,7 @@ USE BankingDB;
 
 CREATE TABLE customers(id INT AUTO_INCREMENT PRIMARY KEY,
                        customerid INT NOT NULL UNIQUE,
-                       dependancyid INT NOT NULL,
+                       dependencyid INT NOT NULL,
                        usertype ENUM("corporation","person") NOT NULL
                        );
                        
@@ -42,7 +42,7 @@ CREATE TABLE loan(loanid INT PRIMARY KEY AUTO_INCREMENT,
                         duration INT,
                         intrestrate DOUBLE,
 						acctId INT NOT NULL,
-						CONSTRAINT fk_acctId FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE
+						CONSTRAINT fk_acctId2 FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE
                         );
 ALTER TABLE loan MODIFY loansanctiondate DATE;
                        
@@ -77,11 +77,6 @@ CREATE TABLE installment(installmentid INT PRIMARY KEY AUTO_INCREMENT,
                         loantype ENUM("home","personal","bussiness")
                         );
                         
-/*ALTER TABLE loanapplicants MODIFY adharid VARCHAR(25);*/
-drop table loanapplicants;
- 
-select * from loan;
-select * from loanapplicants
                         
                         
 						

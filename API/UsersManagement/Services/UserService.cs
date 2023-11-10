@@ -28,8 +28,8 @@ public class UserService : IUserService
 
     public async Task<bool> DeletebyId(int userId) => await _repo.DeletebyId(userId);
 
-    public async Task<List<UserNameWithId>> GetUserNameById(string userId) =>
-        await _repo.GetUserNameById(userId);
+    public async Task<List<UserNameWithId>> GetUserNameById(string userIdString) =>
+        await _repo.GetUserNameById(userIdString);
     public async Task<UserNameWithId> GetUserName(string contactNumber) =>
         await _repo.GetUserName(contactNumber);
 
@@ -38,7 +38,4 @@ public class UserService : IUserService
 
     public async Task<long> GetIdByContactNumber(string contactNumber) =>
         await _repo.GetIdByContactNumber(contactNumber);
-
-    public async Task<UserProfile> GetUserProfile(int userId) =>
-        await _repo.GetUserProfile(userId);
 }

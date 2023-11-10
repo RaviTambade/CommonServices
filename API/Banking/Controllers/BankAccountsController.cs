@@ -35,6 +35,7 @@ public class BankAccountsController : ControllerBase
     [Route("details")]
     public async Task<AccountInfo> GetAccountInfo(CustomerDependancyCondition condition)
     {
+    Console.WriteLine(condition);
         return await _svc.GetAccountInfo(condition);
     }
 
