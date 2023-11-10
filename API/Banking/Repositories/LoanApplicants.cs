@@ -40,14 +40,12 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
             command.Parameters.AddWithValue("@Contactnumber", applicant.ContactNumber);
             command.Parameters.AddWithValue("@Email", applicant.Email);
             command.Parameters.AddWithValue("@Address", applicant.Address);
-            command.Parameters.AddWithValue("@Aadharid", applicant.AadharId);
+            command.Parameters.AddWithValue("@Adharid", applicant.AdharId);
             command.Parameters.AddWithValue("@Panid", applicant.PanId);
             command.Parameters.AddWithValue("@Loantype", applicant.LoanType);
-             command.Parameters.AddWithValue("@Status", applicant.Status);
+            command.Parameters.AddWithValue("@Status", applicant.Status);
             
-             command.Parameters.AddWithValue("@Amount", applicant.Amount);
-            
-            
+            command.Parameters.AddWithValue("@Amount", applicant.Amount);
             
             con.Open();
             int rowsAffected = command.ExecuteNonQuery();
@@ -153,7 +151,7 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
                         ContactNumber = contact,
                         Email = email,
                         Address=address,
-                        AadharId = aadharID,
+                        AdharId = aadharID,
                         PanId = panID,
                         LoanType = loanType,
                         Status = status,
@@ -230,7 +228,7 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
                         ContactNumber = contact,
                         Email = email,
                         Address=address,
-                        AadharId = aadharID,
+                        AdharId = aadharID,
                         PanId = panID,
                         LoanType = loanType,
                         Status = status,

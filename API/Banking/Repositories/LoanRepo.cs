@@ -49,7 +49,14 @@ public class LoanRepo : ILoanRepo
             {
                 int loanId = int.Parse(reader["loanid"].ToString());
                 double amount = double.Parse(reader["amount"].ToString());
-                DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
+
+                
+                DateTime birthDate = DateTime.Parse(reader["loansanctiondate"].ToString());
+                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+
+
+
+                //DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
                 int duration=int.Parse(reader["duration"].ToString());
                 double intrestRate = double.Parse(reader["intrestrate"].ToString());           
 
@@ -59,7 +66,7 @@ public class LoanRepo : ILoanRepo
                     {
                         LoanId = loanId,
                         Amount = amount,
-                        LoanSanctionDate = loanSanctionDate,
+                        LoanSanctionDate = dateOnlyBirthDate,
                         Duration = duration,
                         IntrestRate = intrestRate,
                         AccountId=acctId
@@ -101,7 +108,11 @@ public class LoanRepo : ILoanRepo
             {
                 int loanId = int.Parse(reader["loanid"].ToString());
                 double amount = double.Parse(reader["amount"].ToString());
-                DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
+
+                DateTime birthDate = DateTime.Parse(reader["loansanctiondate"].ToString());
+                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+
+                //DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
                 int duration=int.Parse(reader["duration"].ToString());
                 double intrestRate = double.Parse(reader["intrestrate"].ToString());          
                 int acctId = int.Parse(reader["acctId"].ToString());
@@ -111,7 +122,7 @@ public class LoanRepo : ILoanRepo
                 {
                     LoanId = loanId,
                     Amount = amount,
-                    LoanSanctionDate = loanSanctionDate,
+                    LoanSanctionDate = dateOnlyBirthDate,
                     Duration = duration,
                     IntrestRate = intrestRate,
                     AccountId=acctId
