@@ -40,14 +40,14 @@ public class OperationsController : ControllerBase
         return operations;
     }
 
-     [HttpGet]
+    [HttpGet]
     [Route("accounts/{acctNumber}/statement")]
     public List<Statement> GetStatement(string acctNumber)
     {
         return _svc.GetStatement(acctNumber);
     }
 
-  
+
 
     [HttpGet]
     [Route("operations/{id}")]
@@ -59,10 +59,10 @@ public class OperationsController : ControllerBase
 
     [HttpGet]
     [Route("accounts/{acctnumber}/operations/mode/{mode}")]
-    public List<Operation> Get(int acctNumber,string mode)
+    public List<Operation> Get(int acctNumber, string mode)
     {
-    Console.WriteLine(mode);
-    Console.WriteLine(acctNumber);
+        Console.WriteLine(mode);
+        Console.WriteLine(acctNumber);
         List<Operation> operations = _svc.GetByMode(mode);
         return operations;
     }

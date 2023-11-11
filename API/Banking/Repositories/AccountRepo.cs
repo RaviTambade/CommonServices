@@ -300,8 +300,8 @@ public class AccountRepo : IAccountRepo
             Console.WriteLine(query);
             await con.OpenAsync();
 
-            MySqlDataReader reader =  command.ExecuteReader();
-            if ( await reader.ReadAsync())
+            MySqlDataReader reader = command.ExecuteReader();
+            if (await reader.ReadAsync())
             {
                 string acctNum = reader["acctnumber"].ToString();
                 string ifscCode = reader["ifsccode"].ToString();

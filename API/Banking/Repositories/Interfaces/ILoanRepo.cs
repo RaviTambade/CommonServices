@@ -9,5 +9,5 @@ public interface ILoanRepo
     bool Insert(Loan loans);
     bool Delete(int loanId);
     bool Update(Loan loan);
-   
+
 }

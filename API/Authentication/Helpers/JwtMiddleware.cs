@@ -12,10 +12,10 @@ namespace AuthenticationAPI.Helpers
         private readonly IConfiguration _configuration;
 
 
-        public JwtMiddleware(RequestDelegate next,IConfiguration configuration)
+        public JwtMiddleware(RequestDelegate next, IConfiguration configuration)
         {
             _next = next;
-            _configuration = configuration; 
+            _configuration = configuration;
         }
 
         public async Task Invoke(HttpContext context)
@@ -26,7 +26,7 @@ namespace AuthenticationAPI.Helpers
             await _next(context);
         }
 
-        private void attachUserToContext(HttpContext context,  string token)
+        private void attachUserToContext(HttpContext context, string token)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace AuthenticationAPI.Helpers
                 }, out SecurityToken validatedToken);
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
-                var contactNumber=jwtToken.Claims.First(x => x.Type == "contactNumber").Value;
+                var contactNumber = jwtToken.Claims.First(x => x.Type == "contactNumber").Value;
 
                 context.Items["contactNumber"] = contactNumber;
             }
