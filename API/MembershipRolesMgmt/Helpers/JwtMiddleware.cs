@@ -1,5 +1,6 @@
 
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -43,8 +44,8 @@ namespace Transflower.MembershipRolesMgmt.Helpers
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var contactNumber=jwtToken.Claims.First(x => x.Type == "contactNumber").Value;
-                var userId=jwtToken.Claims.First(x => x.Type == "userId").Value;
-                var userRoles = jwtToken.Claims.Where(x => x.Type == "roles").Select(c => c.Value).ToList();
+                var userId=jwtToken.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+                var userRoles = jwtToken.Claims.Where(x => x.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
 
                 context.Items["userId"] = userId;
                 context.Items["contactNumber"] = contactNumber;
