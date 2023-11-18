@@ -1,6 +1,6 @@
 -- Active: 1696576841746@@127.0.0.1@3306@usersdb
 
-
+DELIMITER $$
 CREATE FUNCTION CalculateDistanceByAddress(
     addressid1 INT,
     addressid2 INT
@@ -38,7 +38,8 @@ BEGIN
     SET a = SIN(dlat/2) * SIN(dlat/2) + COS(RADIANS(lat1)) * COS(RADIANS(lat2)) * SIN(dlon/2) * SIN(dlon/2);
     SET c = 2 * ATAN2(SQRT(a), SQRT(1 - a));
     RETURN R * c ; -- Distance in kilometers
-END;
+END $$
+DELIMITER ; 
 
 
 --  DROP Function CalculateDistanceByAddress;

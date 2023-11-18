@@ -32,11 +32,8 @@ public class TokenHelper{
         {
             claims.Add(new Claim(ClaimTypes.Role, role.Name));
         }
-
         return claims;
     }
-
-
     public async Task<string> GenerateJwtToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
