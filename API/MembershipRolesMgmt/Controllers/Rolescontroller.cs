@@ -29,7 +29,7 @@ public class RolesController : ControllerBase
     }
 
 
-    [HttpGet("userrole")]
+    [HttpGet("userrole/{userId}")]
     public async Task<List<Role>> GetRoles(int userId)
     {
         return await _service.GetRoles(userId);

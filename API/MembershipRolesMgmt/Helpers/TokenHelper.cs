@@ -30,13 +30,11 @@ public class TokenHelper{
 
         foreach (var role in roles)
         {
-            claims.Add(new Claim("roles", role.Name));
+            Claim claim =new Claim("roles", role.Name);
+            claims.Add(claim);
         }
-
         return claims;
     }
-
-
     public async Task<string> GenerateJwtToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
