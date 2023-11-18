@@ -21,8 +21,8 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
     public bool Insert(LoanApplicants applicant)
     {
         //Console.WriteLine("LoanSanctionDate"+loan.LoanSanctionDate);
-        Console.WriteLine("Amount In Repo:- "+applicant.Amount);
-        string applicantBirthDate=applicant.BirthDate.ToString("yyyy-MM-dd");
+        Console.WriteLine("Amount In Repo:- " + applicant.Amount);
+        string applicantBirthDate = applicant.BirthDate.ToString("yyyy-MM-dd");
         bool status = false;
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
@@ -40,15 +40,13 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
             command.Parameters.AddWithValue("@Contactnumber", applicant.ContactNumber);
             command.Parameters.AddWithValue("@Email", applicant.Email);
             command.Parameters.AddWithValue("@Address", applicant.Address);
-            command.Parameters.AddWithValue("@Aadharid", applicant.AadharId);
+            command.Parameters.AddWithValue("@Adharid", applicant.AdharId);
             command.Parameters.AddWithValue("@Panid", applicant.PanId);
             command.Parameters.AddWithValue("@Loantype", applicant.LoanType);
-             command.Parameters.AddWithValue("@Status", applicant.Status);
-            
-             command.Parameters.AddWithValue("@Amount", applicant.Amount);
-            
-            
-            
+            command.Parameters.AddWithValue("@Status", applicant.Status);
+
+            command.Parameters.AddWithValue("@Amount", applicant.Amount);
+
             con.Open();
             int rowsAffected = command.ExecuteNonQuery();
             Console.WriteLine("rowsAffected", rowsAffected);
@@ -95,7 +93,7 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
 
     public List<LoanApplicants> GetAll()
     {
-        
+
         List<LoanApplicants> applicantslist = new List<LoanApplicants>();
 
         //Create connection object
@@ -125,9 +123,9 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
                 string mName = reader["middlename"].ToString();
                 string lName = reader["lastname"].ToString();
                 DateTime bDate = DateTime.Parse(reader["birthdate"].ToString());
-                 DateOnly FormatDate = DateOnly.FromDateTime(bDate);
-                
-               
+                DateOnly FormatDate = DateOnly.FromDateTime(bDate);
+
+
 
                 //DateTime date = DateTime.ParseExact("01-01-2022", "MM-dd-yyyy", CultureInfo.InvariantCulture);
                 string gender = reader["gender"].ToString();
@@ -139,7 +137,7 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
                 string loanType = reader["loantype"].ToString();
                 string status = reader["status"].ToString();
                 double amount = double.Parse(reader["amount"].ToString());
-        
+
                 applicantslist.Add(
                     new LoanApplicants()
                     {
@@ -148,18 +146,18 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
                         FirstName = fName,
                         MiddleName = mName,
                         LastName = lName,
-                        BirthDate=FormatDate,
-                        Gender=gender,
+                        BirthDate = FormatDate,
+                        Gender = gender,
                         ContactNumber = contact,
                         Email = email,
-                        Address=address,
-                        AadharId = aadharID,
+                        Address = address,
+                        AdharId = aadharID,
                         PanId = panID,
                         LoanType = loanType,
                         Status = status,
                         Amount = amount
-                        
-                        
+
+
                     }
                 );
             }
@@ -205,9 +203,9 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
 
                 string lname = reader["lastname"].ToString();
 
-                 DateTime bDate = DateTime.Parse(reader["birthdate"].ToString());
-                 DateOnly FormatDate = DateOnly.FromDateTime(bDate);
-                
+                DateTime bDate = DateTime.Parse(reader["birthdate"].ToString());
+                DateOnly FormatDate = DateOnly.FromDateTime(bDate);
+
                 //DateTime date = DateTime.ParseExact("01-01-2022", "MM-dd-yyyy", CultureInfo.InvariantCulture);
                 string gender = reader["gender"].ToString();
                 string contact = reader["contactnumber"].ToString();
@@ -220,21 +218,21 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
                 double amount = double.Parse(reader["amount"].ToString());
                 applicant = new LoanApplicants
                 {
-                     ApplicantId = id,
-                        AccountId = acctid,
-                        FirstName = fname,
-                        MiddleName = mname,
-                        LastName = lname,
-                        BirthDate=FormatDate,
-                        Gender=gender,
-                        ContactNumber = contact,
-                        Email = email,
-                        Address=address,
-                        AadharId = aadharID,
-                        PanId = panID,
-                        LoanType = loanType,
-                        Status = status,
-                        Amount = amount
+                    ApplicantId = id,
+                    AccountId = acctid,
+                    FirstName = fname,
+                    MiddleName = mname,
+                    LastName = lname,
+                    BirthDate = FormatDate,
+                    Gender = gender,
+                    ContactNumber = contact,
+                    Email = email,
+                    Address = address,
+                    AdharId = aadharID,
+                    PanId = panID,
+                    LoanType = loanType,
+                    Status = status,
+                    Amount = amount
                 };
             }
         }
@@ -248,6 +246,6 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
         }
         return applicant;
 
-        
+
     }
 }

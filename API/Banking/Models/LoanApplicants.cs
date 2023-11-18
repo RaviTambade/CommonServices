@@ -12,7 +12,7 @@ namespace EntityLib
         public string? ContactNumber {get; set;}      
         public string? Email {get; set;}
         public string? Address {get; set;}
-        public string? AadharId {get; set;}
+        public string? AdharId {get; set;}
         public string? PanId {get; set;}
         public string? LoanType {get; set;}
         public double Amount{get;set;}

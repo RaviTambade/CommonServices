@@ -35,7 +35,7 @@ public class BankAccountsController : ControllerBase
     [Route("details")]
     public async Task<AccountInfo> GetAccountInfo(CustomerDependancyCondition condition)
     {
-    Console.WriteLine(condition);
+        Console.WriteLine(condition);
         return await _svc.GetAccountInfo(condition);
     }
 
@@ -60,5 +60,5 @@ public class BankAccountsController : ControllerBase
         bool stauts = _svc.Delete(accountNumber);
         return stauts;
     }
-    
+
 }

@@ -22,10 +22,11 @@ public class RolesController : ControllerBase
     }
 
 
-    [HttpGet("members")]
-    public async Task<List<Role>> GetRoles()
+
+    [HttpGet("{lob}")]
+    public async Task<List<Role>> GetRoles(string lob)
     {
-        return await _service.GetRoles();
+        return await _service.GetRoles(lob);
     }
 
 

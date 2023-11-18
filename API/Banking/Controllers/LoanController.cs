@@ -38,7 +38,7 @@ public class LoanController : ControllerBase
         return status;
     }
 
-     [HttpDelete]
+    [HttpDelete]
     [Route("{loanid}")]
     public bool Delete(int loanid)
     {
@@ -46,12 +46,12 @@ public class LoanController : ControllerBase
         return stauts;
     }
 
-     [HttpPut]
+    [HttpPut]
     // [Route("{loanid}")]
     public bool Update(Loan loan)
     {
         bool stauts = _svc.Update(loan);
         return stauts;
     }
-    
+
 }

@@ -9,12 +9,12 @@ namespace BankingServices.Controllers;
 [Route("/api/applicant")]
 public class LoanApplicantController : ControllerBase
 {
-    private readonly ILoanApplicantService _svc; 
+    private readonly ILoanApplicantService _svc;
 
     public LoanApplicantController(ILoanApplicantService svc)
     {
         _svc = svc;
-    }    
+    }
 
     [HttpGet]
     public IEnumerable<LoanApplicants> GetAll()
@@ -25,10 +25,10 @@ public class LoanApplicantController : ControllerBase
     [HttpPost]
     public bool Insert(LoanApplicants applicant)
     {
-        Console.WriteLine("Amount CONTROLLER : "+ applicant.Amount);
+        Console.WriteLine("Amount CONTROLLER : " + applicant.Amount);
         bool status = _svc.Insert(applicant);
         return status;
-    }     
+    }
 
     [HttpDelete]
     [Route("{id}")]

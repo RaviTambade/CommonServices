@@ -49,9 +49,16 @@ public class LoanRepo : ILoanRepo
             {
                 int loanId = int.Parse(reader["loanid"].ToString());
                 double amount = double.Parse(reader["amount"].ToString());
-                DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
-                int duration=int.Parse(reader["duration"].ToString());
-                double intrestRate = double.Parse(reader["intrestrate"].ToString());           
+
+
+                DateTime birthDate = DateTime.Parse(reader["loansanctiondate"].ToString());
+                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+
+
+
+                //DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
+                int duration = int.Parse(reader["duration"].ToString());
+                double intrestRate = double.Parse(reader["intrestrate"].ToString());
 
                 int acctId = int.Parse(reader["acctId"].ToString());
                 loanlist.Add(
@@ -59,11 +66,11 @@ public class LoanRepo : ILoanRepo
                     {
                         LoanId = loanId,
                         Amount = amount,
-                        LoanSanctionDate = loanSanctionDate,
+                        LoanSanctionDate = dateOnlyBirthDate,
                         Duration = duration,
                         IntrestRate = intrestRate,
-                        AccountId=acctId
-                        
+                        AccountId = acctId
+
                     }
                 );
             }
@@ -101,9 +108,13 @@ public class LoanRepo : ILoanRepo
             {
                 int loanId = int.Parse(reader["loanid"].ToString());
                 double amount = double.Parse(reader["amount"].ToString());
-                DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
-                int duration=int.Parse(reader["duration"].ToString());
-                double intrestRate = double.Parse(reader["intrestrate"].ToString());          
+
+                DateTime birthDate = DateTime.Parse(reader["loansanctiondate"].ToString());
+                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+
+                //DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
+                int duration = int.Parse(reader["duration"].ToString());
+                double intrestRate = double.Parse(reader["intrestrate"].ToString());
                 int acctId = int.Parse(reader["acctId"].ToString());
 
 
@@ -111,10 +122,10 @@ public class LoanRepo : ILoanRepo
                 {
                     LoanId = loanId,
                     Amount = amount,
-                    LoanSanctionDate = loanSanctionDate,
+                    LoanSanctionDate = dateOnlyBirthDate,
                     Duration = duration,
                     IntrestRate = intrestRate,
-                    AccountId=acctId
+                    AccountId = acctId
                 };
             }
         }
@@ -129,10 +140,10 @@ public class LoanRepo : ILoanRepo
         return loan;
     }
 
-     public bool Insert(Loan loan)
+    public bool Insert(Loan loan)
     {
         //Console.WriteLine("LoanSanctionDate"+loan.LoanSanctionDate);
-        string loanSanctionDate=loan.LoanSanctionDate.ToString("yyyy-MM-dd");
+        string loanSanctionDate = loan.LoanSanctionDate.ToString("yyyy-MM-dd");
         bool status = false;
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
@@ -166,7 +177,7 @@ public class LoanRepo : ILoanRepo
         return status;
     }
 
-     public bool Delete(int loanId)
+    public bool Delete(int loanId)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -191,9 +202,9 @@ public class LoanRepo : ILoanRepo
         return status;
     }
 
-     public bool Update(Loan loan)
+    public bool Update(Loan loan)
     {
-        string loanSanctionDate=loan.LoanSanctionDate.ToString("yyyy-MM-dd");
+        string loanSanctionDate = loan.LoanSanctionDate.ToString("yyyy-MM-dd");
         bool status = false;
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
@@ -204,11 +215,11 @@ public class LoanRepo : ILoanRepo
             System.Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@amount", loan.Amount);
-            command.Parameters.AddWithValue("@loansanctiondate",loanSanctionDate);
+            command.Parameters.AddWithValue("@loansanctiondate", loanSanctionDate);
             command.Parameters.AddWithValue("@duration", loan.Duration);
-            command.Parameters.AddWithValue("@intrestrate", loan.IntrestRate);            
+            command.Parameters.AddWithValue("@intrestrate", loan.IntrestRate);
             command.Parameters.AddWithValue("@acctId", loan.AccountId);
-            command.Parameters.AddWithValue("@loanid",loan.LoanId);
+            command.Parameters.AddWithValue("@loanid", loan.LoanId);
             con.Open();
             int rowsAffected = command.ExecuteNonQuery();
             Console.WriteLine("No of rows  affected " + rowsAffected);
