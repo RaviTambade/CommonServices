@@ -118,7 +118,7 @@ public class UserRepository : IUserRepository
     }
     public async Task<User> GetUser(int userId)
     {
-        User people = new User();
+        User user = new User();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
         try
@@ -140,11 +140,9 @@ public class UserRepository : IUserRepository
                 string? gender = reader["gender"].ToString();
                 string? email = reader["email"].ToString();
                 string? contactNumber = reader["contactnumber"].ToString();
-                string? password = reader["password"].ToString();
-                DateTime createdOn = DateTime.Parse(reader["createdon"].ToString());
-                DateTime modifiedOn = DateTime.Parse(reader["modifiedon"].ToString());
+                
 
-                people = new User()
+                user = new User()
                 {
                     Id = id,
                     ImageUrl = imageUrl,
@@ -155,9 +153,6 @@ public class UserRepository : IUserRepository
                     Gender = gender,
                     Email = email,
                     ContactNumber = contactNumber,
-                    Password = password,
-                    CreatedOn = createdOn,
-                    ModifiedOn = modifiedOn
                 };
             }
             await reader.CloseAsync();
@@ -170,7 +165,7 @@ public class UserRepository : IUserRepository
         {
             await con.CloseAsync();
         }
-        return people;
+        return user;
     }
 
 
@@ -198,9 +193,7 @@ public class UserRepository : IUserRepository
                 string? gender = reader["gender"].ToString();
                 string? email = reader["email"].ToString();
                 string? contactNumber = reader["contactnumber"].ToString();
-                string? password = reader["password"].ToString();
-                DateTime createdOn = DateTime.Parse(reader["createdon"].ToString());
-                DateTime modifiedOn = DateTime.Parse(reader["modifiedon"].ToString());
+               
 
                 User user = new User()
                 {
@@ -213,9 +206,6 @@ public class UserRepository : IUserRepository
                     Gender = gender,
                     Email = email,
                     ContactNumber = contactNumber,
-                    Password = password,
-                    CreatedOn = createdOn,
-                    ModifiedOn = modifiedOn
                 };
                 users.Add(user);
             }
@@ -256,9 +246,7 @@ public class UserRepository : IUserRepository
                 string? gender = reader["gender"].ToString();
                 string? email = reader["email"].ToString();
                 string? contact = reader["contactnumber"].ToString();
-                string? password = reader["password"].ToString();
-                DateTime createdOn = DateTime.Parse(reader["createdon"].ToString());
-                DateTime modifiedOn = DateTime.Parse(reader["modifiedon"].ToString());
+                
 
 
                 user = new User()
@@ -272,9 +260,7 @@ public class UserRepository : IUserRepository
                     Gender = gender,
                     Email = email,
                     ContactNumber = contact,
-                    Password = password,
-                    CreatedOn = createdOn,
-                    ModifiedOn = modifiedOn
+                   
                 };
             }
             await reader.CloseAsync();
@@ -415,7 +401,7 @@ public class UserRepository : IUserRepository
         {
             string birthDateString = user.BirthDate.ToString("yyyy-MM-dd");
             string query =
-                "Update users set aadharid=@aadharId, imageurl=@imageUrl,firstname=@firstName,lastname=@lastName,birthdate=@birthDate,gender=@gender,email=@email,contactnumber=@contactNumber,password=@password,createdon=@createdOn,modifiedon=@modifiedOn where id=@Id";
+                "Update users set aadharid=@aadharId, imageurl=@imageUrl,firstname=@firstName,lastname=@lastName,birthdate=@birthDate,gender=@gender,email=@email where id=@Id";
             Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
             await con.OpenAsync();
@@ -427,10 +413,6 @@ public class UserRepository : IUserRepository
             command.Parameters.AddWithValue("@email", user.Email);
             command.Parameters.AddWithValue("@imageUrl", user.ImageUrl);
             command.Parameters.AddWithValue("@Id", id);
-            command.Parameters.AddWithValue("@contactNumber", user.ContactNumber);
-            command.Parameters.AddWithValue("@password", user.Password);
-            command.Parameters.AddWithValue("@createdOn", user.CreatedOn);
-            command.Parameters.AddWithValue("@modifiedOn", user.ModifiedOn);
 
             int rowsAffected = command.ExecuteNonQuery();
             if (rowsAffected > 0)

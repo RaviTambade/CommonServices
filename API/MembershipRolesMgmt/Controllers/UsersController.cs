@@ -76,23 +76,6 @@ public class UsersController : ControllerBase
         return status;
     }
 
-    [HttpPut]
-    [Route("updatepassword")]
-    public async Task<bool> Update(PasswordDetails details)
-    {
-        string currentContactNumber = (string?)HttpContext.Items["contactNumber"];
-        bool status = await _svc.Update(currentContactNumber,details);
-        return status;
-    }
-
-    [HttpPut]
-    [Route("updatecontactnumber")]
-    public async Task<bool> Update(ContactNumberDetails credential)
-    {
-        string currentContactNumber = (string)HttpContext.Items["contactNumber"];
-        bool status = await _svc.Update(currentContactNumber,credential);
-        return status;
-    }
 
     [HttpDelete]
     [Route("DeleteUser/{userId}")]
