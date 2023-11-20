@@ -20,7 +20,7 @@ public class AuthController : ControllerBase
         IRoleService roleService,
         IUserService userService
     )
-    {     
+    {
         _roleService = roleService;
         _configuration = configuration;
         _userService = userService;
@@ -42,4 +42,21 @@ public class AuthController : ControllerBase
         return new AuthToken(strJwtToken);
     }
 
+    [HttpPut]
+    [Route("updatepassword")]
+    public async Task<bool> Update(PasswordDetails details)
+    {
+        string currentContactNumber = (string?)HttpContext.Items["contactNumber"];
+        bool status = await _userService.Update(currentContactNumber, details);
+        return status;
+    }
+
+    [HttpPut]
+    [Route("updatecontactnumber")]
+    public async Task<bool> Update(ContactNumberDetails credential)
+    {
+        string currentContactNumber = (string)HttpContext.Items["contactNumber"];
+        bool status = await _userService.Update(currentContactNumber, credential);
+        return status;
+    }
 }
