@@ -25,18 +25,15 @@ public class TokenHelper{
         List<Claim> claims = new List<Claim>
         {
             new Claim("contactNumber", user.ContactNumber),
-            new Claim("userId", user.Id.ToString()),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
         };
 
         foreach (var role in roles)
         {
-            claims.Add(new Claim("roles", role.Name));
+            claims.Add(new Claim(ClaimTypes.Role, role.Name));
         }
-
         return claims;
     }
-
-
     public async Task<string> GenerateJwtToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
