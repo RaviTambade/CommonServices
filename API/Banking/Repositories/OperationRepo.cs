@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Diagnostics;
 
 //Saving and Restoring logic into json file
 public class OperationRepo : IOperationRepo
@@ -360,6 +361,34 @@ public class OperationRepo : IOperationRepo
             con.Close();
         }
         return statements;
+    }
+
+
+    public bool ProcessAnualInterest(string acctnumber)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+
+        try{
+                 con.Open();
+                MySqlCommand cmd = new MySqlCommand("claculateIntrest", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@accountnumber", acctnumber);
+               
+                int rowsAffected = cmd.ExecuteNonQuery();
+                status = true;
+
+            }
+        catch(Exception e)
+        {
+            throw e;
+        }
+        finally{
+            con.Close();
+        }
+
+        return status;
     }
 }
 

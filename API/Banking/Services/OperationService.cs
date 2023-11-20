@@ -65,4 +65,15 @@ public class OperationsService:IOperationsService
     {
        return _repo.GetStatement(acctNumber);
     }
+
+    public bool ProcessAnualInterest(string acctnumber)
+    {
+
+        bool status = _repo.ProcessAnualInterest(acctnumber);
+
+        return status;
+        
+    }
+
+    
 }

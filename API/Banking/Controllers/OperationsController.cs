@@ -93,4 +93,15 @@ public class OperationsController : ControllerBase
         bool status = _svc.Update(opr);
         return status;
     }
+
+
+    [HttpGet]
+    [Route("accounts/{acctNumber}")]
+    public bool AnnualInterest(string acctNumber)
+    {
+        Console.WriteLine(acctNumber);
+        bool status = _svc.ProcessAnualInterest(acctNumber);
+        return status;
+    }
+
 }
