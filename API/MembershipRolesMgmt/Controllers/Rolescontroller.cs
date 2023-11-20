@@ -8,27 +8,24 @@ namespace Transflower.MembershipRolesMgmt.Controllers;
 [Route("/api/roles")]
 public class RolesController : ControllerBase
 {
-     private readonly IRoleService _service;
+    private readonly IRoleService _service;
 
     public RolesController(IRoleService service)
     {
         _service = service;
     }
 
-     [HttpGet("userid")]
+    [HttpGet("userid")]
     public async Task<List<UserRole>> GetAll()
     {
         return await _service.GetAll();
     }
 
-
-
-    [HttpGet("{lob}")]
-    public async Task<List<Role>> GetRoles(string lob)
+    [HttpGet("{userId}/{lob}")]
+    public async Task<List<Role>> GetRoles(int userId, string lob)
     {
-        return await _service.GetRoles(lob);
+        return await _service.GetRoles(userId, lob);
     }
-
 
     [HttpGet("userrole/{userId}")]
     public async Task<List<Role>> GetRoles(int userId)
@@ -41,6 +38,7 @@ public class RolesController : ControllerBase
     {
         return await _service.Insert(userRole);
     }
+
     [HttpPut]
     public async Task<bool> Update(UserRole userRole)
     {
@@ -53,4 +51,3 @@ public class RolesController : ControllerBase
         return await _service.Delete(userRoleId);
     }
 }
-

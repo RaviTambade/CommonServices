@@ -3,7 +3,6 @@ using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Transflower.MembershipRolesMgmt.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace Transflower.MembershipRolesMgmt.Repositories;
 
 public class RoleRepository : IRoleRepository
@@ -30,11 +29,17 @@ public class RoleRepository : IRoleRepository
         }
     }
 
-    public async Task<List<Role>> GetRoles(string lob)
+    public async Task<List<Role>> GetRoles(int userId, string lob)
     {
         try
         {
-            var userRoles = await _context.Roles.Where(r=>r.Lob ==lob).ToListAsync();
+            var userRoles = await (
+                from role in _context.Roles
+                join userrole in _context.UserRoles on role.Id equals userrole.RoleId
+                join user in _context.Users on userrole.UserId equals user.Id
+                where user.Id == userId && role.Lob == lob
+                select role
+            ).ToListAsync();
             return userRoles;
         }
         catch (Exception)
@@ -62,8 +67,6 @@ public class RoleRepository : IRoleRepository
             throw;
         }
     }
-
-   
 
     public async Task<bool> Insert(UserRole userRole)
     {

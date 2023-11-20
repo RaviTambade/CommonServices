@@ -18,9 +18,9 @@ public class RoleService : IRoleService
         return await _repository.GetAll();
     }
 
-    public async Task<List<Role>> GetRoles(string lob)
+    public async Task<List<Role>> GetRoles(int userId,string lob)
     {
-        return await _repository.GetRoles(lob);
+        return await _repository.GetRoles(userId,lob);
     }
 
     public async Task<List<Role>> GetRoles(int userId)
