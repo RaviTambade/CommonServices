@@ -1,4 +1,5 @@
 -- Active: 1696576841746@@127.0.0.1@3306@bankingdb
+
 DELIMITER $$
 CREATE PROCEDURE fundtransfer(IN fromaccountnumber VARCHAR(20),IN toaccountnumber VARCHAR(20),
                              IN fromifsccode VARCHAR(20),IN toifsccode VARCHAR(20),
@@ -25,29 +26,45 @@ SET transactionId=LAST_INSERT_ID();
 END $$ 
 DELIMITER; 
 
-DELIMITER $$
-CREATE PROCEDURE claculateIntrest(IN accountnumber VARCHAR(20))
-BEGIN
 
-DECLARE Balance DOUBLE DEFAULT 0;
-DECLARE totaldays INT DEFAULT 0;
-DECLARE intrestrate INT DEFAULT 0.07;
-DECLARE Registereddate DATE ;
-
-SELECT registereddate,balance INTO Registereddate,Balance FROM accounts WHERE acctnumber=accountnumber;
-SELECT DATEDIFF(CURDATE(),Registereddate) INTO totaldays;
-IF totaldays > 365 THEN
-SET Balance=balance+intrestrate*balance;
-UPDATE accounts SET balance=Balance WHERE acctnumber=accountnumber;
-END IF;
-
-END $$
-DELIMITER ;
-
-CALL claculateIntrest('67675456546');
 
 DROP procedure claculateIntrest;
 
+DELIMITER $$
+CREATE PROCEDURE claculateIntrest(IN accountnumber VARCHAR(20))
+BEGIN
+DECLARE accountid INT ;
+DECLARE totalBal DOUBLE DEFAULT 0;
+DECLARE totaldays INT DEFAULT 0;
+-- DECLARE intrestrate INT DEFAULT 0.07;
+DECLARE regdate DATE ;
+
+SELECT id,registereddate,balance INTO accountid,regdate,totalBal FROM accounts WHERE acctnumber=accountnumber;
+
+
+SELECT DATEDIFF(CURDATE(),regdate) INTO totaldays;
+
+IF totaldays > 365 THEN
+SET totalBal=totalBal+totalBal*0.07;
+
+UPDATE accounts SET balance=totalBal WHERE id=accountid;
+END IF;
+END $$
+DELIMITER ;
+
+
+
+CALL claculateIntrest('56423234233');
+-- SELECT @idacct,@b,@total,@rdate;
+
+
+
 SELECT DATEDIFF(CURDATE(),"2022-04-21") ;
+
+SELECT registereddate,balance FROM accounts WHERE acctnumber='67675456546';
+SELECT registereddate,balance,id  FROM accounts WHERE acctnumber='67675456546';
+SELECT id FROM accounts WHERE acctnumber='67675456546';
+
+UPDATE accounts SET balance=999 WHERE acctnumber='67675456546';
 
 
