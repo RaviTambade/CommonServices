@@ -13,6 +13,8 @@ public interface IOperationRepo
 
     List<Operation> GetByMode(string Mode);
 
+     bool ProcessAnualInterest(string acctnumber);
+
     /*List<Operation> GetByToAccount(int id);
 
     List<Operation> GetByFromAccount(int id);*/
