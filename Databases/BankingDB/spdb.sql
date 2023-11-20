@@ -25,4 +25,29 @@ SET transactionId=LAST_INSERT_ID();
 END $$ 
 DELIMITER; 
 
+DELIMITER $$
+CREATE PROCEDURE claculateIntrest(IN accountnumber VARCHAR(20))
+BEGIN
+
+DECLARE Balance DOUBLE DEFAULT 0;
+DECLARE totaldays INT DEFAULT 0;
+DECLARE intrestrate INT DEFAULT 0.07;
+DECLARE Registereddate DATE ;
+
+SELECT registereddate,balance INTO Registereddate,Balance FROM accounts WHERE acctnumber=accountnumber;
+SELECT DATEDIFF(CURDATE(),Registereddate) INTO totaldays;
+IF totaldays > 365 THEN
+SET Balance=balance+intrestrate*balance;
+UPDATE accounts SET balance=Balance WHERE acctnumber=accountnumber;
+END IF;
+
+END $$
+DELIMITER ;
+
+CALL claculateIntrest('67675456546');
+
+DROP procedure claculateIntrest;
+
+SELECT DATEDIFF(CURDATE(),"2022-04-21") ;
+
 
