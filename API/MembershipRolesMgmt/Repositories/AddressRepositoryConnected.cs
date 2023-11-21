@@ -45,7 +45,7 @@ public class AddressRepository : IAddressRepository
                     Id = reader.GetInt32("id"),
                     UserId=userId,
                     Area = reader.GetString("area"),
-                    LandMark = reader.GetString("landmark"),
+                    LandMark = reader.GetString("landmark") ,
                     City = reader.GetString("city"),
                     State = reader.GetString("state"),
                     PinCode = reader.GetString("pincode"),
@@ -170,7 +170,6 @@ public class AddressRepository : IAddressRepository
             await con.CloseAsync();
         }
         return status;
-       
     }
 
 }

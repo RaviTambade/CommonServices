@@ -1,5 +1,5 @@
 
--- Active: 1694968636816@@127.0.0.1@3306@membershiprolesdb
+-- Active: 1696576841746@@127.0.0.1@3306@membershiprolesdb
 
 
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","580408011566","Pragati","Bangar","2000-12-18","Female","bangarpragati11@gmail.com","1245987456","password");
@@ -49,32 +49,32 @@ INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUE
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES (2, 'Pargaon tarfe khead','chikhalewasti', 'Pargaon tarfe khead','Maharashtra','410512',"Residential");
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(3, 'Kudalwadi','near ganesh mandir', 'Kudalwadi','Maharashtra','410512',"Residential");  
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(4,'rajgurunagar',' near water tank','rajgurunagar','Maharashtra','410505',"Residential"); 
-INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(8, 'kurwandi','', 'kurwandi','Maharashtra','410512',"Residential");
-INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(9, 'sangli','', 'sangli','Maharashtra','415301',"Residential");  
+INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(8, 'kurwandi','bus stand', 'kurwandi','Maharashtra','410512',"Residential");
+INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(9, 'sangli','bus stand', 'sangli','Maharashtra','415301',"Residential");  
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(15, 'bhavdi','near om agroservices', 'bhavdi','Maharashtra','410512',"Residential"); 
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(16, 'awsari phata', 'next to gowardhan dairy','awsari','Maharashtra','410503',"Residential"); 
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(17, 'manchar','pimplegaon pahata', 'pimplegaon pahata','Maharashtra','410503',"Residential"); 
-INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES (18, 'vadgaon kashimbeg','', 'vadgaon kashimbeg','Maharashtra','410503',"Residential"); 
-INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(19, 'sandbhorwadi','', 'sandbhorwadi','Maharashtra','410505',"Residential"); 
-INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(20, 'rakshewadi','', 'rajgurunagar','Maharashtra','410505',"Residential"); 
-INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES (21, 'chvanmala','', 'rajgurunagar','Maharashtra','410505',"Residential"); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES (18, 'vadgaon kashimbeg','bus stand', 'vadgaon kashimbeg','Maharashtra','410503',"Residential"); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(19, 'sandbhorwadi','bus stand', 'sandbhorwadi','Maharashtra','410505',"Residential"); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(20, 'rakshewadi','bus stand', 'rajgurunagar','Maharashtra','410505',"Residential"); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES (21, 'chvanmala','bus stand', 'rajgurunagar','Maharashtra','410505',"Residential"); 
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(22,'Ozar','near ganesh mandir','Ozar','Maharashtra','410504',"Residential");
-INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(23,'Pimperkhed','','Pimperkhed','Maharashtra','410504',"Residential");
-INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(24,'Nimgaon Sava','','Nimgaon Sava','Maharashtra','410504',"Residential");
+INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(23,'Pimperkhed','bus stand','Pimperkhed','Maharashtra','410504',"Residential");
+INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(24,'Nimgaon Sava','bus stand','Nimgaon Sava','Maharashtra','410504',"Residential");
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(25,'Yenere','near bus stand','Yenere','Maharashtra','410502',"Residential"); 
-INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(26,'Rajur','','Rajur','Maharashtra','410502',"Residential"); 
-INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(27,'Tambe','','Tambe','Maharashtra','410502',"Residential");
+INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(26,'Rajur','bus stand','Rajur','Maharashtra','410502',"Residential"); 
+INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(27,'Tambe','bus stand','Tambe','Maharashtra','410502',"Residential");
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(28,'narayangaon','near bus stand','narayangaon','Maharashtra','410504',"Residential");
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(29,'karegaon','gavthan','karegaon','Maharashtra','410512',"Residential");     
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(30,'junnar','near bus stand','junnar','Maharashtra','410502',"Residential"); 
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(31,'narayangaon','near bus stand','narayangaon','Maharashtra','410504',"Residential");
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(32,'karegaon','gavthan','karegaon','Maharashtra','410512',"Residential");     
-INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES (33,'rajgurunagar',' ','rajgurunagar','Maharashtra','410505',"Residential");
+INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES (33,'rajgurunagar','bus stand','rajgurunagar','Maharashtra','410505',"Residential");
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(34, 'manchar','bus stand', 'manchar','Maharashtra','410503',"Residential"); 
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(35,'junnar','near bus stand','junnar','Maharashtra','410502',"Residential"); 
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(36,'narayangaon','near bus stand','narayangaon','Maharashtra','410504',"Residential");
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(37,'karegaon','gavthan','karegaon','Maharashtra','410512',"Residential");     
-INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(38,'rajgurunagar',' ','rajgurunagar','Maharashtra','410505',"Residential");
+INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(38,'rajgurunagar','bus stand','rajgurunagar','Maharashtra','410505',"Residential");
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(39, 'manchar','bus stand', 'manchar','Maharashtra','410503',"Residential"); 
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(40,'junnar','near bus stand','junnar','Maharashtra','410502',"Residential"); 
 

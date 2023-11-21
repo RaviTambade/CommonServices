@@ -74,8 +74,8 @@ public class AddressRepository : IAddressRepository
         try
         {
             string query =
-                @"INSERT INTO addresses(userid,area,landmark,city,state,pincode) 
-            VALUES(@userid, @area,@landmark, @city,@state,@pincode)";
+                @"INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) 
+            VALUES(@userid, @area,@landmark, @city,@state,@pincode,@addresstype)";
             MySqlCommand command = new MySqlCommand(query, con);
             await con.OpenAsync();
             command.Parameters.AddWithValue("@userid", address.UserId);
@@ -84,6 +84,7 @@ public class AddressRepository : IAddressRepository
             command.Parameters.AddWithValue("@city", address.City);
             command.Parameters.AddWithValue("@state", address.State);
             command.Parameters.AddWithValue("@pincode", address.PinCode);
+            command.Parameters.AddWithValue("@addresstype", address.AddressType);
 
             MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
             DataSet dataSet = new DataSet();
