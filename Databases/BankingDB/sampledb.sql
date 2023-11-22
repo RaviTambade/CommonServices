@@ -46,8 +46,10 @@ INSERT INTO customers (customerid, dependencyid, usertype) VALUES (43, 37, "pers
 INSERT INTO customers (customerid, dependencyid, usertype) VALUES (44, 38, "person");
 INSERT INTO customers (customerid, dependencyid, usertype) VALUES (45, 39, "person");
 INSERT INTO customers (customerid, dependencyid, usertype) VALUES (46, 40, "person");
+INSERT INTO customers(id,customerid,dependencyid,usertype) VALUES(1000,1111,1212,"self");
 
-
+select * from customers;
+INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('123456789','business','ICICI0000999',200000000,'1975-01-01',1000);
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('39025546601','business','MAHB0000286',200000,'2022-03-01',1);
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('39025546612','savings','BARBO0000286',225700,'2022-03-04',2);        
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('12656767876','savings','AXIS0000296',2352500,'2021-07-01',3);   

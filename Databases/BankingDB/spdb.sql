@@ -11,7 +11,7 @@ DECLARE fromoperationid INT DEFAULT 0;
 DECLARE tooperationid INT DEFAULT 0;
 DECLARE fromaccountbalance DOUBLE DEFAULT 0;
 DECLARE toaccountbalance DOUBLE DEFAULT 0;
-SELECT id,balance INTO fromaccountid,fromaccountbalance FROM accounts WHERE  acctnumber=fromaccountnumber AND ifsccode=fromifsccode;
+ SELECT id,balance INTO fromaccountid,fromaccountbalance FROM accounts WHERE  acctnumber=fromaccountnumber AND ifsccode=fromifsccode;
 SELECT id,balance INTO toaccountid,toaccountbalance FROM accounts WHERE  acctnumber=toaccountnumber AND ifsccode =toifsccode;    
 INSERT INTO operations(acctId,acctnumber,amount,operationmode,operationdate)
 VALUES(fromaccountid,fromaccountnumber,amount,'W',NOW());
@@ -54,7 +54,7 @@ DELIMITER ;
 
 
 
-CALL claculateIntrest('56423234233');
+CALL claculateIntrest('67675456546');
 -- SELECT @idacct,@b,@total,@rdate;
 
 

@@ -1,5 +1,9 @@
 -- Active: 1678359546568@@127.0.0.1@3306@bankingdb
 
+drop table accounts;
+show tables;
+
+select * from customers;
 
 select * from accounts;
 SELECT @transactionId;

@@ -1,6 +1,10 @@
 -- Active: 1696576841746@@127.0.0.1@3306@bankingdb
 
+show databases;
+
+show tables;
 DROP DATABASE IF EXISTS BankingDB;
+
 
 CREATE DATABASE BankingDB;
 
@@ -11,7 +15,7 @@ CREATE TABLE
         id INT AUTO_INCREMENT PRIMARY KEY,
         customerid INT NOT NULL UNIQUE,
         dependencyid INT NOT NULL,
-        usertype ENUM("corporation", "person") NOT NULL
+        usertype ENUM("corporation", "person","self") NOT NULL
     );
 
 CREATE TABLE
