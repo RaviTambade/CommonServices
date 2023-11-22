@@ -46,10 +46,10 @@ INSERT INTO customers (customerid, dependencyid, usertype) VALUES (43, 37, "pers
 INSERT INTO customers (customerid, dependencyid, usertype) VALUES (44, 38, "person");
 INSERT INTO customers (customerid, dependencyid, usertype) VALUES (45, 39, "person");
 INSERT INTO customers (customerid, dependencyid, usertype) VALUES (46, 40, "person");
-INSERT INTO customers(id,customerid,dependencyid,usertype) VALUES(1000,1111,1212,"self");
 
-select * from customers;
-INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('123456789','business','ICICI0000999',200000000,'1975-01-01',1000);
+INSERT INTO customers(id,customerid,dependencyid,usertype) VALUES(1000,1111,1212,"self");-- run this query at last
+SELECT * FROM customers;
+
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('39025546601','business','MAHB0000286',200000,'2022-03-01',1);
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('39025546612','savings','BARBO0000286',225700,'2022-03-04',2);        
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('12656767876','savings','AXIS0000296',2352500,'2021-07-01',3);   
@@ -97,7 +97,11 @@ INSERT INTO accounts(acctnumber, accttype, ifsccode, balance, registereddate, cu
 ('9999444433', 'savings', 'SBI0000789', 96000, '2022-11-06', 44),
 ('1111444455', 'savings', 'AXIS0000789', 52000, '2022-12-19', 45);
 
+INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('123456789','business','ICICI0000999',200000000,'1975-01-01',1000);
+
+
 
 INSERT INTO loan(loanid,amount,loansanctiondate,duration,intrestrate,acctId)VALUES(100,'100000','2023-09-08',15,11.58,3);
 INSERT INTO loan(amount,loansanctiondate,duration,intrestrate,acctId)VALUES('50000','2023-01-31',15,11.58,6);
 INSERT INTO loan(amount,loansanctiondate,duration,intrestrate,acctId)VALUES('75000','2023-03-25',15,15.23,4);
+

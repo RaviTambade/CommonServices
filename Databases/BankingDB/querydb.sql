@@ -1,7 +1,6 @@
 -- Active: 1678359546568@@127.0.0.1@3306@bankingdb
 
-drop table accounts;
-show tables;
+
 
 select * from customers;
 
@@ -17,6 +16,9 @@ CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",3000
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",4000,@transactionId);
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",5000,@transactionId);
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",6000,@transactionId);
+
+CALL claculateIntrest('67675456546');
+
 
 
 SELECT acctnumber,ifsccode from accounts 
@@ -53,8 +55,9 @@ WHERE
 ORDER BY
     o.operationdate,
     o.operationid;
-    END;
-    DROP PROCEDURE bankStatement;
+    END ;
+    
+DROP PROCEDURE bankStatement;
 SELECT o.operationid, a.acctnumber, o.amount, o.operationdate, o.operationmode,
        (
            SELECT SUM(

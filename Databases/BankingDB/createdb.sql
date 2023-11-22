@@ -1,13 +1,6 @@
 -- Active: 1696576841746@@127.0.0.1@3306@bankingdb
-
-show databases;
-
-show tables;
 DROP DATABASE IF EXISTS BankingDB;
-
-
 CREATE DATABASE BankingDB;
-
 USE BankingDB;
 
 CREATE TABLE
