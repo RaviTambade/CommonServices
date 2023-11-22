@@ -26,27 +26,40 @@ END $$
 DELIMITER ; 
 
 
+DROP PROCEDURE claculateIntrest;
 
 DELIMITER $$
-CREATE PROCEDURE claculateIntrest(IN accountnumber VARCHAR(20))
+CREATE PROCEDURE claculateIntrest(IN accountnumber VARCHAR(20) ,OUT transid INT)
 BEGIN
 DECLARE accountid INT ;
 DECLARE totalBal DOUBLE DEFAULT 0;
 DECLARE totaldays INT DEFAULT 0;
--- DECLARE intrestrate INT DEFAULT 0.07;
+DECLARE intrestamount DOUBLE DEFAULT 0;
 DECLARE regdate DATE ;
-SELECT id,registereddate,balance INTO accountid,regdate,totalBal FROM accounts WHERE acctnumber=accountnumber;
+DECLARE toifsccode VARCHAR(20) ;
+DECLARE bankIfsccode VARCHAR(20) ;
+SELECT id,registereddate,balance,ifsccode INTO accountid,regdate,totalBal,toifsccode FROM accounts WHERE acctnumber=accountnumber;
+SELECT ifsccode INTO bankifsccode FROM accounts WHERE acctnumber='123456789';
+-- SET ifscone=bankifsccode;
+-- SET ifsctwo=toifsccode;
 SELECT DATEDIFF(CURDATE(),regdate) INTO totaldays;
 IF totaldays > 365 THEN
+SET intrestamount=totalBal*0.07;
 SET totalBal=totalBal+totalBal*0.07;
 UPDATE accounts SET balance=totalBal WHERE id=accountid;
-END IF;
+-- SET amount=intrestamount;
+CALL fundtransfer('123456789',accountnumber,bankifsccode,toifsccode,intrestamount,transid);
+
+END IF ;
 END $$
 DELIMITER ;
 
 
 
-
+CALL claculateIntrest('7777777777',@transid);
+show tables;
+select * from transactions;
+select * from operations;
 
 
 

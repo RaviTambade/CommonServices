@@ -17,9 +17,9 @@ CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",4000
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",5000,@transactionId);
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",6000,@transactionId);
 
-CALL claculateIntrest('67675456546');
+CALL claculateIntrest('1111444455','123456789');
 
-
+select * from accounts;
 
 SELECT acctnumber,ifsccode from accounts 
 JOIN customers ON accounts.customerid = customers.customerid
