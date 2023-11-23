@@ -1,4 +1,5 @@
 -- Active: 1696576841746@@127.0.0.1@3306@bankingdb
+DROP PROCEDURE IF EXISTS fundtransfer;
 DELIMITER $$
 CREATE PROCEDURE fundtransfer(IN fromaccountnumber VARCHAR(20),IN toaccountnumber VARCHAR(20),
                              IN fromifsccode VARCHAR(20),IN toifsccode VARCHAR(20),
@@ -15,18 +16,18 @@ SELECT id,balance INTO toaccountid,toaccountbalance FROM accounts WHERE  acctnum
 INSERT INTO operations(acctId,acctnumber,amount,operationmode,operationdate)
 VALUES(fromaccountid,fromaccountnumber,amount,'W',NOW());
 SET fromoperationid=LAST_INSERT_ID();
-UPDATE accounts SET balance=fromaccountbalance-amount WHERE id=fromaccountid;
+UPDATE accounts SET balance=round(fromaccountbalance-amount,2) WHERE id=fromaccountid;
 INSERT INTO operations(acctId,acctnumber,amount,operationmode,operationdate)
 VALUES(toaccountid,toaccountnumber,amount,'D',NOW());
 SET tooperationid=LAST_INSERT_ID();
-UPDATE accounts SET balance=toaccountbalance+amount WHERE id=toaccountid;
+UPDATE accounts SET balance=round(toaccountbalance+amount,2) WHERE id=toaccountid;
 INSERT INTO transactions (fromoperationid,tooperationid) VALUES (fromoperationid,tooperationid);
 SET transactionId=LAST_INSERT_ID();
 END $$ 
 DELIMITER ; 
 
 
-DROP PROCEDURE claculateIntrest;
+DROP PROCEDURE  IF EXISTS claculateIntrest;
 
 DELIMITER $$
 CREATE PROCEDURE claculateIntrest(IN accountnumber VARCHAR(20) ,OUT transid INT)
@@ -44,8 +45,8 @@ SELECT ifsccode INTO bankifsccode FROM accounts WHERE acctnumber='123456789';
 -- SET ifsctwo=toifsccode;
 SELECT DATEDIFF(CURDATE(),regdate) INTO totaldays;
 IF totaldays > 365 THEN
-SET intrestamount=totalBal*0.07;
-SET totalBal=totalBal+totalBal*0.07;
+SET intrestamount=round(totalBal*0.07,2);
+SET totalBal=round(totalBal+totalBal*0.07,2);
 UPDATE accounts SET balance=totalBal WHERE id=accountid;
 -- SET amount=intrestamount;
 CALL fundtransfer('123456789',accountnumber,bankifsccode,toifsccode,intrestamount,transid);
@@ -56,10 +57,8 @@ DELIMITER ;
 
 
 
-CALL claculateIntrest('7777777777',@transid);
-show tables;
-select * from transactions;
-select * from operations;
+
+
 
 
 

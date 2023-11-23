@@ -1,15 +1,12 @@
 -- Active: 1678359546568@@127.0.0.1@3306@bankingdb
-
-
-
-select * from customers;
-
-select * from accounts;
-SELECT @transactionId;
-SELECT * FROM operations;
-
-SELECT * FROM transactions;
+SELECT * FROM customers;
 SELECT * FROM accounts;
+SELECT * FROM transactions;
+SELECT * FROM operations;
+SELECT @transactionId;
+
+
+
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",1000,@transactionId);
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",2000,@transactionId);
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",3000,@transactionId);
@@ -17,9 +14,11 @@ CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",4000
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",5000,@transactionId);
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",6000,@transactionId);
 
-CALL claculateIntrest('1111444455','123456789');
+CALL claculateIntrest('7777777777',@transid);
+CALL claculateIntrest('39025546612',@transid);
 
-select * from accounts;
+
+show tables;
 
 SELECT acctnumber,ifsccode from accounts 
 JOIN customers ON accounts.customerid = customers.customerid
