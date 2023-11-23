@@ -15,7 +15,8 @@ CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",5000
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",6000,@transactionId);
 
 CALL claculateIntrest('7777777777',@transid);
-CALL claculateIntrest('39025546612',@transid);
+CALL claculateIntrest('67675456546',@transid);
+SELECT @transid;
 
 
 show tables;

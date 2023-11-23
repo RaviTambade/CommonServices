@@ -39,7 +39,9 @@ DECLARE intrestamount DOUBLE DEFAULT 0;
 DECLARE regdate DATE ;
 DECLARE toifsccode VARCHAR(20) ;
 DECLARE bankIfsccode VARCHAR(20) ;
-SELECT id,registereddate,balance,ifsccode INTO accountid,regdate,totalBal,toifsccode FROM accounts WHERE acctnumber=accountnumber;
+
+SELECT id,registereddate,balance,ifsccode INTO accountid,regdate,totalBal,toifsccode 
+FROM accounts WHERE acctnumber=accountnumber;
 SELECT ifsccode INTO bankifsccode FROM accounts WHERE acctnumber='123456789';
 -- SET ifscone=bankifsccode;
 -- SET ifsctwo=toifsccode;
@@ -49,14 +51,16 @@ SET intrestamount=round(totalBal*0.07,2);
 SET totalBal=round(totalBal+totalBal*0.07,2);
 UPDATE accounts SET balance=totalBal WHERE id=accountid;
 -- SET amount=intrestamount;
-CALL fundtransfer('123456789',accountnumber,bankifsccode,toifsccode,intrestamount,transid);
+
+CALL fundtransfer ('123456789',accountnumber,bankifsccode,toifsccode,intrestamount,transid );
 
 END IF ;
 END $$
 DELIMITER ;
 
 
-
+CALL claculateIntrest('67675456546',@transid);
+SELECT @transid
 
 
 

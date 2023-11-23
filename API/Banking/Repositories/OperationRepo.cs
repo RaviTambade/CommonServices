@@ -371,12 +371,15 @@ public class OperationRepo : IOperationRepo
         con.ConnectionString = _conString;
 
         try{
-                 con.Open();
+                con.Open();
                 MySqlCommand cmd = new MySqlCommand("claculateIntrest", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@accountnumber", acctnumber);
-               
+                cmd.Parameters.AddWithValue("@transid", MySqlDbType.Int32);
+                cmd.Parameters["@transid"].Direction = ParameterDirection.Output;
                 int rowsAffected = cmd.ExecuteNonQuery();
+                int transId = (int)cmd.Parameters["@transid"].Value;
+                // Console.WriteLine("transid repo:- "+transId);
                 status = true;
 
             }
