@@ -5,7 +5,9 @@ SELECT * FROM transactions;
 SELECT * FROM operations;
 SELECT * FROM loan;
 SELECT @transactionId;
-
+DROP table customers;
+DROP table accounts;
+DROP table operations;
 
 
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",1000,@transactionId);
@@ -25,6 +27,11 @@ show tables;
 SELECT acctnumber,ifsccode from accounts 
 JOIN customers ON accounts.customerid = customers.customerid
 WHERE customers.usertype="corporation" AND customers.dependancyid=1;
+
+SELECT amount  FROM loan where loanid = 1;
+
+SELECT SUM(amount) from operations where operationmode="W" and operationtype="EMI" and acctnumber="12656767876";
+
 
 SELECT o.operationid,o.amount,o.operationdate,o.operationmode,
     CASE
@@ -82,3 +89,6 @@ SELECT acctnumber,ifsccode from accounts
                  JOIN customers ON accounts.customerid = customers.customerid
                  WHERE customers.dependancyid=2 AND customers.usertype='corporation';
 
+Drop table installment;
+Drop table loanorder;
+drop table loan;

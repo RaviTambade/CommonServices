@@ -1,9 +1,11 @@
 -- Active: 1696576841746@@127.0.0.1@3306@bankingdb
 DROP PROCEDURE IF EXISTS fundtransfer;
+
+DROP PROCEDURE IF EXISTS emitransfer;
 DELIMITER $$
 CREATE PROCEDURE fundtransfer(IN fromaccountnumber VARCHAR(20),IN toaccountnumber VARCHAR(20),
                              IN fromifsccode VARCHAR(20),IN toifsccode VARCHAR(20),
-                             IN amount DOUBLE,OUT transactionId INT)
+                             IN amount DOUBLE,IN transactiontype VARCHAR(20),OUT transactionId INT)
 BEGIN
 DECLARE fromaccountid INT DEFAULT 0;
 DECLARE toaccountid INT DEFAULT 0;
@@ -13,12 +15,12 @@ DECLARE fromaccountbalance DOUBLE DEFAULT 0;
 DECLARE toaccountbalance DOUBLE DEFAULT 0;
 SELECT id,balance INTO fromaccountid,fromaccountbalance FROM accounts WHERE  acctnumber=fromaccountnumber AND ifsccode=fromifsccode;
 SELECT id,balance INTO toaccountid,toaccountbalance FROM accounts WHERE  acctnumber=toaccountnumber AND ifsccode =toifsccode;    
-INSERT INTO operations(acctId,acctnumber,amount,operationmode,operationdate)
-VALUES(fromaccountid,fromaccountnumber,amount,'W',NOW());
+INSERT INTO operations(acctId,acctnumber,amount,operationmode,operationtype,operationdate)
+VALUES(fromaccountid,fromaccountnumber,amount,'W',transactiontype,NOW());
 SET fromoperationid=LAST_INSERT_ID();
 UPDATE accounts SET balance=round(fromaccountbalance-amount,2) WHERE id=fromaccountid;
-INSERT INTO operations(acctId,acctnumber,amount,operationmode,operationdate)
-VALUES(toaccountid,toaccountnumber,amount,'D',NOW());
+INSERT INTO operations(acctId,acctnumber,amount,operationmode,operationtype,operationdate)
+VALUES(toaccountid,toaccountnumber,amount,'D',transactiontype,NOW());
 SET tooperationid=LAST_INSERT_ID();
 UPDATE accounts SET balance=round(toaccountbalance+amount,2) WHERE id=toaccountid;
 INSERT INTO transactions (fromoperationid,tooperationid) VALUES (fromoperationid,tooperationid);
@@ -52,7 +54,7 @@ SET totalBal=round(totalBal+totalBal*0.07,2);
 UPDATE accounts SET balance=totalBal WHERE id=accountid;
 -- SET amount=intrestamount;
 
-CALL fundtransfer ('123456789',accountnumber,bankifsccode,toifsccode,intrestamount,transid );
+CALL fundtransfer ('123456789',accountnumber,bankifsccode,toifsccode,intrestamount,"InterestRate",transid );
 
 END IF ;
 END $$
@@ -77,20 +79,48 @@ DECLARE bankIfsccode VARCHAR(20) ;
 SELECT id,balance,ifsccode INTO accountid,totalBal,fromifsccode 
 FROM accounts WHERE acctnumber=accountnumber;
 SELECT ifsccode INTO bankifsccode FROM accounts WHERE acctnumber='123456789';
-SELECT loanid,emiamount INTO loanId,emi FROM loan WHERE acctnumber = accountnumber;
+SELECT loanid,emiamount INTO loanId,emi FROM loan WHERE acctId = accountid;
 
-UPDATE accounts SET balance=totalBal-emi WHERE id=accountid;
 
-CALL fundtransfer (accountnumber,'123456789',fromifsccode,bankifsccode,emi,transid );
+
+CALL fundtransfer (accountnumber,'123456789',fromifsccode,bankifsccode,emi,'EMI',transid);
 
 END $$
 DELIMITER ;
 
-CALL claculateIntrest('12656767876',@transid);
-SELECT @transid
+CALL emitransfer('12656767876',@transid);
+SELECT @transid;
 
 
+DROP PROCEDURE  IF EXISTS loanstatus;
 
+DELIMITER $$
+CREATE PROCEDURE loanstatus(IN accountnumber VARCHAR(20) ,IN lID INT,OUT Totalpaid DOUBLE,OUT Totalloan DOUBLE,OUT Ramount DOUBLE)
+BEGIN
+-- DECLARE accountid INT ;
+-- DECLARE oprid INT ;
+-- DECLARE loanId INT ;
+
+DECLARE totalemipaid double;
+DECLARE loanamount double;
+
+-- DECLARE remainingduration INT;
+
+SELECT amount INTO loanamount FROM loan where loanid = 1;
+SELECT SUM(amount) INTO totalemipaid from operations where operationmode="W" and operationtype="EMI" and acctnumber=accountnumber;
+
+SET Totalpaid = totalemipaid;
+
+SET Totalloan = loanamount;
+SET Ramount = loanamount - totalemipaid;
+-- SELECT id INTO accountid
+-- FROM accounts WHERE acctnumber=accountnumber;
+-- SELECT loanid,emiamount INTO loanId,emi FROM loan WHERE acctId = accountid;
+END $$
+DELIMITER ;
+
+CALL loanstatus("12656767876",1,@Totalpaid,@Totalloan,@Ramount);
+SELECT @Ramount,@Totalpaid,@Totalloan;
 
 
 
