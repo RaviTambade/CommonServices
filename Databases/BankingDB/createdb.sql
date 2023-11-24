@@ -1,9 +1,6 @@
 -- Active: 1696576841746@@127.0.0.1@3306@bankingdb
-
 DROP DATABASE IF EXISTS BankingDB;
-
 CREATE DATABASE BankingDB;
-
 USE BankingDB;
 
 CREATE TABLE
@@ -11,7 +8,7 @@ CREATE TABLE
         id INT AUTO_INCREMENT PRIMARY KEY,
         customerid INT NOT NULL UNIQUE,
         dependencyid INT NOT NULL,
-        usertype ENUM("corporation", "person") NOT NULL
+        usertype ENUM("corporation", "person","self") NOT NULL
     );
 
 CREATE TABLE
@@ -38,7 +35,8 @@ CREATE TABLE
         acctnumber VARCHAR(20) NOT NULL,
         amount DOUBLE,
         operationdate DATETIME,
-        operationmode CHAR
+        operationmode CHAR,
+        operationtype VARCHAR(20)
     );
 
 CREATE TABLE
@@ -56,29 +54,13 @@ CREATE TABLE
         amount DOUBLE,
         loansanctiondate DATE,
         duration INT,
+		emiday INT,
+		emiamount DOUBLE,
         intrestrate DOUBLE,
         acctId INT NOT NULL,
         CONSTRAINT fk_acctId2 FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
-ALTER TABLE loan MODIFY loansanctiondate DATE;
-
-CREATE TABLE
-    loanorder(
-        loanorderid INT PRIMARY KEY AUTO_INCREMENT,
-        amount DOUBLE,
-        loanid INT NOT NULL,
-        CONSTRAINT fk_loanId FOREIGN KEY(loanid) REFERENCES loan(loanid) ON UPDATE CASCADE ON DELETE CASCADE
-    );
-
-CREATE TABLE
-    installment(
-        installmentid INT PRIMARY KEY AUTO_INCREMENT,
-        amount DOUBLE,
-        InstallmentDate DATETIME,
-        loanorderid INT NOT NULL,
-        CONSTRAINT fk_loanorderId FOREIGN KEY(loanorderid) REFERENCES loanorder(loanorderid) ON UPDATE CASCADE ON DELETE CASCADE
-    );
 
 CREATE TABLE
     loanapplicants(
