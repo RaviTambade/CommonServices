@@ -3,6 +3,7 @@ SELECT * FROM customers;
 SELECT * FROM accounts;
 SELECT * FROM transactions;
 SELECT * FROM operations;
+SELECT * FROM loan;
 SELECT @transactionId;
 
 

@@ -63,6 +63,31 @@ CALL claculateIntrest('67675456546',@transid);
 SELECT @transid
 
 
+DELIMITER $$
+CREATE PROCEDURE emitransfer(IN accountnumber VARCHAR(20) ,OUT transid INT)
+BEGIN
+DECLARE accountid INT ;
+DECLARE totalBal DOUBLE DEFAULT 0;
+
+DECLARE loanId INT ;
+DECLARE emi double ;
+DECLARE fromifsccode VARCHAR(20) ;
+DECLARE bankIfsccode VARCHAR(20) ;
+
+SELECT id,balance,ifsccode INTO accountid,totalBal,fromifsccode 
+FROM accounts WHERE acctnumber=accountnumber;
+SELECT ifsccode INTO bankifsccode FROM accounts WHERE acctnumber='123456789';
+SELECT loanid,emiamount INTO loanId,emi FROM loan WHERE acctnumber = accountnumber;
+
+UPDATE accounts SET balance=totalBal-emi WHERE id=accountid;
+
+CALL fundtransfer (accountnumber,'123456789',fromifsccode,bankifsccode,emi,transid );
+
+END $$
+DELIMITER ;
+
+CALL claculateIntrest('12656767876',@transid);
+SELECT @transid
 
 
 

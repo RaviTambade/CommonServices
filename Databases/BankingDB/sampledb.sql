@@ -101,9 +101,9 @@ INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,custome
 
 
 
-INSERT INTO loan(loanid,amount,loansanctiondate,duration,intrestrate,acctId)VALUES(100,'100000','2023-09-08',15,11.58,3);
-INSERT INTO loan(amount,loansanctiondate,duration,intrestrate,acctId)VALUES('50000','2023-01-31',15,11.58,6);
-INSERT INTO loan(amount,loansanctiondate,duration,intrestrate,acctId)VALUES('75000','2023-03-25',15,15.23,4);
+INSERT INTO loan(loanid,amount,loansanctiondate,duration,emiday,emiamount,intrestrate,acctId)VALUES(1,'1000000','2023-09-08',15,10,,11.58,3);
+INSERT INTO loan(amount,loansanctiondate,duration,intrestrate,acctId)VALUES('500000','2023-01-31',15,15,,11.58,6);
+INSERT INTO loan(amount,loansanctiondate,duration,intrestrate,acctId)VALUES('7500000','2023-03-25',15,5,,15.23,4);
 
 
 SELECT * FROM accounts;
