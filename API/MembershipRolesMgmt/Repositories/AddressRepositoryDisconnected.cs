@@ -54,7 +54,7 @@ public class AddressRepository : IAddressRepository
                     PinCode = dataRow["pincode"].ToString(),
                     Name = dataRow["name"].ToString(),
                     ContactNumber = dataRow["contactnumber"].ToString(),
-                    AddressType=dataRow["addresstype"].ToString(),
+                    AddressType = dataRow["addresstype"].ToString(),
                 };
                 addresses.Add(address);
             }
@@ -64,6 +64,51 @@ public class AddressRepository : IAddressRepository
             throw;
         }
         return addresses;
+    }
+
+    public async Task<Address> GetAddress(int addressId)
+    {
+        Address address = null;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _connectionString;
+        try
+        {
+            string query =
+                @"SELECT addresses.id, addresses.userId,addresses.addresstype,addresses.area,addresses.landmark,addresses.city,
+            addresses.state,addresses.pincode,users.contactnumber,
+            CONCAT(users.firstname, ' ', users.lastname) as name  FROM addresses
+            INNER JOIN users on addresses.userid=users.id
+            WHERE addresses.id=@addressid";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@addressid", addressId);
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
+            DataSet dataSet = new DataSet();
+
+            await dataAdapter.FillAsync(dataSet);
+            DataTable dataTable = dataSet.Tables[0];
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                address = new Address()
+                {
+                    Id = int.Parse(dataRow["id"].ToString()),
+                    UserId = int.Parse(dataRow["userid"].ToString()),
+                    Area = dataRow["area"].ToString(),
+                    LandMark = dataRow["landmark"].ToString(),
+                    City = dataRow["city"].ToString(),
+                    State = dataRow["state"].ToString(),
+                    PinCode = dataRow["pincode"].ToString(),
+                    Name = dataRow["name"].ToString(),
+                    ContactNumber = dataRow["contactnumber"].ToString(),
+                    AddressType = dataRow["addresstype"].ToString(),
+                };
+                return address;
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        return address;
     }
 
     public async Task<bool> Insert(Address address)
@@ -152,7 +197,7 @@ public class AddressRepository : IAddressRepository
             MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
             await dataAdapter.FillAsync(dataSet);
             DataTable dataTable = dataSet.Tables[0];
-             DataColumn[] keycolumn = new DataColumn[1];
+            DataColumn[] keycolumn = new DataColumn[1];
             keycolumn[0] = dataTable.Columns["id"];
             dataTable.PrimaryKey = keycolumn;
             DataRow dataRow = dataTable.Rows.Find(existingId);

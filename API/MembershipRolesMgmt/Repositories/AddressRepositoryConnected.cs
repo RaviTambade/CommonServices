@@ -20,7 +20,6 @@ public class AddressRepository : IAddressRepository
             ?? throw new ArgumentNullException(nameof(_connectionString));
     }
 
-    
     public async Task<List<Address>> GetAllAddresses(int userId)
     {
         List<Address> addresses = new List<Address>();
@@ -43,16 +42,15 @@ public class AddressRepository : IAddressRepository
                 Address address = new Address()
                 {
                     Id = reader.GetInt32("id"),
-                    UserId=userId,
+                    UserId = userId,
                     Area = reader.GetString("area"),
-                    LandMark = reader.GetString("landmark") ,
+                    LandMark = reader.GetString("landmark"),
                     City = reader.GetString("city"),
                     State = reader.GetString("state"),
                     PinCode = reader.GetString("pincode"),
                     Name = reader.GetString("name"),
-                    ContactNumber=reader.GetString("contactnumber"),
-                    AddressType=reader.GetString("addresstype")
-
+                    ContactNumber = reader.GetString("contactnumber"),
+                    AddressType = reader.GetString("addresstype")
                 };
                 addresses.Add(address);
             }
@@ -67,6 +65,53 @@ public class AddressRepository : IAddressRepository
             await con.CloseAsync();
         }
         return addresses;
+    }
+
+    public async Task<Address> GetAddress(int addressId)
+    {
+        Address address = null;
+
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _connectionString;
+        try
+        {
+            string query =
+                @"SELECT addresses.id, addresses.userid,addresses.area,addresses.landmark,addresses.city,
+            addresses.state,addresses.pincode,addresses.addresstype,users.contactnumber,
+            CONCAT(users.firstname, ' ', users.lastname) as name  FROM addresses
+            INNER JOIN users on addresses.userid=users.id
+            WHERE addresses.id=@addressid";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@addressid", addressId);
+            await con.OpenAsync();
+            MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync();
+            if (await reader.ReadAsync())
+            {
+                address = new Address()
+                {
+                    Id = reader.GetInt32("id"),
+                    UserId = reader.GetInt32("userid"),
+                    Area = reader.GetString("area"),
+                    LandMark = reader.GetString("landmark"),
+                    City = reader.GetString("city"),
+                    State = reader.GetString("state"),
+                    PinCode = reader.GetString("pincode"),
+                    Name = reader.GetString("name"),
+                    ContactNumber = reader.GetString("contactnumber"),
+                    AddressType = reader.GetString("addresstype")
+                };
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return address;
     }
 
     public async Task<bool> Insert(Address address)
@@ -88,7 +133,7 @@ public class AddressRepository : IAddressRepository
             command.Parameters.AddWithValue("@city", address.City);
             command.Parameters.AddWithValue("@state", address.State);
             command.Parameters.AddWithValue("@pincode", address.PinCode);
-             command.Parameters.AddWithValue("@addresstype", address.AddressType);
+            command.Parameters.AddWithValue("@addresstype", address.AddressType);
             int rowsAffected = await command.ExecuteNonQueryAsync();
             if (rowsAffected > 0)
             {
@@ -141,10 +186,9 @@ public class AddressRepository : IAddressRepository
         return status;
     }
 
-
     public async Task<bool> Delete(int existingId)
     {
-         bool status = false;
+        bool status = false;
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _connectionString;
 
@@ -171,5 +215,4 @@ public class AddressRepository : IAddressRepository
         }
         return status;
     }
-
 }

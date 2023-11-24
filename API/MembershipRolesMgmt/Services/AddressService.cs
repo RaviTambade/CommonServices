@@ -20,8 +20,11 @@ public class AddressService : IAddressService
         return await _repository.GetAllAddresses(userId);
     }
 
+    public async Task<Address> GetAddress(int addressId)
+    {
+        return await _repository.GetAddress(addressId);
+    }
 
-   
     public async Task<bool> Insert(Address address)
     {
         return await _repository.Insert(address);
@@ -29,11 +32,11 @@ public class AddressService : IAddressService
 
     public async Task<bool> Update(int existingId, Address theAddress)
     {
-        return await _repository.Update(existingId,theAddress);
+        return await _repository.Update(existingId, theAddress);
     }
 
     public async Task<bool> Delete(int existingId)
     {
-       return await _repository.Delete(existingId);
+        return await _repository.Delete(existingId);
     }
 }
