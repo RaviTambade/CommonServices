@@ -114,7 +114,7 @@ public class OperationsController : ControllerBase
     }
 
     [HttpGet]
-    [Route("accounts/emidetails/{acctNumber}")]
+    [Route("accounts/emidetails/{acctNumber}/{loanId}")]
     public LoanApplicantEMIDetails LoanEmiDetails(string acctNumber,int loanId)
     {
         

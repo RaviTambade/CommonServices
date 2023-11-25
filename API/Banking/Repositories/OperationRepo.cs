@@ -431,23 +431,25 @@ public class OperationRepo : IOperationRepo
         LoanApplicantEMIDetails emidetails = new LoanApplicantEMIDetails();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
-
+        Console.WriteLine("acctnumber " + acctnumber);
+        Console.WriteLine("Lid " + loanId);
         try{
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("loanstatus", con);
                 cmd.CommandType = CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@accountnumber", acctnumber);
                 cmd.Parameters.AddWithValue("@lID", loanId);
 
-                cmd.Parameters.AddWithValue("@Ramount", MySqlDbType.Int32);
+                cmd.Parameters.AddWithValue("@Ramount", MySqlDbType.Double);
                 cmd.Parameters["@Ramount"].Direction = ParameterDirection.Output;
 
                  cmd.Parameters.AddWithValue("@RemainingEmi", MySqlDbType.Int32);
                 cmd.Parameters["@RemainingEmi"].Direction = ParameterDirection.Output;
 
                 int rowsAffected = cmd.ExecuteNonQuery();
-                
-                double amount = (int)cmd.Parameters["@Ramount"].Value;
+
+                double amount = (double)cmd.Parameters["@Ramount"].Value;
                 int remi = (int)cmd.Parameters["@RemainingEmi"].Value;
                 emidetails.RemaingEmiAmount = amount;
                 emidetails.RemaingEmi = remi;    
