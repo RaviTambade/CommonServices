@@ -283,7 +283,7 @@ public class UserRepository : IUserRepository
         con.ConnectionString = _conString;
         try
         {
-            string query = $"select id,firstname,lastname from users where id IN ({ids})";
+            string query = $"select id,firstname,lastname,imageurl from users where id IN ({ids})";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@userIdString", ids);
             await con.OpenAsync();
@@ -295,11 +295,14 @@ public class UserRepository : IUserRepository
                 int id = int.Parse(reader["id"].ToString());
                 string? firstName = reader["firstname"].ToString();
                 string? lastName = reader["lastname"].ToString();
+                string? imageUrl = reader["imageurl"].ToString();
+
 
                 UserDetails theUser = new UserDetails()
                 {
                     Id = id,
-                    FullName = $"{firstName} {lastName}"
+                    FullName = $"{firstName} {lastName}",
+                    ImageUrl=imageUrl
                 };
                 users.Add(theUser);
             }
