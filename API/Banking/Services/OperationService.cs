@@ -75,5 +75,14 @@ public class OperationsService:IOperationsService
         
     }
 
+    public bool ProcessMonthlyEmi(string acctnumber)
+    {
+
+        bool status = _repo.ProcessMonthlyEmi(acctnumber);
+
+        return status;
+        
+    }
+
     
 }

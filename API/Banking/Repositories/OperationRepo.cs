@@ -393,5 +393,77 @@ public class OperationRepo : IOperationRepo
 
         return status;
     }
+
+
+    public bool ProcessMonthlyEmi(string acctnumber)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+
+        try{
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("emitransfer", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@accountnumber", acctnumber);
+                cmd.Parameters.AddWithValue("@transid", MySqlDbType.Int32);
+                cmd.Parameters["@transid"].Direction = ParameterDirection.Output;
+                int rowsAffected = cmd.ExecuteNonQuery();
+                int transId = (int)cmd.Parameters["@transid"].Value;
+                // Console.WriteLine("transid repo:- "+transId);
+                status = true;
+
+            }
+        catch(Exception e)
+        {
+            throw e;
+        }
+        finally{
+            con.Close();
+        }
+
+        return status;
+    }
+
+
+    public LoanApplicantEMIDetails LoanEmiDetails(string acctnumber,int loanId)
+    {
+        LoanApplicantEMIDetails emidetails = new LoanApplicantEMIDetails();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+
+        try{
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand("loanstatus", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@accountnumber", acctnumber);
+                cmd.Parameters.AddWithValue("@lID", loanId);
+
+                cmd.Parameters.AddWithValue("@Ramount", MySqlDbType.Int32);
+                cmd.Parameters["@Ramount"].Direction = ParameterDirection.Output;
+
+                 cmd.Parameters.AddWithValue("@RemainingEmi", MySqlDbType.Int32);
+                cmd.Parameters["@RemainingEmi"].Direction = ParameterDirection.Output;
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                
+                double amount = (int)cmd.Parameters["@Ramount"].Value;
+                int remi = (int)cmd.Parameters["@RemainingEmi"].Value;
+                emidetails.RemaingEmiAmount = amount;
+                emidetails.RemaingEmi = remi;    
+
+            }
+        catch(Exception e)
+        {
+            throw e;
+        }
+        finally{
+            con.Close();
+        }
+
+        return emidetails;
+    }
 }
+
+
 

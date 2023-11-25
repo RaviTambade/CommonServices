@@ -81,8 +81,6 @@ FROM accounts WHERE acctnumber=accountnumber;
 SELECT ifsccode INTO bankifsccode FROM accounts WHERE acctnumber='123456789';
 SELECT loanid,emiamount INTO loanId,emi FROM loan WHERE acctId = accountid;
 
-
-
 CALL fundtransfer (accountnumber,'123456789',fromifsccode,bankifsccode,emi,'EMI',transid);
 
 END $$
@@ -95,32 +93,29 @@ SELECT @transid;
 DROP PROCEDURE  IF EXISTS loanstatus;
 
 DELIMITER $$
-CREATE PROCEDURE loanstatus(IN accountnumber VARCHAR(20) ,IN lID INT,OUT Totalpaid DOUBLE,OUT Totalloan DOUBLE,OUT Ramount DOUBLE)
+CREATE PROCEDURE loanstatus(IN accountnumber VARCHAR(20) ,IN lID INT,OUT Ramount DOUBLE,OUT RemainingEmi INT)
 BEGIN
--- DECLARE accountid INT ;
--- DECLARE oprid INT ;
--- DECLARE loanId INT ;
 
 DECLARE totalemipaid double;
 DECLARE loanamount double;
+DECLARE remaingemicount INT;
+DECLARE cnt INT;
+DECLARE loansactiondate date;
 
--- DECLARE remainingduration INT;
+SELECT amount,loansanctiondate,duration INTO loanamount,loansactiondate,remaingemicount FROM loan where loanid = lID;
+SELECT SUM(amount) ,count(operationdate) INTO totalemipaid,cnt from operations where operationmode="W" and operationtype="EMI" and acctnumber=accountnumber;
 
-SELECT amount INTO loanamount FROM loan where loanid = 1;
-SELECT SUM(amount) INTO totalemipaid from operations where operationmode="W" and operationtype="EMI" and acctnumber=accountnumber;
-
-SET Totalpaid = totalemipaid;
-
-SET Totalloan = loanamount;
+SET remaingemicount = remaingemicount * 12;
 SET Ramount = loanamount - totalemipaid;
--- SELECT id INTO accountid
--- FROM accounts WHERE acctnumber=accountnumber;
--- SELECT loanid,emiamount INTO loanId,emi FROM loan WHERE acctId = accountid;
+SET RemainingEmi = remaingemicount - cnt;
+
 END $$
 DELIMITER ;
 
-CALL loanstatus("12656767876",1,@Totalpaid,@Totalloan,@Ramount);
-SELECT @Ramount,@Totalpaid,@Totalloan;
+CALL loanstatus("12656767876",1,@Ramount,@RemainingEmi);
+SELECT @Ramount,@RemainingEmi;
+
+
 
 
 

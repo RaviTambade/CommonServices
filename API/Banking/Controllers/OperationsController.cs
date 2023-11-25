@@ -96,7 +96,7 @@ public class OperationsController : ControllerBase
 
 
     [HttpGet]
-    [Route("accounts/{acctNumber}")]
+    [Route("accounts/interest/{acctNumber}")]
     public bool AnnualInterest(string acctNumber)
     {
         Console.WriteLine(acctNumber);
@@ -104,7 +104,14 @@ public class OperationsController : ControllerBase
         return status;
     }
 
-    
+    [HttpGet]
+    [Route("accounts/emi/{acctNumber}")]
+    public bool MonthlyEmi(string acctNumber)
+    {
+        Console.WriteLine(acctNumber);
+        bool status = _svc.ProcessMonthlyEmi(acctNumber);
+        return status;
+    }
 
 
 }

@@ -15,6 +15,8 @@ public interface IOperationRepo
 
      bool ProcessAnualInterest(string acctnumber);
 
+     public bool ProcessMonthlyEmi(string acctnumber);
+
     /*List<Operation> GetByToAccount(int id);
 
     List<Operation> GetByFromAccount(int id);*/
