@@ -449,8 +449,16 @@ public class OperationRepo : IOperationRepo
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
-                double amount = (double)cmd.Parameters["@Ramount"].Value;
+                Console.WriteLine(cmd.Parameters["@Ramount"].Value);
+                Console.WriteLine(cmd.Parameters["@RemainingEmi"].Value);
+
+                double amount = Convert.ToDouble(cmd.Parameters["@Ramount"].Value);
                 int remi = (int)cmd.Parameters["@RemainingEmi"].Value;
+
+                Console.WriteLine("amount " + amount);
+                Console.WriteLine("remi " + remi);
+
+                
                 emidetails.RemaingEmiAmount = amount;
                 emidetails.RemaingEmi = remi;    
 
