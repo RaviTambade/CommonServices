@@ -113,5 +113,14 @@ public class OperationsController : ControllerBase
         return status;
     }
 
+    [HttpGet]
+    [Route("accounts/emidetails/{acctNumber}")]
+    public LoanApplicantEMIDetails LoanEmiDetails(string acctNumber,int loanId)
+    {
+        
+        LoanApplicantEMIDetails emiDetails = _svc.LoanEmiDetails(acctNumber,loanId);
+        return emiDetails;
+    }
+
 
 }

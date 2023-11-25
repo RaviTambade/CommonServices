@@ -6,7 +6,7 @@ namespace ServicesLib;
 
 public class OperationsService:IOperationsService
 {
-     public readonly IOperationRepo _repo;
+    public readonly IOperationRepo _repo;
     public OperationsService(IOperationRepo repo)
     {
         _repo = repo;
@@ -83,6 +83,11 @@ public class OperationsService:IOperationsService
         return status;
         
     }
+
+     public LoanApplicantEMIDetails LoanEmiDetails(string acctnumber,int loanId){
+        LoanApplicantEMIDetails emidetails=_repo.LoanEmiDetails(acctnumber,loanId);
+        return emidetails;
+     }
 
     
 }

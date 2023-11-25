@@ -13,9 +13,10 @@ public interface IOperationRepo
 
     List<Operation> GetByMode(string Mode);
 
-     bool ProcessAnualInterest(string acctnumber);
+    bool ProcessAnualInterest(string acctnumber);
 
-     public bool ProcessMonthlyEmi(string acctnumber);
+    public bool ProcessMonthlyEmi(string acctnumber);
+    public LoanApplicantEMIDetails LoanEmiDetails(string acctnumber,int loanId);
 
     /*List<Operation> GetByToAccount(int id);
 
