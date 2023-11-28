@@ -32,6 +32,7 @@ SELECT amount  FROM loan where loanid = 1;
 
 SELECT SUM(amount) from operations where operationmode="W" and operationtype="EMI" and acctnumber="12656767876";
 
+SELECT count(operationdate) from operations where operationmode="W" and operationtype="EMI" and acctnumber="46556565566";
 
 SELECT o.operationid,o.amount,o.operationdate,o.operationmode,
     CASE

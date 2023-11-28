@@ -3,12 +3,12 @@ DROP DATABASE IF EXISTS BankingDB;
 CREATE DATABASE BankingDB;
 USE BankingDB;
 
+Drop table customers;
 CREATE TABLE
     customers(
         id INT AUTO_INCREMENT PRIMARY KEY,
-        customerid INT NOT NULL UNIQUE,
-        dependencyid INT NOT NULL,
-        usertype ENUM("corporation", "person","self") NOT NULL
+        bankcustomerid INT NOT NULL,
+        usertype CHAR NOT NULL
     );
 
 CREATE TABLE
