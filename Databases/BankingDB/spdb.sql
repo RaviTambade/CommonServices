@@ -54,7 +54,7 @@ SET totalBal=round(totalBal+totalBal*0.07,2);
 UPDATE accounts SET balance=totalBal WHERE id=accountid;
 -- SET amount=intrestamount;
 
-CALL fundtransfer ('123456789',accountnumber,bankifsccode,toifsccode,intrestamount,"InterestRate",transid );
+CALL fundtransfer ('123456789',accountnumber,bankifsccode,toifsccode,intrestamount,"Interest",transid );
 
 END IF ;
 END $$
@@ -86,34 +86,39 @@ CALL fundtransfer (accountnumber,'123456789',fromifsccode,bankifsccode,emi,'EMI'
 END $$
 DELIMITER ;
 
-CALL emitransfer('12656767876',@transid);
+CALL emitransfer('7777777777',@transid);
 SELECT @transid;
 
 
 DROP PROCEDURE  IF EXISTS loanstatus;
 
 DELIMITER $$
-CREATE PROCEDURE loanstatus(IN accountnumber VARCHAR(20) ,IN lID INT,OUT Ramount DOUBLE,OUT RemainingEmi INT)
+CREATE PROCEDURE loanstatus(IN lID INT,OUT Ramount DOUBLE,OUT RemainingEmi INT,OUT TotalInstllments INT)
 BEGIN
 
-DECLARE totalemipaid double;
+DECLARE accountnumber VARCHAR(20) ;
+DECLARE accountID INT;
+DECLARE totalemipaid double default 0.00;
 DECLARE loanamount double;
 DECLARE remaingemicount INT;
 DECLARE cnt INT;
 DECLARE loansactiondate date;
 
-SELECT amount,loansanctiondate,duration INTO loanamount,loansactiondate,remaingemicount FROM loan where loanid = lID;
+SELECT amount,loansanctiondate,duration,acctId INTO loanamount,loansactiondate,remaingemicount,accountID FROM loan where loanid = lID;
+select acctnumber INTO accountnumber from accounts where id = accountID;
 SELECT SUM(amount) ,count(operationdate) INTO totalemipaid,cnt from operations where operationmode="W" and operationtype="EMI" and acctnumber=accountnumber;
 
+
 SET remaingemicount = remaingemicount * 12;
+SET TotalInstllments = remaingemicount;
 SET Ramount = loanamount - totalemipaid;
 SET RemainingEmi = remaingemicount - cnt;
 
 END $$
 DELIMITER ;
 
-CALL loanstatus("12656767876",1,@Ramount,@RemainingEmi);
-SELECT @Ramount,@RemainingEmi;
+CALL loanstatus(1,@Ramount,@RemainingEmi,@TotalInstllments);
+SELECT @Ramount,@RemainingEmi,@TotalInstllments;
 
 
 

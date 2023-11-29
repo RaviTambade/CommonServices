@@ -3,12 +3,11 @@ DROP DATABASE IF EXISTS BankingDB;
 CREATE DATABASE BankingDB;
 USE BankingDB;
 
-Drop table customers;
 CREATE TABLE
     customers(
         id INT AUTO_INCREMENT PRIMARY KEY,
         bankcustomerid INT NOT NULL,
-        usertype CHAR NOT NULL
+        usertype ENUM("C", "I") NOT NULL
     );
 
 CREATE TABLE
@@ -35,8 +34,8 @@ CREATE TABLE
         acctnumber VARCHAR(20) NOT NULL,
         amount DOUBLE,
         operationdate DATETIME,
-        operationmode CHAR,
-        operationtype VARCHAR(20)
+        operationmode ENUM('D','W'),
+        operationtype ENUM("Interest","EMI","Transfer")
     );
 
 CREATE TABLE
@@ -44,6 +43,7 @@ CREATE TABLE
         id INT PRIMARY KEY AUTO_INCREMENT,
         fromoperationid INT NOT NULL,
         tooperationid INT NOT NULL,
+        transactiondate datetime default current_timestamp,
         CONSTRAINT fk_operationid FOREIGN KEY(fromoperationid) REFERENCES operations(operationid) ON UPDATE CASCADE ON DELETE CASCADE,
         CONSTRAINT fk_rooperationid FOREIGN KEY(tooperationid) REFERENCES operations(operationid) ON UPDATE CASCADE ON DELETE CASCADE
     );
@@ -67,19 +67,22 @@ CREATE TABLE
         applicatid INT PRIMARY KEY AUTO_INCREMENT,
         accountid INT NOT NULL,
         CONSTRAINT fk_accountid FOREIGN KEY (accountid) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE,
-        firstname VARCHAR(50),
-        middlename VARCHAR(50),
-        lastname VARCHAR(50),
-        birthdate DATE,
-        gender ENUM("male", "female") NOT NULL,
-        contactnumber VARCHAR(10),
-        email VARCHAR(60),
-        address VARCHAR(150),
-        adharid VARCHAR(25),
+        -- firstname VARCHAR(50),
+        -- middlename VARCHAR(50),
+        -- lastname VARCHAR(50),
+        -- birthdate DATE,
+        -- gender ENUM("male", "female") NOT NULL,
+        -- contactnumber VARCHAR(10),
+--         email VARCHAR(60),
+--         address VARCHAR(150),
+--         adharid VARCHAR(25),
+		applydate DATE;
         panid VARCHAR(10),
+        loanamount double,
         loantype ENUM(
             "home",
             "personal",
             "bussiness"
-        )
+        ),
+         loanstatus VARCHAR(20)
     );

@@ -84,8 +84,8 @@ public class OperationsService:IOperationsService
         
     }
 
-     public LoanApplicantEMIDetails LoanEmiDetails(string acctnumber,int loanId){
-        LoanApplicantEMIDetails emidetails=_repo.LoanEmiDetails(acctnumber,loanId);
+     public LoanApplicantEMIDetails LoanEmiDetails(int loanId){
+        LoanApplicantEMIDetails emidetails=_repo.LoanEmiDetails(loanId);
         return emidetails;
      }
 

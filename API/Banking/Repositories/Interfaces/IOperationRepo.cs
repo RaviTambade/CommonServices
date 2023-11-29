@@ -16,7 +16,7 @@ public interface IOperationRepo
     bool ProcessAnualInterest(string acctnumber);
 
     public bool ProcessMonthlyEmi(string acctnumber);
-    public LoanApplicantEMIDetails LoanEmiDetails(string acctnumber,int loanId);
+    public LoanApplicantEMIDetails LoanEmiDetails(int loanId);
 
     /*List<Operation> GetByToAccount(int id);
 

@@ -114,11 +114,11 @@ public class OperationsController : ControllerBase
     }
 
     [HttpGet]
-    [Route("accounts/emidetails/{acctNumber}/{loanId}")]
-    public LoanApplicantEMIDetails LoanEmiDetails(string acctNumber,int loanId)
+    [Route("accounts/emidetails/{loanId}")]
+    public LoanApplicantEMIDetails LoanEmiDetails(int loanId)
     {
         
-        LoanApplicantEMIDetails emiDetails = _svc.LoanEmiDetails(acctNumber,loanId);
+        LoanApplicantEMIDetails emiDetails = _svc.LoanEmiDetails(loanId);
         return emiDetails;
     }
 

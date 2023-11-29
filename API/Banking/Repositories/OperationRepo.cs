@@ -426,19 +426,19 @@ public class OperationRepo : IOperationRepo
     }
 
 
-    public LoanApplicantEMIDetails LoanEmiDetails(string acctnumber,int loanId)
+    public LoanApplicantEMIDetails LoanEmiDetails(int loanId)
     {
         LoanApplicantEMIDetails emidetails = new LoanApplicantEMIDetails();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
-        Console.WriteLine("acctnumber " + acctnumber);
+    
         Console.WriteLine("Lid " + loanId);
         try{
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("loanstatus", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@accountnumber", acctnumber);
+            
                 cmd.Parameters.AddWithValue("@lID", loanId);
 
                 cmd.Parameters.AddWithValue("@Ramount", MySqlDbType.Double);
@@ -447,6 +447,10 @@ public class OperationRepo : IOperationRepo
                  cmd.Parameters.AddWithValue("@RemainingEmi", MySqlDbType.Int32);
                 cmd.Parameters["@RemainingEmi"].Direction = ParameterDirection.Output;
 
+
+                cmd.Parameters.AddWithValue("@TotalInstllments", MySqlDbType.Int32);
+                cmd.Parameters["@TotalInstllments"].Direction = ParameterDirection.Output;
+
                 int rowsAffected = cmd.ExecuteNonQuery();
 
                 Console.WriteLine(cmd.Parameters["@Ramount"].Value);
@@ -454,13 +458,14 @@ public class OperationRepo : IOperationRepo
 
                 double amount = Convert.ToDouble(cmd.Parameters["@Ramount"].Value);
                 int remi = (int)cmd.Parameters["@RemainingEmi"].Value;
-
+                int TInstallements = (int)cmd.Parameters["@TotalInstllments"].Value;
                 Console.WriteLine("amount " + amount);
                 Console.WriteLine("remi " + remi);
-
+                Console.WriteLine("Total Installments " + TInstallements);
                 
-                emidetails.RemaingEmiAmount = amount;
-                emidetails.RemaingEmi = remi;    
+                emidetails.EmiAmount = amount;
+                emidetails.RemaingInstallements = remi;    
+                emidetails.Installements = TInstallements;
 
             }
         catch(Exception e)
