@@ -27,9 +27,9 @@ public class BankingService : IBankingService
         return account;
     }
 
-    public async Task<AccountInfo> GetAccountInfo(CustomerDependancyCondition condition)
+    public async Task<AccountInfo> GetAccountInfo(int customerId ,string userType)
     {
-        return await _repo.GetAccountInfo(condition);
+        return await _repo.GetAccountInfo(customerId,userType);
     }
 
     public Account GetById(int id)

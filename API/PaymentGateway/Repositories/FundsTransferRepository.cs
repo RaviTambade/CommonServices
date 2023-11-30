@@ -29,6 +29,7 @@ public class PaymentGatewayRepo:IPaymentGatewayRepo
             cmd.Parameters.AddWithValue("@toaccountnumber",info.ToAcct);
             cmd.Parameters.AddWithValue("@amount",info.Amount);
             cmd.Parameters.AddWithValue("@fromifsccode",info.FromIfsc);
+            cmd.Parameters.AddWithValue("@transactiontype",info.TransactionType);
             cmd.Parameters.AddWithValue("@toifsccode",info.ToIfsc);
             cmd.Parameters.AddWithValue("@transactionId", MySqlDbType.Int32);
             cmd.Parameters["@transactionId"].Direction=ParameterDirection.Output;

@@ -31,12 +31,11 @@ public class BankAccountsController : ControllerBase
         return account;
     }
 
-    [HttpPost]
-    [Route("details")]
-    public async Task<AccountInfo> GetAccountInfo(CustomerDependancyCondition condition)
+    [HttpGet]
+    [Route("details/{customerId}/{userType}")]
+    public async Task<AccountInfo> GetAccountInfo(int customerId, string userType)
     {
-        Console.WriteLine(condition);
-        return await _svc.GetAccountInfo(condition);
+        return await _svc.GetAccountInfo(customerId,userType);
     }
 
     [HttpPut]
@@ -60,5 +59,6 @@ public class BankAccountsController : ControllerBase
         bool stauts = _svc.Delete(accountNumber);
         return stauts;
     }
+
 
 }
