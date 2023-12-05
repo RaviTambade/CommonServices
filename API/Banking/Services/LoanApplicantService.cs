@@ -39,4 +39,11 @@ public class LoanApplicantService : ILoanApplicantService
         return loanapplicant;
     }
     
+
+    public List<LoanApplicants> LoanApplicantsBetweenGivenDates(Date startDate,Date endDate)
+    {
+        List<LoanApplicants> loanapplicants=new List<LoanApplicants>();
+        loanapplicants=_repo.LoanApplicantsBetweenGivenDates(startDate,endDate);
+        return loanapplicants;
+    }
 }

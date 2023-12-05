@@ -3,12 +3,21 @@ SELECT * FROM customers;
 SELECT * FROM accounts;
 SELECT * FROM transactions;
 SELECT * FROM operations;
+SELECT * FROM loanapplicants;
+--  delete from  loanapplicants where applicatid = 11;
+
 SELECT * FROM loan;
 SELECT @transactionId;
 DROP table customers;
 DROP table accounts;
-DROP table operations;
+DROP table loanapplicants;
 
+SELECT * FROM loanapplicants 
+WHERE applydate >= '2023-01-01' 
+AND applydate <= '2023-11-30';
+
+SELECT * FROM loanapplicants 
+WHERE loanstatus = "applied";
 
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",1000,"Interest",@transactionId);
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",2000,@transactionId);
