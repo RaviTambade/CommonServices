@@ -282,7 +282,7 @@ public class AccountRepo : IAccountRepo
         return status;
     }
 
-    public async Task<AccountInfo> GetAccountInfo(CustomerDependancyCondition condition)
+    public async Task<AccountInfo> GetAccountInfo(int customerId ,string userType)
     {
         AccountInfo acct = null;
 
@@ -292,11 +292,11 @@ public class AccountRepo : IAccountRepo
         {
             string query =
                 "SELECT acctnumber,ifsccode from accounts"
-                + " JOIN customers ON accounts.customerid = customers.customerid"
-                + " WHERE customers.dependencyid=@id AND customers.usertype=@usertype";
+                + " JOIN customers ON accounts.customerid = customers.id"
+                + " WHERE customers.bankcustomerid=@id AND customers.usertype=@usertype";
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@id", condition.DependencyId);
-            command.Parameters.AddWithValue("@usertype", condition.Usertype);
+            command.Parameters.AddWithValue("@id",customerId );
+            command.Parameters.AddWithValue("@usertype", userType);
             Console.WriteLine(query);
             await con.OpenAsync();
 

@@ -11,4 +11,15 @@ namespace EntityLib
         public string? Status{get;set;}
             
     }
+
+
+    public class LoanaplicantsInfo : LoanApplicants
+    {
+        
+        public int CustomerUserId{get;set;}
+         
+         public String ApplicantName{get;set;}
+
+         public String ApplicantType{get;set;}
+    }
 }

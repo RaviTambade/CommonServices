@@ -172,6 +172,81 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
         return applicantslist;
     }
 
+
+    public List<LoanaplicantsInfo> GetAllapplicantInfo()
+    {
+
+        List<LoanaplicantsInfo> applicantslist = new List<LoanaplicantsInfo>();
+
+        //Create connection object
+        IDbConnection con = new MySqlConnection(_conString);
+
+        string query = "SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id";
+
+        //Create Command Object
+        IDbCommand cmd = new MySqlCommand(query, con as MySqlConnection);
+
+        // Connected Data Access Mode
+        // connected is kept alive till operations complete
+        try
+        {
+            con.Open();
+            Console.WriteLine("\n Connection status " + con.State);
+            //Create Data reader object
+            IDataReader reader = cmd.ExecuteReader();
+            //Online data using streaming mechanism
+            while (reader.Read())
+            {
+                int applicntID = int.Parse(reader["applicatid"].ToString());
+                int acctID = int.Parse(reader["accountid"].ToString());
+                
+                DateTime aDate = DateTime.Parse(reader["applydate"].ToString());
+                DateOnly FormatDate = DateOnly.FromDateTime(aDate);
+
+                //DateTime date = DateTime.ParseExact("01-01-2022", "MM-dd-yyyy", CultureInfo.InvariantCulture);
+               
+                string panID = reader["panid"].ToString();
+                string loanType = reader["loantype"].ToString();
+                double amount = double.Parse(reader["loanamount"].ToString());
+                string status = reader["loanstatus"].ToString();
+                int custid = int.Parse(reader["bankcustomerid"].ToString());
+                string custtype = reader["usertype"].ToString();
+
+                applicantslist.Add(
+                    new LoanaplicantsInfo()
+                    {
+                        ApplicantId = applicntID,
+                        AccountId = acctID,
+                        
+                        ApplyDate = FormatDate,
+                        
+                        PanId = panID,
+                        LoanType = loanType,
+                        Amount = amount,
+                        Status = status,
+                        CustomerUserId= custid,
+                        ApplicantType = custtype
+                    }
+                );
+            }
+            reader.Close();
+        }
+        catch (MySqlException exp)
+        {
+            string message = exp.Message;
+            //report to developer
+            //log exception message log file
+        }
+        finally
+        {
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+        }
+        return applicantslist;
+    }
+
     public LoanApplicants GetById(int laonapplicantId)
     {
         LoanApplicants applicant = null;
@@ -227,13 +302,18 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
 
     }
 
-    public List<LoanApplicants> LoanApplicantsBetweenGivenDates(Date startDate,Date endDate)
+    public List<LoanApplicants> LoanApplicantsBetweenGivenDates(DateTime startDate,DateTime endDate)
     {
-         DateOnly startDateOnly = startDate;
-         DateOnly endDateOnly = endDate;
+
+        Console.WriteLine("Inside LoanApplicantsBetweenGivenDates method in Repo......");
+         DateOnly startDateOnly = DateOnly.FromDateTime(startDate);
+         DateOnly endDateOnly = DateOnly.FromDateTime(endDate);
+
         string startDateString = startDateOnly.ToString("yyyy-MM-dd");
          string endDateString = endDateOnly.ToString("yyyy-MM-dd");
 
+        Console.WriteLine("startDateString : " + startDateString);
+        Console.WriteLine("endDateString : " + endDateString);
 
         List<LoanApplicants> applicantslist = new List<LoanApplicants>();
 
@@ -241,10 +321,13 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
         IDbConnection con = new MySqlConnection(_conString);
 
         Console.WriteLine("\n Connection status " + con.State);
-        string query = "SELECT * FROM loanapplicants WHERE applydate >= '@StartDateString' AND applydate <= '@EndDateString' ";
+        string query = "SELECT * FROM loanapplicants WHERE applydate >= @StartDateString AND applydate <= @EndDateString ";
 
+
+        
         //Create Command Object
-        IDbCommand cmd = new MySqlCommand(query, con as MySqlConnection);
+
+        MySqlCommand cmd = new MySqlCommand(query, con as MySqlConnection);
         cmd.Parameters.AddWithValue("@StartDateString", startDateString);
         cmd.Parameters.AddWithValue("@EndDateString",endDateString);
 
@@ -272,6 +355,7 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
                 double amount = double.Parse(reader["loanamount"].ToString());
                 string status = reader["loanstatus"].ToString();
                 
+                Console.WriteLine(applicntID);
 
                 applicantslist.Add(
                     new LoanApplicants()
@@ -307,5 +391,77 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
 
     }
 
+    
+    public List<LoanApplicants> LoanApplicantsAccordingLoanStatus(string LoanType)
+    {
+        //SELECT * FROM loanapplicants 
+        //WHERE loanstatus = @Loanstatus;
+        Console.WriteLine("Inside LoanApplicantsAccordingLoanStatus Repo method....");
+        List<LoanApplicants> applicantslist = new List<LoanApplicants>();
 
+        //Create connection object
+        IDbConnection con = new MySqlConnection(_conString);
+
+        Console.WriteLine("\n Connection status " + con.State);
+        string query = "SELECT * FROM loanapplicants WHERE loanstatus = @Loanstatus";
+
+        //Create Command Object
+
+        MySqlCommand cmd = new MySqlCommand(query, con as MySqlConnection);
+        cmd.Parameters.AddWithValue("@Loanstatus", LoanType);
+    
+        try
+        {
+            con.Open();
+           
+            //Create Data reader object
+            IDataReader reader = cmd.ExecuteReader();
+            //Online data using streaming mechanism
+            while (reader.Read())
+            {
+                int applicntID = int.Parse(reader["applicatid"].ToString());
+                int acctID = int.Parse(reader["accountid"].ToString());
+                
+                DateTime aDate = DateTime.Parse(reader["applydate"].ToString());
+                DateOnly FormatDate = DateOnly.FromDateTime(aDate);
+    
+                string panID = reader["panid"].ToString();
+                string loanType = reader["loantype"].ToString();
+                double amount = double.Parse(reader["loanamount"].ToString());
+                string status = reader["loanstatus"].ToString();
+                
+                Console.WriteLine(applicntID);
+
+                applicantslist.Add(
+                    new LoanApplicants()
+                    {
+                        ApplicantId = applicntID,
+                        AccountId = acctID,
+                        
+                        ApplyDate = FormatDate,
+                        
+                        PanId = panID,
+                        LoanType = loanType,
+                        Amount = amount,
+                        Status = status
+                    }
+                );
+            }
+            reader.Close();
+        }
+        catch (MySqlException exp)
+        {
+            string message = exp.Message;
+            //report to developer
+            //log exception message log file
+        }
+        finally
+        {
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+        }
+        return applicantslist;
+    }
 }

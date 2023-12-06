@@ -300,7 +300,7 @@ public class UserRepository : IUserRepository
 
                 UserDetails theUser = new UserDetails()
                 {
-                    Id = id,
+                    UserId = id,
                     FullName = $"{firstName} {lastName}",
                     ImageUrl=imageUrl
                 };
@@ -338,7 +338,7 @@ public class UserRepository : IUserRepository
 
                 userName = new UserDetails()
                 {
-                    Id = id,
+                    UserId = id,
                     FullName = $"{firstName} {lastName}"
                 };
             }

@@ -56,10 +56,28 @@ public class LoanApplicantController : ControllerBase
         return applicant;
     }
 
-     public IEnumerable<LoanApplicants> LoanApplicantsBetweenGivenDates(Date startDate,Date endDate)
+    [HttpGet("{startDate}/{endDate}")]
+     public IEnumerable<LoanApplicants> LoanApplicantsBetweenGivenDates(DateTime startDate,DateTime endDate)
     {
-        Console.WriteLine("Inside getall method....");
+        Console.WriteLine("Inside LoanApplicantsBetweenGivenDates method in Cotroller....");
         IEnumerable<LoanApplicants> applicants = _svc.LoanApplicantsBetweenGivenDates(startDate,endDate);
         return applicants;
     }
+
+    [HttpGet("status/{loanType}")]
+     public IEnumerable<LoanApplicants> LoanApplicantsAccordingLoanStatus(string loanType)
+    {
+        Console.WriteLine("Inside LoanApplicantsAccordingLoanStatus method in Cotroller....");
+        IEnumerable<LoanApplicants> applicants = _svc.LoanApplicantsAccordingLoanStatus(loanType);
+        return applicants;
+    }
+
+    [HttpGet("applicantAscustomer")]
+      public List<LoanaplicantsInfo> GetAllapplicantInfo()
+      {
+        Console.WriteLine("Inside LoanaplicantsInfo method in Cotroller....");
+        List<LoanaplicantsInfo> applicants = _svc.GetAllapplicantInfo();
+        return applicants;
+      }
+
 }
