@@ -47,7 +47,7 @@ public class UsersController : ControllerBase
 
     [HttpGet]
     [Route("name/{ids}")]
-    public async Task<List<UserDetails>> GetUsersDetail(string ids)
+    public async Task<List<User>> GetUsersDetail(string ids)
     {
         return await _svc.GetUsersDetails(ids);
     }

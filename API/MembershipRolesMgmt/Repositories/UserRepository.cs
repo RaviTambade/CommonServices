@@ -276,14 +276,14 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public async Task<List<UserDetails>> GetUsersDetails(string ids)
+    public async Task<List<User>> GetUsersDetails(string ids)
     {
-        List<UserDetails> users = new();
+        List<User> users = new();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
         try
         {
-            string query = $"select id,firstname,lastname,imageurl from users where id IN ({ids})";
+            string query = $"select id,firstname,lastname,imageurl,aadharid,birthdate,gender,email,contactnumber from users where id IN ({ids})";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@userIdString", ids);
             await con.OpenAsync();
@@ -293,16 +293,28 @@ public class UserRepository : IUserRepository
             while (await reader.ReadAsync())
             {
                 int id = int.Parse(reader["id"].ToString());
+                string? imageUrl = reader["imageurl"].ToString();
+                string? aadharId = reader["aadharid"].ToString();
                 string? firstName = reader["firstname"].ToString();
                 string? lastName = reader["lastname"].ToString();
-                string? imageUrl = reader["imageurl"].ToString();
+                DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
+                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+                string? gender = reader["gender"].ToString();
+                string? email = reader["email"].ToString();
+                string? contact = reader["contactnumber"].ToString();
+                
 
-
-                UserDetails theUser = new UserDetails()
+                User theUser = new User()
                 {
-                    UserId = id,
-                    FullName = $"{firstName} {lastName}",
-                    ImageUrl=imageUrl
+                    Id = id,
+                    ImageUrl = imageUrl,
+                    AadharId = aadharId,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    BirthDate = dateOnlyBirthDate,
+                    Gender = gender,
+                    Email = email,
+                    ContactNumber = contact,
                 };
                 users.Add(theUser);
             }
@@ -524,6 +536,8 @@ public class UserRepository : IUserRepository
         }
         return status;
     }
+
+    
 
 
 
