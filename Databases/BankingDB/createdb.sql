@@ -60,29 +60,20 @@ CREATE TABLE
         acctId INT NOT NULL,
         CONSTRAINT fk_acctId2 FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
-
+Drop table loanapplicants;
 
 CREATE TABLE
     loanapplicants(
         applicatid INT PRIMARY KEY AUTO_INCREMENT,
         accountid INT NOT NULL,
         CONSTRAINT fk_accountid FOREIGN KEY (accountid) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE,
-        -- firstname VARCHAR(50),
-        -- middlename VARCHAR(50),
-        -- lastname VARCHAR(50),
-        -- birthdate DATE,
-        -- gender ENUM("male", "female") NOT NULL,
-        -- contactnumber VARCHAR(10),
---         email VARCHAR(60),
---         address VARCHAR(150),
---         adharid VARCHAR(25),
 		applydate DATE,
         panid VARCHAR(10),
         loanamount double,
         loantype ENUM(
             "home",
             "personal",
-            "bussiness"
+            "business"
         ),
-         loanstatus VARCHAR(20)
+         loanstatus ENUM("applied","approved","rejected") DEFAULT "applied"
     );

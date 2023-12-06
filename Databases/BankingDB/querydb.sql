@@ -3,12 +3,27 @@ SELECT * FROM customers;
 SELECT * FROM accounts;
 SELECT * FROM transactions;
 SELECT * FROM operations;
+SELECT * FROM loanapplicants;
+--  delete from  loanapplicants where applicatid = 11;
+
 SELECT * FROM loan;
 SELECT @transactionId;
 DROP table customers;
 DROP table accounts;
-DROP table operations;
+DROP table loanapplicants;
 
+SELECT * FROM loanapplicants 
+WHERE applydate >= '2023-01-01' 
+AND applydate <= '2023-11-30';
+
+
+SELECT * FROM loanapplicants WHERE applydate >= '2023-01-01' AND applydate <= '2023-11-30';
+
+SELECT * FROM loanapplicants 
+WHERE loanstatus = "applied";
+
+SELECT * FROM loanapplicants 
+WHERE loanstatus = "approved";
 
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",1000,"Interest",@transactionId);
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",2000,@transactionId);
@@ -33,6 +48,15 @@ SELECT amount  FROM loan where loanid = 1;
 SELECT SUM(amount) from operations where operationmode="W" and operationtype="EMI" and acctnumber="12656767876";
 
 SELECT count(operationdate) from operations where operationmode="W" and operationtype="EMI" and acctnumber="46556565566";
+
+SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants 
+inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id; 
+
+
+
+
+
+
 
 SELECT o.operationid,o.amount,o.operationdate,o.operationmode,
     CASE

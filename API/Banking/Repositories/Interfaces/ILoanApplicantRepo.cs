@@ -8,5 +8,10 @@ public interface ILoanApplicantRepo
     public bool Delete(int laonapplicantId);
     public List<LoanApplicants> GetAll();
     public LoanApplicants GetById(int laonapplicantId);
+    public List<LoanApplicants> LoanApplicantsBetweenGivenDates(DateTime startDate,DateTime endDate);
+
+    public List<LoanApplicants> LoanApplicantsAccordingLoanStatus(string LoanType);
+
+    public List<LoanaplicantsInfo> GetAllapplicantInfo();
 
 }
