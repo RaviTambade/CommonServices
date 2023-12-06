@@ -161,7 +161,6 @@ INSERT INTO operations(acctId,acctnumber,amount,operationdate,operationmode,oper
 
 
 INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(15,16,'2023-10-10');
-
 INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(17,18,'2023-01-15');
 INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(19,20,'2023-02-15');
 INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(21,22,'2023-03-15');

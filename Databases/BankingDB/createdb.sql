@@ -76,7 +76,7 @@ CREATE TABLE
 --         email VARCHAR(60),
 --         address VARCHAR(150),
 --         adharid VARCHAR(25),
-		applydate DATE;
+		applydate DATE,
         panid VARCHAR(10),
         loanamount double,
         loantype ENUM(
