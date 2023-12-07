@@ -10,11 +10,13 @@ namespace BankingServices.Controllers;
 public class LoanApplicantController : ControllerBase
 {
     private readonly ILoanApplicantService _svc;
-
-    public LoanApplicantController(ILoanApplicantService svc)
+    private readonly HttpClient _httpClient;
+    public LoanApplicantController(ILoanApplicantService svc,IHttpClientFactory httpClient)
     {
         Console.WriteLine("Ctr is called......");
         _svc = svc;
+        _httpClient = httpClient.CreateClient();
+
     }
 
     [HttpGet]
@@ -73,11 +75,31 @@ public class LoanApplicantController : ControllerBase
     }
 
     [HttpGet("applicantAscustomer")]
-      public List<LoanaplicantsInfo> GetAllapplicantInfo()
+      public async Task<List<LoanaplicantsInfo>> GetAllapplicantInfo()
       {
         Console.WriteLine("Inside LoanaplicantsInfo method in Cotroller....");
-        List<LoanaplicantsInfo> applicants = _svc.GetAllapplicantInfo();
+        List<LoanaplicantsInfo> applicants = await _svc.GetAllapplicantInfo();
+
+        String user_ids = string.Join(',',applicants.Select(applicant => applicant.CustomerUserId  ).ToList());
+        Console.WriteLine(user_ids);
+        List<User> users =  await GetUserDetails(user_ids);
+        foreach(var applicant in applicants)
+        {
+            User user = users.FirstOrDefault(u => u.Id == applicant.CustomerUserId);
+            if(user!=null)
+            {
+                applicant.ApplicantName = user.FirstName + " " + user.LastName;
+            }
+        }
         return applicants;
       }
 
+      
+    public async Task<List<User>> GetUserDetails(string userIds)
+    {
+        var response = await _httpClient.GetFromJsonAsync<List<User>>(
+            $"http://localhost:5142/api/users/name/{userIds}"
+        );
+        return response;
+    }
 }

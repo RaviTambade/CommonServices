@@ -173,30 +173,32 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
     }
 
 
-    public List<LoanaplicantsInfo> GetAllapplicantInfo()
+    public async Task<List<LoanaplicantsInfo>> GetAllapplicantInfo()
     {
-
+        Console.WriteLine("Inside LoanaplicantsInfo method in Repo....");
         List<LoanaplicantsInfo> applicantslist = new List<LoanaplicantsInfo>();
 
         //Create connection object
-        IDbConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new MySqlConnection(_conString);
 
         string query = "SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id";
 
         //Create Command Object
-        IDbCommand cmd = new MySqlCommand(query, con as MySqlConnection);
+        MySqlCommand cmd = new MySqlCommand(query, con );
 
         // Connected Data Access Mode
         // connected is kept alive till operations complete
         try
         {
-            con.Open();
+             Console.WriteLine("Inside LoanaplicantsInfo method in Repo Inside Try block....");
+            await con.OpenAsync();
             Console.WriteLine("\n Connection status " + con.State);
             //Create Data reader object
-            IDataReader reader = cmd.ExecuteReader();
+            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
             //Online data using streaming mechanism
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
+                Console.WriteLine("Inside LoanaplicantsInfo Reader loop....");
                 int applicntID = int.Parse(reader["applicatid"].ToString());
                 int acctID = int.Parse(reader["accountid"].ToString());
                 
@@ -229,20 +231,21 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
                     }
                 );
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (MySqlException exp)
         {
             string message = exp.Message;
+            Console.WriteLine(message);
             //report to developer
             //log exception message log file
         }
         finally
         {
-            if (con.State == ConnectionState.Open)
-            {
-                con.Close();
-            }
+            // if (con.State == ConnectionState.Open)
+            // {
+                await con.CloseAsync();
+           // }
         }
         return applicantslist;
     }
@@ -396,6 +399,8 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
     {
         //SELECT * FROM loanapplicants 
         //WHERE loanstatus = @Loanstatus;
+
+        
         Console.WriteLine("Inside LoanApplicantsAccordingLoanStatus Repo method....");
         List<LoanApplicants> applicantslist = new List<LoanApplicants>();
 

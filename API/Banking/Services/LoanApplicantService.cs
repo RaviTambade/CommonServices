@@ -53,10 +53,12 @@ public class LoanApplicantService : ILoanApplicantService
         return loanapplicants;
      }
 
-     public List<LoanaplicantsInfo> GetAllapplicantInfo()
+     public async Task<List<LoanaplicantsInfo>> GetAllapplicantInfo()
      {
+        Console.WriteLine("Inside LoanaplicantsInfo method in Service....");
         List<LoanaplicantsInfo> loanapplicants=new List<LoanaplicantsInfo>();
-        loanapplicants=_repo.GetAllapplicantInfo();
+        loanapplicants=await _repo.GetAllapplicantInfo();
+        
         return loanapplicants;
      }
 }

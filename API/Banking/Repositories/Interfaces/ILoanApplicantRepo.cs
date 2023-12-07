@@ -12,6 +12,6 @@ public interface ILoanApplicantRepo
 
     public List<LoanApplicants> LoanApplicantsAccordingLoanStatus(string LoanType);
 
-    public List<LoanaplicantsInfo> GetAllapplicantInfo();
+    public  Task<List<LoanaplicantsInfo>> GetAllapplicantInfo();
 
 }
