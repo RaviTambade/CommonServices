@@ -469,4 +469,7 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
         }
         return applicantslist;
     }
+
+
+    
 }

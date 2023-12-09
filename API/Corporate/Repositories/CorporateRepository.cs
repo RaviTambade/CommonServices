@@ -32,7 +32,7 @@ public class CorporateRepository : ICorporateRepository
                 string name = reader["name"].ToString();
                 string contactnumber = reader["contactnumber"].ToString();
                 string email = reader["email"].ToString();
-                int personid = int.Parse(reader["personid"].ToString());
+                int personid = int.Parse(reader["userid"].ToString());
 
                 Corporation corporate = new Corporation
                 {

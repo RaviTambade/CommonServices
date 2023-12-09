@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ServicesLib;
 using EntityLib;
-
+using Banking.Helpers;
 
 namespace BankingServices.Controllers;
 
@@ -11,10 +11,12 @@ public class LoanApplicantController : ControllerBase
 {
     private readonly ILoanApplicantService _svc;
     private readonly HttpClient _httpClient;
+    
     public LoanApplicantController(ILoanApplicantService svc,IHttpClientFactory httpClient)
     {
         Console.WriteLine("Ctr is called......");
         _svc = svc;
+        
         _httpClient = httpClient.CreateClient();
 
     }
@@ -80,21 +82,35 @@ public class LoanApplicantController : ControllerBase
         Console.WriteLine("Inside LoanaplicantsInfo method in Cotroller....");
         List<LoanaplicantsInfo> applicants = await _svc.GetAllapplicantInfo();
 
-        String user_ids = string.Join(',',applicants.Select(applicant => applicant.CustomerUserId  ).ToList());
+        String user_ids = string.Join(',',applicants.Where(applicant=> applicant.ApplicantType == "I").Select(applicant => applicant.CustomerUserId  ).ToList());
+
+        String corporateuser_ids =  string.Join(',',applicants.Where(applicant=> applicant.ApplicantType == "C").Select(applicant => applicant.CustomerUserId  ).ToList());
+       
         Console.WriteLine(user_ids);
-        List<User> users =  await GetUserDetails(user_ids);
+    
+        LoanApplicationHelper helper = new LoanApplicationHelper(_httpClient);
+        List<User> users =  await helper.GetUserDetails(user_ids);
+        List<CorporateUser> corporateusers = await helper.GetCorporateUserDetails(corporateuser_ids);
         foreach(var applicant in applicants)
         {
-            User user = users.FirstOrDefault(u => u.Id == applicant.CustomerUserId);
-            if(user!=null)
+            if(applicant.ApplicantType == "I")
             {
+                User user = users.FirstOrDefault(u => u.Id == applicant.CustomerUserId);
                 applicant.ApplicantName = user.FirstName + " " + user.LastName;
+            }
+            else
+            {
+                //if(applicant.ApplicantType == "C")
+                //{
+                    CorporateUser cuser = corporateusers.FirstOrDefault(u => u.Id == applicant.CustomerUserId);
+                    applicant.ApplicantName = cuser.Name;
+                //}
             }
         }
         return applicants;
       }
 
-      
+      /*
     public async Task<List<User>> GetUserDetails(string userIds)
     {
         var response = await _httpClient.GetFromJsonAsync<List<User>>(
@@ -102,4 +118,13 @@ public class LoanApplicantController : ControllerBase
         );
         return response;
     }
+
+    public async Task<List<CorporateUser>> GetCorporateUserDetails(string userIds)
+    {
+        var response = await _httpClient.GetFromJsonAsync<List<CorporateUser>>(
+            $" http://localhost:5041/api/corporates/names/{userIds}"
+        );
+        return response;
+    }*/
+
 }
