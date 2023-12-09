@@ -10,7 +10,9 @@ public interface ILoanApplicantRepo
     public LoanApplicants GetById(int laonapplicantId);
     public List<LoanApplicants> LoanApplicantsBetweenGivenDates(DateTime startDate,DateTime endDate);
 
-    public List<LoanApplicants> LoanApplicantsAccordingLoanStatus(string LoanType);
+    public Task <List<LoanaplicantsInfo>> LoanApplicantsAccordingLoanStatus(string LoanType);//Why need not to write async here before Task
+
+    //public List<LoanApplicants> LoanApplicantsAccordingLoanStatus(string LoanType);
 
     public  Task<List<LoanaplicantsInfo>> GetAllapplicantInfo();
 

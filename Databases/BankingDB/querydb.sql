@@ -52,7 +52,9 @@ SELECT count(operationdate) from operations where operationmode="W" and operatio
 SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants 
 inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id; 
 
-
+SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants 
+inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id
+WHERE loanstatus = @Loanstatus;
 
 
 

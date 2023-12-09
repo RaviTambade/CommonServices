@@ -65,15 +65,20 @@ public class LoanApplicantController : ControllerBase
     {
         Console.WriteLine("Inside LoanApplicantsBetweenGivenDates method in Cotroller....");
         IEnumerable<LoanApplicants> applicants = _svc.LoanApplicantsBetweenGivenDates(startDate,endDate);
+
+
         return applicants;
     }
 
     [HttpGet("status/{loanType}")]
-     public IEnumerable<LoanApplicants> LoanApplicantsAccordingLoanStatus(string loanType)
+     public async Task<List<LoanaplicantsInfo>> LoanApplicantsAccordingLoanStatus(string loanType)
     {
         Console.WriteLine("Inside LoanApplicantsAccordingLoanStatus method in Cotroller....");
-        IEnumerable<LoanApplicants> applicants = _svc.LoanApplicantsAccordingLoanStatus(loanType);
-        return applicants;
+         List<LoanaplicantsInfo> applicants = await _svc.LoanApplicantsAccordingLoanStatus(loanType);
+        LoanApplicationHelper helper = new LoanApplicationHelper(_httpClient);
+        List<LoanaplicantsInfo> DetailsOfApplicants =  await helper.applicantsDetails(applicants);
+        
+        return DetailsOfApplicants;
     }
 
     [HttpGet("applicantAscustomer")]
@@ -81,33 +86,10 @@ public class LoanApplicantController : ControllerBase
       {
         Console.WriteLine("Inside LoanaplicantsInfo method in Cotroller....");
         List<LoanaplicantsInfo> applicants = await _svc.GetAllapplicantInfo();
-
-        String user_ids = string.Join(',',applicants.Where(applicant=> applicant.ApplicantType == "I").Select(applicant => applicant.CustomerUserId  ).ToList());
-
-        String corporateuser_ids =  string.Join(',',applicants.Where(applicant=> applicant.ApplicantType == "C").Select(applicant => applicant.CustomerUserId  ).ToList());
-       
-        Console.WriteLine(user_ids);
-    
         LoanApplicationHelper helper = new LoanApplicationHelper(_httpClient);
-        List<User> users =  await helper.GetUserDetails(user_ids);
-        List<CorporateUser> corporateusers = await helper.GetCorporateUserDetails(corporateuser_ids);
-        foreach(var applicant in applicants)
-        {
-            if(applicant.ApplicantType == "I")
-            {
-                User user = users.FirstOrDefault(u => u.Id == applicant.CustomerUserId);
-                applicant.ApplicantName = user.FirstName + " " + user.LastName;
-            }
-            else
-            {
-                //if(applicant.ApplicantType == "C")
-                //{
-                    CorporateUser cuser = corporateusers.FirstOrDefault(u => u.Id == applicant.CustomerUserId);
-                    applicant.ApplicantName = cuser.Name;
-                //}
-            }
-        }
-        return applicants;
+        List<LoanaplicantsInfo> DetailsOfApplicants =  await helper.applicantsDetails(applicants);
+        
+        return DetailsOfApplicants;
       }
 
       /*

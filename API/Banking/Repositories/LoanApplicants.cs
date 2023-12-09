@@ -179,7 +179,7 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
         List<LoanaplicantsInfo> applicantslist = new List<LoanaplicantsInfo>();
 
         //Create connection object
-        MySqlConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new MySqlConnection(_conString);//IDBConnection is not allowed here Why???
 
         string query = "SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id";
 
@@ -395,20 +395,22 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
     }
 
     
-    public List<LoanApplicants> LoanApplicantsAccordingLoanStatus(string LoanType)
+    public async Task <List<LoanaplicantsInfo>> LoanApplicantsAccordingLoanStatus(string LoanType)
     {
         //SELECT * FROM loanapplicants 
         //WHERE loanstatus = @Loanstatus;
 
         
         Console.WriteLine("Inside LoanApplicantsAccordingLoanStatus Repo method....");
-        List<LoanApplicants> applicantslist = new List<LoanApplicants>();
+        List<LoanaplicantsInfo> applicantslist = new List<LoanaplicantsInfo>();
 
         //Create connection object
-        IDbConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new MySqlConnection(_conString);
 
         Console.WriteLine("\n Connection status " + con.State);
-        string query = "SELECT * FROM loanapplicants WHERE loanstatus = @Loanstatus";
+
+        string query = "SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id WHERE loanstatus =  @Loanstatus";
+        //string query = "SELECT * FROM loanapplicants WHERE loanstatus = @Loanstatus";
 
         //Create Command Object
 
@@ -417,12 +419,14 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
     
         try
         {
-            con.Open();
+            await con.OpenAsync();
            
             //Create Data reader object
-            IDataReader reader = cmd.ExecuteReader();
+             MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
+
+            //MysqlDataReader reader = cmd.ExecuteReader();
             //Online data using streaming mechanism
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int applicntID = int.Parse(reader["applicatid"].ToString());
                 int acctID = int.Parse(reader["accountid"].ToString());
@@ -434,11 +438,14 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
                 string loanType = reader["loantype"].ToString();
                 double amount = double.Parse(reader["loanamount"].ToString());
                 string status = reader["loanstatus"].ToString();
+                int custid = int.Parse(reader["bankcustomerid"].ToString());
+                string custtype = reader["usertype"].ToString();
+
                 
                 Console.WriteLine(applicntID);
 
                 applicantslist.Add(
-                    new LoanApplicants()
+                    new LoanaplicantsInfo()
                     {
                         ApplicantId = applicntID,
                         AccountId = acctID,
@@ -448,8 +455,9 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
                         PanId = panID,
                         LoanType = loanType,
                         Amount = amount,
-                        Status = status
-                    }
+                        Status = status,
+                        CustomerUserId= custid,
+                        ApplicantType = custtype                    }
                 );
             }
             reader.Close();
@@ -470,6 +478,4 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
         return applicantslist;
     }
 
-
-    
 }

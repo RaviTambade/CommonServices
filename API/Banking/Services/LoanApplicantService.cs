@@ -46,10 +46,10 @@ public class LoanApplicantService : ILoanApplicantService
         return loanapplicants;
     }
 
-     public List<LoanApplicants> LoanApplicantsAccordingLoanStatus(string LoanType)
+     public async Task<List<LoanaplicantsInfo>> LoanApplicantsAccordingLoanStatus(string LoanType)
      {
-        List<LoanApplicants> loanapplicants=new List<LoanApplicants>();
-        loanapplicants=_repo.LoanApplicantsAccordingLoanStatus(LoanType);
+        List<LoanaplicantsInfo> loanapplicants=new List<LoanaplicantsInfo>();
+        loanapplicants=await _repo.LoanApplicantsAccordingLoanStatus(LoanType);
         return loanapplicants;
      }
 

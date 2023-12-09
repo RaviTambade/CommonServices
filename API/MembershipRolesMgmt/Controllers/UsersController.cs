@@ -76,7 +76,6 @@ public class UsersController : ControllerBase
         return status;
     }
 
-
     [HttpDelete]
     [Route("DeleteUser/{userId}")]
     public async Task<bool> Delete(int userId)
