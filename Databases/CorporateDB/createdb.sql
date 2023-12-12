@@ -8,9 +8,11 @@ USE CorporateDB;
 
 CREATE TABLE corporations(
         id INT PRIMARY KEY AUTO_INCREMENT,
+        corporationid int NOT NULL UNIQUE,
+        pannumber varchar(20),
         name VARCHAR(30) NOT NULL,
         contactnumber VARCHAR(30) NOT NULL UNIQUE,
         email VARCHAR(30) NOT NULL,
-        personid INT NOT NULL 
+        userid INT NOT NULL 
     );
     

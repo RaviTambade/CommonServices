@@ -92,7 +92,7 @@ public class LoanApplicantController : ControllerBase
         return DetailsOfApplicants;
       }
 
-      /*
+      /* These functions are written in Helper class
     public async Task<List<User>> GetUserDetails(string userIds)
     {
         var response = await _httpClient.GetFromJsonAsync<List<User>>(

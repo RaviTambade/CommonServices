@@ -35,7 +35,7 @@ namespace Banking.Helpers
         
             Console.WriteLine(user_ids);
             List<User> users = null;
-            if(!String.IsNullOrEmpty(corporateuser_ids))
+            if(!String.IsNullOrEmpty(user_ids))
             {
                 users =  await GetUserDetails(user_ids);
             }

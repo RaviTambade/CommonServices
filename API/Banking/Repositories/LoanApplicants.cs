@@ -325,8 +325,6 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
 
         Console.WriteLine("\n Connection status " + con.State);
         string query = "SELECT * FROM loanapplicants WHERE applydate >= @StartDateString AND applydate <= @EndDateString ";
-
-
         
         //Create Command Object
 

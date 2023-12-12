@@ -54,7 +54,7 @@ inner join accounts on loanapplicants.accountid = accounts.id inner join custome
 
 SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants 
 inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id
-WHERE loanstatus = @Loanstatus;
+WHERE loanstatus = "applied";
 
 
 

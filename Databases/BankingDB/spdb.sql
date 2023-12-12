@@ -87,6 +87,15 @@ END $$
 DELIMITER ;
 
 CALL emitransfer('7777777777',@transid);
+CALL emitransfer('67675456546',@transid);
+CALL emitransfer('9999999999',@transid);
+CALL emitransfer('1234432112',@transid);
+CALL emitransfer('12656767876',@transid);
+CALL emitransfer('46556565566',@transid);
+
+
+
+
 SELECT @transid;
 
 
