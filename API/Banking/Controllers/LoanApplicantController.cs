@@ -44,6 +44,18 @@ public class LoanApplicantController : ControllerBase
         return status;
     }
 
+
+    [HttpPut]
+     [Route("{id}")]
+    public async Task <bool> Update(LoanaplicantsInfo applicant)
+    {
+         Console.WriteLine("Inside Update method ......");
+        Console.WriteLine("Status CONTROLLER : " + applicant.Status);
+        
+        bool status = await _svc.Update(applicant);
+        return status;
+    }
+
     [HttpDelete]
     [Route("{id}")]
     public bool Delete(int id)

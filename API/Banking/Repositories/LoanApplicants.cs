@@ -72,6 +72,50 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
         return status;
     }
 
+    public async Task <bool> Update(LoanaplicantsInfo applicant)
+    {
+       
+        Console.WriteLine("ApplayDate In Repo:- " + applicant.ApplyDate);
+
+        // DateTime aDate = DateTime.Parse(reader["applydate"].ToString());
+                //DateOnly FormatDate = DateOnly.FromDateTime(aDate);
+        DateOnly currentDateOnly = applicant.ApplyDate;
+
+        string dateString = currentDateOnly.ToString("yyyy-MM-dd");
+
+        bool status = false;
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+        try
+        {
+            await con.OpenAsync();
+
+            string query =
+            " UPDATE loanapplicants SET loanstatus = @Status WHERE applicatid=@LoanApplicantId";
+            MySqlCommand command = new MySqlCommand(query, con);
+
+            command.Parameters.AddWithValue("@LoanApplicantId", applicant.ApplicantId);
+            command.Parameters.AddWithValue("@Status", applicant.Status);
+
+         
+            int rowsAffected = command.ExecuteNonQuery();
+            Console.WriteLine("rowsAffected", rowsAffected);
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            await con.CloseAsync();;
+        }
+        return status;
+    }
+
     public bool Delete(int laonapplicantId)
     {
         bool status = false;

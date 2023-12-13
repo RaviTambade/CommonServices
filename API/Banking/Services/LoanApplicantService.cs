@@ -25,6 +25,14 @@ public class LoanApplicantService : ILoanApplicantService
         return status;
     }   
 
+    public async Task <bool> Update(LoanaplicantsInfo applicant)
+    {
+         Console.WriteLine("Status in Update method : "+ applicant.Status);
+        bool status=await _repo.Update(applicant);
+        return status;
+    }
+
+
     public bool Delete(int applicantId)
     {
         bool status=_repo.Delete(applicantId);
