@@ -77,3 +77,4 @@ CREATE TABLE
         ),
          loanstatus ENUM("applied","approved","rejected") DEFAULT "applied"
     );
+    
