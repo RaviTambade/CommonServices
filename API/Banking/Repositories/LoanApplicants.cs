@@ -250,19 +250,22 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
         return applicantslist;
     }
 
-    public LoanApplicants GetById(int laonapplicantId)
+    public async Task <LoanaplicantsInfo> GetById(int laonapplicantId)
     {
-        LoanApplicants applicant = null;
+        LoanaplicantsInfo applicant = null;
 
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
         try
         {
-            string query = "SELECT * FROM loanapplicants WHERE applicatid=" + laonapplicantId;
-            con.Open();
+            //string query = "SELECT * FROM loanapplicants WHERE applicatid=" + laonapplicantId;
+
+
+            string query = " SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id WHERE applicatid=" + laonapplicantId;
+             await con.OpenAsync();
             MySqlCommand command = new MySqlCommand(query, con);
             MySqlDataReader reader = command.ExecuteReader();
-            if (reader.Read())
+            if (await reader.ReadAsync())
             {
                 int id = int.Parse(reader["applicatid"].ToString());
 
@@ -277,9 +280,12 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
                 
                 string panID = reader["panid"].ToString();
                 string loanType = reader["loantype"].ToString();
-                string status = reader["status"].ToString();
-                double amount = double.Parse(reader["amount"].ToString());
-                applicant = new LoanApplicants
+                string status = reader["loanstatus"].ToString();
+                double amount = double.Parse(reader["loanamount"].ToString());
+                int custid = int.Parse(reader["bankcustomerid"].ToString());
+                string custtype = reader["usertype"].ToString();
+
+                applicant = new LoanaplicantsInfo
                 {
                     ApplicantId = id,
                     AccountId = acctid,
@@ -287,7 +293,9 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
                     PanId = panID,
                     LoanType = loanType,
                      Amount = amount,
-                    Status = status
+                    Status = status, 
+                    CustomerUserId= custid,
+                    ApplicantType = custtype
                    
                 };
             }
@@ -298,10 +306,10 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
         }
         finally
         {
-            con.Close();
+            await con.CloseAsync();
+
         }
         return applicant;
-
 
     }
 

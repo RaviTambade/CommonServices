@@ -7,7 +7,7 @@ public interface ILoanApplicantRepo
     bool Insert(LoanApplicants applicant);
     public bool Delete(int laonapplicantId);
     public List<LoanApplicants> GetAll();
-    public LoanApplicants GetById(int laonapplicantId);
+    public  Task <LoanaplicantsInfo> GetById(int laonapplicantId);
     public List<LoanApplicants> LoanApplicantsBetweenGivenDates(DateTime startDate,DateTime endDate);
 
     public Task <List<LoanaplicantsInfo>> LoanApplicantsAccordingLoanStatus(string LoanType);//Why need not to write async here before Task

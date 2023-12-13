@@ -1,0 +1,85 @@
+<!-- url: 'http://localhost:5053/api/applicant/status' + "/" + loantype , -->
+ 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Loan Applicants According to Loan status</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!--<script src="jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+  <script>
+    // $(document).ready()
+     function getloanapplicants() {
+        // Make an API call to delete the user using userId
+        var loanid = $('#loanid').val();
+       
+        console.log("Id : " + loanid);
+
+            //$(document).ready(function() {
+                         $.ajax({
+                                url: 'http://localhost:5053/api/applicant' + "/" + loanid ,
+                                type: 'GET',
+                                contentType: 'application/json',
+                                success: function (data) {
+                                    console.log('Got the Data :', data);
+                                    alert("Data get Successfully ...");
+
+
+                                    var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable" class="table table-striped"> <thead> <tr>' +
+                            '<th>AccountId</th><th>Applay Date</th><th>Pan Id</th><th>Loan Type</th><th>Loan Amount</th><th>Loan Status</th><th>Applicant Name</th><th>Applicant Type</th></tr></thead><body>';
+                                // (function(data){
+                                    htmlContent += '<tr>';
+                                    htmlContent +='<td>'+data.accountId + '</td>';
+                                    htmlContent += '<td>'+data.applyDate + '</td>';
+                                    htmlContent += '<td>'+data.panId + '</td>';
+                                    htmlContent += '<td>'+data.loanType + '</td>';
+                                    htmlContent += '<td>'+data.amount + '</td>';
+                                    htmlContent += '<td>'+data.status + '</td>';
+                                    htmlContent += '<td>'+data.applicantName + '</td>';
+                                    htmlContent += '<td>'+data.applicantType + '</td>';
+
+                                   
+                                    htmlContent += '<td>' + "  " + '<button id="approved" class="btn btn-success">Approved</button>' + "  "+ '<button id="rejected" class="btn btn-danger">Rejected</button>' + '</td>';
+                                    htmlContent += '</tr>';
+                                // });
+
+                                htmlContent += '</tbody></table></div>';
+                                $('#dataDisplay').html(htmlContent);
+             
+                                },
+
+                                error: function (xhr, status, error) {
+                                // Handle errors
+                                    console.error(status + ': ' + error);
+                                }
+
+                        });
+        
+    //});
+};
+</script>
+
+</head>
+
+<body>
+<div>
+
+    <h1>Display Loan Applicant  according to Id</h1>
+    <br></br>
+    <label>Enter Loan Id: </label>
+    <input type="number" id="loanid" name="loanid" placeholder="Enter Loan Id "  /> 
+    
+    <br></br>
+
+    <button onclick="getloanapplicants()">Get Loan Applicants</button>
+    <br/><br/>
+</div>
+<div id="dataDisplay"></div>
+</body>

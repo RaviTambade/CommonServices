@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PMSNGApp</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!--<script src="jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <script>
+
+    $(document).ready(function() {
+      $('#frm_applicant').submit(function(event) {
+         event.preventDefault(); // Prevent default form submission
+
+          // Get values from form fields
+          var aactId = $('#accountId').val();
+          var applayDate = $('#applydate').val();
+          console.log(applayDate);
+          var panId = $('#txtPanID').val();
+          var loanAmount = $('#txtAmount').val();
+          var loanType = $('#txtLoantype').val();
+          var loanstatus = $('#txtLoanstatus').val();
+
+          // Create data object to send via AJAX
+          var newData = {
+              "accountId": aactId, 
+              "applyDate": applayDate,
+              "panId": panId,
+              "amount": loanAmount,
+              "loanType":loanType,
+              "status":loanstatus
+          };
+          console.log(JSON.stringify(newData));
+
+           // AJAX GET request to getall data from database
+          // AJAX POST request to insert new data
+          $.ajax({
+              url: 'http://localhost:5053/api/applicant',
+              type: 'POST',
+              contentType: 'application/json',
+              data: JSON.stringify(newData),
+              success: function(response) {
+                  console.log('Data inserted:', response);
+                  alert("Successfully inserted...");
+                 
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error:', status + ': ' + error);
+                  console.log('Data not inserted:', response);
+                  alert("not inserted...");
+              }
+          });
+      });
+  });
+
+    
+  </script>
+</head>
+
+<body>
+<form id="frm_applicant">
+    <div>Loan Application Form</div>
+    <br></br>
+    <label>Bank AccountId : </label>
+    <input type="text" id="accountId" name="accountId" placeholder="Enter Bank Account ID "  />
+    <br></br><br></br>
+
+    <label>Apply Date : </label>
+    <input type="Date" id="applydate" name="applydate" placeholder="Enter Loan Apply Date "  />
+
+    <br></br><br></br>
+    <label>PAN ID : </label>
+    <input type="text" id="txtPanID" name="txtPanID" placeholder="Enter PAN ID" />
+    <br></br><br></br>
+
+    <label>Loan Amount : </label>
+    <input type="number" id="txtAmount" name="txtAmount" placeholder="Enter Loan Amount" />
+    <br></br><br></br>
+
+    <label>Loan Type : </label>
+    <input type="text" id="txtLoantype" name="txtLoantype" placeholder="Enter Loan Type"/>
+    <br></br><br></br>
+
+    <label>Loan Status : </label>
+    <input type="text" id="txtLoanstatus" name="txtLoanstatus" placeholder="Enter Loan Status"/>
+    <br></br><br></br>
+    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+    </form>
+
+
+</body>
