@@ -54,12 +54,31 @@ public class LoanApplicantController : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-    public LoanApplicants GetById(int id)
+    /*public LoanApplicants GetById(int id)
     {
         LoanApplicants applicant = _svc.GetById(id);
         return applicant;
-    }
+    }*/
 
+    public async Task <LoanaplicantsInfo> GetById(int id)
+    {
+
+        Console.WriteLine("Inside GetById method in Cotroller....");
+
+         LoanaplicantsInfo applicant = await _svc.GetById(id);
+        LoanApplicationHelper helper = new LoanApplicationHelper(_httpClient);
+        //LoanaplicantsInfo DetailsOfApplicant =  await helper.applicantDetailsById(applicant);
+        List<LoanaplicantsInfo> applicants = new List<LoanaplicantsInfo>(){applicant};
+
+        List<LoanaplicantsInfo> DetailsOfApplicants =  await helper.applicantsDetails(applicants);
+        
+        
+        return DetailsOfApplicants[0];
+
+
+        //LoanaplicantsInfo applicant = await _svc.GetById(id);
+        //return applicant;
+    }
     [HttpGet("{startDate}/{endDate}")]
      public IEnumerable<LoanApplicants> LoanApplicantsBetweenGivenDates(DateTime startDate,DateTime endDate)
     {

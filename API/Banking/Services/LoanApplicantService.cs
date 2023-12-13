@@ -32,10 +32,17 @@ public class LoanApplicantService : ILoanApplicantService
     }
     
 
-    public LoanApplicants GetById(int laonapplicantId)
+    /*public LoanApplicants GetById(int laonapplicantId)
     {
         LoanApplicants loanapplicant=new LoanApplicants();
         loanapplicant=_repo.GetById(laonapplicantId);
+        return loanapplicant;
+    }*/
+
+    public async Task<LoanaplicantsInfo> GetById(int laonapplicantId)
+    {
+        LoanaplicantsInfo loanapplicant=new LoanaplicantsInfo();
+        loanapplicant=await _repo.GetById(laonapplicantId);
         return loanapplicant;
     }
     

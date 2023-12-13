@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PMSNGApp</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!--<script src="jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <script>
+
+    $(document).ready(function() {
+     
+           // AJAX GET request to getall data from database
+          
+          $.ajax({
+              url: 'http://localhost:5053/api/applicant',
+              type: 'GET',
+              contentType: 'application/json',
+              
+              success: function(response) {
+                  console.log('Got the Data :', response);
+                  alert("Data get Successfully ...");
+
+                var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable" class="table table-striped"> <thead> <tr>' +
+                                '<th>AccountId</th><th>Applay Date</th><th>Pan Id</th><th>Loan Type</th><th>Loan Amount</th><th>Loan Status</th></tr></thead><body>';
+                                    $.each(response,function(index,item){
+                                        htmlContent += '<tr>';
+                                        htmlContent +='<td>'+item.accountId + '</td>';
+                                        htmlContent += '<td>'+item.applyDate + '</td>';
+                                        htmlContent += '<td>'+item.panId + '</td>';
+                                        htmlContent += '<td>'+item.loanType + '</td>';
+                                        htmlContent += '<td>'+item.amount + '</td>';
+                                        htmlContent += '<td>'+item.status + '</td>';
+                                        htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
+                                        htmlContent += '</tr>';
+                                    });
+
+                                    htmlContent += '</tbody></table></div>';
+                                    $('#dataDisplay').html(htmlContent);
+                 
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error:', status + ': ' + error);
+                  console.log('Data does not get:', response);
+                  alert("Data does not get...");
+              }
+          });
+      });
+
+
+  </script>
+</head>
+
+<body>
+    <!-- <button id="addNewEmployee" class="btn btn-primary">Add New Employee</button> -->
+    <!-- <button id="removeAll" class="btn btn-primary">Remove All</button> -->
+    <div id="dataDisplay">
+    </div>
+
+
+</body>
