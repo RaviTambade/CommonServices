@@ -15,19 +15,29 @@
 
 
   <script>
-    // $(document).ready()
+
+    var status1 = "approve";
+    var status2 = "reject";
+    function checkstatus(parameter) {
+        
+            alert(parameter);
+    
+    }
+
      function getloanapplicants() {
         // Make an API call to delete the user using userId
         var loanid = $('#loanid').val();
        
         console.log("Id : " + loanid);
-
+       
             //$(document).ready(function() {
                          $.ajax({
                                 url: 'http://localhost:5053/api/applicant' + "/" + loanid ,
                                 type: 'GET',
                                 contentType: 'application/json',
                                 success: function (data) {
+
+                                   
                                     console.log('Got the Data :', data);
                                     alert("Data get Successfully ...");
 
@@ -46,7 +56,7 @@
                                     htmlContent += '<td>'+data.applicantType + '</td>';
 
                                    
-                                    htmlContent += '<td>' + "  " + '<button id="approved" class="btn btn-success">Approved</button>' + "  "+ '<button id="rejected" class="btn btn-danger">Rejected</button>' + '</td>';
+                                    htmlContent += '<td>' + "  " + '<button onclick = "checkstatus(status1)" id="btnapproved" class="btn btn-success">Approved</button>' + "  "+ '<button  onclick = "checkstatus(status2)" id="btnrejected" class="btn btn-danger">Rejected</button>' + '</td>';
                                     htmlContent += '</tr>';
                                 // });
 
@@ -79,6 +89,7 @@
     <br></br>
 
     <button onclick="getloanapplicants()">Get Loan Applicants</button>
+    <!-- <button id ="btnapproved" name = "btnapproved">Approved</button> -->
     <br/><br/>
 </div>
 <div id="dataDisplay"></div>
