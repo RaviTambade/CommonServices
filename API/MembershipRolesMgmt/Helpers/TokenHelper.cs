@@ -25,6 +25,7 @@ public class TokenHelper
         {
             new Claim("contactNumber", user.ContactNumber),
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Name,user.FirstName)
         };
 
         foreach (var role in roles)

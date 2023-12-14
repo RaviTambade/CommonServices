@@ -25,6 +25,9 @@ WHERE loanstatus = "applied";
 SELECT * FROM loanapplicants 
 WHERE loanstatus = "approved";
 
+ UPDATE loanapplicants SET loanstatus= "approved" WHERE loanid=8;
+
+
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",1000,"Interest",@transactionId);
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",2000,@transactionId);
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",3000,@transactionId);
