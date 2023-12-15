@@ -52,7 +52,7 @@ public class LoanApplicantController : ControllerBase
          Console.WriteLine("Inside Update method ......");
         Console.WriteLine("Status CONTROLLER : " + applicant.Status);
         
-        bool status = await _svc.Update(applicant);
+        bool status = await _svc.UpdateStatus(applicant);
         return status;
     }
 
