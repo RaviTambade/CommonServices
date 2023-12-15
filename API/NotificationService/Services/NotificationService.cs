@@ -14,20 +14,18 @@ public class NotifiactionSender : INotificationSender
         _smsSender = smsSender;
     }
 
-    public void Send(Message message)
+    public async Task Send(Message message)
     {
-        SendSms(message);
-        SendEmail(message);
+       await Task.WhenAll(SendSms(message),SendEmail(message));
     }
 
-
-    private void SendSms(Message message)
+    private async Task SendSms(Message message)
     {
         var smsMessage = new SMSMessage() { To = message.ToPhone, MessageText = message.Body };
-        _smsSender.SendMessage(smsMessage);
+        await _smsSender.SendMessage(smsMessage);
     }
 
-    private void SendEmail(Message message)
+    private async Task SendEmail(Message message)
     {
         var emailMessage = new EmailMessage(
             to: message.ToEmail,
@@ -35,6 +33,6 @@ public class NotifiactionSender : INotificationSender
             body: message.Body
         );
 
-        _mailsender.SendEmail(emailMessage);
+        await _mailsender.SendEmail(emailMessage);
     }
 }

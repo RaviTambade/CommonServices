@@ -4,5 +4,5 @@ namespace Transflower.NotifiactionService.Services.Interfaces;
 
 public interface IEmailSender
 {
-    void SendEmail(EmailMessage message);
+    Task SendEmail(EmailMessage message);
 }

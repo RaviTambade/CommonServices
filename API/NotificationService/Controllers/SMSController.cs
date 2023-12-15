@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Transflower.NotifiactionService.Models;
 using Transflower.NotifiactionService.Services.Interfaces;
 
-
 namespace Transflower.NotifiactionService.Controllers;
 
 [ApiController]
@@ -11,17 +10,15 @@ public class SmsController : ControllerBase
 {
     private readonly ISMSSender _smsSender;
 
-    public SmsController(
-        ISMSSender smsSender
-    )
+    public SmsController(ISMSSender smsSender)
     {
         _smsSender = smsSender;
     }
 
     [HttpPost]
-    public IActionResult SendMessage(SMSMessage message)
+    public async Task<IActionResult> SendMessage(SMSMessage message)
     {
-        _smsSender.SendMessage(message);
-        return Ok("Success");
+        await _smsSender.SendMessage(message);
+        return await Task.FromResult(Ok("Success"));
     }
 }
