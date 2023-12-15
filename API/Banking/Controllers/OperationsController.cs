@@ -124,10 +124,10 @@ public class OperationsController : ControllerBase
 
     [HttpGet]
     [Route("operations/emidetails/{loanId}")]
-    public Operation GetLoanApplicantEmiDetails(int loanId)
+    public List<Operation> GetLoanApplicantEmiDetails(int loanId)
     {
         
-        Operation emiDetails = _svc.GetLoanApplicantEmiDetails(loanId);
+        List<Operation> emiDetails = _svc.GetLoanApplicantEmiDetails(loanId);
         return emiDetails;
     }
 }

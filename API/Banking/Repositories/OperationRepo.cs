@@ -481,9 +481,9 @@ public class OperationRepo : IOperationRepo
 
 
 
-    public Operation GetLoanApplicantEmiDetails(int loanId)
+    public List<Operation> GetLoanApplicantEmiDetails(int loanId)
     {
-        Operation emidetails = new Operation();
+        List<Operation> emidetails = new List<Operation>();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
     
@@ -493,26 +493,26 @@ public class OperationRepo : IOperationRepo
                 string query = "SELECT * from operations inner join accounts on operations.acctId = accounts.id where accounts.id = (Select acctId from loan where loanid = @lId)  AND operations.operationtype = @OperationType"; 
 
                 MySqlCommand cmd = new MySqlCommand(query,con);
-                cmd.CommandType = CommandType.StoredProcedure;
+                //cmd.CommandType = CommandType.StoredProcedure;
 
             
                 cmd.Parameters.AddWithValue("@lID", loanId);
                 cmd.Parameters.AddWithValue("@Operationtype","EMI");
                  MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                while (reader.Read())
                 {
-                                        
-                    string acctNum = reader["acctnumber"].ToString();
+                    string acctNumber = reader["acctnumber"].ToString();
                     double amount = double.Parse(reader["amount"].ToString());
                     DateTime operationdate = Convert.ToDateTime(reader["operationdate"].ToString());
-
-                    emidetails = new Operation()
-                    {
-                        AccountNumber = acctNum,
-                        Amount = amount,
-                        OperationTime = operationdate,
-                       
-                    };
+                    
+                emidetails.Add(new Operation()
+                {
+                    
+                    AccountNumber = acctNumber,
+                    Amount = amount,
+                    OperationTime = operationdate,
+                    
+                });
             }
             reader.Close();
                 

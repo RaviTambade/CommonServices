@@ -89,9 +89,9 @@ public class OperationsService:IOperationsService
         return emidetails;
      }
 
-    public Operation GetLoanApplicantEmiDetails(int loanId)
+    public List<Operation> GetLoanApplicantEmiDetails(int loanId)
     {
-        Operation loanapplicantemidetails = _repo.GetLoanApplicantEmiDetails(loanId);
+        List<Operation> loanapplicantemidetails = _repo.GetLoanApplicantEmiDetails(loanId);
         return loanapplicantemidetails;
     }
     
