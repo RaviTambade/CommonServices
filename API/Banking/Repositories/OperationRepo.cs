@@ -478,6 +478,56 @@ public class OperationRepo : IOperationRepo
 
         return emidetails;
     }
+
+
+
+    public Operation GetLoanApplicantEmiDetails(int loanId)
+    {
+        Operation emidetails = new Operation();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+    
+        Console.WriteLine("Lid " + loanId);
+        try{
+                con.Open();
+                string query = "SELECT operations.acctnumber,operations.amount,operations.operationdate from operations inner join accounts on operations.acctId = accounts.id where accounts.id = (Select acctId from loan where loanid = @lId)AND operations.operationtype = @operationtype";                
+                
+                
+                MySqlCommand cmd = new MySqlCommand(query,con);
+                //cmd.CommandType = CommandType.StoredProcedure;
+
+            
+                cmd.Parameters.AddWithValue("@lID", loanId);
+                cmd.Parameters.AddWithValue("@Operationtype","EMI");
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                                        
+                    string acctNum = reader["acctnumber"].ToString();
+                    double amount = double.Parse(reader["amount"].ToString());
+                    DateTime operationdate = Convert.ToDateTime(reader["operationdate"].ToString());
+
+                    emidetails = new Operation()
+                    {
+                        AccountNumber = acctNum,
+                        Amount = amount,
+                        OperationTime = operationdate,
+                       
+                    };
+            }
+            reader.Close();
+                
+            }
+        catch(Exception e)
+        {
+            throw e;
+        }
+        finally{
+            con.Close();
+        }
+
+        return emidetails;
+    }
 }
 
 

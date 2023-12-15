@@ -1,0 +1,92 @@
+
+ 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Loan Applicants EMI details According to Loan Id</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+
+  <!--<script src="jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   
+
+  <script>
+
+    function displayData(data)
+    {
+        var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsEMIDetailsTable" class="table table-striped"> <thead> <tr>' +
+                                    '<th>AccountNumber</th><th>Amount</th><th>OperationDateAndTime</th></tr></thead><body>';
+                                    
+                                    htmlContent += '<tr>';
+                                    htmlContent +='<td>'+item.acctnumber + '</td>';
+                                    htmlContent += '<td>'+item.amount + '</td>';
+                                    htmlContent += '<td>'+item.operationdateandtime + '</td>';                              
+
+                                   
+                                    htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
+                                    htmlContent += '</tr>';
+                                    
+                                htmlContent += '</tbody></table></div>';
+                                $('#dataDisplay').html(htmlContent);
+             
+
+    }
+
+    
+
+    function getloanapplicantsEMIdetails() {
+        // Make an API call to delete the user using userId
+        var loanid = $('#loanid').val();
+       
+        console.log("Id : " + loanid);
+       
+            //$(document).ready(function() {
+                         $.ajax({
+                                url: 'http://localhost:5053/api/banking/operations/emidetails' + "/" + loanid ,
+                                type: 'GET',
+                                contentType: 'application/json',
+                                success: function (data) {
+
+                                   
+                                    console.log('Got the Data :', data);
+                                    alert("Data get Successfully ...");
+                                    displayData(data);
+
+                                },
+
+                                error: function (xhr, status, error) {
+                                // Handle errors
+                                    console.error(status + ': ' + error);
+                                }
+
+                        });
+
+};
+</script>
+
+</head>
+
+<body>
+<div>
+
+    <h1>Display Loan Applicant EMI details according to Id</h1>
+    <br></br>
+    <label>Enter Loan Id: </label>
+    <input type="number" id="loanid" name="loanid" placeholder="Enter Loan Id "  /> 
+    
+    <br></br>
+
+    <button onclick="getloanapplicantsEMIdetails()">Get Loan Applicants Emi Details</button>
+    <!-- <button id ="btnapproved" name = "btnapproved">Approved</button> -->
+    <br/><br/>
+
+</div>
+<div id="displayData"></div>
+
+ <br/><br/>
+<div id="displayUpdateddata"></div>
+</body>

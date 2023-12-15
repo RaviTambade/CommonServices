@@ -126,7 +126,7 @@ SET RemainingEmi = remaingemicount - cnt;
 END $$
 DELIMITER ;
 
-CALL loanstatus(1,@Ramount,@RemainingEmi,@TotalInstllments);
+CALL loanstatus(6,@Ramount,@RemainingEmi,@TotalInstllments);
 SELECT @Ramount,@RemainingEmi,@TotalInstllments;
 
 
