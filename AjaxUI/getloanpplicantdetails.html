@@ -8,19 +8,71 @@
   <title>Loan Applicants According to Loan status</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
 
   <!--<script src="jquery.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+   <script type="text/javascript" src="G:/TAP/Repositoryes/CommonServices/AjaxUI/HtmlHelper/htmlHelper.js"></script>
 
   <script>
 
-    var status1 = "approve";
-    var status2 = "reject";
-    function checkstatus(parameter) {
+    /*function displayData(details)
+    {
+        var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable" class="table table-striped"> <thead> <tr>' +
+                                    '<th>AccountId</th><th>Applay Date</th><th>Pan Id</th><th>Loan Type</th><th>Loan Amount</th><th>Loan Status</th><th>Applicant Name</th><th>Applicant Type</th></tr></thead><body>';
+                                
+                                    htmlContent += '<tr>';
+                                    htmlContent +='<td>'+details.accountId + '</td>';
+                                    htmlContent += '<td>'+details.applyDate + '</td>';
+                                    htmlContent += '<td>'+details.panId + '</td>';
+                                    htmlContent += '<td>'+details.loanType + '</td>';
+                                    htmlContent += '<td>'+details.amount + '</td>';
+                                    htmlContent += '<td>'+details.status + '</td>';
+                                    htmlContent += '<td>'+details.applicantName + '</td>';
+                                    htmlContent += '<td>'+details.applicantType + '</td>';
+
+                                   
+                                    htmlContent += '<td>' + "  " + '<button onclick = "checkstatus(status1,responsedata)" id="btnapproved" class="btn btn-success">Approved</button>' + "  "+ '<button  onclick = "checkstatus(status2,responsedata)" id="btnrejected" class="btn btn-danger">Rejected</button>' + '</td>';
+                                    htmlContent += '</tr>';
+
+                                htmlContent += '</tbody></table></div>';
+                                $('#dataDisplay').html(htmlContent);
+             
+
+    }*/
+
+    var status1 = "approved";
+    var status2 = "rejected";
+    var responsedata = null;
+    function checkstatus(parameter,details) {
         
-            alert(parameter);
+           // alert(parameter);
+            console.log("details : " , details);
+            details.status = parameter;
+
+            console.log("details status  : " ,details.status);
+            var loanid = $('#loanid').val();
+
+            $.ajax({
+                                url: 'http://localhost:5053/api/applicant' + "/" +  loanid,
+                                type: 'PUT',
+                                contentType: 'application/json',
+                                data: JSON.stringify(details),
+                                success: function (response) {
+                                    console.log('The Data is updated :', response);
+                                    if(response ==true)
+                                    {
+                                        displayData(details);
+                                        alert("Data updatedet Successfully ...");
+                                    }
+                            
+                                },
+                                error: function (xhr, status, error) {
+                                // Handle errors
+                                    console.error(status + ': ' + error);
+                                }
+
+                        });
     
     }
 
@@ -39,30 +91,10 @@
 
                                    
                                     console.log('Got the Data :', data);
+                                    responsedata = data;
                                     alert("Data get Successfully ...");
+                                    displayData(data);
 
-
-                                    var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable" class="table table-striped"> <thead> <tr>' +
-                            '<th>AccountId</th><th>Applay Date</th><th>Pan Id</th><th>Loan Type</th><th>Loan Amount</th><th>Loan Status</th><th>Applicant Name</th><th>Applicant Type</th></tr></thead><body>';
-                                // (function(data){
-                                    htmlContent += '<tr>';
-                                    htmlContent +='<td>'+data.accountId + '</td>';
-                                    htmlContent += '<td>'+data.applyDate + '</td>';
-                                    htmlContent += '<td>'+data.panId + '</td>';
-                                    htmlContent += '<td>'+data.loanType + '</td>';
-                                    htmlContent += '<td>'+data.amount + '</td>';
-                                    htmlContent += '<td>'+data.status + '</td>';
-                                    htmlContent += '<td>'+data.applicantName + '</td>';
-                                    htmlContent += '<td>'+data.applicantType + '</td>';
-
-                                   
-                                    htmlContent += '<td>' + "  " + '<button onclick = "checkstatus(status1)" id="btnapproved" class="btn btn-success">Approved</button>' + "  "+ '<button  onclick = "checkstatus(status2)" id="btnrejected" class="btn btn-danger">Rejected</button>' + '</td>';
-                                    htmlContent += '</tr>';
-                                // });
-
-                                htmlContent += '</tbody></table></div>';
-                                $('#dataDisplay').html(htmlContent);
-             
                                 },
 
                                 error: function (xhr, status, error) {
@@ -71,8 +103,7 @@
                                 }
 
                         });
-        
-    //});
+
 };
 </script>
 
@@ -91,6 +122,10 @@
     <button onclick="getloanapplicants()">Get Loan Applicants</button>
     <!-- <button id ="btnapproved" name = "btnapproved">Approved</button> -->
     <br/><br/>
+
 </div>
 <div id="dataDisplay"></div>
+
+<br/><br/>
+<div id="displayUpdateddata"></div>
 </body>

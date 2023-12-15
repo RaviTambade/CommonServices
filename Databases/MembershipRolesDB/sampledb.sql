@@ -2,8 +2,8 @@
 -- Active: 1696576841746@@127.0.0.1@3306@membershiprolesdb
 
 
-INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","580408011566","Pragati","Bangar","2000-12-18","Female","bangarpragati11@gmail.com","1245987456","password");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","580408011562","Abhay","Navale","2000-12-08","male","navaleabhay11@gmail.com","8456123654","password");
+INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","580408011534","Shubham","Teli","2000-12-08","male","teliShubham@gmail.com","8456123623","password");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","58040801153","Akash","Ajab","2000-12-28","male","ajabakash11@gmail.com","7758983095","password");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","58040801154","Ashok","Bajare","1984-12-28","male","ashok311@gmail.com","8752312210","password");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","58040801155","Ganesh","Morde","1990-04-28","male","mordeganesh11@gmail.com","8546123565","password");
@@ -11,13 +11,14 @@ INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,co
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","58040801157","Ramesh","Kale","1980-04-07","male","rameshkale1@gmail.com","8976231245","password");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","58040801158","Ram","Bajare","1980-04-07","male","rambajare@gmail.com","8767098245","password");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","58040801159","Dadabhau","Navle","1980-04-07","male","dadabhaunavle@gmail.com","9978234578","password");
-INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","58040801160","Maruti","Shinde","1980-04-07","male","marutidhinde@gmail.com","8841235696","password");
-INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","76787954565","Vishal","Kudale","1960-04-07","male","vishalkudle@gmail.com","9090909090","password");
-INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","76787923466","Vishal","Thorat","1969-04-07","male","vishalthorat@gmail.com","9089898989","password");
-INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","76787912367","Vishal","Kale","1964-04-07","male","vishalkale@gmail.com","8909090909","password");
-INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","76734554568","Vishal","Totre","1963-04-07","male","vishaltotre@gmail.com","9889898989","password");
-INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","76734554569","Ramesh","Kamble","1983-04-07","male","rameshkamble12@gmail.com","9945612032","password");
-INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","76734554570","Omkar","Ghule","1999-04-08","male","ghuleomkar@gmail.com","9922456138","password");
+INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","58040801160","Sahil","Mankar","2001-11-17","male","sahilmankar@gmail.com","8530728589","8530728589");
+INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","76787954565","Akash","Ajab","1999-09-15","male","akashajab@gmail.com","9881571268","9881571268");
+INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","76787923466","Prgati","Banger","2001-04-07","female","pragatibanger@gmail.com","7498035692","7498035692");
+INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","580408011566","Ravi","Tambade","1987-08-18","Male","ravi_tambade@gmail.com","9881735801","9881735801");
+INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","76787912367","Shubhangi","Tambade","1990-04-07","female","shubhangitambade@gmail.com","9881735802","9881735802");
+INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","76734554568","Rishikesh","Chickane","1997-04-07","male","rishikesh@gmail.com","7038548505","7038548505");
+INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","76734554569","Rohit","Mangale","1999-04-07","male","rohimangale@gmail.com","8806043365","8806043365");
+INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","76734554570","Omkar","Sudrik","1999-04-08","male","sudrikomkar@gmail.com","7218182210","7218182210");
 INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, email, contactnumber,password) VALUES  ("SnehalPatil.jpg", "678912345678", "Snehal", "Patil", "1995-09-15", "female", "snehal.patil@gmail.com", "9988776655","password");
 INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, email, contactnumber,password) VALUES  ("PranavDeshmukh.jpg", "123456789012", "Pranav", "Deshmukh", "1990-12-25", "male", "pranav.deshmukh@gmail.com", "9876543210","password");
 INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, email, contactnumber,password) VALUES  ("PoojaJadhav.jpg", "456789012346", "Pooja", "Jadhav", "1993-07-11", "female", "pooja.jadhav@gmail.com", "9876543211","password");
@@ -42,7 +43,10 @@ INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, e
 INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, email, contactnumber,password) VALUES ("SheetalKumar.jpg", "456789012945", "Sheetal", "Kumar", "1991-05-09", "female", "sheetal.kumar@gmail.com", "9876543229","password");
 INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, email, contactnumber,password) VALUES ("RajeshwariMore.jpg", "567890121256", "Rajeshwari", "More", "1995-08-28", "female", "rajeshwari.more@gmail.com", "9876543230","password");
 INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, email, contactnumber,password) VALUES ("KunalGupta.jpg", "234567892123", "Kunal", "Gupta", "1993-12-12", "male", "kunal.gupta@gmail.com", "9876543231","password");
+<<<<<<< HEAD
 
+=======
+>>>>>>> b9b86ac57378ac4e3bd925bd9e4f18ab4b46d8df
 
 
 
@@ -82,8 +86,8 @@ INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUE
 
 INSERT INTO roles(name,lob)VALUES('Director','PMS');
 INSERT INTO roles(name,lob)VALUES('HR Manager','PMS');
-INSERT INTO roles(name,lob)VALUES('Team Manager','PMS');
-INSERT INTO roles(name,lob)VALUES('Team Member','PMS');
+INSERT INTO roles(name,lob)VALUES('Project Manager','PMS');
+INSERT INTO roles(name,lob)VALUES('Employee','PMS');
 
 INSERT INTO roles(name,lob) VALUES("Store Incharge",'Inventory Management');
 INSERT INTO roles(name,lob) VALUES("Store Manager",'Inventory Management');
