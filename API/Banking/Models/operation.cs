@@ -8,4 +8,6 @@ public class Operation{
     public double Amount{get;set;}      //amount 
     public DateTime OperationTime{get;set;} // Time of operation
     public char OperationMode{get;set;}  //C or D
+
+    public string OperationType{get;set;} //'Interest','EMI','Transfer'
 }
