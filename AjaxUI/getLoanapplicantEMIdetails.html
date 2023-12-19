@@ -16,25 +16,7 @@
 
   <script>
 
-    function displayData(data)
-    {
-        var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsEMIDetailsTable" class="table table-striped"> <thead> <tr>' +
-                                    '<th>AccountNumber</th><th>Amount</th><th>OperationDateAndTime</th></tr></thead><body>';
-                                    
-                                    htmlContent += '<tr>';
-                                    htmlContent +='<td>'+item.acctnumber + '</td>';
-                                    htmlContent += '<td>'+item.amount + '</td>';
-                                    htmlContent += '<td>'+item.operationdateandtime + '</td>';                              
-
-                                   
-                                    htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
-                                    htmlContent += '</tr>';
-                                    
-                                htmlContent += '</tbody></table></div>';
-                                $('#dataDisplay').html(htmlContent);
-             
-
-    }
+    
 
     
 
@@ -50,11 +32,24 @@
                                 type: 'GET',
                                 contentType: 'application/json',
                                 success: function (data) {
-
-                                   
+                                    
                                     console.log('Got the Data :', data);
                                     alert("Data get Successfully ...");
-                                    displayData(data);
+                                    
+                                    var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsEMIDetailsTable" class="table table-striped"> <thead> <tr>' +
+                                        '<th>AccountNumber</th><th>Amount</th><th>OperationDateAndTime</th></tr></thead><body>';
+
+                                        $.each(data,function(index,item){                                   
+                                            htmlContent += '<tr>';
+                                            htmlContent +='<td>'+item.acctnumber + '</td>';
+                                            htmlContent += '<td>'+item.amount + '</td>';
+                                            htmlContent += '<td>'+item.operationdate + '</td>';                     
+                                            htmlContent += '</tr>';                                                                       
+                               
+                                    });
+                                    htmlContent += '</tbody></table></div>';
+                                    $('#displayData').html(htmlContent);
+                                    
 
                                 },
 
@@ -87,6 +82,5 @@
 </div>
 <div id="displayData"></div>
 
- <br/><br/>
-<div id="displayUpdateddata"></div>
+ 
 </body>

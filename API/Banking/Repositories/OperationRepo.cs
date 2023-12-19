@@ -481,9 +481,9 @@ public class OperationRepo : IOperationRepo
 
 
 
-    public Operation GetLoanApplicantEmiDetails(int loanId)
+    public List<Operation> GetLoanApplicantEmiDetails(int loanId)
     {
-        Operation emidetails = new Operation();
+        List<Operation> emidetails = new List<Operation>();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
     
@@ -499,21 +499,21 @@ public class OperationRepo : IOperationRepo
             
                 cmd.Parameters.AddWithValue("@lID", loanId);
                 cmd.Parameters.AddWithValue("@Operationtype","EMI");
-                MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                 MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                                        
-                    string acctNum = reader["acctnumber"].ToString();
+                    string acctNumber = reader["acctnumber"].ToString();
                     double amount = double.Parse(reader["amount"].ToString());
                     DateTime operationdate = Convert.ToDateTime(reader["operationdate"].ToString());
-
-                    emidetails = new Operation()
-                    {
-                        AccountNumber = acctNum,
-                        Amount = amount,
-                        OperationTime = operationdate,
-                       
-                    };
+                    
+                emidetails.Add(new Operation()
+                {
+                    
+                    AccountNumber = acctNumber,
+                    Amount = amount,
+                    OperationTime = operationdate,
+                    
+                });
             }
             reader.Close();
                 
