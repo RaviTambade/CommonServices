@@ -1,86 +1,72 @@
-
- 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Loan Applicants EMI details According to Loan Id</title>
+  <title>PMSNGApp</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 
   <!--<script src="jquery.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-   
-
+  
   <script>
 
-    
-
-    
-
     function getloanapplicantsEMIdetails() {
-        // Make an API call to delete the user using userId
-        var loanid = $('#loanid').val();
-       
-        console.log("Id : " + loanid);
-       
-            //$(document).ready(function() {
-                         $.ajax({
-                                url: 'http://localhost:5053/api/banking/operations/emidetails' + "/" + loanid ,
-                                type: 'GET',
-                                contentType: 'application/json',
-                                success: function (data) {
-                                    
-                                    console.log('Got the Data :', data);
-                                    alert("Data get Successfully ...");
-                                    
-                                    var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsEMIDetailsTable" class="table table-striped"> <thead> <tr>' +
-                                        '<th>AccountNumber</th><th>Amount</th><th>OperationDateAndTime</th></tr></thead><body>';
+     
+           // AJAX GET request to getall data from database
+           var Loanid = $('#loanid').val();
+          $.ajax({
+              url: 'http://localhost:5053/api/banking/operations/emidetails' + "/" + Loanid,
+              type: 'GET',
+              contentType: 'application/json',
+              
+              success: function(response) {
+                  console.log('Got the Data :', response);
+                  alert("Data get Successfully ...");
 
-                                        $.each(data,function(index,item){                                   
-                                            htmlContent += '<tr>';
-                                            htmlContent +='<td>'+item.acctnumber + '</td>';
-                                            htmlContent += '<td>'+item.amount + '</td>';
-                                            htmlContent += '<td>'+item.operationdate + '</td>';                     
-                                            htmlContent += '</tr>';                                                                       
-                               
+                var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable "  class="table table-striped"> <thead> <tr>' +
+                                '<th px;>Operation Date </th>  <th>EMI</th> </tr></thead><body>';
+                                    $.each(response,function(index,item){
+                                        console.log("index " , index);
+                                        console.log("item ", item);
+                                        htmlContent += '<tr>';
+                                       
+                                        htmlContent += '<td>'+item.operationTime + '</td> <nbsp/><nbsp/>';
+                                        htmlContent += '<td>'+item.amount + '</td>';
+
+                                        
+                                        // htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
+                                        htmlContent += '</tr>';
                                     });
+
                                     htmlContent += '</tbody></table></div>';
-                                    $('#displayData').html(htmlContent);
-                                    
+                                    $('#dataDisplay').html(htmlContent);
+                 
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error:', status + ': ' + error);
+                  console.log('Data does not get:', response);
+                  alert("Data does not get...");
+              }
+          });
+      };
 
-                                },
 
-                                error: function (xhr, status, error) {
-                                // Handle errors
-                                    console.error(status + ': ' + error);
-                                }
-
-                        });
-
-};
-</script>
-
+  </script>
 </head>
 
 <body>
-<div>
 
-    <h1>Display Loan Applicant EMI details according to Id</h1>
-    <br></br>
-    <label>Enter Loan Id: </label>
-    <input type="number" id="loanid" name="loanid" placeholder="Enter Loan Id "  /> 
+    <h2>Loan Applicant EMI details  </h2>
     
-    <br></br>
-
-    <button onclick="getloanapplicantsEMIdetails()">Get Loan Applicants Emi Details</button>
-    <!-- <button id ="btnapproved" name = "btnapproved">Approved</button> -->
+    <label>Enter Loan Applicant Id : </label>
+    <input type ="number" id="loanid" name="loanid" placeholder="Enter Loan Id"/>
     <br/><br/>
+    <button onclick="getloanapplicantsEMIdetails()">Get Loan Applicants Emi Details</button>
+    <br/>
+    <div id="dataDisplay">
+    </div>
 
-</div>
-<div id="displayData"></div>
 
- 
 </body>

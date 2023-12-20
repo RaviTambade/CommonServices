@@ -31,9 +31,9 @@ public class TwilioClient : ITwilioRestClient, ISMSSender
 
     public Task<Response> RequestAsync(Request request) => _client.RequestAsync(request);
 
-    public void SendMessage(SMSMessage message)
+    public async Task SendMessage(SMSMessage message)
     {
-        MessageResource.Create(
+        await MessageResource.CreateAsync(
             to: new PhoneNumber(message.To),
             from: new PhoneNumber(_twilioConfiguration.PhoneNumber),
             body: message.MessageText,

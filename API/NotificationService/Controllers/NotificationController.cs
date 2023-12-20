@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Transflower.NotifiactionService.Models;
-using Transflower.NotifiactionService.Services;
 using Transflower.NotifiactionService.Services.Interfaces;
 
 
@@ -18,9 +17,9 @@ public class NotificationController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Notify(Message message)
+    public async  Task<IActionResult> Notify(Message message)
     {   
-        _notificationSender.Send(message);
-        return Ok("Success");
+        await _notificationSender.Send(message);
+        return await Task.FromResult(Ok("Success"));
     }
 }

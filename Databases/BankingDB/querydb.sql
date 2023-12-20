@@ -62,7 +62,7 @@ WHERE loanstatus = "applied";
 
 SELECT operations.acctnumber,operations.amount,operations.operationdate  from operations 
 inner join accounts on operations.acctId = accounts.id 
-where accounts.id = (Select acctId from loan where loanid = 2) AND operations.operationtype = "EMI"; 
+where accounts.id = (Select acctId from loan where loanid = 3) AND operations.operationtype = "EMI"; 
 
 
 
