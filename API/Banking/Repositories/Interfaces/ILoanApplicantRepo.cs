@@ -5,7 +5,7 @@ namespace RepoLib;
 public interface ILoanApplicantRepo
 {
     bool Insert(LoanApplicants applicant);
-    public Task <bool> UpdateStatus(LoanaplicantsInfo applicant);
+    public Task <bool> UpdateStatus(LoanApplicants applicant);
 
     public bool Delete(int laonapplicantId);
     public List<LoanApplicants> GetAll();
