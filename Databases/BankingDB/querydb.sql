@@ -7,6 +7,8 @@ SELECT * FROM loanapplications;
 SELECT * FROM loantype;
 SELECT * FROM loan;
 SELECT @transactionId;
+
+
 -- DROP table customers;
 -- DROP table accounts;
 -- DROP table loanapplicants;
@@ -24,7 +26,7 @@ WHERE loanstatus = "applied";
 SELECT * FROM loanapplicants 
 WHERE loanstatus = "approved";
 
- UPDATE loanapplicants SET loanstatus = "approved" WHERE applicatid=8;
+UPDATE loanapplicants SET loanstatus = "approved" WHERE applicatid=8;
 
 
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",1000,"Interest",@transactionId);
