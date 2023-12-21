@@ -48,28 +48,21 @@ public class LoanRepo : ILoanRepo
             while (reader.Read())
             {
                 int loanId = int.Parse(reader["loanid"].ToString());
-                double amount = double.Parse(reader["amount"].ToString());
-
-
-                DateTime birthDate = DateTime.Parse(reader["loansanctiondate"].ToString());
-                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
-
-
-
-                //DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
-                int duration = int.Parse(reader["duration"].ToString());
-                double intrestRate = double.Parse(reader["intrestrate"].ToString());
-
-                int acctId = int.Parse(reader["acctId"].ToString());
+                DateTime loansanctiondate = DateTime.Parse(reader["loansanctiondate"].ToString());
+                DateOnly dateOnlyLoanSanctionDate = DateOnly.FromDateTime(loansanctiondate);
+                 //DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
+                int EMIday = int.Parse(reader["EMIday"].ToString());
+                double EMIamount = double.Parse(reader["EMIamount"].ToString());
+                int applicationId = int.Parse(reader["applicationId"].ToString());  
+                
                 loanlist.Add(
                     new Loan()
                     {
                         LoanId = loanId,
-                        Amount = amount,
-                        LoanSanctionDate = dateOnlyBirthDate,
-                        Duration = duration,
-                        IntrestRate = intrestRate,
-                        AccountId = acctId
+                        EMIAmount = EMIamount,
+                        LoanSanctionDate = dateOnlyLoanSanctionDate,
+                        EMIDay = EMIday,
+                        ApplicationId = applicationId
 
                     }
                 );
@@ -92,7 +85,7 @@ public class LoanRepo : ILoanRepo
         return loanlist;
     }
 
-    public Loan GetByAccountId(int accountId)
+    public Loan GetByLoanId(int loanid)
     {
         Loan loan = null;
 
@@ -100,32 +93,31 @@ public class LoanRepo : ILoanRepo
         con.ConnectionString = _conString;
         try
         {
-            string query = "SELECT * FROM loan WHERE acctId=" + accountId;
+            string query = "SELECT * FROM loan WHERE loanid=" + loanid;
             con.Open();
             MySqlCommand command = new MySqlCommand(query, con);
             MySqlDataReader reader = command.ExecuteReader();
             if (reader.Read())
             {
                 int loanId = int.Parse(reader["loanid"].ToString());
-                double amount = double.Parse(reader["amount"].ToString());
-
-                DateTime birthDate = DateTime.Parse(reader["loansanctiondate"].ToString());
-                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+                
+                DateTime loansanctiondate = DateTime.Parse(reader["loansanctiondate"].ToString());
+                DateOnly dateOnlyloansanctiondate = DateOnly.FromDateTime(loansanctiondate);
 
                 //DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
-                int duration = int.Parse(reader["duration"].ToString());
-                double intrestRate = double.Parse(reader["intrestrate"].ToString());
-                int acctId = int.Parse(reader["acctId"].ToString());
+                int EMIday = int.Parse(reader["EMIday"].ToString());
+                double EMIamount = double.Parse(reader["EMIamount"].ToString());
+                int applicationId = int.Parse(reader["applicationId"].ToString()); 
+                
 
 
                 loan = new Loan
                 {
                     LoanId = loanId,
-                    Amount = amount,
-                    LoanSanctionDate = dateOnlyBirthDate,
-                    Duration = duration,
-                    IntrestRate = intrestRate,
-                    AccountId = acctId
+                    EMIAmount = EMIamount,
+                    LoanSanctionDate = dateOnlyloansanctiondate,
+                    EMIDay = EMIday,
+                    ApplicationId = applicationId
                 };
             }
         }
@@ -150,13 +142,12 @@ public class LoanRepo : ILoanRepo
         try
         {
             string query =
-                "INSERT INTO loan(amount,loansanctiondate,duration,intrestrate,acctId) VALUES(@amount,@loansanctiondate,@duration,@intrestrate,@acctId)";
+                "INSERT INTO loan(loansanctiondate,emiday,emiamount, applicationid) VALUES(@Loansanctiondate,@Emiday,@Emiamount,@Applicationid)";
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@amount", loan.Amount);
-            command.Parameters.AddWithValue("@loansanctiondate", loanSanctionDate);
-            command.Parameters.AddWithValue("@duration", loan.Duration);
-            command.Parameters.AddWithValue("@intrestrate", loan.IntrestRate);
-            command.Parameters.AddWithValue("@acctId", loan.AccountId);
+            command.Parameters.AddWithValue("@Loansanctiondate", loanSanctionDate);
+            command.Parameters.AddWithValue("@Emiday", loan.EMIDay);
+            command.Parameters.AddWithValue("@Emiamount", loan.EMIAmount);
+            command.Parameters.AddWithValue("@Applicationid", loan.ApplicationId);
 
             con.Open();
             int rowsAffected = command.ExecuteNonQuery();
@@ -211,15 +202,16 @@ public class LoanRepo : ILoanRepo
         try
         {
             string query =
-                "Update loan SET amount =@amount,loansanctiondate=@loansanctiondate,duration =@duration,intrestrate=@intrestrate,acctId=@acctId WHERE loanid=@loanid";
+                "Update loan SET loansanctiondate=@loansanctiondate,emiday=@emiday,emiamount =@EMIamount,applicationId=@applicationId WHERE loanid=@loanid";
             System.Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@amount", loan.Amount);
-            command.Parameters.AddWithValue("@loansanctiondate", loanSanctionDate);
-            command.Parameters.AddWithValue("@duration", loan.Duration);
-            command.Parameters.AddWithValue("@intrestrate", loan.IntrestRate);
-            command.Parameters.AddWithValue("@acctId", loan.AccountId);
             command.Parameters.AddWithValue("@loanid", loan.LoanId);
+            command.Parameters.AddWithValue("@loansanctiondate", loanSanctionDate);
+            command.Parameters.AddWithValue("@emiday", loan.EMIDay);            
+            command.Parameters.AddWithValue("@EMIamount", loan.EMIAmount);
+            command.Parameters.AddWithValue("@applicationId", loan.ApplicationId);
+            
+            
             con.Open();
             int rowsAffected = command.ExecuteNonQuery();
             Console.WriteLine("No of rows  affected " + rowsAffected);

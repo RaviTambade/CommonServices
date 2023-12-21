@@ -19,9 +19,9 @@ public class LoanService : ILoanService
         return loans;
     }  
 
-    public Loan GetByAccountId(int accountId)
+    public Loan GetByLoanId(int loanId)
     {
-        Loan loan  = _repo.GetByAccountId(accountId);
+        Loan loan  = _repo.GetByLoanId(loanId);
         return loan;
     }
 

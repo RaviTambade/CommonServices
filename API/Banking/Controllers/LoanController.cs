@@ -24,10 +24,10 @@ public class LoanController : ControllerBase
     }
 
     [HttpGet]
-    [Route("{accountid}")]
-    public Loan GetByAccountId(int accountid)
+    [Route("{loanid}")]
+    public Loan GetByLoanId(int loanid)
     {
-        Loan loan = _svc.GetByAccountId(accountid);
+        Loan loan = _svc.GetByLoanId(loanid);
         return loan;
     }
 
@@ -47,7 +47,7 @@ public class LoanController : ControllerBase
     }
 
     [HttpPut]
-    // [Route("{loanid}")]
+    [Route("{loanid}")]
     public bool Update(Loan loan)
     {
         bool stauts = _svc.Update(loan);

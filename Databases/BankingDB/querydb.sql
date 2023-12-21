@@ -3,9 +3,8 @@ SELECT * FROM customers;
 SELECT * FROM accounts;
 SELECT * FROM transactions;
 SELECT * FROM operations;
-SELECT * FROM loanapplicants;
---  delete from  loanapplicants where applicatid = 11;
-
+SELECT * FROM loanapplications;
+SELECT * FROM loantype;
 SELECT * FROM loan;
 SELECT @transactionId;
 -- DROP table customers;
@@ -62,7 +61,12 @@ WHERE loanstatus = "applied";
 
 SELECT operations.acctnumber,operations.amount,operations.operationdate  from operations 
 inner join accounts on operations.acctId = accounts.id 
-where accounts.id = (Select acctId from loan where loanid = 3) AND operations.operationtype = "EMI"; 
+where accounts.id = (Select acctId from loan where loanid = 2) AND operations.operationtype = "EMI"; 
+
+SELECT operations.acctnumber,operations.amount,operations.operationdate  from operations 
+inner join accounts on operations.acctId = accounts.id 
+where accounts.id = (Select acctId from loan where loanid = 2);
+
 
 
 
@@ -95,7 +99,7 @@ WHERE
     a.acctnumber ="39025546612"
 ORDER BY
     o.operationdate,
-    o.operationid;
+    o.operationid,
     END ;
     
 DROP PROCEDURE bankStatement;

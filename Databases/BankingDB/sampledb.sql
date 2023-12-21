@@ -99,19 +99,20 @@ INSERT INTO accounts(acctnumber, accttype, ifsccode, balance, registereddate, cu
 
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('123456789','business','AXIS0000999',200000000,'1975-01-01',47);
 
-INSERT INTO loanapplicants(applicatid,accountid,applydate,panid,loanamount,loantype,loanstatus)VALUES(1,3,'2023-08-11','AFD67550',1000000,'business','approved');
-INSERT INTO loanapplicants(accountid,applydate,panid,loanamount,loantype,loanstatus)VALUES(6,'2022-12-11','JHG6753',5000000,'business','approved');
-INSERT INTO loanapplicants(accountid,applydate,panid,loanamount,loantype,loanstatus)VALUES(4,'2023-02-5','KLM67551',7500000,'business','approved');
-INSERT INTO loanapplicants(accountid,applydate,panid,loanamount,loantype,loanstatus)VALUES(8,'2021-08-1','ZXC6755',2000000,'home','approved');
-INSERT INTO loanapplicants(accountid,applydate,panid,loanamount,loantype,loanstatus)VALUES(9,'2019-12-15','KLT6756',3000000,'home','approved');
-INSERT INTO loanapplicants(accountid,applydate,panid,loanamount,loantype,loanstatus)VALUES(10,'2015-1-15','ERT6757',400000,'home','approved');
+INSERT INTO loanapplications(applicationid,applicationdate,loanamount,loanduration,accountid,loantypeid)VALUES(11,'2023-08-11',500000,10,1,100);
+INSERT INTO loanapplications(applicationid,applicationdate,loanamount,loanduration,accountid,loantypeid)VALUES(12,'2023-08-11',8900000,15,6,100);
+INSERT INTO loanapplications(applicationdate,loanamount,loanduration,accountid,loantypeid)VALUES
+('2023-10-25',500000,10,1,100),
+('2023-11-30',100000,15,2,101),
+('2023-01-25',750000,17,3,102),
+('2023-02-09',850000,20,4,100);
 
-INSERT INTO loan(loanid,amount,loansanctiondate,duration,emiday,emiamount,intrestrate,acctId)VALUES(1,'1000000','2023-09-08',15,10,9321,9.5,3);
-INSERT INTO loan(amount,loansanctiondate,duration,emiday,emiamount,intrestrate,acctId)VALUES('5000000','2023-01-31',15,15,56516,10.9,6);
-INSERT INTO loan(amount,loansanctiondate,duration,emiday,emiamount,intrestrate,acctId)VALUES('7500000','2023-03-25',15,5,90013,12.00,4);
-INSERT INTO loan(amount,loansanctiondate,duration,emiday,emiamount,intrestrate,acctId)VALUES('2000000','2021-09-09',20,10,17356,8.5,8);
-INSERT INTO loan(amount,loansanctiondate,duration,emiday,emiamount,intrestrate,acctId)VALUES('3000000','2020-01-31',12,15,35679,9.9,9);
-INSERT INTO loan(amount,loansanctiondate,duration,emiday,emiamount,intrestrate,acctId)VALUES('400000','2015-03-25',10,5,5510,11.00,10);
+
+
+
+INSERT INTO loan(loansanctiondate,emiamount,applicationid)VALUES('2023-09-08',9321,11);
+
+
 
 INSERT INTO operations(acctId,acctnumber,amount,operationdate,operationmode,operationtype)VALUES(3,12656767876,9321,'2023-10-10','W',"EMI");
 INSERT INTO operations(acctId,acctnumber,amount,operationdate,operationmode,operationtype)VALUES(46,123456789,9321,'2023-10-25','D',"EMI");
@@ -180,3 +181,12 @@ INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(47
 INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(49,50,'2023-09-05');
 INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(51,52,'2023-10-05');
 INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(53,54,'2023-11-05');
+
+
+INSERT INTO loantype(loantype,intrestrate)VALUES('home',9.5);
+INSERT INTO loantype(loantype,intrestrate)VALUES('personal',11.0);
+INSERT INTO loantype(loantype,intrestrate)VALUES('car',12.5);
+INSERT INTO loantype(loantype,intrestrate)VALUES('education',7.6);
+INSERT INTO loantype(loantype,intrestrate)VALUES('bussiness',15.6);
+
+
