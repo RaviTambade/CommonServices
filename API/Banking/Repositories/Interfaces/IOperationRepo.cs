@@ -18,6 +18,8 @@ public interface IOperationRepo
     public bool ProcessMonthlyEmi(string acctnumber);
     public LoanApplicantEMIDetails LoanEmiDetails(int loanId);
 
+    public List<Operation> GetLoanApplicantEmiDetails(int loanId);
+
     /*List<Operation> GetByToAccount(int id);
 
     List<Operation> GetByFromAccount(int id);*/

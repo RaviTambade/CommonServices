@@ -8,51 +8,144 @@
   <title>Loan Applicants According to Loan status</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
 
   <!--<script src="jquery.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+   <script type="text/javascript" src="G:/TAP/Repositoryes/CommonServices/AjaxUI/HtmlHelper/htmlHelper.js"></script>
 
   <script>
-    // $(document).ready()
+    var status1 = "approved";
+    var status2 = "rejected";
+    var responsedata = null;
+    var loanData = null;
+    var details= null;
+    var parameter = null;
+    
+    function checkstatus(parameter,details) {
+        var parameter = parameter;
+        var details=details;
+        console.log(details);
+         console.log(parameter);
+        
+        if(parameter == "approved")
+        {
+            var formContent = '<div>Loan Details Form</div><br></br><label>Enter Duration : </label><input type="number" id="duration" name="duration" placeholder="Enter Duration "  /><br></br><br></br><label>Enter Emi Day  : </label><input type="number" id="emiday" name="emiday" placeholder="Enter EMI day "  /><br></br><br><label>Enter Interest Rate : </label><input type="number" id="interestrate" name="interestrate" placeholder="Enter Interest Rate" /><br></br><br> <button type="button" id="btnemi" onclick="calcuateEMI(details,loanData)">Get EMI</button><br/><br/><br/><label>EMI Amount  : </label><input type="text" id="emiamount" name="emiamount" /><br/><br/><br/> <button type="button" id="btnapproved" onclick="updateLoanAndLoanstatus(parameter,details,loanData)">Loan Approved</button>'
+
+            $('#loan_details').html(formContent);
+            
+            
+            var loanamount = details.amount;
+            
+           // $("#emiamount").html(emi); Using jquery
+          
+            
+                $("#interestrate").change(function(){
+
+                    var duration = $('#duration').val();
+                    var irate = $("#interestrate").val();
+                    var emiday = $("#emiday").val();
+                    var sanctionedate = new Date();
+                    var acctId = details.accountId;
+            
+                     loanData = {
+                        "amount": loanamount, 
+                        "dateonly": sanctionedate,
+                        "duration":duration,
+                        "intrestRate":irate,
+                        "accountId":acctId
+                    };
+                
+                    console.log(loanData);
+                    console.log(loanamount);
+                    const p = loanamount;
+                    const t = duration;
+                    const r = irate;
+                    const n = 12;
+                    const compoundInterest = p * (Math.pow((1 + (r / n)), (n * t)));   
+                    const interest = compoundInterest - p; 
+                
+                //var emi = loanamount*irate*(1+irate)^duration/((1+irate)^duration-1);
+                console.log(interest);
+                document.getElementById("emiamount").innerText = interest;
+             } );
+
+          }
+    };
+    
+
+     function updateLoanAndLoanstatus(parameter,details,loanData)
+        {
+            console.log("loanData : " , loanData); 
+            console.log("details : " , details);
+            //details.status = parameter;
+
+           // console.log("details status  : " ,details.status);
+            var loanid = $('#loanid').val();
+
+            $.ajax({
+                                url: 'http://localhost:5053/api/applicant' + "/" +  loanid,
+                                type: 'PUT',
+                                contentType: 'application/json',
+                                data: JSON.stringify(details),
+                                success: function (response) {
+                                    console.log('The Data is updated :', response);
+                                    if(response ==true)
+                                    {
+                                        displayData(details);
+                                        alert("Data updatedet Successfully ...");
+                                    }
+                            
+                                },
+                                error: function (xhr, status, error) {
+                                // Handle errors
+                                    console.error(status + ': ' + error);
+                                }
+
+                        });
+
+                        $.ajax({
+                                url: 'http://localhost:5053/api/loans',
+                                type: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify(loanData),
+                                success: function (response) {
+                                    console.log('The Data is inserted in loan  :', response);
+                                    if(response ==true)
+                                    {
+                                        //displayData(details);
+                                        alert("Data inserted Successfully ...");
+                                    }
+                            
+                                },
+                                error: function (xhr, status, error) {
+                                // Handle errors
+                                    console.error(status + ': ' + error);
+                                }
+
+                        });
+    
+        }
+
      function getloanapplicants() {
         // Make an API call to delete the user using userId
         var loanid = $('#loanid').val();
        
         console.log("Id : " + loanid);
-
+       
             //$(document).ready(function() {
                          $.ajax({
                                 url: 'http://localhost:5053/api/applicant' + "/" + loanid ,
                                 type: 'GET',
                                 contentType: 'application/json',
                                 success: function (data) {
-                                    console.log('Got the Data :', data);
-                                    alert("Data get Successfully ...");
-
-
-                                    var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable" class="table table-striped"> <thead> <tr>' +
-                            '<th>AccountId</th><th>Applay Date</th><th>Pan Id</th><th>Loan Type</th><th>Loan Amount</th><th>Loan Status</th><th>Applicant Name</th><th>Applicant Type</th></tr></thead><body>';
-                                // (function(data){
-                                    htmlContent += '<tr>';
-                                    htmlContent +='<td>'+data.accountId + '</td>';
-                                    htmlContent += '<td>'+data.applyDate + '</td>';
-                                    htmlContent += '<td>'+data.panId + '</td>';
-                                    htmlContent += '<td>'+data.loanType + '</td>';
-                                    htmlContent += '<td>'+data.amount + '</td>';
-                                    htmlContent += '<td>'+data.status + '</td>';
-                                    htmlContent += '<td>'+data.applicantName + '</td>';
-                                    htmlContent += '<td>'+data.applicantType + '</td>';
 
                                    
-                                    htmlContent += '<td>' + "  " + '<button id="approved" class="btn btn-success">Approved</button>' + "  "+ '<button id="rejected" class="btn btn-danger">Rejected</button>' + '</td>';
-                                    htmlContent += '</tr>';
-                                // });
+                                    console.log('Got the Data :', data);
+                                    responsedata = data;
+                                    alert("Data get Successfully ...");
+                                    displayData(data);
 
-                                htmlContent += '</tbody></table></div>';
-                                $('#dataDisplay').html(htmlContent);
-             
                                 },
 
                                 error: function (xhr, status, error) {
@@ -61,9 +154,9 @@
                                 }
 
                         });
-        
-    //});
+
 };
+    
 </script>
 
 </head>
@@ -79,7 +172,13 @@
     <br></br>
 
     <button onclick="getloanapplicants()">Get Loan Applicants</button>
+    <!-- <button id ="btnapproved" name = "btnapproved">Approved</button> -->
     <br/><br/>
+
 </div>
 <div id="dataDisplay"></div>
+
+<br/><br/>
+<form id="loan_details"></form>
+<div id="displayUpdateddata"></div>
 </body>

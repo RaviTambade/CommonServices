@@ -72,7 +72,7 @@ public class LoanApplicantsRepo : ILoanApplicantRepo
         return status;
     }
 
-    public async Task <bool> Update(LoanaplicantsInfo applicant)
+    public async Task <bool> UpdateStatus(LoanApplicants applicant)
     {
        
         Console.WriteLine("ApplayDate In Repo:- " + applicant.ApplyDate);

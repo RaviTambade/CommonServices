@@ -1,3 +1,5 @@
+// using System.Net.Mail;
+using System.Net;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
@@ -16,43 +18,82 @@ public class EmailSender : IEmailSender
         _emailConfig = emailConfig.Value;
     }
 
-    public void SendEmail(EmailMessage message)
+    public async Task SendEmail(EmailMessage message)
     {
-        var emailMessage = CreateEmailMessage(message);
+        var emailMessage = await CreateEmailMessage(message);
 
-        Send(emailMessage);
+        await Send(emailMessage);
     }
 
-    private MimeMessage CreateEmailMessage(EmailMessage message)
+    private async Task<MimeMessage> CreateEmailMessage(EmailMessage message)
     {
         var emailMessage = new MimeMessage();
-        emailMessage.From.Add(new MailboxAddress("EagroServices", _emailConfig.From));
-        emailMessage.To.AddRange(message.To.Select(x => new MailboxAddress("", x)));
+        emailMessage.From.Add(new MailboxAddress("TFLPORTAL", _emailConfig.From));
+        emailMessage.To.AddRange(message.To.Select(x => new MailboxAddress(x, x)));
         emailMessage.Subject = message.Subject;
-        emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = message.Body };
+
+        Multipart multipart = new Multipart("mixed");
+
+        TextPart body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = message.Body };
+
+//sending file present on local server 
+        // MimePart attachment = new MimePart("application", "octet-stream")
+        // {
+        //     Content = new MimeContent(System.IO.File.OpenRead("sm.txt")),
+        //     ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+        //     ContentTransferEncoding = ContentEncoding.Base64,
+        //     FileName = "sm.txt"
+        // };
+
+//sending file which on remote serve
+
+        // byte[] fileBytes = Array.Empty<byte>();
+        // using (var client = new HttpClient())
+        // {
+        //     var response = await client.GetAsync("http://localhost:5263/abc.txt");
+        //     if (response.IsSuccessStatusCode)
+        //     {
+        //         // Read the file content from the response
+        //         fileBytes = await response.Content.ReadAsByteArrayAsync();
+        //     }
+        // }
+
+        // var attachment = new MimePart("application", "octet-stream")
+        // {
+        //     Content = new MimeContent(new MemoryStream(fileBytes))
+        //     ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+        //     ContentTransferEncoding = ContentEncoding.Base64,
+        //     FileName = "abc.txt",
+        // };
+
+        // multipart.Add(attachment);
+
+        multipart.Add(body);
+
+        emailMessage.Body = multipart;
 
         return emailMessage;
     }
 
-    private void Send(MimeMessage mailMessage)
+    private async Task Send(MimeMessage mailMessage)
     {
         using (var client = new SmtpClient())
         {
             try
             {
-                client.Connect(_emailConfig.SmtpServer, _emailConfig.Port, true);
+                await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, true);
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
-                client.Authenticate(_emailConfig.UserName, _emailConfig.Password);
+                await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
 
-                client.Send(mailMessage);
+                await client.SendAsync(mailMessage);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }
             finally
             {
-                client.Disconnect(true);
+                await client.DisconnectAsync(true);
                 client.Dispose();
             }
         }

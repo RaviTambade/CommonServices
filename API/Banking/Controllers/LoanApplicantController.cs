@@ -47,12 +47,12 @@ public class LoanApplicantController : ControllerBase
 
     [HttpPut]
      [Route("{id}")]
-    public async Task <bool> Update(LoanaplicantsInfo applicant)
+    public async Task <bool> Update(LoanApplicants applicant)
     {
          Console.WriteLine("Inside Update method ......");
         Console.WriteLine("Status CONTROLLER : " + applicant.Status);
         
-        bool status = await _svc.Update(applicant);
+        bool status = await _svc.UpdateStatus(applicant);
         return status;
     }
 

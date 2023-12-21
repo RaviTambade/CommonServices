@@ -5,7 +5,7 @@ using Transflower.NotifiactionService.Services.Interfaces;
 namespace Transflower.NotifiactionService.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("notification/email")]
 public class EMailController : ControllerBase
 {
     private readonly IEmailSender _emailSender;
@@ -16,9 +16,9 @@ public class EMailController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult SendMessage(EmailMessage message)
+    public async Task<IActionResult> SendMessage(EmailMessage message)
     {
-        _emailSender.SendEmail(message);
-        return Ok("EMail sent successfully");
+        await _emailSender.SendEmail(message);
+        return await Task.FromResult(Ok("Email Sent Sucessfully"));
     }
 }

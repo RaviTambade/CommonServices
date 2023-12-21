@@ -122,5 +122,12 @@ public class OperationsController : ControllerBase
         return emiDetails;
     }
 
-
+    [HttpGet]
+    [Route("operations/emidetails/{loanId}")]
+    public List<Operation> GetLoanApplicantEmiDetails(int loanId)
+    {
+        
+        List<Operation> emiDetails = _svc.GetLoanApplicantEmiDetails(loanId);
+        return emiDetails;
+    }
 }

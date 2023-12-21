@@ -60,7 +60,7 @@ CREATE TABLE
         acctId INT NOT NULL,
         CONSTRAINT fk_acctId2 FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
-Drop table loanapplicants;
+
 
 CREATE TABLE
     loanapplicants(
@@ -77,3 +77,4 @@ CREATE TABLE
         ),
          loanstatus ENUM("applied","approved","rejected") DEFAULT "applied"
     );
+    

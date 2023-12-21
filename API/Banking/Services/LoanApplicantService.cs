@@ -25,10 +25,10 @@ public class LoanApplicantService : ILoanApplicantService
         return status;
     }   
 
-    public async Task <bool> Update(LoanaplicantsInfo applicant)
+    public async Task <bool> UpdateStatus(LoanApplicants applicant)
     {
          Console.WriteLine("Status in Update method : "+ applicant.Status);
-        bool status=await _repo.Update(applicant);
+        bool status=await _repo.UpdateStatus(applicant);
         return status;
     }
 

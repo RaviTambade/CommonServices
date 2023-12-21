@@ -8,9 +8,9 @@ SELECT * FROM loanapplicants;
 
 SELECT * FROM loan;
 SELECT @transactionId;
-DROP table customers;
-DROP table accounts;
-DROP table loanapplicants;
+-- DROP table customers;
+-- DROP table accounts;
+-- DROP table loanapplicants;
 
 SELECT * FROM loanapplicants 
 WHERE applydate >= '2023-01-01' 
@@ -25,7 +25,7 @@ WHERE loanstatus = "applied";
 SELECT * FROM loanapplicants 
 WHERE loanstatus = "approved";
 
- UPDATE loanapplicants SET loanstatus= "approved" WHERE loanid=8;
+ UPDATE loanapplicants SET loanstatus = "approved" WHERE applicatid=8;
 
 
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",1000,"Interest",@transactionId);
@@ -46,6 +46,7 @@ SELECT acctnumber,ifsccode from accounts
 JOIN customers ON accounts.customerid = customers.customerid
 WHERE customers.usertype="corporation" AND customers.dependancyid=1;
 
+
 SELECT amount  FROM loan where loanid = 1;
 
 SELECT SUM(amount) from operations where operationmode="W" and operationtype="EMI" and acctnumber="12656767876";
@@ -59,7 +60,9 @@ SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanap
 inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id
 WHERE loanstatus = "applied";
 
-
+SELECT operations.acctnumber,operations.amount,operations.operationdate  from operations 
+inner join accounts on operations.acctId = accounts.id 
+where accounts.id = (Select acctId from loan where loanid = 3) AND operations.operationtype = "EMI"; 
 
 
 

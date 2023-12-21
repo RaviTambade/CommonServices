@@ -14,5 +14,5 @@ INSERT INTO corporations VALUES(DEFAULT,112,"VBN6759","Dhanuka Pvt. Ltd. Company
 INSERT INTO corporations VALUES(DEFAULT,113,"MNV6760","BAYER Pvt. Ltd. Company","9873456792","bayer@gmail.com",16);
 
 INSERT INTO corporations VALUES(DEFAULT,114,"BNK9090","AXIS Bank","0202423579","axisbank@gmail.com",17);
-
+select * from corporations
 
