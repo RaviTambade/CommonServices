@@ -16,7 +16,13 @@ public class LoanTypeController : ControllerBase
         _svc = svc;
     }
 
-   
+   [HttpGet]
+   public List<LoanType> GetAll(){
+       List<LoanType> newloantype=_svc.GetAll();
+       return newloantype;
+   }
+    
+    
     [HttpGet]
     [Route("{loantypeid}")]
     public LoanType GetByLoanTypeId(int loantypeid)

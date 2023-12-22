@@ -17,7 +17,65 @@ public class LoanTypeRepo : ILoanTypeRepo
         _configuration = configuration;
         _conString = this._configuration.GetConnectionString("DefaultConnection");
     }
-   
+
+    public List<LoanType> GetAll()
+    {
+        List<LoanType> loantypelist = new List<LoanType>();
+
+        //Create connection object
+        IDbConnection con = new MySqlConnection(_conString);
+
+        Console.WriteLine("\n Connection status " + con.State);
+        string query = "SELECT * FROM loantype";
+
+        //Create Command Object
+        IDbCommand cmd = new MySqlCommand(query, con as MySqlConnection);
+        Console.WriteLine("\n cmd status " + cmd.GetType());
+
+        // Connected Data Access Mode
+        // connected is kept alive till operations complete
+        try
+        {
+            con.Open();
+            Console.WriteLine("\n Connection status " + con.State);
+            //Create Data reader object
+            IDataReader reader = cmd.ExecuteReader();
+            //Online data using streaming mechanism
+            while (reader.Read())
+            {
+               int LoantypeId = int.Parse(reader["loantypeid"].ToString());
+                string loanType=reader["loantype"].ToString(); 
+                double IntrestRate = double.Parse(reader["Intrestrate"].ToString());
+                loantypelist.Add(
+                    new LoanType()
+                    {
+                        LoanTypeId = LoantypeId,
+                        LoanTypeName = loanType,
+                        IntrestRate = IntrestRate,
+
+                    }
+                );
+            }
+            reader.Close();
+        }
+        catch (MySqlException exp)
+        {
+            string message = exp.Message;
+            //report to developer
+            //log exception message log file
+        }
+        finally
+        {
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+        }
+        return loantypelist;
+    }
+
+ 
+
     public LoanType GetByLoanTypeId(int loantypeid)
     {
         LoanType loantype = null;

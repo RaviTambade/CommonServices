@@ -13,6 +13,40 @@
   <script>
 
     $(document).ready(function() {
+        var loantypesdata=null;
+        $.ajax({
+                url: 'http://localhost:5053/api/loanstypes',
+                type: 'GET',
+                contentType: 'application/json',
+                success: function(response) {
+                console.log('Data :', response);
+                loantypesdata=response;
+                    var ddlloantypes = document.getElementById("loantype");
+            
+                    //Add the Options to the DropDownList.
+                    for (var i = 0; i < loantypesdata.length; i++) {
+                         var option = document.createElement("OPTION");
+                        //Set Customer Name in Text part.
+                        option.innerHTML = loantypesdata[i].loanTypeName;
+                        //Set CustomerId in Value part.
+                        option.value = loantypesdata[i].loanTypeId;
+                         //Add the Option element to DropDownList.
+                    ddlloantypes.options.add(option);             
+                }
+                
+                    $("#loantype").change(function(){
+                    var selectedText = $(this).find("option:selected").text();
+                    var selectedValue = $(this).val();
+                    document.getElementById("intrestrate").innerHTML=loantypesdata.find((loan)=>loan.loanTypeId==selectedValue).intrestRate                    
+                })
+                },
+                error: function(xhr, status, error) {
+                console.error('Error:', status + ': ' + error);
+                console.log('Data :', response);
+                  
+                  
+              }
+          });
       $('#frm_applicant').submit(function(event) {
          event.preventDefault(); // Prevent default form submission
 
@@ -63,33 +97,33 @@
 
 <body>
 <form id="frm_applicant">
-    <div>Loan Application Form</div>
-    <br></br>
+    <div><h2>Loan Application Form</h2></div><hr/>
+    <br/><br/>
     <label>Bank AccountId : </label>
     <input type="text" id="accountId" name="accountId" placeholder="Enter Bank Account ID "  />
-    <br></br><br></br>
-
-    <label>Apply Date : </label>
-    <input type="Date" id="applydate" name="applydate" placeholder="Enter Loan Apply Date "  />
-
-    <br></br><br></br>
-    <label>PAN ID : </label>
-    <input type="text" id="txtPanID" name="txtPanID" placeholder="Enter PAN ID" />
-    <br></br><br></br>
-
+    <br/><br/>
+    <label>Application Date : </label>
+    <input type="Date" id="applicationdate" name="applicationdate" placeholder="Enter Loan Application Date "  />
+    <br/><br/>   
     <label>Loan Amount : </label>
     <input type="number" id="txtAmount" name="txtAmount" placeholder="Enter Loan Amount" />
-    <br></br><br></br>
-
+    <br></br>
     <label>Loan Type : </label>
-    <input type="text" id="txtLoantype" name="txtLoantype" placeholder="Enter Loan Type"/>
-    <br></br><br></br>
-
+    <select name="loantype" id="loantype" >
+        <option value="">Select Loan Type</option>
+        <!-- <option value="home">Home</option>
+        <option value="personal">Personal</option>
+        <option value="car">Car</option>
+        <option value="education">Education</option>        
+        <option value="bussiness">Bussiness</option> -->
+    </select>    
+    <br></br>    
+    <label>Intrest Rate : </label>
+    <label type="number" id="intrestrate" name="intrestrate"></label>    
+    <br></br>
     <label>Loan Status : </label>
     <input type="text" id="txtLoanstatus" name="txtLoanstatus" placeholder="Enter Loan Status"/>
-    <br></br><br></br>
+    <br></br>
     <button type="submit" class="btn btn-primary btn-sm">Submit</button>
     </form>
-
-
 </body>
