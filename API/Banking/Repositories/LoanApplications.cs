@@ -364,7 +364,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         IDbConnection con = new MySqlConnection(_conString);
 
         Console.WriteLine("\n Connection status " + con.State);
-        string query = "SELECT * FROM loanapplications WHERE applicationdate >= @StartDateString AND applicationdate <= @EndDateString ";
+        string query = "SELECT loanapplications.*,loantype.loantype From loanapplications inner join loantype ON loanapplications.loantypeid=loantype.loantypeid WHERE applicationdate >= @StartDateString AND applicationdate <= @EndDateString;";
         
         //Create Command Object
 
@@ -427,22 +427,22 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
 
     }
 
-    
-    /*public async Task <List<LoanaplicationInfo>> LoanApplicationsAccordingLoanStatus(string LoanType)
+     
+    public async Task <List<LoanaplicationInfo>> LoanApplicationAccordingLoanStatus(string LoanType)
     {
         //SELECT * FROM loanapplicants 
         //WHERE loanstatus = @Loanstatus;
 
         
         Console.WriteLine("Inside LoanApplicantsAccordingLoanStatus Repo method....");
-        List<LoanaplicantsInfo> applicantslist = new List<LoanaplicantsInfo>();
+        List<LoanaplicationInfo> applicationslist = new List<LoanaplicationInfo>();
 
         //Create connection object
         MySqlConnection con = new MySqlConnection(_conString);
 
         Console.WriteLine("\n Connection status " + con.State);
 
-        string query = "SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id WHERE loanstatus =  @Loanstatus";
+        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id WHERE loanstatus =  @Loanstatus";
         //string query = "SELECT * FROM loanapplicants WHERE loanstatus = @Loanstatus";
 
         //Create Command Object
@@ -461,36 +461,35 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
             //Online data using streaming mechanism
             while (await reader.ReadAsync())
             {
-                int applicntID = int.Parse(reader["applicatid"].ToString());
+                int applictionID = int.Parse(reader["applicationid"].ToString());
                 int acctID = int.Parse(reader["accountid"].ToString());
                 
-                DateTime aDate = DateTime.Parse(reader["applydate"].ToString());
+                DateTime aDate = DateTime.Parse(reader["applicationdate"].ToString());
                 DateOnly FormatDate = DateOnly.FromDateTime(aDate);
     
-                string panID = reader["panid"].ToString();
-                string loanType = reader["loantype"].ToString();
+                int loanTypeid = int.Parse(reader["loantypeid"].ToString());
+                int loanduration = int.Parse(reader["loanduration"].ToString());
                 double amount = double.Parse(reader["loanamount"].ToString());
                 string status = reader["loanstatus"].ToString();
                 int custid = int.Parse(reader["bankcustomerid"].ToString());
                 string custtype = reader["usertype"].ToString();
 
                 
-                Console.WriteLine(applicntID);
+                Console.WriteLine(applictionID);
 
-                applicantslist.Add(
-                    new LoanaplicantsInfo()
+                applicationslist.Add(
+                    new LoanaplicationInfo()
                     {
-                        ApplicantId = applicntID,
-                        AccountId = acctID,
-                        
-                        ApplyDate = FormatDate,
-                        
-                        PanId = panID,
-                        LoanType = loanType,
-                        Amount = amount,
-                        Status = status,
+                        ApplicationId = applictionID,
+                        AccountId = acctID,                        
+                        ApplicationDate = FormatDate,                        
+                        LoanTypeId = loanTypeid,
+                        LoanDuration=loanduration,
+                        LoanAmount = amount,
+                        LoanStatus = status,
                         CustomerUserId= custid,
-                        ApplicantType = custtype                    }
+                        ApplicantType = custtype                   
+                    }
                 );
             }
             reader.Close();
@@ -508,7 +507,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 con.Close();
             }
         }
-        return applicantslist;
-    }*/
+        return applicationslist;
+    }
 
 }

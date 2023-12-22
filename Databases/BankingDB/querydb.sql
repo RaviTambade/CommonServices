@@ -13,9 +13,12 @@ SELECT @transactionId;
 -- DROP table accounts;
 -- DROP table loanapplicants;
 
-SELECT * FROM loanapplicants 
-WHERE applydate >= '2023-01-01' 
-AND applydate <= '2023-11-30';
+SELECT loanapplications.*,loantype.loantype From loanapplications
+inner join loantype ON loanapplications.loantypeid=loantype.loantypeid
+WHERE applicationdate >= '2023-01-01' 
+AND applicationdate <= '2023-11-30';
+
+
 
 
 SELECT * FROM loanapplicants WHERE applydate >= '2023-01-01' AND applydate <= '2023-11-30';

@@ -12,7 +12,7 @@ public interface ILoanApplicationsRepo
     public  Task <LoanaplicationInfo> GetById(int laonapplicationId);
     public List<LoanApplications> LoanApplicationBetweenGivenDates(DateTime startDate,DateTime endDate);
 
-    //public Task <List<LoanaplicationInfo>> LoanApplicationAccordingLoanStatus(string LoanType);//Why need not to write async here before Task
+    public Task <List<LoanaplicationInfo>> LoanApplicationAccordingLoanStatus(string LoanType);//Why need not to write async here before Task
 
     //public List<LoanApplicants> LoanApplicantsAccordingLoanStatus(string LoanType);
 

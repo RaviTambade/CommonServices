@@ -24,7 +24,7 @@
 
             //$(document).ready(function() {
                          $.ajax({
-                                url: 'http://localhost:5053/api/applicant/status' + "/" + loanStatus ,
+                                url: 'http://localhost:5053/api/application/status' + "/" + loanStatus ,
                                 type: 'GET',
                                 contentType: 'application/json',
                                 success: function (data) {
@@ -71,7 +71,7 @@
 <body>
 <div>
 
-    <h1>Display Loan Applicants between given Dates</h1>
+    <h1>Display Loan Applicants According to Status</h1><hr/>
     <br></br>
     <label>Enter Loan Status: </label>
     <!-- <input type="text" id="loanstatus" name="loanstatus" placeholder="Enter Loan Status "  /> -->
@@ -82,7 +82,7 @@
       </select>
     <br></br>
 
-    <button onclick="getloanapplicants()">Get Loan Applicants</button>
+    <button onclick="getloanapplicants()">Get Loan Applications</button>
 
 </div>
 <div id="dataDisplay"></div>

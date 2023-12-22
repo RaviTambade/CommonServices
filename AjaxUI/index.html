@@ -51,29 +51,30 @@
          event.preventDefault(); // Prevent default form submission
 
           // Get values from form fields
-          var aactId = $('#accountId').val();
-          var applayDate = $('#applydate').val();
-          console.log(applayDate);
-          var panId = $('#txtPanID').val();
+          var accountId = $('#accountId').val();
+          var applicationDate = $('#applicationdate').val();
+          console.log(applicationDate);
           var loanAmount = $('#txtAmount').val();
-          var loanType = $('#txtLoantype').val();
-          var loanstatus = $('#txtLoanstatus').val();
+          var loanduration=$("#txtduration").val();
+          var loanTypeId = $('#loantype').val();
+          var loanstatus = $('#loanstatus').val();
+          
 
           // Create data object to send via AJAX
           var newData = {
-              "accountId": aactId, 
-              "applyDate": applayDate,
-              "panId": panId,
-              "amount": loanAmount,
-              "loanType":loanType,
-              "status":loanstatus
+              "accountId": accountId, 
+              "applicationDate": applicationDate,
+              "loanAmount": loanAmount,
+              "loanDuration": loanduration,
+              "loanTypeId":loanTypeId,
+              "loanStatus":loanstatus
           };
           console.log(JSON.stringify(newData));
 
            // AJAX GET request to getall data from database
           // AJAX POST request to insert new data
           $.ajax({
-              url: 'http://localhost:5053/api/applicant',
+              url: 'http://localhost:5053/api/application',
               type: 'POST',
               contentType: 'application/json',
               data: JSON.stringify(newData),
@@ -108,6 +109,9 @@
     <label>Loan Amount : </label>
     <input type="number" id="txtAmount" name="txtAmount" placeholder="Enter Loan Amount" />
     <br></br>
+    <label>Loan Duration : </label>
+    <input type="number" id="txtduration" name="txtduration" placeholder="Enter Loan Duration in year" />
+    <br></br>
     <label>Loan Type : </label>
     <select name="loantype" id="loantype" >
         <option value="">Select Loan Type</option>
@@ -122,7 +126,9 @@
     <label type="number" id="intrestrate" name="intrestrate"></label>    
     <br></br>
     <label>Loan Status : </label>
-    <input type="text" id="txtLoanstatus" name="txtLoanstatus" placeholder="Enter Loan Status"/>
+    <select name="loanstatus" id="loanstatus" >
+         <option value="applied">Applied</option>
+    </select>
     <br></br>
     <button type="submit" class="btn btn-primary btn-sm">Submit</button>
     </form>

@@ -101,16 +101,16 @@ public class LoanApplicationController : ControllerBase
         return applicants;
     }
 
-    // [HttpGet("status/{loanType}")]
-    //  public async Task<List<LoanaplicationInfo>> LoanApplicantsAccordingLoanStatus(string loanType)
-    // {
-    //     Console.WriteLine("Inside LoanApplicantsAccordingLoanStatus method in Cotroller....");
-    //      List<LoanaplicantsInfo> applicants = await _svc.LoanApplicantsAccordingLoanStatus(loanType);
-    //     LoanApplicationHelper helper = new LoanApplicationHelper(_httpClient);
-    //     List<LoanaplicantsInfo> DetailsOfApplicants =  await helper.applicantsDetails(applicants);
+    [HttpGet("status/{loanType}")]
+     public async Task<List<LoanaplicationInfo>> LoanApplicationsAccordingLoanStatus(string loanType)
+    {
+        Console.WriteLine("Inside LoanApplicantsAccordingLoanStatus method in Cotroller....");
+         List<LoanaplicationInfo> applications = await _svc.LoanApplicationAccordingLoanStatus(loanType);
+        LoanApplicationHelper helper = new LoanApplicationHelper(_httpClient);
+        List<LoanaplicationInfo> DetailsOfApplicants =  await helper.applicationsDetails(applications);
         
-    //     return DetailsOfApplicants;
-    // }
+        return DetailsOfApplicants;
+    }
 
     [HttpGet("applicationAscustomer")]
       public async Task<List<LoanaplicationInfo>> GetAllapplicationInfo()

@@ -3,7 +3,7 @@
  function displayData(details)
     {
         var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable" class="table table-striped"> <thead> <tr>' +
-                                    '<th>AccountId</th><th>Applay Date</th><th>Pan Id</th><th>Loan Type</th><th>Loan Amount</th><th>Loan Status</th><th>Applicant Name</th><th>Applicant Type</th></tr></thead><body>';
+                                    '<th>AccountId</th><th>Application Date</th><th>Loan Type</th><th>Loan Duration<th>Loan Amount</th><th>Loan Status</th><th>Applicant Name</th><th>Applicant Type</th></tr></thead><body>';
                                 
                                     htmlContent += '<tr>';
                                     htmlContent +='<td>'+details.accountId + '</td>';
