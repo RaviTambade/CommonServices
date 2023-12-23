@@ -8,7 +8,8 @@ namespace EntityLib
         public int LoanDuration{get;set;} 
         public string? LoanStatus{get;set;}        
         public int  AccountId {get; set;}
-        public int  LoanTypeId {get; set;}      
+        public int  LoanTypeId {get; set;}  
+         
            
     }
 
@@ -18,5 +19,9 @@ namespace EntityLib
         public int CustomerUserId{get;set;}         
         public String ApplicantName{get;set;}
         public String ApplicantType{get;set;}
+    }
+    
+    public class LoanApplicationDetails : LoanApplications{
+        public String LoanTypeName{get;set;}
     }
 }

@@ -25,23 +25,23 @@
             console.log(endDate);
 
                 $(document).ready(function() {
-                    var loantypesdata=null;
-                            $.ajax({
-                                        url: 'http://localhost:5053/api/loanstypes',
-                                        type: 'GET',
-                                        contentType: 'application/json',
-                                        success: function(response) {
-                                        console.log('Data :', response);
-                                        loantypesdata=response; 
-                                        console.log(loantypedata);                                      
-                                        },
+                   // var loantypesdata=null;
+                            // $.ajax({
+                            //             url: 'http://localhost:5053/api/loanstypes',
+                            //             type: 'GET',
+                            //             contentType: 'application/json',
+                            //             success: function(response) {
+                            //             console.log('Data :', response);
+                            //             loantypesdata=response; 
+                            //             console.log(loantypedata);                                      
+                            //             },
 
-                                        error: function(xhr, status, error) {
-                                        console.error('Error:', status + ': ' + error);
-                                        console.log('Data :', response);                                      
+                            //             error: function(xhr, status, error) {
+                            //             console.error('Error:', status + ': ' + error);
+                            //             console.log('Data :', response);                                      
                                     
-                                        }
-                                     });
+                            //             }
+                            //          });
 
                              $.ajax({
                                     url: 'http://localhost:5053/api/application' + "/" + startDate + "/" + endDate,
@@ -53,14 +53,14 @@
 
 
                                         var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable" class="table table-striped"> <thead> <tr>' +
-                                        '<th>AccountId</th><th>Application Date</th><th>Loan Amount</th><th>Loan Duration</th><th>Loan Type</th><th>Loan Status</th></tr></thead><body>';
+                                        '<th>AccountId</th><th padding-left:10px>Application Date</th><th>Loan Amount</th><th>Loan Duration</th><th>Loan Type</th><th>Loan Status</th></tr></thead><body>';
                                         $.each(data,function(index,item){
                                         htmlContent += '<tr>';
                                         htmlContent +='<td>'+item.accountId + '</td>';
                                         htmlContent += '<td>'+item.applicationDate + '</td>';
                                         htmlContent += '<td>'+item.loanAmount + '</td>';
                                         htmlContent += '<td>'+item.loanDuration + '</td>';                                                                      
-                                        htmlContent += '<td >'+loantypesdata[index].loanTypeName  + '</td>';                                       
+                                        htmlContent += '<td >'+item.loanTypeName  + '</td>';                                       
                                         htmlContent += '<td>'+item.loanStatus + '</td>';
                                         //htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
                                         htmlContent += '</tr>';

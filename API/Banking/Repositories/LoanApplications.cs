@@ -45,7 +45,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
             while (reader.Read())
             {
                 int applicationID = int.Parse(reader["applicationid"].ToString());
-                DateTime applicationDate = DateTime.Parse(reader["appldate"].ToString());
+                DateTime applicationDate = DateTime.Parse(reader["applicationdate"].ToString());
                 DateOnly formatapplicationDate = DateOnly.FromDateTime(applicationDate);
                 double loanamount = double.Parse(reader["loanamount"].ToString());
                 int LoanDuration =int.Parse (reader["loanduration"].ToString());
@@ -345,7 +345,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
 
     }
 
-    public List<LoanApplications> LoanApplicationBetweenGivenDates(DateTime startDate,DateTime endDate)
+    public List<LoanApplicationDetails> LoanApplicationBetweenGivenDates(DateTime startDate,DateTime endDate)
     {
 
         Console.WriteLine("Inside LoanApplicantsBetweenGivenDates method in Repo......");
@@ -358,7 +358,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         Console.WriteLine("startDateString : " + startDateString);
         Console.WriteLine("endDateString : " + endDateString);
 
-        List<LoanApplications> applicationslist = new List<LoanApplications>();
+        List<LoanApplicationDetails> applicationslist = new List<LoanApplicationDetails>();
 
         //Create connection object
         IDbConnection con = new MySqlConnection(_conString);
@@ -391,11 +391,12 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 int loanduration = int.Parse(reader["loanduration"].ToString());
                 string status = reader["loanstatus"].ToString();
                 int acctID = int.Parse(reader["accountid"].ToString());
-                int loantypeId = int.Parse(reader["loantypeid"].ToString());                
-                Console.WriteLine(applicationID);
+                int loantypeId = int.Parse(reader["loantypeid"].ToString()); 
+                string loantypename = reader["loantype"].ToString();               
+                Console.WriteLine("Loantypename in repo :"+loantypename);
 
                 applicationslist.Add(
-                    new LoanApplications()
+                    new LoanApplicationDetails()
                     {
                         ApplicationId = applicationID,                       
                         ApplicationDate = FormatDate,
@@ -403,7 +404,8 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                         LoanDuration=loanduration,
                         LoanStatus = status,
                         AccountId = acctID,
-                        LoanTypeId=loantypeId                      
+                        LoanTypeId=loantypeId ,
+                        LoanTypeName= loantypename                    
                          
                     }
                 );

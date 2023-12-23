@@ -16,7 +16,7 @@
 
   <script>
     // $(document).ready()
-     function getloanapplicants() {
+     function getloanapplications() {
         // Make an API call to delete the user using userId
         var loanStatus = $('#loanstatus').val();
        
@@ -76,13 +76,14 @@
     <label>Enter Loan Status: </label>
     <!-- <input type="text" id="loanstatus" name="loanstatus" placeholder="Enter Loan Status "  /> -->
     <select name="loanstatus" id="loanstatus">
+        <option>Select Loan Status</option>
         <option value="applied">Applied</option>
         <option value="approved">Approved</option>
         <option value="rejected">Rejected</option>
       </select>
-    <br></br>
-
-    <button onclick="getloanapplicants()">Get Loan Applications</button>
+    <br></br></div>
+   
+    <button onclick="getloanapplications()">Get Loan Applications</button> <hr/>
 
 </div>
 <div id="dataDisplay"></div>

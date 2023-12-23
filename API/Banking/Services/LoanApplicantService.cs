@@ -54,9 +54,9 @@ public class LoanApplicationsService : ILoanApplicationsService
         return loanapplication;
     }
     
-   public List<LoanApplications> LoanApplicationBetweenGivenDates(DateTime startDate,DateTime endDate)
+   public List<LoanApplicationDetails> LoanApplicationBetweenGivenDates(DateTime startDate,DateTime endDate)
     {
-        List<LoanApplications> loanapplications=new List<LoanApplications>();
+        List<LoanApplicationDetails> loanapplications=new List<LoanApplicationDetails>();
         loanapplications=_repo.LoanApplicationBetweenGivenDates(startDate,endDate);
         return loanapplications;
     }
