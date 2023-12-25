@@ -135,14 +135,14 @@
        
             //$(document).ready(function() {
                          $.ajax({
-                                url: 'http://localhost:5053/api/applicant' + "/" + loanid ,
+                                url: 'http://localhost:5053/api/application' + "/" + loanid ,
                                 type: 'GET',
                                 contentType: 'application/json',
                                 success: function (data) {
 
                                    
                                     console.log('Got the Data :', data);
-                                    responsedata = data;
+                                    //responsedata = data;
                                     alert("Data get Successfully ...");
                                     displayData(data);
 

@@ -92,13 +92,18 @@ public class LoanApplicationController : ControllerBase
         //return applicant;
     }
     [HttpGet("{startDate}/{endDate}")]
-     public IEnumerable<LoanApplicationDetails> LoanApplicantsBetweenGivenDates(DateTime startDate,DateTime endDate)
+     public async Task<IEnumerable<LoanaplicationInfo>> LoanApplicantsBetweenGivenDates(DateTime startDate,DateTime endDate)
     {
         // Console.WriteLine("Inside LoanApplicantsBetweenGivenDates method in Cotroller....");
         // IEnumerable<LoanApplications> applicants = _svc.LoanApplicationBetweenGivenDates(startDate,endDate);
+        Console.WriteLine("Inside LoanApplicantsAccordingLoanStatus method in Cotroller....");
+        List<LoanaplicationInfo> applications = await _svc.LoanApplicationBetweenGivenDates(startDate,endDate);
+        LoanApplicationHelper helper = new LoanApplicationHelper(_httpClient);
+        List<LoanaplicationInfo> DetailsOfApplicants =  await helper.applicationsDetails(applications);
+        
+        return DetailsOfApplicants;
 
-
-        return _svc.LoanApplicationBetweenGivenDates(startDate,endDate);
+       
     }
 
     [HttpGet("status/{loanType}")]

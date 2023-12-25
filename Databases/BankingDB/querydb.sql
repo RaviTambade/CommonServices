@@ -57,12 +57,17 @@ SELECT SUM(amount) from operations where operationmode="W" and operationtype="EM
 
 SELECT count(operationdate) from operations where operationmode="W" and operationtype="EMI" and acctnumber="46556565566";
 
-SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants 
-inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id; 
+SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications 
+inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id
+inner join loantype on loanapplications.loantypeid=loantype.loantypeid; 
 
-SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants 
-inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id
+SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype from loanapplications 
+inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id
 WHERE loanstatus = "applied";
+
+
+
+
 
 SELECT operations.acctnumber,operations.amount,operations.operationdate  from operations 
 inner join accounts on operations.acctId = accounts.id 

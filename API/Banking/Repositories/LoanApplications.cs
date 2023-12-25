@@ -216,7 +216,8 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         //Create connection object
         MySqlConnection con = new MySqlConnection(_conString);//IDBConnection is not allowed here Why???
 
-        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id";
+        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
+        "inner join loantype on loanapplications.loantypeid=loantype.loantypeid ";
 
         //Create Command Object
         MySqlCommand cmd = new MySqlCommand(query, con );
@@ -243,7 +244,8 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 int loanduration = int.Parse (reader["loanduration"].ToString());
                 string loanstatus = reader["loanstatus"].ToString();
                 int accountID = int.Parse(reader["accountid"].ToString());
-                int loantypeid = int.Parse(reader["loantypeid"].ToString());               
+                int loantypeid = int.Parse(reader["loantypeid"].ToString()); 
+                string loantypename = reader["loantype"].ToString();                
                                 
                 int custid = int.Parse(reader["bankcustomerid"].ToString());
                 string custtype = reader["usertype"].ToString();
@@ -258,6 +260,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                         LoanStatus = loanstatus,
                         AccountId = accountID,
                         LoanTypeId=loantypeid,
+                        LoanTypeName= loantypename,
                         
                         CustomerUserId= custid,
                         ApplicantType = custtype
@@ -294,15 +297,14 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
             //string query = "SELECT * FROM loanapplicants WHERE applicatid=" + laonapplicantId;
 
 
-            string query = " SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id WHERE applicationid=" + loanapplicationId;
+            string query = " SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
+                             "inner join loantype on loanapplications.loantypeid=loantype.loantypeid WHERE applicationid=" + loanapplicationId;
             await con.OpenAsync();
             MySqlCommand command = new MySqlCommand(query, con);
             MySqlDataReader reader = command.ExecuteReader();
             if (await reader.ReadAsync())
             {
-                int id = int.Parse(reader["applicationid"].ToString());
-
-                
+                int id = int.Parse(reader["applicationid"].ToString());               
                 
 
                 DateTime aDate = DateTime.Parse(reader["applicationdate"].ToString());
@@ -313,6 +315,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 string status = reader["loanstatus"].ToString();                
                 int acctid = int.Parse((reader["accountid"]).ToString());
                 int loantypeId = int.Parse((reader["loantypeid"]).ToString());
+                string loantypename = reader["loantype"].ToString();  
                 int custid = int.Parse(reader["bankcustomerid"].ToString());
                 string custtype = reader["usertype"].ToString();
 
@@ -326,6 +329,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                     LoanStatus = status,                                      
                     AccountId = acctid,
                     LoanTypeId=loantypeId,
+                    LoanTypeName= loantypename ,
                     CustomerUserId= custid,
                     ApplicantType = custtype
                    
@@ -345,7 +349,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
 
     }
 
-    public List<LoanApplicationDetails> LoanApplicationBetweenGivenDates(DateTime startDate,DateTime endDate)
+    public async Task<List<LoanaplicationInfo>> LoanApplicationBetweenGivenDates(DateTime startDate,DateTime endDate)
     {
 
         Console.WriteLine("Inside LoanApplicantsBetweenGivenDates method in Repo......");
@@ -358,13 +362,14 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         Console.WriteLine("startDateString : " + startDateString);
         Console.WriteLine("endDateString : " + endDateString);
 
-        List<LoanApplicationDetails> applicationslist = new List<LoanApplicationDetails>();
+        List<LoanaplicationInfo> applicationslist = new List<LoanaplicationInfo>();
 
         //Create connection object
-        IDbConnection con = new MySqlConnection(_conString);
+        MySqlConnection con = new MySqlConnection(_conString);
 
         Console.WriteLine("\n Connection status " + con.State);
-        string query = "SELECT loanapplications.*,loantype.loantype From loanapplications inner join loantype ON loanapplications.loantypeid=loantype.loantypeid WHERE applicationdate >= @StartDateString AND applicationdate <= @EndDateString;";
+        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
+                       "inner join loantype on loanapplications.loantypeid=loantype.loantypeid  WHERE applicationdate >= @StartDateString AND applicationdate <= @EndDateString;";
         
         //Create Command Object
 
@@ -374,12 +379,12 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
 
         try
         {
-            con.Open();
+            await con.OpenAsync();
             Console.WriteLine("\n Connection status " + con.State);
             //Create Data reader object
-            IDataReader reader = cmd.ExecuteReader();
+            MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
             //Online data using streaming mechanism
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 int applicationID = int.Parse(reader["applicationid"].ToString());
                 
@@ -392,11 +397,15 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 string status = reader["loanstatus"].ToString();
                 int acctID = int.Parse(reader["accountid"].ToString());
                 int loantypeId = int.Parse(reader["loantypeid"].ToString()); 
-                string loantypename = reader["loantype"].ToString();               
+                string loantypename = reader["loantype"].ToString();  
+                int custid = int.Parse(reader["bankcustomerid"].ToString()); 
+                string custtype = reader["usertype"].ToString();
+          
                 Console.WriteLine("Loantypename in repo :"+loantypename);
 
+
                 applicationslist.Add(
-                    new LoanApplicationDetails()
+                    new LoanaplicationInfo()
                     {
                         ApplicationId = applicationID,                       
                         ApplicationDate = FormatDate,
@@ -405,12 +414,15 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                         LoanStatus = status,
                         AccountId = acctID,
                         LoanTypeId=loantypeId ,
-                        LoanTypeName= loantypename                    
+                        LoanTypeName= loantypename ,
+                        CustomerUserId= custid,
+                        ApplicantType = custtype
+
                          
                     }
                 );
             }
-            reader.Close();
+            await reader.CloseAsync();
         }
         catch (MySqlException exp)
         {
@@ -422,7 +434,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         {
             if (con.State == ConnectionState.Open)
             {
-                con.Close();
+                await con.CloseAsync();
             }
         }
         return applicationslist;
@@ -444,7 +456,8 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
 
         Console.WriteLine("\n Connection status " + con.State);
 
-        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id WHERE loanstatus =  @Loanstatus";
+        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
+        "inner join loantype on loanapplications.loantypeid=loantype.loantypeid WHERE loanstatus =  @Loanstatus";
         //string query = "SELECT * FROM loanapplicants WHERE loanstatus = @Loanstatus";
 
         //Create Command Object
@@ -470,6 +483,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 DateOnly FormatDate = DateOnly.FromDateTime(aDate);
     
                 int loanTypeid = int.Parse(reader["loantypeid"].ToString());
+                string loantypename = reader["loantype"].ToString(); 
                 int loanduration = int.Parse(reader["loanduration"].ToString());
                 double amount = double.Parse(reader["loanamount"].ToString());
                 string status = reader["loanstatus"].ToString();
@@ -486,6 +500,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                         AccountId = acctID,                        
                         ApplicationDate = FormatDate,                        
                         LoanTypeId = loanTypeid,
+                        LoanTypeName=loantypename,
                         LoanDuration=loanduration,
                         LoanAmount = amount,
                         LoanStatus = status,

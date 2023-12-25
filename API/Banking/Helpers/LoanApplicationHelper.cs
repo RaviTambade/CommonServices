@@ -4,7 +4,7 @@ namespace Banking.Helpers
 {
     public  class LoanApplicationHelper
     {
-         private readonly HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
         public  LoanApplicationHelper(HttpClient httpClient)
         {
              _httpClient = httpClient;

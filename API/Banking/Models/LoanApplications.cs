@@ -19,9 +19,10 @@ namespace EntityLib
         public int CustomerUserId{get;set;}         
         public String ApplicantName{get;set;}
         public String ApplicantType{get;set;}
-    }
-    
-    public class LoanApplicationDetails : LoanApplications{
         public String LoanTypeName{get;set;}
     }
+    
+    /*public class LoanApplicationDetails : LoanApplications{
+          public String LoanTypeName{get;set;}
+    }*/
 }

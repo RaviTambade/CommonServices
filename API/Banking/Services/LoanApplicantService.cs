@@ -54,10 +54,10 @@ public class LoanApplicationsService : ILoanApplicationsService
         return loanapplication;
     }
     
-   public List<LoanApplicationDetails> LoanApplicationBetweenGivenDates(DateTime startDate,DateTime endDate)
+   public async Task<List<LoanaplicationInfo> >LoanApplicationBetweenGivenDates(DateTime startDate,DateTime endDate)
     {
-        List<LoanApplicationDetails> loanapplications=new List<LoanApplicationDetails>();
-        loanapplications=_repo.LoanApplicationBetweenGivenDates(startDate,endDate);
+        List<LoanaplicationInfo> loanapplications=new List<LoanaplicationInfo>();
+        loanapplications=await _repo.LoanApplicationBetweenGivenDates(startDate,endDate);
         return loanapplications;
     }
 
