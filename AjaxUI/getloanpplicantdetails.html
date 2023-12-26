@@ -30,7 +30,7 @@
         
         if(parameter == "approved")
         {
-            var formContent = '<div>Loan Details Form</div><br></br><label>Enter Duration : </label><input type="number" id="duration" name="duration" placeholder="Enter Duration "  /><br></br><br></br><label>Enter Emi Day  : </label><input type="number" id="emiday" name="emiday" placeholder="Enter EMI day "  /><br></br><br><label>Enter Interest Rate : </label><input type="number" id="interestrate" name="interestrate" placeholder="Enter Interest Rate" /><br></br><br> <button type="button" id="btnemi" onclick="calcuateEMI(details,loanData)">Get EMI</button><br/><br/><br/><label>EMI Amount  : </label><input type="text" id="emiamount" name="emiamount" /><br/><br/><br/> <button type="button" id="btnapproved" onclick="updateLoanAndLoanstatus(parameter,details,loanData)">Loan Approved</button>'
+            var formContent = '<div>Loan Details Form</div><br></br><label><input type="number" id="duration" name="duration" placeholder="Enter Duration "  /><br></br><br></br><label>Enter Emi Day  : </label><input type="number" id="emiday" name="emiday" placeholder="Enter EMI day "  /><br></br><br><label>Enter Interest Rate : </label><input type="number" id="interestrate" name="interestrate" placeholder="Enter Interest Rate" /><br></br><br> <button type="button" id="btnemi" onclick="calcuateEMI(details,loanData)">Get EMI</button><br/><br/><br/><label>EMI Amount  : </label><input type="text" id="emiamount" name="emiamount" /><br/><br/><br/> <button type="button" id="btnapproved" onclick="updateLoanAndLoanstatus(parameter,details,loanData)">Loan Approved</button>'
 
             $('#loan_details').html(formContent);
             
@@ -129,13 +129,13 @@
 
      function getloanapplicants() {
         // Make an API call to delete the user using userId
-        var loanid = $('#loanid').val();
+        var loanapplicationid = $('#loanapplicationid').val();
        
-        console.log("Id : " + loanid);
+        console.log("Id : " + loanapplicationid);
        
             //$(document).ready(function() {
                          $.ajax({
-                                url: 'http://localhost:5053/api/application' + "/" + loanid ,
+                                url: 'http://localhost:5053/api/application' + "/" + loanapplicationid ,
                                 type: 'GET',
                                 contentType: 'application/json',
                                 success: function (data) {
@@ -164,16 +164,16 @@
 <body>
 <div>
 
-    <h1>Display Loan Applicant  according to Id</h1>
+    <h1>Loan Applicant  according to Loan Application Id</h1>
     <br></br>
-    <label>Enter Loan Id: </label>
-    <input type="number" id="loanid" name="loanid" placeholder="Enter Loan Id "  /> 
+    <label>Enter Your Loan Application Id: </label>
+    <input type="number" id="loanapplicationid" name="loanapplicationid" placeholder="Enter Loan Application Id "  /> 
     
     <br></br>
 
     <button onclick="getloanapplicants()">Get Loan Applicants</button>
     <!-- <button id ="btnapproved" name = "btnapproved">Approved</button> -->
-    <br/><br/>
+    <br/><br/><hr/>
 
 </div>
 <div id="dataDisplay"></div>
