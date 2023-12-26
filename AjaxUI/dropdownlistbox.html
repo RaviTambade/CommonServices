@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PMSNGApp</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!--<script src="jquery.min.js"></script> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <script>
+        $(document).ready(function() {
+        getSelectData($('#dpp'));
+     });
+  
+    $('#dpp').on('change', function() {
+        getSelectData($(this));
+    });
+  
+    function getSelectData(el) {
+        var $option = el.find('option:selected');
+        var text = $option.text();
+        var val = $option.val();
+    
+        alert('option text: ' + text + '; option value ' + val)
+    }
+    </script>
+    </head>
+  <body>
+  <select name="name" id="dpp">
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+  </select>
+
+</body>
+
+</html>
