@@ -12,7 +12,7 @@
 
   <!--<script src="jquery.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-   <script type="text/javascript" src="G:/TAP/Repositoryes/CommonServices/AjaxUI/HtmlHelper/htmlHelper.js"></script>
+   <script type="text/javascript" src="D:/DotNet/CommonServices/CommonServices/AjaxUI/HtmlHelper/htmlHelper.js"></script>
 
   <script>
     var status1 = "approved";
@@ -63,7 +63,7 @@
                                     console.log('The Data is updated :', response);
                                     if(response ==true)
                                     {
-                                        displayData(details);
+                                        //displayData(details);
                                         alert("Data updatedet Successfully ...");
                                     }
                             
@@ -127,13 +127,13 @@
                                     displayData(data,emiamount);
                                     var sanctionedate = new Date();
                                     var formatdate =  sanctionedate.toISOString().slice(0,10);
-                                    var emiday=data.eMIDay;
+                                    //var emiday= 10;
                                     var acctId = data.applicationId;
 
                                     loanData = {
                                                 
                                                 "loanSanctionDate": formatdate, 
-                                                "eMIDay" :emiday,
+                                                //"eMIDay" :emiday,
                                                 "eMIAmount":emiamount,
                                                 "applicationId":acctId
                                             };

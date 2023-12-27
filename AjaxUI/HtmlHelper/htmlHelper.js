@@ -19,13 +19,27 @@
 
                                    
                                     // htmlContent += '<td>' + "  " + '<button onclick = "checkstatus(status1,responsedata)" id="btnapproved" class="btn btn-success">Approved</button>' + "  "+ '<button  onclick = "checkstatus(status2,responsedata)" id="btnrejected" class="btn btn-danger">Rejected</button>' + '</td>';
-                                    htmlContent += '<td>' + "  " + '<button onclick = "updateLoanAndLoanstatus(status1,details,loanData)" id="btnapproved" class="btn btn-success">Approved</button>' + "  "+ '<button  onclick = "updateLoanAndLoanstatus(status2,details,loanData)" id="btnrejected" class="btn btn-danger">Rejected</button>' + '</td>';
+                                    htmlContent += '<td>' + "  " + '<button onclick = "updateLoanAndLoanstatus(status1,details,loanData)" id="btnapproved" class="btn btn-success" >Approved</button>' + "  "+ '<button  onclick = "updateLoanAndLoanstatus(status2,details,loanData)" id="btnrejected" class="btn btn-danger">Rejected</button>' + '</td>';
                                     htmlContent += '</tr>';
 
                                     htmlContent += '</tbody></table></div>';
                                     $('#dataDisplay').html(htmlContent);
                 
-
+                                    
+                                    var button = document.getElementById('btnapproved');
+                                            button.addEventListener('click', function(event){
+                                            event.target.disabled = true; 
+                                            document.getElementById('btnrejected').disabled = true;
+                                        });
+    
+                                        var button = document.getElementById('btnrejected');
+                                        button.addEventListener('click', function(event){
+                                        event.target.disabled = true; 
+                                        document.getElementById('btnapproved').disabled = true;
+                                    });
+    
     };
 
 
+    
+        

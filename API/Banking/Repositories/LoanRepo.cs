@@ -142,10 +142,10 @@ public class LoanRepo : ILoanRepo
         try
         {
             string query =
-                "INSERT INTO loan(loansanctiondate,emiday,emiamount, applicationid) VALUES(@Loansanctiondate,@Emiday,@Emiamount,@Applicationid)";
+                "INSERT INTO loan(loansanctiondate,emiamount, applicationid) VALUES(@Loansanctiondate,@Emiamount,@Applicationid)";
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@Loansanctiondate", loanSanctionDate);
-            command.Parameters.AddWithValue("@Emiday", loan.EMIDay);
+           // command.Parameters.AddWithValue("@Emiday", loan.EMIDay);
             command.Parameters.AddWithValue("@Emiamount", loan.EMIAmount);
             command.Parameters.AddWithValue("@Applicationid", loan.ApplicationId);
 
