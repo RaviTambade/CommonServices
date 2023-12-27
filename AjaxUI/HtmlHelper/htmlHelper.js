@@ -22,11 +22,9 @@
                                     htmlContent += '<td>' + "  " + '<button onclick = "updateLoanAndLoanstatus(status1,details,loanData)" id="btnapproved" class="btn btn-success">Approved</button>' + "  "+ '<button  onclick = "updateLoanAndLoanstatus(status2,details,loandata)" id="btnrejected" class="btn btn-danger">Rejected</button>' + '</td>';
                                     htmlContent += '</tr>';
 
-
-                            
-                                htmlContent += '</tbody></table></div>';
-                                $('#dataDisplay').html(htmlContent);
-             
+                                    htmlContent += '</tbody></table></div>';
+                                    $('#dataDisplay').html(htmlContent);
+                
 
     };
 
