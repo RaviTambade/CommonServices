@@ -19,7 +19,7 @@
 
                                    
                                     // htmlContent += '<td>' + "  " + '<button onclick = "checkstatus(status1,responsedata)" id="btnapproved" class="btn btn-success">Approved</button>' + "  "+ '<button  onclick = "checkstatus(status2,responsedata)" id="btnrejected" class="btn btn-danger">Rejected</button>' + '</td>';
-                                    htmlContent += '<td>' + "  " + '<button onclick = "updateLoanAndLoanstatus(status1,details,loanData)" id="btnapproved" class="btn btn-success">Approved</button>' + "  "+ '<button  onclick = "updateLoanAndLoanstatus(status2,details,loandata)" id="btnrejected" class="btn btn-danger">Rejected</button>' + '</td>';
+                                    htmlContent += '<td>' + "  " + '<button onclick = "updateLoanAndLoanstatus(status1,details,loanData)" id="btnapproved" class="btn btn-success">Approved</button>' + "  "+ '<button  onclick = "updateLoanAndLoanstatus(status2,details,loanData)" id="btnrejected" class="btn btn-danger">Rejected</button>' + '</td>';
                                     htmlContent += '</tr>';
 
                                     htmlContent += '</tbody></table></div>';
