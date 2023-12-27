@@ -12,7 +12,7 @@
 
   <!--<script src="jquery.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-   <script type="text/javascript" src="D:/DotNet/CommonServices/CommonServices/AjaxUI/HtmlHelper/htmlHelper.js"></script>
+   <script type="text/javascript" src="G:/TAP/Repositoryes/CommonServices/AjaxUI/HtmlHelper/htmlHelper.js"></script>
 
   <script>
     var status1 = "approved";
@@ -127,7 +127,7 @@
                                 }
 
                         });
-
+                        if(details.loanStatus=="approved"){
                         $.ajax({
                                 url: 'http://localhost:5053/api/loans',
                                 type: 'POST',
@@ -148,6 +148,7 @@
                                 }
 
                         });
+                        }
     
         }
 
@@ -184,11 +185,13 @@
                                     displayData(data,emiamount);
                                     var sanctionedate = new Date();
                                     var formatdate =  sanctionedate.toISOString().slice(0,10);
+                                    var emiday=data.eMIDay;
                                     var acctId = data.applicationId;
 
                                     loanData = {
                                                 
-                                                "loanSanctionDate": formatdate,  
+                                                "loanSanctionDate": formatdate, 
+                                                "eMIDay" :emiday,
                                                 "eMIAmount":emiamount,
                                                 "applicationId":acctId
                                             };
