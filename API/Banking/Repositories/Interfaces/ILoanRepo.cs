@@ -5,7 +5,7 @@ namespace RepoLib;
 public interface ILoanRepo
 {
     List<Loan> GetAll();
-    Loan GetByAccountId(int accountId);
+    Loan GetByLoanId(int loanId);
     bool Insert(Loan loans);
     bool Delete(int loanId);
     bool Update(Loan loan);

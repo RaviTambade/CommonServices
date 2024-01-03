@@ -16,7 +16,7 @@
 
   <script>
     // $(document).ready()
-     function getloanapplicants() {
+     function getloanapplications() {
         // Make an API call to delete the user using userId
         var loanStatus = $('#loanstatus').val();
        
@@ -24,7 +24,7 @@
 
             //$(document).ready(function() {
                          $.ajax({
-                                url: 'http://localhost:5053/api/applicant/status' + "/" + loanStatus ,
+                                url: 'http://localhost:5053/api/application/status' + "/" + loanStatus ,
                                 type: 'GET',
                                 contentType: 'application/json',
                                 success: function (data) {
@@ -33,21 +33,19 @@
 
 
                                     var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable" class="table table-striped"> <thead> <tr>' +
-                            '<th>AccountId</th><th>Applay Date</th><th>Pan Id</th><th>Loan Type</th><th>Loan Amount</th><th>Loan Status</th><th>Applicant Name</th><th>Applicant Type</th></tr></thead><body>';
-                                $.each(data,function(index,item){
-                                    htmlContent += '<tr>';
-                                    htmlContent +='<td>'+item.accountId + '</td>';
-                                    htmlContent += '<td>'+item.applyDate + '</td>';
-                                    htmlContent += '<td>'+item.panId + '</td>';
-                                    htmlContent += '<td>'+item.loanType + '</td>';
-                                    htmlContent += '<td>'+item.amount + '</td>';
-                                    htmlContent += '<td>'+item.status + '</td>';
-                                    htmlContent += '<td>'+item.applicantName + '</td>';
-                                    htmlContent += '<td>'+item.applicantType + '</td>';
-
-                                   
-                                    htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
-                                    htmlContent += '</tr>';
+                                '<th>AccountId</th><th>Applicant Name</th><th>Application Date</th><th>Loan Type</th><th>Loan Duration<th>Loan Amount</th>'+
+                                '<th>Loan Status</th></tr></thead><body>';;
+                                    $.each(data,function(index,item){
+                                        htmlContent += '<tr>';
+                                        htmlContent +='<td>'+item.accountId + '</td>';
+                                        htmlContent +='<td>'+item.applicantName + '</td>';
+                                        htmlContent += '<td>'+item.applicationDate + '</td>';
+                                        htmlContent += '<td>'+item.loanTypeName + '</td>';
+                                        htmlContent += '<td>'+item.loanDuration + '</td>';
+                                        htmlContent += '<td>'+item.loanAmount + '</td>';
+                                        htmlContent += '<td>'+item.loanStatus + '</td>';
+                                       // htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
+                                        htmlContent += '</tr>'
                                 });
 
                                 htmlContent += '</tbody></table></div>';
@@ -71,18 +69,19 @@
 <body>
 <div>
 
-    <h1>Display Loan Applicants between given Dates</h1>
+    <h1>Display Loan Applicants According to Status</h1><hr/>
     <br></br>
     <label>Enter Loan Status: </label>
     <!-- <input type="text" id="loanstatus" name="loanstatus" placeholder="Enter Loan Status "  /> -->
     <select name="loanstatus" id="loanstatus">
+        <option>Select Loan Status</option>
         <option value="applied">Applied</option>
         <option value="approved">Approved</option>
         <option value="rejected">Rejected</option>
       </select>
-    <br></br>
-
-    <button onclick="getloanapplicants()">Get Loan Applicants</button>
+    <br></br></div>
+   
+    <button onclick="getloanapplications()">Get Loan Applications</button> <hr/>
 
 </div>
 <div id="dataDisplay"></div>

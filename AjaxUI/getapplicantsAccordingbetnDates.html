@@ -12,7 +12,7 @@
 
     <script>
         // $(document).ready()
-         function getloanapplicants() {
+         function getloanapplications() {
             // Make an API call to delete the user using userId
             var startDate = $('#startdate').val();
             //var dateObj1 = new Date(startDate);
@@ -24,9 +24,27 @@
             console.log(startDate);
             console.log(endDate);
 
-                //$(document).ready(function() {
+                $(document).ready(function() {
+                   // var loantypesdata=null;
+                            // $.ajax({
+                            //             url: 'http://localhost:5053/api/loanstypes',
+                            //             type: 'GET',
+                            //             contentType: 'application/json',
+                            //             success: function(response) {
+                            //             console.log('Data :', response);
+                            //             loantypesdata=response; 
+                            //             console.log(loantypedata);                                      
+                            //             },
+
+                            //             error: function(xhr, status, error) {
+                            //             console.error('Error:', status + ': ' + error);
+                            //             console.log('Data :', response);                                      
+                                    
+                            //             }
+                            //          });
+
                              $.ajax({
-                                    url: 'http://localhost:5053/api/applicant' + "/" + startDate + "/" + endDate,
+                                    url: 'http://localhost:5053/api/application' + "/" + startDate + "/" + endDate,
                                     type: 'GET',
                                     contentType: 'application/json',
                                     success: function (data) {
@@ -35,16 +53,17 @@
 
 
                                         var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable" class="table table-striped"> <thead> <tr>' +
-                                '<th>AccountId</th><th>Applay Date</th><th>Pan Id</th><th>Loan Type</th><th>Loan Amount</th><th>Loan Status</th></tr></thead><body>';
-                                    $.each(data,function(index,item){
+                                        '<th>AccountId</th><th>Applicant Name</th><th padding-left:10px>Application Date</th><th>Loan Amount</th><th>Loan Duration</th><th>Loan Type</th><th>Loan Status</th></tr></thead><body>';
+                                        $.each(data,function(index,item){
                                         htmlContent += '<tr>';
                                         htmlContent +='<td>'+item.accountId + '</td>';
-                                        htmlContent += '<td>'+item.applyDate + '</td>';
-                                        htmlContent += '<td>'+item.panId + '</td>';
-                                        htmlContent += '<td>'+item.loanType + '</td>';
-                                        htmlContent += '<td>'+item.amount + '</td>';
-                                        htmlContent += '<td>'+item.status + '</td>';
-                                        htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
+                                        htmlContent +='<td>'+item.applicantName + '</td>';
+                                        htmlContent += '<td>'+item.applicationDate + '</td>';
+                                        htmlContent += '<td>'+item.loanAmount + '</td>';
+                                        htmlContent += '<td>'+item.loanDuration + '</td>';                                                                      
+                                        htmlContent += '<td >'+item.loanTypeName  + '</td>';                                       
+                                        htmlContent += '<td>'+item.loanStatus + '</td>';
+                                        //htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
                                         htmlContent += '</tr>';
                                     });
 
@@ -60,7 +79,7 @@
 
                             });
             
-        //});
+        });
     };
     </script>
 
@@ -69,7 +88,7 @@
 <body>
     <div>
     
-        <h1>Display Loan Applicants between given Dates</h1>
+        <h1>Display Loan Applicants between given Dates</h1><hr/>
         <br></br>
         <label>Enter Start Date: </label>
         <input type="date" id="startdate" name="startdate" placeholder="Enter Start Date "  />
@@ -78,7 +97,7 @@
         <label>Enter Start Date: </label>
         <input type="date" id="enddate" name="enddate" placeholder="Enter End Date "  />
         <br/><br/>
-        <button onclick="getloanapplicants()">Get Loan Applicants</button>
+        <button onclick="getloanapplications()">Get Loan Applications</button>
 
     </div>
     <div id="dataDisplay"></div>

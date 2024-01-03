@@ -17,7 +17,8 @@
            // AJAX GET request to getall data from database
           
           $.ajax({
-              url: 'http://localhost:5053/api/applicant',
+              //url: 'http://localhost:5053/api/application',
+              url:'http://localhost:5053/api/application/applicationAscustomer',
               type: 'GET',
               contentType: 'application/json',
               
@@ -26,16 +27,17 @@
                   alert("Data get Successfully ...");
 
                 var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable" class="table table-striped"> <thead> <tr>' +
-                                '<th>AccountId</th><th>Applay Date</th><th>Pan Id</th><th>Loan Type</th><th>Loan Amount</th><th>Loan Status</th></tr></thead><body>';
+                                '<th>AccountId</th><th>Applicant Name</th><th>Application Date</th><th>Loan Type</th><th>Loan Duration<th>Loan Amount</th><th>Loan Status</th></tr></thead><body>';
                                     $.each(response,function(index,item){
                                         htmlContent += '<tr>';
                                         htmlContent +='<td>'+item.accountId + '</td>';
-                                        htmlContent += '<td>'+item.applyDate + '</td>';
-                                        htmlContent += '<td>'+item.panId + '</td>';
-                                        htmlContent += '<td>'+item.loanType + '</td>';
-                                        htmlContent += '<td>'+item.amount + '</td>';
-                                        htmlContent += '<td>'+item.status + '</td>';
-                                        htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
+                                        htmlContent +='<td>'+item.applicantName + '</td>';
+                                        htmlContent += '<td>'+item.applicationDate + '</td>';
+                                        htmlContent += '<td>'+item.loanTypeName + '</td>';
+                                        htmlContent += '<td>'+item.loanDuration + '</td>';
+                                        htmlContent += '<td>'+item.loanAmount + '</td>';
+                                        htmlContent += '<td>'+item.loanStatus + '</td>';
+                                       // htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
                                         htmlContent += '</tr>';
                                     });
 

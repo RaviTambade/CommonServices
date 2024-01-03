@@ -13,33 +13,68 @@
   <script>
 
     $(document).ready(function() {
+        var loantypesdata=null;
+        $.ajax({
+                url: 'http://localhost:5053/api/loanstypes',
+                type: 'GET',
+                contentType: 'application/json',
+                success: function(response) {
+                console.log('Data :', response);
+                loantypesdata=response;
+                    var ddlloantypes = document.getElementById("loantype");
+            
+                    //Add the Options to the DropDownList.
+                    for (var i = 0; i < loantypesdata.length; i++) {
+                         var option = document.createElement("OPTION");
+                        //Set Customer Name in Text part.
+                        option.innerHTML = loantypesdata[i].loanTypeName;
+                        //Set CustomerId in Value part.
+                        option.value = loantypesdata[i].loanTypeId;
+                         //Add the Option element to DropDownList.
+                    ddlloantypes.options.add(option);             
+                }
+                
+                    $("#loantype").change(function(){
+                    var selectedText = $(this).find("option:selected").text();
+                    var selectedValue = $(this).val();
+                    document.getElementById("intrestrate").innerHTML=loantypesdata.find((loan)=>loan.loanTypeId==selectedValue).intrestRate                    
+                })
+                },
+                error: function(xhr, status, error) {
+                console.error('Error:', status + ': ' + error);
+                console.log('Data :', response);
+                  
+                  
+              }
+          });
       $('#frm_applicant').submit(function(event) {
          event.preventDefault(); // Prevent default form submission
 
           // Get values from form fields
-          var aactId = $('#accountId').val();
-          var applayDate = $('#applydate').val();
-          console.log(applayDate);
-          var panId = $('#txtPanID').val();
+          var accountId = $('#accountId').val();
+          var applicationDate = $('#applicationdate').val();
+          console.log(applicationDate);
           var loanAmount = $('#txtAmount').val();
-          var loanType = $('#txtLoantype').val();
-          var loanstatus = $('#txtLoanstatus').val();
+          var loanduration=$("#txtduration").val();
+          var loanTypeId = $('#loantype').val();
+          var loanstatus = $('#loanstatus').val();
+          
 
           // Create data object to send via AJAX
           var newData = {
-              "accountId": aactId, 
-              "applyDate": applayDate,
-              "panId": panId,
-              "amount": loanAmount,
-              "loanType":loanType,
-              "status":loanstatus
+              "accountId": accountId, 
+              "applicationDate": applicationDate,
+              "loanAmount": loanAmount,
+              "loanDuration": loanduration,
+              "loanTypeId":loanTypeId,
+              "loanStatus":loanstatus
           };
           console.log(JSON.stringify(newData));
 
            // AJAX GET request to getall data from database
           // AJAX POST request to insert new data
           $.ajax({
-              url: 'http://localhost:5053/api/applicant',
+              url: 'http://localhost:5053/api/application',
               type: 'POST',
               contentType: 'application/json',
               data: JSON.stringify(newData),
@@ -63,33 +98,38 @@
 
 <body>
 <form id="frm_applicant">
-    <div>Loan Application Form</div>
-    <br></br>
+    <div><h2>Loan Application Form</h2></div><hr/>
+    <br/><br/>
     <label>Bank AccountId : </label>
     <input type="text" id="accountId" name="accountId" placeholder="Enter Bank Account ID "  />
-    <br></br><br></br>
-
-    <label>Apply Date : </label>
-    <input type="Date" id="applydate" name="applydate" placeholder="Enter Loan Apply Date "  />
-
-    <br></br><br></br>
-    <label>PAN ID : </label>
-    <input type="text" id="txtPanID" name="txtPanID" placeholder="Enter PAN ID" />
-    <br></br><br></br>
-
+    <br/><br/>
+    <label>Application Date : </label>
+    <input type="Date" id="applicationdate" name="applicationdate" placeholder="Enter Loan Application Date "  />
+    <br/><br/>   
     <label>Loan Amount : </label>
     <input type="number" id="txtAmount" name="txtAmount" placeholder="Enter Loan Amount" />
-    <br></br><br></br>
-
+    <br></br>
+    <label>Loan Duration : </label>
+    <input type="number" id="txtduration" name="txtduration" placeholder="Enter Loan Duration in year" />
+    <br></br>
     <label>Loan Type : </label>
-    <input type="text" id="txtLoantype" name="txtLoantype" placeholder="Enter Loan Type"/>
-    <br></br><br></br>
-
+    <select name="loantype" id="loantype" >
+        <option value="">Select Loan Type</option>
+        <!-- <option value="home">Home</option>
+        <option value="personal">Personal</option>
+        <option value="car">Car</option>
+        <option value="education">Education</option>        
+        <option value="bussiness">Bussiness</option> -->
+    </select>    
+    <br></br>    
+    <label>Intrest Rate : </label>
+    <label type="number" id="intrestrate" name="intrestrate"></label>    
+    <br></br>
     <label>Loan Status : </label>
-    <input type="text" id="txtLoanstatus" name="txtLoanstatus" placeholder="Enter Loan Status"/>
-    <br></br><br></br>
+    <select name="loanstatus" id="loanstatus" >
+         <option value="applied">Applied</option>
+    </select>
+    <br></br>
     <button type="submit" class="btn btn-primary btn-sm">Submit</button>
     </form>
-
-
 </body>

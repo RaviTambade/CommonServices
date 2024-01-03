@@ -3,39 +3,39 @@ using EntityLib;
 using RepoLib;
 // using BusinessLogic;
 //Bussiness Logic Implementation
-public class LoanApplicantService : ILoanApplicantService
+public class LoanApplicationsService : ILoanApplicationsService
 {
     
-    public readonly ILoanApplicantRepo _repo;
-    public LoanApplicantService(ILoanApplicantRepo repo)
+    public readonly ILoanApplicationsRepo _repo;
+    public LoanApplicationsService(ILoanApplicationsRepo repo)
     {
         _repo = repo;
     }  
     
-    public List<LoanApplicants> GetAll()
+    public List<LoanApplications> GetAll()
     {
-        List<LoanApplicants> loanapplicants=new List<LoanApplicants>();
+        List<LoanApplications> loanapplicants=new List<LoanApplications>();
         loanapplicants=_repo.GetAll();
         return loanapplicants;
     }  
-    public bool Insert(LoanApplicants applicant)
+    public bool Insert(LoanApplications application)
     {
-        Console.WriteLine("Amount IN SERVICE : "+ applicant.Amount);
-        bool status=_repo.Insert(applicant);
+        Console.WriteLine("Amount IN SERVICE : "+ application.LoanAmount);
+        bool status=_repo.Insert(application);
         return status;
     }   
 
-    public async Task <bool> UpdateStatus(LoanApplicants applicant)
+    public async Task <bool> UpdateStatus(LoanApplications application)
     {
-         Console.WriteLine("Status in Update method : "+ applicant.Status);
-        bool status=await _repo.UpdateStatus(applicant);
+         Console.WriteLine("Status in Update method : "+ application.LoanStatus);
+        bool status=await _repo.UpdateStatus(application);
         return status;
     }
 
 
-    public bool Delete(int applicantId)
+    public bool Delete(int applicationId)
     {
-        bool status=_repo.Delete(applicantId);
+        bool status=_repo.Delete(applicationId);
         return status;
     }
     
@@ -47,33 +47,35 @@ public class LoanApplicantService : ILoanApplicantService
         return loanapplicant;
     }*/
 
-    public async Task<LoanaplicantsInfo> GetById(int laonapplicantId)
+    public async Task<LoanaplicationInfo> GetById(int laonapplicationId)
     {
-        LoanaplicantsInfo loanapplicant=new LoanaplicantsInfo();
-        loanapplicant=await _repo.GetById(laonapplicantId);
-        return loanapplicant;
+        LoanaplicationInfo loanapplication=new LoanaplicationInfo();
+        loanapplication=await _repo.GetById(laonapplicationId);
+        return loanapplication;
     }
     
-    public List<LoanApplicants> LoanApplicantsBetweenGivenDates(DateTime startDate,DateTime endDate)
+   public async Task<List<LoanaplicationInfo> >LoanApplicationBetweenGivenDates(DateTime startDate,DateTime endDate)
     {
-        List<LoanApplicants> loanapplicants=new List<LoanApplicants>();
-        loanapplicants=_repo.LoanApplicantsBetweenGivenDates(startDate,endDate);
-        return loanapplicants;
+        List<LoanaplicationInfo> loanapplications=new List<LoanaplicationInfo>();
+        loanapplications=await _repo.LoanApplicationBetweenGivenDates(startDate,endDate);
+        return loanapplications;
     }
 
-     public async Task<List<LoanaplicantsInfo>> LoanApplicantsAccordingLoanStatus(string LoanType)
+    public async Task<List<LoanaplicationInfo>> LoanApplicationAccordingLoanStatus(string LoanType)
      {
-        List<LoanaplicantsInfo> loanapplicants=new List<LoanaplicantsInfo>();
-        loanapplicants=await _repo.LoanApplicantsAccordingLoanStatus(LoanType);
-        return loanapplicants;
-     }
+        List<LoanaplicationInfo> loanapplication=new List<LoanaplicationInfo>();
+        loanapplication=await _repo.LoanApplicationAccordingLoanStatus(LoanType);
+        return loanapplication;
+    }
 
-     public async Task<List<LoanaplicantsInfo>> GetAllapplicantInfo()
+    public async Task<List<LoanaplicationInfo>> GetAllapplicationInfo()
      {
         Console.WriteLine("Inside LoanaplicantsInfo method in Service....");
-        List<LoanaplicantsInfo> loanapplicants=new List<LoanaplicantsInfo>();
-        loanapplicants=await _repo.GetAllapplicantInfo();
+        List<LoanaplicationInfo> loanapplications=new List<LoanaplicationInfo>();
+        loanapplications=await _repo.GetAllapplicationInfo();
         
-        return loanapplicants;
+        return loanapplications;
      }
+
+   
 }

@@ -44,7 +44,60 @@
                                 });
                  })
            
-   
+    function checkstatus(parameter,details) {
+        var parameter = parameter;
+        var details=details;
+        console.log(details);
+         console.log(parameter);
+        
+        if(parameter == "approved")
+        {
+        //     var formContent = '<div>Loan Details Form</div><br></br><label>Enter Duration : </label><input type="number" id="duration" name="duration" placeholder="Enter Duration "  /><br></br><br></br><label>Enter Emi Day  : </label><input type="number" id="emiday" name="emiday" placeholder="Enter EMI day "  /><br></br><br><label>Enter Interest Rate : </label><input type="number" id="interestrate" name="interestrate" placeholder="Enter Interest Rate" /><br></br><br> <button type="button" id="btnemi" onclick="calcuateEMI(details,loanData)">Get EMI</button><br/><br/><br/><label>EMI Amount  : </label><input type="text" id="emiamount" name="emiamount" /><br/><br/><br/> <button type="button" id="btnapproved" onclick="updateLoanAndLoanstatus(parameter,details,loanData)">Loan Approved</button>'
+
+        //     $('#loan_details').html(formContent);
+            
+            
+        //     var loanamount = details.amount;
+        //     var loanduration = details.duration;
+        //     var loaninterest = 
+            
+        //    // $("#emiamount").html(emi); Using jquery
+          
+            
+        //         $("#interestrate").change(function(){
+
+        //             var duration = $('#duration').val();
+        //             var irate = $("#interestrate").val();
+        //             var emiday = $("#emiday").val();
+        //             var sanctionedate = new Date();
+        //             var acctId = details.accountId;
+            
+        //              loanData = {
+        //                 "amount": loanamount, 
+        //                 "dateonly": sanctionedate,
+        //                 "duration":duration,
+        //                 "intrestRate":irate,
+        //                 "accountId":acctId
+        //             };
+                
+        //             console.log(loanData);
+        //             console.log(loanamount);
+        //             const p = loanamount;
+        //             const t = duration;
+        //             const r = irate;
+        //             const n = 12;
+        //             const compoundInterest = p * (Math.pow((1 + (r / n)), (n * t)));   
+        //             const interest = compoundInterest - p; 
+                
+        //         //var emi = loanamount*irate*(1+irate)^duration/((1+irate)^duration-1);
+        //         console.log(interest);
+           //     document.getElementById("emiamount").innerText = interest;
+             //} );
+
+          }
+    };
+    
+
      function updateLoanAndLoanstatus(parameter,details,loanData)
         {
             console.log("loanData : " , loanData); 
@@ -63,7 +116,7 @@
                                     console.log('The Data is updated :', response);
                                     if(response ==true)
                                     {
-                                        //displayData(details);
+                                        displayData(details);
                                         alert("Data updatedet Successfully ...");
                                     }
                             
@@ -74,7 +127,7 @@
                                 }
 
                         });
-                        if(details.loanStatus=="approved"){
+
                         $.ajax({
                                 url: 'http://localhost:5053/api/loans',
                                 type: 'POST',
@@ -95,17 +148,21 @@
                                 }
 
                         });
-                        }
     
         }
 
      function getloanapplicants() {
-
+        // Make an API call to delete the user using userId
         var applicationid = $('#applicationid').val();
         
         console.log("applicationid : " + applicationid);
       
-       
+       //write calculation to get emi amount
+       //display emi amount
+
+       //create loan data-(sanctiondate,emiamount,applictionid)
+       //pass data ,loan data  and parameter to update fn.
+                
                          $.ajax({
                                 url: 'http://localhost:5053/api/application' + "/" + applicationid ,
                                 type: 'GET',
@@ -127,13 +184,11 @@
                                     displayData(data,emiamount);
                                     var sanctionedate = new Date();
                                     var formatdate =  sanctionedate.toISOString().slice(0,10);
-                                    //var emiday= 10;
                                     var acctId = data.applicationId;
 
                                     loanData = {
                                                 
-                                                "loanSanctionDate": formatdate, 
-                                                //"eMIDay" :emiday,
+                                                "loanSanctionDate": formatdate,  
                                                 "eMIAmount":emiamount,
                                                 "applicationId":acctId
                                             };
@@ -147,6 +202,12 @@
                                 }
 
                         });
+
+        
+        
+        
+        
+
 };
     
 </script>
@@ -162,11 +223,17 @@
     <input type="number" id="applicationid" name="applicationid" placeholder="Enter Application Id "  /> 
     
     <br></br>
+
     <button onclick="getloanapplicants()">Get Loan Applicants</button>
+    <!-- <button id ="btnapproved" name = "btnapproved">Approved</button> -->
     <br/><br/><hr/>
+
 </div>
 <div id="dataDisplay"></div>
 <br/><br/>
+<!-- <label >EMI Amount: </label>
+<label id="emiAmount" name="emiAmount"></label> 
+<br/><br/> -->
 <form id="loan_details"></form>
 <div id="displayUpdateddata"></div>
 </body>

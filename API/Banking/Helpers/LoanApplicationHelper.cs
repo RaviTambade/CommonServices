@@ -4,7 +4,7 @@ namespace Banking.Helpers
 {
     public  class LoanApplicationHelper
     {
-         private readonly HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
         public  LoanApplicationHelper(HttpClient httpClient)
         {
              _httpClient = httpClient;
@@ -41,12 +41,12 @@ namespace Banking.Helpers
             );
             return response;
         }*/
-        public  async Task <List<LoanaplicantsInfo>> applicantsDetails(List<LoanaplicantsInfo> applicants )
+        public  async Task <List<LoanaplicationInfo>> applicationsDetails(List<LoanaplicationInfo> applications )
         {
             
-            String user_ids = string.Join(',',applicants.Where(applicant=> applicant.ApplicantType == "I").Select(applicant => applicant.CustomerUserId  ).ToList());
+            String user_ids = string.Join(',',applications.Where(application=> application.ApplicantType == "I").Select(application => application.CustomerUserId  ).ToList());
 
-            String corporateuser_ids =  string.Join(',',applicants.Where(applicant=> applicant.ApplicantType == "C").Select(applicant => applicant.CustomerUserId  ).ToList());
+            String corporateuser_ids =  string.Join(',',applications.Where(application=> application.ApplicantType == "C").Select(application => application.CustomerUserId  ).ToList());
         
             Console.WriteLine(user_ids);
             List<User> users = null;
@@ -60,24 +60,24 @@ namespace Banking.Helpers
                 corporateusers = await GetCorporateUserDetails(corporateuser_ids);
             }
             
-            foreach(var applicant in applicants)
+            foreach(var application in applications)
             {
-                if(applicant.ApplicantType == "I")
+                if(application.ApplicantType == "I")
                 {
-                    User user = users.FirstOrDefault(u => u.Id == applicant.CustomerUserId);
-                    applicant.ApplicantName = user.FirstName + " " + user.LastName;
+                    User user = users.FirstOrDefault(u => u.Id == application.CustomerUserId);
+                    application.ApplicantName = user.FirstName + " " + user.LastName;
                 }
                 else
                 {
                     //if(applicant.ApplicantType == "C")
                     //{
-                        CorporateUser cuser = corporateusers.FirstOrDefault(u => u.Id == applicant.CustomerUserId);
-                        applicant.ApplicantName = cuser.Name;
+                        CorporateUser cuser = corporateusers.FirstOrDefault(u => u.Id == application.CustomerUserId);
+                        application.ApplicantName = cuser.Name;
                     //}
                 }
             }
 
-            return applicants;
+            return applications;
         }
 
 

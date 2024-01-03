@@ -3,18 +3,25 @@ SELECT * FROM customers;
 SELECT * FROM accounts;
 SELECT * FROM transactions;
 SELECT * FROM operations;
-SELECT * FROM loanapplicants;
---  delete from  loanapplicants where applicatid = 11;
-
+SELECT * FROM loanapplications;
+SELECT * FROM loantype;
 SELECT * FROM loan;
 SELECT @transactionId;
+
+delete from loan Where loanid = 9;
+update loanapplications SET loanstatus = "applied" where applicationid = 12;
 -- DROP table customers;
 -- DROP table accounts;
 -- DROP table loanapplicants;
 
-SELECT * FROM loanapplicants 
-WHERE applydate >= '2023-01-01' 
-AND applydate <= '2023-11-30';
+SELECT loanapplications.*,loantype.loantype From loanapplications
+inner join loantype ON loanapplications.loantypeid=loantype.loantypeid
+WHERE applicationdate >= '2023-01-01' 
+AND applicationdate <= '2023-11-30';
+
+SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id 
+                       inner join loantype on loanapplications.loantypeid=loantype.loantypeid  WHERE applicationdate >= '2023=09-01' AND applicationdate <= '2023-12-25';
+        
 
 
 SELECT * FROM loanapplicants WHERE applydate >= '2023-01-01' AND applydate <= '2023-11-30';
@@ -25,7 +32,7 @@ WHERE loanstatus = "applied";
 SELECT * FROM loanapplicants 
 WHERE loanstatus = "approved";
 
- UPDATE loanapplicants SET loanstatus = "approved" WHERE applicatid=8;
+UPDATE loanapplicants SET loanstatus = "approved" WHERE applicatid=8;
 
 
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",1000,"Interest",@transactionId);
@@ -53,16 +60,26 @@ SELECT SUM(amount) from operations where operationmode="W" and operationtype="EM
 
 SELECT count(operationdate) from operations where operationmode="W" and operationtype="EMI" and acctnumber="46556565566";
 
-SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants 
-inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id; 
+SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications 
+inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id
+inner join loantype on loanapplications.loantypeid=loantype.loantypeid; 
 
-SELECT loanapplicants.* ,customers.bankcustomerid,customers.usertype from loanapplicants 
-inner join accounts on loanapplicants.accountid = accounts.id inner join customers on accounts.customerid = customers.id
+SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype from loanapplications 
+inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id
 WHERE loanstatus = "applied";
+
+
+
+
 
 SELECT operations.acctnumber,operations.amount,operations.operationdate  from operations 
 inner join accounts on operations.acctId = accounts.id 
-where accounts.id = (Select acctId from loan where loanid = 3) AND operations.operationtype = "EMI"; 
+where accounts.id = (Select acctId from loan where loanid = 2) AND operations.operationtype = "EMI"; 
+
+SELECT operations.acctnumber,operations.amount,operations.operationdate  from operations 
+inner join accounts on operations.acctId = accounts.id 
+where accounts.id = (Select acctId from loan where loanid = 2);
+
 
 
 
@@ -95,7 +112,7 @@ WHERE
     a.acctnumber ="39025546612"
 ORDER BY
     o.operationdate,
-    o.operationid;
+    o.operationid,
     END ;
     
 DROP PROCEDURE bankStatement;

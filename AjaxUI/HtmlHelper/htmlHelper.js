@@ -1,28 +1,45 @@
 
 
- function displayData(details)
+ function displayData(details,emi)
     {
+        console.log(details);
         var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable" class="table table-striped"> <thead> <tr>' +
-                                    '<th>AccountId</th><th>Applay Date</th><th>Pan Id</th><th>Loan Type</th><th>Loan Amount</th><th>Loan Status</th><th>Applicant Name</th><th>Applicant Type</th></tr></thead><body>';
-                                
+                            '<th>AccountId</th><th>Applicant Name</th><th padding-left:10px>Application Date</th><th>Loan Amount</th><th>Loan Duration</th><th>Loan Type</th><th>Loan Status</th> <th>EMI Amount</th></tr></thead><body>';
+                            
                                     htmlContent += '<tr>';
                                     htmlContent +='<td>'+details.accountId + '</td>';
-                                    htmlContent += '<td>'+details.applyDate + '</td>';
-                                    htmlContent += '<td>'+details.panId + '</td>';
-                                    htmlContent += '<td>'+details.loanType + '</td>';
-                                    htmlContent += '<td>'+details.amount + '</td>';
-                                    htmlContent += '<td>'+details.status + '</td>';
-                                    htmlContent += '<td>'+details.applicantName + '</td>';
-                                    htmlContent += '<td>'+details.applicantType + '</td>';
+                                    htmlContent +='<td>'+details.applicantName + '</td>';
+                                    htmlContent += '<td>'+details.applicationDate + '</td>';
+                                    htmlContent += '<td>'+details.loanAmount + '</td>';
+                                    htmlContent += '<td>'+details.loanDuration + '</td>';                                                                      
+                                    htmlContent += '<td >'+details.loanTypeName  + '</td>';                                       
+                                    htmlContent += '<td>'+details.loanStatus + '</td>';
+                                    htmlContent += '<td>'+ emi + '</td>';
+
 
                                    
-                                    htmlContent += '<td>' + "  " + '<button onclick = "checkstatus(status1,responsedata)" id="btnapproved" class="btn btn-success">Approved</button>' + "  "+ '<button  onclick = "checkstatus(status2,responsedata)" id="btnrejected" class="btn btn-danger">Rejected</button>' + '</td>';
+                                    // htmlContent += '<td>' + "  " + '<button onclick = "checkstatus(status1,responsedata)" id="btnapproved" class="btn btn-success">Approved</button>' + "  "+ '<button  onclick = "checkstatus(status2,responsedata)" id="btnrejected" class="btn btn-danger">Rejected</button>' + '</td>';
+                                    htmlContent += '<td>' + "  " + '<button onclick = "updateLoanAndLoanstatus(status1,details,loanData)" id="btnapproved" class="btn btn-success" >Approved</button>' + "  "+ '<button  onclick = "updateLoanAndLoanstatus(status2,details,loanData)" id="btnrejected" class="btn btn-danger">Rejected</button>' + '</td>';
                                     htmlContent += '</tr>';
 
-                                htmlContent += '</tbody></table></div>';
-                                $('#dataDisplay').html(htmlContent);
-             
-
+                                    htmlContent += '</tbody></table></div>';
+                                    $('#dataDisplay').html(htmlContent);
+                
+                                    
+                                    var button = document.getElementById('btnapproved');
+                                            button.addEventListener('click', function(event){
+                                            event.target.disabled = true; 
+                                            document.getElementById('btnrejected').disabled = true;
+                                        });
+    
+                                        var button = document.getElementById('btnrejected');
+                                        button.addEventListener('click', function(event){
+                                        event.target.disabled = true; 
+                                        document.getElementById('btnapproved').disabled = true;
+                                    });
+    
     };
 
 
+    
+        

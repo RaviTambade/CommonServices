@@ -18,8 +18,10 @@ builder.Services.AddTransient<IOperationRepo, OperationRepo>();
 builder.Services.AddTransient<IOperationsService, OperationsService>();
 builder.Services.AddTransient<ILoanRepo, LoanRepo>();
 builder.Services.AddTransient<ILoanService,LoanService>();
-builder.Services.AddTransient<ILoanApplicantRepo, LoanApplicantsRepo>();
-builder.Services.AddTransient<ILoanApplicantService,LoanApplicantService>();
+builder.Services.AddTransient<ILoanApplicationsRepo, LoanApplicationsRepo>();
+builder.Services.AddTransient<ILoanApplicationsService,LoanApplicationsService>();
+builder.Services.AddTransient<ILoanTypeRepo,LoanTypeRepo>();
+builder.Services.AddTransient<ILoanTypeService,LoanTypeService>();
 
 var app = builder.Build();
 
