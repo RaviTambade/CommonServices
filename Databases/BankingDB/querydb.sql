@@ -8,8 +8,9 @@ SELECT * FROM loantype;
 SELECT * FROM loan;
 SELECT @transactionId;
 
-delete from loan Where loanid = 9;
-update loanapplications SET loanstatus = "applied" where applicationid = 12;
+ALTER USER  root@localhost IDENTIFIED BY 'password';
+
+
 -- DROP table customers;
 -- DROP table accounts;
 -- DROP table loanapplicants;
@@ -19,9 +20,7 @@ inner join loantype ON loanapplications.loantypeid=loantype.loantypeid
 WHERE applicationdate >= '2023-01-01' 
 AND applicationdate <= '2023-11-30';
 
-SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id 
-                       inner join loantype on loanapplications.loantypeid=loantype.loantypeid  WHERE applicationdate >= '2023=09-01' AND applicationdate <= '2023-12-25';
-        
+
 
 
 SELECT * FROM loanapplicants WHERE applydate >= '2023-01-01' AND applydate <= '2023-11-30';

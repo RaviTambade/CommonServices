@@ -29,7 +29,7 @@ function LoanApplicantsList()
     <div>
        <h1>Loan Applicnts List</h1>
       
-            <Table stripped bordered hover >
+            <Table striped bordered hover >
                 <thead>
                     <tr>
                         <th>AccountId</th>
