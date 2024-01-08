@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useNavigate } from "react";
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 
 
 function LoanApplicantsList() {
+    const navigate = useNavigate();
+
+     const navigateToDetails = () => {
+        // 👇️ navigate to /Details
+         navigate('/details');
+       };
+
     const url = "http://localhost:5053/api/application/applicationAscustomer";
     const [data, setData] = useState([]);
 
@@ -34,11 +41,8 @@ function LoanApplicantsList() {
                         <th>Sr.No</th>
                         <th>AccountId</th>
                         <th>Applicant Name</th>
-                        <th>Application Date</th>
-                        <th>Loan Type</th>
-                        <th>Loan Duration</th>
-                        <th>Loan Amount</th>
                         <th>Loan Status</th>
+                        <th></th>
                     </tr>
                 </thead>
                 {data.map((applications, index) => (
@@ -49,12 +53,13 @@ function LoanApplicantsList() {
                             <td>{index+1}</td>
                             <td>{applications.accountId}</td>
                             <td>{applications.applicantName}</td>
-                            <td>{applications.applicationDate}</td>
-                            <td>{applications.loanTypeName}</td>
-                            <td>{applications.loanDuration}</td>
-                            <td>{applications.loanAmount}</td>
                             <td>{applications.loanStatus}</td>
+                            <td><button onClick={navigateToDetails}>Details</button></td> 
                         </tr>
+                        <Routes>
+                        <Route key={applications.applicantId} path="/details" element={<GetApplicantDetails />} />
+                        
+                        </Routes>
                     </tbody>
                 ))}
             </Table>

@@ -1,5 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
-import './Layout.css';
+import '../css/Layout.css';
 
 const Layout = () => {
   return (
@@ -23,6 +23,9 @@ const Layout = () => {
           </li>
           <li>
             <Link to="/loanapplicantsaccordingtodates">Loan Application List Acording to dates</Link>
+          </li>
+          <li>
+            <Link to="/loanapplicantsaccordingtostatus">Loan Application List Acording to Status</Link>
           </li>
         </ul>
       </nav>

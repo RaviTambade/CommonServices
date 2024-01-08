@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Button, Table } from 'react-bootstrap';
 import axios from "axios";
 
@@ -10,10 +10,10 @@ function GetApplicantsListByDate() {
 
     const handlefromdates = (values) => {
         setFromdate(values)
-        
+
     }
     const handletodates = (values) => {
-        
+
         setTodate(values)
     }
     const handleSubmit = (event) => {
@@ -21,18 +21,19 @@ function GetApplicantsListByDate() {
         event.preventDefault();
 
         const url = "http://localhost:5053/api/application" + "/" + FromDate + "/" + ToDate;
-                    axios
-                    .get(url)
-                    .then((res) => {
-                        console.log(res);
-                        setData(res.data);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
+
+        axios
+            .get(url)
+            .then((res) => {
+                console.log(res);
+                setData(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
 
 
-                }
+    }
     // const fetchInfo = () => {
 
     //     axios
@@ -45,7 +46,7 @@ function GetApplicantsListByDate() {
     //             console.log(err);
     //         });
 
-   // };
+    // };
 
     // useEffect(() => {
     //     fetchInfo();
@@ -78,12 +79,12 @@ function GetApplicantsListByDate() {
                         <th>Loan Status</th>
                     </tr>
                 </thead>
-                {data.map((applications,i) => (
+                {data.map((applications, i) => (
 
                     <tbody key={applications.applicationId}>
 
                         <tr >
-                            <td>{i+1}</td>
+                            <td>{i + 1}</td>
                             <td>{applications.accountId}</td>
                             <td>{applications.applicantName}</td>
                             <td>{applications.applicationDate}</td>
@@ -97,7 +98,7 @@ function GetApplicantsListByDate() {
             </Table>
 
 
-            
+
         </>
 
 
