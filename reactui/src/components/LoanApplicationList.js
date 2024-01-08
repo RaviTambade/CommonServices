@@ -1,14 +1,13 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 
 
-function LoanApplicantsList()
-{
+function LoanApplicantsList() {
     const url = "http://localhost:5053/api/application/applicationAscustomer";
     const [data, setData] = useState([]);
 
-    const fetchInfo = () =>{
+    const fetchInfo = () => {
 
         axios
             .get(url)
@@ -20,18 +19,19 @@ function LoanApplicantsList()
                 console.log(err);
             });
 
-     };
+    };
     useEffect(() => {
-        fetchInfo();        
-    },[]);
+        fetchInfo();
+    }, []);
 
-    return(
-    <div>
-       <h1>Loan Applicnts List</h1>
-      
+    return (
+        <div>
+            <h1>Loan Applicnts List</h1>
+
             <Table striped bordered hover >
                 <thead>
                     <tr>
+                        <th>Sr.No</th>
                         <th>AccountId</th>
                         <th>Applicant Name</th>
                         <th>Application Date</th>
@@ -41,23 +41,24 @@ function LoanApplicantsList()
                         <th>Loan Status</th>
                     </tr>
                 </thead>
-                {data.map((applications) => (
-            
+                {data.map((applications, index) => (
+
                     <tbody key={applications.applicationId}>
-            
-                      <tr >
+
+                        <tr >
+                            <td>{index+1}</td>
                             <td>{applications.accountId}</td>
                             <td>{applications.applicantName}</td>
                             <td>{applications.applicationDate}</td>
                             <td>{applications.loanTypeName}</td>
                             <td>{applications.loanDuration}</td>
                             <td>{applications.loanAmount}</td>
-                            <td>{applications.loanStatus}</td>                            
+                            <td>{applications.loanStatus}</td>
                         </tr>
                     </tbody>
-                ))}              
+                ))}
             </Table>
-    </div>
-   );
+        </div>
+    );
 }
 export default LoanApplicantsList;

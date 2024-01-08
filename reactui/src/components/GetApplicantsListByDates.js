@@ -1,45 +1,74 @@
 import React, { useState, useEffect } from "react"
-import {Button,Table} from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import axios from "axios";
 
 function GetApplicantsListByDate() {
     const [FromDate, setFromdate] = useState('')
     const [ToDate, setTodate] = useState('')
+    const [data, setData] = useState([]);
 
-    const handledates=(values) =>{
-        setFromdate(values.FromDate)
-        setTodate(values.ToDate)
+
+    const handlefromdates = (values) => {
+        setFromdate(values)
+        
+    }
+    const handletodates = (values) => {
+        
+        setTodate(values)
     }
     const handleSubmit = (event) => {
         console.log(FromDate, ToDate);
         event.preventDefault();
-        
-    }
 
-    const url = "http://localhost:5053/api/application" +"/" + FromDate + "/" + ToDate;
-    const [data, setData] = useState([]);
-    const fetchInfo = () => {
+        const url = "http://localhost:5053/api/application" + "/" + FromDate + "/" + ToDate;
+                    axios
+                    .get(url)
+                    .then((res) => {
+                        console.log(res);
+                        setData(res.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
 
-        axios
-            .get(url)
-            .then((res) => {
-                console.log(res);
-                setData(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
 
-    };
-    useEffect(() => {
-        fetchInfo();
-    }, []);
+                }
+    // const fetchInfo = () => {
+
+    //     axios
+    //         .get(url)
+    //         .then((res) => {
+    //             console.log(res);
+    //             setData(res.data);
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //         });
+
+   // };
+
+    // useEffect(() => {
+    //     fetchInfo();
+    // }, []);
 
     return (
         <>
+            <form onSubmit={handleSubmit}>
+                <h1>Applicant List According to dates </h1>
+
+                <label>From Date : </label>
+                <input type="date" id="fromdate" name="fromdate" placeholder="Enter Starting Date" onChange={(e) => handlefromdates(e.target.value)} /><br /><br />
+
+                <label>To Date : </label>
+                <input type="date" id="startdate" name="startdate" placeholder="Enter Starting Date" onChange={(e) => handletodates(e.target.value)} /><br /><br />
+
+                <Button type="submit" variant="primary">Submit</Button>{' '}
+
+            </form>
             <Table striped bordered hover >
                 <thead>
                     <tr>
+                        <th>Sr No.</th>
                         <th>AccountId</th>
                         <th>Applicant Name</th>
                         <th>Application Date</th>
@@ -49,11 +78,12 @@ function GetApplicantsListByDate() {
                         <th>Loan Status</th>
                     </tr>
                 </thead>
-                {data.map((applications) => (
+                {data.map((applications,i) => (
 
                     <tbody key={applications.applicationId}>
 
                         <tr >
+                            <td>{i+1}</td>
                             <td>{applications.accountId}</td>
                             <td>{applications.applicantName}</td>
                             <td>{applications.applicationDate}</td>
@@ -67,19 +97,7 @@ function GetApplicantsListByDate() {
             </Table>
 
 
-            <form onSubmit={handleSubmit}>
-                <h1>Applicant List According to dates </h1>
-
-                <label>From Date : </label>
-                <input type="date" id="fromdate" name="fromdate" placeholder="Enter Starting Date" onChange={(e) => handledates(e.target.value)} /><br /><br />
-
-                <label>To Date : </label>
-                <input type="date" id="startdate" name="startdate" placeholder="Enter Starting Date" onChange={(e) => handledates(e.target.value)} /><br /><br />
-
-                <Button type="submit" variant="primary">Submit</Button>{' '}
-
-
-            </form>
+            
         </>
 
 
