@@ -285,7 +285,6 @@ public class UserRepository : IUserRepository
         {
             string query = $"select id,firstname,lastname,imageurl,aadharid,birthdate,gender,email,contactnumber from users where id IN ({ids})";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@userIdString", ids);
             await con.OpenAsync();
 
             MySqlDataReader reader = cmd.ExecuteReader();

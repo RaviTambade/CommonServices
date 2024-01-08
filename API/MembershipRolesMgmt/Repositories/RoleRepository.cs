@@ -3,6 +3,7 @@ using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Transflower.MembershipRolesMgmt.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Transflower.MembershipRolesMgmt.Repositories;
 
 public class RoleRepository : IRoleRepository
@@ -22,6 +23,24 @@ public class RoleRepository : IRoleRepository
         {
             var userRoles = await _context.UserRoles.ToListAsync();
             return userRoles;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    public async Task<List<Role>> GetRoleDetails(string roleIds)
+    {
+        try
+        {
+            // var roles = await _context.Roles.Where(r => roleIds.Contains(r.Id.ToString())).ToListAsync();
+            var allRoles= await ( 
+                from role in _context.Roles
+                where roleIds.Contains(role.Id.ToString())
+                select role
+            ).ToListAsync();
+            return allRoles;
         }
         catch (Exception)
         {
