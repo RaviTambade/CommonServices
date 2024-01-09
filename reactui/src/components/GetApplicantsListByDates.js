@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Button, Table } from 'react-bootstrap';
 import axios from "axios";
+import {Link} from 'react-router-dom';
 
 function GetApplicantsListByDate() {
     const [FromDate, setFromdate] = useState('')
@@ -66,17 +67,14 @@ function GetApplicantsListByDate() {
                 <Button type="submit" variant="primary">Submit</Button>{' '}
 
             </form>
-            <Table striped bordered hover >
+            <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
                         <th>Sr No.</th>
                         <th>AccountId</th>
                         <th>Applicant Name</th>
-                        <th>Application Date</th>
-                        <th>Loan Type</th>
-                        <th>Loan Duration</th>
-                        <th>Loan Amount</th>
                         <th>Loan Status</th>
+                        <th></th>
                     </tr>
                 </thead>
                 {data.map((applications, i) => (
@@ -87,11 +85,8 @@ function GetApplicantsListByDate() {
                             <td>{i + 1}</td>
                             <td>{applications.accountId}</td>
                             <td>{applications.applicantName}</td>
-                            <td>{applications.applicationDate}</td>
-                            <td>{applications.loanTypeName}</td>
-                            <td>{applications.loanDuration}</td>
-                            <td>{applications.loanAmount}</td>
                             <td>{applications.loanStatus}</td>
+                            <td><Link to={`/details/${applications.applicationId}`}>details</Link></td>
                         </tr>
                     </tbody>
                 ))}

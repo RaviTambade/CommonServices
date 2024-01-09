@@ -1,22 +1,26 @@
-import React, { useState, useEffect} from "react";
-import {useNavigate,Routes,Route} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
-import GetApplicantDetails from './GetApplicantDetails'
+//import GetApplicantDetails from './GetApplicantDetails'
 
 function LoanApplicantsList() {
-    const navigate = useNavigate();
+//     const navigate = useNavigate();
+//    // const[applicationId,setApplicationId]=useState('')
+    
+//     const navigateToDetails = (applicationId) => {
+//         // 👇️ navigate to /Details
+//         navigate('/details/'+applicationId);
+        
+//     };
 
-     const navigateToDetails = () => {
-        // 👇️ navigate to /Details
-         navigate('/details');
-       };
-
+    const [count, setCount]=useState(0);
     const url = "http://localhost:5053/api/application/applicationAscustomer";
     const [data, setData] = useState([]);
 
     const fetchInfo = () => {
-
+        setCount(count+1);
+        console.log(count);
         axios
             .get(url)
             .then((res) => {
@@ -36,7 +40,7 @@ function LoanApplicantsList() {
         <div>
             <h1>Loan Applicnts List</h1>
 
-            <Table striped bordered hover >
+            <Table striped bordered hover size="sm" >
                 <thead>
                     <tr>
                         <th>Sr.No</th>
@@ -51,16 +55,16 @@ function LoanApplicantsList() {
                     <tbody key={applications.applicationId}>
 
                         <tr >
-                            <td>{index+1}</td>
+                            <td>{index + 1}</td>
                             <td>{applications.accountId}</td>
                             <td>{applications.applicantName}</td>
                             <td>{applications.loanStatus}</td>
-                            <td><button onClick={navigateToDetails}>Details</button></td> 
+                            {/* <td><button type="submit" onClick={navigateToDetails(applications.applicationId)}>Details</button></td> */}
+                            <td><Link to={`/details/${applications.applicationId}`}>details</Link></td>
                         </tr>
-                        <Routes>
-                        <Route key={applications.applicationId} path="/details/:key" element={<GetApplicantDetails />} />
-                        
-                        </Routes>
+                        {/* <Routes>
+                            <Route key={applications.applicationId} path="/details:key" element={<GetApplicantDetails />} />
+                        </Routes> */}
                     </tbody>
                 ))}
             </Table>

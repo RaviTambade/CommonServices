@@ -8,6 +8,7 @@ import Resister from './components/Resister';
 import Layout from './components/Layout';
 import LoanApplicantsList from './components/LoanApplicationList';
 import GetApplicantsListByDate from './components/GetApplicantsListByDates';
+import GetApplicantDetails from './components/GetApplicantDetails';
 
 
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="loanapplicationlist" element={<LoanApplicantsList />} />
             <Route path="loanapplicantsaccordingtodates" element={<GetApplicantsListByDate />} />
+            <Route path="details/:id" element={<GetApplicantDetails/>}/>
             <Route path="*" element={<NoPage />} />
           </Route>         
         </Routes>
