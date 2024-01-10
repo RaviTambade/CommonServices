@@ -10,6 +10,7 @@ import LoanApplicantsList from './components/LoanApplicationList';
 import GetApplicantsListByDate from './components/GetApplicantsListByDates';
 import GetApplicantsListByStatus from './components/GetApplicantsListByStatus';
 import GetApplicantDetails from './components/GetApplicantDetails';
+import DetailsOfLoanApplicants from './components/DetailsOfLoanApplicants';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path="loanapplicantsaccordingtodates" element={<GetApplicantsListByDate />} />
             <Route path="loanapplicantsaccordingtostatus" element={<GetApplicantsListByStatus/>}/>
             <Route path="details/:id" element={<GetApplicantDetails/>}/>
+            <Route path="detailsfromlist/:id" element={<DetailsOfLoanApplicants/>}/>
             <Route path="*" element={<NoPage />} />
           </Route>         
         </Routes>

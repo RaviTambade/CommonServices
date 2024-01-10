@@ -60,7 +60,7 @@ function LoanApplicantsList() {
                             <td>{applications.applicantName}</td>
                             <td>{applications.loanStatus}</td>
                             {/* <td><button type="submit" onClick={navigateToDetails(applications.applicationId)}>Details</button></td> */}
-                            <td><Link to={`/details/${applications.applicationId}`}>details</Link></td>
+                            <td><Link to={`/detailsfromlist/${applications.applicationId}`}>Details</Link></td>
                         </tr>
                         {/* <Routes>
                             <Route key={applications.applicationId} path="/details:key" element={<GetApplicantDetails />} />
