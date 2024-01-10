@@ -12,6 +12,7 @@ import GetApplicantsListByStatus from './components/GetApplicantsListByStatus';
 import GetApplicantDetails from './components/GetApplicantDetails';
 import DetailsOfLoanApplicants from './components/DetailsOfLoanApplicants';
 import LoanApplicationsList from './components/LoanApplicationsList';
+import CheckboxDemo from './components/CheckboxDemo';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
             <Route path="details/:id" element={<GetApplicantDetails/>}/>
             <Route path="detailsfromlist/:id" element={<DetailsOfLoanApplicants/>}/>
             <Route path="loanapplicationslist" element={<LoanApplicationsList/>}/>
+            <Route path="checkboxdemo" element={<CheckboxDemo/>}/>
             <Route path="*" element={<NoPage />} />
           </Route>         
         </Routes>

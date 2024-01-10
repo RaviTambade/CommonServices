@@ -19,7 +19,7 @@ const Layout = () => {
             <Link to="/resister">Resister</Link>
           </li>
           <li>
-            <Link to="/loanapplicationlist">Loan Application List</Link>
+            <Link to="/loanapplicationslist">Loan Applications List</Link>
           </li>
           <li>
             <Link to="/loanapplicantsaccordingtodates">Loan Application List Acording to dates</Link>
@@ -28,8 +28,9 @@ const Layout = () => {
             <Link to="/loanapplicantsaccordingtostatus">Loan Application List Acording to Status</Link>
           </li>
           <li>
-            <Link to="/loanapplicationslist">Loan Applications List</Link>
+            <Link to="/checkboxdemo">CheckboxDemo</Link>
           </li>
+          
         </ul>
       </nav>
 
