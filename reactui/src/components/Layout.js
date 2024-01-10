@@ -27,6 +27,9 @@ const Layout = () => {
           <li>
             <Link to="/loanapplicantsaccordingtostatus">Loan Application List Acording to Status</Link>
           </li>
+          <li>
+            <Link to="/loanapplicationslist">Loan Applications List</Link>
+          </li>
         </ul>
       </nav>
 

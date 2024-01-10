@@ -6,11 +6,12 @@ import NoPage from './components/NoPage';
 import Login from './components/Login';
 import Resister from './components/Resister';
 import Layout from './components/Layout';
-import LoanApplicantsList from './components/LoanApplicationList';
+//import LoanApplicantsList from './components/LoanApplicationList';
 import GetApplicantsListByDate from './components/GetApplicantsListByDates';
 import GetApplicantsListByStatus from './components/GetApplicantsListByStatus';
 import GetApplicantDetails from './components/GetApplicantDetails';
 import DetailsOfLoanApplicants from './components/DetailsOfLoanApplicants';
+import LoanApplicationsList from './components/LoanApplicationsList';
 
 
 function App() {
@@ -26,11 +27,12 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="resister" element={<Resister />} />
             <Route path="aboutus" element={<AboutUs />} />
-            <Route path="loanapplicationlist" element={<LoanApplicantsList />} />
+            {/* <Route path="loanapplicationlist" element={<LoanApplicantsList />} /> */}
             <Route path="loanapplicantsaccordingtodates" element={<GetApplicantsListByDate />} />
             <Route path="loanapplicantsaccordingtostatus" element={<GetApplicantsListByStatus/>}/>
             <Route path="details/:id" element={<GetApplicantDetails/>}/>
             <Route path="detailsfromlist/:id" element={<DetailsOfLoanApplicants/>}/>
+            <Route path="loanapplicationslist" element={<LoanApplicationsList/>}/>
             <Route path="*" element={<NoPage />} />
           </Route>         
         </Routes>
