@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { Button } from 'react-bootstrap'
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 function DetailsOfLoanApplicants() {
     const params = useParams();
     const { id } = params;
-    const [emiAmount,setEmiAmount]=useState(0);
     console.log(id);
+
+    const navigation = useNavigate()
 
 
     const url = "http://localhost:5053/api/application" + "/" + id;
@@ -54,31 +56,62 @@ function DetailsOfLoanApplicants() {
         var durtioninmonths = Data.loanDuration * 12;
         const interest = (Data.loanAmount * (irate * 0.01)) / durtioninmonths;
         var emiamount = ((Data.loanAmount / durtioninmonths) + irate).toFixed(2);
-        setEmiAmount(emiamount);
-        console.log("EMI =", emiAmount);
 
-        // displayData(data, emiamount);
+        return emiamount;
 
-        // var sanctionedate = new Date();
-        // var formatdate = sanctionedate.toISOString().slice(0, 10);
-        // //var emiday= 10;
-        // var acctId = data.applicationId;
     }
 
-    const UpdateStatus =(e)=>{
-        window.confirm("Are You "+{e}+"Status..");
+    const UpdateStatus = (e) => {
+
         console.log(e);
-        Data.loanStatus=e;
+        Data.loanStatus = e;
         axios
-            .put(url,Data)
+            .put(url, Data)
             .then((res) => {
                 console.log(res);
-                            })
+
+                if (e == "approved") {
+                    InsertLoanRecord();  
+                }
+                var btnApprove=document.getElementById("btnapprove");
+                var btnReject=document.getElementById("btnreject");
+                btnApprove.remove();
+                btnReject.remove(); 
+                navigation("/loanapplicationslist");          
+            })
             .catch((err) => {
                 console.log(err);
             });
-
     };
+
+    const InsertLoanRecord = () => {
+        
+        let sanctionedate = new Date();
+        let formatdate = sanctionedate.toISOString().slice(0, 10);
+        let applicationID = Data.applicationId;
+
+        var emiAmount = EmiCalculation();
+
+        const loanData = {
+            "loanSanctionDate": formatdate,
+            "eMIAmount": emiAmount,
+            "applicationId": applicationID
+        };
+
+        console.log("loanData = ", loanData);
+
+        let url = 'http://localhost:5053/api/loans'
+
+        axios
+            .post(url, loanData)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
 
     return (
         <div>
@@ -116,9 +149,13 @@ function DetailsOfLoanApplicants() {
                 </tbody>
             </table>
             <br />
-            <Button variant="success" id="btnapprove" value="approved" onClick={(e)=>UpdateStatus(e.target.value)}>Approve Loan  </Button>
-            <Button variant="danger" id="btnreject" value="rejected" onClick={(e)=>UpdateStatus(e.target.value)}>Reject Loan  </Button>
-           
+            {Data.loanStatus == "applied" ?
+                <div>
+                    <Button variant="success" id="btnapprove" value="approved" onClick={(e) => UpdateStatus(e.target.value)}>Approve Loan  </Button>
+                    <Button variant="danger" id="btnreject" value="rejected" onClick={(e) => UpdateStatus(e.target.value)}>Reject Loan  </Button>
+                </div>
+            : null}
+
         </div>
     )
 }
