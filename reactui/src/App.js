@@ -9,34 +9,26 @@ import Layout from './components/Layout';
 //import LoanApplicantsList from './components/LoanApplicationList';
 import GetApplicantsListByDate from './components/GetApplicantsListByDates';
 import GetApplicantsListByStatus from './components/GetApplicantsListByStatus';
-import GetApplicantDetails from './components/GetApplicantDetails';
 import DetailsOfLoanApplicants from './components/DetailsOfLoanApplicants';
 import LoanApplicationsList from './components/LoanApplicationsList';
 import CheckboxDemo from './components/CheckboxDemo';
+import NavBar from './components/Navbar';
+
 
 
 function App() {
   return (
     <div className="App">
 
-      <br /> <br></br>
+      
       <BrowserRouter>
-        {/* <GetApplicantsListByDate/> */}
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="resister" element={<Resister />} />
+      <NavBar/>
+        <Routes>          
+            <Route path='/' element={<Home />} />
             <Route path="aboutus" element={<AboutUs />} />
-            {/* <Route path="loanapplicationlist" element={<LoanApplicantsList />} /> */}
-            <Route path="loanapplicantsaccordingtodates" element={<GetApplicantsListByDate />} />
-            <Route path="loanapplicantsaccordingtostatus" element={<GetApplicantsListByStatus/>}/>
-            <Route path="details/:id" element={<GetApplicantDetails/>}/>
-            <Route path="detailsfromlist/:id" element={<DetailsOfLoanApplicants/>}/>
-            <Route path="loanapplicationslist" element={<LoanApplicationsList/>}/>
-            <Route path="checkboxdemo" element={<CheckboxDemo/>}/>
-            <Route path="*" element={<NoPage />} />
-          </Route>         
+            <Route path="loanapplicationslist" element={<LoanApplicationsList/>}/> 
+            <Route path="detailsfromlist/:id" element={<DetailsOfLoanApplicants/>}/> 
+            <Route path="*" element={<NoPage/>}/>             
         </Routes>
       </BrowserRouter>
 
