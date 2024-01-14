@@ -3,7 +3,7 @@ SELECT * FROM customers;
 SELECT * FROM accounts;
 SELECT * FROM transactions;
 SELECT * FROM operations;
-SELECT * FROM loanapplications;
+SELECT * FROM loanapplications; 
 SELECT * FROM loantype;
 SELECT * FROM loan;
 SELECT @transactionId;
@@ -31,9 +31,9 @@ WHERE loanstatus = "applied";
 SELECT * FROM loanapplicants 
 WHERE loanstatus = "approved";
 
-UPDATE loanapplications SET loanstatus = "applied" WHERE applicationid=22;
-UPDATE loanapplications SET loanstatus = "applied" WHERE loanstatus = "approved";
+UPDATE loanapplications SET loanstatus = "applied" WHERE applicationid in(11,12,13,14,15,16,17,18,19,20,21,22);
 
+TRUNCATE TABLE loan;
 
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",1000,"Interest",@transactionId);
 CALL fundtransfer("39025546601","39025546612","MAHB0000286" ,"BARBO0000286",2000,@transactionId);
@@ -61,7 +61,8 @@ SELECT SUM(amount) from operations where operationmode="W" and operationtype="EM
 SELECT count(operationdate) from operations where operationmode="W" and operationtype="EMI" and acctnumber="46556565566";
 
 SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications 
-inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id
+inner join accounts on loanapplications.accountid = accounts.id 
+inner join customers on accounts.customerid = customers.id
 inner join loantype on loanapplications.loantypeid=loantype.loantypeid; 
 
 SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype from loanapplications 
