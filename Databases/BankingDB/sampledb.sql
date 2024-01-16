@@ -47,7 +47,7 @@ INSERT INTO customers (bankcustomerid, usertype) VALUES (38, "I");
 INSERT INTO customers (bankcustomerid, usertype) VALUES (39, "I");
 INSERT INTO customers (bankcustomerid, usertype) VALUES (40, "I");
 
-INSERT INTO customers(bankcustomerid,usertype) VALUES(14,"C");-- run this query at last
+INSERT INTO customers(bankcustomerid,usertype) VALUES(46,"C");-- run this query at last
 
 
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('39025546601','business','MAHB0000286',200000,'2022-03-01',1);
@@ -98,6 +98,13 @@ INSERT INTO accounts(acctnumber, accttype, ifsccode, balance, registereddate, cu
 ('1111444455', 'savings', 'AXIS0000789', 52000, '2022-12-19', 45);
 
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('123456789','business','AXIS0000999',200000000,'1975-01-01',47);
+
+
+INSERT INTO loantype(loantype,intrestrate)VALUES('home',9.5);
+INSERT INTO loantype(loantype,intrestrate)VALUES('personal',11.0);
+INSERT INTO loantype(loantype,intrestrate)VALUES('car',12.5);
+INSERT INTO loantype(loantype,intrestrate)VALUES('education',7.6);
+INSERT INTO loantype(loantype,intrestrate)VALUES('bussiness',15.6);
 
 INSERT INTO loanapplications(applicationid,applicationdate,loanamount,loanduration,accountid,loantypeid)VALUES(11,'2023-08-11',500000,10,1,100);
 INSERT INTO loanapplications(applicationid,applicationdate,loanamount,loanduration,accountid,loantypeid)VALUES(12,'2023-08-11',8900000,15,6,100);
@@ -160,7 +167,6 @@ INSERT INTO operations(acctId,acctnumber,amount,operationdate,operationmode,oper
 INSERT INTO operations(acctId,acctnumber,amount,operationdate,operationmode,operationtype)VALUES(4,67675456546,90013,'2023-11-5','W',"EMI");
 INSERT INTO operations(acctId,acctnumber,amount,operationdate,operationmode,operationtype)VALUES(46,123456789,90013,'2023-11-5','D',"EMI");
 
-
 INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(15,16,'2023-10-10');
 INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(17,18,'2023-01-15');
 INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(19,20,'2023-02-15');
@@ -174,19 +180,13 @@ INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(33
 INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(35,36,'2023-10-15');
 INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(37,38,'2023-11-15');
 INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(39,40,'2023-04-05');
-INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(41,42,'2023-05-05');
-INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(43,44,'2023-06-05');
-INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(45,46,'2023-07-05');
-INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(47,48,'2023-08-05');
-INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(49,50,'2023-09-05');
-INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(51,52,'2023-10-05');
-INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(53,54,'2023-11-05');
+-- INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(41,42,'2023-05-05');
+-- INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(43,44,'2023-06-05');
+-- INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(45,46,'2023-07-05');
+-- INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(47,48,'2023-08-05');
+-- INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(49,50,'2023-09-05');
+-- INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(51,52,'2023-10-05');
+-- INSERT INTO transactions(fromoperationid,tooperationid,transactiondate)VALUES(53,54,'2023-11-05');
 
-
-INSERT INTO loantype(loantype,intrestrate)VALUES('home',9.5);
-INSERT INTO loantype(loantype,intrestrate)VALUES('personal',11.0);
-INSERT INTO loantype(loantype,intrestrate)VALUES('car',12.5);
-INSERT INTO loantype(loantype,intrestrate)VALUES('education',7.6);
-INSERT INTO loantype(loantype,intrestrate)VALUES('bussiness',15.6);
 
 
