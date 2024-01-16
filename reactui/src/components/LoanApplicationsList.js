@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react"
 import { Button, Table } from 'react-bootstrap';
 import axios from "axios";
 import { Link } from 'react-router-dom';
- var updatelist=[];
+ 
 function LoanApplicationsList() {
     
     var [Status,setStatus]=useState([]);
@@ -10,25 +10,26 @@ function LoanApplicationsList() {
    
     const url = "http://localhost:5053/api/application/applicationAscustomer";
     const [data, setData] = useState([]);
-    updatelist=[...Status];
-   
+
+
 
     const handleChange=(e)=>{
         //setAppliedStatus(value)
+
         console.log(e.target.value)
         
         if (e.target.checked) {
-            // setAllChecked([...allchecked, e.target.value]);
-            //setStatus(data.filter((a)=>a.loanStatus==e.target.value));
-            updatelist=([...Status,data.filter((a)=>a.loanStatus==e.target.value)])
+             //setAllChecked([...allchecked, e.target.value]);
+            setStatus([...Status,data.filter((a)=>a.loanStatus==e.target.value)]);
+
             // console.log(Status);
         } else {
-            // setAllChecked(allchecked.filter((item) => item !== e.target.value));
-            // setStatus(data.filter((item) => item !== e.target.value))
-            updatedlist.splice(Status.indexOf(e.target.value), 1);    
+            //setAllChecked(allchecked.filter((item) => item !== e.target.value));
+            setStatus(data.filter((item) => item !== e.target.value))
+            
             // console.log(Status);
         }
-        setStatus(updatedlist);
+    
         
     }
 
@@ -52,7 +53,7 @@ function LoanApplicationsList() {
     return (
         <div>
             <h1>Loan Applicnts List</h1>
-            <input value="applied" type="checkbox" onChange={handleChange} />
+            <input value="applied" type="checkbox" onChange={handleChange}  defaultChecked />
             <span>Applied</span>
             <input value="approved" type="checkbox" onChange={handleChange} />
             <span>Approved</span>
