@@ -50,7 +50,15 @@ function LoanApplicantsList() {
                         <th></th>
                     </tr>
                 </thead>
-                {data.map((applications, index) => (
+
+                {checked ? (
+            <div> Checkbox is checked. </div>
+         ) : (
+            <div> Checkbox is not checked. </div>
+         )}
+
+
+            {data.map((applications, index) => (
 
                     <tbody key={applications.applicationId}>
 

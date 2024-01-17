@@ -47,7 +47,7 @@ INSERT INTO customers (bankcustomerid, usertype) VALUES (38, "I");
 INSERT INTO customers (bankcustomerid, usertype) VALUES (39, "I");
 INSERT INTO customers (bankcustomerid, usertype) VALUES (40, "I");
 
-INSERT INTO customers(bankcustomerid,usertype) VALUES(14,"C");-- run this query at last
+INSERT INTO customers(bankcustomerid,usertype) VALUES(46,"C");-- run this query at last
 
 
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('39025546601','business','MAHB0000286',200000,'2022-03-01',1);
