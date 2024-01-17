@@ -41,7 +41,7 @@ public class OperationsController : ControllerBase
     }
 
     [HttpGet]
-    [Route("accounts/{acctNumber}/statement")]
+    [Route("accounts/statement/{acctNumber}")]
     public List<Statement> GetStatement(string acctNumber)
     {
         return _svc.GetStatement(acctNumber);

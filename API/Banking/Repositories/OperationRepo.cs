@@ -348,7 +348,9 @@ public class OperationRepo : IOperationRepo
                     Date = reader.GetDateTime("operationdate"),
                     Mode = reader.GetString("operationmode"),
                     Balance = reader.GetDouble("balance")
+                  
                 });
+                  
             }
             reader.Close();
         }
