@@ -1,0 +1,32 @@
+Banking :
+
+Account
+-------
+Get All account holders.
+Get Account holder details by account number.
+Insert new account holder information.
+Update account holder information.
+Delete account holder.
+Get AccountInfo by customer id and usertype.
+Get Mini statment of Bank Cutomer/Account holder.
+Process Annual Interest of Customer/Account holder.
+Transfer fund from one account to another account.
+
+Loan
+----
+Customer apply for loan.
+List of LoanApplicants.
+Details of LoanApplicant.
+Loan Applicants from date - to date.
+Loan Applicants according to loan status(applied,approved,rejected).
+Loan Applicnat Loan will approve by Loan Manager.
+Loan Applicnat Loan will reject by Loan Manager.
+Add approved Loan Applicant in Loan Table.
+Process Monthly EMI of Loan Applicant.
+Get Loan EMI details of Loan Applicant.
+Get total EMI paid by Loan Applicant.
+Display Loantypes. 
+
+
+
+
