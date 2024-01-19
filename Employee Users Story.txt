@@ -1,0 +1,113 @@
+Leave :
+ 
+1.Apply for Leave
+2.Check status of applied leave application
+3.Cancel leave applied
+4.Update existing leave applied
+5.Check existing leaves available
+6.Show list of leave consumed  (Total leaves)
+7.Show Employee leavedetails available
+ 
+TimeSheet :
+1.Create timesheet.
+2.update timesheet if not submitted or approved.
+3.Remove timesheet.
+4.list of timesheets.
+5.Details of timesheet.
+ 
+project :
+1.MY working project list
+2.project details.
+3.Show work list of employee.
+4.show work details of employee.
+5.show sprints 
+6.show sprint details .
+7.Show sprint employee work.
+8.update work status.
+HR role
+ 
+1.Apply for Leave
+2.Check status of applied leave application
+3.Cancel leave applied
+4.Update existing leave applied
+5.Check existing leaves available
+6.Show list of leave consumed  (Total leaves)
+7.Show Employee leavedetails available
+8.Check existing leaves available for employee
+9.Show list of leave consumed  (Total leaves) by employee
+10.Show Employee leavedetails available for particular employee
+11.Approve or reject leave application of member
+12.Check leaves consumed by employee
+13.Show list of leave applications submitted
+14.Show leave application details of particular employee
+15.Update Leaves assigned for role 
+Insert new leave policy for a role
+15.Show Leaves assigned for role
+ 
+timesheet:
+1.Create timesheet.
+2.update timesheet if not submitted or approved.
+3.Remove timesheet.
+4.Approved or reject timesheet.
+5.List of timesheet.
+6.show timesheet details of all employees.
+ 
+ 
+ 
+ProjectManager
+ 
+ 
+leave:
+ 
+1.Apply for Leave
+2.Check status of applied leave application
+3.Cancel leave applied
+4.Update existing leave applied
+5.Check existing leaves available
+6.Show list of leave consumed  (Total leaves)
+7.Show Employee leavedetails available
+ 
+ 
+timesheet:
+1.Create timesheet.
+2.update timesheet if not submitted or approved.
+3.Remove timesheet.
+4.list of timesheets.
+5.Details of timesheet.
+6.show list of timsheets of employees working on project.
+ 
+ 
+project :
+1.MY working project list
+2.project details.
+3.Show work list of employee.
+4.show work details of employee.
+5.show sprints 
+6.show sprint details .
+7.Show sprint employee work.
+8.update work status.
+9.assign employee work.
+10.update employee work.
+11.Remove employee work.
+12.Add employee work.
+13.show all work of project .
+
+Director
+ 
+leave :
+ 
+1.Apply for Leave
+2.Check status of applied leave application
+3.Cancel leave applied
+4.Update existing leave applied
+5.Check existing leaves available
+6.Show list of leave consumed  (Total leaves)
+7.Show Employee leavedetails available
+ 
+timesheet:
+1.Create timesheet.
+2.update timesheet if not submitted or approved.
+3.Remove timesheet.
+4.list of timesheets.
+5.Details of timesheet.
+ 

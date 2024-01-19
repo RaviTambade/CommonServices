@@ -78,4 +78,11 @@ CREATE TABLE
     );
 
 
+DELIMITER //
+CREATE TRIGGER balance AFTER INSERT ON accounts 
+for each row
+BEGIN
+INSERT INTO operations(acctId,acctnumber,amount,operationdate,operationmode,operationtype) VALUES(NEW.id,NEW.acctnumber,NEW.balance,curdate(),"D","Transfer");
+END //
+DELIMITER ;
 

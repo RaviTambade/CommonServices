@@ -4,8 +4,6 @@ import { Button } from 'react-bootstrap'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-//import addNotification from "react-push-notification";
-
 import { NotificationManager } from "react-notifications";
 
 function DetailsOfLoanApplicants() {
@@ -77,13 +75,10 @@ function DetailsOfLoanApplicants() {
 
                 if (e === "approved") {
 
-                    //approveNotification(e);
+            
                     InsertLoanRecord();  
                 }
-                /*else
-                {
-                    rejectNotification(e);
-                }*/
+                
                 createNotification(e);
             
                 var btnApprove=document.getElementById("btnapprove");
@@ -125,31 +120,7 @@ function DetailsOfLoanApplicants() {
             });
     };
 
-    /*function rejectNotification(type) {
-        console.log(type);
-        addNotification({
-            title: "Rejected",
-            subtitle: "Try next time",
-            message: "Your oan is rejected....",
-            theme: "red",
-            closeButton: "X",
-            duration:3000
-        });
-    }
- 
-    function approveNotification(type) {
-        console.log(type);
-        addNotification({
-            title: "Success",
-            subtitle: "Congrtutions!!!!",
-            message: "Loan is approved.",
-            theme: "light",
-            closeButton: "X",
-            backgroundTop: "green",
-            backgroundBottom: "yellowgreen",
-            duration:2000
-        });
-    }*/
+   
     const createNotification = (type) => {
 
         switch (type) {

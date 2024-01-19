@@ -2,8 +2,6 @@
 DROP PROCEDURE IF EXISTS fundtransfer;
 
 DROP PROCEDURE IF EXISTS emitransfer;
-
-
 DELIMITER $$
 CREATE PROCEDURE fundtransfer(IN fromaccountnumber VARCHAR(20),IN toaccountnumber VARCHAR(20),
                              IN fromifsccode VARCHAR(20),IN toifsccode VARCHAR(20),
@@ -16,7 +14,9 @@ DECLARE tooperationid INT DEFAULT 0;
 DECLARE fromaccountbalance DOUBLE DEFAULT 0;
 DECLARE toaccountbalance DOUBLE DEFAULT 0;
 SELECT id,balance INTO fromaccountid,fromaccountbalance FROM accounts WHERE  acctnumber=fromaccountnumber AND ifsccode=fromifsccode;
+
 SELECT id,balance INTO toaccountid,toaccountbalance FROM accounts WHERE  acctnumber=toaccountnumber AND ifsccode =toifsccode;    
+
 INSERT INTO operations(acctId,acctnumber,amount,operationmode,operationtype,operationdate)
 VALUES(fromaccountid,fromaccountnumber,amount,'W',transactiontype,NOW());
 SET fromoperationid=LAST_INSERT_ID();
@@ -95,11 +95,7 @@ CALL emitransfer('1234432112',@transid);
 CALL emitransfer('12656767876',@transid);
 CALL emitransfer('46556565566',@transid);
 
-
-
-
 SELECT @transid;
-
 
 DROP PROCEDURE  IF EXISTS loanstatus;
 
