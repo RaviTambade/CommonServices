@@ -9,13 +9,13 @@ public interface ILoanApplicationsRepo
 
     public bool Delete(int laonapplicantionId);
     public List<LoanApplications> GetAll();
-    public  Task <LoanaplicationInfo> GetById(int laonapplicationId);
-    public Task<List<LoanaplicationInfo> >LoanApplicationBetweenGivenDates(DateTime startDate,DateTime endDate);
+    public  Task <LoanResponse> GetById(int laonapplicationId);
+    public Task<List<LoanResponse> >GetAllLoans(DateTime startDate,DateTime endDate);
 
-    public Task <List<LoanaplicationInfo>> LoanApplicationAccordingLoanStatus(string LoanType);//Why need not to write async here before Task
+    public Task <List<LoanResponse>> GetAllLoans(string LoanType);//Why need not to write async here before Task
 
     //public List<LoanApplicants> LoanApplicantsAccordingLoanStatus(string LoanType);
 
-    public  Task<List<LoanaplicationInfo>> GetAllapplicationInfo();
+    public  Task<List<LoanResponse>> GetAllapplicantsInfo();
 
 }

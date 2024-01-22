@@ -205,13 +205,10 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         return status;
     }
 
-    
-
-
-    public async Task<List<LoanaplicationInfo>> GetAllapplicationInfo()
+    public async Task<List<LoanResponse>> GetAllapplicantsInfo()
     {
         Console.WriteLine("Inside LoanaplicantsInfo method in Repo....");
-        List<LoanaplicationInfo> applicationslist = new List<LoanaplicationInfo>();
+        List<LoanResponse> applicationslist = new List<LoanResponse>();
 
         //Create connection object
         MySqlConnection con = new MySqlConnection(_conString);//IDBConnection is not allowed here Why???
@@ -251,15 +248,16 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 string custtype = reader["usertype"].ToString();
                 
                 applicationslist.Add(
-                    new LoanaplicationInfo()
+                    new LoanResponse()
                     {
-                        ApplicationId = applicationID,
-                        ApplicationDate = FormatDate,
-                        LoanAmount = loanamount,
-                        LoanDuration=loanduration,
-                        LoanStatus = loanstatus,
-                        AccountId = accountID,
-                        LoanTypeId=loantypeid,
+
+                        TheApplication.ApplicationId = applicationID,
+                        TheApplication.ApplicationDate = FormatDate,
+                        LoanResponseLoanAmount = loanamount,
+                        LoanResponseLoanDuration=loanduration,
+                        LoanResponseLoanStatus = loanstatus,
+                        LoanResponseAccountId = accountID,
+                        LoanResponseLoanTypeId=loantypeid,
                         LoanTypeName= loantypename,
                         
                         CustomerUserId= custid,
@@ -286,9 +284,9 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         return applicationslist;
     }
 
-    public async Task <LoanaplicationInfo> GetById(int loanapplicationId)
+    public async Task <LoanResponse> GetById(int loanapplicationId)
     {
-        LoanaplicationInfo application = null;
+        LoanResponse application = null;
 
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
@@ -320,7 +318,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 string custtype = reader["usertype"].ToString();
 
 
-                application = new LoanaplicationInfo
+                application = new LoanResponse
                 {
                     ApplicationId = id,                    
                     ApplicationDate = FormatDate,
@@ -349,7 +347,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
 
     }
 
-    public async Task<List<LoanaplicationInfo>> LoanApplicationBetweenGivenDates(DateTime startDate,DateTime endDate)
+    public async Task<List<LoanResponse>> GetAllLoans(DateTime startDate,DateTime endDate)
     {
 
         Console.WriteLine("Inside LoanApplicantsBetweenGivenDates method in Repo......");
@@ -362,7 +360,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         Console.WriteLine("startDateString : " + startDateString);
         Console.WriteLine("endDateString : " + endDateString);
 
-        List<LoanaplicationInfo> applicationslist = new List<LoanaplicationInfo>();
+        List<LoanResponse> applicationslist = new List<LoanResponse>();
 
         //Create connection object
         MySqlConnection con = new MySqlConnection(_conString);
@@ -405,7 +403,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
 
 
                 applicationslist.Add(
-                    new LoanaplicationInfo()
+                    new LoanResponse()
                     {
                         ApplicationId = applicationID,                       
                         ApplicationDate = FormatDate,
@@ -442,7 +440,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
     }
 
      
-    public async Task <List<LoanaplicationInfo>> LoanApplicationAccordingLoanStatus(string LoanType)
+    public async Task <List<LoanaplicationInfo>> GetAllLoans(string LoanType)
     {
         //SELECT * FROM loanapplicants 
         //WHERE loanstatus = @Loanstatus;

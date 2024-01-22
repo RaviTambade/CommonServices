@@ -32,7 +32,8 @@ public class BankAccountsController : ControllerBase
     }
 
     [HttpGet]
-    [Route("details/{customerId}/{userType}")]
+    [Route("customers/{customerId}/mode/{userType}")]
+    
     public async Task<AccountInfo> GetAccountInfo(int customerId, string userType)
     {
         return await _svc.GetAccountInfo(customerId,userType);
@@ -54,6 +55,8 @@ public class BankAccountsController : ControllerBase
 
     [HttpDelete]
     [Route("{accountNumber}")]
+
+    
     public bool Delete(string accountNumber)
     {
         bool stauts = _svc.Delete(accountNumber);

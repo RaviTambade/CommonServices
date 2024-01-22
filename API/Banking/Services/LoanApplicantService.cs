@@ -54,28 +54,26 @@ public class LoanApplicationsService : ILoanApplicationsService
         return loanapplication;
     }
     
-   public async Task<List<LoanaplicationInfo> >LoanApplicationBetweenGivenDates(DateTime startDate,DateTime endDate)
+   public async Task<List<LoanaplicationInfo> >GetAllLoans(DateTime startDate,DateTime endDate)
     {
         List<LoanaplicationInfo> loanapplications=new List<LoanaplicationInfo>();
-        loanapplications=await _repo.LoanApplicationBetweenGivenDates(startDate,endDate);
+        loanapplications=await _repo.GetAllLoans(startDate,endDate);
         return loanapplications;
     }
 
-    public async Task<List<LoanaplicationInfo>> LoanApplicationAccordingLoanStatus(string LoanType)
+    public async Task<List<LoanaplicationInfo>> GetAllLoans(string LoanType)
      {
         List<LoanaplicationInfo> loanapplication=new List<LoanaplicationInfo>();
-        loanapplication=await _repo.LoanApplicationAccordingLoanStatus(LoanType);
+        loanapplication=await _repo.GetAllLoans(LoanType);
         return loanapplication;
     }
-
-    public async Task<List<LoanaplicationInfo>> GetAllapplicationInfo()
-     {
+    
+    public async Task<List<LoanaplicationInfo>> GetAllapplicantsInfo()
+    {
         Console.WriteLine("Inside LoanaplicantsInfo method in Service....");
         List<LoanaplicationInfo> loanapplications=new List<LoanaplicationInfo>();
-        loanapplications=await _repo.GetAllapplicationInfo();
+        loanapplications=await _repo.GetAllapplicantsInfo();
         
         return loanapplications;
-     }
-
-   
+    }
 }

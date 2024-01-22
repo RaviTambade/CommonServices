@@ -6,7 +6,7 @@ using Banking.Helpers;
 namespace BankingServices.Controllers;
 
 [ApiController]
-[Route("/api/application")]
+[Route("/api/loans")]
 public class LoanApplicationController : ControllerBase
 {
     private readonly ILoanApplicationsService _svc;
@@ -91,13 +91,14 @@ public class LoanApplicationController : ControllerBase
         //LoanaplicantsInfo applicant = await _svc.GetById(id);
         //return applicant;
     }
-    [HttpGet("{startDate}/{endDate}")]
-     public async Task<IEnumerable<LoanaplicationInfo>> LoanApplicantsBetweenGivenDates(DateTime startDate,DateTime endDate)
+    [HttpGet("from/{startdate}/to/{enddate}")]
+
+     public async Task<IEnumerable<LoanaplicationInfo>> GetallLoans(DateTime startDate,DateTime endDate)
     {
         // Console.WriteLine("Inside LoanApplicantsBetweenGivenDates method in Cotroller....");
         // IEnumerable<LoanApplications> applicants = _svc.LoanApplicationBetweenGivenDates(startDate,endDate);
         Console.WriteLine("Inside LoanApplicantsAccordingLoanStatus method in Cotroller....");
-        List<LoanaplicationInfo> applications = await _svc.LoanApplicationBetweenGivenDates(startDate,endDate);
+        List<LoanaplicationInfo> applications = await _svc.GetAllLoans(startDate,endDate);
         LoanApplicationHelper helper = new LoanApplicationHelper(_httpClient);
         List<LoanaplicationInfo> DetailsOfApplicants =  await helper.applicationsDetails(applications);
         
@@ -107,10 +108,12 @@ public class LoanApplicationController : ControllerBase
     }
 
     [HttpGet("status/{loanType}")]
-     public async Task<List<LoanaplicationInfo>> LoanApplicationsAccordingLoanStatus(string loanType)
+
+    //GetallLoans
+     public async Task<List<LoanaplicationInfo>> GetallLoans(string loanType)
     {
         Console.WriteLine("Inside LoanApplicantsAccordingLoanStatus method in Cotroller....");
-         List<LoanaplicationInfo> applications = await _svc.LoanApplicationAccordingLoanStatus(loanType);
+         List<LoanaplicationInfo> applications = await _svc.GetAllLoans(loanType);
         LoanApplicationHelper helper = new LoanApplicationHelper(_httpClient);
         List<LoanaplicationInfo> DetailsOfApplicants =  await helper.applicationsDetails(applications);
         
@@ -118,10 +121,10 @@ public class LoanApplicationController : ControllerBase
     }
 
     [HttpGet("applicationAscustomer")]
-      public async Task<List<LoanaplicationInfo>> GetAllapplicationInfo()
+      public async Task<List<LoanaplicationInfo>> GetAllapplicantsInfo()
       {
         Console.WriteLine("Inside LoanaplicantsInfo method in Cotroller....");
-        List<LoanaplicationInfo> applicants = await _svc.GetAllapplicationInfo();
+        List<LoanaplicationInfo> applicants = await _svc.GetAllapplicantsInfo();
         LoanApplicationHelper helper = new LoanApplicationHelper(_httpClient);
         List<LoanaplicationInfo> DetailsOfApplicants =  await helper.applicationsDetails(applicants);
         

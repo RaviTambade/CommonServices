@@ -1,6 +1,6 @@
 namespace EntityLib
 {
-    public class LoanApplications
+    public class LoanApplications //LoanApplication change it
     {
         public int ApplicationId{ get; set; }  
         public DateOnly ApplicationDate{get;set;}
@@ -12,17 +12,4 @@ namespace EntityLib
          
            
     }
-
-
-    public class LoanaplicationInfo : LoanApplications
-    {
-        public int CustomerUserId{get;set;}         
-        public String ApplicantName{get;set;}
-        public String ApplicantType{get;set;}
-        public String LoanTypeName{get;set;}
-    }
-    
-    /*public class LoanApplicationDetails : LoanApplications{
-          public String LoanTypeName{get;set;}
-    }*/
 }
