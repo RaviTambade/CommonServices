@@ -6,6 +6,7 @@ using System.Data;
 using System.Globalization;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.ComponentModel;
 
 //Saving and Restoring logic into json file
 public class LoanApplicationsRepo : ILoanApplicationsRepo
@@ -247,21 +248,27 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 int custid = int.Parse(reader["bankcustomerid"].ToString());
                 string custtype = reader["usertype"].ToString();
                 
+                //LoanApplications loanApplication = new LoanApplications();
                 applicationslist.Add(
                     new LoanResponse()
                     {
-
-                        TheApplication.ApplicationId = applicationID,
-                        TheApplication.ApplicationDate = FormatDate,
-                        LoanResponseLoanAmount = loanamount,
-                        LoanResponseLoanDuration=loanduration,
-                        LoanResponseLoanStatus = loanstatus,
-                        LoanResponseAccountId = accountID,
-                        LoanResponseLoanTypeId=loantypeid,
-                        LoanTypeName= loantypename,
+                        TheApplication =  new LoanApplications(){
                         
-                        CustomerUserId= custid,
-                        ApplicantType = custtype
+                        ApplicationId = applicationID,
+                        ApplicationDate = FormatDate,
+                        LoanAmount = loanamount,
+                        LoanDuration=loanduration,
+                        LoanStatus = loanstatus,
+                        AccountId = accountID,
+                        LoanTypeId=loantypeid,
+                        },
+                    
+                        TheApplicant = new LoanapplicationInfo(){
+
+                            LoanTypeName = loantypename,
+                            CustomerUserId= custid,
+                            ApplicantType = custtype
+                        }
                     }
                 );
             }
@@ -440,14 +447,14 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
     }
 
      
-    public async Task <List<LoanaplicationInfo>> GetAllLoans(string LoanType)
+    public async Task <List<LoanResponse>> GetAllLoans(string LoanType)
     {
         //SELECT * FROM loanapplicants 
         //WHERE loanstatus = @Loanstatus;
 
         
         Console.WriteLine("Inside LoanApplicantsAccordingLoanStatus Repo method....");
-        List<LoanaplicationInfo> applicationslist = new List<LoanaplicationInfo>();
+        List<LoanResponse> applicationslist = new List<LoanResponse>();
 
         //Create connection object
         MySqlConnection con = new MySqlConnection(_conString);
@@ -492,7 +499,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 Console.WriteLine(applictionID);
 
                 applicationslist.Add(
-                    new LoanaplicationInfo()
+                    new LoanResponse()
                     {
                         ApplicationId = applictionID,
                         AccountId = acctID,                        
