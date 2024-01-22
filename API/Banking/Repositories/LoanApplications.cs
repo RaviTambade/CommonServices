@@ -327,16 +327,24 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
 
                 application = new LoanResponse
                 {
-                    ApplicationId = id,                    
-                    ApplicationDate = FormatDate,
-                    LoanAmount = amount,
-                    LoanDuration=loanduration,
-                    LoanStatus = status,                                      
-                    AccountId = acctid,
-                    LoanTypeId=loantypeId,
-                    LoanTypeName= loantypename ,
-                    CustomerUserId= custid,
-                    ApplicantType = custtype
+                    TheApplication =  new LoanApplications(){
+                        
+                    
+                        ApplicationDate = FormatDate,
+                        LoanAmount = amount,
+                        LoanDuration=loanduration,
+                        LoanStatus = status,
+                        AccountId = acctid,
+                        LoanTypeId=loantypeId,
+                        },
+                    
+                        TheApplicant = new LoanapplicationInfo(){
+
+                            LoanTypeName = loantypename,
+                            CustomerUserId= custid,
+                            ApplicantType = custtype
+                        }
+
                    
                 };
             }
@@ -412,18 +420,23 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 applicationslist.Add(
                     new LoanResponse()
                     {
-                        ApplicationId = applicationID,                       
+                        TheApplication =  new LoanApplications(){
+                        
+                        ApplicationId = applicationID,
                         ApplicationDate = FormatDate,
                         LoanAmount = loanamount,
                         LoanDuration=loanduration,
                         LoanStatus = status,
                         AccountId = acctID,
-                        LoanTypeId=loantypeId ,
-                        LoanTypeName= loantypename ,
-                        CustomerUserId= custid,
-                        ApplicantType = custtype
+                        LoanTypeId=loantypeId,
+                        },
+                    
+                        TheApplicant = new LoanapplicationInfo(){
 
-                         
+                            LoanTypeName = loantypename,
+                            CustomerUserId= custid,
+                            ApplicantType = custtype
+                        }
                     }
                 );
             }
@@ -501,16 +514,24 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 applicationslist.Add(
                     new LoanResponse()
                     {
+                        TheApplication =  new LoanApplications(){
+                        
                         ApplicationId = applictionID,
-                        AccountId = acctID,                        
-                        ApplicationDate = FormatDate,                        
-                        LoanTypeId = loanTypeid,
-                        LoanTypeName=loantypename,
-                        LoanDuration=loanduration,
+                        ApplicationDate = FormatDate,
                         LoanAmount = amount,
+                        LoanDuration=loanduration,
                         LoanStatus = status,
-                        CustomerUserId= custid,
-                        ApplicantType = custtype                   
+                        AccountId = acctID,
+                        LoanTypeId=loanTypeid,
+                        },
+                    
+                        TheApplicant = new LoanapplicationInfo(){
+
+                            LoanTypeName = loantypename,
+                            CustomerUserId= custid,
+                            ApplicantType = custtype
+                        }
+                   
                     }
                 );
             }

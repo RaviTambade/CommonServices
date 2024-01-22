@@ -47,31 +47,31 @@ public class LoanApplicationsService : ILoanApplicationsService
         return loanapplicant;
     }*/
 
-    public async Task<LoanaplicationInfo> GetById(int laonapplicationId)
+    public async Task<LoanResponse> GetById(int laonapplicationId)
     {
-        LoanaplicationInfo loanapplication=new LoanaplicationInfo();
+        LoanResponse loanapplication=new LoanResponse();
         loanapplication=await _repo.GetById(laonapplicationId);
         return loanapplication;
     }
     
-   public async Task<List<LoanaplicationInfo> >GetAllLoans(DateTime startDate,DateTime endDate)
+   public async Task<List<LoanResponse> >GetAllLoans(DateTime startDate,DateTime endDate)
     {
-        List<LoanaplicationInfo> loanapplications=new List<LoanaplicationInfo>();
+        List<LoanResponse> loanapplications=new List<LoanResponse>();
         loanapplications=await _repo.GetAllLoans(startDate,endDate);
         return loanapplications;
     }
 
-    public async Task<List<LoanaplicationInfo>> GetAllLoans(string LoanType)
+    public async Task<List<LoanResponse>> GetAllLoans(string LoanType)
      {
-        List<LoanaplicationInfo> loanapplication=new List<LoanaplicationInfo>();
+        List<LoanResponse> loanapplication=new List<LoanResponse>();
         loanapplication=await _repo.GetAllLoans(LoanType);
         return loanapplication;
     }
     
-    public async Task<List<LoanaplicationInfo>> GetAllapplicantsInfo()
+    public async Task<List<LoanResponse>> GetAllapplicantsInfo()
     {
         Console.WriteLine("Inside LoanaplicantsInfo method in Service....");
-        List<LoanaplicationInfo> loanapplications=new List<LoanaplicationInfo>();
+        List<LoanResponse> loanapplications=new List<LoanResponse>();
         loanapplications=await _repo.GetAllapplicantsInfo();
         
         return loanapplications;
