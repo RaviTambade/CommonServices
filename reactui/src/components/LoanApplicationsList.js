@@ -6,7 +6,7 @@ import '../css/LoanApplicationsList.css';
 
 
 function LoanApplicationsList() {
-  const url = "http://localhost:5053/api/application/applicationAscustomer";
+  const url = "http://localhost:5053/api/loans/applicationAscustomer";
   const [data, setData] = useState([]);
   const [toDate, setToDate] = useState(new Date().toISOString().slice(0, 10));
   const [fromDate, setFromDate] = useState('');
@@ -22,7 +22,7 @@ function LoanApplicationsList() {
   };
   
 
-  const getFilteredData = data.filter((loan) => tempData.includes(loan.loanStatus) && loan.applicationDate <= toDate && loan.applicationDate >=fromDate);
+  const getFilteredData = data.filter((loan) => tempData.includes(loan.theApplication.loanStatus) && loan.theApplication.applicationDate <= toDate && loan.theApplication.applicationDate >=fromDate);
 
 
   const fetchInfo = () => {
@@ -70,13 +70,13 @@ function LoanApplicationsList() {
             </tr>
           </thead>
           {getFilteredData.map((applications, index) => (
-            <tbody key={applications.applicationId}>
+            <tbody key={applications.theApplication.applicationId}>
               <tr>
                 <td>{index + 1}</td>
-                <td>{applications.applicantName}</td>
-                <td>{applications.loanStatus}</td>
+                <td>{applications.theApplicant.applicantName}</td>
+                <td>{applications.theApplication.loanStatus}</td>
                 <td>
-                  <Link to={`/detailsfromlist/${applications.applicationId}`}>
+                  <Link to={`/detailsfromlist/${applications.theApplication.applicationId}`}>
                     Details
                   </Link>
                 </td>
