@@ -21,7 +21,7 @@ function GetApplicantsListByDate() {
         console.log(FromDate, ToDate);
         event.preventDefault();
 
-        const url = "http://localhost:5053/api/application" + "/" + FromDate + "/" + ToDate;
+        const url = "http://localhost:5053/api/loans" + "/" + FromDate + "/" + ToDate;
 
         axios
             .get(url)

@@ -43,10 +43,6 @@ INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, e
 INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, email, contactnumber,password) VALUES ("SheetalKumar.jpg", "456789012945", "Sheetal", "Kumar", "1991-05-09", "female", "sheetal.kumar@gmail.com", "9876543229","password");
 INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, email, contactnumber,password) VALUES ("RajeshwariMore.jpg", "567890121256", "Rajeshwari", "More", "1995-08-28", "female", "rajeshwari.more@gmail.com", "9876543230","password");
 INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, email, contactnumber,password) VALUES ("KunalGupta.jpg", "234567892123", "Kunal", "Gupta", "1993-12-12", "male", "kunal.gupta@gmail.com", "9876543231","password");
-<<<<<<< HEAD
-
-=======
->>>>>>> b9b86ac57378ac4e3bd925bd9e4f18ab4b46d8df
 
 
 
