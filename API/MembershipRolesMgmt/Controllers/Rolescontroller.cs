@@ -15,45 +15,63 @@ public class RolesController : ControllerBase
         _service = service;
     }
 
-    [HttpGet("userid")]
-    public async Task<List<UserRole>> GetAll()
+    [HttpGet]
+    public async Task<List<Role>> GetRoles()
     {
-        return await _service.GetAll();
+        return await _service.GetRoles();
     }
 
-    [HttpGet("{roleIds}")]
-    public async Task<List<Role>> GetRoleDetails(string roleIds)
-    {
-        return await _service.GetRoleDetails(roleIds);
-    }
-
-    [HttpGet("{userId}/{lob}")]
-    public async Task<List<Role>> GetRoles(int userId, string lob)
-    {
-        return await _service.GetRoles(userId, lob);
-    }
-
-    [HttpGet("userrole/{userId}")]
+    [HttpGet("{userId}")]
     public async Task<List<Role>> GetRoles(int userId)
     {
         return await _service.GetRoles(userId);
     }
 
+    [HttpGet("users/{userId}/lob/{lob}")]
+    public async Task<List<Role>> GetRoles(int userId, string lob)
+    {
+        return await _service.GetRoles(userId, lob);
+    }
+
+    [HttpGet("ids/{roleIds}")]
+    public async Task<List<Role>> GetRoles(string roleIds)
+    {
+        return await _service.GetRoles(roleIds);
+    }
+
     [HttpPost]
+    public async Task<bool> Insert(Role role)
+    {
+        return await _service.Insert(role);
+    }
+
+    [HttpPut]
+    public async Task<bool> Update(Role role)
+    {
+        return await _service.Update(role);
+    }
+
+    [HttpDelete("{roleId}")]
+    public async Task<bool> DeleteRole(int roleId)
+    {
+        return await _service.DeleteRole(roleId);
+    }
+
+    [HttpPost("userroles")]
     public async Task<bool> Insert(UserRole userRole)
     {
         return await _service.Insert(userRole);
     }
 
-    [HttpPut]
+    [HttpPut("userroles")]
     public async Task<bool> Update(UserRole userRole)
     {
         return await _service.Update(userRole);
     }
 
-    [HttpDelete("{userRoleId}")]
-    public async Task<bool> Delete(int userRoleId)
+    [HttpDelete("userroles/{userRoleId}")]
+    public async Task<bool> DeleteUserRole(int userRoleId)
     {
-        return await _service.Delete(userRoleId);
+        return await _service.DeleteUserRole(userRoleId);
     }
 }

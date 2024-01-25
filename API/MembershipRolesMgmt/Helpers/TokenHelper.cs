@@ -1,16 +1,14 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Transflower.MembershipRolesMgmt.Helpers;
 using Transflower.MembershipRolesMgmt.Models.Entities;
-using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
 
+namespace  Transflower.MembershipRolesMgmt.Helpers;
 public class TokenHelper
 {
     private readonly IRoleService _roleService;
-    private IConfiguration _configuration;
+    private readonly IConfiguration _configuration;
 
     public TokenHelper(IConfiguration configuration, IRoleService roleService)
     {

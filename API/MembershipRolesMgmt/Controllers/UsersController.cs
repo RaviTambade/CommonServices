@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Transflower.MembershipRolesMgmt.Helpers;
 using Transflower.MembershipRolesMgmt.Models.Entities;
-using Transflower.MembershipRolesMgmt.Models.Requests;
-using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
 
 namespace Transflower.MembershipRolesMgmt.Controllers;
+
 [ApiController]
 [Route("/api/users")]
 public class UsersController : ControllerBase
@@ -18,10 +16,23 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<List<User>> GetAllUsers()
+    public async Task<List<User>> GetUsers()
     {
-        List<User> users = await _svc.GetAllUsers();
+        List<User> users = await _svc.GetUsers();
         return users;
+    }
+
+    [HttpGet("roles/{role}")]
+    public async Task<List<User>> GetUsersByRole(string role)
+    {
+        return await _svc.GetUsersByRole(role);
+    }
+
+    [HttpGet]
+    [Route("ids/{userIds}")]
+    public async Task<List<User>> GetUsersByUserIds(string userIds)
+    {
+        return await _svc.GetUsersByUserIds(userIds);
     }
 
     [HttpGet]
@@ -31,35 +42,13 @@ public class UsersController : ControllerBase
         return await _svc.GetUser(userId);
     }
 
-    [HttpGet("usersid/{role}")]
-    public async Task<List<User>> GetUsers(string role)
-    {
-        return await _svc.GetUsers(role);
-    }
-
-   
     [HttpGet]
     [Route("contact/{contactNumber}")]
-    public async Task<User> GetUserByContact(string contactNumber)
+    public async Task<User> GetUser(string contactNumber)
     {
-        return await _svc.GetUserByContact(contactNumber);
+        return await _svc.GetUser(contactNumber);
     }
 
-    [HttpGet]
-    [Route("name/{ids}")]
-    public async Task<List<User>> GetUsersDetail(string ids)
-    {
-        return await _svc.GetUsersDetails(ids);
-    }
-
-    [HttpGet]
-    [Route("username/{contactNumber}")]
-    public async Task<UserDetails> GetUserDetailsByContactNumber(string contactNumber)
-    {
-        return await _svc.GetUserDetailsByContactNumber(contactNumber);
-    }
- 
-    // POST http://localhost:/api/users
     [HttpPost]
     public async Task<bool> Add(User user)
     {
@@ -69,15 +58,15 @@ public class UsersController : ControllerBase
 
     // [Authorize]
     [HttpPut]
-    [Route("{id}")]
-    public async Task<bool> Update(int id, User user)
+    [Route("{userId}")]
+    public async Task<bool> Update(int userId, User user)
     {
-        bool status = await _svc.Update(id, user);
+        bool status = await _svc.Update(userId, user);
         return status;
     }
 
     [HttpDelete]
-    [Route("DeleteUser/{userId}")]
+    [Route("{userId}")]
     public async Task<bool> Delete(int userId)
     {
         return await _svc.Delete(userId);

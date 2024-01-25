@@ -3,13 +3,10 @@ using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Transflower.MembershipRolesMgmt.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace Transflower.MembershipRolesMgmt.Repositories;
 
 public class RoleRepository : IRoleRepository
 {
-    private readonly IConfiguration _configuration;
-    private readonly string _conString;
     private readonly RoleContext _context;
 
     public RoleRepository(RoleContext context)
@@ -17,12 +14,12 @@ public class RoleRepository : IRoleRepository
         _context = context;
     }
 
-    public async Task<List<UserRole>> GetAll()
+    public async Task<List<Role>> GetRoles()
     {
         try
         {
-            var userRoles = await _context.UserRoles.ToListAsync();
-            return userRoles;
+            var roles = await _context.Roles.ToListAsync();
+            return roles;
         }
         catch (Exception)
         {
@@ -30,17 +27,17 @@ public class RoleRepository : IRoleRepository
         }
     }
 
-    public async Task<List<Role>> GetRoleDetails(string roleIds)
+    public async Task<List<Role>> GetRoles(string roleIds)
     {
         try
         {
             // var roles = await _context.Roles.Where(r => roleIds.Contains(r.Id.ToString())).ToListAsync();
-            var allRoles= await ( 
+            var roles = await (
                 from role in _context.Roles
                 where roleIds.Contains(role.Id.ToString())
                 select role
             ).ToListAsync();
-            return allRoles;
+            return roles;
         }
         catch (Exception)
         {
@@ -52,14 +49,14 @@ public class RoleRepository : IRoleRepository
     {
         try
         {
-            var userRoles = await (
+            var roles = await (
                 from role in _context.Roles
                 join userrole in _context.UserRoles on role.Id equals userrole.RoleId
                 join user in _context.Users on userrole.UserId equals user.Id
                 where user.Id == userId && role.Lob == lob
                 select role
             ).ToListAsync();
-            return userRoles;
+            return roles;
         }
         catch (Exception)
         {
@@ -87,6 +84,61 @@ public class RoleRepository : IRoleRepository
         }
     }
 
+      public async Task<bool> Insert(Role role)
+    {
+        bool status = false;
+        try
+        {
+            await _context.Roles.AddAsync(role);
+            status = await SaveChanges(_context);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        return status;
+    }
+
+    public async Task<bool> Update(Role role)
+    {
+        bool status = false;
+        try
+        {
+            var oldrole = await _context.Roles.FindAsync(role.Id);
+            if (oldrole is not null)
+            {
+                oldrole.Name = role.Name;
+                oldrole.Lob = role.Lob;
+                status = await SaveChanges(_context);
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        return status;
+    }
+
+    public async Task<bool> DeleteRole(int roleId)
+    {
+        bool status = false;
+        try
+        {
+            var role = await _context.Roles.FindAsync(roleId);
+            if (role is not null)
+            {
+                _context.Roles.Remove(role);
+                status = await SaveChanges(_context);
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        return status;
+    }
+
+
     public async Task<bool> Insert(UserRole userRole)
     {
         bool status = false;
@@ -107,11 +159,11 @@ public class RoleRepository : IRoleRepository
         bool status = false;
         try
         {
-            var oldMerchant = await _context.UserRoles.FindAsync(userRole.Id);
-            if (oldMerchant is not null)
+            var oldUserRole = await _context.UserRoles.FindAsync(userRole.Id);
+            if (oldUserRole is not null)
             {
-                oldMerchant.UserId = userRole.UserId;
-                oldMerchant.RoleId = userRole.RoleId;
+                oldUserRole.UserId = userRole.UserId;
+                oldUserRole.RoleId = userRole.RoleId;
                 status = await SaveChanges(_context);
             }
         }
@@ -122,7 +174,7 @@ public class RoleRepository : IRoleRepository
         return status;
     }
 
-    public async Task<bool> Delete(int userRoleId)
+    public async Task<bool> DeleteUserRole(int userRoleId)
     {
         bool status = false;
         try
@@ -141,6 +193,7 @@ public class RoleRepository : IRoleRepository
         return status;
     }
 
+  
     private async Task<bool> SaveChanges(RoleContext _context)
     {
         int rowsAffected = await _context.SaveChangesAsync();

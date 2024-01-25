@@ -35,7 +35,7 @@ public class AuthController : ControllerBase
         var status = await _userService.Authenticate(claim);
         if (status)
         {
-            User user = await _userService.GetUserByContact(claim.ContactNumber);
+            User user = await _userService.GetUser(claim.ContactNumber);
             TokenHelper helper = new TokenHelper(_configuration, _roleService);
             strJwtToken = await helper.GenerateJwtToken(user, claim.Lob);
         }

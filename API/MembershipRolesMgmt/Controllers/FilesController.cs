@@ -63,5 +63,4 @@ public class FilesController : ControllerBase
             return StatusCode(500, $"Internal server error: {ex}");
         }
     }
-
 }

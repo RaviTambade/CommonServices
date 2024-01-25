@@ -1,9 +1,7 @@
 
 using MySql.Data.MySqlClient;
-using System.Globalization;
 using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Models.Requests;
-using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Claim = Transflower.MembershipRolesMgmt.Models.Requests.Claim;
 namespace Transflower.MembershipRolesMgmt.Repositories;
@@ -21,7 +19,6 @@ public class UserRepository : IUserRepository
         throw new ArgumentNullException(nameof(_conString));
     }
 
-
     public async Task<bool> Authenticate(Claim claim)
     {
         bool status = false;
@@ -37,16 +34,7 @@ public class UserRepository : IUserRepository
             MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();
             if (await reader.ReadAsync())
             {
-
                 status = true;
-
-
-                /*UserRepository repo=new UserRepository(_configuration);
-
-                 User user=await repo.GetUserByContact(claim.ContactNumber);
-                 TokenHelper tokenHelper=new TokenHelper();
-                 jwtToken = await tokenHelper.GenerateJwtToken(user);
-                */
             }
             await reader.CloseAsync();
         }
@@ -60,7 +48,7 @@ public class UserRepository : IUserRepository
         }
         return status;
     }
-    public async Task<List<User>> GetAllUsers()
+    public async Task<List<User>> GetUsers()
     {
         List<User> users = new List<User>();
         MySqlConnection con = new MySqlConnection();
@@ -170,7 +158,7 @@ public class UserRepository : IUserRepository
 
 
 
-    public async Task<List<User>> GetUsers(string roleName)
+    public async Task<List<User>> GetUsersByRole(string roleName)
     {
         List<User> users = new();
         MySqlConnection con = new MySqlConnection(_conString);
@@ -222,7 +210,7 @@ public class UserRepository : IUserRepository
         return users;
     }
 
-    public async Task<User> GetUserByContact(string contactNumber)
+    public async Task<User> GetUser(string contactNumber)
     {
         User user = new User();
         MySqlConnection con = new MySqlConnection();
@@ -276,14 +264,14 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public async Task<List<User>> GetUsersDetails(string ids)
+    public async Task<List<User>> GetUsersByUserIds(string userIds)
     {
         List<User> users = new();
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
         try
         {
-            string query = $"select id,firstname,lastname,imageurl,aadharid,birthdate,gender,email,contactnumber from users where id IN ({ids})";
+            string query = $"select id,firstname,lastname,imageurl,aadharid,birthdate,gender,email,contactnumber from users where id IN ({userIds})";
             MySqlCommand cmd = new MySqlCommand(query, con);
             await con.OpenAsync();
 
@@ -329,43 +317,7 @@ public class UserRepository : IUserRepository
         }
         return users;
     }
-    public async Task<UserDetails> GetUserDetailsByContactNumber(string contactNumber)
-    {
-        UserDetails userName = null;
-        MySqlConnection con = new MySqlConnection();
-        con.ConnectionString = _conString;
-        try
-        {
-            string query = $"select id,firstname,lastname from users where contactnumber=@contactNumber";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@contactNumber", contactNumber);
-            await con.OpenAsync();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            if (await reader.ReadAsync())
-            {
-                int id = int.Parse(reader["id"].ToString());
-                string? firstName = reader["firstname"].ToString();
-                string? lastName = reader["lastname"].ToString();
-
-                userName = new UserDetails()
-                {
-                    UserId = id,
-                    FullName = $"{firstName} {lastName}"
-                };
-            }
-            await reader.CloseAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-            await con.CloseAsync();
-        }
-        return userName;
-    }
-    public async Task<bool> Add(User user)
+        public async Task<bool> Add(User user)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection();
@@ -535,9 +487,4 @@ public class UserRepository : IUserRepository
         }
         return status;
     }
-
-    
-
-
-
 }

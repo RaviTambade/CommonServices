@@ -13,24 +13,39 @@ public class RoleService : IRoleService
         _repository = repository;
     }
 
-    public async Task<List<UserRole>> GetAll()
+    public async Task<List<Role>> GetRoles()
     {
-        return await _repository.GetAll();
+        return await _repository.GetRoles();
     }
 
-    public async Task<List<Role>> GetRoleDetails(string roleIds)
+    public async Task<List<Role>> GetRoles(string roleIds)
     {
-        return await _repository.GetRoleDetails(roleIds);
+        return await _repository.GetRoles(roleIds);
     }
 
-    public async Task<List<Role>> GetRoles(int userId,string lob)
+    public async Task<List<Role>> GetRoles(int userId, string lob)
     {
-        return await _repository.GetRoles(userId,lob);
+        return await _repository.GetRoles(userId, lob);
     }
 
     public async Task<List<Role>> GetRoles(int userId)
     {
         return await _repository.GetRoles(userId);
+    }
+
+    public async Task<bool> Insert(Role role)
+    {
+        return await _repository.Insert(role);
+    }
+
+    public async Task<bool> Update(Role role)
+    {
+        return await _repository.Update(role);
+    }
+
+    public async Task<bool> DeleteRole(int roleId)
+    {
+        return await _repository.DeleteRole(roleId);
     }
 
     public async Task<bool> Insert(UserRole userRole)
@@ -43,8 +58,8 @@ public class RoleService : IRoleService
         return await _repository.Update(userRole);
     }
 
-    public async Task<bool> Delete(int userRoleId)
+    public async Task<bool> DeleteUserRole(int userRoleId)
     {
-        return await _repository.Delete(userRoleId);
+        return await _repository.DeleteUserRole(userRoleId);
     }
 }
