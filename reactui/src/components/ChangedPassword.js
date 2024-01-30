@@ -16,6 +16,7 @@ function ChangedPassword(){
         };
         console.log("data ",data);
         const url =' http://localhost:5142/api/auth/updatepassword';
+        
         const token = localStorage.getItem("jwt_token");
         axios.put(url,data,{ headers: {
             Authorization: `Bearer ${token}`
@@ -48,7 +49,7 @@ function ChangedPassword(){
                 <br></br><br></br>
 
                 <input type="submit" value = "ChangedPassword"/>
-        
+
             </form>
         </div>
     )

@@ -24,6 +24,7 @@ function Login(){
             console.log(result.data);
             if(result.data.token){
                 localStorage.setItem("jwt_token",result.data.token);
+                
                 alert("Login is Valid");
             }
             else
@@ -52,6 +53,7 @@ function Login(){
                 <br></br><br></br>
 
                 <input type="submit" value="Login" /> <br></br>
+                
                 <label>If you are new user click on Register Link</label><br></br>
                 <Link to="/register">Register</Link>
             </form>
