@@ -77,10 +77,7 @@ function LoanApplicationForm(){
                 <label>Loan Status : </label>
                 <select id="loanstatus" name="loanstatus" onChange={(e) => setStatus(e.target.value)}>
                     <option value="applied">Applied</option></select>
-                <br></br><br></br>
-
-                
-                
+                <br></br><br></br>             
 
                 <input type="submit" />
 

@@ -104,7 +104,8 @@ INSERT INTO roles(name,lob)VALUES('farmer ','EAgro');
 INSERT INTO roles(name,lob)VALUES ('collection manager','EAgro');
 INSERT INTO roles(name,lob)VALUES('inspector','EAgro');
 INSERT INTO roles(name,lob)VALUES('transporter','EAgro');
-INSERT INTO roles(name,lob)VALUES('merchant','EAgro');   
+INSERT INTO roles(name,lob)VALUES('customers','banking');
+INSERT INTO roles(name,lob)VALUES('manager','banking');
 
 
 
@@ -189,3 +190,5 @@ INSERT INTO userroles(userid,roleid)VALUES(11,19);
 INSERT INTO userroles(userid,roleid)VALUES(12,19);
 INSERT INTO userroles(userid,roleid)VALUES(13,17);
 INSERT INTO userroles(userid,roleid)VALUES(14,17);
+INSERT INTO userroles(userid,roleid)VALUES(14,20);
+INSERT INTO userroles(userid,roleid)VALUES(17,19);

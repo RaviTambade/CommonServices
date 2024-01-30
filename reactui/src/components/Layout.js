@@ -8,7 +8,7 @@ const Layout = () => {
       <nav >
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">Huuuuome...</Link>
           </li>
           <li>
             <Link to="/aboutus">AoutUs</Link>
@@ -17,7 +17,10 @@ const Layout = () => {
             <Link to="/login">Login</Link>
           </li>
           <li>
-            <Link to="/resister">Resister</Link>
+            <Link to="/register">Register</Link>
+          </li>
+          <li>
+            <Link to="/changedpassword">ChangedPassword</Link>
           </li>
           <li>
             <Link to="/loanapplicationslist">Loan Applications List</Link>
