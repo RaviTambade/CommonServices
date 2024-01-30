@@ -1,4 +1,5 @@
-import React, {useState} from "react"
+import React, {Fragment, useState} from "react"
+import axios from "axios";
 
 function Register(){
     const[imageurl,setImageUrl] = useState('');
@@ -6,16 +7,62 @@ function Register(){
     const[firstname,setFirstName] = useState('');
     const[lastname,setLastName] = useState('')
     const[birthdate,setBirthDate] = useState('');
-    const[gender,setGender] = useState('');
+    //const[gender,setGender] = useState('');
     const[contactnumber,setContactNumber] = useState('');
     const[password,setPassword] = useState('');
 
+    const [genderdata, setGenderData] = useState('');
 
+    const handleChange = (e) => {
+      if (e.target.checked) {
+        setGenderData(genderdata, e.target.value);
+      } else {
+        setGenderData(genderdata.filter((item) => item != e.target.value));
+      }
+     
+    };
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    
+        const data = {
+            ImageUrl:imageurl,
+            FirstName:firstname,
+            LastName:lastname,
+            BirthDate:birthdate,
+            AadharId:aadharid,
+            Gender:genderdata,
+            ContactNumber:contactnumber,
+            Password:password
+            
+           
+        };
+
+        console.log("data ",data);
+        const url =' http://localhost:5142/api/users';
+    
+        axios.post(url,data).then((result) =>{
+            console.log(result.data);
+            if(result.data){
+                
+                
+                alert("Registration Sucessfull....");
+            }
+            else
+            {
+                alert("Registration Not Sucessfull....");;
+            }
+            
+        }).catch(error =>{
+                alert(error);
+                
+        });
+    }
 
     
 
     return(
-        <Fragment>
+        <div>
+        
             <h1>Resister Form</h1>
             <form onSubmit={handleSubmit}>
                 
@@ -42,9 +89,11 @@ function Register(){
                 <br></br><br></br>
 
                 <label>Gender : </label>
-                <input type="radio" id="male" name="male" value="Male"/>
-                <label for="male">Male</label><br/>
-                <input type="radio" id="female" name="female" value="Female"/>
+                &nbsp;
+                <input type="radio" id="male" name="gender" value="male" onChange={handleChange}/>
+                <label for="male">Male</label>
+                  &nbsp;   &nbsp;
+                <input type="radio" id="female" name="gender" value="female" onChange={handleChange}/>
                 <label for="female">Female</label><br/>  
                        
                 <br></br><br></br>
@@ -62,7 +111,7 @@ function Register(){
                 <input type="submit" />
 
             </form>
-            </Fragment>
+            </div>
     )
 }
 export default Register
