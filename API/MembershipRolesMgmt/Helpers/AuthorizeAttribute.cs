@@ -32,7 +32,7 @@ namespace Transflower.MembershipRolesMgmt.Helpers
             var userRoles = (List<string>?)context.HttpContext.Items["userRoles"];
             bool status = false;
 
-            if (this.Roles is null && userId is not null)
+            if (Roles is null && userId is not null)
             {
                 return;
             }
@@ -40,11 +40,8 @@ namespace Transflower.MembershipRolesMgmt.Helpers
             if (userRoles is not null && Roles is not null)
             {
                 List<string> requiredRoles = Roles.Split(',').ToList();
-                bool result = requiredRoles.Intersect(userRoles).Count() >= 1;
-                if (result)
-                {
-                    status = true;
-                }
+                status = requiredRoles.Intersect(userRoles).Any();
+              
             }
 
             if (status == false || userId is null)

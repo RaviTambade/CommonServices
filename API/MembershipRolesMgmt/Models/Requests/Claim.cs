@@ -2,7 +2,7 @@ namespace Transflower.MembershipRolesMgmt.Models.Requests;
 
 public class Claim
 {
-    public string? ContactNumber { get; set; }
-    public string? Password { get; set; }
-    public string? Lob { get; set; }
+    public required string ContactNumber { get; set; }
+    public required string Password { get; set; }
+    public required string Lob { get; set; }
 }

@@ -4,40 +4,36 @@ using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Models.Requests;
 using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Helpers;
+using Microsoft.AspNetCore.Authorization;
+using AuthorizeAttribute = Transflower.MembershipRolesMgmt.Helpers.AuthorizeAttribute;
 
 namespace Transflower.MembershipRolesMgmt.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("/api/auth")]
 public class AuthController : ControllerBase
 {
-    private readonly IConfiguration _configuration;
-    private readonly IRoleService _roleService;
     private readonly IUserService _userService;
+    private readonly TokenHelper _tokenHelper;
 
-    public AuthController(
-        IConfiguration configuration,
-        IRoleService roleService,
-        IUserService userService
-    )
+    public AuthController(IUserService userService, TokenHelper tokenHelper)
     {
-        _roleService = roleService;
-        _configuration = configuration;
         _userService = userService;
+        _tokenHelper = tokenHelper;
     }
 
-    // [AllowAnonymous]
+    [AllowAnonymous]
     [HttpPost]
     [Route("signin")]
     public async Task<AuthToken> SignIn([FromBody] Claim claim)
     {
-        string strJwtToken = "";
+        string strJwtToken = string.Empty;
         var status = await _userService.Authenticate(claim);
         if (status)
         {
             User user = await _userService.GetUser(claim.ContactNumber);
-            TokenHelper helper = new TokenHelper(_configuration, _roleService);
-            strJwtToken = await helper.GenerateJwtToken(user, claim.Lob);
+            strJwtToken = await _tokenHelper.GenerateJwtToken(user, claim.Lob);
         }
         return new AuthToken(strJwtToken);
     }
@@ -46,7 +42,7 @@ public class AuthController : ControllerBase
     [Route("updatepassword")]
     public async Task<bool> Update(PasswordDetails details)
     {
-        string currentContactNumber = (string?)HttpContext.Items["contactNumber"];
+        string currentContactNumber = HttpContext.Items["contactNumber"] as string ?? string.Empty;
         bool status = await _userService.Update(currentContactNumber, details);
         return status;
     }
@@ -55,7 +51,7 @@ public class AuthController : ControllerBase
     [Route("updatecontactnumber")]
     public async Task<bool> Update(ContactNumberDetails credential)
     {
-        string currentContactNumber = (string)HttpContext.Items["contactNumber"];
+        string currentContactNumber = HttpContext.Items["contactNumber"] as string ?? string.Empty;
         bool status = await _userService.Update(currentContactNumber, credential);
         return status;
     }

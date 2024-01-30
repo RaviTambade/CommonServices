@@ -1,19 +1,21 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
 
-namespace  Transflower.MembershipRolesMgmt.Helpers;
+namespace Transflower.MembershipRolesMgmt.Helpers;
+
 public class TokenHelper
 {
     private readonly IRoleService _roleService;
-    private readonly IConfiguration _configuration;
+    private readonly JwtSettings _jwtSettings;
 
-    public TokenHelper(IConfiguration configuration, IRoleService roleService)
+    public TokenHelper(IRoleService roleService, IOptions<JwtSettings> jwtSettings)
     {
-        _configuration = configuration;
         _roleService = roleService;
+        _jwtSettings = jwtSettings.Value;
     }
 
     private async Task<List<Claim>> GetAllClaims(User user, string lob)
@@ -23,7 +25,7 @@ public class TokenHelper
         {
             new Claim("contactNumber", user.ContactNumber),
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name,user.FirstName)
+            new Claim(ClaimTypes.Name, $"{user.FirstName}{user.LastName}")
         };
 
         foreach (var role in roles)
@@ -35,20 +37,18 @@ public class TokenHelper
 
     public async Task<string> GenerateJwtToken(User user, string lob)
     {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = System.Text.Encoding.ASCII.GetBytes(
-            _configuration.GetValue<string>("JWT:Secret")
-        );
-        var tokenDescriptor = new SecurityTokenDescriptor
+        byte[] key = System.Text.Encoding.ASCII.GetBytes(_jwtSettings.Secret);
+        SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(await GetAllClaims(user, lob)),
-            Expires = DateTime.UtcNow.AddDays(7),
+            Expires = DateTime.UtcNow.AddDays(1),
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature
             )
         };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
+        JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+        SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
     }
 }
