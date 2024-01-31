@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Transflower.MembershipRolesMgmt.Helpers;
 using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
 
@@ -34,7 +35,7 @@ public class UsersController : ControllerBase
     {
         return await _svc.GetUsersByUserIds(userIds);
     }
-
+    [Authorize]
     [HttpGet]
     [Route("{userId}")]
     public async Task<User> GetUser(int userId)
