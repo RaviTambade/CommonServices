@@ -7,20 +7,12 @@ function Register(){
     const[firstname,setFirstName] = useState('');
     const[lastname,setLastName] = useState('')
     const[birthdate,setBirthDate] = useState('');
-    //const[gender,setGender] = useState('');
     const[contactnumber,setContactNumber] = useState('');
     const[password,setPassword] = useState('');
-
+    const[email,setEmail]=useState('');
     const [genderdata, setGenderData] = useState('');
 
-    const handleChange = (e) => {
-      if (e.target.checked) {
-        setGenderData(genderdata, e.target.value);
-      } else {
-        setGenderData(genderdata.filter((item) => item != e.target.value));
-      }
-     
-    };
+    
     const handleSubmit = (event) => {
         event.preventDefault();
     
@@ -32,7 +24,8 @@ function Register(){
             AadharId:aadharid,
             Gender:genderdata,
             ContactNumber:contactnumber,
-            Password:password
+            Password:password,
+            Email:email
             
            
         };
@@ -90,10 +83,10 @@ function Register(){
 
                 <label>Gender : </label>
                 &nbsp;
-                <input type="radio" id="male" name="gender" value="male" onChange={handleChange}/>
+                <input type="radio" id="male" name="gender" value="male" onChange={(e) => setGenderData(e.target.value)}/>
                 <label for="male">Male</label>
                   &nbsp;   &nbsp;
-                <input type="radio" id="female" name="gender" value="female" onChange={handleChange}/>
+                <input type="radio" id="female" name="gender" value="female" onChange={(e) => setGenderData(e.target.value)}/>
                 <label for="female">Female</label><br/>  
                        
                 <br></br><br></br>
@@ -106,7 +99,12 @@ function Register(){
                 <label>Password : </label>
                 <input type="password" id="password" name="password" onChange={(e) => setPassword(e.target.value)}/>
                     
-                <br></br><br></br>               
+                <br></br><br></br>   
+
+                <label>Email : </label>
+               
+                <input type="text" id="email" name="email" placeholder="Enter email Id"  onChange={(e) => setEmail(e.target.value)}/>
+                <br></br><br></br>            
 
                 <input type="submit" />
 

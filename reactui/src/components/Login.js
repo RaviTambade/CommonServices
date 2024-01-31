@@ -24,7 +24,7 @@ function Login(){
             console.log(result.data);
             if(result.data.token){
                 localStorage.setItem("jwt_token",result.data.token);
-                
+                //console.log(result.data.c)
                 alert("Login is Valid");
             }
             else
