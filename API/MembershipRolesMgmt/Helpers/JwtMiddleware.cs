@@ -19,7 +19,7 @@ namespace Transflower.MembershipRolesMgmt.Helpers
 
         public async Task Invoke(HttpContext context)
         {
-            var token = context.Request.Headers["Authorization"]
+            string? token = context.Request.Headers["Authorization"]
                 .FirstOrDefault()
                 ?.Split(" ")
                 .Last();
@@ -32,8 +32,8 @@ namespace Transflower.MembershipRolesMgmt.Helpers
         {
             try
             {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_JwtSettings.Secret);
+                JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+                byte[] key = Encoding.ASCII.GetBytes(_JwtSettings.Secret);
                 tokenHandler.ValidateToken(
                     token,
                     new TokenValidationParameters
@@ -47,15 +47,16 @@ namespace Transflower.MembershipRolesMgmt.Helpers
                     out SecurityToken validatedToken
                 );
 
-                var jwtToken = (JwtSecurityToken)validatedToken;
-                var contactNumber = jwtToken.Claims.First(x => x.Type == "contactNumber").Value;
+                JwtSecurityToken jwtToken = (JwtSecurityToken)validatedToken;
+                string contactNumber = jwtToken.Claims.First(x => x.Type == "contactNumber").Value;
 
-                var userId = jwtToken.Claims.First(x => x.Type == "nameid").Value;
-                var userRoles = jwtToken.Claims
+                string userId = jwtToken.Claims.First(x => x.Type == "nameid").Value;
+                List<string> userRoles = jwtToken.Claims
                     .Where(x => x.Type == ClaimTypes.Role)
                     .Select(c => c.Value)
                     .ToList();
 
+            //  After Token Validation set the required claims in HttpContext
                 context.Items["userId"] = userId;
                 context.Items["contactNumber"] = contactNumber;
                 context.Items["userRoles"] = userRoles;

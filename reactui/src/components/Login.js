@@ -19,12 +19,20 @@ function Login(){
         };
         console.log("data ",data);
         const url =' http://localhost:5142/api/auth/signin';
+        const url1 =" http://localhost:5142/api/users/contact"+"/" +contact;
     
         axios.post(url,data).then((result) =>{
             console.log(result.data);
             if(result.data.token){
-                localStorage.setItem("jwt_token",result.data.token);
                 
+                localStorage.setItem("jwt_token",result.data.token);
+                axios.get(url1).then((res) => {
+                    console.log(res.data);
+                   
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
                 alert("Login is Valid");
             }
             else

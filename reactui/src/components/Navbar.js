@@ -19,7 +19,12 @@ function NavBar() {
             <Nav.Link href="/login">Login</Nav.Link>  
             <Nav.Link href="/register">Register</Nav.Link>  
             <Nav.Link href="/changedpassword">ChangedPassword</Nav.Link>  
+<<<<<<< HEAD
             <Nav.Link href="/ministatment">MiniStatement</Nav.Link>
+=======
+            
+                     
+>>>>>>> 2ea49b2ca7894a8de2655de7881e82882e49d10f
           </Nav>
         </Navbar.Collapse>
       </Container>
