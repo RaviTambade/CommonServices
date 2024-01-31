@@ -11,9 +11,11 @@ import Layout from './components/Layout';
 //import GetApplicantsListByDate from './components/GetApplicantsListByDates';
 import DetailsOfLoanApplicants from './components/DetailsOfLoanApplicants';
 import LoanApplicationsList from './components/LoanApplicationsList';
+import MiniStatement  from './components/MiniStatement';
 import NavBar from './components/Navbar';
 //import TryNotification from './components/Notification';
 import { NotificationContainer } from 'react-notifications';
+
 //import { Notifications } from "react-push-notification";
 import 'react-notifications/lib/notifications.css';
 
@@ -21,23 +23,25 @@ function App() {
   return (
     <div className="App">
 
-      
       <BrowserRouter>
       <NavBar/>
           <NotificationContainer/>
+          <h3>hhhhhhh</h3>
+          <hr/>
         <Routes>          
             <Route path='/' element={<Home />} />
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="loanapplicationslist" element={<LoanApplicationsList/>}/> 
             <Route path="detailsfromlist/:id" element={<DetailsOfLoanApplicants/>}/> 
-            {/* <Route path="*" element={<NoPage/>}/>   */}
             <Route path="login" element={<Login />} />
             <Route path="changedpassword" element={<ChangedPassword />} /> 
             <Route path="register" element={<Register/>} /> 
-                        
+            <Route path="ministatment" element={<MiniStatement/>} /> 
+            
         </Routes> 
         
         {/* <TryNotification/> */}
+
       </BrowserRouter>
 
     </div>

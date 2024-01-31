@@ -1,4 +1,5 @@
 import React, {useState} from "react"
+import axios from "axios";
 
 function Register(){
     const[imageurl,setImageUrl] = useState('');
@@ -10,12 +11,41 @@ function Register(){
     const[contactnumber,setContactNumber] = useState('');
     const[password,setPassword] = useState('');
 
-
-
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    
+        const data = {
+            
+            ImageUrl:imageurl,
+            FirstName:firstname,
+            LastName:lastname,
+            BirthDate:birthdate,
+            AadharId:aadharid,
+            Gender:gender,
+            ContactNumber:contactnumber,
+            Password:password
+     
+        };
+        console.log("data ",data);
+        const url ='http://localhost:5053/api/users';
+    
+        axios.post(url,data).then((result) =>{
+            console.log(result.data);
+            if(result.data)
+                alert("Data Posted")
+            
+        }).catch(error =>{
+                alert(error);
+                
+        });
+     
+      }
     
 
+
+
     return(
-        <Fragment>
+        <div>
             <h1>Resister Form</h1>
             <form onSubmit={handleSubmit}>
                 
@@ -41,9 +71,9 @@ function Register(){
                  <input type="date" id="bdate" name="bdate" placeholder="Enter Birth Date" onChange={(e) => setBirthDate(e.target.value)}/> 
                 <br></br><br></br>
 
-                <label>Gender : </label>
+                <label>Gender : </label> &nbsp;
                 <input type="radio" id="male" name="male" value="Male"/>
-                <label for="male">Male</label><br/>
+                <label for="male">Male</label>&nbsp; &nbsp;
                 <input type="radio" id="female" name="female" value="Female"/>
                 <label for="female">Female</label><br/>  
                        
@@ -62,7 +92,7 @@ function Register(){
                 <input type="submit" />
 
             </form>
-            </Fragment>
+            </div>
     )
 }
 export default Register

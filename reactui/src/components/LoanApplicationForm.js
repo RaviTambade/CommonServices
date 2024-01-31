@@ -12,9 +12,6 @@ function LoanApplicationForm(){
     const[status,setStatus] = useState('');
 
        
-
-   
-
     const handleSubmit = (event) => {
     event.preventDefault();
 

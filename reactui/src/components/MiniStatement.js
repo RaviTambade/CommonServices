@@ -40,25 +40,21 @@ function MiniStatement() {
     }, []);
 
     return (
-
         <div>
-
             <h1>Mini Statement of Account</h1>
             <form onSubmit={handleSubmit}>
                 <h1>Account Statement</h1>
-
                 <label>Enter Account Number : </label>
                 <input type="text" placeholder="Enter Account Number" onChange={(e) => handleministatement(e.target.value)} />
 
                 {/* <label>To Date : </label>
                 <input type="date" id="startdate" name="startdate" placeholder="Enter Starting Date" onChange={(e) => handletodates(e.target.value)} /><br /><br /> */}
-
                 <button type="submit" variant="primary">Submit</button>{' '}
-
             </form>
             <Table striped bordered hover >
                 <thead>
                     <tr>
+                        
                         <th>Amount</th>
                         <th>Date</th>
                         <th>Mode</th>
@@ -68,7 +64,6 @@ function MiniStatement() {
                 </thead>
 
                 {data.map((statement, index) => (
-
                     <tbody key={index}>
 
                         <tr >
@@ -83,7 +78,10 @@ function MiniStatement() {
             </Table>
 
         </div>
+
+    
     )
 }
+
 
 export default MiniStatement;
