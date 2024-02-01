@@ -45,7 +45,7 @@ public class LoanTypeRepo : ILoanTypeRepo
             {
                int LoantypeId = int.Parse(reader["loantypeid"].ToString());
                 string loanType=reader["loantype"].ToString(); 
-                double IntrestRate = double.Parse(reader["Intrestrate"].ToString());
+                double IntrestRate = double.Parse(reader["intrestrate"].ToString());
                 loantypelist.Add(
                     new LoanType()
                     {
@@ -75,7 +75,6 @@ public class LoanTypeRepo : ILoanTypeRepo
     }
 
  
-
     public LoanType GetByLoanTypeId(int loantypeid)
     {
         LoanType loantype = null;
@@ -91,7 +90,7 @@ public class LoanTypeRepo : ILoanTypeRepo
             {
                 int LoantypeId = int.Parse(reader["loantypeid"].ToString());
                 string loanType=reader["loantype"].ToString(); 
-                double IntrestRate = double.Parse(reader["Intrestrate"].ToString());
+                double IntrestRate = double.Parse(reader["intrestrate"].ToString());
                  
                 
 

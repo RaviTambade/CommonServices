@@ -47,8 +47,8 @@ public class OperationRepo : IOperationRepo
             //Online data using streaming mechanism
             while (reader.Read())
             {
-                int operationId = int.Parse(reader["operationid"].ToString());
-                int acctId = int.Parse(reader["acctid"].ToString());
+                int operationId = int.Parse(reader["id"].ToString());
+                int acctId = int.Parse(reader["acctId"].ToString());
                 string acctNumber = reader["acctnumber"].ToString();
                 double amount = double.Parse(reader["amount"].ToString());
                 DateTime operationdate = Convert.ToDateTime(reader["operationdate"].ToString());
@@ -97,7 +97,7 @@ public class OperationRepo : IOperationRepo
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int operationId = int.Parse(reader["operationid"].ToString());
+                int operationId = int.Parse(reader["id"].ToString());
                 int acctId = int.Parse(reader["acctid"].ToString());
                 string acctNum = reader["acctnumber"].ToString();
                 double amount = double.Parse(reader["amount"].ToString());
@@ -142,7 +142,7 @@ public class OperationRepo : IOperationRepo
             MySqlDataReader reader = command.ExecuteReader();
             if (reader.Read())
             {
-                int operationId = int.Parse(reader["operationid"].ToString());
+                int operationId = int.Parse(reader["id"].ToString());
                 int acctId = int.Parse(reader["acctid"].ToString());
                 string acctNum = reader["acctnumber"].ToString();
                 double amount = double.Parse(reader["amount"].ToString());
@@ -194,7 +194,7 @@ public class OperationRepo : IOperationRepo
             while (reader.Read())
             {
 
-                int operationId = int.Parse(reader["operationid"].ToString());
+                int operationId = int.Parse(reader["id"].ToString());
                 int acctId = int.Parse(reader["acctid"].ToString());
                 string acctNumber = reader["acctnumber"].ToString();
                 double amount = double.Parse(reader["amount"].ToString());
@@ -257,9 +257,9 @@ public class OperationRepo : IOperationRepo
         con.ConnectionString = _conString;
         try
         {
-            string query = "INSERT INTO operations(operationid,acctid,acctnumber,amount,operationdate,operationmode) VALUES(@OperationId,@AcctID,@acctNumber,@Amount,@Operationdate,@operationMode)";
+            string query = "INSERT INTO operations(id,acctid,acctnumber,amount,operationdate,operationmode) VALUES(@OperationId,@AcctID,@acctNumber,@Amount,@Operationdate,@operationMode)";
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@operationid", opr.OperationId);
+            command.Parameters.AddWithValue("@id", opr.OperationId);
             command.Parameters.AddWithValue("@acctid", opr.AcctId);
             command.Parameters.AddWithValue("@acctnumber", opr.AccountNumber);
             command.Parameters.AddWithValue("@amount", opr.Amount);
@@ -291,7 +291,7 @@ public class OperationRepo : IOperationRepo
         con.ConnectionString = _conString;
         try
         {
-            string query = "Update operations SET amount=@amount,operationdate=@operationdate,operationmode=@operationmode WHERE operationid=@OperationId";
+            string query = "Update operations SET amount=@amount,operationdate=@operationdate,operationmode=@operationmode WHERE id=@OperationId";
             System.Console.WriteLine(query);
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@amount", opr.Amount);
@@ -335,7 +335,7 @@ public class OperationRepo : IOperationRepo
                         FROM operations o
                         JOIN accounts a ON o.acctId = a.id
                         WHERE a.acctnumber = @acctnumber
-                        ORDER BY o.operationdate, o.operationid";
+                        ORDER BY o.operationdate, o.id";
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@acctnumber", acctNumber);
             con.Open();
