@@ -293,10 +293,10 @@ public class AccountRepo : IAccountRepo
             string query =
                 "SELECT acctnumber,ifsccode from accounts"
                 + " JOIN customers ON accounts.customerid = customers.id"
-                + " WHERE customers.bankcustomerid=@id AND customers.usertype=@usertype";
+                + " WHERE customers.bankcustomerid=@id AND customers.customertype=@customertype";
             MySqlCommand command = new MySqlCommand(query, con);
             command.Parameters.AddWithValue("@id",customerId );
-            command.Parameters.AddWithValue("@usertype", userType);
+            command.Parameters.AddWithValue("@customertype",userType);
             Console.WriteLine(query);
             await con.OpenAsync();
 

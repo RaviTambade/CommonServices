@@ -214,7 +214,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         //Create connection object
         MySqlConnection con = new MySqlConnection(_conString);//IDBConnection is not allowed here Why???
 
-        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
+        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.customertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
         "inner join loantype on loanapplications.loantypeid=loantype.loantypeid ";
 
         //Create Command Object
@@ -302,7 +302,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
             //string query = "SELECT * FROM loanapplicants WHERE applicatid=" + laonapplicantId;
 
 
-            string query = " SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
+            string query = " SELECT loanapplications.* ,customers.bankcustomerid,customers.customertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
                              "inner join loantype on loanapplications.loantypeid=loantype.loantypeid WHERE applicationid=" + loanapplicationId;
             await con.OpenAsync();
             MySqlCommand command = new MySqlCommand(query, con);
@@ -381,7 +381,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         MySqlConnection con = new MySqlConnection(_conString);
 
         Console.WriteLine("\n Connection status " + con.State);
-        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
+        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.customertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
                        "inner join loantype on loanapplications.loantypeid=loantype.loantypeid  WHERE applicationdate >= @StartDateString AND applicationdate <= @EndDateString;";
         
         //Create Command Object
@@ -474,7 +474,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
 
         Console.WriteLine("\n Connection status " + con.State);
 
-        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
+        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.customertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
         "inner join loantype on loanapplications.loantypeid=loantype.loantypeid WHERE loanstatus =  @Loanstatus";
         //string query = "SELECT * FROM loanapplicants WHERE loanstatus = @Loanstatus";
 
