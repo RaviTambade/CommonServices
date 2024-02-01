@@ -4,7 +4,7 @@ SELECT * FROM accounts;
 SELECT * FROM transactions;
 SELECT * FROM operations;
 SELECT * FROM loanapplications;
-SELECT * FROM loantype;
+SELECT * FROM loantypes;
 SELECT * FROM loan;
 SELECT @transactionId;
 

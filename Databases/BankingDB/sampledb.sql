@@ -51,13 +51,13 @@ INSERT INTO customers(customerid,customertype) VALUES(46,"C");-- run this query 
 
 
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registrationdate,customerid)VALUES('39025546601','business','MAHB0000286',200000,'2022-03-01',1);
-INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('39025546612','business','BARBO0000286',225700,'2022-03-04',2);        
-INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('12656767876','business','AXIS0000296',2352500,'2021-07-01',3);   
-INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('67675456546','business','AXIS0000296',789000,'2021-06-01',4); 
-INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('45656577687','business','AXIS0000296',2352500,'2022-03-11',5); 
-INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('46556565566','business','AXIS0000296',2352500,'2022-04-21',6); 
-INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('56423234233','savings','AXIS0000296',2352500,'2021-11-11',7);
-INSERT INTO accounts(acctnumber, accttype, ifsccode, balance, registereddate, customerid) VALUES
+INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registrationdate,customerid)VALUES('39025546612','business','BARBO0000286',225700,'2022-03-04',2);        
+INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registrationdate,customerid)VALUES('12656767876','business','AXIS0000296',2352500,'2021-07-01',3);   
+INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registrationdate,customerid)VALUES('67675456546','business','AXIS0000296',789000,'2021-06-01',4); 
+INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registrationdate,customerid)VALUES('45656577687','business','AXIS0000296',2352500,'2022-03-11',5); 
+INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registrationdate,customerid)VALUES('46556565566','business','AXIS0000296',2352500,'2022-04-21',6); 
+INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registrationdate,customerid)VALUES('56423234233','savings','AXIS0000296',2352500,'2021-11-11',7);
+INSERT INTO accounts(acctnumber, accttype, ifsccode, balance, registrationdate, customerid) VALUES
 ('9999999999', 'savings', 'SBI0000123', 32000, '2022-11-19', 8),
 ('7777777777', 'savings', 'AXIS0000456', 65000, '2022-12-31', 9),
 ('1234432112', 'savings', 'HDFC0000234', 10000, '2021-01-05', 10),
@@ -97,7 +97,7 @@ INSERT INTO accounts(acctnumber, accttype, ifsccode, balance, registereddate, cu
 ('9999444433', 'savings', 'SBI0000789', 96000, '2022-11-06', 44),
 ('1111444455', 'savings', 'AXIS0000789', 52000, '2022-12-19', 45);
 
-INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('123456789','business','AXIS0000999',200000000,'1975-01-01',47);
+INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registrationdate,customerid)VALUES('123456789','business','AXIS0000999',200000000,'1975-01-01',47);
 
 
 INSERT INTO loantypes(loantype,intrestrate)VALUES('home',9.5);
@@ -106,8 +106,8 @@ INSERT INTO loantypes(loantype,intrestrate)VALUES('car',12.5);
 INSERT INTO loantypes(loantype,intrestrate)VALUES('education',7.6);
 INSERT INTO loantypes(loantype,intrestrate)VALUES('bussiness',15.6);
 
-INSERT INTO loanapplications(applicationid,applicationdate,amount,duration,accountid,loantypeid)VALUES(11,'2023-08-11',500000,10,1,100);
-INSERT INTO loanapplications(applicationid,applicationdate,amount,duration,accountid,loantypeid)VALUES(12,'2023-08-11',8900000,15,6,100);
+INSERT INTO loanapplications(id,applicationdate,amount,duration,accountid,loantypeid)VALUES(11,'2023-08-11',500000,10,1,100);
+INSERT INTO loanapplications(id,applicationdate,amount,duration,accountid,loantypeid)VALUES(12,'2023-08-11',8900000,15,6,100);
 INSERT INTO loanapplications(applicationdate,amount,duration,accountid,loantypeid)VALUES
 ('2023-10-25',500000,10,1,100),
 ('2023-11-30',100000,15,2,101),
@@ -117,7 +117,7 @@ INSERT INTO loanapplications(applicationdate,amount,duration,accountid,loantypei
 
 
 
-INSERT INTO loan(loansanctiondate,emiamount,applicationid)VALUES('2023-09-08',9321,11);
+-- INSERT INTO loan(loansanctiondate,emiamount,applicationid)VALUES('2023-09-08',9321,11);
 
 
 
