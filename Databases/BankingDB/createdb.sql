@@ -3,72 +3,62 @@ DROP DATABASE IF EXISTS BankingDB;
 CREATE DATABASE BankingDB;
 USE BankingDB;
 
-CREATE TABLE
-    customers(
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        bankcustomerid INT NOT NULL,
-        usertype ENUM("C", "I") NOT NULL
+CREATE TABLE customers(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customerid INT NOT NULL,
+    customertype ENUM("C", "I") NOT NULL
+);
+
+CREATE TABLE  accounts(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    acctnumber VARCHAR(20) NOT NULL,
+    ifsccode VARCHAR(20),
+    accttype ENUM('savings','business','current'),
+    balance DOUBLE,
+    registrationdate DATE,
+    customerid INT NOT NULL,
+    CONSTRAINT fk_customers_accounts_customerid FOREIGN KEY(customerid) REFERENCES customers(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE operations(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    acctId INT NOT NULL,
+    acctnumber VARCHAR(20) NOT NULL,
+    amount DOUBLE,
+    operationdate DATETIME,
+    operationmode ENUM('D','W'),
+    operationtype ENUM("Interest","EMI","Transfer"),
+    CONSTRAINT fk_accounts_operations_acctId FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE,
     );
 
-CREATE TABLE
-    accounts(
-        id INT PRIMARY KEY AUTO_INCREMENT,
-        acctnumber VARCHAR(20) NOT NULL,
-        accttype ENUM(
-            'savings',
-            'business',
-            'current'
-        ),
-        ifsccode VARCHAR(20),
-        balance DOUBLE,
-        registereddate DATE,
-        customerid INT NOT NULL,
-        CONSTRAINT fk_customerid FOREIGN KEY(customerid) REFERENCES customers(id) ON UPDATE CASCADE ON DELETE CASCADE
-    );
-
-CREATE TABLE
-    operations(
-        operationid INT PRIMARY KEY AUTO_INCREMENT,
-        acctId INT NOT NULL,
-        CONSTRAINT fk_acctId FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE,
-        acctnumber VARCHAR(20) NOT NULL,
-        amount DOUBLE,
-        operationdate DATETIME,
-        operationmode ENUM('D','W'),
-        operationtype ENUM("Interest","EMI","Transfer")
-    );
-
-CREATE TABLE
-    transactions(
-        id INT PRIMARY KEY AUTO_INCREMENT,
-        fromoperationid INT NOT NULL,
-        tooperationid INT NOT NULL,
-        transactiondate datetime default current_timestamp,
-        CONSTRAINT fk_operationid FOREIGN KEY(fromoperationid) REFERENCES operations(operationid) ON UPDATE CASCADE ON DELETE CASCADE,
-        CONSTRAINT fk_rooperationid FOREIGN KEY(tooperationid) REFERENCES operations(operationid) ON UPDATE CASCADE ON DELETE CASCADE
-    );
+CREATE TABLE  transactions(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    fromoperationid INT NOT NULL,
+    tooperationid INT NOT NULL,
+    transactiondate datetime default current_timestamp,
+    CONSTRAINT fk_operations_transactions_from FOREIGN KEY(fromoperationid) REFERENCES operations(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_operations_transactions_to FOREIGN KEY(tooperationid) REFERENCES operations(operationid) ON UPDATE CASCADE ON DELETE CASCADE
+);
     
-CREATE TABLE loantype(
-		loantypeid INT PRIMARY KEY AUTO_INCREMENT,
-        loantype VARCHAR(20),
-        intrestrate DOUBLE
-        ) AUTO_INCREMENT=100;
+CREATE TABLE loantypes(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    loantype VARCHAR(20),
+    intrestrate DOUBLE
+) AUTO_INCREMENT=100;
         
-CREATE TABLE
-    loanapplications(
-        applicationid INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE loanapplications(
+        id INT PRIMARY KEY AUTO_INCREMENT,
         applicationdate DATE,
-        loanamount double,
-        loanduration INT,
-		loanstatus ENUM("applied","approved","rejected") DEFAULT "applied",
+        amount double,
+        duration INT,
+		status ENUM("applied","approved","rejected") DEFAULT "applied",
         accountid INT NOT NULL,
-        CONSTRAINT fk_accountid FOREIGN KEY (accountid) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE,
         loantypeid INT NOT NULL,
-        CONSTRAINT fk_loantypeid FOREIGN KEY(loantypeid) REFERENCES loantype(loantypeid)  ON UPDATE CASCADE ON DELETE CASCADE
+        CONSTRAINT fk_loantypeid FOREIGN KEY(loantypeid) REFERENCES loantypes(id)  ON UPDATE CASCADE ON DELETE CASCADE,
+        CONSTRAINT fk_accountid FOREIGN KEY (accountid) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE,
     );
 
-CREATE TABLE
-    loan(
+CREATE TABLE loan(
         loanid INT PRIMARY KEY AUTO_INCREMENT,
         loansanctiondate DATE,
         emiday INT DEFAULT 10,
