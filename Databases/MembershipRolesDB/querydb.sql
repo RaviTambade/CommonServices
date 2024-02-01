@@ -8,3 +8,5 @@ select * FROM roles where lob="PMS";
 
 select * FROM roles where lob="Inventory Management";
 
+select * FROM roles where lob="banking";
+

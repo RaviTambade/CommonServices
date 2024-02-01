@@ -1,53 +1,53 @@
 -- Active: 1696576841746@@127.0.0.1@3306@bankingdb
 /* don't change sequence of any records*/
-INSERT INTO customers(bankcustomerid,usertype) VALUES(1,"C");
-INSERT INTO customers(bankcustomerid,usertype) VALUES(2,"C");
-INSERT INTO customers(bankcustomerid,usertype) VALUES(3,"C");
-INSERT INTO customers(bankcustomerid,usertype) VALUES(4,"C");
-INSERT INTO customers(bankcustomerid,usertype) VALUES(5,"C"); 
-INSERT INTO customers(bankcustomerid,usertype) VALUES(6,"C");
-INSERT INTO customers(bankcustomerid,usertype) VALUES(1,"I");  
-INSERT INTO customers(bankcustomerid,usertype) VALUES(2,"I");-- Insert records from customerid 9 to 46
-INSERT INTO customers (bankcustomerid, usertype) VALUES (3, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (4, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (5, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (6, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (7, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (8, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (9, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (10, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (11, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (12, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (13, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (14, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (15, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (16, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (17, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (18, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (19, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (20, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (21, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (22, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (23, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (24, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (25, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (26, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (27, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (28, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (29, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (30, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (31, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (32, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (33, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (34, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (35, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (36, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (37, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (38, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (39, "I");
-INSERT INTO customers (bankcustomerid, usertype) VALUES (40, "I");
+INSERT INTO customers(customerid,customertype) VALUES(1,"C");
+INSERT INTO customers(customerid,customertype) VALUES(2,"C");
+INSERT INTO customers(customerid,customertype) VALUES(3,"C");
+INSERT INTO customers(customerid,customertype) VALUES(4,"C");
+INSERT INTO customers(customerid,customertype) VALUES(5,"C"); 
+INSERT INTO customers(customerid,customertype) VALUES(6,"C");
+INSERT INTO customers(customerid,customertype) VALUES(1,"I");  
+INSERT INTO customers(customerid,customertype) VALUES(2,"I");-- Insert records from customerid 9 to 46
+INSERT INTO customers (customerid, customertype) VALUES (3, "I");
+INSERT INTO customers (customerid, customertype) VALUES (4, "I");
+INSERT INTO customers (customerid, customertype) VALUES (5, "I");
+INSERT INTO customers (customerid, customertype) VALUES (6, "I");
+INSERT INTO customers (customerid, customertype) VALUES (7, "I");
+INSERT INTO customers (customerid, customertype) VALUES (8, "I");
+INSERT INTO customers (customerid, customertype) VALUES (9, "I");
+INSERT INTO customers (customerid, customertype) VALUES (10, "I");
+INSERT INTO customers (customerid, customertype) VALUES (11, "I");
+INSERT INTO customers (customerid, customertype) VALUES (12, "I");
+INSERT INTO customers (customerid, customertype) VALUES (13, "I");
+INSERT INTO customers (customerid, customertype) VALUES (14, "I");
+INSERT INTO customers (customerid, customertype) VALUES (15, "I");
+INSERT INTO customers (customerid, customertype) VALUES (16, "I");
+INSERT INTO customers (customerid, customertype) VALUES (17, "I");
+INSERT INTO customers (customerid, customertype) VALUES (18, "I");
+INSERT INTO customers (customerid, customertype) VALUES (19, "I");
+INSERT INTO customers (customerid, customertype) VALUES (20, "I");
+INSERT INTO customers (customerid, customertype) VALUES (21, "I");
+INSERT INTO customers (customerid, customertype) VALUES (22, "I");
+INSERT INTO customers (customerid, customertype) VALUES (23, "I");
+INSERT INTO customers (customerid, customertype) VALUES (24, "I");
+INSERT INTO customers (customerid, customertype) VALUES (25, "I");
+INSERT INTO customers (customerid, customertype) VALUES (26, "I");
+INSERT INTO customers (customerid, customertype) VALUES (27, "I");
+INSERT INTO customers (customerid, customertype) VALUES (28, "I");
+INSERT INTO customers (customerid, customertype) VALUES (29, "I");
+INSERT INTO customers (customerid, customertype) VALUES (30, "I");
+INSERT INTO customers (customerid, customertype) VALUES (31, "I");
+INSERT INTO customers (customerid, customertype) VALUES (32, "I");
+INSERT INTO customers (customerid, customertype) VALUES (33, "I");
+INSERT INTO customers (customerid, customertype) VALUES (34, "I");
+INSERT INTO customers (customerid, customertype) VALUES (35, "I");
+INSERT INTO customers (customerid, customertype) VALUES (36, "I");
+INSERT INTO customers (customerid, customertype) VALUES (37, "I");
+INSERT INTO customers (customerid, customertype) VALUES (38, "I");
+INSERT INTO customers (customerid, customertype) VALUES (39, "I");
+INSERT INTO customers (customerid, customertype) VALUES (40, "I");
 
-INSERT INTO customers(bankcustomerid,usertype) VALUES(46,"C");-- run this query at last
+INSERT INTO customers(customerid,customertype) VALUES(46,"C");-- run this query at last
 
 
 INSERT INTO accounts(acctnumber,accttype,ifsccode,balance,registereddate,customerid)VALUES('39025546601','business','MAHB0000286',200000,'2022-03-01',1);

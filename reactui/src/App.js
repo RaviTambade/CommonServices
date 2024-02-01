@@ -26,7 +26,7 @@ function App() {
       <BrowserRouter>
       <NavBar/>
           <NotificationContainer/>
-          <h3>hhhhhhh</h3>
+          
           <hr/>
         <Routes>          
             <Route path='/' element={<Home />} />
@@ -37,7 +37,7 @@ function App() {
             <Route path="changedpassword" element={<ChangedPassword />} /> 
             <Route path="register" element={<Register/>} /> 
             <Route path="ministatment" element={<MiniStatement/>} /> 
-            
+
         </Routes> 
         
         {/* <TryNotification/> */}

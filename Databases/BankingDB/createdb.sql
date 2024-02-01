@@ -28,7 +28,7 @@ CREATE TABLE operations(
     operationdate DATETIME,
     operationmode ENUM('D','W'),
     operationtype ENUM("Interest","EMI","Transfer"),
-    CONSTRAINT fk_accounts_operations_acctId FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_accounts_operations_acctId FOREIGN KEY(acctId) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
 CREATE TABLE  transactions(
@@ -37,7 +37,7 @@ CREATE TABLE  transactions(
     tooperationid INT NOT NULL,
     transactiondate datetime default current_timestamp,
     CONSTRAINT fk_operations_transactions_from FOREIGN KEY(fromoperationid) REFERENCES operations(id) ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT fk_operations_transactions_to FOREIGN KEY(tooperationid) REFERENCES operations(operationid) ON UPDATE CASCADE ON DELETE CASCADE
+    CONSTRAINT fk_operations_transactions_to FOREIGN KEY(tooperationid) REFERENCES operations(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
     
 CREATE TABLE loantypes(
@@ -54,8 +54,8 @@ CREATE TABLE loanapplications(
 		status ENUM("applied","approved","rejected") DEFAULT "applied",
         accountid INT NOT NULL,
         loantypeid INT NOT NULL,
-        CONSTRAINT fk_loantypeid FOREIGN KEY(loantypeid) REFERENCES loantypes(id)  ON UPDATE CASCADE ON DELETE CASCADE,
-        CONSTRAINT fk_accountid FOREIGN KEY (accountid) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        CONSTRAINT fk_loantypes_loanapplications_loantypeid FOREIGN KEY(loantypeid) REFERENCES loantypes(id)  ON UPDATE CASCADE ON DELETE CASCADE,
+        CONSTRAINT fk_accounts_loanapplications_accountid FOREIGN KEY (accountid) REFERENCES accounts(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
 CREATE TABLE loan(
@@ -64,7 +64,7 @@ CREATE TABLE loan(
         emiday INT DEFAULT 10,
 		emiamount DOUBLE,
         applicationid INT NOT NULL,
-        CONSTRAINT fk_applicationid FOREIGN KEY(applicationid) REFERENCES loanapplications(applicationid) ON UPDATE CASCADE ON DELETE CASCADE
+        CONSTRAINT fk_loanapplications_loan_applicationid FOREIGN KEY(id) REFERENCES loanapplications(applicationid) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
 

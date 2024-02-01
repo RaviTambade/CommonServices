@@ -24,7 +24,7 @@
 
             //$(document).ready(function() {
                          $.ajax({
-                                url: 'http://localhost:5053/api/application/status' + "/" + loanStatus ,
+                                url: 'http://localhost:5053/api/loans/status' + "/" + loanStatus ,
                                 type: 'GET',
                                 contentType: 'application/json',
                                 success: function (data) {
