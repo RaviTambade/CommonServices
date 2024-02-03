@@ -6,7 +6,7 @@ using Banking.Helpers;
 namespace BankingServices.Controllers;
 
 [ApiController]
-[Route("/api/loans")]
+[Route("/api/loanapplications")]
 public class LoanApplicationController : ControllerBase
 {
     private readonly ILoanApplicationsService _svc;
