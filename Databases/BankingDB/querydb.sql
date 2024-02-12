@@ -9,16 +9,17 @@ SELECT * FROM loan;
 SELECT @transactionId;
 
 show procedure status where db = 'BankingDB';
+delete from transactions Where id = 14;
+delete from operations Where id in(69,70);
 
-
-delete from loan Where loanid = 12;
+delete from loan Where loanid = 3;
 truncate table loan;
-update loanapplications SET loanstatus = "applied" where applicationid = 13;
+update loanapplications SET loanstatus = "approved" where applicationid = 11;
 update loanapplications SET loanstatus = "applied" where applicationid in (11,12,13,14,15,16);
 -- DROP table customers;
 -- DROP table accounts;
 -- DROP table loanapplicants;
-
+insert into loan (emiamount,applicationid) values (10000,11);
 SELECT loanapplications.*,loantype.loantype From loanapplications
 inner join loantype ON loanapplications.loantypeid=loantype.loantypeid
 WHERE applicationdate >= '2023-01-01' 
@@ -27,7 +28,10 @@ AND applicationdate <= '2023-11-30';
 SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id 
                        inner join loantype on loanapplications.loantypeid=loantype.loantypeid  WHERE applicationdate >= '2023=09-01' AND applicationdate <= '2023-12-25';
         
-
+-- laon spdb
+SELECT  loan.loanid,loan.emiamount from loan 
+inner join loanapplications on
+loanapplications.id = loan.applicationid WHERE loanapplications.accountid = 1 ;
 
 SELECT * FROM loanapplicants WHERE applydate >= '2023-01-01' AND applydate <= '2023-11-30';
 

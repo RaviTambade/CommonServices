@@ -6,7 +6,7 @@ using Banking.Helpers;
 namespace BankingServices.Controllers;
 
 [ApiController]
-[Route("/api/loans")]
+[Route("/api/loanppications")]
 public class LoanApplicationController : ControllerBase
 {
     private readonly ILoanApplicationsService _svc;
@@ -66,12 +66,7 @@ public class LoanApplicationController : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-    /*public LoanApplicants GetById(int id)
-    {
-        LoanApplicants applicant = _svc.GetById(id);
-        return applicant;
-    }*/
-
+   
     public async Task <LoanResponse> GetById(int id)
     {
 

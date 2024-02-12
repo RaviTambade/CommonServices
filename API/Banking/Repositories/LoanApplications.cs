@@ -45,12 +45,12 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
             //Online data using streaming mechanism
             while (reader.Read())
             {
-                int applicationID = int.Parse(reader["applicationid"].ToString());
+                int applicationID = int.Parse(reader["id"].ToString());
                 DateTime applicationDate = DateTime.Parse(reader["applicationdate"].ToString());
                 DateOnly formatapplicationDate = DateOnly.FromDateTime(applicationDate);
-                double loanamount = double.Parse(reader["loanamount"].ToString());
-                int LoanDuration =int.Parse (reader["loanduration"].ToString());
-                string loanStatus = reader["loanstatus"].ToString();          
+                double loanamount = double.Parse(reader["amount"].ToString());
+                int LoanDuration =int.Parse (reader["duration"].ToString());
+                string loanStatus = reader["status"].ToString();          
                 int accountId = int.Parse(reader["accountid"].ToString()); 
                 int loantypeId = int.Parse(reader["loantypeid"].ToString());             
 
@@ -99,10 +99,14 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         bool status = false;
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
+
+        Console.WriteLine(application.LoanTypeId);
         try
         {
+
+            Console.WriteLine("Inside try block....Inside Repo");
             string query =
-            "INSERT INTO loanapplications(applicationdate,loanamount,loanduration,loanstatus,accountid,loantypeid) VALUES(@Applicationdate,@Loanamount,@Loanduration,@Loanstatus,@Accountid,@Loantypeid)";
+            "INSERT INTO loanapplications(applicationdate,amount,duration,status,accountid,loantypeid) VALUES(@Applicationdate,@Loanamount,@Loanduration,@Loanstatus,@Accountid,@Loantypeid)";
             MySqlCommand command = new MySqlCommand(query, con);
                        
             command.Parameters.AddWithValue("@Applicationdate",dateString);
@@ -114,6 +118,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
             command.Parameters.AddWithValue("@Loanstatus", application.LoanStatus);
 
             command.Parameters.AddWithValue("@Accountid", application.AccountId);
+           
             command.Parameters.AddWithValue("@Loantypeid", application.LoanTypeId);
 
            
@@ -139,8 +144,9 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
 
     public async Task <bool> UpdateStatus(LoanApplications application)
     {
-       
+        
         Console.WriteLine("ApplayDate In Repo:- " + application.ApplicationDate);
+        Console.WriteLine("LoanStatus In Repo:- " + application.LoanStatus);
 
         // DateTime aDate = DateTime.Parse(reader["applydate"].ToString());
                 //DateOnly FormatDate = DateOnly.FromDateTime(aDate);
@@ -156,7 +162,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
             await con.OpenAsync();
 
             string query =
-            " UPDATE loanapplications SET loanstatus = @Status WHERE applicationid=@LoanApplicationId";
+            " UPDATE loanapplications SET status = @Status WHERE id=@LoanApplicationId";
             MySqlCommand command = new MySqlCommand(query, con);
 
             command.Parameters.AddWithValue("@LoanApplicationId", application.ApplicationId);
@@ -188,7 +194,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         con.ConnectionString = _conString;
         try
         {
-            string query = "DELETE FROM loanapplications WHERE applicationid=" + laonapplicationId;
+            string query = "DELETE FROM loanapplications WHERE id=" + laonapplicationId;
             MySqlCommand command = new MySqlCommand(query, con);
             //if(con.State == ConnectionState.Closed)
             con.Open();
@@ -214,8 +220,8 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         //Create connection object
         MySqlConnection con = new MySqlConnection(_conString);//IDBConnection is not allowed here Why???
 
-        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.customertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
-        "inner join loantype on loanapplications.loantypeid=loantype.loantypeid ";
+        string query = "SELECT loanapplications.* ,customers.customerid,customers.customertype,loantypes.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
+        "inner join loantypes on loanapplications.loantypeid=loantypes.id ";
 
         //Create Command Object
         MySqlCommand cmd = new MySqlCommand(query, con );
@@ -233,20 +239,20 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
             while (await reader.ReadAsync())
             {
                 Console.WriteLine("Inside LoanaplicantsInfo Reader loop....");
-                int applicationID = int.Parse(reader["applicationid"].ToString());              
+                int applicationID = int.Parse(reader["id"].ToString());              
                 
                 DateTime aDate = DateTime.Parse(reader["applicationdate"].ToString());
                 DateOnly FormatDate = DateOnly.FromDateTime(aDate);
                 //DateTime date = DateTime.ParseExact("01-01-2022", "MM-dd-yyyy", CultureInfo.InvariantCulture);
-                double loanamount = double.Parse(reader["loanamount"].ToString());
-                int loanduration = int.Parse (reader["loanduration"].ToString());
-                string loanstatus = reader["loanstatus"].ToString();
+                double loanamount = double.Parse(reader["amount"].ToString());
+                int loanduration = int.Parse (reader["duration"].ToString());
+                string loanstatus = reader["status"].ToString();
                 int accountID = int.Parse(reader["accountid"].ToString());
-                int loantypeid = int.Parse(reader["loantypeid"].ToString()); 
+                int loantypeid = int.Parse(reader["id"].ToString()); 
                 string loantypename = reader["loantype"].ToString();                
                                 
-                int custid = int.Parse(reader["bankcustomerid"].ToString());
-                string custtype = reader["usertype"].ToString();
+                int custid = int.Parse(reader["customerid"].ToString());
+                string custtype = reader["customertype"].ToString();
                 
                 //LoanApplications loanApplication = new LoanApplications();
                 applicationslist.Add(
@@ -302,34 +308,34 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
             //string query = "SELECT * FROM loanapplicants WHERE applicatid=" + laonapplicantId;
 
 
-            string query = " SELECT loanapplications.* ,customers.bankcustomerid,customers.customertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
-                             "inner join loantype on loanapplications.loantypeid=loantype.loantypeid WHERE applicationid=" + loanapplicationId;
+            string query = " SELECT loanapplications.* ,customers.customerid,customers.customertype,loantypes.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
+                             "inner join loantypes on loanapplications.loantypeid=loantypes.id WHERE loanapplications.id=" + loanapplicationId;
             await con.OpenAsync();
             MySqlCommand command = new MySqlCommand(query, con);
             MySqlDataReader reader = command.ExecuteReader();
             if (await reader.ReadAsync())
             {
-                int id = int.Parse(reader["applicationid"].ToString());               
+                int id = int.Parse(reader["id"].ToString());               
                 
-
+               // int applicationID = int.Parese(reader[""].ToString);
                 DateTime aDate = DateTime.Parse(reader["applicationdate"].ToString());
                 DateOnly FormatDate = DateOnly.FromDateTime(aDate);
                 //DateTime date = DateTime.ParseExact("01-01-2022", "MM-dd-yyyy", CultureInfo.InvariantCulture);
-                double amount = double.Parse(reader["loanamount"].ToString());                
-                int loanduration =int.Parse( reader["loanduration"].ToString());
-                string status = reader["loanstatus"].ToString();                
+                double amount = double.Parse(reader["amount"].ToString());                
+                int loanduration =int.Parse( reader["duration"].ToString());
+                string status = reader["status"].ToString();                
                 int acctid = int.Parse((reader["accountid"]).ToString());
                 int loantypeId = int.Parse((reader["loantypeid"]).ToString());
                 string loantypename = reader["loantype"].ToString();  
-                int custid = int.Parse(reader["bankcustomerid"].ToString());
-                string custtype = reader["usertype"].ToString();
+                int custid = int.Parse(reader["customerid"].ToString());
+                string custtype = reader["customertype"].ToString();
 
 
                 application = new LoanResponse
                 {
                     TheApplication =  new LoanApplications(){
                         
-                    
+                        ApplicationId = id,
                         ApplicationDate = FormatDate,
                         LoanAmount = amount,
                         LoanDuration=loanduration,
@@ -381,8 +387,8 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         MySqlConnection con = new MySqlConnection(_conString);
 
         Console.WriteLine("\n Connection status " + con.State);
-        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.customertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
-                       "inner join loantype on loanapplications.loantypeid=loantype.loantypeid  WHERE applicationdate >= @StartDateString AND applicationdate <= @EndDateString;";
+        string query = "SELECT loanapplications.* ,customers.customerid,customers.customertype,loantypes.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
+                       "inner join loantypes on loanapplications.loantypeid=loantypes.id  WHERE applicationdate >= @StartDateString AND applicationdate <= @EndDateString;";
         
         //Create Command Object
 
@@ -399,20 +405,20 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
             //Online data using streaming mechanism
             while (await reader.ReadAsync())
             {
-                int applicationID = int.Parse(reader["applicationid"].ToString());
+                int applicationID = int.Parse(reader["id"].ToString());
                 
                 
                 DateTime aDate = DateTime.Parse(reader["applicationdate"].ToString());
                 DateOnly FormatDate = DateOnly.FromDateTime(aDate);
                 //DateTime date = DateTime.ParseExact("01-01-2022", "MM-dd-yyyy", CultureInfo.InvariantCulture);
-                double loanamount = double.Parse(reader["loanamount"].ToString());
-                int loanduration = int.Parse(reader["loanduration"].ToString());
-                string status = reader["loanstatus"].ToString();
+                double loanamount = double.Parse(reader["amount"].ToString());
+                int loanduration = int.Parse(reader["duration"].ToString());
+                string status = reader["status"].ToString();
                 int acctID = int.Parse(reader["accountid"].ToString());
-                int loantypeId = int.Parse(reader["loantypeid"].ToString()); 
+                int loantypeId = int.Parse(reader["id"].ToString()); 
                 string loantypename = reader["loantype"].ToString();  
-                int custid = int.Parse(reader["bankcustomerid"].ToString()); 
-                string custtype = reader["usertype"].ToString();
+                int custid = int.Parse(reader["customerid"].ToString()); 
+                string custtype = reader["customertype"].ToString();
           
                 Console.WriteLine("Loantypename in repo :"+loantypename);
 
@@ -474,8 +480,8 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
 
         Console.WriteLine("\n Connection status " + con.State);
 
-        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.customertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
-        "inner join loantype on loanapplications.loantypeid=loantype.loantypeid WHERE loanstatus =  @Loanstatus";
+        string query = "SELECT loanapplications.* ,customers.customerid,customers.customertype,loantypes.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
+        "inner join loantypes on loanapplications.loantypeid=loantypes.id WHERE status =  @Loanstatus";
         //string query = "SELECT * FROM loanapplicants WHERE loanstatus = @Loanstatus";
 
         //Create Command Object
@@ -494,19 +500,19 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
             //Online data using streaming mechanism
             while (await reader.ReadAsync())
             {
-                int applictionID = int.Parse(reader["applicationid"].ToString());
+                int applictionID = int.Parse(reader["id"].ToString());
                 int acctID = int.Parse(reader["accountid"].ToString());
                 
                 DateTime aDate = DateTime.Parse(reader["applicationdate"].ToString());
                 DateOnly FormatDate = DateOnly.FromDateTime(aDate);
     
-                int loanTypeid = int.Parse(reader["loantypeid"].ToString());
+                int loanTypeid = int.Parse(reader["id"].ToString());
                 string loantypename = reader["loantype"].ToString(); 
-                int loanduration = int.Parse(reader["loanduration"].ToString());
-                double amount = double.Parse(reader["loanamount"].ToString());
-                string status = reader["loanstatus"].ToString();
-                int custid = int.Parse(reader["bankcustomerid"].ToString());
-                string custtype = reader["usertype"].ToString();
+                int loanduration = int.Parse(reader["duration"].ToString());
+                double amount = double.Parse(reader["amount"].ToString());
+                string status = reader["status"].ToString();
+                int custid = int.Parse(reader["customerid"].ToString());
+                string custtype = reader["customertype"].ToString();
 
                 
                 Console.WriteLine(applictionID);

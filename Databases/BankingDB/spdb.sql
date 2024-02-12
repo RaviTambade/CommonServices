@@ -64,8 +64,9 @@ DELIMITER ;
 
 
 CALL claculateIntrest('67675456546',@transid);
-SELECT @transid
+SELECT @transid;
 
+DROP PROCEDURE  IF EXISTS emitransfer;
 
 DELIMITER $$
 CREATE PROCEDURE emitransfer(IN accountnumber VARCHAR(20) ,OUT transid INT)
@@ -81,7 +82,10 @@ DECLARE bankIfsccode VARCHAR(20) ;
 SELECT id,balance,ifsccode INTO accountid,totalBal,fromifsccode 
 FROM accounts WHERE acctnumber=accountnumber;
 SELECT ifsccode INTO bankifsccode FROM accounts WHERE acctnumber='123456789';
-SELECT loanid,emiamount INTO loanId,emi FROM loan WHERE acctId = accountid;
+-- SELECT loanid,emiamount INTO loanId,emi FROM loan WHERE acctId = accountid;
+SELECT  loan.loanid,loan.emiamount INTO loanId,emi FROM loan 
+inner join loanapplications on
+loanapplications.id = loan.applicationid WHERE loanapplications.accountid = accountid ;
 
 CALL fundtransfer (accountnumber,'123456789',fromifsccode,bankifsccode,emi,'EMI',transid);
 

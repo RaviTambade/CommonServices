@@ -53,7 +53,7 @@ public class OperationRepo : IOperationRepo
                 double amount = double.Parse(reader["amount"].ToString());
                 DateTime operationdate = Convert.ToDateTime(reader["operationdate"].ToString());
                 char operationmode = Convert.ToChar(reader["operationmode"].ToString());
-
+                string Operationtype = reader["operationtype"].ToString();
                 operationlist.Add(new Operation()
                 {
                     OperationId = operationId,
@@ -61,7 +61,8 @@ public class OperationRepo : IOperationRepo
                     AccountNumber = acctNumber,
                     Amount = amount,
                     OperationTime = operationdate,
-                    OperationMode = operationmode
+                    OperationMode = operationmode,
+                    OperationType = Operationtype
                 });
             }
             reader.Close();
@@ -103,7 +104,7 @@ public class OperationRepo : IOperationRepo
                 double amount = double.Parse(reader["amount"].ToString());
                 DateTime operationdate = Convert.ToDateTime(reader["operationdate"].ToString());
                 char operationmode = Convert.ToChar(reader["operationmode"].ToString());
-
+                string Operationtype = reader["operationtype"].ToString();
                 opr.Add(new Operation
                 {
                     OperationId = operationId,
@@ -111,7 +112,8 @@ public class OperationRepo : IOperationRepo
                     AccountNumber = acctNum,
                     Amount = amount,
                     OperationTime = operationdate,
-                    OperationMode = operationmode
+                    OperationMode = operationmode,
+                    OperationType = Operationtype
                 });
             }
             reader.Close();
@@ -136,7 +138,7 @@ public class OperationRepo : IOperationRepo
         con.ConnectionString = _conString;
         try
         {
-            string query = "SELECT * FROM operations WHERE operationid=" + id;
+            string query = "SELECT * FROM operations WHERE id=" + id;
             con.Open();
             MySqlCommand command = new MySqlCommand(query, con);
             MySqlDataReader reader = command.ExecuteReader();
@@ -148,6 +150,7 @@ public class OperationRepo : IOperationRepo
                 double amount = double.Parse(reader["amount"].ToString());
                 DateTime operationdate = Convert.ToDateTime(reader["operationdate"].ToString());
                 char operationmode = Convert.ToChar(reader["operationmode"].ToString());
+                string Operationtype = reader["operationtype"].ToString();
 
                 opr = new Operation()
                 {
@@ -156,7 +159,8 @@ public class OperationRepo : IOperationRepo
                     AccountNumber = acctNum,
                     Amount = amount,
                     OperationTime = operationdate,
-                    OperationMode = operationmode
+                    OperationMode = operationmode,
+                    OperationType = Operationtype
                 };
             }
             reader.Close();
@@ -200,7 +204,7 @@ public class OperationRepo : IOperationRepo
                 double amount = double.Parse(reader["amount"].ToString());
                 DateTime operationdate = Convert.ToDateTime(reader["operationdate"].ToString());
                 char operationmode = Convert.ToChar(reader["operationmode"].ToString());
-
+                string Operationtype = reader["operationtype"].ToString();
 
                 oprlist.Add(new Operation()
                 {
@@ -209,7 +213,8 @@ public class OperationRepo : IOperationRepo
                     AccountNumber = acctNumber,
                     Amount = amount,
                     OperationTime = operationdate,
-                    OperationMode = operationmode
+                    OperationMode = operationmode,
+                    OperationType = Operationtype
                 });
 
 
@@ -331,7 +336,7 @@ public class OperationRepo : IOperationRepo
                                         WHEN o2.operationmode = 'D' THEN o2.amount
                                         WHEN o2.operationmode = 'W' THEN -o2.amount
                                         ELSE 0 END )FROM operations o2
-                                WHERE o2.acctId = o.acctId AND (o2.operationid <= o.operationid))AS balance
+                                WHERE o2.acctId = o.acctId AND (o2.id <= o.id))AS balance
                         FROM operations o
                         JOIN accounts a ON o.acctId = a.id
                         WHERE a.acctnumber = @acctnumber

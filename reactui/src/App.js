@@ -13,6 +13,7 @@ import DetailsOfLoanApplicants from './components/DetailsOfLoanApplicants';
 import LoanApplicationsList from './components/LoanApplicationsList';
 import MiniStatement  from './components/MiniStatement';
 import NavBar from './components/Navbar';
+import LoanApplicationForm from'./components/LoanApplicationForm';
 //import TryNotification from './components/Notification';
 import { NotificationContainer } from 'react-notifications';
 
@@ -37,7 +38,7 @@ function App() {
             <Route path="changedpassword" element={<ChangedPassword />} /> 
             <Route path="register" element={<Register/>} /> 
             <Route path="ministatment" element={<MiniStatement/>} /> 
-
+            <Route path="loanapplicationForm" element={<LoanApplicationForm/>}/>
         </Routes> 
         
         {/* <TryNotification/> */}

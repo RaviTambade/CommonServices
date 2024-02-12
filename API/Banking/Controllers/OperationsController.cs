@@ -46,9 +46,7 @@ public class OperationsController : ControllerBase
     {
         return _svc.GetStatement(acctNumber);
     }
-
-
-
+    
     [HttpGet]
     [Route("operations/{id}")]
     public Operation GetById(int id)
