@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Models.Requests;
+using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Claim = Transflower.MembershipRolesMgmt.Models.Requests.Claim;
 namespace Transflower.MembershipRolesMgmt.Repositories;
@@ -317,6 +318,47 @@ public class UserRepository : IUserRepository
         }
         return users;
     }
+    public async Task<List<UserDetails>> GetUserDetailsByUserIds(string userIds)
+    {
+       List<UserDetails> users = new List<UserDetails>();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+        try
+        {
+            string query = $"select id,firstname,lastname,imageurl from users where id IN ({userIds})";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            await con.OpenAsync();
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (await reader.ReadAsync())
+            {
+                int id = int.Parse(reader["id"].ToString());
+                string? imageUrl = reader["imageurl"].ToString();
+                string? firstName = reader["firstname"].ToString();
+                string? lastName = reader["lastname"].ToString();
+                
+
+                UserDetails user = new UserDetails()
+                {
+                    Id = id,
+                    ImageUrl = imageUrl,
+                    FullName =$"{firstName} {lastName}"
+                };
+                users.Add(user);
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return users;
+    }
         public async Task<bool> Add(User user)
     {
         bool status = false;
@@ -487,4 +529,6 @@ public class UserRepository : IUserRepository
         }
         return status;
     }
+
+   
 }

@@ -1,5 +1,6 @@
 using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Models.Requests;
+using Transflower.MembershipRolesMgmt.Models.Responses;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
 
@@ -29,6 +30,10 @@ public class UserService : IUserService
         return await _repo.GetUsersByUserIds(ids);
     }
 
+    public async Task<List<UserDetails>> GetUserDetailsByUserIds(string userIds)
+    {
+        return await _repo.GetUserDetailsByUserIds(userIds);
+    }
     public async Task<List<User>> GetUsersByRole(string role)
     {
         return await _repo.GetUsersByRole(role);
@@ -68,4 +73,6 @@ public class UserService : IUserService
     {
         return await _repo.Delete(userId);
     }
+
+   
 }
