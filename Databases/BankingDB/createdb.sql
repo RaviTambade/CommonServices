@@ -1,4 +1,4 @@
--- Active: 1696576841746@@127.0.0.1@3306@bankingdb
+-- Active: 1695204043273@@127.0.0.1@3306@bankingdb
 DROP DATABASE IF EXISTS BankingDB;
 CREATE DATABASE BankingDB;
 USE BankingDB;
@@ -64,7 +64,7 @@ CREATE TABLE loan(
         emiday INT DEFAULT 10,
 		emiamount DOUBLE,
         applicationid INT NOT NULL,
-        CONSTRAINT fk_loanapplications_loan_applicationid FOREIGN KEY(id) REFERENCES loanapplications(applicationid) ON UPDATE CASCADE ON DELETE CASCADE
+        CONSTRAINT fk_loanapplications_loan_applicationid FOREIGN KEY (applicationid) REFERENCES loanapplications(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
 

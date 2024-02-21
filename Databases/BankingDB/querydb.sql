@@ -1,4 +1,4 @@
--- Active: 1678359546568@@127.0.0.1@3306@bankingdb
+-- Active: 1695204043273@@127.0.0.1@3306@bankingdb
 SELECT * FROM customers;
 SELECT * FROM accounts;
 SELECT * FROM transactions;
@@ -140,4 +140,6 @@ SELECT acctnumber,ifsccode from accounts
 
 Drop table installment;
 Drop table loanorder;
-drop table loan;
+SELECT acctnumber,ifsccode from accounts
+                 INNER JOIN customers ON accounts.customerid = customers.id WHERE customers.customerid=10 AND customers.customertype="i";
+

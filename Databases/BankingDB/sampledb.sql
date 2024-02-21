@@ -1,4 +1,4 @@
--- Active: 1696576841746@@127.0.0.1@3306@bankingdb
+-- Active: 1695204043273@@127.0.0.1@3306@bankingdb
 /* don't change sequence of any records*/
 INSERT INTO customers(customerid,customertype) VALUES(1,"C");
 INSERT INTO customers(customerid,customertype) VALUES(2,"C");

@@ -1,4 +1,4 @@
--- Active: 1696576841746@@127.0.0.1@3306@bankingdb
+-- Active: 1695204043273@@127.0.0.1@3306@bankingdb
 DROP PROCEDURE IF EXISTS fundtransfer;
 
 DROP PROCEDURE IF EXISTS emitransfer;
