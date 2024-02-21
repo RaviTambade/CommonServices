@@ -1,4 +1,4 @@
--- Active: 1695204043273@@127.0.0.1@3306@bankingdb
+-- Active: 1707123530557@@127.0.0.1@3306@bankingdb
 DROP DATABASE IF EXISTS BankingDB;
 CREATE DATABASE BankingDB;
 USE BankingDB;
