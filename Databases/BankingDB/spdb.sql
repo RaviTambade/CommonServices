@@ -1,6 +1,7 @@
 -- Active: 1707123530557@@127.0.0.1@3306@bankingdb
 DROP PROCEDURE IF EXISTS fundtransfer;
 
+
 DROP PROCEDURE IF EXISTS emitransfer;
 DELIMITER $$
 CREATE PROCEDURE fundtransfer(IN fromaccountnumber VARCHAR(20),IN toaccountnumber VARCHAR(20),
