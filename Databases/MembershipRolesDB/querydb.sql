@@ -53,3 +53,13 @@ where lob ="banking";
 
 -- Address details for user
 select * from addresses where userid = 1;
+
+
+--Users With Given Contact Number & Password
+ SELECT * FROM users WHERE contactnumber=@contactNumber AND BINARY password=@password;
+
+ --this query returned users who have the role specified by roleName
+  select * from users inner join userroles on users.id=userroles.userid inner join roles on roles.id=userroles.roleid where roles.name=@roleName;
+
+--this query returns all the info related to that user id
+   select id,firstname,lastname,imageurl,aadharid,birthdate,gender,email,contactnumber from users where id IN (1);
