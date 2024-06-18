@@ -16,8 +16,7 @@ public class UserRepository : IUserRepository
     public UserRepository(IConfiguration configuration)
     {
         _configuration = configuration;
-        _conString = this._configuration.GetConnectionString("DefaultConnection") ??
-        throw new ArgumentNullException(nameof(_conString));
+        _conString = this._configuration.GetConnectionString("DefaultConnection") ?? throw new ArgumentNullException(nameof(_conString));
     }
 
     public async Task<bool> Authenticate(Claim claim)
