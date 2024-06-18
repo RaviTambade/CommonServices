@@ -37,7 +37,7 @@ CREATE TABLE
             lob varchar(20)
         );
 
-    CREATE TABLE
+CREATE TABLE
         userroles(
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             userid INT NOT NULL,
