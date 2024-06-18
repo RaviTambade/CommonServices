@@ -63,3 +63,16 @@ select * from addresses where userid = 1;
 
 --this query returns all the info related to that user id
    select id,firstname,lastname,imageurl,aadharid,birthdate,gender,email,contactnumber from users where id IN (1);
+
+--Insert New User In the user table
+   Insert Into users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password,createdon,modifiedon) Values(@imageurl,@aadharId,@firstName,@lastName,@birthDate,@gender,@email,@contactNumber,@password,@createdOn,@modifiedOn);
+
+--This query updates the specified table
+     Update users set aadharid=@aadharId, imageurl=@imageUrl,firstname=@firstName,lastname=@lastName,birthdate=@birthDate,gender=@gender,email=@email where id=@Id;
+
+
+     --Update old contact number to new contact number
+       UPDATE users SET contactnumber=@newContactNumber  WHERE password=@password AND contactnumber=@oldContactNumber;
+
+     --Update old password to new password
+        UPDATE users SET password=@newPassword  WHERE password=@oldpassword AND contactnumber=@contactNumber;
