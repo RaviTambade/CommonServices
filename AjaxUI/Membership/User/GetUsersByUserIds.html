@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MemberShipRole Management</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!--<script src="jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  
+  <script>
+
+    function getUserdetailsByUserIds() {
+     
+           // AJAX GET request to getall data from database
+           var UserIds = $('#userids').val();
+          $.ajax({
+              url: 'http://localhost:5142/api/users/ids/'+ UserIds,
+              type: 'GET',
+              contentType: 'application/json',
+              
+              success: function(response) {
+                  console.log('Got the Data :', response);
+                  alert("Data get Successfully ...");
+
+                var htmlContent = '<div class="table-responsive"> <table id="userByRoleTable "  class="table table-striped"> <thead> <tr>' +
+                    '<th>Id</th><th>ImageUrl</th><th>FirstName</th><th>LastName</th><th>BirthDate<th>AadharId</th><th>Gender</th><th>Email</th><th>contactNumber</th><th>CreatedOn</th><th>ModifiedOn</th> </tr></thead><body>';
+                        $.each(response,function(index,item){
+                                        htmlContent += '<tr>';
+                                        htmlContent +='<td>'+item.id + '</td>';
+                                        htmlContent +='<td>'+item.imageUrl + '</td>';
+                                        htmlContent += '<td>'+item.firstName + '</td>';
+                                        htmlContent += '<td>'+item.lastName + '</td>';
+                                        htmlContent += '<td>'+item.birthDate + '</td>';
+                                        htmlContent += '<td>'+item.aadharId + '</td>';
+                                        htmlContent += '<td>'+item.gender + '</td>';
+                                        htmlContent += '<td>'+item.email + '</td>';
+                                        htmlContent += '<td>'+item.contactNumber + '</td>'
+                                        htmlContent += '<td>'+item.createdOn + '</td>';;
+                                        htmlContent += '<td>'+item.modifiedOn + '</td>';
+                                         htmlContent += '</tr>';
+                                    });
+
+                                    htmlContent += '</tbody></table></div>';
+                                    $('#dataDisplay').html(htmlContent);
+                 
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error:', status + ': ' + error);
+                  console.log('Data does not get:', response);
+                  alert("Data does not get...");
+              }
+          });
+      };
+
+
+  </script>
+</head>
+
+<body>
+
+    <h2>User details By User Ids  </h2>
+    
+    <label>Enter User's Role : </label>
+    <input type ="text" id="userids" name="userids" placeholder="Enter User's Ids"/>
+    <br/><br/>
+    <button onclick="getUserdetailsByUserIds()">Get User Details</button>
+    <br/>
+    <div id="dataDisplay">
+    </div>
+
+
+</body>
