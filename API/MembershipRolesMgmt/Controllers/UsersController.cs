@@ -62,9 +62,14 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
+    [Route("add")]
     public async Task<bool> Add(User user)
     {
+<<<<<<< HEAD
         Console.WriteLine(user.BirthDate);
+=======
+   
+>>>>>>> bfd416ecf12af4ee3274f493968869bdb71318e9
         bool status = await _svc.Add(user);
         return status;
     }
