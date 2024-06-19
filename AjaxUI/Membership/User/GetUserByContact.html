@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PMSNGApp</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!--<script src="jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  
+  <script>
+
+    function getUserdetailsByContact() {
+     
+           // AJAX GET request to getall data from database
+           var UserContact = $('#contact').val();
+          $.ajax({
+              url: 'http://localhost:5053/api/banking/operations/emidetails' + "/" + UserContact,
+              type: 'GET',
+              contentType: 'application/json',
+              
+              success: function(response) {
+                  console.log('Got the Data :', response);
+                  alert("Data get Successfully ...");
+
+                var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable "  class="table table-striped"> <thead> <tr>' +
+                                '<th px;>Operation Date </th>  <th>EMI</th> </tr></thead><body>';
+                                    $.each(response,function(index,item){
+                                        console.log("index " , index);
+                                        console.log("item ", item);
+                                        htmlContent += '<tr>';
+                                       
+                                        htmlContent += '<td>'+item.operationTime + '</td> <nbsp/><nbsp/>';
+                                        htmlContent += '<td>'+item.amount + '</td>';
+
+                                        
+                                        // htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
+                                        htmlContent += '</tr>';
+                                    });
+
+                                    htmlContent += '</tbody></table></div>';
+                                    $('#dataDisplay').html(htmlContent);
+                 
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error:', status + ': ' + error);
+                  console.log('Data does not get:', response);
+                  alert("Data does not get...");
+              }
+          });
+      };
+
+
+  </script>
+</head>
+
+<body>
+
+    <h2>User details By ContactNumber  </h2>
+    
+    <label>Enter User ContactNumber : </label>
+    <input type ="number" id="contact" name="contact" placeholder="Enter User Id"/>
+    <br/><br/>
+    <button onclick="getUserdetailsByContact()">Get User Details</button>
+    <br/>
+    <div id="dataDisplay">
+    </div>
+
+
+</body>
