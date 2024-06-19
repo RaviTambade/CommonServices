@@ -58,13 +58,11 @@ $(document).ready(function() {
             Gender: $("#gender").val(),
             Email: $("#email").val(),
             ContactNumber: $("#contactnumber").val(),
-            Password: $("#password").val(),
-            CreatedOn: new Date().toISOString(),
-            ModifiedOn: new Date().toISOString()
+            Password: $("#password").val()
         };
 
         $.ajax({
-            url: "http://localhost:5142/api/users/add",
+            url: "http://localhost:5142/api/users",
             type: 'POST',
             data: JSON.stringify(user),
             contentType: 'application/json',
