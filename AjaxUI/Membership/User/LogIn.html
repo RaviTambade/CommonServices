@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>MemberShipRole Management</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>LogIn</title>
@@ -120,8 +121,10 @@ $(document).ready(function() {
         contentType: 'application/json',
 
         success: function (data) {
-            var token = data;
-            console.log(token);
+            console.log(data.token);
+            //var tokenData = JSON.stringify(data);
+            localStorage.setItem('token',);
+            
             
         },
         error: function (xhr, status, error) {

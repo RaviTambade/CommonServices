@@ -1,0 +1,182 @@
+[10:16 AM] Ravi Tambade
+// Assuming you have a JWT token stored in a variable called 'jwtToken'
+
+var jwtToken = 'your_jwt_token_here';
+ 
+// Example of making a POST request with jQuery's $.ajax
+
+$.ajax({
+
+    url: 'https://api.example.com/endpoint', // Replace with your API endpoint
+
+    type: 'POST',
+
+    headers: {
+
+        'Authorization': 'Bearer ' + jwtToken, // Include the JWT token in the Authorization header
+
+        'Content-Type': 'application/json' // Adjust the content type as needed
+
+    },
+
+    data: JSON.stringify({
+
+        // Include any data you want to send in the request body
+
+        key1: 'value1',
+
+        key2: 'value2'
+
+    }),
+
+    success: function(response) {
+
+        // Handle the successful response here
+
+        console.log('Response:', response);
+
+    },
+
+    error: function(xhr, status, error) {
+
+        // Handle errors here
+
+        console.error('Error:', error);
+
+    }
+
+});
+
+[10:18 AM] 
+Nayan Kothawade (Unverified) has temporarily joined the chat.
+
+[10:33 AM] Ravi Tambade
+
+
+login.html
+ 
+<login.html
+ 
+<html>
+
+<head> </head>
+
+<body> 
+
+<div>
+
+	login ui using html
+
+</div>
+ 
+<script>
+ 
+  
+ 
+var claim={
+
+	"contactnumber": $("#contactnumber").Val(),
+
+	"password": $("#pass").Val(),
+
+};
+ 
+// Example of making a POST request with jQuery's $.ajax
+
+$.ajax({
+
+    url: 'https://api/auth/signin', // Replace with your API endpoint
+
+    type: 'POST',
+
+    data: JSON.stringify(claim),
+
+    success: function(data) {
+
+        console.log('Response JWT Token:', data);
+
+	localStorage.setItem("membershiptoken": data);  // save inside browser's localstorage
+
+    },
+
+    error: function(xhr, status, error) {
+
+        // Handle errors here
+
+        console.error('Error:', error);
+
+    }
+
+});
+ 
+ 
+</script>
+ 
+ 
+</body>
+
+</html>
+ 
+ 
+//))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+ 
+ 
+login.html
+ 
+<html>
+
+<head> </head>
+
+<body> 
+
+<div>
+
+	login ui using html
+
+</div>
+ 
+<script>
+ 
+	// Assuming you have a JWT token stored in a variable called 'jwtToken'
+
+var jwtToken = localStorage.getItem(("membershiptoken");  //get token from browswer's localstorage
+ 
+ 
+// Example of making a POST request with jQuery's $.ajax
+
+$.ajax({
+
+    url: 'https://api/users/12', //Secure REST API
+
+    type: 'POST',
+
+    headers: {
+
+        'Authorization': 'Bearer ' + jwtToken, // Include the JWT token in the Authorization header
+
+        'Content-Type': 'application/json' // Adjust the content type as needed
+
+    },
+
+    success: function(data) {
+
+        console.log(' User DEtails Response:', data);
+
+    },
+
+    error: function(xhr, status, error) {
+
+        // Handle errors here
+
+        console.error('Error:', error);
+
+    }
+
+});
+ 
+ 
+ 
+ 
+</script>
+ 
+ 
