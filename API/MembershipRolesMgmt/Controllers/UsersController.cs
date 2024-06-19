@@ -63,7 +63,7 @@ public class UsersController : ControllerBase
     [HttpPost]
     public async Task<bool> Add(User user)
     {
-        Console.WriteLine(user);
+   
         bool status = await _svc.Add(user);
         return status;
     }
