@@ -61,6 +61,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
+    [Route("add")]
     public async Task<bool> Add(User user)
     {
    
