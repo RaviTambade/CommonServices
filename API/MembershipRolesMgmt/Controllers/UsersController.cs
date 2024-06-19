@@ -57,6 +57,7 @@ public class UsersController : ControllerBase
     [Route("contact/{contactNumber}")]
     public async Task<User> GetUser(string contactNumber)
     {
+        Console.WriteLine("Inside GetUser by Contact....");
         return await _svc.GetUser(contactNumber);
     }
 
@@ -64,7 +65,11 @@ public class UsersController : ControllerBase
     [Route("add")]
     public async Task<bool> Add(User user)
     {
+<<<<<<< HEAD
+        Console.WriteLine(user.BirthDate);
+=======
    
+>>>>>>> bfd416ecf12af4ee3274f493968869bdb71318e9
         bool status = await _svc.Add(user);
         return status;
     }

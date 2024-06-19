@@ -359,7 +359,8 @@ public class UserRepository : IUserRepository
         return users;
     }
         public async Task<bool> Add(User user)
-    {
+        {
+            Console.WriteLine(user);
         bool status = false;
         MySqlConnection con = new MySqlConnection();
         con.ConnectionString = _conString;
