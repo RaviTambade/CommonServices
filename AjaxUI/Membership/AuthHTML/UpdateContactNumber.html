@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Update Contact Number</title>
+</head>
+<body>
+        <h2>Update Contact Number</h2>
+      
+        <div class="container">
+          <label for="number"><b>Enter New Contact Number</b></label>
+          <input type="text" id="newContact" placeholder="New Contact Number" name="newContact" required>
+      
+          <label for="psw"><b>Enter Password</b></label>
+          <input type="text" id="pass" placeholder="Password" name="pass" required>
+      
+          <button  id="btnsubmit">Update Password</button>
+        </div>
+</body>
+<script>
+    
+
+$(document).ready(function() {
+
+        $("#btnsubmit").click(function () {    
+        var newContact = $("#newContact").val();
+        var password = $("#pass").val();
+
+        var update = {"newContactNumber":newContact, "password":password}
+        function getToken() {
+            return localStorage.getItem('token');
+        }
+      
+        $.ajax({
+          
+        url: "http://localhost:5142/api/auth/updatecontactnumber",
+        type: 'PUT',
+        headers :{
+          'Authorization': 'Bearer ' + getToken()
+        },
+        data: JSON.stringify(update),
+        contentType: 'application/json',
+
+        success: function (data) {
+           if(data==true)
+           alert("Number Changed Successfully")
+           else
+           alert("Failed To Change Number")
+            
+        },
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+   });
+});
+
+</script>
+
+</html>

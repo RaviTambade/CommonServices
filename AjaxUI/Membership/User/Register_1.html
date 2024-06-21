@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MemberShipRole Management</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!--<script src="jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <script>
+
+    $(document).ready(function() {
+        
+        
+      $('#frm_applicant').submit(function(event) {
+         event.preventDefault(); // Prevent default form submission
+
+          // Get values from form fields
+          var imageUrl = $('#imgurl').val();
+          var aadharId =$('#aadharid').val();
+          var firstName =$('#fname').val();
+          var lasttName =$('#lname').val();
+
+          var birthDate = $('#birthdate').val();
+          console.log(birthDate);
+
+          var gender = $('#gender').val();
+          var email=$("#email").val();
+          var contact = $('#contact').val();
+          var password = $('#password').val();
+        
+          // Create data object to send via AJAX
+          var newData = {
+              "imageUrl": imageUrl, 
+              "firstName": firstName,
+              "lastName": lasttName,
+              "birthDate":birthDate,
+              "aadharId": aadharId,
+              "gender":gender,
+              "email":email,
+              "contact":contact,
+              "password":password
+          };
+          console.log(JSON.stringify(newData));
+
+           // AJAX GET request to getall data from database
+          // AJAX POST request to insert new data
+          $.ajax({
+              url: ' http://localhost:5142/api/users',
+              type: 'POST',
+              contentType: 'application/json',
+              data: JSON.stringify(newData),
+              success: function(data) {
+                  console.log('Data inserted:', data);
+                  alert("Successfully inserted...");
+                 
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error:', status + ': ' + error);
+                  //console.log('Data not inserted:', response);
+                  alert("not inserted...");
+              }
+          });
+      });
+  });
+
+    
+  </script>
+</head>
+
+<body>
+<form id="frm_applicant">
+    <div>
+        <h2>Registration Form </h2>
+        <h4>Enter User Information</h4>
+    </div>
+    <hr/>
+    <br/><br/>
+    <label>Image Url : </label>
+    <input type="text" id="imgurl" name="imgurl" placeholder="Enter Image Url "  />
+    <br/><br/>
+    <label>Aadhar ID : </label>
+    <input type="text" id="aadharid" name="aadharid" placeholder="Enter Aadhar Id "  />
+    <br/><br/>   
+    <label>First Name : </label>
+    <input type="text" id="fname" name="fname" placeholder="Enter First Name" />
+    <br></br>
+    <label>Last Name : </label>
+    <input type="text" id="lname" name="lname" placeholder="Enter Last Name" />
+    <br/><br/>
+    <label>Birth Date : </label>
+    <input type="date" id="birthdate" name="birthdate" placeholder="Enter Birth Date" />
+    <br></br>
+
+    <label>Gender : </label>
+    <input type="text" id="gender" name="gender" placeholder="Enter Gender male/female" />  
+    <br></br>
+    
+    <label>Email : </label>
+    <input type="text" id="email" name="email" placeholder="Enter Email Id" />  
+    <br></br>
+    <label>Contact Number : </label>
+    <input type="text" id="contact" name="contact" placeholder="Enter Contact Number" />  
+    <br></br>
+    <label>Password : </label>
+    <input type="text" id="password" name="password" placeholder="Enter Password" />  
+    <br></br>
+    
+    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+    </form>
+</body>
