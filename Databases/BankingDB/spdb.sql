@@ -1,8 +1,6 @@
--- Active: 1707123530557@@127.0.0.1@3306@bankingdb
+-- Active: 1705924796699@@127.0.0.1@3306@bankingdb
 DROP PROCEDURE IF EXISTS fundtransfer;
 
-
-DROP PROCEDURE IF EXISTS emitransfer;
 DELIMITER $$
 CREATE PROCEDURE fundtransfer(IN fromaccountnumber VARCHAR(20),IN toaccountnumber VARCHAR(20),
                              IN fromifsccode VARCHAR(20),IN toifsccode VARCHAR(20),
@@ -30,6 +28,13 @@ INSERT INTO transactions (fromoperationid,tooperationid) VALUES (fromoperationid
 SET transactionId=LAST_INSERT_ID();
 END $$ 
 DELIMITER ; 
+
+CALL fundtransfer ('39025546601','39025546612','MAHB0000286','BARBO0000286',5000,"EMI",@transactionId );
+
+select @transactionId;
+
+
+
 
 
 DROP PROCEDURE  IF EXISTS claculateIntrest;
@@ -82,7 +87,7 @@ DECLARE bankIfsccode VARCHAR(20) ;
 SELECT id,balance,ifsccode INTO accountid,totalBal,fromifsccode 
 FROM accounts WHERE acctnumber=accountnumber;
 SELECT ifsccode INTO bankifsccode FROM accounts WHERE acctnumber='123456789';
-SELECT loanid,emiamount INTO loanId,emi FROM loan WHERE acctId = accountid;
+SELECT loanid,emiamount INTO loanId,emi FROM loan WHERE applicationid = accountid;
 
 CALL fundtransfer (accountnumber,'123456789',fromifsccode,bankifsccode,emi,'EMI',transid);
 
