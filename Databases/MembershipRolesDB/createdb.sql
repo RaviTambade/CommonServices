@@ -45,6 +45,6 @@ CREATE TABLE
             CONSTRAINT uc_userroles UNIQUE (userid, roleid),
             CONSTRAINT fk_userroles_roles FOREIGN KEY(roleid) REFERENCES roles(id) ON UPDATE CASCADE ON DELETE CASCADE,
             CONSTRAINT fk_userroles_users FOREIGN KEY(userid) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
-        );
+    );
 
    
