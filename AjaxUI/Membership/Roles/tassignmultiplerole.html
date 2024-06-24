@@ -36,9 +36,12 @@
 </head>
 <body>
     <h1>Assign Multiple Roles to User</h1>
-    <form id="assignRolesForm">
-        <label for="username">Username:</label>
+   
+        <label for="username">User ID:</label>
         <input type="text" id="username" name="username" required>
+        <label for="lob">Line of Business:</label>
+
+        <input type="text" id="lob" name="lob" required>
         
         <label>Select Roles:</label><br>
         <input type="checkbox" id="adminRole" name="roles" value="Administrator">
@@ -53,8 +56,8 @@
         <input type="checkbox" id="subscriberRole" name="roles" value="Subscriber">
         <label for="subscriberRole">Subscriber</label><br>
 
-        <input type="submit" value="Assign Roles">
-    </form>
+        <input type="submit" value="Update Roles">
+   
 
     <script>
         document.getElementById("assignRolesForm").addEventListener("submit", function(event) {
