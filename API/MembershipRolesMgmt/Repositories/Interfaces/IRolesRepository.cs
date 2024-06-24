@@ -7,6 +7,7 @@ public interface IRoleRepository
     Task<List<Role>> GetRoles(string roleIds);
     Task<List<Role>> GetRoles(int userId,string lob);
     Task<List<Role>> GetRoles(int userId);
+    Task<List<Role>>GetRolesByLob(string lob);
     Task<bool> Insert(Role role);
     Task<bool> Update(Role role);
     Task<bool> DeleteRole(int roleId);

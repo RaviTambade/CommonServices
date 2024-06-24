@@ -33,6 +33,11 @@ public class RoleService : IRoleService
         return await _repository.GetRoles(userId);
     }
 
+    public async Task<List<Role>> GetRolesByLob(string lob)
+    {
+        return await _repository.GetRolesByLob(lob);
+    }
+
     public async Task<bool> Insert(Role role)
     {
         return await _repository.Insert(role);

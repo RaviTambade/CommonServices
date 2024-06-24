@@ -39,6 +39,12 @@ public class RolesController : ControllerBase
         return await _service.GetRoles(roleIds);
     }
 
+      [HttpGet("lob/{lob}")]
+    public async Task<List<Role>> GetRolesByLob(string lob)
+    {
+        return await _service.GetRolesByLob(lob);
+    }
+
     [HttpPost]
     public async Task<bool> Insert(Role role)
     {

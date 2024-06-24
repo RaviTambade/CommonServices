@@ -85,6 +85,20 @@ public class RoleRepository : IRoleRepository
         }
     }
 
+    public async Task<List<Role>>GetRolesByLob(string lob)
+    {
+        try
+        {
+            var roles = await _context.Roles.Where(r => r.Lob == lob
+            ).ToListAsync();
+
+           return roles;
+        }
+        catch (Exception){
+            throw;
+        }
+    }
+
       public async Task<bool> Insert(Role role)
     {
         bool status = false;
