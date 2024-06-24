@@ -16,7 +16,7 @@ import NavBar from './components/Navbar';
 import LoanApplicationForm from'./components/LoanApplicationForm';
 //import TryNotification from './components/Notification';
 import { NotificationContainer } from 'react-notifications';
-
+import GetCustomerDetails from './components/CustomerDetails';
 //import { Notifications } from "react-push-notification";
 import 'react-notifications/lib/notifications.css';
 
@@ -42,6 +42,8 @@ function App() {
         </Routes> 
         
         {/* <TryNotification/> */}
+
+        {<GetCustomerDetails/>}
 
       </BrowserRouter>
 

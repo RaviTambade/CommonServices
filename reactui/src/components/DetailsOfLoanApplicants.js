@@ -15,13 +15,13 @@ function DetailsOfLoanApplicants() {
     const navigation = useNavigate()
 
 
-    const url = "http://localhost:5053/api/loanppications/"  + id;
+    const url = "http://localhost:5053/api/loanapplications/"  + id;
     
     const [Data, setData] = useState({theApplication:{},theApplicant:{}});// Wrongway to set the data in this way :useState({})
 
 
     const url2 = "http://localhost:5053/api/loanstypes";
-     const [loantypes, setLoantypes] = useState([]);
+    const [loantypes, setLoantypes] = useState([]);
      
     const fetchInfo = () => {
 

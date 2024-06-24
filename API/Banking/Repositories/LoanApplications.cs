@@ -106,11 +106,7 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
 
             Console.WriteLine("Inside try block....Inside Repo");
             string query =
-<<<<<<< HEAD
             "INSERT INTO loanapplications(applicationdate,amount,duration,status,accountid,loantypeid) VALUES(@Applicationdate,@Loanamount,@Loanduration,@Loanstatus,@Accountid,@Loantypeid)";
-=======
-            "INSERT INTO loanapplications(applicationdate,amount,duration,status,accountid,loantypeid) VALUES(@Applicationdate,@amount,@duration,@status,@Accountid,@Loantypeid)";
->>>>>>> fba9648453c0d71ae962593abe8dcec6e645d1e3
             MySqlCommand command = new MySqlCommand(query, con);
                        
             command.Parameters.AddWithValue("@Applicationdate",dateString);
@@ -224,13 +220,8 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
         //Create connection object
         MySqlConnection con = new MySqlConnection(_conString);//IDBConnection is not allowed here Why???
 
-<<<<<<< HEAD
         string query = "SELECT loanapplications.* ,customers.customerid,customers.customertype,loantypes.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
         "inner join loantypes on loanapplications.loantypeid=loantypes.id ";
-=======
-        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.customertype,loantypes.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
-        "inner join loantype on loanapplications.loantypeid=loantype.loantypeid ";
->>>>>>> fba9648453c0d71ae962593abe8dcec6e645d1e3
 
         //Create Command Object
         MySqlCommand cmd = new MySqlCommand(query, con );
@@ -257,13 +248,8 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 int loanduration = int.Parse (reader["duration"].ToString());
                 string loanstatus = reader["status"].ToString();
                 int accountID = int.Parse(reader["accountid"].ToString());
-<<<<<<< HEAD
                 int loantypeid = int.Parse(reader["id"].ToString()); 
                 string loantypename = reader["loantype"].ToString();                
-=======
-                int loantypeid = int.Parse(reader["loantypeid"].ToString()); 
-                string loantypename = reader["loantypes"].ToString();                
->>>>>>> fba9648453c0d71ae962593abe8dcec6e645d1e3
                                 
                 int custid = int.Parse(reader["customerid"].ToString());
                 string custtype = reader["customertype"].ToString();
@@ -494,13 +480,8 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
 
         Console.WriteLine("\n Connection status " + con.State);
 
-<<<<<<< HEAD
         string query = "SELECT loanapplications.* ,customers.customerid,customers.customertype,loantypes.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
         "inner join loantypes on loanapplications.loantypeid=loantypes.id WHERE status =  @Loanstatus";
-=======
-        string query = "SELECT loanapplications.* ,customers.bankcustomerid,customers.customertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id "+
-        "inner join loantype on loanapplications.loantypeid=loantype.loantypeid WHERE status =  @Loanstatus";
->>>>>>> fba9648453c0d71ae962593abe8dcec6e645d1e3
         //string query = "SELECT * FROM loanapplicants WHERE loanstatus = @Loanstatus";
 
         //Create Command Object
@@ -530,13 +511,8 @@ public class LoanApplicationsRepo : ILoanApplicationsRepo
                 int loanduration = int.Parse(reader["duration"].ToString());
                 double amount = double.Parse(reader["amount"].ToString());
                 string status = reader["status"].ToString();
-<<<<<<< HEAD
                 int custid = int.Parse(reader["customerid"].ToString());
                 string custtype = reader["customertype"].ToString();
-=======
-                int custid = int.Parse(reader["bankcustomerid"].ToString());
-                string custtype = reader["usertype"].ToString();
->>>>>>> fba9648453c0d71ae962593abe8dcec6e645d1e3
 
                 
                 Console.WriteLine(applictionID);

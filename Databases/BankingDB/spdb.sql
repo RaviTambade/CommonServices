@@ -19,13 +19,18 @@ SELECT id,balance INTO toaccountid,toaccountbalance FROM accounts WHERE  acctnum
 
 INSERT INTO operations(acctId,acctnumber,amount,operationmode,operationtype,operationdate)
 VALUES(fromaccountid,fromaccountnumber,amount,'W',transactiontype,NOW());
+
 SET fromoperationid=LAST_INSERT_ID();
+
 UPDATE accounts SET balance=round(fromaccountbalance-amount,2) WHERE id=fromaccountid;
 INSERT INTO operations(acctId,acctnumber,amount,operationmode,operationtype,operationdate)
 VALUES(toaccountid,toaccountnumber,amount,'D',transactiontype,NOW());
+
 SET tooperationid=LAST_INSERT_ID();
+
 UPDATE accounts SET balance=round(toaccountbalance+amount,2) WHERE id=toaccountid;
 INSERT INTO transactions (fromoperationid,tooperationid) VALUES (fromoperationid,tooperationid);
+
 SET transactionId=LAST_INSERT_ID();
 END $$ 
 DELIMITER ; 
@@ -92,7 +97,7 @@ CALL fundtransfer (accountnumber,'123456789',fromifsccode,bankifsccode,emi,'EMI'
 END $$
 DELIMITER ;
 
-CALL emitransfer('7777777777',@transid);
+CALL emitransfer('39025546601',@transid);
 CALL emitransfer('67675456546',@transid);
 CALL emitransfer('9999999999',@transid);
 CALL emitransfer('1234432112',@transid);
@@ -130,11 +135,3 @@ DELIMITER ;
 
 CALL loanstatus(6,@Ramount,@RemainingEmi,@TotalInstllments);
 SELECT @Ramount,@RemainingEmi,@TotalInstllments;
-
-
-
-
-
-
-
-

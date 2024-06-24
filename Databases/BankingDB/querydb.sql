@@ -12,26 +12,38 @@ show procedure status where db = 'BankingDB';
 delete from transactions Where id = 14;
 delete from operations Where id in(69,70);
 
-delete from loan Where loanid = 3;
+delete from loan Where loanid in (7,8);
 truncate table loan;
 update loanapplications SET loanstatus = "approved" where applicationid = 11;
 update loanapplications SET loanstatus = "applied" where applicationid in (11,12,13,14,15,16);
 -- DROP table customers;
 -- DROP table accounts;
 -- DROP table loanapplicants;
+
+SELECT loanapplications.* ,customers.customerid,customers.customertype,loantypes.loantype 
+from loanapplications inner join accounts on loanapplications.accountid = accounts.id 
+inner join customers on accounts.customerid = customers.id 
+inner join loantypes on loanapplications.loantypeid=loantypes.id ;
+
+use bankingdb;
+
 insert into loan (emiamount,applicationid) values (10000,11);
-SELECT loanapplications.*,loantype.loantype From loanapplications
-inner join loantype ON loanapplications.loantypeid=loantype.loantypeid
+
+SELECT loanapplications.*,loantypes.loantype From loanapplications
+inner join loantypes ON loanapplications.loantypeid=loantypes.id
 WHERE applicationdate >= '2023-01-01' 
 AND applicationdate <= '2023-11-30';
 
-SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.loantype from loanapplications inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id 
-                       inner join loantype on loanapplications.loantypeid=loantype.loantypeid  WHERE applicationdate >= '2023=09-01' AND applicationdate <= '2023-12-25';
+SELECT loanapplications.* ,customers.customerid,customers.customertype,loantypes.loantype from loanapplications
+ inner join accounts on loanapplications.accountid = accounts.id
+ inner join customers on accounts.customerid = customers.id 
+ inner join loantypes on loanapplications.loantypeid=loantypes.id  WHERE applicationdate >= '2023=09-01' AND applicationdate <= '2023-12-25';
         
 -- laon spdb
 SELECT  loan.loanid,loan.emiamount from loan 
 inner join loanapplications on
-loanapplications.id = loan.applicationid WHERE loanapplications.accountid = 1 ;
+loanapplications.id = loan.applicationid WHERE loanapplications.accountid = 6 ;
+
 
 SELECT * FROM loanapplicants WHERE applydate >= '2023-01-01' AND applydate <= '2023-11-30';
 
@@ -60,7 +72,7 @@ show tables;
 
 SELECT acctnumber,ifsccode from accounts 
 JOIN customers ON accounts.customerid = customers.customerid
-WHERE customers.usertype="corporation" AND customers.dependancyid=1;
+WHERE customers.customertype="I";
 
 
 SELECT amount  FROM loan where loanid = 1;
@@ -73,17 +85,21 @@ SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype,loantype.
 inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id
 inner join loantype on loanapplications.loantypeid=loantype.loantypeid; 
 
-SELECT loanapplications.* ,customers.bankcustomerid,customers.usertype from loanapplications 
-inner join accounts on loanapplications.accountid = accounts.id inner join customers on accounts.customerid = customers.id
-WHERE loanstatus = "applied";
+SELECT loanapplications.* ,customers.customerid,customers.customertype from loanapplications 
+inner join accounts on loanapplications.accountid = accounts.id 
+inner join customers on accounts.customerid = customers.id
+WHERE status = "applied";
+
 
 SELECT operations.acctnumber,operations.amount,operations.operationdate  from operations 
 inner join accounts on operations.acctId = accounts.id 
-where accounts.id = (Select acctId from loan where loanid = 2) AND operations.operationtype = "EMI"; 
+where accounts.id = (Select applicationId from loan where loanid = 9) AND operations.operationtype = "EMI"; 
+
+
 
 SELECT operations.acctnumber,operations.amount,operations.operationdate  from operations 
 inner join accounts on operations.acctId = accounts.id 
-where accounts.id = (Select acctId from loan where loanid = 2);
+where accounts.id = (Select applicationId from loan where loanid = 9);
 
 SELECT o.operationid,o.amount,o.operationdate,o.operationmode,
     CASE
