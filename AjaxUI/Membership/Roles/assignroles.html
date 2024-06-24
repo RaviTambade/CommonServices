@@ -10,32 +10,53 @@
 
 <body>
     <div>
+        <label>Enter UserId</label>
+        <input type = "number" id = "userid" name = "userid"/>
         <button id="btngetroles">Get Roles</button>
     </div>
     <div>
-        <label id="roles"></label>
+        <select id="ddlob" name = "ddlob"></select>
     </div>
 </body>
 
 <script>
     $(document).ready(function () {
         console.log("Document.Ready");
+        // $.ajax({
+
+        //     url: "http://localhost:5142/api/roles",
+        //         type: 'GET',
+        //         contentType: 'application/json',
+
+        //         success: function (data) {
+                    
+        //             var allRoles = data;
+        //             for (var i = 0; i <data.length; i++) {
+        //                 var theroles = $('<input type="checkbox" value="' + data[i].id + '"/>' + data[i].name  +"<br/>");
+        //                 $("#roles").append(theroles);
+        //             }
+        //         },
+        //         error: function (xhr, status, error) {
+        //             console.error(xhr.responseText);
+        //         }
+
+        // });
+
         $("#btngetroles").click(function () {
+            $("ddlob").empty();
+            var userId = $("#userid").val();
+            console.log(userId);
             $.ajax({
-                url: "http://localhost:5142/api/roles",
+                url: "http://localhost:5142/api/roles/" + userId,
                 type: 'GET',
                 contentType: 'application/json',
 
                 success: function (data) {
-                    // console.log(data);
-                    // $('#roles').append(
-                    //     $(document.createElement('h6')).prop({
-                    //         for: data.id
-                    //     }).html(data.id + " " + data.name + " " + data.lob)
-                    // )
+                     
                     for (var i = 0; i <data.length; i++) {
-                        var theroles = $('<input type="label" value="' + data[i].id + '"/>' + data[i].name + data[i].lob + "<br/>");
-                        $("#roles").append(theroles);
+                        var theroles = $('<option value="' + data[i].lob + '">'  + data[i].lob +'</option>');
+                        $("#ddlob").append(theroles);
+                        
                     }
                 },
                 error: function (xhr, status, error) {
