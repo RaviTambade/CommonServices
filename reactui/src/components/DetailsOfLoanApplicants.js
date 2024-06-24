@@ -8,20 +8,21 @@ import { NotificationManager } from "react-notifications";
 
 function DetailsOfLoanApplicants() {
 
-    const params = useParams();
-    const { id } = params;
-    console.log(id);
+    let params = useParams();
+    let { id } = params;
+    console.log("****" +id);
 
     const navigation = useNavigate()
 
 
-    const url = "http://localhost:5053/api/application" + "/" + id;
-    const [Data, setData] = useState({});
+    const url = "http://localhost:5053/api/loanapplications/"  + id;
+    
+    const [Data, setData] = useState({theApplication:{},theApplicant:{}});// Wrongway to set the data in this way :useState({})
+
 
     const url2 = "http://localhost:5053/api/loanstypes";
     const [loantypes, setLoantypes] = useState([]);
-
-
+     
     const fetchInfo = () => {
 
         axios
@@ -35,6 +36,7 @@ function DetailsOfLoanApplicants() {
             });
 
     };
+
     const fetchInfo2 = () => {
         axios
             .get(url2)
@@ -49,33 +51,45 @@ function DetailsOfLoanApplicants() {
     };
 
     useEffect(() => {
+        console.log("try effect");
         fetchInfo();
         fetchInfo2();
-    }, []);
+      }, []);
+    
+   
 
     const EmiCalculation = () => {
-        var loatypeid = Data.loanTypeId;
+        var loatypeid = Data.theApplication.loanTypeId;
         var irate = loantypes.find((loantype) => loantype.loanTypeId == loatypeid).intrestRate
-        var durtioninmonths = Data.loanDuration * 12;
-        const interest = (Data.loanAmount * (irate * 0.01)) / durtioninmonths;
-        var emiamount = ((Data.loanAmount / durtioninmonths) + irate).toFixed(2);
+        var durtioninmonths = Data.theApplication.loanDuration * 12;
+        const interest = (Data.theApplication.loanAmount * (irate * 0.01)) / durtioninmonths;
+        var emiamount = ((Data.theApplication.loanAmount / durtioninmonths) + irate).toFixed(2);
 
         return emiamount;
-
-    }
+    
+    };
 
     const UpdateStatus = (e) => {
 
         console.log(e);
-        Data.loanStatus = e;
+        Data.theApplication.loanStatus = e;
+        
+        var obj = {
+        applicationId : Data.theApplication.applicationId,
+        applicationDate : Data.theApplication.applicationDate,
+        loanAmount : Data.theApplication.loanAmount,
+        loanDuration : Data.theApplication.loanDuration,
+        loanStatus :  e,    
+        accountId : Data.theApplication.accountId,
+        loanTypeId : Data.theApplication.loanTypeId
+        }
+        console.log(Data);
         axios
-            .put(url, Data)
+            .put(url, obj)
             .then((res) => {
                 console.log(res);
 
-                if (e === "approved") {
-
-            
+                if (e === "approved") {     
                     InsertLoanRecord();  
                 }
                 
@@ -92,11 +106,12 @@ function DetailsOfLoanApplicants() {
             });
     };
 
+
     const InsertLoanRecord = () => {
         
         let sanctionedate = new Date();
         let formatdate = sanctionedate.toISOString().slice(0, 10);
-        let applicationID = Data.applicationId;
+        let applicationID = Data.theApplication.applicationId;
 
         var emiAmount = EmiCalculation();
 
@@ -142,6 +157,7 @@ function DetailsOfLoanApplicants() {
           }
 
     };
+
     return (
         <div>
             <h1>Loan Applicant Detials</h1>
@@ -149,36 +165,36 @@ function DetailsOfLoanApplicants() {
                 <tbody>
                     <tr>
                         <td>AccountId  </td>
-                        <td>: {Data.accountId}</td>
+                        <td>: {Data.theApplication.accountId}</td>   
                     </tr>
                     <tr>
                         <td>Applicant Name </td>
-                        <td><th>: {Data.applicantName}</th> </td>
+                        <td>: {Data.theApplicant.applicantName} </td>
                     </tr>
                     <tr>
                         <td>Application Date  </td>
-                        <td>: {Data.applicationDate}</td>
+                        <td>: {Data.theApplication.applicationDate}</td>
                     </tr>
                     <tr>
                         <td>Loan Type   </td>
-                        <td>: {Data.loanTypeName}</td>
+                        <td>: {Data.theApplicant.loanTypeName}</td>
                     </tr>
                     <tr>
                         <td>Loan Duration  </td>
-                        <td>: {Data.loanDuration} Years</td>
+                        <td>: {Data.theApplication.loanDuration} Years</td>
                     </tr>
                     <tr>
                         <td>Loan Amount  </td>
-                        <td>: Rs {Data.loanAmount}</td>
+                        <td>: Rs {Data.theApplication.loanAmount}</td>
                     </tr>
                     <tr>
                         <td>Loan Status  </td>
-                        <td>: {Data.loanStatus}</td>
+                        <td>: {Data.theApplication.loanStatus}</td>
                     </tr>
                 </tbody>
             </table>
             <br />
-            {Data.loanStatus == "applied" ?
+            {Data.theApplication.loanStatus == "applied" ?
                 <div>
                     <Button variant="success" id="btnapprove" value="approved" onClick={(e) => UpdateStatus(e.target.value)}>Approve Loan  </Button>
                     <Button variant="danger" id="btnreject" value="rejected" onClick={(e) => UpdateStatus(e.target.value)}>Reject Loan  </Button>

@@ -64,7 +64,11 @@ CREATE TABLE loan(
         emiday INT DEFAULT 10,
 		emiamount DOUBLE,
         applicationid INT NOT NULL,
+<<<<<<< HEAD
+        CONSTRAINT fk_loanapplications_loan_applicationid FOREIGN KEY(applicationid) REFERENCES loanapplications(id) ON UPDATE CASCADE ON DELETE CASCADE
+=======
         CONSTRAINT fk_loanapplications_loan_applicationid FOREIGN KEY (applicationid) REFERENCES loanapplications(id) ON UPDATE CASCADE ON DELETE CASCADE
+>>>>>>> e519588b39b8691c72d50190c4c0b962bd4fb5e5
     );
 
 

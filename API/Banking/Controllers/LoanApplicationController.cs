@@ -66,12 +66,7 @@ public class LoanApplicationController : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-    /*public LoanApplicants GetById(int id)
-    {
-        LoanApplicants applicant = _svc.GetById(id);
-        return applicant;
-    }*/
-
+   
     public async Task <LoanResponse> GetById(int id)
     {
 

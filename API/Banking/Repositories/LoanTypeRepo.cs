@@ -26,7 +26,7 @@ public class LoanTypeRepo : ILoanTypeRepo
         IDbConnection con = new MySqlConnection(_conString);
 
         Console.WriteLine("\n Connection status " + con.State);
-        string query = "SELECT * FROM loantype";
+        string query = "SELECT * FROM loantypes";
 
         //Create Command Object
         IDbCommand cmd = new MySqlCommand(query, con as MySqlConnection);
@@ -43,7 +43,7 @@ public class LoanTypeRepo : ILoanTypeRepo
             //Online data using streaming mechanism
             while (reader.Read())
             {
-               int LoantypeId = int.Parse(reader["loantypeid"].ToString());
+               int LoantypeId = int.Parse(reader["id"].ToString());
                 string loanType=reader["loantype"].ToString(); 
                 double IntrestRate = double.Parse(reader["intrestrate"].ToString());
                 loantypelist.Add(
@@ -82,13 +82,13 @@ public class LoanTypeRepo : ILoanTypeRepo
         con.ConnectionString = _conString;
         try
         {
-            string query = "SELECT * FROM loantype WHERE loantypeid=" + loantypeid;
+            string query = "SELECT * FROM loantypes WHERE id=" + loantypeid;
             con.Open();
             MySqlCommand command = new MySqlCommand(query, con);
             MySqlDataReader reader = command.ExecuteReader();
             if (reader.Read())
             {
-                int LoantypeId = int.Parse(reader["loantypeid"].ToString());
+                int LoantypeId = int.Parse(reader["id"].ToString());
                 string loanType=reader["loantype"].ToString(); 
                 double IntrestRate = double.Parse(reader["intrestrate"].ToString());
                  

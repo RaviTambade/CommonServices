@@ -45,7 +45,7 @@ public class UsersController : ControllerBase
         return await _svc.GetUserDetailsByUserIds(userIds);
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpGet]
     [Route("{userId}")]
     public async Task<User> GetUser(int userId)
