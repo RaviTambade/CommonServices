@@ -9,47 +9,51 @@
 </head>
 
 <body>
-    <h2>Get All Roles in Application of User</h2>
-    <hr/>
-    <div>
-        <input id="txtUserId"/>
-    <div>
-        <button id="btngetroles">Get Roles</button>
+    <h2>Get Roles for User and LOB</h2>
+    <hr />
+    <div><label for="txtUserId">User ID:</label><input id="txtUserId" placeholder="Enter User ID" /></div>
+    <div><button id="btngetroles">Get Roles</button></div>
+    <hr />
+    <div id="rolesContainer">
+        <h3>Roles:</h3>
+        <div id="roles"></div>
     </div>
-    <div>
-        <label id="roles"></label>
-    </div>
-</body>
 
-<script>
-    $(document).ready(function () {
-        console.log("Document.Ready");
-        $("#btngetroles").click(function () {
-            var userId=$("#txtUserId").val();
 
-            $.ajax({
-                url: "http://localhost:5142/api/users/"+userId+ "/roles",
-                type: 'GET',
-                contentType: 'application/json',
+    <script>
+        $(document).ready(function () {
+            console.log("Document.Ready");
+            $("#btngetroles").click(function () {
+                var userId = $("#txtUserId").val();
+                $("#roles").empty();
 
-                success: function (data) {
-                    // console.log(data);
-                    // $('#roles').append(
-                    //     $(document.createElement('h6')).prop({
-                    //         for: data.id
-                    //     }).html(data.id + " " + data.name + " " + data.lob)
-                    // )
-                    for (var i = 0; i <data.length; i++) {
-                        var theroles = $('<input type="label" value="' + data[i].id + '"/>' + data[i].name + data[i].lob + "<br/>");
-                        $("#roles").append(theroles);
+                $.ajax({
+                    url: "http://localhost:5142/api/users/${userId}/roles",
+                    type: 'GET',
+                    contentType: 'application/json',
+
+                    success: function (data) {
+                        // console.log(data);
+                        // $('#roles').append(
+                        //     $(document.createElement('h6')).prop({
+                        //         for: data.id
+                        //     }).html(data.id + " " + data.name + " " + data.lob)
+                        // )
+                        if(data.length > 0){
+                        data.forEach(function (role) {
+                            var theroles = $('<div>').text('ID:${role.id},Name:${role.name},LOB:${role.lob}');
+                            $("#roles").append(theroles);
+                        });
+                        } else {
+                            $("#roles").text("No Roles Found");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
                     }
-                },
-                error: function (xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
+                });
             });
         });
-    });
-</script>
+    </script>
 
 </html>
