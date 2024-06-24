@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign User Roles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        select, input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Assign User Roles</h1>
+    
+        <label for="userid">User ID:</label>
+        <input type="text" id="userid" name="userid" required>     
+        <label for="role">Select Role:</label>
+        <select id="role" name="role" required>
+            <option value="">Select a role</option>
+            <option value="Administrator">Administrator</option>
+            <option value="Editor">Editor</option>
+            <option value="Contributor">Contributor</option>
+            <option value="Subscriber">Subscriber</option>
+        </select>
+
+        <input type="submit" value="Assign Role">
+   
+
+    <script>
+      
+    </script>
+</body>
+</html>

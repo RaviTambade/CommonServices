@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Multiple Roles to User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="checkbox"], input[type="submit"] {
+            margin-bottom: 15px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Assign Multiple Roles to User</h1>
+   
+        <label for="username">User ID:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="lob">Line of Business:</label>
+
+        <input type="text" id="lob" name="lob" required>
+        
+        <label>Select Roles:</label><br>
+        <input type="checkbox" id="adminRole" name="roles" value="Administrator">
+        <label for="adminRole">Administrator</label><br>
+        
+        <input type="checkbox" id="editorRole" name="roles" value="Editor">
+        <label for="editorRole">Editor</label><br>
+        
+        <input type="checkbox" id="contributorRole" name="roles" value="Contributor">
+        <label for="contributorRole">Contributor</label><br>
+        
+        <input type="checkbox" id="subscriberRole" name="roles" value="Subscriber">
+        <label for="subscriberRole">Subscriber</label><br>
+
+        <input type="submit" value="Update Roles">
+   
+
+    <script>
+        
+    </script>
+</body>
+</html>
