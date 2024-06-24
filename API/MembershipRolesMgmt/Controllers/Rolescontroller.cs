@@ -74,4 +74,10 @@ public class RolesController : ControllerBase
     {
         return await _service.DeleteUserRole(userRoleId);
     }
+
+    [HttpGet("userid/{userId}/roleId/{roleId}")]
+    public async Task<bool> CheckUserRole(int userId, int roleId)
+    {
+        return await _service.CheckUserRole(userId, roleId);
+    }
 }
