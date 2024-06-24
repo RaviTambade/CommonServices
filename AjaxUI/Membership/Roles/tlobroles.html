@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign User Roles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        select, input[type="button"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Assign User Roles</h1>
+    <form id="assignRolesForm">  
+        <label for="role">Select LOB:</label>
+        <select id="role" name="role" required>
+            <option value="">Select a LOB</option>
+            <option value="PMS">PMS</option>
+            <option value="banking">banking</option>
+            <option value="EKrushi">EKrushi</option>
+            <option value="EAgro">EAgro</option>
+            <option value="Inventory Management">Inventory Management</option>
+        </select>
+
+        <input type="button" value="Show Roles" id="showRolesButton">
+    </form>
+
+    <table id="rolesTable">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>LOB</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#showRolesButton").click(function () {
+                var selectedLob = $("#role").val();
+                if (selectedLob) {
+                    $.ajax({
+                        url: `http://localhost:5142/api/roles/lob/${selectedLob}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            var rolesTableBody = $("#rolesTable tbody");
+                            rolesTableBody.empty();
+
+                            if (data.length > 0) {
+                                data.forEach(function (role) {
+                                    var row = `<tr>
+                                        <td>${role.name}</td>
+                                        <td>${role.lob}</td>
+                                    </tr>`;
+                                    rolesTableBody.append(row);
+                                });
+                            } else {
+                                rolesTableBody.append('<tr><td colspan="2">No Roles Found</td></tr>');
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    alert("Please select a LOB.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
