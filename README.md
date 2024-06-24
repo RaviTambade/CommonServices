@@ -1,243 +1,79 @@
 # CommonServices
 
-# Role Based Access Control - User Management Microservice
-<hr/>
+Building common services for a portal solution involves creating reusable components or modules that can be used across various parts of the portal. These services typically facilitate functionalities such as user management, content management, authentication, and integration with external systems. Here’s a structured approach to develop common services for a portal solution:
 
-## Overview
-The need to manage a user base for an online system is very frequent. Goal of this project is to offer a generic user's data management microservice.
+### 1. **User Management Service**
 
-This microservice can offer a good and solid starting point for managing your accounts. Thanks to this Role Based Access Control implementation it's easy to define roles and permissions for your specific application/prototype and subsequently apply these access rules on the users.
+- **User Registration:** Implement user registration with validations and email verification.
+- **User Authentication:** Provide login/logout functionalities using secure authentication methods (e.g., OAuth, JWT).
+- **User Profile Management:** Allow users to update their profiles, manage preferences, and view account information.
+- **Role-Based Access Control (RBAC):** Define roles and permissions to control access to portal features and content.
 
-This project lends itself very well to implement new prototypes or to create new solutions based on microservice architecture.
+### 2. **Content Management Service**
 
-The solution is thought using the Docker technologies with two different containers:
-- ASP.NET Core REST Apis
- -MySql 8.0 database
-The code has been well tested (> 115 tests) using JUnit and Mockito, H2 in memory database and some standard libraries for the integration tests.
+- **Content Creation:** Enable administrators to create, edit, and delete portal content (e.g., articles, announcements).
+- **Content Publishing:** Implement workflows for content approval and publishing.
+- **Version Control:** Maintain version history of content updates and rollbacks.
+- **Search and Filter:** Implement search functionality to quickly locate specific content items.
 
+### 3. **Notification Service**
 
-### Exposed REST apis
-Here below the most relevant features exposed using REST Apis:
+- **Email Notifications:** Send notifications for account activities, system updates, and user interactions.
+- **SMS Notifications:** Integrate with SMS gateways to send alerts and notifications to users' mobile phones.
+- **In-App Notifications:** Display real-time notifications within the portal to alert users of new messages or updates.
 
-<b>User management features</b>
-- Register a new user account
-- Login with username & password
-- Retrieve a single user account
-- Retrieve the list of all the existing user accounts
-- Update user account data (basic user data, contacts, address)
-- Add or remove a role on an user account
-- Delete a user account
-- Define secured accounts that cannot be deleted but only modified
-- Standard validation for email, phone, password
+### 4. **Integration Service**
 
-<b>RBAC features: manages roles and permissions</b>
-- Retrieve all the permissions
-- Retrieve the list of the existing roles
-- Create a new role
-- Retrieve a single role
-- Delete a role
-- Add a permission on a role
-- Remove a permission on a role
-- Create a new permission
-- Update an existing permission (also enabled or disable it)
-- Retrieve single permission
-- Delete not used permission
+- **External API Integration:** Integrate with third-party services and APIs for functionalities like payment gateways, analytics, or CRM systems.
+- **Data Synchronization:** Sync data between the portal and external databases or systems.
+- **Webhooks:** Implement webhooks for real-time notifications from external systems to update portal data.
 
-### Api to generate a salt random value to encrypt password (configuration)
+### 5. **Analytics and Reporting Service**
 
-Using a browser it's possible to interact with the REST apis with Swagger:
+- **Data Collection:** Gather and store usage data, user interactions, and portal performance metrics.
+- **Analytics Dashboard:** Provide administrators with insights and visualizations through dashboards.
+- **Reporting:** Generate standard and custom reports on portal usage, content popularity, and user behavior.
 
-http://localhost:8090/swagger-ui.html
+### 6. **Security and Compliance**
 
-<<<<<<< HEAD
-![Swagger](https://github.com/andreagiassi/microservice-rbac-user-management/blob/master/src/main/resources/images/swagger.png "Swagger interface")
-=======
-<img src="/images/swaggermembershiprolesmgmt.png"/>
->>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
+- **Data Encryption:** Encrypt sensitive data (e.g., user credentials, personal information) to ensure confidentiality.
+- **Compliance:** Adhere to data protection regulations (e.g., GDPR, HIPAA) and implement security best practices.
+- **User Privacy:** Provide options for users to manage consent and privacy settings.
 
-Another alternative is to using an external tool, for example Postman (https://www.postman.com/).
+### 7. **Localization and Internationalization**
 
-This project contains also the Postman export file with all the configured test calls:
+- **Multilingual Support:** Enable the portal to support multiple languages and locales.
+- **Date and Time Formats:** Adapt date, time, and currency formats based on user preferences and geographic location.
 
-<<<<<<< HEAD
-![Swagger](https://github.com/andreagiassi/microservice-rbac-user-management/blob/master/src/main/resources/images/postman.png "Swagger interface")
-=======
-<img src="/images/postman.png"/>
->>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
+### 8. **Performance Optimization**
 
-## Quick Start
+- **Caching:** Implement caching strategies to improve portal performance and reduce database load.
+- **Load Balancing:** Distribute incoming traffic across multiple servers or instances to optimize performance during peak usage.
 
-### Setup using Docker containers
->Thanks to Docker it’s easy to create scalable and manageable applications built of microservices.
+### 9. **Monitoring and Logging**
 
-The project is designed to use two containers:
-<<<<<<< HEAD
-* one Java microservice
-=======
-* one asp.net core microservice
->>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
-* one MySql database
+- **Monitoring Tools:** Use monitoring tools to track portal uptime, performance metrics, and error rates.
+- **Logging:** Maintain logs for system events, user activities, and errors to facilitate troubleshooting and auditing.
 
-The Docker environment is necessary in order to work with the containers and the setup depends about your Os.
+### 10. **Scalability and Flexibility**
 
-Proceed the setup for the Docker environment: [Get Docker](https://docs.docker.com/get-docker/)
+- **Scalable Architecture:** Design a scalable architecture to accommodate growing user base and increasing data volumes.
+- **Modular Design:** Ensure services are modular and loosely coupled to facilitate updates, enhancements, and integrations.
 
-To compile and run the Java project you need to install a Java 8 JDK on your local machine.
+### Example Technologies and Tools
 
-Follow the instructions below to setup a local docker image for a mysql8.0 database:
+- **Frameworks:** React, Angular, Vue.js (for frontend); Node.js, Django, Spring Boot (for backend)
+- **Database:** PostgreSQL, MongoDB, MySQL
+- **Authentication:** OAuth 2.0, JWT (JSON Web Tokens)
+- **Notification Services:** SendGrid, Twilio, Firebase Cloud Messaging
+- **Analytics and Reporting:** Google Analytics, Elastic Stack (ELK), Grafana
 
-https://medium.com/@crmcmullen/how-to-run-mysql-in-a-docker-container-on-macos-with-persistent-local-data-58b89aec496a
+By following this structured approach and leveraging appropriate technologies and tools, you can develop robust and scalable common services for a portal solution that enhance user experience, streamline operations, and support business goals effectively.
 
-The microservice application has been updated to support a docker dev-network and there are no needs to
- configure manually the IP address of the database target: this setup is necessary only one time.
+<a href="https://github.com/RaviTambade/CommonServices/blob/main/membershiprolesmgmt.md">Users and Roles Management</a>
 
-Create the developer network:
+<a href="https://github.com/RaviTambade/CommonServices/blob/main/bankingaccountmgmt.md">Banking Account Management</a>
 
-    docker network create dev-network
+<a href="https://github.com/RaviTambade/CommonServices/blob/main/bankingloansanction.md">Banking Loan Sanction</a>
 
-Check that the network has been defined:
-
-    docker network ls
-
-Modify the file db.cmd and set a folder to use for the MySql's docker volume.
-
-Run the MySql container:
-
-    ./db.cmd
-
-Execute the run bash script to compile and run the microservice container:
-
-    ./run.cmd
-
-Open a browser and explore the REST apis:
-
-http://localhost:8090/swagger-ui.html
-
-The RBAC microservice should be up and running and connecting with the MySql instance with the demo data.
-If you want to remove this demo data proceed to configure your system as in "Setup a ready and empty RBAC" section.
-
-Everything should be up and running :)
-
-### Setup without Docker
-
->You can also setup and work on this project without to consider to use Docker.
-You will just launch the Spring Boot application targeting the MySql database (on localhost or on a remote one).
-
-<<<<<<< HEAD
-Install Java 8 JDK.
-
-Set up your MySql instance and create the empty database "users":
-
-    CREATE DATABASE IF NOT EXISTS users;
-
-Create and grant a new MySql user on the "users" database.
-
-Open the application.properties file located in /src/main/resources.
-
-Target your localhost MySql database:
-
-    connectionstring=jdbc:mysql://localhost:3306/users?useSSL=false&allowPublicKeyRetrieval=true
-
-Set the username and password of the MySql's user:
-
-    spring.datasource.username=yourMySqlUser
-    spring.datasource.password=yourMySqlUserStrongPassword
-
-Execute the microservice code using Maven:
-=======
-- Install Dotnet core 8.0.
-
-- Set up your MySql instance and create the empty database "users":
-
-    CREATE DATABASE IF NOT EXISTS users;
-
-- Create and grant a new MySql user on the "users" database.
-
-- Open the appsettings.json file.
-
-Target your localhost MySql database:
-
-    connectionstring=mysql://localhost:3306/users?useSSL=false&allowPublicKeyRetrieval=true
-
-
-Execute the microservice code using Dotnet CLI command:
->>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
-
-    ./dotnet run
-    
-Open a browser and explore the REST apis:
-
-http://localhost:8090/swagger-ui.html
-
-<img src="/images/swaggermembershiprolesmgmt.png"/>
-
-The RBAC microservice should be up and running and connecting with the MySql instance with the demo data.
-If you want to remove this demo data proceed to configure your system as in "Setup a ready and empty RBAC" section.
-
-Everything should be up and running using your local MySql :)
-
-### Setup a ready and empty RBAC
->You can prepare a specific clean RBAC microservice setup without any demo data and
-> without to reset the database content at each restart.
-
-Install Dotnet core 8.0.
-
-Set up your MySql instance and create the empty database "users":
-
-    CREATE DATABASE IF NOT EXISTS users;
-
-Create and grant a new MySql user on the "users" database.
-
-Open the appsettings.json file located in /src.
-
-Set the username and password of the MySql's user:
-
-
->For a production environment consider to create a specific MySql user for the database "users" using
- a strong password.
-
-Disable the demo data setting as below:
-
-    # enable initialization using schema.sql and data.sql
-<<<<<<< HEAD
-    
-
-=======
->>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
-
-
->If you need, you can launch the microservice and using Swagger to call the rest endpoint /users/rbac/salt
-> in order to generate a new random one.
-
-Save the application.properties file.
-
-Run the build of the microservice and lunch the container:
-
-    ./run.cmd
-
-The RBAC microservice should be up and running and connecting with the MySql instance without demo data.
-Proceed with your RBAC configuration using the REST apis:
-
-http://localhost:8090/swagger-ui.html
-
-Restarting the db or the microservices should not affect the persistence of your RBAC configuration.
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
-#### Author
-This project has been created in October 2023 by Pragati Bangar.
-
-Andrea he's an italian Agile professional and Software Engineer actives in web systems and services.
-Since 2022, Pragati is working in the Transflower as intern and she is contributing
- to the success of several solutions and products at Transflower.
-
-About me:
-<<<<<<< HEAD
-https://www.linkedin.com/in/bangarpragati/
-
-=======
-https://www.linkedin.com/in/bangarpragati/
->>>>>>> 63f00096f1ddd68a6c3d6ec12aa23386c9f39130
+<a href="https://github.com/RaviTambade/CommonServices/blob/main/notificationsystem.md">Notification System</a>

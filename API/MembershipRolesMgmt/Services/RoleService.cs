@@ -62,4 +62,9 @@ public class RoleService : IRoleService
     {
         return await _repository.DeleteUserRole(userRoleId);
     }
+
+    public async Task<bool> CheckUserRole(int userId, int roleId)
+    {
+        return await _repository.CheckUserRole(userId, roleId);
+    }
 }

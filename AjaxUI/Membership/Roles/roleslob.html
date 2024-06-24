@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Roles</title>
+</head>
+
+<body>
+    <h2>Get All Roles in Application of  LOB (Line of Business)</h2>
+    <div>
+     
+    </div>
+
+    <div>
+        <button id="btngetroles">Get Role</button>
+    </div>
+    <div>
+        <label id="roles"></label>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        console.log("Document.Ready");
+        $("#btngetroles").click(function () {
+            $.ajax({
+                url: "http://localhost:5142/api/roles",
+                type: 'GET',
+                contentType: 'application/json',
+
+                success: function (data) {
+                    // console.log(data);
+                    // $('#roles').append(
+                    //     $(document.createElement('h6')).prop({
+                    //         for: data.id
+                    //     }).html(data.id + " " + data.name + " " + data.lob)
+                    // )
+                    for (var i = 0; i <data.length; i++) {
+                        var theroles = $('<input type="label" value="' + data[i].id + '"/>' + data[i].name + data[i].lob + "<br/>");
+                        $("#roles").append(theroles);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+</html>

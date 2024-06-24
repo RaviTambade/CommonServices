@@ -42,6 +42,7 @@ public class AuthController : ControllerBase
     [Route("updatepassword")]
     public async Task<bool> Update(PasswordDetails details)
     {
+        Console.WriteLine("Old : " +details.OldPassword+" New : "+details.NewPassword );
         string currentContactNumber = HttpContext.Items["contactNumber"] as string ?? string.Empty;
         bool status = await _userService.Update(currentContactNumber, details);
         return status;

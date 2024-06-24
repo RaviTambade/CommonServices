@@ -1,4 +1,4 @@
--- Active: 1696576841746@@127.0.0.1@3306@membershiprolesdb
+-- Active: 1712217931410@@127.0.0.1@3306
 
 DROP DATABASE IF EXISTS MembershipRolesDB;
 CREATE DATABASE  MembershipRolesDB;
@@ -37,7 +37,7 @@ CREATE TABLE
             lob varchar(20)
         );
 
-    CREATE TABLE
+CREATE TABLE
         userroles(
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             userid INT NOT NULL,
@@ -45,6 +45,6 @@ CREATE TABLE
             CONSTRAINT uc_userroles UNIQUE (userid, roleid),
             CONSTRAINT fk_userroles_roles FOREIGN KEY(roleid) REFERENCES roles(id) ON UPDATE CASCADE ON DELETE CASCADE,
             CONSTRAINT fk_userroles_users FOREIGN KEY(userid) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
-        );
+    );
 
    

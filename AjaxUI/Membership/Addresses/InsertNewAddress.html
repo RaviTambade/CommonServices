@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Address</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>Insert Address</h2>
+    <form id="addressForm">
+        <label for="userId">User ID:</label>
+        <input type="number" id="userId" name="userId" required><br><br>
+
+        <label for="area">Area:</label>
+        <input type="text" id="area" name="area" required><br><br>
+
+        <label for="landmark">Landmark:</label>
+        <input type="text" id="landmark" name="landmark" required><br><br>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" required><br><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+
+        <label for="pincode">Pincode:</label>
+        <input type="text" id="pincode" name="pincode" required><br><br>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="contactNumber">Contact Number:</label>
+        <input type="text" id="contactNumber" name="contactNumber" required><br><br>
+
+        <label for="addressType">Address Type:</label>
+        <select id="addressType" name="addressType" required>
+            <option value="Residential">Residential</option>
+            <option value="Official">Official</option>
+            <option value="Billing">Billing</option>
+        </select><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="message"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#addressForm').submit(function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                // Get form data
+                var formData = {
+                    UserId: $('#userId').val(),
+                    Area: $('#area').val(),
+                    LandMark: $('#landmark').val(),
+                    State: $('#state').val(),
+                    City: $('#city').val(),
+                    PinCode: $('#pincode').val(),
+                    Name: $('#name').val(),
+                    ContactNumber: $('#contactNumber').val(),
+                    AddressType: $('#addressType').val()
+                };
+
+                // Send AJAX request
+                $.ajax({
+                    url: 'http://localhost:5142/api/addresses', 
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        $('#message').text('Address inserted successfully.');
+                        $('#addressForm')[0].reset(); // Clear form fields
+                    },
+                    error: function(xhr, status, error) {
+                        var errorMessage = xhr.status + ': ' + xhr.statusText;
+                        $('#message').text('Error inserting address: ' + errorMessage);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -2,6 +2,7 @@ using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Repositories.Interfaces;
 using Transflower.MembershipRolesMgmt.Repositories.Contexts;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 namespace Transflower.MembershipRolesMgmt.Repositories;
 
@@ -198,5 +199,23 @@ public class RoleRepository : IRoleRepository
     {
         int rowsAffected = await _context.SaveChangesAsync();
         return rowsAffected > 0;
+    }
+
+    public async Task<bool> CheckUserRole(int userId, int roleId)
+    {
+        try
+        {
+            var isAsign = await (
+                from userroles in _context.UserRoles
+                where userroles.UserId == userId && userroles.RoleId == roleId
+                select userroles.Id
+            ).AnyAsync();
+            return isAsign;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+
     }
 }

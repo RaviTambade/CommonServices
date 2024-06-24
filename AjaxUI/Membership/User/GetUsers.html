@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>PMSNGApp</title>
+  <title>MemberShipRole Management</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -11,14 +11,16 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
   <script>
-
+    // javascript
     $(document).ready(function() {
      
+            alert("Hello");
            // AJAX GET request to getall data from database
           
+        
           $.ajax({
               //url: 'http://localhost:5053/api/application',
-              url:'http://localhost:5053/api/loans/applicationAscustomer',
+              url:' http://localhost:5142/api/users',
               type: 'GET',
               contentType: 'application/json',
               
@@ -26,17 +28,22 @@
                   console.log('Got the Data :', response);
                   alert("Data get Successfully ...");
 
-                var htmlContent = '<div class="table-responsive"> <table id="loanapplicantsTable" class="table table-striped"> <thead> <tr>' +
-                                '<th>AccountId</th><th>Applicant Name</th><th>Application Date</th><th>Loan Type</th><th>Loan Duration<th>Loan Amount</th><th>Loan Status</th></tr></thead><body>';
+                var htmlContent = '<div class="table-responsive"> <table id="usersTable" class="table table-striped"> <thead> <tr>' +
+                                '<th>Id</th><th>ImageUrl</th><th>FirstName</th><th>LastName</th><th>BirthDate<th>AadharId</th><th>Gender</th><th>Email</th><th>contactNumber</th><th>Password</th><th>CreatedOn</th><th>ModifiedOn</th></tr></thead><body>';
                                     $.each(response,function(index,item){
                                         htmlContent += '<tr>';
-                                        htmlContent +='<td>'+item.accountId + '</td>';
-                                        htmlContent +='<td>'+item.applicantName + '</td>';
-                                        htmlContent += '<td>'+item.applicationDate + '</td>';
-                                        htmlContent += '<td>'+item.loanTypeName + '</td>';
-                                        htmlContent += '<td>'+item.loanDuration + '</td>';
-                                        htmlContent += '<td>'+item.loanAmount + '</td>';
-                                        htmlContent += '<td>'+item.loanStatus + '</td>';
+                                        htmlContent +='<td>'+item.id + '</td>';
+                                        htmlContent +='<td>'+item.imageUrl + '</td>';
+                                        htmlContent += '<td>'+item.firstName + '</td>';
+                                        htmlContent += '<td>'+item.lastName + '</td>';
+                                        htmlContent += '<td>'+item.birthDate + '</td>';
+                                        htmlContent += '<td>'+item.aadharId + '</td>';
+                                        htmlContent += '<td>'+item.gender + '</td>';
+                                        htmlContent += '<td>'+item.email + '</td>';
+                                        htmlContent += '<td>'+item.contactNumber + '</td>';
+                                        htmlContent += '<td>'+item.password + '</td>';
+                                        htmlContent += '<td>'+item.createdOn + '</td>';
+                                        htmlContent += '<td>'+item.modifiedOn + '</td>';
                                        // htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
                                         htmlContent += '</tr>';
                                     });

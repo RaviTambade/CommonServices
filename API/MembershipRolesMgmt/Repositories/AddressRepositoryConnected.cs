@@ -12,6 +12,7 @@ public class AddressRepository : IAddressRepository
     public AddressRepository(IConfiguration configuration)
     {
         _configuration = configuration;
+        
         _connectionString =
             _configuration.GetConnectionString("DefaultConnection")
             ?? throw new ArgumentNullException(nameof(_connectionString));

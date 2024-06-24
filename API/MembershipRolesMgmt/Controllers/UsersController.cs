@@ -57,12 +57,15 @@ public class UsersController : ControllerBase
     [Route("contact/{contactNumber}")]
     public async Task<User> GetUser(string contactNumber)
     {
+        Console.WriteLine("Inside GetUser by Contact....");
         return await _svc.GetUser(contactNumber);
     }
 
     [HttpPost]
+    [Route("add")]
     public async Task<bool> Add(User user)
     {
+   
         bool status = await _svc.Add(user);
         return status;
     }

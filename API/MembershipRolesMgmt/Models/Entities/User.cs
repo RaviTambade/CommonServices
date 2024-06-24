@@ -22,7 +22,7 @@ public class User
     [Column("birthdate")]
     public DateOnly BirthDate { get; set; }
 
-    [Column(" aadharid")]
+    [Column("aadharid")]
     public string? AadharId { get; set; }
 
     [Column("gender")]
