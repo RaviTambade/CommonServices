@@ -23,7 +23,22 @@
     $(document).ready(function () {
         console.log("Document.Ready");
         $("#btngetroles").click(function () {
-            
+            $.ajax({
+                url: "https://localhost:7162/api/roles",
+                type: 'GET',
+                contentType: 'application/json',
+
+                success: function (data) {
+                   
+                    for (var i = 0; i <data.length; i++) {
+                        var theroles = $('<div>' + data[i].id  + data[i].name + data[i].lob + '</div>'+"<br/>");
+                        $("#roles").append(theroles);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
         });
     });
 </script>
