@@ -6,7 +6,7 @@ import '../css/LoanApplicationsList.css';
 
 
 function LoanApplicationsList() {
-  const url = "http://localhost:5053/api/loans/applicationAscustomer";
+  const url = "http://localhost:5053/api/loanapplications/applicationAscustomer";
   const [data, setData] = useState([]);
   const [toDate, setToDate] = useState(new Date().toISOString().slice(0, 10));
   const [fromDate, setFromDate] = useState('');

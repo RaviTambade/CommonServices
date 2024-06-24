@@ -7,28 +7,62 @@ function LoanApplicationForm(){
     const[applicationdate,setApplicationdate] = useState('');
     const[amount,setAmount] = useState('')
     const[duration,setDuration] = useState('');
-    const[loantype,setLoantype] = useState('');
+    const[loantypeid,setLoantypeid] = useState('');
     const[intrestrate,setIntrestrate] = useState('');
-    const[status,setStatus] = useState('');
+    const[status,setStatus] = useState('applied');
+    
+
+    const handleChange = (e) => {
+
+        setLoantypeid(e.target.value);
+        
+        console.log("Inside handlechange  "+ loantypeid);
+       
+        SetInterestAccordingLoanType(e.target.value);
+      };
 
        
-    const handleSubmit = (event) => {
-    event.preventDefault();
+    const SetInterestAccordingLoanType = (ltype)=>
+    {
+        console.log("Inside SetInterset  " + ltype);
+        switch(ltype){
 
+            case '100': setIntrestrate(9.5);
+            console.log(intrestrate);
+            break;
+            case '101':setIntrestrate(11);
+            console.log(intrestrate);
+            break;
+            case '102':setIntrestrate(12.5);
+            console.log(intrestrate);
+            break;
+            case '103':setIntrestrate(7.6);
+            console.log(intrestrate);
+            break;
+            case '104':setIntrestrate(15.6);
+            console.log(intrestrate);
+            break;
+        }
+        
+    };
+
+
+    const handleSubmit = (event) => {
+    event.preventDefault();    
     const data = {
         
         AccountId:accountid,
         ApplicationDate:applicationdate,
         LoanAmount:amount,
         LoanDuration:duration,
-        LoanType:loantype,
+        LoanTypeId:loantypeid,
         Intrestrate:intrestrate,
         LoanStatus:status
    
         
     };
     console.log("data ",data);
-    const url ='http://localhost:5053/api/application';
+    const url ='http://localhost:5053/api/loanppications';
 
     axios.post(url,data).then((result) =>{
         console.log(result.data);
@@ -63,17 +97,32 @@ function LoanApplicationForm(){
                 <br></br><br></br>
 
                 <label>Loan Type : </label>
-                <select  id="txtLoantype" name="txtLoantype" placeholder="Enter Loan Type" onChange={(e) => setLoantype(e.target.value)}>
-                    <option value="">Select Loan Type</option></select>
+                <select  id="txtLoantype" name="txtLoantype" placeholder="Enter Loan Type" onChange={handleChange}>
+                    <option value="">Select Loan Type</option>
+                    <option value='100' >Home</option>
+                    <option value='101' >Personal</option>
+                    <option value='102' >Car</option>
+                    <option value='103' >Education</option>
+                    <option value='104' >Business</option>
+                
+                    </select>
+                    
+
                 <br></br><br></br>
 
                 <label>Intrest Rate : </label>
-                <label type="number" id="intrestrate" name="intrestrate" onChange={(e) => setIntrestrate(e.target.value)}></label>
+                {/* <label type="number" id="intrestrate" name="intrestrate" onChange={(e) => setIntrestrate(e.target.value)}></label> */}
+                <label type="number" id="intrestrate" name="intrestrate" >{intrestrate}</label>
+
+                {/* <label type="number" id="intrestrate" name="intrestrate" onChange={(e) => SetInterestAccordingLoanType(collectloantype)}></label> */}
+               
                 <br></br><br></br>
 
                 <label>Loan Status : </label>
-                <select id="loanstatus" name="loanstatus" onChange={(e) => setStatus(e.target.value)}>
-                    <option value="applied">Applied</option></select>
+                {/* <select id="loanstatus" name="loanstatus" onChange={(e) => setStatus(e.target.value)}> */}
+                    {/* <option value="applied">Applied</option></select> */}
+                <label type="text" id="loanstatus" name="loanstatus" >{status}</label>
+
                 <br></br><br></br>             
 
                 <input type="submit" />

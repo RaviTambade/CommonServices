@@ -18,13 +18,18 @@ SELECT id,balance INTO toaccountid,toaccountbalance FROM accounts WHERE  acctnum
 
 INSERT INTO operations(acctId,acctnumber,amount,operationmode,operationtype,operationdate)
 VALUES(fromaccountid,fromaccountnumber,amount,'W',transactiontype,NOW());
+
 SET fromoperationid=LAST_INSERT_ID();
+
 UPDATE accounts SET balance=round(fromaccountbalance-amount,2) WHERE id=fromaccountid;
 INSERT INTO operations(acctId,acctnumber,amount,operationmode,operationtype,operationdate)
 VALUES(toaccountid,toaccountnumber,amount,'D',transactiontype,NOW());
+
 SET tooperationid=LAST_INSERT_ID();
+
 UPDATE accounts SET balance=round(toaccountbalance+amount,2) WHERE id=toaccountid;
 INSERT INTO transactions (fromoperationid,tooperationid) VALUES (fromoperationid,tooperationid);
+
 SET transactionId=LAST_INSERT_ID();
 END $$ 
 DELIMITER ; 
@@ -70,8 +75,9 @@ DELIMITER ;
 
 
 CALL claculateIntrest('67675456546',@transid);
-SELECT @transid
+SELECT @transid;
 
+DROP PROCEDURE  IF EXISTS emitransfer;
 
 DELIMITER $$
 CREATE PROCEDURE emitransfer(IN accountnumber VARCHAR(20) ,OUT transid INT)
@@ -87,14 +93,21 @@ DECLARE bankIfsccode VARCHAR(20) ;
 SELECT id,balance,ifsccode INTO accountid,totalBal,fromifsccode 
 FROM accounts WHERE acctnumber=accountnumber;
 SELECT ifsccode INTO bankifsccode FROM accounts WHERE acctnumber='123456789';
+<<<<<<< HEAD
+-- SELECT loanid,emiamount INTO loanId,emi FROM loan WHERE acctId = accountid;
+SELECT  loan.loanid,loan.emiamount INTO loanId,emi FROM loan 
+inner join loanapplications on
+loanapplications.id = loan.applicationid WHERE loanapplications.accountid = accountid ;
+=======
 SELECT loanid,emiamount INTO loanId,emi FROM loan WHERE applicationid = accountid;
+>>>>>>> e519588b39b8691c72d50190c4c0b962bd4fb5e5
 
 CALL fundtransfer (accountnumber,'123456789',fromifsccode,bankifsccode,emi,'EMI',transid);
 
 END $$
 DELIMITER ;
 
-CALL emitransfer('7777777777',@transid);
+CALL emitransfer('39025546601',@transid);
 CALL emitransfer('67675456546',@transid);
 CALL emitransfer('9999999999',@transid);
 CALL emitransfer('1234432112',@transid);
@@ -132,11 +145,3 @@ DELIMITER ;
 
 CALL loanstatus(6,@Ramount,@RemainingEmi,@TotalInstllments);
 SELECT @Ramount,@RemainingEmi,@TotalInstllments;
-
-
-
-
-
-
-
-

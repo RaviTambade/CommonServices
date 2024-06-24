@@ -22,6 +22,7 @@ function NavBar() {
             <Nav.Link href="/register">Register</Nav.Link>  
             <Nav.Link href="/changedpassword">ChangedPassword</Nav.Link>  
             <Nav.Link href="/ministatment">MiniStatement</Nav.Link>
+            <Nav.Link href="/loanapplicationform">LoanApplicationForm</Nav.Link>
             
           </Nav>
         </Navbar.Collapse>

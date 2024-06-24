@@ -51,9 +51,9 @@ public class LoanRepo : ILoanRepo
                 DateTime loansanctiondate = DateTime.Parse(reader["loansanctiondate"].ToString());
                 DateOnly dateOnlyLoanSanctionDate = DateOnly.FromDateTime(loansanctiondate);
                  //DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
-                int EMIday = int.Parse(reader["EMIday"].ToString());
-                double EMIamount = double.Parse(reader["EMIamount"].ToString());
-                int applicationId = int.Parse(reader["applicationId"].ToString());  
+                int EMIday = int.Parse(reader["emiday"].ToString());
+                double EMIamount = double.Parse(reader["emiamount"].ToString());
+                int applicationId = int.Parse(reader["applicationid"].ToString());  
                 
                 loanlist.Add(
                     new Loan()
@@ -105,9 +105,9 @@ public class LoanRepo : ILoanRepo
                 DateOnly dateOnlyloansanctiondate = DateOnly.FromDateTime(loansanctiondate);
 
                 //DateOnly loanSanctionDate = DateOnly.Parse(reader["loansanctiondate"].ToString());
-                int EMIday = int.Parse(reader["EMIday"].ToString());
-                double EMIamount = double.Parse(reader["EMIamount"].ToString());
-                int applicationId = int.Parse(reader["applicationId"].ToString()); 
+                int EMIday = int.Parse(reader["emiday"].ToString());
+                double EMIamount = double.Parse(reader["emiamount"].ToString());
+                int applicationId = int.Parse(reader["applicationid"].ToString()); 
                 
 
 
