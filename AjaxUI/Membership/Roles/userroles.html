@@ -9,10 +9,12 @@
 </head>
 
 <body>
-    <h2>Get All Roles in Application</h2>
-
+    <h2>Get All Roles in Application of User</h2>
+    <hr/>
     <div>
-        <button id="btngetroles">Get Role</button>
+        <input id="txtUserId"/>
+    <div>
+        <button id="btngetroles">Get Roles</button>
     </div>
     <div>
         <label id="roles"></label>
@@ -23,8 +25,10 @@
     $(document).ready(function () {
         console.log("Document.Ready");
         $("#btngetroles").click(function () {
+            var userId=$("#txtUserId").val();
+
             $.ajax({
-                url: "http://localhost:5142/api/roles",
+                url: "http://localhost:5142/api/users/"+userId+ "/roles",
                 type: 'GET',
                 contentType: 'application/json',
 
