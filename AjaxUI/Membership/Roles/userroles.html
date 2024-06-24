@@ -26,34 +26,12 @@
     </div>
 </body>
 
+
 <script>
     $(document).ready(function () {
         console.log("Document.Ready");
-        $("#btngetroles").click(function () {
-            var userId=$("#txtUserId").val();
-
-            $.ajax({
-                url: "http://localhost:5142/api/users/"+userId+ "/roles",
-                type: 'GET',
-                contentType: 'application/json',
-
-                success: function (data) {
-                    // console.log(data);
-                    // $('#roles').append(
-                    //     $(document.createElement('h6')).prop({
-                    //         for: data.id
-                    //     }).html(data.id + " " + data.name + " " + data.lob)
-                    // )
-                    for (var i = 0; i <data.length; i++) {
-                        var theroles = $('<input type="label" value="' + data[i].id + '"/>' + data[i].name + data[i].lob + "<br/>");
-                        $("#roles").append(theroles);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-        });
+       
+       
     });
 </script>
 
