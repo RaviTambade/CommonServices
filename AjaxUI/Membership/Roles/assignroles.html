@@ -43,26 +43,7 @@
         // });
 
         $("#btngetroles").click(function () {
-            $("ddlob").empty();
-            var userId = $("#userid").val();
-            console.log(userId);
-            $.ajax({
-                url: "http://localhost:5142/api/roles/" + userId,
-                type: 'GET',
-                contentType: 'application/json',
-
-                success: function (data) {
-                     
-                    for (var i = 0; i <data.length; i++) {
-                        var theroles = $('<option value="' + data[i].lob + '">'  + data[i].lob +'</option>');
-                        $("#ddlob").append(theroles);
-                        
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
+          
         });
     });
 </script>

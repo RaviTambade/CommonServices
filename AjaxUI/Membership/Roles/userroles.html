@@ -6,55 +6,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Roles</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 
 <body>
-    <h2>Get All Roles in Application of User</h2>
-    <hr/>
+    <h2>Get Roles for User and LOB</h2>
+    <hr />
+<<<<<<< HEAD
+    <div><label for="txtUserId">User ID:</label><input id="txtUserId" placeholder="Enter User ID" /></div>
+    <div><button id="btngetroles">Get Roles</button></div>
+    <hr />
+    <div id="rolesContainer">
+        <h3>Roles:</h3>
+        <div id="roles"></div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            console.log("Document.Ready");
+            $("#btngetroles").click(function () {
+                var userId = $("#txtUserId").val();
+                $("#roles").empty();
+
+                $.ajax({
+                    url: "http://localhost:5142/api/users/${userId}/roles",
+                    type: 'GET',
+                    contentType: 'application/json',
+
+                    success: function (data) {
+                        // console.log(data);
+                        // $('#roles').append(
+                        //     $(document.createElement('h6')).prop({
+                        //         for: data.id
+                        //     }).html(data.id + " " + data.name + " " + data.lob)
+                        // )
+                        if(data.length > 0){
+                        data.forEach(function (role) {
+                            var theroles = $('<div>').text('ID:${role.id},Name:${role.name},LOB:${role.lob}');
+                            $("#roles").append(theroles);
+                        });
+                        } else {
+                            $("#roles").text("No Roles Found");
+=======
     <div>
-        <input id="txtUserId"/>
+        <label for="txtUserId">User ID:</label>
+        <input id="txtUserId" placeholder="Enter User ID" />
+    </div>
     <div>
         <button id="btngetroles">Get Roles</button>
     </div>
-    <div>
-        <ul>
-            <li>Administrator</li>
-            <li>Editor</li>
-            <li>Contributor</li>
-            <li>Subscriber</li>
-        </ul>
+    <hr />
+    <div id="rolesContainer">
+        <h3>Roles:</h3>
+        <table id="rolesTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>LOB</th>
+                </tr>
+            </thead>
+            <tbody id="rolesTableBody">
+                <!-- Roles data will be dynamically inserted here -->
+            </tbody>
+        </table>
     </div>
-</body>
 
-<script>
-    $(document).ready(function () {
-        console.log("Document.Ready");
-        $("#btngetroles").click(function () {
-            var userId=$("#txtUserId").val();
+    <script>
+        $(document).ready(function () {
+            console.log("Document.Ready");
+            $("#btngetroles").click(function () {
+                var userId = $("#txtUserId").val();
+                $("#rolesTableBody").empty(); // Clear previous roles table rows
 
-            $.ajax({
-                url: "http://localhost:5142/api/users/"+userId+ "/roles",
-                type: 'GET',
-                contentType: 'application/json',
+                $.ajax({
+                    url: `http://localhost:5142/api/roles/${userId}`,
+                    type: 'GET',
+                    contentType: 'application/json',
 
-                success: function (data) {
-                    // console.log(data);
-                    // $('#roles').append(
-                    //     $(document.createElement('h6')).prop({
-                    //         for: data.id
-                    //     }).html(data.id + " " + data.name + " " + data.lob)
-                    // )
-                    for (var i = 0; i <data.length; i++) {
-                        var theroles = $('<input type="label" value="' + data[i].id + '"/>' + data[i].name + data[i].lob + "<br/>");
-                        $("#roles").append(theroles);
+                    success: function (data) {
+                        if (data.length > 0) {
+                            data.forEach(function (role) {
+                                var row = `<tr>
+                                    <td>${role.id}</td>
+                                    <td>${role.name}</td>
+                                    <td>${role.lob}</td>
+                                </tr>`;
+                                $("#rolesTableBody").append(row);
+                            });
+                        } else {
+                            $("#rolesTableBody").html('<tr><td colspan="3">No Roles Found</td></tr>');
+>>>>>>> 8cf702e3a5bf0bc2a08ddee877615718cb5ac3ac
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
                     }
-                },
-                error: function (xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
+                });
             });
         });
-    });
-</script>
+    </script>
+
+</body>
 
 </html>

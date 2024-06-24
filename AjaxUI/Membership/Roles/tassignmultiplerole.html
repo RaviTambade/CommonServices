@@ -60,28 +60,7 @@
    
 
     <script>
-        document.getElementById("assignRolesForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent the form from submitting
-
-            // Get form values
-            var username = document.getElementById("username").value;
-            var selectedRoles = [];
-            var rolesCheckboxes = document.getElementsByName("roles");
-
-            // Loop through checkboxes to find selected roles
-            for (var i = 0; i < rolesCheckboxes.length; i++) {
-                if (rolesCheckboxes[i].checked) {
-                    selectedRoles.push(rolesCheckboxes[i].value);
-                }
-            }
-
-            // Normally you would send this data to the server to process the role assignment
-            // For this example, we'll just log the values to console
-            console.log("Assigning roles: " + selectedRoles.join(", ") + " to user: " + username);
-
-            // Optionally, you can reset the form after submission
-            // this.reset();
-        });
+        
     </script>
 </body>
 </html>
