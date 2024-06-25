@@ -15,7 +15,7 @@
     $(document).ready(function() {
         var loantypesdata=null;
         $.ajax({
-                url: 'http://localhost:5053/api/loanstypes',
+                url: 'http://localhost:5002/api/loanstypes',
                 type: 'GET',
                 contentType: 'application/json',
                 success: function(response) {
@@ -74,7 +74,7 @@
            // AJAX GET request to getall data from database
           // AJAX POST request to insert new data
           $.ajax({
-              url: 'http://localhost:5053/api/application',
+              url: 'http://localhost:5002/api/application',
               type: 'POST',
               contentType: 'application/json',
               data: JSON.stringify(newData),

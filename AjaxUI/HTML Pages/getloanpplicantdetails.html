@@ -26,7 +26,7 @@
     //call lotype API
     $(document).ready(function() {
                                 $.ajax({
-                                        url: 'http://localhost:5053/api/loanstypes',
+                                        url: 'http://localhost:5002/api/loanstypes',
                                         type: 'GET',
                                         contentType: 'application/json',
                                         success: function (response) {
@@ -55,7 +55,7 @@
             var applcationid = $('#applicationid').val();
 
             $.ajax({
-                                url: 'http://localhost:5053/api/application' + "/" +  applcationid,
+                                url: 'http://localhost:5002/api/application' + "/" +  applcationid,
                                 type: 'PUT',
                                 contentType: 'application/json',
                                 data: JSON.stringify(details),
@@ -76,7 +76,7 @@
                         });
                         if(details.loanStatus=="approved"){
                         $.ajax({
-                                url: 'http://localhost:5053/api/loans',
+                                url: 'http://localhost:5002/api/loans',
                                 type: 'POST',
                                 contentType: 'application/json',
                                 data: JSON.stringify(loanData),
@@ -107,7 +107,7 @@
       
        
                          $.ajax({
-                                url: 'http://localhost:5053/api/application' + "/" + applicationid ,
+                                url: 'http://localhost:5002/api/application' + "/" + applicationid ,
                                 type: 'GET',
                                 contentType: 'application/json',
                                 success: function (data) {
