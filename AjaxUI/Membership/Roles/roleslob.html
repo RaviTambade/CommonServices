@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Roles</title>
+    <style>
+         table,
+        th,
+        td {
+
+            width: auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Get All Roles in Application of User and LOB (Line of Business)</h2>
+
+
+    <div>
+        <label for="">Enter Id : </label><input id="txtUserId" />
+        
+        <div>
+            <div>
+                <label>Select LOB : </label>
+                <select name="lob" id="lob">
+                    <option value="PMS">PMS</option>
+                    <option value="Inventory Management">Inventory Management</option>
+                    <option value="EKrushi">EKrushi</option>
+                    <option value="EAgro">EAgro</option>
+                    <option value="banking">banking</option>
+                </select>
+
+
+            </div>
+            <div>
+                <button id="btngetroles">Get Role</button>
+            </div>
+            <br/>
+            <div>
+                <table id="roles">
+                    <thead>
+                        <tr>
+                            <th><u>Roles</u></th>
+
+                        </tr>
+
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+
+                </table>
+            </div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        console.log("Document.Ready");
+        $("#btngetroles").click(function () {
+            var userId = $("#txtUserId").val();
+            var LOB = $('#lob').val();
+            $.ajax({
+                url: "https://localhost:7162/api/roles/users/" + userId + "/lob/" + LOB,
+                type: 'GET',
+                contentType: 'application/json',
+
+                success: function (data) {
+                    $('#roles tbody').empty();
+
+                    $.each(data, function (index, item) {
+                        $('#roles tbody').append('<tr><td>' + item.name + '</td></tr>');
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX Error: ' + status + error);
+                }
+            });
+        });
+    });
+</script>
+
+</html>
