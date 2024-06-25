@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Roles</title>
+</head>
+
+<body>
+    <div id="checkboxContainer">
+        <!-- Checkboxes will be dynamically added here -->
+    </div>
+
+    <script>
+
+            $(document).ready(function() {
+                // Function to add a new checkbox
+                function addCheckbox(labelText, value) {
+                    var checkbox = $('<input>').attr({
+                        type: 'checkbox',
+                        value: value
+                    });
+                    var label = $('<label>').text(labelText).prepend(checkbox);
+                    $('<div>').addClass('checkbox').append(label).appendTo('#checkboxContainer');
+                }
+
+                
+                // Example of adding checkboxes dynamically
+                addCheckbox('Admin', 'admin');
+                addCheckbox('Director', 'director');
+                
+                // Add more checkboxes as needed
+
+                // Event handler for checkbox change
+                $('#checkboxContainer').on('change', 'input[type="checkbox"]', function() {
+                    var value = $(this).val();
+                    if ($(this).is(':checked')) {
+                        console.log(value + ' is checked');
+                        // Perform actions when checkbox is checked
+                    } else {
+                        console.log(value + ' is unchecked');
+                        // Perform actions when checkbox is unchecked
+                    }
+                });
+            });
+    </script>
+</html>
