@@ -1,4 +1,4 @@
-<!-- url: 'http://localhost:5053/api/applicant/status' + "/" + loantype , -->
+<!-- url: 'http://localhost:5000/api/applicant/status' + "/" + loantype , -->
  
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
 
             //$(document).ready(function() {
                          $.ajax({
-                                url: 'http://localhost:5053/api/loans/status' + "/" + loanStatus ,
+                                url: 'http://localhost:5000/api/loans/status' + "/" + loanStatus ,
                                 type: 'GET',
                                 contentType: 'application/json',
                                 success: function (data) {

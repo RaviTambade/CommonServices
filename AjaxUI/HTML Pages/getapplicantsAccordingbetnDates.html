@@ -27,7 +27,7 @@
                 $(document).ready(function() {
                    // var loantypesdata=null;
                             // $.ajax({
-                            //             url: 'http://localhost:5053/api/loanstypes',
+                            //             url: 'http://localhost:5000/api/loanstypes',
                             //             type: 'GET',
                             //             contentType: 'application/json',
                             //             success: function(response) {
@@ -44,7 +44,7 @@
                             //          });
 
                              $.ajax({
-                                    url: 'http://localhost:5053/api/loans' + "/" + startDate + "/" + endDate,
+                                    url: 'http://localhost:5000/api/loans' + "/" + startDate + "/" + endDate,
                                     type: 'GET',
                                     contentType: 'application/json',
                                     success: function (data) {
