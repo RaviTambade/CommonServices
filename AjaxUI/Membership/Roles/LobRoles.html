@@ -83,7 +83,7 @@
                 var selectedLob = $("#role").val();
                 if (selectedLob) {
                     $.ajax({
-                        url: `http://localhost:5142/api/roles/lob/${selectedLob}`,
+                        url: `http://localhost:5000/api/roles/lob/${selectedLob}`,
                         type: 'GET',
                         contentType: 'application/json',
                         success: function (data) {

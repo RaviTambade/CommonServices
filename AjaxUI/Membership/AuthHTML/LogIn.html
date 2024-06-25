@@ -39,7 +39,7 @@
 <script>
     
 
-//var signInUrl="http://localhost:5142/api/auth/signin";
+//var signInUrl="http://localhost:5000/api/auth/signin";
 
 $(document).ready(function() {
   // Event handler for checkboxes
@@ -52,7 +52,7 @@ $(document).ready(function() {
         var Claim = {"ContactNumber":contactNo, "password":pass,"lob":lob}
       
         $.ajax({
-        url: "http://localhost:5142/api/auth/signin",
+        url: "http://localhost:5000/api/auth/signin",
         type: 'POST',
         data: JSON.stringify(Claim),
         contentType: 'application/json',

@@ -67,7 +67,7 @@
             var userId = $("#txtUserId").val();
             var LOB = $('#lob').val();
             $.ajax({
-                url: "https://localhost:7162/api/roles/users/" + userId + "/lob/" + LOB,
+                url: "https://localhost:5000/api/roles/users/" + userId + "/lob/" + LOB,
                 type: 'GET',
                 contentType: 'application/json',
 

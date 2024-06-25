@@ -17,7 +17,7 @@
            // AJAX GET request to getall data from database
            var UserIds = $('#userids').val();
           $.ajax({
-              url: 'http://localhost:5142/api/users/details/ids/'+ UserIds,
+              url: 'http://localhost:5000/api/users/details/ids/'+ UserIds,
               type: 'GET',
               contentType: 'application/json',
               

@@ -52,7 +52,7 @@
                 }
 
                 $.ajax({
-                    url: `http://localhost:5142/api/addresses/users/${userId}`,
+                    url: `http://localhost:5000/api/addresses/users/${userId}`,
                     method: 'GET',
                     success: function(addresses) {
                         displayAddresses(addresses);

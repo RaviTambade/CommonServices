@@ -56,7 +56,7 @@
             userId = $("#userid").val();
             if (userId) {
                 $.ajax({
-                    url: `http://localhost:5142/api/roles/${userId}`,
+                    url: `http://localhost:5000/api/roles/${userId}`,
                     type: 'GET',
                     contentType: 'application/json',
                     success: function (data) {
@@ -80,7 +80,7 @@
             var lob = $(this).val();
             if (userId && lob) {
                 $.ajax({
-                    url: `http://localhost:5142/api/roles/users/${userId}/lob/${lob}`,
+                    url: `http://localhost:5000/api/roles/users/${userId}/lob/${lob}`,
                     type: 'GET',
                     contentType: 'application/json',
                     success: function (data) {
