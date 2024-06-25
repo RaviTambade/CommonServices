@@ -30,7 +30,7 @@ public class RoleRepository : IRoleRepository
 
     public async Task<List<string>> GetLOBs()
     {
-            try
+        try
         {
             // var roles = await _context.Roles.Where(r => roleIds.Contains(r.Id.ToString())).ToListAsync();
             var  roles =  await(
@@ -170,7 +170,6 @@ public class RoleRepository : IRoleRepository
         return status;
     }
 
-
     public async Task<bool> Insert(UserRole userRole)
     {
         bool status = false;
@@ -224,8 +223,7 @@ public class RoleRepository : IRoleRepository
         }
         return status;
     }
-
-  
+ 
     private async Task<bool> SaveChanges(RoleContext _context)
     {
         int rowsAffected = await _context.SaveChangesAsync();

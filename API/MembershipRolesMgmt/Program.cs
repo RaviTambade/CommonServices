@@ -30,6 +30,7 @@ builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<TokenHelper>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services
     .AddOptions<JwtSettings>()
     .BindConfiguration("JWT")
@@ -48,4 +49,4 @@ app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 app.UseStaticFiles();
 app.UseMiddleware<JwtMiddleware>();
 app.MapControllers();
-app.Run();
+app.Run("http://localhost:5000");
