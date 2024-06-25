@@ -17,7 +17,7 @@
            // AJAX GET request to getall data from database
            var UserRole = $('#role').val();
           $.ajax({
-              url: 'http://localhost:5142/api/users/roles/'+ UserRole,
+              url: 'http://localhost:5000/api/users/roles/'+ UserRole,
               type: 'GET',
               contentType: 'application/json',
               

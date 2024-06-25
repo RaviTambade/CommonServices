@@ -17,7 +17,7 @@
            // AJAX GET request to getall data from database
            var Loanid = $('#loanid').val();
           $.ajax({
-              url: 'http://localhost:5000/api/banking/operations/emidetails' + "/" + Loanid,
+              url: 'http://localhost:5002/api/banking/operations/emidetails' + "/" + Loanid,
               type: 'GET',
               contentType: 'application/json',
               
