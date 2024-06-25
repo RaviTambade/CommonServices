@@ -7,33 +7,61 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Roles</title>
     <style>
-        table {
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        select, input[type="button"], input[type="text"] {
             width: 100%;
-            border-collapse: collapse;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+        #rolesContainer {
             margin-top: 20px;
         }
-        table, th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
+        #roles div {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: #f9f9f9;
         }
     </style>
 </head>
 
 <body>
-    <h2>Get Roles for User and LOB</h2>
+    <h2>Get Roles for User </h2>
     <hr />
-    <div><label for="txtUserId">User ID:</label><input id="txtUserId" placeholder="Enter User ID" /></div>
-    <div><button id="btngetroles">Get Roles</button></div>
+    <div><label for="txtUserId">User ID:</label><input type="text" id="txtUserId" placeholder="Enter User ID" /></div>
+    <div><input type="button" id="btngetroles" value="Get Roles" /></div>
     <hr />
     <div id="rolesContainer">
         <h3>Roles:</h3>
         <div id="roles"></div>
     </div>
-
 
     <script>
         $(document).ready(function () {
@@ -43,17 +71,15 @@
                 $("#roles").empty();
 
                 $.ajax({
-                    url: "http://localhost:5142/api/users/${userId}/roles",
+                    url: `http://localhost:5142/api/roles`,
                     type: 'GET',
                     contentType: 'application/json',
-
                     success: function (data) {
-                   
                         if(data.length > 0){
-                        data.forEach(function (role) {
-                            var theroles = $('<div>').text('ID:${role.id},Name:${role.name},LOB:${role.lob}');
-                            $("#roles").append(theroles);
-                        });
+                            data.forEach(function (role) {
+                                var theroles = $(`<div>`).text(`ID: ${role.id}, Name: ${role.name}, LOB: ${role.lob}`);
+                                $("#roles").append(theroles);
+                            });
                         } else {
                             $("#roles").text("No Roles Found");
                         }
