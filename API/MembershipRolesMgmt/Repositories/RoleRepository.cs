@@ -28,6 +28,23 @@ public class RoleRepository : IRoleRepository
         }
     }
 
+    public async Task<List<string>> GetLOBs()
+    {
+            try
+        {
+            // var roles = await _context.Roles.Where(r => roleIds.Contains(r.Id.ToString())).ToListAsync();
+            var  roles =  await(
+                from role in _context.Roles
+                select role.Lob).Distinct().ToListAsync<string>();
+            
+            return roles;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
     public async Task<List<Role>> GetRoles(string roleIds)
     {
         try

@@ -21,6 +21,12 @@ public class RolesController : ControllerBase
         return await _service.GetRoles();
     }
 
+    [HttpGet("lobs")]
+    public async Task<List<string>> GetLOBs()
+    {
+        return await _service.GetLOBs();
+    }
+
     [HttpGet("{userId}")]
     public async Task<List<Role>> GetRoles(int userId)
     {

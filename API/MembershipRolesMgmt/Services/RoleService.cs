@@ -72,4 +72,10 @@ public class RoleService : IRoleService
     {
         return await _repository.CheckUserRole(userId, roleId);
     }
+
+    public async Task<List<string>> GetLOBs()
+    {
+        return await _repository.GetLOBs();
+
+    }
 }
