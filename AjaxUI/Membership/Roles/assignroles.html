@@ -11,40 +11,57 @@
 <body>
     <div>
         <label>Enter UserId</label>
-        <input type = "number" id = "userid" name = "userid"/>
-        <button id="btngetroles">Get Roles</button>
+        <input type="number" id="userid" name="userid" />
+        <button id="btngetroles">Get Line Of Business</button>
     </div>
     <div>
-        <select id="ddlob" name = "ddlob"></select>
+        <select id="ddlob" name="ddlob" >
+
+        </select>
+    </div>
+    <div>
+        
     </div>
 </body>
 
 <script>
     $(document).ready(function () {
-        console.log("Document.Ready");
-        // $.ajax({
-
-        //     url: "http://localhost:5142/api/roles",
-        //         type: 'GET',
-        //         contentType: 'application/json',
-
-        //         success: function (data) {
-                    
-        //             var allRoles = data;
-        //             for (var i = 0; i <data.length; i++) {
-        //                 var theroles = $('<input type="checkbox" value="' + data[i].id + '"/>' + data[i].name  +"<br/>");
-        //                 $("#roles").append(theroles);
-        //             }
-        //         },
-        //         error: function (xhr, status, error) {
-        //             console.error(xhr.responseText);
-        //         }
-
-        // });
-
+        
+        var allRoles = null;
         $("#btngetroles").click(function () {
-          
+            var userId = $("#userid").val();
+            console.log(userId);
+            $.ajax({ 
+                url: "http://localhost:5142/api/roles/"+userId,
+                type: 'GET',
+                contentType: 'application/json',
+
+                success: function (data) {
+                    $("#ddlob").empty();
+                    allRoles = data;
+                    for (var i = 0; i < data.length; i++) {
+                       var theroles = $('<option selected=""  >' +data[i].lob + "</option>");
+                        $("#ddlob").append(theroles); 
+                    }
+                   
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+
+            });
+
         });
+        $("#ddlob").change(function(){
+           
+            for (var i = 0; i < allRoles.length; i++) {
+               // var theroles = $('<option  >' +data[i].lob + "</option>");
+                // $("#ddlob").append(theroles);
+                    
+                    console.log(allRoles[i].name);
+                   }
+                  
+        })
     });
 </script>
 
