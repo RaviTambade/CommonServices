@@ -47,7 +47,7 @@ public class UsersController : ControllerBase
 
     //[Authorize]
     [HttpGet]
-    [Route("{userId}")]
+    [Route("userdetails/{userId}")]
     public async Task<User> GetUser(int userId)
     {
         return await _svc.GetUser(userId);

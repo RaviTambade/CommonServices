@@ -33,8 +33,6 @@
           <button type="button" class="cancelbtn">Cancel</button>
           <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
-      
-    
 </body>
 <script>
     
@@ -61,8 +59,6 @@ $(document).ready(function() {
             console.log(data.token);
             //var tokenData = JSON.stringify(data);
             localStorage.setItem('token',data.token);
-            
-            
         },
         error: function (xhr, status, error) {
             console.error(xhr.responseText);
