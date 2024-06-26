@@ -51,6 +51,12 @@ public class RolesController : ControllerBase
         return await _service.GetRolesByLob(lob);
     }
 
+    [HttpGet("getuserbyroles/rolename/{rolename}/lob/{lob}")]
+     public async Task<List<User>> UserDetailsByRole(LOB lob)
+     {
+        return await _service.UserDetailsByRole(lob);
+     }
+
     [HttpPost]
     public async Task<bool> Insert(Role role)
     {
