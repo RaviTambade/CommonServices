@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Delete User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        select, input[type="button"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        input[type="button"] {
+            background-color: #f44336;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="button"]:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Delete User</h2>
+    <hr />
+    <div>
+        <label for="txtUserId">User ID:</label>
+        <input type="text" id="txtUserId" placeholder="Enter User ID" />
+    </div>
+    <div>
+        <input type="button" id="btndeleteuser" value="Delete User" />
+    </div>
+    <hr />
+
+    <script>
+        $(document).ready(function () {
+            console.log("Document.Ready");
+
+            // Delete a user
+            $("#btndeleteuser").click(function () {
+                var userId = $("#txtUserId").val();
+
+                $.ajax({
+                    url: `http://localhost:5000/api/users/${userId}`,
+                    type: 'DELETE',
+                    success: function (result) {
+                        if(result) {
+                            alert("User deleted successfully!");
+                        } else {
+                            alert("User could not be deleted.");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert("An error occurred while deleting the user.");
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
