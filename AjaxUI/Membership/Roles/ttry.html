@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,8 +10,8 @@
 
 <body>
     <div id="checkboxContainer">
-        <!-- Checkboxes will be dynamically added here -->
-    </div>
+         Checkboxes will be dynamically added here -->
+    <!-- </div>
 
     <script>
 
@@ -45,4 +45,116 @@
                 });
             });
     </script>
+</html> --> 
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input[type="number"],
+        button {
+            padding: 5px;
+            margin-left: 10px;
+        }
+
+        input[type="radio"] {
+            margin-left: 5px;
+        }
+
+        #roles div {
+            margin-top: 5px;
+        }
+    </style>
+    <title>Roles</title>
+</head>
+
+<body>
+    <div>
+        <label>Enter UserId</label>
+        <input type="number" id="userid" name="userid" />
+        <button id="btngetlobs">Get Line Of Business</button>
+    </div>
+    <div id="lobs">
+        <label>Select LOB</label>
+        <div>
+            <input type="radio" id="pms" name="lob" value="PMS" />
+            <label for="pms">PMS</label>
+        </div>
+        <div>
+            <input type="radio" id="banking" name="lob" value="Banking" />
+            <label for="banking">Banking</label>
+        </div>
+        <div>
+            <input type="radio" id="eKrushi" name="lob" value="EKrushi" />
+            <label for="eKrushi">EKrushi</label>
+        </div>
+        <div>
+            <input type="radio" id="eAgro" name="lob" value="EAgro" />
+            <label for="eAgro">EAgro</label>
+        </div>
+    
+    </div>
+    <div id="roles"></div>
+
+    <script>
+        $(document).ready(function () {
+            var userId = null;
+            $("#btngetlobs").click(function () {
+                userId = $("#userid").val();
+                if (userId) {
+                    $("input[name='lob']").prop('disabled', false);
+                } else {
+                    alert("Please enter a valid user ID.");
+                    $("input[name='lob']").prop('disabled', true);
+                }
+            });
+
+            $("input[name='lob']").change(function () {
+                var lob = $(this).val();
+                if (userId && lob) {
+                    $.ajax({
+                        url: `http://localhost:5000/api/roles/users/${userId}/lob/${lob}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            const roles = $("#roles").empty();
+                            data.forEach(role => roles.append($('<div></div>').text(role.name)));
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(xhr.responseText);
+                            alert("An error occurred while fetching the roles. Please try again.");
+                        }
+                    });
+                } else {
+                    $("#roles").empty();
+                }
+            });
+
+            // Initially disable the radio buttons
+            $("input[name='lob']").prop('disabled', true);
+        });
+    </script>
+
+</body>
+
 </html>
