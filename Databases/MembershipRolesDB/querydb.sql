@@ -26,7 +26,7 @@ from users
     inner join userroles on users.id = userroles.userid
     inner join roles on userroles.roleid = roles.id
 where
-    userid = 1;
+    userid = 5;
 
 -- Users assigned for for specific role
 select * from userroles where roleid = 1;
@@ -36,7 +36,7 @@ from users
     inner join userroles on users.id = userroles.userid
     inner join roles on userroles.roleid = roles.id
 where
-    roleid = 19;
+    roleid = 15;
 
 -- User details according to lob
 select users.firstname, users.lastname, roles.lob
@@ -57,14 +57,14 @@ where
 -- Address details for user
 select * from addresses where userid = 1;
 
---Users With Given Contact Number & Password
+-- Users With Given Contact Number & Password
 SELECT *
 FROM users
 WHERE
     contactnumber = @contactNumber
     AND BINARY password = @password;
 
---this query returned users who have the role specified by roleName
+-- this query returned users who have the role specified by roleName
 select *
 from users
     inner join userroles on users.id = userroles.userid
@@ -72,7 +72,7 @@ from users
 where
     roles.name = @roleName;
 
---this query returns all the info related to that user id
+-- this query returns all the info related to that user id
 select
     id,
     firstname,
@@ -87,7 +87,7 @@ from users
 where
     id IN (1);
 
---Insert New User In the user table
+-- Insert New User In the user table
 Insert Into
     users (
         imageurl,
@@ -116,7 +116,7 @@ Values (
         @modifiedOn
     );
 
---This query updates the specified table
+-- This query updates the specified table
 Update users
 set
     aadharid = @aadharId,
@@ -129,7 +129,7 @@ set
 where
     id = @Id;
 
---Update old contact number to new contact number
+-- Update old contact number to new contact number
 UPDATE users
 SET
     contactnumber = @newContactNumber
@@ -137,9 +137,19 @@ WHERE
     password = @password
     AND contactnumber = @oldContactNumber;
 
---Update old password to new password
+-- Update old password to new password
 UPDATE users
 SET password = @newPassword
 WHERE
     password = @oldpassword
     AND contactnumber = @contactNumber;
+    
+-- Get user details according to lob and role
+select users.id,users.imageurl,users.aadharid,users.firstname,users.lastname,users.birthdate,users.gender,users.email,users.contactnumber,users.createdon,users.modifiedon
+from users
+inner join userroles on users.id = userroles.userid
+inner join roles on userroles.roleid = roles.id
+where roles.name = "farmer" AND roles.lob = "EAgro";
+
+
+    
