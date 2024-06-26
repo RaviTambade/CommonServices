@@ -125,7 +125,7 @@
                             success: function (data) {
                                 var userdata =data;
                                 console.log("Users: ", data);
-
+                                $('#user').empty();
                                 for (var i = 0; i < userdata.length; i++) {
                                 var radiobutton = $('<input>').attr({
                                     type: 'radio',
