@@ -51,10 +51,11 @@ public class RolesController : ControllerBase
         return await _service.GetRolesByLob(lob);
     }
 
-    [HttpGet("getuserbyroles/rolename/{rolename}/lob/{lob}")]
-     public async Task<List<User>> UserDetailsByRole(LOB lob)
+   [HttpGet("getuserbyroles/rolename/{roleName}/lob/{lob}")]
+     public async Task<List<User>> UserDetailsByRole(string roleName, string lob)
      {
-        return await _service.UserDetailsByRole(lob);
+        var lobObj = new LOB { RoleName = roleName, Lob = lob };
+        return await _service.UserDetailsByRole(lobObj);
      }
 
     [HttpPost]
