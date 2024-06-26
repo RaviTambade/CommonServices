@@ -29,13 +29,13 @@
 
         #roles div {
             float: left;
-           
             display: inline-block;
-        }
-        .radio{
-            margin-right: 5px;
+            margin-right: 10px;
         }
 
+        .radio {
+            margin-right: 5px;
+        }
     </style>
     <title>Users information According to LOB And their Roles</title>
 </head>
@@ -43,87 +43,90 @@
 <body>
     <div>
         <p>Please select Line of Business(LOB):</p>
-        <input type="radio" id="pms" name="lob" value="PMS">
-        <label for="pms">PMS</label> 
-        <input type="radio" id="banking" name="lob" value="Banking">
-        <label for="banking">Banking</label>
-        <input type="radio" id="ekrushi" name="lob" value="EKrushi">
-        <label for="ekrushi">EKrushi</label>
+        <input type="radio" id="pms" name="lob" value="PMS">
+        <label for="pms">PMS</label>
+        <input type="radio" id="banking" name="lob" value="Banking">
+        <label for="banking">Banking</label>
+        <input type="radio" id="ekrushi" name="lob" value="EKrushi">
+        <label for="ekrushi">EKrushi</label>
         <input type="radio" id="eagro" name="lob" value="EAgro">
-        <label for="eagro">EAgro</label>
+        <label for="eagro">EAgro</label>
         <input type="radio" id="iManagment" name="lob" value="Inventory Management">
-        <label for="iManagment">Inventory Management</label>
+        <label for="iManagment">Inventory Management</label>
     </div>
-    
-    <div id="roles" ;>
+
+    <div id="roles">
         <p>Role According To Selected LOB</p>
     </div>
 
-    
-    
-</body>
+    <script>
+       $(document).ready(function () {
+    var selectedLob;
 
-<script>
-
-$(document).ready(function() {
-    $('input:radio').change(function() {
-       var selectedLob = $("input[name='lob']:checked").val();
-        console.log(selectedLob);
+    $('input:radio[name="lob"]').change(function () {
+        selectedLob = $("input[name='lob']:checked").val();
+        console.log("Selected LOB: " + selectedLob);
 
         if (selectedLob) {
-                    $.ajax({
-                        url: `http://localhost:5000/api/roles/lob/${selectedLob}`,
-                        type: 'GET',
-                        contentType: 'application/json',
-                        success: function (data) {
-                            //var rolesTableBody = $("#rolesTable tbody");
-                            //rolesTableBody.empty();
-                            if(data.length>0)
-                            {
-
-                                //for(i=0;i<data.length;i++)
-                                //{
-                                    //console.log(data[i].name);
-                                    addRadioButton(data);
-                                //}
-                            }
-                            else 
-                            {
-                                //rolesTableBody.append('<tr><td colspan="2">No Roles Found</td></tr>');
-                                alert("No Roles Founs....");
-                             }
-                        },
-                        error: function (xhr, status, error) {
-                            console.error(xhr.responseText);
-                        }
-                    });
-                } 
-                else 
-                {
-                    alert("Please select a LOB.");
+            $.ajax({
+                url: `http://localhost:5000/api/roles/lob/${selectedLob}`,
+                type: 'GET',
+                contentType: 'application/json',
+                success: function (data) {
+                    if (data.length > 0) {
+                        addRadioButton(data);
+                    } else {
+                        alert("No Roles Found.");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching roles: " + xhr.responseText);
                 }
             });
-
-
-            function addRadioButton(values) {
-                //console.log("Inside addRadioButton : "+ value);
-
-                for(var i=0;i<values.length;i++)
-                {
-                    var radiobutton = $('<input>').attr({
-                        type: 'radio',
-                        value: values
-                    });
-                    var label = $('<label>').text(values[i].name).prepend(radiobutton);
-                     $('<div>').addClass('roles').append(label).appendTo('#roles');
-                }
-               
-                    
-                }
+        } else {
+            alert("Please select a LOB.");
+        }
     });
 
-        
-    
-</script>
+    function addRadioButton(values) {
+        $('#roles').empty();
+        for (var i = 0; i < values.length; i++) {
+            var radiobutton = $('<input>').attr({
+                type: 'radio',
+                value: values[i].name,
+                name: 'roleName'
+            });
+            var label = $('<label>').text(values[i].name).prepend(radiobutton);
+            $('#roles').append($('<div>').addClass('radio').append(radiobutton).append(label));
+        }
+
+        $('input[name="roleName"]').change(function () {
+            var userRole = $("input[name='roleName']:checked").val();
+            console.log("Selected role: " + userRole);
+            console.log("Selected LOB: " + selectedLob);
+             
+            if (userRole && selectedLob) {
+                $.ajax({
+                    url:'http://localhost:5000/api/roles/getuserbyroles/rolename/'+ userRole +'/lob/'+selectedLob,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        console.log("Users: ", data);
+                        alert("Users fetched successfully.");
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error fetching users: " + xhr.responseText);
+                        alert("An error occurred while fetching the users. Please try again.");
+                    }
+                });
+            } else {
+                alert("Please select a role.");
+            }
+        });
+    }
+});
+
+    </script>
+</body>
 
 </html>
