@@ -27,17 +27,24 @@
             margin-left: 10px;
         }
 
+        #lobs div {
+            align-items: left;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
         #roles div {
-            float: left;
+            align-items: left;
             display: inline-block;
             margin-right: 10px;
         }
 
         #user div {
-            float: left;
+            align-items: left;
             display: inline-block;
 
         }
+
         #dataDisplay div {
             margin-right: 5px;
         }
@@ -50,19 +57,8 @@
 </head>
 
 <body>
-    <div>
-        <p>Please select Line of Business(LOB):</p>
-        <input type="radio" id="pms" name="lob" value="PMS">
-        <label for="pms">PMS</label>
-        <input type="radio" id="banking" name="lob" value="Banking">
-        <label for="banking">Banking</label>
-        <input type="radio" id="ekrushi" name="lob" value="EKrushi">
-        <label for="ekrushi">EKrushi</label>
-        <input type="radio" id="eagro" name="lob" value="EAgro">
-        <label for="eagro">EAgro</label>
-        <input type="radio" id="iManagment" name="lob" value="Inventory Management">
-        <label for="iManagment">Inventory Management</label>
-    </div>
+
+    <div id="lobs"></div>
     <br />
     <br />
     <div id="roles">
@@ -70,9 +66,12 @@
     </div>
     <br />
     <br />
-    <div id="user">
-
-    </div>
+    
+    <div>
+        <div>
+           <select id="user"></select>
+         </div>
+    </div>     
     <br />
     <br />
     <div id="dataDisplay"></div>
@@ -80,31 +79,57 @@
     <script>
         $(document).ready(function () {
             var selectedLob;
+            $.ajax({
+                url: `http://localhost:5000/api/roles/lobs`,
+                type: 'GET',
+                contentType: 'application/json',
+                success: function (data) {
+                    var lobList = data;
+                    console.log("LOB: ", lobList);
+                    $('#lobs').empty();
+                    for (var i = 0; i < lobList.length; i++) {
+                        var radiobutton = $('<input>').attr({
+                            type: 'radio',
+                            value: lobList[i],
+                            name: 'lob'
+                        });
+                        var label = $('<label>').text(lobList[i]).prepend(radiobutton);
+                        $('#lobs').append($('<div>').addClass('lob').append(radiobutton).append(label));
 
-            $('input:radio[name="lob"]').change(function () {
-                selectedLob = $("input[name='lob']:checked").val();
-                console.log("Selected LOB: " + selectedLob);
 
-                if (selectedLob) {
-                    $.ajax({
-                        url: `http://localhost:5000/api/roles/lob/${selectedLob}`,
-                        type: 'GET',
-                        contentType: 'application/json',
-                        success: function (data) {
-                            if (data.length > 0) {
-                                addRadioButton(data);
-                            } else {
-                                alert("No Roles Found.");
-                            }
-                        },
-                        error: function (xhr, status, error) {
-                            console.error("Error fetching roles: " + xhr.responseText);
+                    }
+                    $('input:radio[name="lob"]').change(function () {
+                        selectedLob = $("input[name='lob']:checked").val();
+                        console.log("Selected LOB: " + selectedLob);
+
+                        if (selectedLob) {
+                            $.ajax({
+                                url: `http://localhost:5000/api/roles/lob/${selectedLob}`,
+                                type: 'GET',
+                                contentType: 'application/json',
+                                success: function (data) {
+                                    if (data.length > 0) {
+                                        addRadioButton(data);
+                                    } else {
+                                        alert("No Roles Found.");
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error("Error fetching roles: " + xhr.responseText);
+                                }
+                            });
+                        } else {
+                            alert("Please select a LOB.");
                         }
                     });
-                } else {
-                    alert("Please select a LOB.");
+                },
+
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert("An error occurred while fetching the LOBs. Please try again.");
                 }
             });
+
 
             function addRadioButton(values) {
                 $('#roles').empty();
@@ -133,37 +158,39 @@
                                 console.log("Users: ", data);
                                 $('#user').empty();
                                 for (var i = 0; i < userdata.length; i++) {
-                                    var radiobutton = $('<input>').attr({
-                                        type: 'radio',
+                                    var dduser = $('<input>').attr({
+                                        type: 'select',
                                         value: userdata[i].id,
                                         name: 'username'
                                     });
-                                    var label = $('<label>').text(userdata[i].firstName).prepend(radiobutton);
-                                    $('#user').append($('<div>').addClass('user').append(radiobutton).append(label));
+                                    var label = $('<option>').text(userdata[i].firstName);
+                                    $('#user').append((label));
 
 
                                 }
-                                $('input[name="username"]').change(function () {
-                                    console.log(" insid user");
-                                    var userId = $("input[name='username']:checked").val();
-                                    console.log(userId);
+                                $('#user').change(function () {
+                                    console.log("inside user");
+                                    
+                                    var userName = $(this).children("option:selected").val();  
+                                  
+                                   
                                     for (var i = 0; i < userdata.length; i++) {
-                                        if (userdata[i].id == userId) {
+                                        if (userdata[i].firstName == userName) {
                                             console.log(userdata[i]);
-                                           
+
                                             var htmlContent = '<div>';
-                                           
-                                                htmlContent += '<p> Id : '+ userdata[i].id +'<p>';
-                                                htmlContent += '<p> First Name : '+ userdata[i].firstName +'<p>';
-                                                htmlContent += '<p> Last Name : '+ userdata[i].lastName +'<p>';
-                                                htmlContent += '<p> Gender : '+ userdata[i].gender +'<p>';  
-                                                htmlContent += '<p> Contact Number : '+ userdata[i].contactNumber +'<p>';
-                                                htmlContent += '<p> Email : '+ userdata[i].email +'<p>';
-                                                htmlContent += '<p> Birth Date : '+ userdata[i].birthDate +'<p>';
-                                                htmlContent += '<p> Adhar Id : '+ userdata[i].aadharId +'<p>';                
-                                              
-                                                
-                                            
+
+                                            htmlContent += '<p> Id : ' + userdata[i].id + '<p>';
+                                            htmlContent += '<p> First Name : ' + userdata[i].firstName + '<p>';
+                                            htmlContent += '<p> Last Name : ' + userdata[i].lastName + '<p>';
+                                            htmlContent += '<p> Gender : ' + userdata[i].gender + '<p>';
+                                            htmlContent += '<p> Contact Number : ' + userdata[i].contactNumber + '<p>';
+                                            htmlContent += '<p> Email : ' + userdata[i].email + '<p>';
+                                            htmlContent += '<p> Birth Date : ' + userdata[i].birthDate + '<p>';
+                                            htmlContent += '<p> Adhar Id : ' + userdata[i].aadharId + '<p>';
+
+
+
 
                                             htmlContent += '</div>';
                                             $('#dataDisplay').html(htmlContent);
