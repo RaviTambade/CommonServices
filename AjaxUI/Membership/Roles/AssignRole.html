@@ -39,10 +39,7 @@
 
         }
         #dataDisplay div {
-            margin-right: 10px;
-            display: inline-block;
-
-
+            margin-right: 5px;
         }
 
         .radio {
@@ -156,7 +153,14 @@
                                            
                                             var htmlContent = '<div>';
                                            
-                                                htmlContent += '<lable> Id : '+ userdata[i].id +'<label>';
+                                                htmlContent += '<p> Id : '+ userdata[i].id +'<p>';
+                                                htmlContent += '<p> First Name : '+ userdata[i].firstName +'<p>';
+                                                htmlContent += '<p> Last Name : '+ userdata[i].lastName +'<p>';
+                                                htmlContent += '<p> Gender : '+ userdata[i].gender +'<p>';  
+                                                htmlContent += '<p> Contact Number : '+ userdata[i].contactNumber +'<p>';
+                                                htmlContent += '<p> Email : '+ userdata[i].email +'<p>';
+                                                htmlContent += '<p> Birth Date : '+ userdata[i].birthDate +'<p>';
+                                                htmlContent += '<p> Adhar Id : '+ userdata[i].aadharId +'<p>';                
                                               
                                                 
                                             
