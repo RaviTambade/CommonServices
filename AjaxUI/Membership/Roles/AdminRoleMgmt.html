@@ -10,7 +10,6 @@
         table,
         th,
         td {
-
             width: auto;
             border: 1px solid black;
             border-collapse: collapse;
@@ -22,86 +21,112 @@
 <body>
     <h2>Get All Roles in Application of User and LOB (Line of Business)</h2>
 
-
     <div>
-        <label for="">Enter User Id : </label><input id="txtUserId" />
+        <label for="txtUserId">Enter User Id: </label><input id="txtUserId" />
 
         <div>
-            <div>
-                <label>Select LOB : </label>
-                <select id="ddlob">
+            <label for="ddlob">Select LOB: </label>
+            <select id="ddlob"></select>
+        </div>
+        
+        <div>
+            <button id="btngetroles">Get Role</button>
+        </div>
+        
+        <br />
+        <div id="checkboxContainer"></div>
+    </div>
 
-                </select>
+    <script>
+        $(document).ready(function () {
+            console.log("Document.Ready");
 
-
-            </div>
-            <div>
-                <button id="btngetroles">Get Role</button>
-            </div>
-            <br />
-            <div id="checkboxContainer">
-                
-            </div>
-</body>
-
-<script>
-    $(document).ready(function () {
-        console.log("Document.Ready");
-
-        $.ajax({
-            url: `http://localhost:5000/api/roles/lobs`,
-            type: 'GET',
-            contentType: 'application/json',
-            success: function (data) {
-                console.log(data);
-                $("#ddlob").append('<option value="">Select LOB</option>');
-                data.forEach(function (data) {
-                    var option = $('<option></option>').attr("value", data).text(data);
-                    $("#ddlob").append(option);
-                });
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr.responseText);
-                alert("An error occurred while fetching the LOBs. Please try again.");
-            }
-        });
-
-
-
-
-        $("#btngetroles").click(function () {
-            var userId = $("#txtUserId").val();
-            //var LOB = $('#ddlob').val();
-            var lob =$("#ddlob option:selected").text();
-            console.log(lob);
+            // Fetch all LOBs
             $.ajax({
-                url: "http://localhost:5000/api/roles/users/"+userId+"/lob/"+lob,
+                url: `http://localhost:5000/api/roles/lobs`,
                 type: 'GET',
                 contentType: 'application/json',
-
                 success: function (data) {
-                   var userroles =data;
-                    data.forEach(addCheckbox);
                     console.log(data);
-                   
+                    $("#ddlob").append('<option value="">Select LOB</option>');
+                    data.forEach(function (lob) {
+                        var option = $('<option></option>').attr("value", lob).text(lob);
+                        $("#ddlob").append(option);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert("An error occurred while fetching the LOBs. Please try again.");
+                }
+            });
+
+            // Fetch all roles and display as checkboxes
+            $.ajax({
+                url: `http://localhost:5000/api/roles`,
+                type: 'GET',
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data);
+                    $('#checkboxContainer').empty();
+                    data.forEach(addCheckbox);
                 },
                 error: function (xhr, status, error) {
                     console.error('AJAX Error: ' + status + error);
                 }
             });
-            
-                function addCheckbox(userroles) {
-                    $('#checkboxContainer').empty();
-                    console.log("Inside chechbox fun");
-                    var checkbox = $('<input>').attr({
-                        type: 'checkbox',
-                        value: userroles.name
+
+            $("#btngetroles").click(function () {
+                var userId = $("#txtUserId").val();
+                var lob = $("#ddlob option:selected").text();
+                console.log(lob);
+
+                if (userId && lob) {
+                    $.ajax({
+                        url: `http://localhost:5000/api/roles/users/${userId}/lob/${lob}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            $('#checkboxContainer').empty();
+                            data.forEach(addCheckbox);
+                            console.log(data);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('AJAX Error: ' + status + error);
+                        }
                     });
-                    var label = $('<label>').text(userroles.name).prepend(checkbox);
-                    $('<div>').addClass('checkbox').append(label).appendTo('#checkboxContainer');
+                } else {
+                    alert("Please enter a User ID and select a LOB.");
+                }
+            });
+
+            function addCheckbox(role) {
+                var checkbox = $('<input>').attr({
+                    type: 'checkbox',
+                    value: role.name
+                });
+                var label = $('<label>').text(role.name).prepend(checkbox);
+                $('<div>').addClass('checkbox').append(label).appendTo('#checkboxContainer');
+            }
+
+            $('#ddlob').change(function () {
+                var selectedLob = $(this).val();
+                if (selectedLob) {
+                    $.ajax({
+                        url: `http://localhost:5000/api/roles/lob/${selectedLob}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            $('#checkboxContainer').empty();
+                            data.forEach(addCheckbox);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('AJAX Error: ' + status + error);
+                        }
+                    });
                 }
             });
         });
-</script>
+    </script>
+</body>
 
 </html>
