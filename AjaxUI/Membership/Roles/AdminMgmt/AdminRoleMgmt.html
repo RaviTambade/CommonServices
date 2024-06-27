@@ -61,19 +61,19 @@
             });
 
             // Fetch all roles and display as checkboxes
-            $.ajax({
-                url: `http://localhost:5000/api/roles`,
-                type: 'GET',
-                contentType: 'application/json',
-                success: function (data) {
-                    console.log(data);
-                    $('#checkboxContainer').empty();
-                    data.forEach(addCheckbox);
-                },
-                error: function (xhr, status, error) {
-                    console.error('AJAX Error: ' + status + error);
-                }
-            });
+            // $.ajax({
+            //     url: `http://localhost:5000/api/roles`,
+            //     type: 'GET',
+            //     contentType: 'application/json',
+            //     success: function (data) {
+            //         console.log(data);
+            //         $('#checkboxContainer').empty();
+            //         data.forEach(addCheckbox);
+            //     },
+            //     error: function (xhr, status, error) {
+            //         console.error('AJAX Error: ' + status + error);
+            //     }
+            // });
 
             $("#btngetroles").click(function () {
                 var userId = $("#txtUserId").val();
