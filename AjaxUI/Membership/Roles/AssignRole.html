@@ -36,7 +36,13 @@
         #user div {
             float: left;
             display: inline-block;
-           
+
+        }
+        #dataDisplay div {
+            margin-right: 10px;
+            display: inline-block;
+
+
         }
 
         .radio {
@@ -60,16 +66,19 @@
         <input type="radio" id="iManagment" name="lob" value="Inventory Management">
         <label for="iManagment">Inventory Management</label>
     </div>
-    <br/>
-    <br/>
+    <br />
+    <br />
     <div id="roles">
         <p>Role According To Selected LOB</p>
     </div>
-    <br/>
-    <br/>
+    <br />
+    <br />
     <div id="user">
-       
+
     </div>
+    <br />
+    <br />
+    <div id="dataDisplay"></div>
 
     <script>
         $(document).ready(function () {
@@ -123,18 +132,41 @@
                             type: 'GET',
                             contentType: 'application/json',
                             success: function (data) {
-                                var userdata =data;
+                                var userdata = data;
                                 console.log("Users: ", data);
                                 $('#user').empty();
                                 for (var i = 0; i < userdata.length; i++) {
-                                var radiobutton = $('<input>').attr({
-                                    type: 'radio',
-                                    value: userdata,
-                                    name: 'username'
+                                    var radiobutton = $('<input>').attr({
+                                        type: 'radio',
+                                        value: userdata[i].id,
+                                        name: 'username'
+                                    });
+                                    var label = $('<label>').text(userdata[i].firstName).prepend(radiobutton);
+                                    $('#user').append($('<div>').addClass('user').append(radiobutton).append(label));
+
+
+                                }
+                                $('input[name="username"]').change(function () {
+                                    console.log(" insid user");
+                                    var userId = $("input[name='username']:checked").val();
+                                    console.log(userId);
+                                    for (var i = 0; i < userdata.length; i++) {
+                                        if (userdata[i].id == userId) {
+                                            console.log(userdata[i]);
+                                           
+                                            var htmlContent = '<div>';
+                                           
+                                                htmlContent += '<lable> Id : '+ userdata[i].id +'<label>';
+                                              
+                                                
+                                            
+
+                                            htmlContent += '</div>';
+                                            $('#dataDisplay').html(htmlContent);
+                                        }
+                                    }
                                 });
-                                var label = $('<label>').text(userdata[i].firstName).prepend(radiobutton);
-                                $('#user').append($('<div>').addClass('user').append(radiobutton).append(label));
-                            }
+
 
                             },
                             error: function (xhr, status, error) {
@@ -142,19 +174,9 @@
                                 alert("An error occurred while fetching the users. Please try again.");
                             }
                         });
-                        // $('input[name="roleName"]').change(function() {
-                        //     console.log("Inside role change");
-                        //     $('#user').empty();
-                        //     for (var i = 0; i < userdata.length; i++) {
-                        //         var radiobutton = $('<input>').attr({
-                        //             type: 'radio',
-                        //             value: userdata,
-                        //             name: 'username'
-                        //         });
-                        //         var label = $('<label>').text(userdata[i].firstName).prepend(radiobutton);
-                        //         $('#user').append($('<div>').addClass('radio').append(radiobutton).append(label));
-                        //     }
-                        // })
+
+
+
                     }
 
                     else {
