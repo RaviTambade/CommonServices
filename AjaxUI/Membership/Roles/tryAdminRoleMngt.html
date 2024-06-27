@@ -22,17 +22,19 @@
     <h2>Get All Roles in Application of User and LOB (Line of Business)</h2>
 
     <div>
-        <label for="txtUserId">Enter User Id: </label><input id="txtUserId" />
+
 
         <div>
             <label for="ddlob">Select LOB: </label>
             <select id="ddlob"></select>
         </div>
-        
+        <br /><br />
+        <label for="txtUserId">Enter User Id: </label><input id="txtUserId" />
+        <br /><br />
         <div>
             <button id="btngetroles">Get Role</button>
         </div>
-        
+
         <br />
         <div id="checkboxContainer"></div>
     </div>
@@ -40,7 +42,8 @@
     <script>
         $(document).ready(function () {
             console.log("Document.Ready");
-
+            var rollList;
+            var userRoll;
             // Fetch all LOBs
             $.ajax({
                 url: `http://localhost:5000/api/roles/lobs`,
@@ -61,7 +64,7 @@
             });
 
             // Fetch all roles and display as checkboxes
-            $.ajax({
+            /*$.ajax({
                 url: `http://localhost:5000/api/roles`,
                 type: 'GET',
                 contentType: 'application/json',
@@ -73,7 +76,7 @@
                 error: function (xhr, status, error) {
                     console.error('AJAX Error: ' + status + error);
                 }
-            });
+            });*/
 
             $("#btngetroles").click(function () {
                 var userId = $("#txtUserId").val();
@@ -86,9 +89,12 @@
                         type: 'GET',
                         contentType: 'application/json',
                         success: function (data) {
-                            $('#checkboxContainer').empty();
-                            data.forEach(addCheckbox);
+                            //$('#checkboxContainer').empty();
+                            userRoll = data;
                             console.log(data);
+                            compare(rollList,userRoll);
+                            //data.forEach(addCheckbox);
+
                         },
                         error: function (xhr, status, error) {
                             console.error('AJAX Error: ' + status + error);
@@ -116,6 +122,7 @@
                         type: 'GET',
                         contentType: 'application/json',
                         success: function (data) {
+                            rollList = data;
                             $('#checkboxContainer').empty();
                             data.forEach(addCheckbox);
                         },
@@ -125,6 +132,28 @@
                     });
                 }
             });
+
+
+            function compare(lobRollList,userRollList){
+            
+                var length1 =lobRollList.length;
+                console.log(length1);
+                for(i=0;i<length1;i++)
+                {
+                    console.log(lobRollList[i].name);
+
+                    for(j=0;i<length1;j++)
+                    {
+                        console.log(userRollList[j].name);
+     
+                    }
+     
+                }
+
+                
+
+                
+            }
         });
     </script>
 </body>
