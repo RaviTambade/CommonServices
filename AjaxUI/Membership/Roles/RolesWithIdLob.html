@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Roles With Id & LOB</title>
+</head>
+
+<body>
+    <h2>User Roles Management</h2>
+
+    <div>
+        <label for="txtUserId">Enter User Id: </label><input id="txtUserId" />
+
+        <div>
+            <label for="ddlob">Select LOB: </label>
+            <select id="ddlob"></select>
+        </div>
+
+        <div id="rolesContainer">
+            <h3>Roles for Selected User and LOB:</h3>
+            <ul id="rolesList"></ul>
+        </div>
+
+        <button id="btnGetRoles">Get Roles</button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            console.log("Document.Ready");
+
+            // Fetch all LOBs
+            $.ajax({
+                url: `http://localhost:5000/api/roles/lobs`,
+                type: 'GET',
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data);
+                    $("#ddlob").append('<option value="">Select LOB</option>');
+                    data.forEach(function (lob) {
+                        var option = $('<option></option>').attr("value", lob).text(lob);
+                        $("#ddlob").append(option);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert("An error occurred while fetching the LOBs. Please try again.");
+                }
+            });
+
+            // Get roles for selected user and LOB
+            $("#btnGetRoles").click(function () {
+                var userId = $("#txtUserId").val();
+                var lob = $("#ddlob").val();
+
+                if (userId && lob) {
+                    $.ajax({
+                        url: `http://localhost:5000/api/roles/users/${userId}/lob/${lob}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (userRoles) {
+                            console.log(userRoles);
+                            displayRoles(userRoles);
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('AJAX Error: ' + status + ' ' + error);
+                            alert('Failed to fetch roles. Please try again.');
+                        }
+                    });
+                } else {
+                    alert("Please enter a User ID and select a LOB.");
+                }
+            });
+
+            function displayRoles(roles) {
+                var rolesList = $("#rolesList");
+                rolesList.empty(); // Clear previous roles
+
+                roles.forEach(function (role) {
+                    var listItem = $("<li>").text(role.name);
+                    rolesList.append(listItem);
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>
