@@ -23,7 +23,7 @@
 
     <div>
         <label for="txtUserId">Enter User Id: </label><input id="txtUserId" />
-
+        
         <div>
             <label for="ddlob">Select LOB: </label>
             <select id="ddlob"></select>
@@ -34,7 +34,8 @@
         </div>
 
         <div>
-            <label id="userdetails" name="userdetails">Hello</label>
+            <label id="userdetails" name="userdetails">Hello</label><br/><br/>
+            <p id="img"></p>
         </div>
 
 
@@ -62,9 +63,11 @@
                     success: function (data) {
                         console.log(data);
                         var name = data.fullName;
+                        console.log(data.imageUrl);
+                        var userimage='<img src="' + data.imageUrl + '" width="300" height="300">';
+                        $('#img').append(userimage);
                         $("#userdetails").html(name);
                         console.log(name);
-
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
@@ -193,7 +196,7 @@
                     var lob = $("#ddlob").val();
 
                     if (userId && lob) {
-                        $("#checkboxContainer input:checkbox:not(:checked)").each(function () {
+                        $("#checkboxContainer input:checkbox:checked").each(function () {
                             var roleId = $(this).data('role-id');
 
                             // Call delete role API
