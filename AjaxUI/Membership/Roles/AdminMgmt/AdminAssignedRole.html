@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roles Management</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input,
+        select,
+        button {
+            padding: 5px;
+            margin-left: 10px;
+        }
+
+        #roles div {
+            margin-top: 5px;
+        }
+
+        table,
+        th,
+        td {
+            width: auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Manage Roles for User and LOB</h2>
+    <div>
+        <label for="txtUserId">Enter User Id:</label>
+        <input type="number" id="txtUserId" />
+
+        <div>
+            <label for="ddlob">Select LOB:</label>
+            <select id="ddlob"></select>
+        </div>
+
+        <div>
+            <button id="btngetroles">Get Roles</button>
+        </div>
+
+        <br />
+        <div id="checkboxContainer"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            const hardcodedRoles = ['Director', 'HR Manager', 'Employee', 'Project Manager', 'Store Incharge', 'Store Manager', 'Store Owner'];
+
+            // Function to fetch LOBs
+            function fetchLobs() {
+                $.ajax({
+                    url: `http://localhost:5000/api/roles/lobs`,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        $("#ddlob").append('<option value="">Select LOB</option>');
+                        data.forEach(function (lob) {
+                            var option = $('<option></option>').attr("value", lob).text(lob);
+                            $("#ddlob").append(option);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert("An error occurred while fetching the LOBs. Please try again.");
+                    }
+                });
+            }
+
+            // Function to fetch roles for a specific user and LOB
+            function fetchRoles(userId, lob) {
+                $.ajax({
+                    url: `http://localhost:5000/api/roles/users/${userId}/lob/${lob}`,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        $('#checkboxContainer').empty();
+                        displayRoles(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX Error: ' + status + error);
+                        alert("An error occurred while fetching roles. Please try again.");
+                    }
+                });
+            }
+
+            // Function to display roles as checkboxes
+            function displayRoles(roles) {
+                $('#checkboxContainer').empty();
+                hardcodedRoles.forEach(role => {
+                    const isChecked = roles.some(r => r.name === role);
+                    const checkbox = $('<input>').attr({
+                        type: 'checkbox',
+                        value: role,
+                        checked: isChecked ? 'checked' : null
+                    });
+                    const label = $('<label>').text(role).prepend(checkbox);
+                    $('#checkboxContainer').append($('<div>').append(label));
+                });
+            }
+
+            // Button click event for fetching roles
+            $("#btngetroles").click(function () {
+                var userId = $("#txtUserId").val();
+                var lob = $("#ddlob").val();
+
+                if (userId && lob) {
+                    fetchRoles(userId, lob);
+                } else {
+                    alert("Please enter a User ID and select a LOB.");
+                }
+            });
+
+            // Fetch LOBs on document ready
+            fetchLobs();
+        });
+    </script>
+</body>
+
+</html>

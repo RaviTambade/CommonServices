@@ -27,17 +27,14 @@
             margin-left: 10px;
         }
 
-        #roles div {
-            float: left;
+        #lobs div,
+        #roles div,
+        #user div {
+            align-items: left;
             display: inline-block;
             margin-right: 10px;
         }
 
-        #user div {
-            float: left;
-            display: inline-block;
-
-        }
         #dataDisplay div {
             margin-right: 5px;
         }
@@ -50,19 +47,8 @@
 </head>
 
 <body>
-    <div>
-        <p>Please select Line of Business(LOB):</p>
-        <input type="radio" id="pms" name="lob" value="PMS">
-        <label for="pms">PMS</label>
-        <input type="radio" id="banking" name="lob" value="Banking">
-        <label for="banking">Banking</label>
-        <input type="radio" id="ekrushi" name="lob" value="EKrushi">
-        <label for="ekrushi">EKrushi</label>
-        <input type="radio" id="eagro" name="lob" value="EAgro">
-        <label for="eagro">EAgro</label>
-        <input type="radio" id="iManagment" name="lob" value="Inventory Management">
-        <label for="iManagment">Inventory Management</label>
-    </div>
+
+    <div id="lobs"></div>
     <br />
     <br />
     <div id="roles">
@@ -70,8 +56,9 @@
     </div>
     <br />
     <br />
-    <div id="user">
 
+    <div>
+        <select id="user"></select>
     </div>
     <br />
     <br />
@@ -80,19 +67,48 @@
     <script>
         $(document).ready(function () {
             var selectedLob;
+            var selectedRole;
 
-            $('input:radio[name="lob"]').change(function () {
-                selectedLob = $("input[name='lob']:checked").val();
-                console.log("Selected LOB: " + selectedLob);
+            // Fetch and display LOBs
+            $.ajax({
+                url: `http://localhost:5000/api/roles/lobs`,
+                type: 'GET',
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log("LOB: ", data);
+                    $('#lobs').empty();
+                    data.forEach(function (lob) {
+                        var radiobutton = $('<input>').attr({
+                            type: 'radio',
+                            value: lob,
+                            name: 'lob'
+                        });
+                        var label = $('<label>').text(lob).prepend(radiobutton);
+                        $('#lobs').append($('<div>').addClass('lob').append(radiobutton).append(label));
+                    });
 
-                if (selectedLob) {
+                    $('input:radio[name="lob"]').change(function () {
+                        selectedLob = $("input[name='lob']:checked").val();
+                        console.log("Selected LOB: " + selectedLob);
+                        fetchRoles(selectedLob);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert("An error occurred while fetching the LOBs. Please try again.");
+                }
+            });
+
+            // Fetch and display roles based on selected LOB
+            function fetchRoles(lob) {
+                if (lob) {
                     $.ajax({
-                        url: `http://localhost:5000/api/roles/lob/${selectedLob}`,
+                        url: `http://localhost:5000/api/roles/lob/${lob}`,
                         type: 'GET',
                         contentType: 'application/json',
                         success: function (data) {
                             if (data.length > 0) {
-                                addRadioButton(data);
+                                addRoleRadioButtons(data);
                             } else {
                                 alert("No Roles Found.");
                             }
@@ -104,89 +120,76 @@
                 } else {
                     alert("Please select a LOB.");
                 }
-            });
+            }
 
-            function addRadioButton(values) {
+            // Add role radio buttons
+            function addRoleRadioButtons(roles) {
                 $('#roles').empty();
-                for (var i = 0; i < values.length; i++) {
+                roles.forEach(function (role) {
                     var radiobutton = $('<input>').attr({
                         type: 'radio',
-                        value: values[i].name,
+                        value: role.name,
                         name: 'roleName'
                     });
-                    var label = $('<label>').text(values[i].name).prepend(radiobutton);
+                    var label = $('<label>').text(role.name).prepend(radiobutton);
                     $('#roles').append($('<div>').addClass('radio').append(radiobutton).append(label));
-                }
+                });
 
                 $('input[name="roleName"]').change(function () {
-                    var userRole = $("input[name='roleName']:checked").val();
-                    console.log("Selected role: " + userRole);
-                    console.log("Selected LOB: " + selectedLob);
-
-                    if (userRole && selectedLob) {
-                        $.ajax({
-                            url: 'http://localhost:5000/api/roles/getuserbyroles/rolename/' + userRole + '/lob/' + selectedLob,
-                            type: 'GET',
-                            contentType: 'application/json',
-                            success: function (data) {
-                                var userdata = data;
-                                console.log("Users: ", data);
-                                $('#user').empty();
-                                for (var i = 0; i < userdata.length; i++) {
-                                    var radiobutton = $('<input>').attr({
-                                        type: 'radio',
-                                        value: userdata[i].id,
-                                        name: 'username'
-                                    });
-                                    var label = $('<label>').text(userdata[i].firstName).prepend(radiobutton);
-                                    $('#user').append($('<div>').addClass('user').append(radiobutton).append(label));
-
-
-                                }
-                                $('input[name="username"]').change(function () {
-                                    console.log(" insid user");
-                                    var userId = $("input[name='username']:checked").val();
-                                    console.log(userId);
-                                    for (var i = 0; i < userdata.length; i++) {
-                                        if (userdata[i].id == userId) {
-                                            console.log(userdata[i]);
-                                           
-                                            var htmlContent = '<div>';
-                                           
-                                                htmlContent += '<p> Id : '+ userdata[i].id +'<p>';
-                                                htmlContent += '<p> First Name : '+ userdata[i].firstName +'<p>';
-                                                htmlContent += '<p> Last Name : '+ userdata[i].lastName +'<p>';
-                                                htmlContent += '<p> Gender : '+ userdata[i].gender +'<p>';  
-                                                htmlContent += '<p> Contact Number : '+ userdata[i].contactNumber +'<p>';
-                                                htmlContent += '<p> Email : '+ userdata[i].email +'<p>';
-                                                htmlContent += '<p> Birth Date : '+ userdata[i].birthDate +'<p>';
-                                                htmlContent += '<p> Adhar Id : '+ userdata[i].aadharId +'<p>';                
-                                              
-                                                
-                                            
-
-                                            htmlContent += '</div>';
-                                            $('#dataDisplay').html(htmlContent);
-                                        }
-                                    }
-                                });
-
-
-                            },
-                            error: function (xhr, status, error) {
-                                console.error("Error fetching users: " + xhr.responseText);
-                                alert("An error occurred while fetching the users. Please try again.");
-                            }
-                        });
-                    }
-
-                    else {
-                        alert("Please select a role.");
-                    }
+                    selectedRole = $("input[name='roleName']:checked").val();
+                    console.log("Selected role: " + selectedRole);
+                    fetchUsersByRoleAndLob(selectedRole, selectedLob);
                 });
             }
-        });
 
+            // Fetch and display users based on selected role and LOB
+            function fetchUsersByRoleAndLob(role, lob) {
+                if (role && lob) {
+                    $.ajax({
+                        url: `http://localhost:5000/api/roles/getuserbyroles/rolename/${role}/lob/${lob}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            console.log("Users: ", data);
+                            $('#user').empty();
+                            data.forEach(function (user) {
+                                var option = $('<option>').attr('value', user.id).text(user.firstName);
+                                $('#user').append(option);
+                            });
+
+                            $('#user').change(function () {
+                                var userId = $(this).val();
+                                displayUserDetails(data, userId);
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error fetching users: " + xhr.responseText);
+                            alert("An error occurred while fetching the users. Please try again.");
+                        }
+                    });
+                } else {
+                    alert("Please select a role.");
+                }
+            }
+
+            // Display user details
+            function displayUserDetails(users, userId) {
+                var user = users.find(user => user.id == userId);
+                if (user) {
+                    var htmlContent = '<div>';
+                    htmlContent += '<p>Id: ' + user.id + '</p>';
+                    htmlContent += '<p>First Name: ' + user.firstName + '</p>';
+                    htmlContent += '<p>Last Name: ' + user.lastName + '</p>';
+                    htmlContent += '<p>Gender: ' + user.gender + '</p>';
+                    htmlContent += '<p>Contact Number: ' + user.contactNumber + '</p>';
+                    htmlContent += '<p>Email: ' + user.email + '</p>';
+                    htmlContent += '<p>Birth Date: ' + user.birthDate + '</p>';
+                    htmlContent += '<p>Aadhar Id: ' + user.aadharId + '</p>';
+                    htmlContent += '</div>';
+                    $('#dataDisplay').html(htmlContent);
+                }
+            }
+        });
     </script>
 </body>
 
