@@ -358,7 +358,46 @@ public class UserRepository : IUserRepository
         }
         return users;
     }
-        public async Task<bool> Add(User user)
+
+
+    public async Task<UserDetails> GetUserDetailsByUserId(int userId)
+    {
+        UserDetails user = new UserDetails();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+        try
+        {
+            string query = $"select id,firstname,lastname,imageurl from users where id IN ({userId})";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            await con.OpenAsync();
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (await reader.ReadAsync())
+            {
+                int id = int.Parse(reader["id"].ToString());
+                string? imageUrl = reader["imageurl"].ToString();
+                string? firstName = reader["firstname"].ToString();
+                string? lastName = reader["lastname"].ToString();
+
+
+                user.Id = id;
+                user.ImageUrl = imageUrl;
+                user.FullName = $"{firstName} {lastName}";
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return user;
+    }
+    public async Task<bool> Add(User user)
         {
             Console.WriteLine(user);
         bool status = false;

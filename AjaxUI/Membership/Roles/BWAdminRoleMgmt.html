@@ -22,8 +22,10 @@
     <h2>Get All Roles in Application of User and LOB (Line of Business)</h2>
 
     <div>
-        <label for="txtUserId">Enter User Id: </label><input id="txtUserId" />
-
+        <label for="txtUserId">Enter User Id: </label>
+        <input id="txtUserId" />
+       
+        
         <div>
             <label for="ddlob">Select LOB: </label>
             <select id="ddlob"></select>
@@ -35,11 +37,42 @@
 
         <br />
         <div id="checkboxContainer"></div>
+        <br/>
+
+        <div>
+            <label id="userdetails" name="userdetails">Hello</label>
+        </div>
+
     </div>
+    
 
     <script>
         $(document).ready(function () {
             console.log("Document.Ready");
+            //Fetch User dtails according to User Id 
+
+            $('#txtUserId').change(function() {
+                var id = $("#txtUserId").val();
+                console.log("Input Id = " + id);
+
+                $.ajax({
+                url: `http://localhost:5000/api/users/details/id/`+id,
+                type: 'GET',
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data);
+                    var name = data.fullName;
+                    $("#userdetails").html(name);
+                    console.log(name);
+                    
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert("An error occurred while fetching the LOBs. Please try again.");
+                }
+            });
+
+            });
 
             // Fetch all LOBs
             $.ajax({

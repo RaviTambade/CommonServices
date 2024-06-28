@@ -29,14 +29,17 @@
             <select id="ddlob"></select>
         </div>
         <br /><br />
-        <label for="txtUserId">Enter User Id: </label><input id="txtUserId" />
+        <label for="txtUserId">Enter User Id: </label>
+        <input id="txtUserId" />
         <br /><br />
         <div>
             <button id="btngetroles">Get Role</button>
         </div>
 
         <br />
-        <div id="checkboxContainer"></div>
+        <div id="checkboxContainer">
+
+        </div>
     </div>
 
     <script>
@@ -44,6 +47,11 @@
             console.log("Document.Ready");
             var rollList;
             var userRoll;
+
+            $('#txtUserId').on('change keyup paste', function() {
+                var id = $("#txtUserId").val();
+                console.log("Input Id = " + id);
+            });
             // Fetch all LOBs
             $.ajax({
                 url: `http://localhost:5000/api/roles/lobs`,
@@ -89,10 +97,11 @@
                         type: 'GET',
                         contentType: 'application/json',
                         success: function (data) {
-                        
+                            
                             var len = data.length; 
                             console.log(data);
                             var rollnames =  [];
+                            
                             for(i=0;i<len;i++)
                             {
                                 rollnames += data[i].name;
@@ -116,8 +125,10 @@
             function addCheckbox(role) {
                 var checkbox = $('<input>').attr({
                     type: 'checkbox',
-                    value: role.name
+                    value: role.name,
+                    name:'rollnames'
                 });
+
                 var label = $('<label>').text(role.name).prepend(checkbox);
                 $('<div>').addClass('checkbox').append(label).appendTo('#checkboxContainer');
             }
@@ -153,7 +164,7 @@
                     if(lobRollList[i].name === userRollNames)
                     {
                         console.log("equal.....");
-                        $('#checkboxContainer').prop('checked', true);
+                        $('input:checkbox[name="rollnames"]').prop('checked', true);
                         break;
                     }
                 }

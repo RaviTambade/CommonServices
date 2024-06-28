@@ -74,5 +74,8 @@ public class UserService : IUserService
         return await _repo.Delete(userId);
     }
 
-   
+    public async Task<UserDetails> GetUserDetailsByUserId(int userId)
+    {
+        return await _repo.GetUserDetailsByUserId(userId);
+    }
 }
