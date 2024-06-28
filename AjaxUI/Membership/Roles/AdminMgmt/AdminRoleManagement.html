@@ -198,10 +198,11 @@
                     if (userId && lob) {
                         $("#checkboxContainer input:checkbox:checked").each(function () {
                             var roleId = $(this).data('role-id');
-
+                            console.log("UserId "+userId);
+                            console.log("RoleId "+roleId);
                             // Call delete role API
                             $.ajax({
-                                url: `http://localhost:5000/api/roles/${roleId}`, // Adjust the endpoint to your API endpoint for deleting roles
+                                url: `http://localhost:5000/api/roles/remove/userroles/userid/${userId}/roleid/${roleId}`, // Adjust the endpoint to your API endpoint for deleting roles
                                 type: 'DELETE',
                                 contentType: 'application/json',
                                 success: function () {

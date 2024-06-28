@@ -99,4 +99,11 @@ public class RolesController : ControllerBase
     {
         return await _service.CheckUserRole(userId, roleId);
     }
+
+     [HttpDelete]
+    [Route("remove/userroles/userid/{userId}/roleid/{roleId}")]
+    public async Task<bool> RemoveUserRole(int userId,int roleId)
+    {
+        return await _service.DeleteRoleByUserId(userId,roleId);
+    }
 }

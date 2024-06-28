@@ -18,5 +18,6 @@ public interface IRoleRepository
     Task<bool> Insert(UserRole userRole);
     Task<bool> Update(UserRole userRole);
     Task<bool> DeleteUserRole(int userRoleId);
+    public Task<bool> DeleteRoleByUserId(int userId,int roleId);
     Task<bool> CheckUserRole(int userId, int roleId);     
 }

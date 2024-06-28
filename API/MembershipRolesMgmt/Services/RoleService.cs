@@ -58,6 +58,11 @@ public class RoleService : IRoleService
         return await _repository.DeleteRole(roleId);
     }
 
+    public async Task<bool> DeleteRoleByUserId(int userId,int roleId)
+    {
+        return await _repository.DeleteRoleByUserId(userId,roleId);
+    }
+
     public async Task<bool> Insert(UserRole userRole)
     {
         return await _repository.Insert(userRole);
