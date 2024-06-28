@@ -89,11 +89,19 @@
                         type: 'GET',
                         contentType: 'application/json',
                         success: function (data) {
-                            //$('#checkboxContainer').empty();
-                            userRoll = data;
+                        
+                            var len = data.length; 
                             console.log(data);
-                            compare(rollList,userRoll);
-                            //data.forEach(addCheckbox);
+                            var rollnames =  [];
+                            for(i=0;i<len;i++)
+                            {
+                                rollnames += data[i].name;
+                                console.log(rollnames);
+                            }
+
+                            console.log("Names = "+ rollnames);
+                            compare(rollList,rollnames);
+                           
 
                         },
                         error: function (xhr, status, error) {
@@ -134,25 +142,21 @@
             });
 
 
-            function compare(lobRollList,userRollList){
+            function compare(lobRollList,userRollNames){
             
                 var length1 =lobRollList.length;
-                console.log(length1);
+                
                 for(i=0;i<length1;i++)
                 {
-                    console.log(lobRollList[i].name);
-
-                    for(j=0;i<length1;j++)
+                    //console.log("userRollNames in compare function = " + userRollNames);
+                    console.log("userRollNames in compare function = " + lobRollList[i].name);
+                    if(lobRollList[i].name === userRollNames)
                     {
-                        console.log(userRollList[j].name);
-     
+                        console.log("equal.....");
+                        $('#checkboxContainer').prop('checked', true);
+                        break;
                     }
-     
                 }
-
-                
-
-                
             }
         });
     </script>
