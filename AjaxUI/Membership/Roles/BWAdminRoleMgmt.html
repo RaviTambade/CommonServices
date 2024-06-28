@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Roles</title>
+    <style>
+        table,
+        th,
+        td {
+            width: auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Get All Roles in Application of User and LOB (Line of Business)</h2>
+
+    <div>
+        <label for="txtUserId">Enter User Id: </label><input id="txtUserId" />
+
+        <div>
+            <label for="ddlob">Select LOB: </label>
+            <select id="ddlob"></select>
+        </div>
+
+        <div>
+            <button id="btngetroles">Get Role</button>
+        </div>
+
+        <br />
+        <div id="checkboxContainer"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            console.log("Document.Ready");
+
+            // Fetch all LOBs
+            $.ajax({
+                url: `http://localhost:5000/api/roles/lobs`,
+                type: 'GET',
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data);
+                    $("#ddlob").append('<option value="">Select LOB</option>');
+                    data.forEach(function (lob) {
+                        var option = $('<option></option>').attr("value", lob).text(lob);
+                        $("#ddlob").append(option);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert("An error occurred while fetching the LOBs. Please try again.");
+                }
+            });
+
+            // All roles for lob
+            $('#ddlob').change(function () {
+                var selectedLob = $(this).val();
+                if (selectedLob) {
+                    $.ajax({
+                        url: `http://localhost:5000/api/roles/lob/${selectedLob}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            if (Array.isArray(data)) {
+                                var allRoles = data;
+                                selectCheckbox(allRoles, []); // Empty selectedRoles
+                            } else {
+                                console.error('Expected an array of roles, but received:', data);
+
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('AJAX Error: ' + status + error);
+                        }
+                    });
+                }
+            });
+
+            // All roles for user for a selected lob
+            $("#btngetroles").click(function () {
+                var userId = $("#txtUserId").val();
+                var lob = $("#ddlob option:selected").text();
+
+                if (userId && lob) {
+                    $.ajax({
+                        url: `http://localhost:5000/api/roles/users/${userId}/lob/${lob}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            if (Array.isArray(data)) {
+                                var selectedRoles = data;
+
+                                // Fetch all roles for the selected LOB
+                                $.ajax({
+                                    url: `http://localhost:5000/api/roles/lob/${lob}`,
+                                    type: 'GET',
+                                    contentType: 'application/json',
+                                    success: function (data) {
+                                    if (Array.isArray(data)) {
+                                        var allRoles = data;
+                                        selectCheckbox(allRoles, selectedRoles);
+                                } else {
+                                            console.error('Unable to fetch data');
+                                            
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error('AJAX Error: ' + status + error);
+                                    }
+                                });
+                            } else {
+                                console.error('Unable to fetch data');
+
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('AJAX Error: ' + status + error);
+                        }
+                    });
+                } else {
+                    alert("Please enter a User ID and select a LOB.");
+                }
+            });
+
+
+
+            function selectCheckbox(allRoles, selectedRoles) {
+                console.log("Inside selectCheckbox");
+
+                $('#checkboxContainer').empty();
+
+                allRoles.forEach(function (role) {
+                    var checkbox = $('<input>').attr({
+                        type: 'checkbox',
+                        value: role.name
+                    });
+
+                    // Check if role exists in selectedRoles
+                    var roleExists = selectedRoles.some(function (selectedRole) {
+                        return selectedRole.name === role.name;
+                    });
+                    console.log(roleExists);
+
+                    checkbox.prop('checked', roleExists);
+
+                    var label = $('<label>').text(role.name).prepend(checkbox);
+                    $('<div>').addClass('checkbox').append(label).appendTo('#checkboxContainer');
+                });
+
+            }
+
+
+        });
+    </script>
+</body>
+
+</html>
