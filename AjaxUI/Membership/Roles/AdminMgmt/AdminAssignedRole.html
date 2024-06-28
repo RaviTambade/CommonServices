@@ -7,7 +7,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Roles</title>
     <style>
-        table, th, td {
+        table,
+        th,
+        td {
             width: auto;
             border: 1px solid black;
             border-collapse: collapse;
@@ -135,13 +137,13 @@
                     $("#checkboxContainer input:checkbox:checked").each(function () {
                         var roleId = $(this).data('role-id');
                         var userRole = {
-                            userId: userId,
-                            roleId: roleId,
-                            lob: lob
+                            UserId: userId,
+                            RoleId: roleId,
+                            Lob: lob
                         };
 
                         $.ajax({
-                            url: `http://localhost:5000/api/userroles`,
+                            url: `http://localhost:5000/api/roles/userroles`,
                             type: 'POST',
                             contentType: 'application/json',
                             data: JSON.stringify(userRole),
@@ -167,23 +169,19 @@
                 if (userId && lob) {
                     $("#checkboxContainer input:checkbox:not(:checked)").each(function () {
                         var roleId = $(this).data('role-id');
-                        var userRole = {
-                            userId: userId,
-                            roleId: roleId,
-                            lob: lob
-                        };
 
+                        // Call delete role API
                         $.ajax({
-                            url: `http://localhost:5000/api/userroles`,
+                            url: `http://localhost:5000/api/roles/${roleId}`, // Adjust the endpoint to your API endpoint for deleting roles
                             type: 'DELETE',
                             contentType: 'application/json',
-                            data: JSON.stringify(userRole),
                             success: function () {
                                 console.log('Role removed successfully');
                                 alert('Role removed successfully');
                             },
                             error: function (xhr, status, error) {
                                 console.error('AJAX Error: ' + status + ' ' + error);
+                                alert('Failed to remove role. Please try again.');
                             }
                         });
                     });
@@ -217,6 +215,7 @@
             }
         });
     </script>
+
 </body>
 
 </html>
