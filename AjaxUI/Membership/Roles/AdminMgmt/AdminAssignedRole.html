@@ -4,37 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roles Management</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Roles</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        div {
-            margin-bottom: 10px;
-        }
-
-        label {
-            display: inline-block;
-            width: 100px;
-        }
-
-        input,
-        select,
-        button {
-            padding: 5px;
-            margin-left: 10px;
-        }
-
-        #roles div {
-            margin-top: 5px;
-        }
-
-        table,
-        th,
-        td {
+        table, th, td {
             width: auto;
             border: 1px solid black;
             border-collapse: collapse;
@@ -44,13 +17,13 @@
 </head>
 
 <body>
-    <h2>Manage Roles for User and LOB</h2>
+    <h2>Get All Roles in Application of User and LOB (Line of Business)</h2>
+
     <div>
-        <label for="txtUserId">Enter User Id:</label>
-        <input type="number" id="txtUserId" />
+        <label for="txtUserId">Enter User Id: </label><input id="txtUserId" />
 
         <div>
-            <label for="ddlob">Select LOB:</label>
+            <label for="ddlob">Select LOB: </label>
             <select id="ddlob"></select>
         </div>
 
@@ -60,78 +33,188 @@
 
         <br />
         <div id="checkboxContainer"></div>
+
+        <div>
+            <button id="btnaddrole">Add Role</button>
+            <button id="btndeleterole">Delete Role</button>
+        </div>
     </div>
 
     <script>
         $(document).ready(function () {
-            const hardcodedRoles = ['Director', 'HR Manager', 'Employee', 'Project Manager', 'Store Incharge', 'Store Manager', 'Store Owner'];
+            console.log("Document.Ready");
 
-            // Function to fetch LOBs
-            function fetchLobs() {
-                $.ajax({
-                    url: `http://localhost:5000/api/roles/lobs`,
-                    type: 'GET',
-                    contentType: 'application/json',
-                    success: function (data) {
-                        $("#ddlob").append('<option value="">Select LOB</option>');
-                        data.forEach(function (lob) {
-                            var option = $('<option></option>').attr("value", lob).text(lob);
-                            $("#ddlob").append(option);
-                        });
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                        alert("An error occurred while fetching the LOBs. Please try again.");
-                    }
-                });
-            }
-
-            // Function to fetch roles for a specific user and LOB
-            function fetchRoles(userId, lob) {
-                $.ajax({
-                    url: `http://localhost:5000/api/roles/users/${userId}/lob/${lob}`,
-                    type: 'GET',
-                    contentType: 'application/json',
-                    success: function (data) {
-                        $('#checkboxContainer').empty();
-                        displayRoles(data);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('AJAX Error: ' + status + error);
-                        alert("An error occurred while fetching roles. Please try again.");
-                    }
-                });
-            }
-
-            // Function to display roles as checkboxes
-            function displayRoles(roles) {
-                $('#checkboxContainer').empty();
-                hardcodedRoles.forEach(role => {
-                    const isChecked = roles.some(r => r.name === role);
-                    const checkbox = $('<input>').attr({
-                        type: 'checkbox',
-                        value: role,
-                        checked: isChecked ? 'checked' : null
+            // Fetch all LOBs
+            $.ajax({
+                url: `http://localhost:5000/api/roles/lobs`,
+                type: 'GET',
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data);
+                    $("#ddlob").append('<option value="">Select LOB</option>');
+                    data.forEach(function (lob) {
+                        var option = $('<option></option>').attr("value", lob).text(lob);
+                        $("#ddlob").append(option);
                     });
-                    const label = $('<label>').text(role).prepend(checkbox);
-                    $('#checkboxContainer').append($('<div>').append(label));
-                });
-            }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert("An error occurred while fetching the LOBs. Please try again.");
+                }
+            });
 
-            // Button click event for fetching roles
+            // Fetch roles for selected LOB
+            $('#ddlob').change(function () {
+                var selectedLob = $(this).val();
+                if (selectedLob) {
+                    $.ajax({
+                        url: `http://localhost:5000/api/roles/lob/${selectedLob}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            if (Array.isArray(data)) {
+                                selectCheckbox(data, []); // Empty selectedRoles
+                            } else {
+                                console.error('Expected an array of roles, but received:', data);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('AJAX Error: ' + status + ' ' + error);
+                        }
+                    });
+                }
+            });
+
+            // Fetch roles for user for selected LOB
             $("#btngetroles").click(function () {
                 var userId = $("#txtUserId").val();
                 var lob = $("#ddlob").val();
 
                 if (userId && lob) {
-                    fetchRoles(userId, lob);
+                    $.ajax({
+                        url: `http://localhost:5000/api/roles/users/${userId}/lob/${lob}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (userRoles) {
+                            if (Array.isArray(userRoles)) {
+                                // Fetch all roles for the selected LOB
+                                $.ajax({
+                                    url: `http://localhost:5000/api/roles/lob/${lob}`,
+                                    type: 'GET',
+                                    contentType: 'application/json',
+                                    success: function (allRoles) {
+                                        if (Array.isArray(allRoles)) {
+                                            selectCheckbox(allRoles, userRoles);
+                                        } else {
+                                            console.error('Expected an array of roles, but received:', allRoles);
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error('AJAX Error: ' + status + ' ' + error);
+                                    }
+                                });
+                            } else {
+                                console.error('Expected an array of roles, but received:', userRoles);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('AJAX Error: ' + status + ' ' + error);
+                        }
+                    });
                 } else {
                     alert("Please enter a User ID and select a LOB.");
                 }
             });
 
-            // Fetch LOBs on document ready
-            fetchLobs();
+            // Add Role Button Click Event
+            $("#btnaddrole").click(function () {
+                var userId = $("#txtUserId").val();
+                var lob = $("#ddlob").val();
+
+                if (userId && lob) {
+                    $("#checkboxContainer input:checkbox:checked").each(function () {
+                        var roleId = $(this).data('role-id');
+                        var userRole = {
+                            userId: userId,
+                            roleId: roleId,
+                            lob: lob
+                        };
+
+                        $.ajax({
+                            url: `http://localhost:5000/api/userroles`,
+                            type: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify(userRole),
+                            success: function () {
+                                console.log('Role added successfully');
+                                alert('Role added successfully');
+                            },
+                            error: function (xhr, status, error) {
+                                console.error('AJAX Error: ' + status + ' ' + error);
+                            }
+                        });
+                    });
+                } else {
+                    alert("Please enter a User ID and select a LOB.");
+                }
+            });
+
+            // Delete Role Button Click Event
+            $("#btndeleterole").click(function () {
+                var userId = $("#txtUserId").val();
+                var lob = $("#ddlob").val();
+
+                if (userId && lob) {
+                    $("#checkboxContainer input:checkbox:not(:checked)").each(function () {
+                        var roleId = $(this).data('role-id');
+                        var userRole = {
+                            userId: userId,
+                            roleId: roleId,
+                            lob: lob
+                        };
+
+                        $.ajax({
+                            url: `http://localhost:5000/api/userroles`,
+                            type: 'DELETE',
+                            contentType: 'application/json',
+                            data: JSON.stringify(userRole),
+                            success: function () {
+                                console.log('Role removed successfully');
+                                alert('Role removed successfully');
+                            },
+                            error: function (xhr, status, error) {
+                                console.error('AJAX Error: ' + status + ' ' + error);
+                            }
+                        });
+                    });
+                } else {
+                    alert("Please enter a User ID and select a LOB.");
+                }
+            });
+
+            function selectCheckbox(allRoles, selectedRoles) {
+                console.log("Inside selectCheckbox");
+
+                $('#checkboxContainer').empty();
+
+                allRoles.forEach(function (role) {
+                    var checkbox = $('<input>').attr({
+                        type: 'checkbox',
+                        value: role.name,
+                        'data-role-id': role.id
+                    });
+
+                    // Check if role exists in selectedRoles
+                    var roleExists = selectedRoles.some(function (selectedRole) {
+                        return selectedRole.name === role.name;
+                    });
+
+                    checkbox.prop('checked', roleExists);
+
+                    var label = $('<label>').text(role.name).prepend(checkbox);
+                    $('<div>').addClass('checkbox').append(label).appendTo('#checkboxContainer');
+                });
+            }
         });
     </script>
 </body>
