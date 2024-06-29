@@ -10,6 +10,7 @@ public interface IRoleRepository
     Task<List<Role>> GetRoles(int userId,string lob);
     Task<List<Role>> GetRoles(int userId);
     Task<List<Role>>GetRolesByLob(string lob);
+    Task<List<User>> UserDetailsByRole(LOB lob);
     Task<bool> Insert(Role role);
     Task<bool> Update(Role role);
     Task<bool> DeleteRole(int roleId);
@@ -17,5 +18,6 @@ public interface IRoleRepository
     Task<bool> Insert(UserRole userRole);
     Task<bool> Update(UserRole userRole);
     Task<bool> DeleteUserRole(int userRoleId);
+    public Task<bool> DeleteRoleByUserId(int userId,int roleId);
     Task<bool> CheckUserRole(int userId, int roleId);     
 }

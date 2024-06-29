@@ -38,6 +38,11 @@ public class RoleService : IRoleService
         return await _repository.GetRolesByLob(lob);
     }
 
+     public async Task<List<User>> UserDetailsByRole(LOB lob)
+     {
+        return await _repository.UserDetailsByRole(lob);
+     }
+
     public async Task<bool> Insert(Role role)
     {
         return await _repository.Insert(role);
@@ -51,6 +56,11 @@ public class RoleService : IRoleService
     public async Task<bool> DeleteRole(int roleId)
     {
         return await _repository.DeleteRole(roleId);
+    }
+
+    public async Task<bool> DeleteRoleByUserId(int userId,int roleId)
+    {
+        return await _repository.DeleteRoleByUserId(userId,roleId);
     }
 
     public async Task<bool> Insert(UserRole userRole)

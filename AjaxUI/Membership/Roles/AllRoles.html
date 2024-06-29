@@ -24,10 +24,9 @@
         console.log("Document.Ready");
         $("#btngetroles").click(function () {
             $.ajax({
-                url: "https://localhost:5000/api/roles",
+                url: "http://localhost:5000/api/roles",
                 type: 'GET',
                 contentType: 'application/json',
-
                 success: function (data) {
                    
                     for (var i = 0; i <data.length; i++) {

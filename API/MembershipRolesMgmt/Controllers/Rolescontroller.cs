@@ -51,6 +51,13 @@ public class RolesController : ControllerBase
         return await _service.GetRolesByLob(lob);
     }
 
+   [HttpGet("getuserbyroles/rolename/{roleName}/lob/{lob}")]
+     public async Task<List<User>> UserDetailsByRole(string roleName, string lob)
+     {
+        var lobObj = new LOB { RoleName = roleName, Lob = lob };
+        return await _service.UserDetailsByRole(lobObj);
+     }
+
     [HttpPost]
     public async Task<bool> Insert(Role role)
     {
@@ -91,5 +98,12 @@ public class RolesController : ControllerBase
     public async Task<bool> CheckUserRole(int userId, int roleId)
     {
         return await _service.CheckUserRole(userId, roleId);
+    }
+
+     [HttpDelete]
+    [Route("remove/userroles/userid/{userId}/roleid/{roleId}")]
+    public async Task<bool> RemoveUserRole(int userId,int roleId)
+    {
+        return await _service.DeleteRoleByUserId(userId,roleId);
     }
 }

@@ -45,9 +45,16 @@ public class UsersController : ControllerBase
         return await _svc.GetUserDetailsByUserIds(userIds);
     }
 
+    [HttpGet]
+    [Route("details/id/{userId}")]
+    public async Task<UserDetails> GetUserDetailsByUserId(int userId)
+    {
+        return await _svc.GetUserDetailsByUserId(userId);
+    }
+
     //[Authorize]
     [HttpGet]
-    [Route("{userId}")]
+    [Route("userdetails/{userId}")]
     public async Task<User> GetUser(int userId)
     {
         return await _svc.GetUser(userId);
@@ -85,4 +92,6 @@ public class UsersController : ControllerBase
     {
         return await _svc.Delete(userId);
     }
+
+    
 }
