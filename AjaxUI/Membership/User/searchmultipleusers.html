@@ -22,9 +22,6 @@
               contentType: 'application/json',
               
               success: function(response) {
-                  console.log('Got the Data :', response);
-                  alert("Data get Successfully ...");
-
                 var htmlContent = '<div class="table-responsive"> <table id="userByuserIdsTable "  class="table table-striped"> <thead> <tr>' +
                     '<th>Id</th><th>ImageUrl</th><th>Full Name</th> </tr></thead><body>';
                         $.each(response,function(index,item){
@@ -47,14 +44,14 @@
           });
       };
 
-
   </script>
 </head>
 
 <body>
 
-    <h2>User details By User Ids  </h2>
-    
+    <h2>Input multiple User Id's seperated by Comma  </h2>
+
+    <hr/>
     <label>Enter Users Ids : </label>
     <input type ="text" id="userids" name="userids" placeholder="Enter multiple Users Ids"/>
     <br/><br/>
