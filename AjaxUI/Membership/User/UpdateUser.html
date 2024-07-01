@@ -6,40 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Update User Details</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-        input[type="text"], input[type="email"], input[type="date"], select, input[type="button"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
-        input[type="button"] {
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-        input[type="button"]:hover {
-            background-color: #45a049;
-        }
-    </style>
+    
 </head>
 
 <body>
@@ -80,7 +47,7 @@
 
     <script>
         $(document).ready(function () {
-            console.log("Document.Ready");
+           
 
             // Update a user
             $("#btnUpdateUser").click(function () {
@@ -102,14 +69,15 @@
                     data: JSON.stringify(user),
                     success: function (result) {
                         if(result) {
-                            alert("User updated successfully!");
+                           
                         } else {
-                            alert("User could not be updated.");
+                            
                         }
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
-                        alert("An error occurred while updating the user.");
+                       
+                        
                     }
                 });
             });
