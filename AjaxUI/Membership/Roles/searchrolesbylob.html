@@ -9,14 +9,8 @@
 <body class="font-sans m-5">
     <h1 class="text-2xl font-bold mb-5">Search Roles By LOB</h1>
     <form id="assignRolesForm" class="max-w-md mx-auto p-5 border border-gray-300 rounded bg-gray-100">  
-        <label for="role" class="block mb-2">Select LOB:</label>
-        <select id="role" name="role" required class="w-full p-2 mb-4 border border-gray-300 rounded">
-            <option value="">Select a LOB</option>
-            <option value="PMS">PMS</option>
-            <option value="banking">banking</option>
-            <option value="EKrushi">EKrushi</option>
-            <option value="EAgro">EAgro</option>
-            <option value="Inventory Management">Inventory Management</option>
+        <label for="lob" class="block mb-2">Select LOB:</label>
+        <select id="ddlob" name="lob" required class="w-full p-2 mb-4 border border-gray-300 rounded">
         </select>
 
         <input type="button" value="Show Roles" id="showRolesButton" class="w-full p-2 mb-4 bg-green-500 text-white rounded cursor-pointer">
@@ -36,8 +30,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            $.ajax({
+                url: `http://localhost:5000/api/roles/lobs`,
+                type: 'GET',
+                contentType: 'application/json',
+                success: function (data) {
+                        $("#ddlob").empty().append('<option value="">Select LOB</option>');
+                        data.forEach(function (data) {
+                            var option = $('<option></option>').attr("value", data).text(data);
+                            $("#ddlob").append(option);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert("An error occurred while fetching the LOBs. Please try again.");
+                    }
+
+            })
             $("#showRolesButton").click(function () {
-                var selectedLob = $("#role").val();
+                var selectedLob = $("#ddlob").val();
                 if (selectedLob) {
                     $.ajax({
                         url: `http://localhost:5000/api/roles/lob/${selectedLob}`,
