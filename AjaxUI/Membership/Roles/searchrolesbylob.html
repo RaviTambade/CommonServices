@@ -1,158 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <title>Users information According to LOB And their Roles</title>
+    <title>Roles By LOB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="font-sans m-5">
+    <h1 class="text-2xl font-bold mb-5">Search Roles By LOB</h1>
+    <form id="assignRolesForm" class="max-w-md mx-auto p-5 border border-gray-300 rounded bg-gray-100">  
+        <label for="role" class="block mb-2">Select LOB:</label>
+        <select id="role" name="role" required class="w-full p-2 mb-4 border border-gray-300 rounded">
+            <option value="">Select a LOB</option>
+            <option value="PMS">PMS</option>
+            <option value="banking">banking</option>
+            <option value="EKrushi">EKrushi</option>
+            <option value="EAgro">EAgro</option>
+            <option value="Inventory Management">Inventory Management</option>
+        </select>
 
-    <div id="lobs" class="mb-5"></div>
-    
+        <input type="button" value="Show Roles" id="showRolesButton" class="w-full p-2 mb-4 bg-green-500 text-white rounded cursor-pointer">
+    </form>
 
-    <div id="roles" class="mb-5">
-        <p class="font-bold">Role According To Selected LOB</p>
-    </div>
+    <table id="rolesTable" class="w-full border-collapse mt-5">
+        <thead>
+            <tr>
+                <th class="border border-gray-300 p-2 bg-gray-200">Role</th>
+                <th class="border border-gray-300 p-2 bg-gray-200">LOB</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 
-    <div class="mb-5">
-        <select id="user" class="p-2 border border-gray-300 rounded"></select>
-    </div>
-
-    <div id="dataDisplay" class="space-y-2"></div>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            var selectedLob;
-            var selectedRole;
-
-            // Fetch and display LOBs
-            $.ajax({
-                url: `http://localhost:5000/api/roles/lobs`,
-                type: 'GET',
-                contentType: 'application/json',
-                success: function (data) {
-                    console.log("LOB: ", data);
-                    $('#lobs').empty();
-                    data.forEach(function (lob) {
-                        var radiobutton = $('<input>').attr({
-                            type: 'radio',
-                            value: lob,
-                            name: 'lob',
-                            class: 'mr-2'
-                        });
-                        var label = $('<label>').text(lob).prepend(radiobutton);
-                        $('#lobs').append($('<div>').addClass('mb-2').append(radiobutton).append(label));
-                    });
-
-                    $('input:radio[name="lob"]').change(function () {
-                        selectedLob = $("input[name='lob']:checked").val();
-                        console.log("Selected LOB: " + selectedLob);
-                        fetchRoles(selectedLob);
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error(xhr.responseText);
-                    alert("An error occurred while fetching the LOBs. Please try again.");
-                }
-            });
-
-            // Fetch and display roles based on selected LOB
-            function fetchRoles(lob) {
-                if (lob) {
+            $("#showRolesButton").click(function () {
+                var selectedLob = $("#role").val();
+                if (selectedLob) {
                     $.ajax({
-                        url: `http://localhost:5000/api/roles/lob/${lob}`,
+                        url: `http://localhost:5000/api/roles/lob/${selectedLob}`,
                         type: 'GET',
                         contentType: 'application/json',
                         success: function (data) {
+                            var rolesTableBody = $("#rolesTable tbody");
+                            rolesTableBody.empty();
+
                             if (data.length > 0) {
-                                addRoleRadioButtons(data);
+                                data.forEach(function (role) {
+                                    var row = `<tr>
+                                        <td class="border border-gray-300 p-2">${role.name}</td>
+                                        <td class="border border-gray-300 p-2">${role.lob}</td>
+                                    </tr>`;
+                                    rolesTableBody.append(row);
+                                });
                             } else {
-                                alert("No Roles Found.");
+                                rolesTableBody.append('<tr><td class="border border-gray-300 p-2" colspan="2">No Roles Found</td></tr>');
                             }
                         },
                         error: function (xhr, status, error) {
-                            console.error("Error fetching roles: " + xhr.responseText);
+                            console.error(xhr.responseText);
                         }
                     });
                 } else {
                     alert("Please select a LOB.");
                 }
-            }
-
-            // Add role radio buttons
-            function addRoleRadioButtons(roles) {
-                $('#roles').empty();
-                roles.forEach(function (role) {
-                    var radiobutton = $('<input>').attr({
-                        type: 'radio',
-                        value: role.name,
-                        name: 'roleName',
-                        class: 'mr-2'
-                    });
-                    var label = $('<label>').text(role.name).prepend(radiobutton);
-                    $('#roles').append($('<div>').addClass('mb-2').append(radiobutton).append(label));
-                });
-
-                $('input[name="roleName"]').change(function () {
-                    selectedRole = $("input[name='roleName']:checked").val();
-                    console.log("Selected role: " + selectedRole);
-                    fetchUsersByRoleAndLob(selectedRole, selectedLob);
-                });
-            }
-
-            // Fetch and display users based on selected role and LOB
-            function fetchUsersByRoleAndLob(role, lob) {
-                if (role && lob) {
-                    $.ajax({
-                        url: `http://localhost:5000/api/roles/getuserbyroles/rolename/${role}/lob/${lob}`,
-                        type: 'GET',
-                        contentType: 'application/json',
-                        success: function (data) {
-                            console.log("Users: ", data);
-                            $('#user').empty();
-                            data.forEach(function (user) {
-                                var option = $('<option>').attr('value', user.id).text(user.firstName);
-                                $('#user').append(option);
-                            });
-
-                            $('#user').change(function () {
-                                var userId = $(this).val();
-                                displayUserDetails(data, userId);
-                            });
-                        },
-                        error: function (xhr, status, error) {
-                            console.error("Error fetching users: " + xhr.responseText);
-                            alert("An error occurred while fetching the users. Please try again.");
-                        }
-                    });
-                } else {
-                    alert("Please select a role.");
-                }
-            }
-
-            // Display user details
-            function displayUserDetails(users, userId) {
-                var user = users.find(user => user.id == userId);
-                if (user) {
-                    var htmlContent = '<div>';
-                    htmlContent += '<p>Id: ' + user.id + '</p>';
-                    htmlContent += '<p>First Name: ' + user.firstName + '</p>';
-                    htmlContent += '<p>Last Name: ' + user.lastName + '</p>';
-                    htmlContent += '<p>Gender: ' + user.gender + '</p>';
-                    htmlContent += '<p>Contact Number: ' + user.contactNumber + '</p>';
-                    htmlContent += '<p>Email: ' + user.email + '</p>';
-                    htmlContent += '<p>Birth Date: ' + user.birthDate + '</p>';
-                    htmlContent += '<p>Aadhar Id: ' + user.aadharId + '</p>';
-                    htmlContent += '</div>';
-                    $('#dataDisplay').html(htmlContent);
-                }
-            }
+            });
         });
     </script>
 </body>
-
 </html>
