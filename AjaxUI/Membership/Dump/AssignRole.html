@@ -24,7 +24,18 @@
             <option value="">Select LOB</option>
         </select>
     </div>
-    <div id="roles" class="mt-5"></div>
+    <div>
+        <table id="roles" class="mt-5 w-full border-collapse border border-gray-300">
+            <thead>
+                <tr>
+                    <th class="border border-gray-300 p-2">Roles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Role rows will be appended here -->
+            </tbody>
+        </table>
+    </div>
 
     <script>
         $(document).ready(function () {
@@ -62,8 +73,12 @@
                         type: 'GET',
                         contentType: 'application/json',
                         success: function (data) {
-                            const roles = $("#roles").empty();
-                            data.forEach(role => roles.append($('<div></div>').text(role.name)));
+                            const rolesTable = $("#roles").find('tbody').empty();
+                            data.forEach(function (role) {
+                                var row = $('<tr></tr>');
+                                row.append($('<td></td>').text(role.name));
+                                rolesTable.append(row);
+                            });
                         },
                         error: function (xhr, status, error) {
                             console.error(xhr.responseText);
@@ -71,7 +86,7 @@
                         }
                     });
                 } else {
-                    $("#roles").empty();
+                    $("#roles").find('tbody').empty();
                 }
             });
         });
