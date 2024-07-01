@@ -1,75 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>MemberShipRole Management</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta charset="utf-8">
+    <title>MemberShipRole Management</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <!--<script src="jquery.min.js"></script> -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
-  <script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    function getUserdetailsByContact() {
-     
-           // AJAX GET request to getall data from database
-           var UserContact = $('#contact').val();
-          $.ajax({
-              url: 'http://localhost:5000/api/users/contact/'+ UserContact,
-              type: 'GET',
-              contentType: 'application/json',
-              
-              success: function(response) {
+    <script>
 
-                var htmlContent = '<div class="table-responsive"> <table id="userByContactTable "  class="table table-striped"> <thead> <tr>' +
-                    '<th>Id</th><th>ImageUrl</th><th>FirstName</th><th>LastName</th><th>BirthDate<th>AadharId</th><th>Gender</th><th>Email</th><th>contactNumber</th><th>Password</th><th>CreatedOn</th><th>ModifiedOn</th> </tr></thead><body>';
-                                    //$.each(response,function(index,item){
-                                        
-                                        htmlContent += '<tr>';
-                                       
-                                        htmlContent += '<td>'+response.id + '</td> <nbsp/><nbsp/>';
-                                        htmlContent +='<td>'+response.imageUrl + '</td>';
-                                        htmlContent += '<td>'+response.firstName + '</td>';
-                                        htmlContent += '<td>'+response.lastName + '</td>';
-                                        htmlContent += '<td>'+response.birthDate + '</td>';
-                                        htmlContent += '<td>'+response.aadharId + '</td>';
-                                        htmlContent += '<td>'+response.gender + '</td>';
-                                        htmlContent += '<td>'+response.email + '</td>';
-                                        htmlContent += '<td>'+response.contactNumber + '</td>';
-                                        // htmlContent += '<td>'+response.password + '</td>';
-                                        htmlContent += '<td>'+response.createdOn + '</td>';
-                                        htmlContent += '<td>'+response.modifiedOn + '</td>';
+        function getUserdetailsByContact() {
 
-                                        
-                                        // htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
-                                        htmlContent += '</tr>';
-                                   // });
+            // AJAX GET request to getall data from database
+            var UserContact = $('#contact').val();
+            $.ajax({
+                url: 'http://localhost:5000/api/users/contact/' + UserContact,
+                type: 'GET',
+                contentType: 'application/json',
 
-                                    htmlContent += '</tbody></table></div>';
-                                    $('#dataDisplay').html(htmlContent);
-                 
-              },
-              error: function(xhr, status, error) {
-                  console.error('Error:', status + ': ' + error);
-              }
-          });
-      };
+                success: function (response) {
+                    var htmlContent = '<div class="table-responsive"> <table id="userByContactTable "  class="table table-striped"> <thead> <tr>' +
+                        '<th>Id</th><th>ImageUrl</th><th>FirstName</th><th>LastName</th><th>BirthDate<th>AadharId</th><th>Gender</th><th>Email</th><th>contactNumber</th><th>CreatedOn</th><th>ModifiedOn</th> </tr></thead><body>';
+                    htmlContent += '<tr>';
+                    htmlContent += '<td>' + response.id + '</td> <nbsp/><nbsp/>';
+                    htmlContent += '<td>' + response.imageUrl + '</td>';
+                    htmlContent += '<td>' + response.firstName + '</td>';
+                    htmlContent += '<td>' + response.lastName + '</td>';
+                    htmlContent += '<td>' + response.birthDate + '</td>';
+                    htmlContent += '<td>' + response.aadharId + '</td>';
+                    htmlContent += '<td>' + response.gender + '</td>';
+                    htmlContent += '<td>' + response.email + '</td>';
+                    htmlContent += '<td>' + response.contactNumber + '</td>';
+                    htmlContent += '<td>' + response.createdOn + '</td>';
+                    htmlContent += '<td>' + response.modifiedOn + '</td>';
+                    htmlContent += '</tr>';
+                    htmlContent += '</tbody></table></div>';
+                    $('#dataDisplay').html(htmlContent);
+
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', status + ': ' + error);
+                    console.log('Data does not get:', response);
+                    alert("Data does not get...");
+                }
+            });
+        };
 
 
-  </script>
+    </script>
 </head>
 
 <body>
 
-    <h2>User details By ContactNumber  </h2>
-    
-    <label>Enter User ContactNumber : </label>
-    <input type ="number" id="contact" name="contact" placeholder="Enter User Id"/>
-    <br/><br/>
+    <h2>User details By ContactNumber </h2>
+
+    <label>Enter User Contact Number : </label>
+    <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" maxlength="10" required />
+    <br /><br />
     <button onclick="getUserdetailsByContact()">Get User Details</button>
-    <br/>
+    <br />
     <div id="dataDisplay">
     </div>
 
