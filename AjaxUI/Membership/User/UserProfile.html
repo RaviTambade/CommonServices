@@ -185,6 +185,8 @@
                     htmlContent += '<p>Email: ' + user.email + '</p>';
                     htmlContent += '<p>Birth Date: ' + user.birthDate + '</p>';
                     htmlContent += '<p>Aadhar Id: ' + user.aadharId + '</p>';
+                    //htmlContent += '<img src = "/images/tfl.jpg" width=100 height =100 />';
+                    htmlContent += '<img src = "'+''+user.imageUrl+''+'" width=100 height =100 />';
                     htmlContent += '</div>';
                     $('#dataDisplay').html(htmlContent);
                 }
