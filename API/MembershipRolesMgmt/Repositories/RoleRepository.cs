@@ -187,6 +187,18 @@ public class RoleRepository : IRoleRepository
         return status;
     }
 
+     public async Task<bool> DeleteRoleByUserId(int userId,int roleId)
+    {
+        bool status = false;
+        var userRoleToDelete = _context.UserRoles
+        .Where(ur => ur.UserId == userId && ur.RoleId == roleId)
+        .FirstOrDefault();
+        _context.Remove(userRoleToDelete);
+       status =await SaveChanges(_context);
+ 
+        return status;
+    }
+
     public async Task<bool> Insert(UserRole userRole)
     {
         bool status = false;

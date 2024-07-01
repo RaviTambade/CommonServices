@@ -151,5 +151,8 @@ inner join userroles on users.id = userroles.userid
 inner join roles on userroles.roleid = roles.id
 where roles.name = "farmer" AND roles.lob = "EAgro";
 
+delete from userroles
+where userid =1 AND roleid =1;
+
 
     

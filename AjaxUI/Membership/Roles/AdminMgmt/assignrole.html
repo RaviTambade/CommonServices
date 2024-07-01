@@ -27,7 +27,7 @@
 
     <div>
         <label for="txtUserId">Enter User Id: </label><input id="txtUserId" />
-
+        
         <div>
             <label for="ddlob">Select LOB: </label>
             <select id="ddlob"></select>
@@ -38,7 +38,12 @@
         </div>
 
         <div>
+<<<<<<< HEAD:AjaxUI/Membership/Roles/AdminMgmt/AdminRoleManagement.html
             <label id="userdetails" name="userdetails"></label>
+=======
+            <label id="userdetails" name="userdetails">Hello</label><br/><br/>
+            <p id="img"></p>
+>>>>>>> 613a6aaa2e1a4aabddc861c8f14834eb74608bdf:AjaxUI/Membership/Roles/AdminMgmt/assignrole.html
         </div>
 
 
@@ -66,9 +71,11 @@
                     success: function (data) {
                         console.log(data);
                         var name = data.fullName;
+                        console.log(data.imageUrl);
+                        var userimage='<img src="' + data.imageUrl + '" width="300" height="300">';
+                        $('#img').append(userimage);
                         $("#userdetails").html(name);
                         console.log(name);
-
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
@@ -197,12 +204,13 @@
                     var lob = $("#ddlob").val();
 
                     if (userId && lob) {
-                        $("#checkboxContainer input:checkbox:not(:checked)").each(function () {
+                        $("#checkboxContainer input:checkbox:checked").each(function () {
                             var roleId = $(this).data('role-id');
-
+                            console.log("UserId "+userId);
+                            console.log("RoleId "+roleId);
                             // Call delete role API
                             $.ajax({
-                                url: `http://localhost:5000/api/roles/${roleId}`, // Adjust the endpoint to your API endpoint for deleting roles
+                                url: `http://localhost:5000/api/roles/remove/userroles/userid/${userId}/roleid/${roleId}`, // Adjust the endpoint to your API endpoint for deleting roles
                                 type: 'DELETE',
                                 contentType: 'application/json',
                                 success: function () {

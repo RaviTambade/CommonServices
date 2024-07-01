@@ -13,43 +13,41 @@
   <script>
     // javascript
     $(document).ready(function() {
+<<<<<<< HEAD:AjaxUI/Membership/User/GetUsers.html
      
            
            // AJAX GET request to getall data from database
           
         
+=======
+>>>>>>> 613a6aaa2e1a4aabddc861c8f14834eb74608bdf:AjaxUI/Membership/User/users.html
           $.ajax({
-              //url: 'http://localhost:5053/api/application',
               url:' http://localhost:5000/api/users',
               type: 'GET',
               contentType: 'application/json',
-              
               success: function(response) {
+<<<<<<< HEAD:AjaxUI/Membership/User/GetUsers.html
                   
 
+=======
+>>>>>>> 613a6aaa2e1a4aabddc861c8f14834eb74608bdf:AjaxUI/Membership/User/users.html
                 var htmlContent = '<div class="table-responsive"> <table id="usersTable" class="table table-striped"> <thead> <tr>' +
-                                '<th>Id</th><th>ImageUrl</th><th>FirstName</th><th>LastName</th><th>BirthDate<th>AadharId</th><th>Gender</th><th>Email</th><th>contactNumber</th><th>Password</th><th>CreatedOn</th><th>ModifiedOn</th></tr></thead><body>';
+                                '<th>Id</th><th>ImageUrl</th><th>FirstName</th><th>LastName</th><th>contactNumber</th> <th>Actions</th></tr></thead><body>';
                                     $.each(response,function(index,item){
                                         htmlContent += '<tr>';
                                         htmlContent +='<td>'+item.id + '</td>';
-                                        htmlContent +='<td>'+item.imageUrl + '</td>';
+                                        
                                         htmlContent += '<td>'+item.firstName + '</td>';
                                         htmlContent += '<td>'+item.lastName + '</td>';
-                                        htmlContent += '<td>'+item.birthDate + '</td>';
-                                        htmlContent += '<td>'+item.aadharId + '</td>';
-                                        htmlContent += '<td>'+item.gender + '</td>';
-                                        htmlContent += '<td>'+item.email + '</td>';
                                         htmlContent += '<td>'+item.contactNumber + '</td>';
-                                        htmlContent += '<td>'+item.password + '</td>';
-                                        htmlContent += '<td>'+item.createdOn + '</td>';
-                                        htmlContent += '<td>'+item.modifiedOn + '</td>';
+                                        htmlContent += '<td> <a href=">Details </a>| <a href=">Update </a>|<a href=">Remove </a></td>';
+
                                        // htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
                                         htmlContent += '</tr>';
                                     });
 
                                     htmlContent += '</tbody></table></div>';
                                     $('#dataDisplay').html(htmlContent);
-                 
               },
               error: function(xhr, status, error) {
                   console.error('Error:', status + ': ' + error);
@@ -58,15 +56,13 @@
           });
       });
 
-
   </script>
 </head>
 
 <body>
-    <!-- <button id="addNewEmployee" class="btn btn-primary">Add New Employee</button> -->
-    <!-- <button id="removeAll" class="btn btn-primary">Remove All</button> -->
+    <h2>All Users List</h2>
+    <hr/>
     <div id="dataDisplay">
     </div>
-
 
 </body>

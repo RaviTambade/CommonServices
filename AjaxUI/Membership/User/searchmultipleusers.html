@@ -22,7 +22,10 @@
               contentType: 'application/json',
               
               success: function(response) {
+<<<<<<< HEAD:AjaxUI/Membership/User/GetUserDetailsByUserIds.html
                   
+=======
+>>>>>>> 613a6aaa2e1a4aabddc861c8f14834eb74608bdf:AjaxUI/Membership/User/searchmultipleusers.html
                 var htmlContent = '<div class="table-responsive"> <table id="userByuserIdsTable "  class="table table-striped"> <thead> <tr>' +
                     '<th>Id</th><th>ImageUrl</th><th>Full Name</th> </tr></thead><body>';
                         $.each(response,function(index,item){
@@ -43,14 +46,14 @@
           });
       };
 
-
   </script>
 </head>
 
 <body>
 
-    <h2>User details By User Ids  </h2>
-    
+    <h2>Input multiple User Id's seperated by Comma  </h2>
+
+    <hr/>
     <label>Enter Users Ids : </label>
     <input type ="text" id="userids" name="userids" placeholder="Enter multiple Users Ids"/>
     <br/><br/>
