@@ -13,11 +13,24 @@
   <script>
     // javascript
     $(document).ready(function() {
+<<<<<<< HEAD:AjaxUI/Membership/User/GetUsers.html
+     
+           
+           // AJAX GET request to getall data from database
+          
+        
+=======
+>>>>>>> 613a6aaa2e1a4aabddc861c8f14834eb74608bdf:AjaxUI/Membership/User/users.html
           $.ajax({
               url:' http://localhost:5000/api/users',
               type: 'GET',
               contentType: 'application/json',
               success: function(response) {
+<<<<<<< HEAD:AjaxUI/Membership/User/GetUsers.html
+                  
+
+=======
+>>>>>>> 613a6aaa2e1a4aabddc861c8f14834eb74608bdf:AjaxUI/Membership/User/users.html
                 var htmlContent = '<div class="table-responsive"> <table id="usersTable" class="table table-striped"> <thead> <tr>' +
                                 '<th>Id</th><th>ImageUrl</th><th>FirstName</th><th>LastName</th><th>contactNumber</th> <th>Actions</th></tr></thead><body>';
                                     $.each(response,function(index,item){
@@ -38,8 +51,7 @@
               },
               error: function(xhr, status, error) {
                   console.error('Error:', status + ': ' + error);
-                  console.log('Data does not get:', response);
-                  alert("Data does not get...");
+                 
               }
           });
       });

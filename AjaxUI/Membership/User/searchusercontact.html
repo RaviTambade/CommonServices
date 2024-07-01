@@ -22,8 +22,6 @@
               contentType: 'application/json',
               
               success: function(response) {
-                  console.log('Got the Data :', response);
-                  alert("Data get Successfully ...");
 
                 var htmlContent = '<div class="table-responsive"> <table id="userByContactTable "  class="table table-striped"> <thead> <tr>' +
                     '<th>Id</th><th>ImageUrl</th><th>FirstName</th><th>LastName</th><th>BirthDate<th>AadharId</th><th>Gender</th><th>Email</th><th>contactNumber</th><th>Password</th><th>CreatedOn</th><th>ModifiedOn</th> </tr></thead><body>';
@@ -55,8 +53,6 @@
               },
               error: function(xhr, status, error) {
                   console.error('Error:', status + ': ' + error);
-                  console.log('Data does not get:', response);
-                  alert("Data does not get...");
               }
           });
       };

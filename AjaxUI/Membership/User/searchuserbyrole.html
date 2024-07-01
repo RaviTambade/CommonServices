@@ -16,7 +16,13 @@
               contentType: 'application/json',
               
               success: function(response) {
+<<<<<<< HEAD:AjaxUI/Membership/User/GetUserByRole.html
+                 
+
+                var htmlContent = '<div class="table-responsive"> <table id="userByRoleTable "  class="table table-striped"> <thead> <tr>' +
+=======
                   var htmlContent = '<div class="table-responsive"> <table id="userByRoleTable "  class="table table-striped"> <thead> <tr>' +
+>>>>>>> 613a6aaa2e1a4aabddc861c8f14834eb74608bdf:AjaxUI/Membership/User/searchuserbyrole.html
                     '<th>Id</th><th>ImageUrl</th><th>FirstName</th><th>LastName</th><th>BirthDate<th>AadharId</th><th>Gender</th><th>Email</th><th>contactNumber</th><th>CreatedOn</th><th>ModifiedOn</th> </tr></thead><body>';
                         $.each(response,function(index,item){
                                         htmlContent += '<tr>';
@@ -40,8 +46,7 @@
               },
               error: function(xhr, status, error) {
                   console.error('Error:', status + ': ' + error);
-                  console.log('Data does not get:', response);
-                  alert("Data does not get...");
+                  
               }
           });
       };

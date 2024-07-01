@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input,
+        select,
+        button {
+            padding: 5px;
+            margin-left: 10px;
+        }
+
+        #roles div {
+            margin-top: 5px;
+        }
+    </style>
+    <title>Roles</title>
+</head>
+
+<body>
+    <div>
+        <label>Enter UserId</label>
+        <input type="number" id="userid" name="userid" />
+        <button id="btngetlobs">Get Line Of Business</button>
+    </div>
+    <div>
+        <label>Select LOB</label>
+        <select id="ddlob" name="ddlob">
+            <option value="">Select LOB</option>
+        </select>
+    </div>
+    <div id="roles"></div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        var userId = null;
+        $("#btngetlobs").click(function () {
+            userId = $("#userid").val();
+            if (userId) {
+                $.ajax({
+                    url: `http://localhost:5000/api/roles/${userId}`,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        $("#ddlob").empty().append('<option value="">Select LOB</option>');
+                        data.forEach(function (lob) {
+                            var option = $('<option></option>').attr("value", lob.lob).text(lob.lob);
+                            $("#ddlob").append(option);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert("An error occurred while fetching the LOBs. Please try again.");
+                    }
+                });
+            } else {
+                alert("Please enter a valid user ID.");
+            }
+        });
+
+        $("#ddlob").change(function () {
+            var lob = $(this).val();
+            if (userId && lob) {
+                $.ajax({
+                    url: `http://localhost:5000/api/roles/users/${userId}/lob/${lob}`,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        const roles = $("#roles").empty();
+                        data.forEach(role => roles.append($('<div></div>').text(role.name)));
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert("An error occurred while fetching the roles. Please try again.");
+                    }
+                });
+            } else {
+                $("#roles").empty();
+            }
+        });
+    });
+</script>
+
+</html>
