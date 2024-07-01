@@ -154,5 +154,14 @@ where roles.name = "farmer" AND roles.lob = "EAgro";
 delete from userroles
 where userid =1 AND roleid =1;
 
+-- update img url according to userid
+update users
+set imageurl = "/images/tfl.jpg"
+where id =1;
+
+update users
+set imageurl = "/images/Ravi_Sir.jpeg"
+where id =2;
+
 
     
