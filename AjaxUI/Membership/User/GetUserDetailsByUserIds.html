@@ -22,9 +22,7 @@
               contentType: 'application/json',
               
               success: function(response) {
-                  console.log('Got the Data :', response);
-                  alert("Data get Successfully ...");
-
+                  
                 var htmlContent = '<div class="table-responsive"> <table id="userByuserIdsTable "  class="table table-striped"> <thead> <tr>' +
                     '<th>Id</th><th>ImageUrl</th><th>Full Name</th> </tr></thead><body>';
                         $.each(response,function(index,item){
@@ -41,8 +39,6 @@
               },
               error: function(xhr, status, error) {
                   console.error('Error:', status + ': ' + error);
-                  console.log('Data does not get:', response);
-                  alert("Data does not get...");
               }
           });
       };
