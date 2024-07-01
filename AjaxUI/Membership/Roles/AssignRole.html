@@ -61,9 +61,13 @@
                     contentType: 'application/json',
                     success: function (data) {
                         $("#ddlob").empty().append('<option value="">Select LOB</option>');
+                        const lobSet = new Set();
                         data.forEach(function (lob) {
+                            if (!lobSet.has(lob.lob)) {
+                                lobSet.add(lob.lob);
                             var option = $('<option></option>').attr("value", lob.lob).text(lob.lob);
                             $("#ddlob").append(option);
+                            }
                         });
                     },
                     error: function (xhr, status, error) {
