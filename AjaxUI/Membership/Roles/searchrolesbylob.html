@@ -3,57 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assign User Roles</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-        select, input[type="button"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
-        input[type="button"] {
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <title>Roles By LOB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Assign User Roles</h1>
-    <form id="assignRolesForm">  
-        <label for="role">Select LOB:</label>
-        <select id="role" name="role" required>
+<body class="font-sans m-5">
+    <h1 class="text-2xl font-bold mb-5">Search Roles By LOB</h1>
+    <form id="assignRolesForm" class="max-w-md mx-auto p-5 border border-gray-300 rounded bg-gray-100">  
+        <label for="role" class="block mb-2">Select LOB:</label>
+        <select id="role" name="role" required class="w-full p-2 mb-4 border border-gray-300 rounded">
             <option value="">Select a LOB</option>
             <option value="PMS">PMS</option>
             <option value="banking">banking</option>
@@ -62,14 +19,14 @@
             <option value="Inventory Management">Inventory Management</option>
         </select>
 
-        <input type="button" value="Show Roles" id="showRolesButton">
+        <input type="button" value="Show Roles" id="showRolesButton" class="w-full p-2 mb-4 bg-green-500 text-white rounded cursor-pointer">
     </form>
 
-    <table id="rolesTable">
+    <table id="rolesTable" class="w-full border-collapse mt-5">
         <thead>
             <tr>
-                <th>Role</th>
-                <th>LOB</th>
+                <th class="border border-gray-300 p-2 bg-gray-200">Role</th>
+                <th class="border border-gray-300 p-2 bg-gray-200">LOB</th>
             </tr>
         </thead>
         <tbody>
@@ -93,13 +50,13 @@
                             if (data.length > 0) {
                                 data.forEach(function (role) {
                                     var row = `<tr>
-                                        <td>${role.name}</td>
-                                        <td>${role.lob}</td>
+                                        <td class="border border-gray-300 p-2">${role.name}</td>
+                                        <td class="border border-gray-300 p-2">${role.lob}</td>
                                     </tr>`;
                                     rolesTableBody.append(row);
                                 });
                             } else {
-                                rolesTableBody.append('<tr><td colspan="2">No Roles Found</td></tr>');
+                                rolesTableBody.append('<tr><td class="border border-gray-300 p-2" colspan="2">No Roles Found</td></tr>');
                             }
                         },
                         error: function (xhr, status, error) {

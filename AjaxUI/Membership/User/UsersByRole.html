@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items List</title>
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Get Users By Roles</h2>
+    <label>Enter Role : </label><input id="userrole" />
+    <button id="showUsersBtn">Get Users</button>
+
+
+
+    <table id="usersTable">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Contact Number</th>
+                <th>Email</th>
+                <th>Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+
+
+    <script>
+        $(document).ready(function () {
+
+            $("#showUsersBtn").click(function () {
+                var selectedRole = $("#userrole").val();
+                console.log(selectedRole);
+                if (selectedRole) {
+                    $.ajax({
+                        url: `http://localhost:5000/api/users/roles/${selectedRole}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            console.log(data);
+                            var usersTableBody = $("#usersTable tbody");
+                            usersTableBody.empty();
+
+                            if (data.length > 0) {
+                                data.forEach(function (user) {
+                                    var row = `<tr>
+                                        <td>${selectedRole}</td>
+                                        <td>${user.firstName}</td>
+                                        <td>${user.lastName}</td>
+                                        <td>${user.contactNumber}</td>
+                                        <td>${user.email}</td>
+                                        <td>${user.imageUrl}</td>
+
+                                    </tr>`;
+                                    usersTableBody.append(row);
+                                    // $("usersTable").append(row);
+                                });
+                            } else {
+                                rolesTableBody.append('<tr><td colspan="2">No Roles Found</td></tr>');
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    alert("Please select a LOB.");
+                }
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

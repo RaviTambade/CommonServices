@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Delete User</title>
+<<<<<<< HEAD
+    
+=======
+>>>>>>> 613a6aaa2e1a4aabddc861c8f14834eb74608bdf
 </head>
 
 <body>
@@ -22,8 +26,7 @@
 
     <script>
         $(document).ready(function () {
-            console.log("Document.Ready");
-
+           
             // Delete a user
             $("#btndeleteuser").click(function () {
                 var userId = $("#txtUserId").val();
@@ -33,14 +36,14 @@
                     type: 'DELETE',
                     success: function (result) {
                         if(result) {
-                            alert("User deleted successfully!");
+                            
                         } else {
-                            alert("User could not be deleted.");
+                            
                         }
                     },
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
-                        alert("An error occurred while deleting the user.");
+                        
                     }
                 });
             });
