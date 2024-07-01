@@ -4,90 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Roles</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-        select, input[type="button"], input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
-        input[type="button"] {
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-        input[type="button"]:hover {
-            background-color: #45a049;
-        }
-        #rolesContainer {
-            margin-top: 20px;
-        }
-        #roles div {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            background-color: #f9f9f9;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-    <h2>Get Roles for User </h2>
-    <hr />
-    <div><label for="txtUserId">User ID:</label><input type="text" id="txtUserId" placeholder="Enter User ID" /></div>
-    <div><input type="button" id="btngetroles" value="Get Roles" /></div>
-    <hr />
-    <div id="rolesContainer">
-        <h3>Roles:</h3>
-        <div id="roles"></div>
+<body class="bg-gray-100 font-sans">
+    <div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-4">Get Roles for User</h2>
+        <hr class="mb-4" />
+        <div class="mb-4">
+            <label for="txtUserId" class="block text-gray-700">User ID:</label>
+            <input type="text" id="txtUserId" class="w-full p-2 border border-gray-300 rounded" placeholder="Enter User ID" />
+        </div>
+        <div class="mb-4">
+            <input type="button" id="btngetroles" class="w-full p-2 bg-green-500 text-white rounded hover:bg-green-600 cursor-pointer" value="Get Roles" />
+        </div>
+        <hr class="mb-4" />
+        <div id="rolesContainer">
+            <h3 class="text-xl font-semibold mb-2">Roles:</h3>
+            <div id="roles" class="space-y-2"></div>
+        </div>
     </div>
 
     <script>
-        $(document).ready(function () {
+        document.addEventListener("DOMContentLoaded", function () {
             console.log("Document.Ready");
-            $("#btngetroles").click(function () {
-                var userId = $("#txtUserId").val();
-                $("#roles").empty();
+            document.getElementById("btngetroles").addEventListener("click", function () {
+                var userId = document.getElementById("txtUserId").value;
+                var rolesContainer = document.getElementById("roles");
+                rolesContainer.innerHTML = '';
 
-                $.ajax({
-                    url: `http://localhost:5000/api/roles/`+userId,
-                    type: 'GET',
-                    contentType: 'application/json',
-                    success: function (data) {
-                        if(data.length > 0){
+                fetch(`http://localhost:5000/api/roles/` + userId)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
                             data.forEach(function (role) {
-                                var theroles = $(`<div>`).text(`ID: ${role.id}, Name: ${role.name}, LOB: ${role.lob}`);
-                                $("#roles").append(theroles);
+                                var roleElement = document.createElement("div");
+                                roleElement.className = "p-4 bg-gray-100 border border-gray-300 rounded";
+                                roleElement.textContent = `ID: ${role.id}, Name: ${role.name}, LOB: ${role.lob}`;
+                                rolesContainer.appendChild(roleElement);
                             });
                         } else {
-                            $("#roles").text("No Roles Found");
+                            rolesContainer.textContent = "No Roles Found";
                         }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
             });
         });
     </script>
