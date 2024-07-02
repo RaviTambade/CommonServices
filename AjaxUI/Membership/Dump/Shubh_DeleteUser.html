@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Delete User</title>
+</head>
+
+<body>
+    <h2>Delete User</h2>
+    <hr />
+    <div>
+        <label for="txtUserId">User ID:</label>
+        <input type="text" id="txtUserId" placeholder="Enter User ID" />
+    </div>
+    <div>
+        <input type="button" id="btndeleteuser" value="Delete User" />
+    </div>
+    <hr />
+
+    <script>
+        $(document).ready(function () {
+
+            // Delete a user
+            $("#btndeleteuser").click(function () {
+                var userId = $("#txtUserId").val();
+                const apiUrl = 'http://localhost:5000/api/users/${userId}';
+
+                fetch(apiUrl, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: null //JSON.stringify(YOUR_ADDITIONAL_DATA)  //if you do not want to send any addional data,  replace the complete JSON.stringify(YOUR_ADDITIONAL_DATA) with null
+                })
+
+                /* $.ajax({
+                     url: `http://localhost:5000/api/users/${userId}`,
+                     type: 'DELETE',
+                     success: function (result) {
+                         if(result) {
+                             
+                         } else {
+                             
+                         }
+                     },
+                     error: function (xhr, status, error) {
+                         console.error(xhr.responseText);
+                         
+                     }
+                 });*/
+            });
+        });
+    </script>
+
+</body>
+
+</html>

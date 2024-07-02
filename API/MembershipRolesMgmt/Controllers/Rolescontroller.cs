@@ -58,7 +58,7 @@ public class RolesController : ControllerBase
         return await _service.UserDetailsByRole(lobObj);
      }
 
-    [HttpPost]
+    [HttpPost("addrole")]
     public async Task<bool> Insert(Role role)
     {
         return await _service.Insert(role);
