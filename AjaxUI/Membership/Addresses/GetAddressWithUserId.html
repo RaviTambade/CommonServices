@@ -4,83 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Addresses</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-    <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>User Addresses</h1>
-    <input type="number" id="userId" placeholder="Enter User ID">
-    <button id="getAddressesBtn">Get Addresses</button>
-    <table id="addressesTable">
+<body class="p-4">
+    <h1 class="text-2xl font-bold mb-4">User Addresses</h1>
+    <div class="mb-4">
+        <input type="number" id="userId" placeholder="Enter User ID" class="p-2 border rounded-md">
+        <button id="getAddressesBtn" class="p-2 bg-blue-500 text-white rounded-md">Get Address</button>
+    </div>
+    <table id="addressesTable" class="w-full border-collapse">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Area</th>
-                <th>Landmark</th>
-                <th>City</th>
-                <th>State</th>
-                <th>Pincode</th>
-                <th>Address Type</th>
-                <th>Contact Number</th>
-                <th>Name</th>
+                <th class="border p-2 bg-gray-200">User ID</th>
+                <th class="border p-2 bg-gray-200">Area</th>
+                <th class="border p-2 bg-gray-200">Landmark</th>
+                <th class="border p-2 bg-gray-200">City</th>
+                <th class="border p-2 bg-gray-200">State</th>
+                <th class="border p-2 bg-gray-200">Pincode</th>
+                <th class="border p-2 bg-gray-200">Address Type</th>
+                <th class="border p-2 bg-gray-200">Contact Number</th>
+                <th class="border p-2 bg-gray-200">Name</th>
             </tr>
         </thead>
         <tbody>
             <!-- Address rows will be inserted here -->
         </tbody>
     </table>
-    <script>
-        $(document).ready(function() {
-            $('#getAddressesBtn').click(function() {
-                const userId = $('#userId').val();
-                if (!userId) {
-                    alert('Please enter a User ID');
-                    return;
-                }
-
-                $.ajax({
-                    url: `http://localhost:5000/api/addresses/users/${userId}`,
-                    method: 'GET',
-                    success: function(addresses) {
-                        displayAddresses(addresses);
-                    },
-                    error: function() {
-                        console.error('There was a problem with the fetch operation.');
-                    }
-                });
-            });
-
-            function displayAddresses(addresses) {
-                const tbody = $('#addressesTable tbody');
-                tbody.empty(); // Clear previous data
-                addresses.forEach(address => {
-                    const row = $('<tr>');
-                    row.append($('<td>').text(address.id));
-                    row.append($('<td>').text(address.area));
-                    row.append($('<td>').text(address.landMark));
-                    row.append($('<td>').text(address.city));
-                    row.append($('<td>').text(address.state));
-                    row.append($('<td>').text(address.pinCode));
-                    row.append($('<td>').text(address.addressType));
-                    row.append($('<td>').text(address.contactNumber));
-                    row.append($('<td>').text(address.name));
-                    tbody.append(row);
-                });
-            }
-        });
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="getAddressWithUserId.js"></script>
 </body>
 </html>
