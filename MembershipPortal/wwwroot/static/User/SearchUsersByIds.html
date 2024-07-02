@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MemberShipRole Management</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!--<script src="jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  
+  <script>
+
+    function getUserdetailsByUsersIds() {
+     
+           // AJAX GET request to getall data from database
+           var UserIds = $('#userids').val();
+          $.ajax({
+              url: 'http://localhost:5000/api/users/details/ids/'+ UserIds,
+              type: 'GET',
+              contentType: 'application/json',
+              
+              success: function(response) {
+                var htmlContent = '<div class="table-responsive"> <table id="userByuserIdsTable "  class="table table-striped"> <thead> <tr>' +
+                    '<th>Id</th><th>ImageUrl</th><th>Full Name</th> </tr></thead><body>';
+                        $.each(response,function(index,item){
+                                        htmlContent += '<tr>';
+                                        htmlContent +='<td>'+item.id + '</td>';
+                                        htmlContent +='<td>'+item.imageUrl + '</td>';
+                                        htmlContent += '<td>'+item.fullName + '</td>';
+                                        htmlContent += '</tr>';
+                                    });
+
+                                    htmlContent += '</tbody></table></div>';
+                                    $('#dataDisplay').html(htmlContent);
+                 
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error:', status + ': ' + error);
+              }
+          });
+      };
+
+  </script>
+</head>
+
+<body>
+
+    <h2>Input multiple User Id's seperated by Comma  </h2>
+
+    <hr/>
+    <label>Enter Users Ids : </label>
+    <input type ="text" id="userids" name="userids" placeholder="Enter multiple Users Ids"/>
+    <br/><br/>
+    <button onclick="getUserdetailsByUsersIds()">Get User Details</button>
+    <br/>
+    <div id="dataDisplay">
+    </div>
+
+
+</body>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Register</title>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Register</h2>
+        
+        <label for="imageurl"><b>Image URL</b></label>
+        <input type="text" id="imageurl" placeholder="Enter Image URL" name="imageurl" required>
+        <br>
+        <label for="aadharid"><b>Aadhar ID</b></label>
+        <input type="text" id="aadharid" placeholder="Enter Aadhar ID" name="aadharid" required>
+        <br>
+        <label for="firstname"><b>First Name</b></label>
+        <input type="text" id="firstname" placeholder="Enter First Name" name="firstname" required>
+        <br>
+        <label for="lastname"><b>Last Name</b></label>
+        <input type="text" id="lastname" placeholder="Enter Last Name" name="lastname" required>
+        <br>
+        <label for="birthdate"><b>Birth Date</b></label>
+        <input type="date" id="birthdate" name="birthdate" required>
+        <br>
+        <label for="gender"><b>Gender</b></label>
+        <input type="text" id="gender" placeholder="Enter Gender" name="gender" required>
+        <br>
+        <label for="email"><b>Email</b></label>
+        <input type="email" id="email" placeholder="Enter Email" name="email" required>
+        <br>
+        <label for="contactnumber"><b>Contact Number</b></label>
+        <input type="text" id="contactnumber" placeholder="Enter Contact Number" name="contactnumber" required>
+        <br>
+        <label for="password"><b>Password</b></label>
+        <input type="password" id="password" placeholder="Enter Password" name="password" required>
+        <br>
+        <button id="btnsubmit">Register</button>
+    </div>
+    <br>
+    <div class="container" style="background-color:#f1f1f1">
+        <button type="button" class="cancelbtn">Cancel</button>
+    </div>
+
+</body>
+<script>
+$(document).ready(function() {
+    $("#btnsubmit").click(function () {    
+        var user = {
+            ImageUrl: $("#imageurl").val(),
+            AadharId: $("#aadharid").val(),
+            FirstName: $("#firstname").val(),
+            LastName: $("#lastname").val(),
+            BirthDate: $("#birthdate").val(),
+            Gender: $("#gender").val(),
+            Email: $("#email").val(),
+            ContactNumber: $("#contactnumber").val(),
+            Password: $("#password").val()
+        };
+
+        $.ajax({
+            url: "http://localhost:5000/api/users",
+            type: 'POST',
+            data: JSON.stringify(user),
+            contentType: 'application/json',
+            success: function (data) {
+                alert("Registration successful!");
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+                alert("Registration failed. Please try again.");
+            }
+        });
+    });
+});
+</script>
+</html>

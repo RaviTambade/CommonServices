@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roles</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        /* No inline styles needed, all Tailwind CSS classes */
+    </style>
+</head>
+
+<body class="font-sans m-5">
+    <div class="mb-5">
+        <label class="inline-block w-24">Enter UserId</label>
+        <input type="number" id="userid" name="userid" class="p-2 border rounded">
+        <button id="btngetlobs" class="ml-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded">Get Line Of Business</button>
+    </div>
+    <div class="mb-5">
+        <label class="inline-block w-24">Select LOB</label>
+        <select id="ddlob" name="ddlob" class="p-2 border rounded">
+            <option value="">Select LOB</option>
+        </select>
+    </div>
+    <div>
+        <table id="roles" class="mt-5 w-full border-collapse border border-gray-300">
+            <thead>
+                <tr>
+                    <th class="border border-gray-300 p-2">Roles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Role rows will be appended here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var userId = null;
+            $("#btngetlobs").click(function () {
+                userId = $("#userid").val();
+                if (userId) {
+                    $.ajax({
+                        url: `http://localhost:5000/api/roles/${userId}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            console.log(data);
+                            $("#ddlob").empty().append('<option value="">Select LOB</option>');
+                            data.forEach(function (lob) {
+                                var option = $('<option></option>').attr("value", lob.lob).text(lob.lob);
+                                $("#ddlob").append(option);
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(xhr.responseText);
+                            alert("An error occurred while fetching the LOBs. Please try again.");
+                        }
+                    });
+                } else {
+                    alert("Please enter a valid user ID.");
+                }
+            });
+
+            $("#ddlob").change(function () {
+                var lob = $(this).val();
+                if (userId && lob) {
+                    $.ajax({
+                        url: `http://localhost:5000/api/roles/users/${userId}/lob/${lob}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            const rolesTable = $("#roles").find('tbody').empty();
+                            data.forEach(function (role) {
+                                var row = $('<tr></tr>');
+                                row.append($('<td></td>').text(role.name));
+                                rolesTable.append(row);
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(xhr.responseText);
+                            alert("An error occurred while fetching the roles. Please try again.");
+                        }
+                    });
+                } else {
+                    $("#roles").find('tbody').empty();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

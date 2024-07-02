@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Roles</title>
+ 
+</head>
+
+<body>
+    <h2>Get Roles for User </h2>
+    <hr />
+    <div><label for="txtUserId">User ID:</label><input type="text" id="txtUserId" placeholder="Enter User ID" /></div>
+    <div><input type="button" id="btngetroles" value="Get Roles" /></div>
+    <hr />
+    <div id="rolesContainer">
+        <h3>Roles:</h3>
+        <div id="roles"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            console.log("Document.Ready");
+            $("#btngetroles").click(function () {
+                var userId = $("#txtUserId").val();
+                $("#roles").empty();
+
+                $.ajax({
+                    url: `http://localhost:5000/api/roles`,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        if(data.length > 0){
+                            data.forEach(function (role) {
+                                var theroles = $(`<div>`).text(`ID: ${role.id}, Name: ${role.name}, LOB: ${role.lob}`);
+                                $("#roles").append(theroles);
+                            });
+                        } else {
+                            $("#roles").text("No Roles Found");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

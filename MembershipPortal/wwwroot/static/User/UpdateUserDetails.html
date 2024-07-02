@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Update User Details</title>
+    
+</head>
+
+<body>
+    <h2>Update User Details</h2>
+    <hr />
+    <form id="updateForm">
+        <label for="txtUserId">User ID:</label>
+        <input type="text" id="txtUserId" placeholder="Enter User ID" required />
+
+        <label for="txtAadharId">Aadhar ID:</label>
+        <input type="text" id="txtAadharId" placeholder="Enter Aadhar ID" required />
+
+        <label for="txtFirstName">First Name:</label>
+        <input type="text" id="txtFirstName" placeholder="Enter First Name" required />
+
+        <label for="txtLastName">Last Name:</label>
+        <input type="text" id="txtLastName" placeholder="Enter Last Name" required />
+
+        <label for="txtBirthDate">Birth Date:</label>
+        <input type="date" id="txtBirthDate" required />
+
+        <label for="txtGender">Gender:</label>
+        <select id="txtGender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="txtEmail">Email:</label>
+        <input type="email" id="txtEmail" placeholder="Enter Email" required />
+
+        <label for="txtImageUrl">Image URL:</label>
+        <input type="text" id="txtImageUrl" placeholder="Enter Image URL" required />
+
+        <input type="button" id="btnUpdateUser" value="Update User" />
+    </form>
+    <hr />
+
+    <script>
+        $(document).ready(function () {
+           
+
+            // Update a user
+            $("#btnUpdateUser").click(function () {
+                var userId = $("#txtUserId").val();
+                var user = {
+                    AadharId: $("#txtAadharId").val(),
+                    FirstName: $("#txtFirstName").val(),
+                    LastName: $("#txtLastName").val(),
+                    BirthDate: $("#txtBirthDate").val(),
+                    Gender: $("#txtGender").val(),
+                    Email: $("#txtEmail").val(),
+                    ImageUrl: $("#txtImageUrl").val()
+                };
+
+                $.ajax({
+                    url: `http://localhost:5000/api/users/${userId}`,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify(user),
+                    success: function (result) {
+                        if(result) {
+                           
+                        } else {
+                            
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                       
+                        
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

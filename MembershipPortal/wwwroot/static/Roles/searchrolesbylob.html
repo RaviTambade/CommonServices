@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roles By LOB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans m-5">
+    <h1 class="text-2xl font-bold mb-5">Search Roles By LOB</h1>
+    <form id="assignRolesForm" class="max-w-md mx-auto p-5 border border-gray-300 rounded bg-gray-100">  
+        <label for="lob" class="block mb-2">Select LOB:</label>
+        <select id="ddlob" name="lob" required class="w-full p-2 mb-4 border border-gray-300 rounded">
+        </select>
+
+        <input type="button" value="Show Roles" id="showRolesButton" class="w-full p-2 mb-4 bg-green-500 text-white rounded cursor-pointer">
+    </form>
+
+    <table id="rolesTable" class="w-full border-collapse mt-5">
+        <thead>
+            <tr>
+                <th class="border border-gray-300 p-2 bg-gray-200">Role</th>
+                <th class="border border-gray-300 p-2 bg-gray-200">LOB</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+                url: `http://localhost:5000/api/roles/lobs`,
+                type: 'GET',
+                contentType: 'application/json',
+                success: function (data) {
+                        $("#ddlob").empty().append('<option value="">Select LOB</option>');
+                        data.forEach(function (data) {
+                            var option = $('<option></option>').attr("value", data).text(data);
+                            $("#ddlob").append(option);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        alert("An error occurred while fetching the LOBs. Please try again.");
+                    }
+
+            })
+            $("#showRolesButton").click(function () {
+                var selectedLob = $("#ddlob").val();
+                if (selectedLob) {
+                    $.ajax({
+                        url: `http://localhost:5000/api/roles/lob/${selectedLob}`,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        success: function (data) {
+                            var rolesTableBody = $("#rolesTable tbody");
+                            rolesTableBody.empty();
+
+                            if (data.length > 0) {
+                                data.forEach(function (role) {
+                                    var row = `<tr>
+                                        <td class="border border-gray-300 p-2">${role.name}</td>
+                                        <td class="border border-gray-300 p-2">${role.lob}</td>
+                                    </tr>`;
+                                    rolesTableBody.append(row);
+                                });
+                            } else {
+                                rolesTableBody.append('<tr><td class="border border-gray-300 p-2" colspan="2">No Roles Found</td></tr>');
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    alert("Please select a LOB.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

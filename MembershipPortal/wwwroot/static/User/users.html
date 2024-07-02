@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>All Users</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!--<script src="jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <script>
+    // javascript
+    $(document).ready(function() {
+          $.ajax({
+              url:' http://localhost:5000/api/users',
+              type: 'GET',
+              contentType: 'application/json',
+              success: function(response) {
+                var htmlContent = '<div class="table-responsive"> <table id="usersTable" class="table table-striped"> <thead> <tr>' +
+                                '<th>Id</th><th>ImageUrl</th><th>FirstName</th><th>LastName</th><th>contactNumber</th> <th>Actions</th></tr></thead><body>';
+                                    $.each(response,function(index,item){
+                                        htmlContent += '<tr>';
+                                        htmlContent +='<td>'+item.id + '</td>';
+                                        
+                                        htmlContent += '<td>'+item.firstName + '</td>';
+                                        htmlContent += '<td>'+item.lastName + '</td>';
+                                        htmlContent += '<td>'+item.contactNumber + '</td>';
+                                        htmlContent += '<td> <a href=">Details </a>| <a href=">Update </a>|<a href=">Remove </a></td>';
+
+                                       // htmlContent += '<td>' + '<button id="edit" class="btn btn-success">Edit</button>' + '<button id="delete" class="btn btn-danger">Delete</button>' + '</td>';
+                                        htmlContent += '</tr>';
+                                    });
+
+                                    htmlContent += '</tbody></table></div>';
+                                    $('#dataDisplay').html(htmlContent);
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error:', status + ': ' + error);
+                 
+              }
+          });
+      });
+
+  </script>
+</head>
+
+<body>
+    <h2>All Users List</h2>
+    <hr/>
+    <div id="dataDisplay">
+    </div>
+
+</body>
