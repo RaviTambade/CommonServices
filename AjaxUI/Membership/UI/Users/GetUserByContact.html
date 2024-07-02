@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Membership Role Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h2>User Details By Contact Number</h2>
+    <label for="contact">Enter User Contact Number:</label>
+    <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" maxlength="10" required />
+    <br /><br />
+    <button onclick="getUserdetailsByContact()">Get User Details</button>
+    <br />
+    <div id="dataDisplay"></div>
+</body>
+</html>

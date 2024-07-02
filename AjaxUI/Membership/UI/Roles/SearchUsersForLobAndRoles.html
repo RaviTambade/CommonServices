@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Users information According to LOB And their Roles</title>
+</head>
+
+<body class="font-sans m-5">
+    <div id="lobsSection" class="mb-5">
+        <h2 class="text-xl font-bold mb-3">Select LOB</h2>
+        <div id="lobs"></div>
+    </div>
+
+    <div id="rolesSection" class="mb-5 hidden">
+        <h2 class="text-xl font-bold mb-3">Selected Role</h2>
+        <div id="roles"></div>
+    </div>
+
+    <div id="userSection" class="mb-5 hidden">
+        <h2 class="text-xl font-bold mb-3">Select User</h2>
+        <select id="user" class="p-2 border border-gray-300 rounded"></select>
+    </div>
+
+    <div id="dataDisplay" class="space-y-2"></div>
+
+    <script src="SearchUsersForLobAndRoles.js">
+        
+    </script>
+</body>
+
+</html>
