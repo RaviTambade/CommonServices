@@ -6,50 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Roles</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-        select, input[type="button"], input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
-        input[type="button"] {
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-        input[type="button"]:hover {
-            background-color: #45a049;
-        }
-        #rolesContainer {
-            margin-top: 20px;
-        }
-        #roles div {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            background-color: #f9f9f9;
-        }
-    </style>
+ 
 </head>
 
 <body>
@@ -71,7 +28,7 @@
                 $("#roles").empty();
 
                 $.ajax({
-                    url: `http://localhost:5000/api/roles/`+userId,
+                    url: `http://localhost:5000/api/roles`,
                     type: 'GET',
                     contentType: 'application/json',
                     success: function (data) {
