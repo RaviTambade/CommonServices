@@ -26,31 +26,45 @@
             // Delete a user
             $("#btndeleteuser").click(function () {
                 var userId = $("#txtUserId").val();
-                const apiUrl = 'http://localhost:5000/api/users/${userId}';
-
+                //const apiUrl = 'http://localhost:5000/api/users/${userId}';
+                const apiUrl = 'http://localhost:5000/api/users/' + userId;
                 fetch(apiUrl, {
+
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: null //JSON.stringify(YOUR_ADDITIONAL_DATA)  //if you do not want to send any addional data,  replace the complete JSON.stringify(YOUR_ADDITIONAL_DATA) with null
+                    body: null
                 })
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data =>
+                        // this is the data we get after putting our data, do whatever you want with this data
+                        console.log(data)
+                    );
 
-                /* $.ajax({
-                     url: `http://localhost:5000/api/users/${userId}`,
-                     type: 'DELETE',
-                     success: function (result) {
-                         if(result) {
-                             
-                         } else {
-                             
-                         }
-                     },
-                     error: function (xhr, status, error) {
-                         console.error(xhr.responseText);
-                         
-                     }
-                 });*/
+                /*
+
+                    // Simple DELETE request with fetch
+                            const element = document.querySelector('#delete-request .status');
+                            fetch('https://reqres.in/api/posts/1', { method: 'DELETE' })
+                                .then(() => element.innerHTML = 'Delete successful');
+
+                            // DELETE request using fetch with set headers
+                            const element = document.querySelector('#delete-request-set-headers .status');
+                            const requestOptions = {
+                                method: 'DELETE',
+                                headers: { 
+                                    'Authorization': 'Bearer my-token',
+                                    'My-Custom-Header': 'foobar'
+                                }
+                            };
+                            fetch('https://reqres.in/api/posts/1', )
+                                .then(() => element.innerHTML = 'Delete successful');
+
+
+                */
             });
         });
     </script>
