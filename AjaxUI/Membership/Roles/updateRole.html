@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Role</title>
+</head>
+<body>
+    <h1>Update Role</h1>
+    <form id="updateRoleForm">
+        <label for="Id">ID:</label>
+        <input type="text" id="Id" name="Id" required>
+        <br> <br>
+        <label for="roleTitle">Role :</label>
+        <input type="text" id="roleTitle" name="roleTitle" required>
+        <br> <br>
+        <label for="lob">LOB :</label>
+        <input type="text" id="lob" name="lob" required>
+        <br> <br>
+        <button type="submit">Update Role</button>
+    </form>
+    
+    <script>
+        document.getElementById('updateRoleForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const roleId = document.getElementById('Id').value;
+            const roleName = document.getElementById('roleTitle').value;
+            const LOB = document.getElementById('lob').value;
+
+            fetch(`http://localhost:5000/api/roles`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: roleId,
+                    name: roleName,
+                    lob: LOB
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('User updated successfully!');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Failed to update user.');
+            });
+        });
+        
+     </script>
+</body>
+</html>
