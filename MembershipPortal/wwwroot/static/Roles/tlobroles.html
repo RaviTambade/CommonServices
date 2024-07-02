@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show User Roles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        select, input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Show User Roles As Per Lob</h1>
+    <form id="assignRolesForm">  
+        <label for="role">Select LOB:</label>
+        <select id="role" name="role" required>
+            <option value="">Select a LOB</option>
+            <option value="Portal">Portal</option>
+            <option value="Assessment">Assessment</option>
+            <option value="EKrishi">EKrishi</option>
+            <option value="EAgro">EAgro</option>
+        </select>
+
+        <input type="submit" value="Show Roles">
+        <table>
+            <thead>
+                <tr>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Administrator</td>
+                </tr>
+                <tr>
+                    <td>User</td>
+                </tr>
+                <tr>
+                    <td>Customer</td>
+                </tr>
+                <tr>
+                    <td>Director</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <script>
+       
+    </script>
+</body>
+</html>

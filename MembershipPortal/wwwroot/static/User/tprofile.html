@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div>
+        <label>User Id:</label>
+        <input type="text" id="txtUserId" />
+        <button id="btnShow">Show Details</button>
+    </div>
+
+    <div class="profile">
+
+        <hr />
+        User Id : <label id="pid"><strong></strong></label><br />
+        First Name : <label id="pfname"><strong></strong></label><br />
+        Last Name : <label id="plname"><strong></strong></label><br />
+        Email : <label id="pemail"><strong></strong></label><br />
+        Contact Number : <label id="pcontact"><strong></strong></label><br />
+        Gender : <label id="pgender"><strong></strong></label><br />
+        Image Url :<label id="pimgurl"><strong></strong></label><br />
+        Aadhar Number : <label id="paadharid"><strong></strong></label><br />
+        Birth Date : <label id="pdob"><strong></strong></label><br />
+        Profile Created On : <label id="pcreatedon"><strong></strong></label><br />
+        Profile Modified On :<label id="pmodifiedon"><strong></strong></label>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#btnShow").click(function () {
+                var userId = $("#txtUserId").val();
+                $.ajax({
+                    url: "http://localhost:5000/api/users/userdetails/" + userId,
+                    type: 'GET',
+                    contentType: 'application/json',
+
+                    success: function (data) {
+
+                        $("#pid").html(data.id);
+                        $("#pfname").html(data.firstName);
+                        $("#plname").html(data.lastName);
+                        $("#pemail").html(data.email);
+                        $("#paadharid").html(data.aadharId);
+                        $("#pdob").html(data.birthDate);
+                        $("#pcontact").html(data.contactNumber);
+                        $("#pgender").html(data.gender);
+                        $("#pimgurl").html(data.imageUrl);
+                        $("#pcreatedon").html(data.createdOn);
+                        $("#pmodifiedon").html(data.modifiedOn);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

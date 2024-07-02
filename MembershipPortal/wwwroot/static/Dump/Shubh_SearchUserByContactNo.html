@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MemberShipRole Management</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+
+        function getUserdetailsByContact() {
+
+            var UserContact = $('#contact').val();
+            // Specify the API endpoint for user data
+            const apiUrl = 'http://localhost:5000/api/users/contact/' + UserContact;
+
+            // Make a GET request using the Fetch API
+            fetch(apiUrl)
+                .then(response => {
+                    console.log(response);
+                    
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(userData => {
+                    // Process the retrieved user data
+
+                    console.log('Inside second then = User Data:', userData);
+                    var htmlContent = '<div class="table-responsive"> <table id="userByContactTable "  class="table table-striped"> <thead> <tr>' +
+                        '<th>Id</th><th>ImageUrl</th><th>FirstName</th><th>LastName</th><th>BirthDate<th>AadharId</th><th>Gender</th><th>Email</th><th>contactNumber</th><th>CreatedOn</th><th>ModifiedOn</th> </tr></thead><body>';
+                    htmlContent += '<tr>';
+                    htmlContent += '<td>' + userData.id + '</td> <nbsp/><nbsp/>';
+                    htmlContent += '<td>' + userData.imageUrl + '</td>';
+                    htmlContent += '<td>' + userData.firstName + '</td>';
+                    htmlContent += '<td>' + userData.lastName + '</td>';
+                    htmlContent += '<td>' + userData.birthDate + '</td>';
+                    htmlContent += '<td>' + userData.aadharId + '</td>';
+                    htmlContent += '<td>' + userData.gender + '</td>';
+                    htmlContent += '<td>' + userData.email + '</td>';
+                    htmlContent += '<td>' + userData.contactNumber + '</td>';
+                    htmlContent += '<td>' + userData.createdOn + '</td>';
+                    htmlContent += '<td>' + userData.modifiedOn + '</td>';
+                    htmlContent += '</tr>';
+                    htmlContent += '</tbody></table></div>';
+                    $('#dataDisplay').html(htmlContent);
+
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+                
+        };
+
+
+    </script>
+</head>
+
+<body>
+
+    <h2>User details By ContactNumber </h2>
+
+    <label>Enter User Contact Number : </label>
+    <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" maxlength="10" required />
+    <br /><br />
+    <button onclick="getUserdetailsByContact()">Get User Details</button>
+    <br />
+    <div id="dataDisplay">
+    </div>
+
+
+</body>
