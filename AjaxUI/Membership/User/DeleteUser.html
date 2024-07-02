@@ -19,28 +19,31 @@
         <input type="button" id="btndeleteuser" value="Delete User" />
     </div>
     <hr />
-
     <script>
-        $(document).ready(function () {
-           
-            // Delete a user
-            $("#btndeleteuser").click(function () {
-                var userId = $("#txtUserId").val();
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("btndeleteuser").addEventListener("click", function () {
+                var userId = document.getElementById("txtUserId").value;
 
-                $.ajax({
-                    url: `http://localhost:5000/api/users/${userId}`,
-                    type: 'DELETE',
-                    success: function (result) {
-                        if(result) {
-                            
-                        } else {
-                            
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                        
+                fetch('http://localhost:5000/api/users/' +userId, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                
+                    console.log('User deleted successfully:', data);
+                 
+                })
+                .catch(error => {
+                
+                    console.error('Error:', error);
                 });
             });
         });
