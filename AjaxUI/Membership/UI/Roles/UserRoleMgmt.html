@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Roles Management</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body class="font-sans m-5">
+  <div class="max-w-4xl mx-auto">
+    <header class="mb-8">
+      <a class="block mb-4" href="#" style="color: black;">
+        <img src="../../../../images/tfl.jpg" alt="Company Logo" class="w-24 h-24">
+      </a>
+      <h2 class="text-3xl font-bold mb-4">Admin Roles Management</h2>
+    </header>
+
+    <div class="bg-gray-50 p-6 border border-gray-300 rounded-lg mb-8">
+      <div class="mb-4">
+        <label for="txtUserId" class="block text-sm font-medium text-gray-700 mb-2">Enter User Id:</label>
+        <input id="txtUserId" class="w-full p-2 border border-gray-300 rounded" />
+      </div>
+
+      <div class="mb-4">
+        <label for="ddlob" class="block text-sm font-medium text-gray-700 mb-2">Select LOB:</label>
+        <select id="ddlob" class="w-full p-2 border border-gray-300 rounded"></select>
+      </div>
+
+      <div class="flex space-x-4 mb-4">
+        <button id="btngetroles" class="w-full p-2 bg-blue-600 text-white rounded hover:bg-blue-700">Get Roles</button>
+        <button id="btnaddrole" class="w-full p-2 bg-green-600 text-white rounded hover:bg-green-700">Add Role</button>
+        <button id="btndeleterole" class="w-full p-2 bg-red-600 text-white rounded hover:bg-red-700">Delete Role</button>
+      </div>
+
+      <div id="userdetails" class="text-lg font-medium mb-4"></div>
+      <div id="img" class="mb-4"></div>
+      <div id="checkboxContainer" class="space-y-2"></div>
+    </div>
+
+   
+  </div>
+
+  <script src="UserRoleMgmt.js">
+    
+  </script>
+</body>
+</html>

@@ -12,19 +12,18 @@ $(document).ready(function () {
             pincode: $('#pincode').val(),
             addresstype: $('#addressType').val()
         };
-        console.log(addressData);
 
         $.ajax({
-            url: `http://localhost:5000/api/addresses`,
+            url: 'http://localhost:5000/api/addresses',
             method: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify(addressData),
             success: function () {
-                $('#message').text('Address updated successfully.').addClass('text-green-500');
+                $('#message').text('Address updated successfully.').removeClass('text-red-500').addClass('text-green-500');
                 $('#updateAddressForm')[0].reset();
             },
             error: function () {
-                $('#message').text('There was a problem with the update operation.').addClass('text-red-500');
+                $('#message').text('There was a problem with the update operation.').removeClass('text-green-500').addClass('text-red-500');
             }
         });
     });

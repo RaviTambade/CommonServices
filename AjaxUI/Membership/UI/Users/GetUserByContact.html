@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Fetch User Details by Contact Number</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Fetch User Details by Contact Number</h2>
+
+        <div class="form-group">
+            <label for="contact">Enter User Contact Number:</label>
+            <input type="tel" class="form-control" id="contact" name="contact" pattern="[0-9]{10}" maxlength="10" required>
+        </div>
+
+        <button id="getUserDetailsBtn" class="btn btn-primary">Get User Details</button>
+
+        <div id="dataDisplay" class="mt-3"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src ="GetUserByContact.js"></script>
+</body>
+</html>
