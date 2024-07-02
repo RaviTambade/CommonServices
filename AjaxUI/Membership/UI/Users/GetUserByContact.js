@@ -1,61 +1,50 @@
-$(document).ready(function () {
-    function getUserdetailsByContact() {
-        const userContact = $('#contact').val(); // Use const for variables that do not change
-        const apiUrl = `http://localhost:5000/api/users/contact/${userContact}`;
-
-        $.ajax({
-            url: apiUrl,
-            type: 'GET',
-            contentType: 'application/json',
-            success: function (response) {
-                // Build HTML content for displaying user details
-                const htmlContent = `
-                    <div class="table-responsive">
-                        <table id="userByContactTable" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Image URL</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Birth Date</th>
-                                    <th>Aadhar Id</th>
-                                    <th>Gender</th>
-                                    <th>Email</th>
-                                    <th>Contact Number</th>
-                                    <th>Created On</th>
-                                    <th>Modified On</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>${response.id}</td>
-                                    <td>${response.imageUrl}</td>
-                                    <td>${response.firstName}</td>
-                                    <td>${response.lastName}</td>
-                                    <td>${response.birthDate}</td>
-                                    <td>${response.aadharId}</td>
-                                    <td>${response.gender}</td>
-                                    <td>${response.email}</td>
-                                    <td>${response.contactNumber}</td>
-                                    <td>${response.createdOn}</td>
-                                    <td>${response.modifiedOn}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>`;
-                
-                $('#dataDisplay').html(htmlContent); // Update HTML content with user details
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', status, error); // Log detailed error information
-                alert("Failed to fetch user details."); // Alert user about the error
-            }
-        });
-    }
-
-    // Event handler for button click
-    $('#getUserDetailsBtn').click(function () {
+$(document).ready(function() {
+    $('#getUserDetailsBtn').on('click', function() {
         getUserdetailsByContact();
     });
 });
+
+function getUserdetailsByContact() {
+    var userContact = $('#contact').val();
+    $.ajax({
+        url: 'http://localhost:5000/api/users/contact/' + userContact,
+        type: 'GET',
+        contentType: 'application/json',
+        success: function(response) {
+            var htmlContent = '<div class="overflow-x-auto"><table id="userByContactTable" class="min-w-full divide-y divide-gray-200"><thead class="bg-gray-50"><tr>' +
+                '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Id</th>' +
+                '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image URL</th>' +
+                '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>' +
+                '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>' +
+                '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Birth Date</th>' +
+                '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aadhar Id</th>' +
+                '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gender</th>' +
+                '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>' +
+                '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact Number</th>' +
+                '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created On</th>' +
+                '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modified On</th>' +
+                '</tr></thead><tbody class="bg-white divide-y divide-gray-200">';
+
+            htmlContent += '<tr>' +
+                '<td class="px-6 py-4 whitespace-nowrap">' + response.id + '</td>' +
+                '<td class="px-6 py-4 whitespace-nowrap">' + response.imageUrl + '</td>' +
+                '<td class="px-6 py-4 whitespace-nowrap">' + response.firstName + '</td>' +
+                '<td class="px-6 py-4 whitespace-nowrap">' + response.lastName + '</td>' +
+                '<td class="px-6 py-4 whitespace-nowrap">' + response.birthDate + '</td>' +
+                '<td class="px-6 py-4 whitespace-nowrap">' + response.aadharId + '</td>' +
+                '<td class="px-6 py-4 whitespace-nowrap">' + response.gender + '</td>' +
+                '<td class="px-6 py-4 whitespace-nowrap">' + response.email + '</td>' +
+                '<td class="px-6 py-4 whitespace-nowrap">' + response.contactNumber + '</td>' +
+                '<td class="px-6 py-4 whitespace-nowrap">' + response.createdOn + '</td>' +
+                '<td class="px-6 py-4 whitespace-nowrap">' + response.modifiedOn + '</td>' +
+                '</tr>';
+
+            htmlContent += '</tbody></table></div>';
+            $('#dataDisplay').html(htmlContent);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', status, error);
+            alert("Failed to fetch user details.");
+        }
+    });
+}

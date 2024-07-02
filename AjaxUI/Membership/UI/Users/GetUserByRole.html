@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>MemberShip Role Management</title>
-    <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-
-    <!--<script src="jquery.min.js"></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-
+  <meta charset="utf-8">
+  <title>MemberShipRole Management</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="GetUserByRole.js" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body>
-
-    <h2>User details By ContactNumber </h2>
-
-    <label>Enter User's Role : </label>
-    <input type="text" id="role" name="role" placeholder="Enter User's Role" />
-    <br /><br />
-    <button onclick="getUserdetailsByRole()">Get User Details</button>
-    <br />
-    <div id="dataDisplay">
+<body class="bg-gray-100">
+  <div class="container mx-auto mt-10 p-5 bg-white shadow-md rounded-md">
+    <h2 class="text-2xl font-bold mb-5">User Details By Role</h2>
+    
+    <div class="form-group mb-5">
+      <label for="role" class="block text-sm font-medium text-gray-700">Enter User's Role:</label>
+      <input type="text" id="role" name="role" placeholder="Enter User's Role" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
     </div>
-
-    <script src="GetUserByRole.js"></script>
+    
+    <button id="getUserDetailsBtn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Get User Details</button>
+    
+    <div id="dataDisplay" class="mt-5"></div>
+  </div>
 </body>
-
 </html>
