@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MemberShip Role Management</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!--<script src="jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <h2>User details By ContactNumber </h2>
+
+    <label>Enter User's Role : </label>
+    <input type="text" id="role" name="role" placeholder="Enter User's Role" />
+    <br /><br />
+    <button onclick="getUserdetailsByRole()">Get User Details</button>
+    <br />
+    <div id="dataDisplay">
+    </div>
+
+    <script src="GetUserByRole.js"></script>
+</body>
+
+</html>
