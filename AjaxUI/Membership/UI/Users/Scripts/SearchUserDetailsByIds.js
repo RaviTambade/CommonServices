@@ -11,9 +11,6 @@ function userdetailsByUserIds() {
         type: 'GET',
         contentType: 'application/json',
         success: function(response) {
-            console.log('Got the Data :', response);
-            alert("Data retrieved successfully");
-
             var htmlContent = '<div class="table-responsive"><table id="userByRoleTable" class="table-auto w-full"><thead><tr>' +
                 '<th class="px-4 py-2">Id</th><th class="px-4 py-2">ImageUrl</th><th class="px-4 py-2">FirstName</th><th class="px-4 py-2">LastName</th><th class="px-4 py-2">BirthDate</th><th class="px-4 py-2">AadharId</th><th class="px-4 py-2">Gender</th><th class="px-4 py-2">Email</th><th class="px-4 py-2">ContactNumber</th><th class="px-4 py-2">CreatedOn</th><th class="px-4 py-2">ModifiedOn</th></tr></thead><tbody>';
                 
