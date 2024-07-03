@@ -11,6 +11,7 @@ $(document).ready(function() {
             method: 'GET',
             success: function(address) {
                 displayAddress(address);
+                console.log(address);
             },
             error: function() {
                 console.error('There was a problem with the fetch operation.');

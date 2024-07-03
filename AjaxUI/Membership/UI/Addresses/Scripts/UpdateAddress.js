@@ -12,6 +12,8 @@ $(document).ready(function () {
             pincode: $('#pincode').val(),
             addresstype: $('#addressType').val()
         };
+        console.log(existingId);
+        console.log(addressData);
 
         $.ajax({
             url: 'http://localhost:5000/api/addresses/'+existingId,
