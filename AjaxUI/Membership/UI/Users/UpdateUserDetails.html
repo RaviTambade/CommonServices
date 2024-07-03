@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User Details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="Scripts/UpdateUserDetails.js" defer></script>
+</head>
+
+<body class="bg-gray-100 ">
+    <div class="container mx-auto p-4">
+        <h2 class="text-2xl font-bold mb-4">Update User Details</h2>
+        <hr class="mb-4" />
+        <form id="updateForm" class="space-y-4">
+            <div>
+                <label for="txtUserId" class="block mb-1">User ID:</label>
+                <input type="text" id="txtUserId" placeholder="Enter User ID" required
+                    class="border border-gray-300 p-2 w-full sm:w-1/2" />
+            </div>
+
+            <div>
+                <label for="txtAadharId" class="block mb-1">Aadhar ID:</label>
+                <input type="text" id="txtAadharId" placeholder="Enter Aadhar ID" required
+                    class="border border-gray-300 p-2 w-full sm:w-1/2" />
+            </div>
+
+            <div>
+                <label for="txtFirstName" class="block mb-1">First Name:</label>
+                <input type="text" id="txtFirstName" placeholder="Enter First Name" required
+                    class="border border-gray-300 p-2 w-full sm:w-1/2" />
+            </div>
+
+            <div>
+                <label for="txtLastName" class="block mb-1">Last Name:</label>
+                <input type="text" id="txtLastName" placeholder="Enter Last Name" required
+                    class="border border-gray-300 p-2 w-full sm:w-1/2" />
+            </div>
+
+            <div>
+                <label for="txtBirthDate" class="block mb-1">Birth Date:</label>
+                <input type="date" id="txtBirthDate" required class="border border-gray-300 p-2 w-full sm:w-1/2" />
+            </div>
+
+            <div>
+                <label for="txtGender" class="block mb-1">Gender:</label>
+                <select id="txtGender" required class="border border-gray-300 p-2 w-full sm:w-1/2">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="txtEmail" class="block mb-1">Email:</label>
+                <input type="email" id="txtEmail" placeholder="Enter Email" required
+                    class="border border-gray-300 p-2 w-full sm:w-1/2" />
+            </div>
+
+            <div>
+                <label for="txtImageUrl" class="block mb-1">Image URL:</label>
+                <input type="text" id="txtImageUrl" placeholder="Enter Image URL" required
+                    class="border border-gray-300 p-2 w-full sm:w-1/2" />
+            </div>
+
+            <div>
+                <input type="button" id="btnUpdateUser" value="Update User"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" />
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
