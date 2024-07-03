@@ -10,23 +10,31 @@
 
 <body class="font-sans m-5">
     <h2>Add New Role</h2>
-    <form id ="addnewrole">
-        <label>Enter Role ID : </label><input id="roleid">
+    <!-- Form tag is for fetch mathod -->
+    <!-- <form id ="addnewrole">
+        
         <label>Enter Role : </label><input id="role">
         <label>Enter LOB : </label><input id="lob"><br>
-        <button type="submit" id="btnaddrole">Add Role</button>
-    </form>
+        <button  id="btnaddrole">Add Role</button>
+    </form> -->
+
+    <!-- Div tag is for Ajax Call -->
+    <div>
+        <label>Enter Role : </label><input id="role">
+        <label>Enter LOB : </label><input id="lob"><br>
+        <button  id="btnaddrole">Add Role</button>
+    </div>
     
 
-    <!-- <script>
+     <script>
         $(document).ready(function() {
             $('#btnaddrole').click(function() {
-                var roleId = $('#roleid').val();
+               // var roleId = $('#roleid').val();
                 var role = $('#role').val();
                 var lob = $('#lob').val();
 
                 var newRole = {
-                    id: roleId,
+                    //id: roleId,
                     name: role,
                     lob: lob
                 };
@@ -48,12 +56,12 @@
                 });
             });
         });
-    </script> -->
-   <script>
+    </script> 
+   <!-- <script>
           document.getElementById('addnewrole').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            const roleId = document.getElementById('roleid').value;
+            //const roleId = document.getElementById('roleid').value;
             const roleName = document.getElementById('role').value;
             const LOB = document.getElementById('lob').value;
 
@@ -63,7 +71,7 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    id: roleId,
+                    //id: roleId,
                     name: roleName,
                     lob: LOB
                 })
@@ -78,7 +86,7 @@
                 alert('Failed to update user.');
             });
         });
-   </script>
+   </script> -->
 </body>
 
 </html>
