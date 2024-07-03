@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('#updateAddressForm').submit(function (event) {
         event.preventDefault();
-
+        var existingId =  $('#existingId').val();
         var addressData = {
             id: $('#existingId').val(),
             userid: $('#userId').val(),
@@ -14,7 +14,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: 'http://localhost:5000/api/addresses',
+            url: 'http://localhost:5000/api/addresses/'+existingId,
             method: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify(addressData),
