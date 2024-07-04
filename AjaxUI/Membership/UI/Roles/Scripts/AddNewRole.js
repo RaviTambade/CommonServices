@@ -1,5 +1,5 @@
 // Ajax call to add new role
-/* $(document).ready(function() {
+ $(document).ready(function() {
     $('#btnaddrole').click(function() {
         var roleId = $('#roleid').val();
         var role = $('#role').val();
@@ -28,8 +28,12 @@
         });
     });
 });
- */
+ 
 
+
+
+
+/*
 document.getElementById('addnewrole').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -57,4 +61,4 @@ document.getElementById('addnewrole').addEventListener('submit', function(event)
         console.error('Error:', error);
         alert('Failed to update user.');
     });
-});
+});*/
