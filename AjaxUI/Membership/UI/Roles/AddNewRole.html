@@ -6,18 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Roles</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="Script/AddNewRole.js"></script>
+    <script src="Scripts/AddNewRole.js"></script>
 </head>
 
 <body class="font-sans m-5">
     <h2>Add New Role</h2>
-    <form id="addnewrole">ng
+    <!-- For Fetch Function use form-->
+    <!-- <form id="addnewrole">
         <label>Enter Role ID : </label><input id="roleid">
         <label>Enter Role : </label><input id="role">
         <label>Enter LOB : </label><input id="lob"><br>
         <button type="submit" id="btnaddrole">Add Role</button>
-    </form>
+    </form> -->
 
+    <!-- For Ajax call use Div tag , Don't use form and button type submit -->
+    <div>
+        <label>Enter Role ID : </label><input id="roleid">
+        <label>Enter Role : </label><input id="role">
+        <label>Enter LOB : </label><input id="lob"><br>
+        <button  id="btnaddrole">Add Role</button>
+    </div>
 
 
 
