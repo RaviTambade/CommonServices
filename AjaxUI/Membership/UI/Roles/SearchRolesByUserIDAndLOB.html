@@ -7,27 +7,42 @@
     <title>Roles</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="Script/SearchRolesByUserIDAndLOB.js"> </script>
-   
+    <script src="Scripts/SearchRolesByUserIDAndLOB.js"> </script>
+
 </head>
 
-<body class="font-sans m-5">
-    <div class="mb-5">
-        <label class="inline-block w-24">Enter UserId</label>
-        <input type="number" id="userid" name="userid" class="p-2 border rounded">
-        <button id="btngetlobs" class="ml-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded">Get Line Of Business</button>
+<nav class="bg-blue-500 p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="text-white text-2xl font-bold">Transflower.in</div>
+        <div class="space-x-4">
+            <a href="#login" class="text-white hover:text-gray-300">Login</a>
+            <a href="#register" class="text-white hover:text-gray-300">Register</a>
+            <a href="#about" class="text-white hover:text-gray-300">About</a>
+            <a href="#contact" class="text-white hover:text-gray-300">Contact</a>
+            <a href="#help" class="text-white hover:text-gray-300">Help</a>
+        </div>
     </div>
-    <div class="mb-5">
-        <label class="inline-block w-24">Select LOB</label>
-        <select id="ddlob" name="ddlob" class="p-2 border rounded">
-            <option value="">Select LOB</option>
-        </select>
-    </div>
-    <div id="roles"></div>
-</body>
+</nav>
 
-<script src="Script/SearchRolesByUserIDAndLOB.js">
-    
-</script>
+<body class="mb-6 ">
+    <div class="font-sans m-20">
+        <div class="mb-5 font-bold">
+            <label class="inline-block w-24">Enter UserId</label>
+            <input type="number" id="userid" name="userid" class="p-2 border rounded">
+            <button id="btngetlobs" class="ml-2 px-4 py-2 bg-blue-500 hover:bg-blue-500 text-white rounded">Get Line Of
+                Business</button>
+        </div>
+        <div class="mb-5 font-bold">
+            <label class="inline-block w-24">Select LOB</label>
+            <select id="ddlob" name="ddlob" class="p-2 border rounded">
+                <option value="">Select LOB</option>
+            </select>
+        </div>
+        <div class="mb-5 ">
+            <label class="font-bold w-24">Roles</label>
+            <label id="roles"></label>
+        </div>
+    </div>
+</body>
 
 </html>
