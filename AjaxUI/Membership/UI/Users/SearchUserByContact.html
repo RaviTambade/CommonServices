@@ -9,12 +9,24 @@
     <script src="Scripts/SearchUserByContact.js"></script>
 </head>
 <body class="bg-gray-100">
+    <nav class="bg-blue-600 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-white text-2xl font-bold">My Dashboard</div>
+            <div class="space-x-4">
+                <a href="#login" class="text-white hover:text-gray-300">Login</a>
+                <a href="#register" class="text-white hover:text-gray-300">Register</a>
+                <a href="#about" class="text-white hover:text-gray-300">About</a>
+                <a href="#contact" class="text-white hover:text-gray-300">Contact</a>
+                <a href="#help" class="text-white hover:text-gray-300">Help</a>
+            </div>
+        </div>
+    </nav>
     <div class="container mx-auto mt-10 p-5 bg-white shadow-md rounded-md">
-        <h2 class="text-2xl font-bold mb-5">User Details by Contact Number</h2>
+        <h2 class="text-2xl font-bold mb-5">Search User by Contact Number</h2>
 
         <div class="form-group mb-5">
             <label for="contact" class="block text-sm font-medium text-gray-700">Enter User Contact Number:</label>
-            <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" maxlength="10" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" maxlength="10" required class="mt-1 block max-w-md px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
 
         <button id="getUserDetailsBtn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Get User Details</button>

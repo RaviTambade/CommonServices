@@ -64,7 +64,7 @@ public class UsersController : ControllerBase
     [Route("contact/{contactNumber}")]
     public async Task<User> GetUser(string contactNumber)
     {
-        Console.WriteLine("Inside GetUser by Contact....");
+      
         return await _svc.GetUser(contactNumber);
     }
 
