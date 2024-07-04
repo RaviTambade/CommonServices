@@ -8,9 +8,11 @@ $(document).ready(function() {
         var firstName = $('#fname').val();
         var lastName = $('#lname').val();
         var birthDate = $('#birthdate').val();
-        var gender = $('#gender').val();
+        var gender = $("input[type='radio'][name='gender']:checked").val();
+        console.log(gender);
         var email = $('#email').val();
         var contact = $('#contact').val();
+
         var password = $('#password').val();
 
         // Create data object to send via AJAX
@@ -22,7 +24,7 @@ $(document).ready(function() {
             "aadharId": aadharId,
             "gender": gender,
             "email": email,
-            "contact": contact,
+            "contactnumber": contact,
             "password": password
         };
 
