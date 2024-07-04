@@ -2,41 +2,42 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roles</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="Scripts/SearchUserRoleById.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roles</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="Scripts/SearchUserRoleById.js"></script>
 </head>
 
 <body class="bg-gray-100 font-sans">
-    <div>
-        <nav class="bg-blue-600 p-4 shadow-lg">
-          <div class="container mx-auto flex justify-between items-center">
-            <div class="text-white text-2xl font-bold">My Dashboard</div>
-            <div class="space-x-4">
-              <a href="#login" class="text-white hover:text-gray-300">Login</a>
-              <a href="#register" class="text-white hover:text-gray-300">Register</a>
-              <a href="#about" class="text-white hover:text-gray-300">About</a>
-              <a href="#contact" class="text-white hover:text-gray-300">Contact</a>
-              <a href="#help" class="text-white hover:text-gray-300">Help</a>
-            </div>
-          </div>
-        </nav>
+  <div>
+    <nav class="bg-blue-600 p-4 shadow-lg">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="text-white text-2xl font-bold">Transflower.in</div>
+        <div class="space-x-4">
+          <a href="#login" class="text-white hover:text-gray-300">Login</a>
+          <a href="#register" class="text-white hover:text-gray-300">Register</a>
+          <a href="#about" class="text-white hover:text-gray-300">About</a>
+          <a href="#contact" class="text-white hover:text-gray-300">Contact</a>
+          <a href="#help" class="text-white hover:text-gray-300">Help</a>
+        </div>
       </div>
-        <div class="container mx-auto mt-10 p-5 bg-white shadow-md rounded-md">
-            <h2 class="text-2xl font-bold mb-5">Search Roles for User By User Id</h2>
-            
-            <div class="form-group mb-5">
-              <label for="txtUserId" class="block text-sm font-medium text-gray-700">Enter User's Id: </label>
-              <input type="text" id="txtUserId" placeholder="Enter User ID" class="mt-1 block max-w-md px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
-            </div>
-            
-            <button id="btngetroles" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Get Roles</button>
-            
-            <div id="roles" class="mt-5"></div>
-          </div>
+    </nav>
+  </div>
+  <div class="container mx-auto mt-10 p-5 bg-white shadow-md rounded-md">
+    <h2 class="text-2xl font-bold mb-5">Search Roles for User By User Id</h2>
+
+    <div class="form-group mb-5">
+      <label for="txtUserId" class="block text-sm font-medium text-gray-700">Enter User's Id: </label>
+      <input type="text" id="txtUserId" placeholder="Enter User ID"
+        class="mt-1 block max-w-md px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
     </div>
+
+    <button id="btngetroles" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Get Roles</button>
+
+    <div id="roles" class="mt-5"></div>
+  </div>
+  </div>
 </body>
 
 </html>
