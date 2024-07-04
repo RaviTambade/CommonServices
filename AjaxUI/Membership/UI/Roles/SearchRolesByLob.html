@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,28 +10,43 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="Scripts/SearchRolesByLob.js"></script>
 </head>
-<body class="font-sans m-5">
-    <h1 class="text-3xl font-bold mb-6 text-center">Search Roles By LOB</h1>
-    <form id="assignRolesForm" class="max-w-md mx-auto p-5 border border-gray-300 rounded bg-gray-100">  
-        <label for="lob" class="block mb-2">Select LOB:</label>
-        <select id="ddlob" name="lob" required class="w-full p-2 mb-4 border border-gray-300 rounded">
-        </select>
 
-        <input type="button" value="Show Roles" id="showRolesButton" class="w-full p-2 mb-4 bg-blue-500 text-white rounded cursor-pointer">
-    </form>
+<nav class="bg-blue-500 p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="text-white text-2xl font-bold">Transflower.in</div>
+        <div class="space-x-4">
+            <a href="#login" class="text-white hover:text-gray-300">Login</a>
+            <a href="#register" class="text-white hover:text-gray-300">Register</a>
+            <a href="#about" class="text-white hover:text-gray-300">About</a>
+            <a href="#contact" class="text-white hover:text-gray-300">Contact</a>
+            <a href="#help" class="text-white hover:text-gray-300">Help</a>
+        </div>
+    </div>
+</nav>
 
-    <table id="rolesTable" class="w-full border-collapse mt-5">
-        <thead>
-            <tr>
-                <th class="border border-gray-300 p-2 bg-gray-200">Role</th>
-                <th class="border border-gray-300 p-2 bg-gray-200">LOB</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+<body>
+    <div class="font-sans m-5">
+        <h1 class="text-3xl font-bold mb-6 text-center">Search Roles By LOB</h1>
+        <form id="assignRolesForm" class="max-w-md mx-auto p-5 border border-gray-300 rounded bg-gray-100">
+            <label for="lob" class="block mb-2">Select LOB:</label>
+            <select id="ddlob" name="lob" required class="w-full p-2 mb-4 border border-gray-300 rounded">
+            </select>
 
-   
-    
+            <input type="button" value="Show Roles" id="showRolesButton"
+                class="w-full p-2 mb-4 bg-blue-500 text-white rounded cursor-pointer">
+        </form>
+
+        <table id="rolesTable" class="w-full border-collapse mt-5">
+            <thead>
+                <tr>
+                    <th class="border border-gray-300 p-2 bg-gray-200">Role</th>
+                    <th class="border border-gray-300 p-2 bg-gray-200">LOB</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 </body>
+
 </html>

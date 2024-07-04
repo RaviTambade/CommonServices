@@ -10,27 +10,42 @@
     <title>Users information According to LOB And their Roles</title>
 </head>
 
-<body class="font-sans m-5">
-    <div id="lobsSection" class="mb-5">
-        <h2 class="text-3xl font-bold mb-6 ">Select LOB</h2>
-        <div id="lobs"></div>
+<nav class="bg-blue-500 p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="text-white text-2xl font-bold">Transflower.in</div>
+        <div class="space-x-4">
+            <a href="#login" class="text-white hover:text-gray-300">Login</a>
+            <a href="#register" class="text-white hover:text-gray-300">Register</a>
+            <a href="#about" class="text-white hover:text-gray-300">About</a>
+            <a href="#contact" class="text-white hover:text-gray-300">Contact</a>
+            <a href="#help" class="text-white hover:text-gray-300">Help</a>
+        </div>
     </div>
+</nav>
 
-    <div id="rolesSection" class="mb-5 hidden">
-        <h2 class="text-3xl font-bold mb-6 ">Selected Role</h2>
-        <div id="roles"></div>
+<body>
+    <div class="font-sans m-5">
+        <div id="lobsSection" class="mb-5">
+            <h2 class="text-3xl font-bold mb-6 ">Select LOB</h2>
+            <div id="lobs"></div>
+        </div>
+
+        <div id="rolesSection" class="mb-5 hidden">
+            <h2 class="text-3xl font-bold mb-6 ">Selected Role</h2>
+            <div id="roles"></div>
+        </div>
+
+        <div id="userSection" class="mb-5 hidden">
+            <h2 class="text-xl font-bold mb-3">Select User</h2>
+            <select id="user" class="p-2 border border-blue-300 rounded"></select>
+        </div>
+
+        <div id="dataDisplay" class="space-y-2"></div>
+
+        <script src="Scripts/SearchUsersForLobAndRoles.js">
+
+        </script>
     </div>
-
-    <div id="userSection" class="mb-5 hidden">
-        <h2 class="text-xl font-bold mb-3">Select User</h2>
-        <select id="user" class="p-2 border border-blue-300 rounded"></select>
-    </div>
-
-    <div id="dataDisplay" class="space-y-2"></div>
-
-    <script src="Scripts/SearchUsersForLobAndRoles.js">
-        
-    </script>
 </body>
 
 </html>
