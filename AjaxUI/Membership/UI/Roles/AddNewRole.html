@@ -12,7 +12,7 @@
 </head>
 
 <body class="font-sans m-5">
-    <h2>Add New Role</h2>
+    
     <!-- For Fetch Function use form-->
     <!-- <form id="addnewrole">
         <label>Enter Role ID : </label><input id="roleid">
@@ -22,12 +22,33 @@
     </form> -->
 
     <!-- For Ajax call use Div tag , Don't use form and button type submit -->
-    <div>
-        <label>Enter Role ID : </label><input id="roleid">
-        <label>Enter Role : </label><input id="role">
-        <label>Enter LOB : </label><input id="lob"><br>
-        <button  id="btnaddrole">Add Role</button>
-    </div>
+    <div class="container mx-auto mt-10 flex justify-center">
+        <div class="w-full max-w-md mb-6">
+ 
+            <h2 class="text-3xl font-bold mb-6 text-center">Add New Role</h2>
+     
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="role">
+              Enter Role
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="role" type="text" placeholder="Role">
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="lob">
+              Enter LOB
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lob" type="text" placeholder="LOB">
+           
+          </div>
+          <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id ="btnaddrole">
+              Add Role
+            </button>  
+          </div>
+ 
+ 
+        </div>
+      </div>
 
 
 

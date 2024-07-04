@@ -4,7 +4,7 @@ $(document).ready(function() {
         type: 'GET',
         contentType: 'application/json',
         success: function(response) {
-            var htmlContent = '<div class="table-responsive"><table id="usersTable" class="table table-striped"><thead><tr>' +
+            var htmlContent = '<div class="table-responsive"><table id="usersTable"><thead><tr>' +
                 '<th>Id</th><th>Image URL</th><th>First Name</th><th>Last Name</th><th>Birth Date</th><th>Aadhar Id</th>' +
                 '<th>Gender</th><th>Email</th><th>Contact Number</th><th>Password</th><th>Created On</th><th>Modified On</th>' +
                 '</tr></thead><tbody>';
