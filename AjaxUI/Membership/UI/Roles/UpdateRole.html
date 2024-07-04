@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script scr="Script/UpdateRole.js"></script>
     <title>Update Role</title>
 </head>
-<body>
-    <h1>Update Role</h1>
-    <form id="updateRoleForm">
+<body >
+
+     <h1 class= "text-3xl font-bold mb-6 text-center">Update Role</h1 >
+    <div id="updateRoleForm" class="text-2xl font-bold mb-6 text-center">
         <label for="Id">ID:</label>
-        <input type="text" id="Id" name="Id" required>
+        <input class="shadow appearance-none border rounded w-center py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"type="text" id="Id" name="Id" required>
         <br> <br>
         <label for="roleTitle">Role :</label>
-        <input type="text" id="roleTitle" name="roleTitle" required>
+        <input class="shadow appearance-none border rounded w-center py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" id="roleTitle" name="roleTitle" required>
         <br> <br>
         <label for="lob">LOB :</label>
-        <input type="text" id="lob" name="lob" required>
+        <input class="shadow appearance-none border rounded w-center py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"type="text" id="lob" name="lob" required>
         <br> <br>
-        <button type="submit">Update Role</button>
-    </form>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Update Role</button>
+        </div>
    
 </body>
 </html>

@@ -7,16 +7,16 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="Script/SearchRolesByLob.js"></script>
+    <script src="Scripts/SearchRolesByLob.js"></script>
 </head>
 <body class="font-sans m-5">
-    <h1 class="text-2xl font-bold mb-5">Search Roles By LOB</h1>
+    <h1 class="text-3xl font-bold mb-6 text-center">Search Roles By LOB</h1>
     <form id="assignRolesForm" class="max-w-md mx-auto p-5 border border-gray-300 rounded bg-gray-100">  
         <label for="lob" class="block mb-2">Select LOB:</label>
         <select id="ddlob" name="lob" required class="w-full p-2 mb-4 border border-gray-300 rounded">
         </select>
 
-        <input type="button" value="Show Roles" id="showRolesButton" class="w-full p-2 mb-4 bg-green-500 text-white rounded cursor-pointer">
+        <input type="button" value="Show Roles" id="showRolesButton" class="w-full p-2 mb-4 bg-blue-500 text-white rounded cursor-pointer">
     </form>
 
     <table id="rolesTable" class="w-full border-collapse mt-5">
