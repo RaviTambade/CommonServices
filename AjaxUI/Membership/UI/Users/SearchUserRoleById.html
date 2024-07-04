@@ -24,21 +24,18 @@
           </div>
         </nav>
       </div>
-    <div class="container mx-auto p-4">
-        <h2 class="text-2xl font-bold mb-4">Get Roles for User</h2>
-        <hr class="mb-4 border-gray-300" />
-        <div class="mb-4">
-            <label for="txtUserId" class="block text-gray-700">User ID:</label>
-            <input type="text" id="txtUserId" class="max-w-md p-2 border border-gray-300 rounded" placeholder="Enter User ID">
-        </div>
-        <div class="mb-4">
-            <input type="button" id="btngetroles" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" value="Get Roles">
-        </div>
-        <hr class="mb-4 border-gray-300" />
-        <div id="rolesContainer">
-            <h3 class="text-xl font-semibold mb-2">Roles:</h3>
-            <div id="roles" class="space-y-2"></div>
-        </div>
+        <div class="container mx-auto mt-10 p-5 bg-white shadow-md rounded-md">
+            <h2 class="text-2xl font-bold mb-5">Search Roles for User By User Id</h2>
+            
+            <div class="form-group mb-5">
+              <label for="txtUserId" class="block text-sm font-medium text-gray-700">Enter User's Id: </label>
+              <input type="text" id="txtUserId" placeholder="Enter User ID" class="mt-1 block max-w-md px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+            </div>
+            
+            <button id="btngetroles" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Get Roles</button>
+            
+            <div id="roles" class="mt-5"></div>
+          </div>
     </div>
 </body>
 

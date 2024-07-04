@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Document.Ready");
     document.getElementById("btngetroles").addEventListener("click", function () {
         var userId = document.getElementById("txtUserId").value;
         var rolesContainer = document.getElementById("roles");
