@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<nav class="bg-blue-500 p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="text-white text-2xl font-bold">Transflower.in</div>
+        <div class="space-x-4">
+            <a href="../Navigation/Login.html" class="text-white hover:text-gray-300">Login</a>
+            <a href="../Users/Register.html" class="text-white hover:text-gray-300">Register</a>
+            <a href="../Navigation/AboutUs.html" class="text-white hover:text-gray-300">About</a>
+            <a href="../Navigation/Contact.html" class="text-white hover:text-gray-300">Contact</a>
+            <a href="../Navigation/Help.html" class="text-white hover:text-gray-300">Help</a>
+        </div>
+    </div>
+</nav>
+
+<body class="bg-gray-100">
+    <div class="p-4">
+        <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-md">
+            <h1 class="text-2xl font-bold mb-6 text-center">We Value Your Feedback</h1>
+            <div class="flex justify-between">
+                <div class="flex items-center justify-center w-10 h-10 bg-red-800 text-white rounded-full">1</div>
+                <div class="flex items-center justify-center w-10 h-10 bg-red-700 text-white rounded-full">2</div>
+                <div class="flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full">3</div>
+                <div class="flex items-center justify-center w-10 h-10 bg-yellow-600 text-white rounded-full">4
+                </div>
+                <div class="flex items-center justify-center w-10 h-10 bg-yellow-500 text-white rounded-full">5
+                </div>
+                <div class="flex items-center justify-center w-10 h-10 bg-yellow-400 text-white rounded-full">6
+                </div>
+                <div class="flex items-center justify-center w-10 h-10 bg-yellow-300 text-white rounded-full">7
+                </div>
+                <div class="flex items-center justify-center w-10 h-10 bg-green-300 text-white rounded-full">8</div>
+                <div class="flex items-center justify-center w-10 h-10 bg-green-500 text-white rounded-full">9</div>
+                <div class="flex items-center justify-center w-10 h-10 bg-green-900 text-white rounded-full">10
+                </div>
+            </div>
+            <div>
+                <div class="m-6">
+                    <label for="message" class="block text-gray-700 font-medium ">Message</label>
+                    <textarea id="message" name="message" rows="4"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+            </div>
+            <button type="submit"
+                class="w-full bg-blue-500 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition duration-300">Submit
+                Feedback</button>
+        </div>
+    </div>
+</body>
+
+</html>
