@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 p-4">
+    <nav class="bg-blue-600 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-white text-2xl font-bold">Membership Management</div>
+            <div class="space-x-4">
+                <a href="../../AuthHTML/UpdateUserPassword.html" class="text-white hover:text-gray-300">Update Password</a>
+                <a href="../../AuthHTML/UpdateContactNumber.html" class="text-white hover:text-gray-300">Update Contact</a>
+                <a href="../Users/Login.html" class="text-white hover:text-gray-300">Log Out</a>
+            </div>
+        </div>
+    </nav>
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
+        <label class="block mb-2 font-bold">User Id:</label>
+        <input type="text" id="txtUserId" class="border border-gray-300 px-3 py-2 rounded-lg w-full mb-4">
+
+        <button id="btnShow" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            Show Details
+        </button>
+
+        <div class="profile mt-4">
+            <hr class="my-4">
+
+            <div>
+                <span class="font-bold">User Id:</span> <span id="pid" class="ml-2 font-semibold"></span>
+            </div>
+            <div>
+                <span class="font-bold">First Name:</span> <span id="pfname" class="ml-2 font-semibold"></span>
+            </div>
+            <div>
+                <span class="font-bold">Last Name:</span> <span id="plname" class="ml-2 font-semibold"></span>
+            </div>
+            <div>
+                <span class="font-bold">Email:</span> <span id="pemail" class="ml-2 font-semibold"></span>
+            </div>
+            <div>
+                <span class="font-bold">Contact Number:</span> <span id="pcontact" class="ml-2 font-semibold"></span>
+            </div>
+            <div>
+                <span class="font-bold">Gender:</span> <span id="pgender" class="ml-2 font-semibold"></span>
+            </div>
+            <div>
+                <span class="font-bold">Image Url:</span> <span id="pimgurl" class="ml-2 font-semibold"></span>
+            </div>
+            <div>
+                <span class="font-bold">Aadhar Number:</span> <span id="paadharid" class="ml-2 font-semibold"></span>
+            </div>
+            <div>
+                <span class="font-bold">Birth Date:</span> <span id="pdob" class="ml-2 font-semibold"></span>
+            </div>
+            <div>
+                <span class="font-bold">Profile Created On:</span> <span id="pcreatedon" class="ml-2 font-semibold"></span>
+            </div>
+            <div>
+                <span class="font-bold">Profile Modified On:</span> <span id="pmodifiedon" class="ml-2 font-semibold"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#btnShow").click(function () {
+                var userId = $("#txtUserId").val();
+                $.ajax({
+                    url: "http://localhost:5000/api/users/userdetails/" + userId,
+                    type: 'GET',
+                    contentType: 'application/json',
+
+                    success: function (data) {
+                        $("#pid").text(data.id);
+                        $("#pfname").text(data.firstName);
+                        $("#plname").text(data.lastName);
+                        $("#pemail").text(data.email);
+                        $("#paadharid").text(data.aadharId);
+                        $("#pdob").text(data.birthDate);
+                        $("#pcontact").text(data.contactNumber);
+                        $("#pgender").text(data.gender);
+                        $("#pimgurl").text(data.imageUrl);
+                        $("#pcreatedon").text(data.createdOn);
+                        $("#pmodifiedon").text(data.modifiedOn);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
