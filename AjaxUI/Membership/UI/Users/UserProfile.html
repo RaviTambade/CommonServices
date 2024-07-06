@@ -6,21 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="Scripts/UserProfile.js"defer></script>
     <!-- Include Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100 p-4">
-    <nav class="bg-blue-600 p-4 shadow-lg">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="text-white text-2xl font-bold">Membership Management</div>
-            <div class="space-x-4">
-                <a href="../../AuthHTML/UpdateUserPassword.html" class="text-white hover:text-gray-300">Update Password</a>
-                <a href="../../AuthHTML/UpdateContactNumber.html" class="text-white hover:text-gray-300">Update Contact</a>
-                <a href="../Users/Login.html" class="text-white hover:text-gray-300">Log Out</a>
+<body class="bg-gray-100 ">
+    <div>
+        <nav class="bg-blue-500 p-4 shadow-lg">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="text-white text-2xl font-bold">Transflower.in</div>
+                <div class="space-x-4">
+                    <a href="../../AuthHTML/UpdateUserPassword.html" class="text-white hover:text-gray-300">Update Password</a>
+                    <a href="../../AuthHTML/UpdateContactNumber.html" class="text-white hover:text-gray-300">Update Contact</a>
+                    <a href="../Users/Login.html" class="text-white hover:text-gray-300">Log Out</a> 
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
     <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
         <label class="block mb-2 font-bold">User Id:</label>
         <input type="text" id="txtUserId" class="border border-gray-300 px-3 py-2 rounded-lg w-full mb-4">
@@ -68,35 +71,6 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready(function () {
-            $("#btnShow").click(function () {
-                var userId = $("#txtUserId").val();
-                $.ajax({
-                    url: "http://localhost:5000/api/users/userdetails/" + userId,
-                    type: 'GET',
-                    contentType: 'application/json',
-
-                    success: function (data) {
-                        $("#pid").text(data.id);
-                        $("#pfname").text(data.firstName);
-                        $("#plname").text(data.lastName);
-                        $("#pemail").text(data.email);
-                        $("#paadharid").text(data.aadharId);
-                        $("#pdob").text(data.birthDate);
-                        $("#pcontact").text(data.contactNumber);
-                        $("#pgender").text(data.gender);
-                        $("#pimgurl").text(data.imageUrl);
-                        $("#pcreatedon").text(data.createdOn);
-                        $("#pmodifiedon").text(data.modifiedOn);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>
