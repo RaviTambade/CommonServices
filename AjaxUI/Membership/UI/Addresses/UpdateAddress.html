@@ -5,60 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Address</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="Scripts/UpdateAddress.js"></script>
 </head>
-<body class="p-6 bg-gray-100">
-    <h2 class="text-2xl font-bold mb-6">Update Address</h2>
-    <form id="updateAddressForm" class="bg-white p-6 rounded-lg shadow-md">
-        <div class="mb-4">
-            <label for="existingId" class="block text-gray-700">Existing ID:</label>
-            <input type="number" id="existingId" name="existingId" required class="mt-1 p-2 w-full border rounded-md">
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-blue-500 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-white text-2xl font-bold">Membership Management</div>
+            <div class="space-x-4">
+                <a href="../Navigation/Login.html" class="text-white hover:text-gray-300">Login</a>
+                <a href="../Users/Register.html" class="text-white hover:text-gray-300">Register</a>
+                <a href="../Navigation/AboutUs.html" class="text-white hover:text-gray-300">About</a>
+                <a href="../Navigation/Contact.html" class="text-white hover:text-gray-300">Contact</a>
+                <a href="../Navigation/Help.html" class="text-white hover:text-gray-300">Help</a>
+            </div>
         </div>
+    </nav>
 
-        <div class="mb-4">
-            <label for="userId" class="block text-gray-700">User ID:</label>
-            <input type="number" id="userId" name="userId" required class="mt-1 p-2 w-full border rounded-md">
+    <main class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold mb-6">Update Address</h2>
+        <form id="updateAddressForm" class="bg-white p-6 rounded-lg shadow-md">
+            <div class="mb-4">
+                <label for="existingId" class="block text-gray-700">Existing ID:</label>
+                <input type="number" id="existingId" name="existingId" required class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label for="userId" class="block text-gray-700">User ID:</label>
+                <input type="number" id="userId" name="userId" required class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label for="area" class="block text-gray-700">Area:</label>
+                <input type="text" id="area" name="area" required class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label for="landmark" class="block text-gray-700">Landmark:</label>
+                <input type="text" id="landmark" name="landmark" required class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label for="state" class="block text-gray-700">State:</label>
+                <input type="text" id="state" name="state" required class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label for="city" class="block text-gray-700">City:</label>
+                <input type="text" id="city" name="city" required class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label for="pincode" class="block text-gray-700">Pincode:</label>
+                <input type="text" id="pincode" name="pincode" required class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label for="addressType" class="block text-gray-700">Address Type:</label>
+                <select id="addressType" name="addressType" required class="mt-1 p-2 w-full border rounded-md">
+                    <option value="Residential">Residential</option>
+                    <option value="Official">Official</option>
+                    <option value="Billing">Billing</option>
+                </select>
+            </div>
+
+            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Update</button>
+        </form>
+
+        <div id="message" class="mt-4"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-500 py-4 mt-6">
+        <div class="container mx-auto text-center text-white">
+            <p>&copy; 2024 Membership Management. All rights reserved.</p>
         </div>
-
-        <div class="mb-4">
-            <label for="area" class="block text-gray-700">Area:</label>
-            <input type="text" id="area" name="area" required class="mt-1 p-2 w-full border rounded-md">
-        </div>
-
-        <div class="mb-4">
-            <label for="landmark" class="block text-gray-700">Landmark:</label>
-            <input type="text" id="landmark" name="landmark" required class="mt-1 p-2 w-full border rounded-md">
-        </div>
-
-        <div class="mb-4">
-            <label for="state" class="block text-gray-700">State:</label>
-            <input type="text" id="state" name="state" required class="mt-1 p-2 w-full border rounded-md">
-        </div>
-
-        <div class="mb-4">
-            <label for="city" class="block text-gray-700">City:</label>
-            <input type="text" id="city" name="city" required class="mt-1 p-2 w-full border rounded-md">
-        </div>
-
-        <div class="mb-4">
-            <label for="pincode" class="block text-gray-700">Pincode:</label>
-            <input type="text" id="pincode" name="pincode" required class="mt-1 p-2 w-full border rounded-md">
-        </div>
-
-        <div class="mb-4">
-            <label for="addressType" class="block text-gray-700">Address Type:</label>
-            <select id="addressType" name="addressType" required class="mt-1 p-2 w-full border rounded-md">
-                <option value="Residential">Residential</option>
-                <option value="Official">Official</option>
-                <option value="Billing">Billing</option>
-            </select>
-        </div>
-
-        <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Update</button>
-    </form>
-
-    <div id="message" class="mt-4"></div>
-  
+    </footer>
 </body>
 </html>
