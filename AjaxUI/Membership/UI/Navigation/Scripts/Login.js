@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+ // var contactNo = $("#contactNo").val();
     $("#btnsubmit").click(function () {    
       var contactNo = $("#contactNo").val();
       console.log(contactNo);
