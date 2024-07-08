@@ -1,6 +1,7 @@
+var userId = parseInt(sessionStorage.getItem("userid"));
+console.log(userId);
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("btngetroles").addEventListener("click", function () {
-        var userId = document.getElementById("txtUserId").value;
         var rolesContainer = document.getElementById("roles");
         rolesContainer.innerHTML = '';
 

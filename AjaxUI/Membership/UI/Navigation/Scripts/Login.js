@@ -35,7 +35,7 @@ $(document).ready(function() {
          // window.localStorage.setItem("userid",data);
 
          jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
-          window.location.href = 'http://127.0.0.1:5500/Navigation/ManagerDashboard.html';
+          window.location.href = 'http://127.0.0.1:5500/AjaxUI/Membership/UI/Navigation/ManagerDashboard.html';
         });
         
           //localStorage.setItem('token', data.token); // Assuming 'token' is returned from API
