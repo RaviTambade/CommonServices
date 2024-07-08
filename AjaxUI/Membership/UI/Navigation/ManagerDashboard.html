@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Membership Management</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="/Navigation/Scripts/ManagerDashboard.js"></script>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -33,9 +35,11 @@
    
     <section class="bg-gray-100 py-20 flex-1">
         <div class="container max-w-md text-center">
-            <h3 class="text-3xl font-bold text-blue-500 mb-4">Welcome </h3>
-            <br><br>
+            <h3 class="text-3xl font-bold text-blue-500 mb-4">Welcome <span id="fname" class="ml-2 font-semibold"></span> <span id="lname" class="ml-2 font-semibold"></span></h3>
             
+            
+            <span id="uid" class="ml-2 font-semibold"></span><br/><br/>
+             
         </div>
     </section>
 

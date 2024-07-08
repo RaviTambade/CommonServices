@@ -30,6 +30,7 @@ $(document).ready(function() {
           //const Userdata = JSON.parse(data);
           //console.log(Userdata);
           window.sessionStorage.setItem("userid", data.id);
+          
          // window.localStorage.setItem("userid",data);
 
          jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
