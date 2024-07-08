@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="flex flex-col min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-blue-500 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-white text-2xl font-bold">Membership Management</div>
+            <!-- Dropdown Menu -->
+            <div class="relative">
+                <button
+                    class="text-white hover:text-gray-300 focus:outline-none focus:text-gray-300 transition duration-150 ease-in-out">
+                    Options
+                </button>
+                <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 hidden">
+                    <a href="../Navigation/LandingPage.html"class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Home</a>
+                    <a href="../Users/UserProfile.html"class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Profile</a>
+                    <a href="../Users/SearchUserRoleById.html"class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Roles</a>
+                    <a href="../Navigation/Help.html"class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Help</a>
+                    <a href="../Navigation/Login.html"class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Log Out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+   
+    <section class="bg-gray-100 py-20 flex-1">
+        <div class="container max-w-md text-center">
+            <h3 class="text-3xl font-bold text-blue-500 mb-4">Welcome </h3>
+            <br><br>
+            
+        </div>
+    </section>
+
+   
+    <footer class="bg-blue-500 py-4 mt-auto">
+        <div class="container text-center text-white">
+            <p>&copy; 2024 Membership Management. All rights reserved.</p>
+        </div>
+    </footer>
+
+ 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dropdownButton = document.querySelector('.relative button');
+            const dropdownMenu = document.querySelector('.relative .absolute');
+
+
+            dropdownButton.addEventListener('click', function () {
+                dropdownMenu.classList.toggle('hidden');
+            });
+
+          
+        });
+    </script>
+</body>
+
+</html>
