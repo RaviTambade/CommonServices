@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+console.log("Inside userProfile.js");
     var userId = parseInt(sessionStorage.getItem("userid"));
         console.log("User Id = " +userId);
         //$("#txtUserId").text = userId;
