@@ -28,9 +28,25 @@ $(document).ready(function() {
           type: 'GET',
           contentType: 'application/json',
           success: function (rolesData) {
-            console.log("Roles:", rolesData);
             
+            rolesInfo = rolesData;
+            $("#lob").empty().append('<option value="">Select LOB</option>');
+            rolesData.forEach(function(LOB) {    
+              
+              var option = $('<option></option>').attr("value", LOB.lob).text(LOB.lob);
+              $("#lob").append(option);
+          
+            });
 
+            $("#lob").change(function(){
+
+              var selectedLob = $("#lob").val()
+              console.log(selectedLob);
+              //var role = rolesInfo.name;
+              //console.log(role);
+
+          });
+           
           },
           error: function (xhr, status, error) {
             console.error("Error fetching roles:", xhr.responseText);
@@ -42,7 +58,7 @@ $(document).ready(function() {
 
    //After click on Sign In button
   $("#btnsubmit").click(function () {
-    //var contactNo = $("#contactNo").val();
+    var contactNo = $("#contactNo").val();
     var pass = $("#pass").val();
     var lob = $("#lob").val();
 
@@ -52,7 +68,7 @@ $(document).ready(function() {
       "lob": lob
     };
 
-   
+    
     $.ajax({
       url: "http://localhost:5000/api/auth/signin",
       type: 'POST',
@@ -79,17 +95,19 @@ $(document).ready(function() {
               contentType: 'application/json',
               success: function (rolesData) {
                 console.log("Roles:", rolesData);
-                
+                var role = rolesData;
 
                 rolesData.forEach(function(role) {
                   console.log("Role:", role.name);
                   // Redirect based on role name
                   if (role.name === "Director" ) 
                   {
+                    
                     window.location.href = 'http://127.0.0.1:5500/Membership/UI/Navigation/DirectorDashboard.html';
                   } 
                   else if (role.name === "HR Manager" ) 
                   {
+                    console.log("Role:", role.name);
                     window.location.href = 'http://127.0.0.1:5500/Membership/UI/Navigation/ManagerDashboard.html';
                   }
                   else
