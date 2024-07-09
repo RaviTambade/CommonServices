@@ -36,11 +36,8 @@ $(document).ready(function () {
         $("#lob").empty().append('<option value="">Select LOB</option>');
         const lobSet = new Set();
         rolesData.forEach(function (LOB) {
-          if (!lobSet.has(lob.lob)) {
-            lobSet.add(lob.lob);
-            var option = $('<option></option>').attr("value", LOB.lob).text(LOB.lob);
-            $("#lob").append(option);
-          }
+          var option = $('<option></option>').attr("value", LOB.lob).text(LOB.lob);
+          $("#lob").append(option);
         });
         $("#lob").change(function () {
 
