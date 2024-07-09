@@ -16,7 +16,8 @@
     <div class="mb-5">
         <label class="inline-block w-24">Enter UserId</label>
         <input type="number" id="userid" name="userid" class="p-2 border rounded">
-        <button id="btngetlobs" class="ml-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded">Get Line Of Business</button>
+        <button id="btngetlobs" class="ml-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded">Get Line Of
+            Business</button>
     </div>
     <div class="mb-5">
         <label class="inline-block w-24">Select LOB</label>
@@ -50,9 +51,13 @@
                         success: function (data) {
                             console.log(data);
                             $("#ddlob").empty().append('<option value="">Select LOB</option>');
+                            const lobSet = new Set();
                             data.forEach(function (lob) {
-                                var option = $('<option></option>').attr("value", lob.lob).text(lob.lob);
-                                $("#ddlob").append(option);
+                                if (!lobSet.has(lob.lob)) {
+                                    lobSet.add(lob.lob);
+                                    var option = $('<option></option>').attr("value", lob.lob).text(lob.lob);
+                                    $("#ddlob").append(option);
+                                }
                             });
                         },
                         error: function (xhr, status, error) {
