@@ -28,25 +28,32 @@ $(document).ready(function() {
           type: 'GET',
           contentType: 'application/json',
           success: function (rolesData) {
-            
+
+            //console.log(rolesData);
+
             rolesInfo = rolesData;
+            console.log(rolesInfo);
             $("#lob").empty().append('<option value="">Select LOB</option>');
             rolesData.forEach(function(LOB) {    
               
               var option = $('<option></option>').attr("value", LOB.lob).text(LOB.lob);
               $("#lob").append(option);
-          
             });
 
             $("#lob").change(function(){
 
               var selectedLob = $("#lob").val()
-              console.log(selectedLob);
-              //var role = rolesInfo.name;
-              //console.log(role);
+              console.log("SElected LOB: "+ selectedLob);
+             var selectedLOBId = LOB.id;
+             console.log(selectedLOBId);
+              var selectedLOBRole = LOB.name
+              
+              console.log(selectedLOBRole);
 
           });
            
+
+            
           },
           error: function (xhr, status, error) {
             console.error("Error fetching roles:", xhr.responseText);
