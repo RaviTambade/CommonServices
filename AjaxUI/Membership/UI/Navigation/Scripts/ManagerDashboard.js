@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    console.log("Inside ManagerDashBoard.js");
+    console.log("Inside Manager DashBoard.js");
     var userId = parseInt(sessionStorage.getItem("userid"));
 
         console.log("User Id = " +userId);
