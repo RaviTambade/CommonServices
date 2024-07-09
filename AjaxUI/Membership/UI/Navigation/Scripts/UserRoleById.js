@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     data.forEach(function (role) {
                         var roleElement = document.createElement("div");
                         roleElement.className = "p-4 bg-gray-100 border border-gray-300 rounded";
-                        roleElement.textContent = `ID: ${role.id}, Name: ${role.name}, LOB: ${role.lob}`;
+                        roleElement.textContent = `Role: ${role.name} | LOB: ${role.lob}`;
                         rolesContainer.appendChild(roleElement);
                     });
                 } else {

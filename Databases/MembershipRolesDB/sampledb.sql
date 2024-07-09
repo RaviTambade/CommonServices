@@ -112,9 +112,9 @@ INSERT INTO roles(name,lob)VALUES('manager','banking');
 
 
 INSERT INTO userroles(userid,roleid) VALUES (1,1);
-INSERT INTO userroles(userid,roleid) VALUES (1,2);
-INSERT INTO userroles(userid,roleid) VALUES (1,3);
-INSERT INTO userroles(userid,roleid) VALUES (1,4);
+-- INSERT INTO userroles(userid,roleid) VALUES (1,2);
+-- INSERT INTO userroles(userid,roleid) VALUES (1,3);
+-- INSERT INTO userroles(userid,roleid) VALUES (1,4);
 INSERT INTO userroles(userid,roleid) VALUES (2,1);
 INSERT INTO userroles(userid,roleid) VALUES (3,1);
 INSERT INTO userroles(userid,roleid) VALUES (4,2);
