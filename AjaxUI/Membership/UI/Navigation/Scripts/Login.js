@@ -38,44 +38,15 @@ $(document).ready(function () {
           var option = $('<option></option>').attr("value", LOB.lob).text(LOB.lob);
           $("#lob").append(option);
         });
+
         $("#lob").change(function () {
 
-<<<<<<< HEAD
-            //console.log(rolesData);
-
-            rolesInfo = rolesData;
-            console.log(rolesInfo);
-            $("#lob").empty().append('<option value="">Select LOB</option>');
-            rolesData.forEach(function(LOB) {    
-              
-              var option = $('<option ></option>').attr("value", LOB.role).text(LOB.lob);
-              $("#lob").append(option);
-              
-              
-            });
-
-            $("#lob").change(function(){
-
-              var selectedLob = $("#lob").val()
-              console.log("SElected LOB: "+ selectedLob);
-              console.log("RolesInfo : : "+rolesInfo);
-              
-          });
-           
-
-            
-          },
-          error: function (xhr, status, error) {
-            console.error("Error fetching roles:", xhr.responseText);
-          }
-=======
           var selectedLob = $("#lob").val()
           console.log("SElected LOB: " + selectedLob);
-          var selectedLOBId = LOB.id;
+          var selectedLOBId = rolesInfo.id;
           console.log(selectedLOBId);
-          var selectedLOBRole = LOB.name
+          var selectedLOBRole = rolesInfo.name
           console.log(selectedLOBRole);
->>>>>>> a30929188fae3c0e649a199628e64fdc12c7694d
         });
       },
       error: function (xhr, status, error) {
@@ -124,12 +95,8 @@ $(document).ready(function () {
                 console.log("Roles:", rolesData);
                 var role = rolesData;
 
-<<<<<<< HEAD
                 
                 rolesData.forEach(function(role) {
-=======
-                rolesData.forEach(function (role) {
->>>>>>> a30929188fae3c0e649a199628e64fdc12c7694d
                   console.log("Role:", role.name);
                   // Redirect based on role name
                   if (role.name === "Director") {
