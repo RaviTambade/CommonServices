@@ -1,69 +1,63 @@
-$(document).ready(function() {
-   var rolesInfo;
-   var userId;
+$(document).ready(function () {
+  var rolesInfo;
+  var userId;
 
-   $("#contactNo").change(function(){
-    
-      var contactNo = $("#contactNo").val();
-      console.log("Contact " + contactNo);
-      $.ajax({
-        url: "http://localhost:5000/api/users/contact/" + contactNo,
-        type: 'GET',
-        contentType: 'application/json',
-        success: function (userData) {
-          console.log("User's Data:", userData.id);
-          window.sessionStorage.setItem("userid", userData.id);
-          
-        },
-          error: function (xhr, status, error) {
-            console.error("Error authenticating user:", xhr.responseText);
-           
-          }
-          
-        });
-        
-         userId = window.sessionStorage.getItem("userid");
-        $.ajax({
-          url: "http://localhost:5000/api/roles/" + userId,
-          type: 'GET',
-          contentType: 'application/json',
-          success: function (rolesData) {
+  $("#contactNo").change(function () {
 
-            //console.log(rolesData);
+    var contactNo = $("#contactNo").val();
+    console.log("Contact " + contactNo);
+    $.ajax({
+      url: "http://localhost:5000/api/users/contact/" + contactNo,
+      type: 'GET',
+      contentType: 'application/json',
+      success: function (userData) {
+        console.log("User's Data:", userData.id);
+        window.sessionStorage.setItem("userid", userData.id);
 
-            rolesInfo = rolesData;
-            console.log(rolesInfo);
-            $("#lob").empty().append('<option value="">Select LOB</option>');
-            rolesData.forEach(function(LOB) {    
-              
-              var option = $('<option></option>').attr("value", LOB.lob).text(LOB.lob);
-              $("#lob").append(option);
-            });
+      },
+      error: function (xhr, status, error) {
+        console.error("Error authenticating user:", xhr.responseText);
 
-            $("#lob").change(function(){
+      }
 
-              var selectedLob = $("#lob").val()
-              console.log("SElected LOB: "+ selectedLob);
-             var selectedLOBId = LOB.id;
-             console.log(selectedLOBId);
-              var selectedLOBRole = LOB.name
-              
-              console.log(selectedLOBRole);
+    });
 
-          });
-           
+    userId = window.sessionStorage.getItem("userid");
+    $.ajax({
+      url: "http://localhost:5000/api/roles/" + userId,
+      type: 'GET',
+      contentType: 'application/json',
+      success: function (rolesData) {
 
-            
-          },
-          error: function (xhr, status, error) {
-            console.error("Error fetching roles:", xhr.responseText);
+        //console.log(rolesData);
+
+        rolesInfo = rolesData;
+        console.log(rolesInfo);
+        $("#lob").empty().append('<option value="">Select LOB</option>');
+        const lobSet = new Set();
+        rolesData.forEach(function (LOB) {
+          if (!lobSet.has(lob.lob)) {
+            lobSet.add(lob.lob);
+            var option = $('<option></option>').attr("value", LOB.lob).text(LOB.lob);
+            $("#lob").append(option);
           }
         });
+        $("#lob").change(function () {
 
-   });
-   
-
-   //After click on Sign In button
+          var selectedLob = $("#lob").val()
+          console.log("SElected LOB: " + selectedLob);
+          var selectedLOBId = LOB.id;
+          console.log(selectedLOBId);
+          var selectedLOBRole = LOB.name
+          console.log(selectedLOBRole);
+        });
+      },
+      error: function (xhr, status, error) {
+        console.error("Error fetching roles:", xhr.responseText);
+      }
+    });
+  });
+  //After click on Sign In button
   $("#btnsubmit").click(function () {
     var contactNo = $("#contactNo").val();
     var pass = $("#pass").val();
@@ -75,7 +69,7 @@ $(document).ready(function() {
       "lob": lob
     };
 
-    
+
     $.ajax({
       url: "http://localhost:5000/api/auth/signin",
       type: 'POST',
@@ -83,9 +77,9 @@ $(document).ready(function() {
       contentType: 'application/json',
       success: function (data) {
         console.log("Token:", data.token);
-        localStorage.setItem('token', data.token); 
-        
-      
+        localStorage.setItem('token', data.token);
+
+
         $.ajax({
           url: "http://localhost:5000/api/users/contact/" + contactNo,
           type: 'GET',
@@ -94,7 +88,7 @@ $(document).ready(function() {
             console.log("User's Data:", userData.id);
             window.sessionStorage.setItem("userid", userData.id);
             var userId = userData.id;
-            
+
             // Now fetch roles based on user ID
             $.ajax({
               url: "http://localhost:5000/api/roles/" + userId,
@@ -104,21 +98,18 @@ $(document).ready(function() {
                 console.log("Roles:", rolesData);
                 var role = rolesData;
 
-                rolesData.forEach(function(role) {
+                rolesData.forEach(function (role) {
                   console.log("Role:", role.name);
                   // Redirect based on role name
-                  if (role.name === "Director" ) 
-                  {
-                    
+                  if (role.name === "Director") {
+
                     window.location.href = 'http://127.0.0.1:5500/Membership/UI/Navigation/DirectorDashboard.html';
-                  } 
-                  else if (role.name === "HR Manager" ) 
-                  {
+                  }
+                  else if (role.name === "HR Manager") {
                     console.log("Role:", role.name);
                     window.location.href = 'http://127.0.0.1:5500/Membership/UI/Navigation/ManagerDashboard.html';
                   }
-                  else
-                  {
+                  else {
                     window.location.href = 'http://127.0.0.1:5500/Membership/UI/Navigation/UserProfile.html';
                   }
                 });
@@ -135,9 +126,9 @@ $(document).ready(function() {
       },
       error: function (xhr, status, error) {
         console.error("Error authenticating user:", xhr.responseText);
-       
+
       }
     });
   });
-  
+
 });
