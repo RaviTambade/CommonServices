@@ -36,20 +36,18 @@ $(document).ready(function() {
             $("#lob").empty().append('<option value="">Select LOB</option>');
             rolesData.forEach(function(LOB) {    
               
-              var option = $('<option></option>').attr("value", LOB.lob).text(LOB.lob);
+              var option = $('<option ></option>').attr("value", LOB.role).text(LOB.lob);
               $("#lob").append(option);
+              
+              
             });
 
             $("#lob").change(function(){
 
               var selectedLob = $("#lob").val()
               console.log("SElected LOB: "+ selectedLob);
-             var selectedLOBId = LOB.id;
-             console.log(selectedLOBId);
-              var selectedLOBRole = LOB.name
+              console.log("RolesInfo : : "+rolesInfo);
               
-              console.log(selectedLOBRole);
-
           });
            
 
@@ -104,6 +102,7 @@ $(document).ready(function() {
                 console.log("Roles:", rolesData);
                 var role = rolesData;
 
+                
                 rolesData.forEach(function(role) {
                   console.log("Role:", role.name);
                   // Redirect based on role name
