@@ -34,7 +34,6 @@ $(document).ready(function () {
         rolesInfo = rolesData;
         console.log(rolesInfo);
         $("#lob").empty().append('<option value="">Select LOB</option>');
-        const lobSet = new Set();
         rolesData.forEach(function (LOB) {
           var option = $('<option></option>').attr("value", LOB.lob).text(LOB.lob);
           $("#lob").append(option);
