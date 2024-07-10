@@ -3,29 +3,23 @@ $(document).ready(function() {
         event.preventDefault(); // Prevent default form submission
 
         // Get values from form fields
-        var imageUrl = $('#imgurl').val();
-        var aadharId = $('#aadharid').val();
-        var firstName = $('#fname').val();
-        var lastName = $('#lname').val();
+        var firstName = $('#first_name').val();
+        var lastName = $('#last_name').val();
         var birthDate = $('#birthdate').val();
-        var gender = $("input[type='radio'][name='gender']:checked").val();
-        console.log(gender);
+        var gender = $("input[name='gender']:checked").val();
         var email = $('#email').val();
         var contact = $('#contact').val();
-
-        var password = $('#password').val();
+        var aadharId = $('#aadharid').val();
 
         // Create data object to send via AJAX
         var newData = {
-            "imageUrl": imageUrl,
             "firstName": firstName,
             "lastName": lastName,
             "birthDate": birthDate,
-            "aadharId": aadharId,
             "gender": gender,
             "email": email,
             "contactnumber": contact,
-            "password": password
+            "aadharId": aadharId
         };
 
         console.log(JSON.stringify(newData));
