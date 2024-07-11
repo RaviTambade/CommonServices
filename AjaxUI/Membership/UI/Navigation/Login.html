@@ -10,7 +10,7 @@
   <script src="Scripts/TryLogin.js"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 flex flex-col min-h-screen">
   <!-- Navbar -->
   <nav class="bg-blue-500 p-4 shadow-lg">
     <div class="container mx-auto flex justify-between items-center">
@@ -27,7 +27,7 @@
     </div>
   </nav>
 
-  <div class="container mx-auto mt-10 flex justify-center">
+  <div class="container mx-auto mt-10 flex justify-center flex-grow">
     <div class="w-full max-w-md">
       <h1 class="text-3xl font-bold mb-6 text-center">Login</h1>
       <form id="frm_applicant" class="bg-white p-8 rounded shadow-md">
@@ -61,6 +61,12 @@
     </div>
   </div>
 
+  <!-- Footer -->
+  <footer class="bg-blue-500 p-4 text-white text-center">
+    <div class="container mx-auto">
+      <p>&copy; 2024 Membership Management. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 
 </html>
