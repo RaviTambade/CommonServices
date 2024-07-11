@@ -57,7 +57,7 @@ $(document).ready(function() {
         var pass = $("#pass").val();
         var lob = $("#lob").val();
 
-        var claimData = {
+        var claimData = {   
             "ContactNumber": contactNo,
             "password": pass,
             "lob": lob
@@ -71,6 +71,7 @@ $(document).ready(function() {
             success: function(data) {
                 console.log("Token:", data.token);
                 localStorage.setItem('token', data.token);
+
 
                 $.ajax({
                     url: "http://localhost:5000/api/users/contact/" + contactNo,
