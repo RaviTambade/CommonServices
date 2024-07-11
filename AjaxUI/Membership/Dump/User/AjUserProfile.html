@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="Scripts/UserProfile.js"></script>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+    <nav class="bg-blue-500 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
+                <div class="text-white text-2xl font-bold">Membership Management</div>
+            </div>
+            <div class="space-x-4">
+                <a href="../../AuthHTML/UpdateUserPassword.html" class="text-white hover:text-gray-300">Update Password</a>
+                <a href="../../AuthHTML/UpdateContactNumber.html" class="text-white hover:text-gray-300">Update Contact</a>
+                <a href="../Users/Login.html" class="text-white hover:text-gray-300">Log Out</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6 mt-6">
+        <div class="flex items-center mb-4">
+            <div class="w-1/4">
+                <img id="profilePicture" src="../../../../MembershipPortal/wwwroot/images/RaviSir.jpg" alt="Profile Picture" class="rounded-full h-24 w-24 object-cover">
+            </div>
+            <div class="w-3/4 pl-6">
+                <div class="mb-2">
+                    <span class="font-bold text-xl">First Name:</span>
+                    <span id="pfname" class="ml-2 text-lg font-semibold"></span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-bold text-xl">Last Name:</span>
+                    <span id="plname" class="ml-2 text-lg font-semibold"></span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-bold text-xl">Email:</span>
+                    <span id="pemail" class="ml-2 text-lg font-semibold"></span>
+                </div>
+                <button id="btnShow" class="bg-blue-500 hover:bg-blue-300 text-white font-sans py-2 px-4 rounded mt-4">
+                    Show/Edit Profile
+                </button>
+            </div>
+        </div>
+        <div class="profile mt-4 hidden" id="profileDetails">
+            <hr class="my-4">
+            <div class="mb-4">
+                <span class="font-bold">Contact Number:</span>
+                <span id="pcontact" class="ml-2 font-semibold"></span>
+            </div>
+            <div class="mb-4">
+                <span class="font-bold">Gender:</span>
+                <span id="pgender" class="ml-2 font-semibold"></span>
+            </div>
+            <div class="mb-4">
+                <span class="font-bold">Aadhar Number:</span>
+                <span id="paadharid" class="ml-2 font-semibold"></span>
+            </div>
+            <div class="mb-4">
+                <span class="font-bold">Birth Date:</span>
+                <span id="pdob" class="ml-2 font-semibold"></span>
+            </div>
+            </div>
+        
+</body>
+
+</html>
