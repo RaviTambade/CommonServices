@@ -1,13 +1,12 @@
 $(document).ready(function () {
-    $("#btnShow").click(function () {
-        var userId = $("#txtUserId").val();
+   
+        var userId = parseInt(sessionStorage.getItem("userid")); 
         $.ajax({
             url: "http://localhost:5000/api/users/userdetails/" + userId,
             type: 'GET',
             contentType: 'application/json',
 
             success: function (data) {
-                $("#pid").text(data.id);
                 $("#pfname").text(data.firstName);
                 $("#plname").text(data.lastName);
                 $("#pemail").text(data.email);
@@ -15,7 +14,7 @@ $(document).ready(function () {
                 $("#pdob").text(data.birthDate);
                 $("#pcontact").text(data.contactNumber);
                 $("#pgender").text(data.gender);
-                $("#pimgurl").text(data.imageUrl);
+                $("#pimgurl").attr("src",data.imageUrl);
                 $("#pcreatedon").text(data.createdOn);
                 $("#pmodifiedon").text(data.modifiedOn);
             },
@@ -24,4 +23,3 @@ $(document).ready(function () {
             }
         });
     });
-});

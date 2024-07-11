@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="Scripts/UserProfile.js" defer></script>
+    <script src="Scripts/UserProfileDetails.js" defer></script>
     <!-- Include Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
@@ -28,12 +28,12 @@
         </div>
     </nav>
 
-    <main class="flex-grow flex items-center justify-center">
+    <main class="flex-grow flex ">
         <div class="w-full max-w-xl p-8 bg-white rounded-xl shadow-lg">
             <div class="font-sans m-11">
                 <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4">
                     <div class="shrink-0">
-                        <img class="h-12 w-12" src="../../../../MembershipPortal/wwwroot/images/RaviSir.jpg" alt="Profile Photo">
+                        <img id = "pimgurl"class="h-12 w-12" alt="Profile Photo">
                     </div>
                     <div>
                         <div class="mb-2">
