@@ -11,61 +11,80 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen flex flex-col">
     <nav class="bg-blue-500 p-4 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
-          <div class="flex items-center space-x-4">
-            <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
-            <div class="text-white text-2xl font-bold">Membership Management</div>
-          </div>
+            <div class="flex items-center space-x-4">
+                <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
+                <div class="text-white text-2xl font-bold">Membership Management</div>
+            </div>
             <div class="space-x-4">
-                <a href="../../AuthHTML/UpdateUserPassword.html" class="text-white hover:text-gray-300">Update Password</a>
-                <a href="../../AuthHTML/UpdateContactNumber.html" class="text-white hover:text-gray-300">Update Contact</a>
-                <a href="../Users/Login.html" class="text-white hover:text-gray-300">Log Out</a> 
+                <a href="../../AuthHTML/UpdateUserPassword.html" class="text-white hover:text-gray-300">Update
+                    Password</a>
+                <a href="../../AuthHTML/UpdateContactNumber.html" class="text-white hover:text-gray-300">Update
+                    Contact</a>
+                <a href="../Users/Login.html" class="text-white hover:text-gray-300">Log Out</a>
             </div>
         </div>
     </nav>
 
-    <div class="max-w-md mx-auto mt-10 bg-white rounded-lg shadow-lg p-6">
-        <div class="mb-4">
-            <label for="txtUserId" class="block mb-2 font-bold text-gray-700">User Id:</label>
-            <input type="text" id="txtUserId" class="border border-gray-300 px-3 py-2 rounded-lg w-full">
-        </div>
+    <main class="flex-grow flex items-center justify-center">
+        <div class="w-full max-w-xl p-8 bg-white rounded-xl shadow-lg">
+            <div class="font-sans m-11">
+                <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4">
+                    <div class="shrink-0">
+                        <img class="h-12 w-12" src="../../../../MembershipPortal/wwwroot/images/RaviSir.jpg" alt="Profile Photo">
+                    </div>
+                    <div>
+                        <div class="text-xl font-medium text-black">Transflower</div>
+                        <p class="text-slate-500">Transflower Acceleration Program...!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="profile">
+                <hr class="my-4">
+                <div class="mb-2">
+                    <span class="font-bold text-gray-700">User Id:</span> <span id="pid"
+                        class="ml-2 font-semibold text-gray-800"></span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-bold text-gray-700">First Name:</span> <span id="pfname"
+                        class="ml-2 font-semibold text-gray-800"></span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-bold text-gray-700">Last Name:</span> <span id="plname"
+                        class="ml-2 font-semibold text-gray-800"></span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-bold text-gray-700">Email:</span> <span id="pemail"
+                        class="ml-2 font-semibold text-gray-800"></span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-bold text-gray-700">Contact Number:</span> <span id="pcontact"
+                        class="ml-2 font-semibold text-gray-800"></span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-bold text-gray-700">Gender:</span> <span id="pgender"
+                        class="ml-2 font-semibold text-gray-800"></span>
+                </div>
 
-        <button id="btnShow" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full mb-4">
-            Show Details
-        </button>
-
-        <div class="profile">
-            <hr class="my-4">
-            <div class="mb-2">
-                <span class="font-bold text-gray-700">User Id:</span> <span id="pid" class="ml-2 font-semibold text-gray-800"></span>
+                <div class="mb-2">
+                    <span class="font-bold text-gray-700">Aadhar Number:</span> <span id="paadharid"
+                        class="ml-2 font-semibold text-gray-800"></span>
+                </div>
+                <div class="mb-2">
+                    <span class="font-bold text-gray-700">Birth Date:</span> <span id="pdob"
+                        class="ml-2 font-semibold text-gray-800"></span>
+                </div>
             </div>
-            <div class="mb-2">
-                <span class="font-bold text-gray-700">First Name:</span> <span id="pfname" class="ml-2 font-semibold text-gray-800"></span>
-            </div>
-            <div class="mb-2">
-                <span class="font-bold text-gray-700">Last Name:</span> <span id="plname" class="ml-2 font-semibold text-gray-800"></span>
-            </div>
-            <div class="mb-2">
-                <span class="font-bold text-gray-700">Email:</span> <span id="pemail" class="ml-2 font-semibold text-gray-800"></span>
-            </div>
-            <div class="mb-2">
-                <span class="font-bold text-gray-700">Contact Number:</span> <span id="pcontact" class="ml-2 font-semibold text-gray-800"></span>
-            </div>
-            <div class="mb-2">
-                <span class="font-bold text-gray-700">Gender:</span> <span id="pgender" class="ml-2 font-semibold text-gray-800"></span>
-            </div>
-           
-            <div class="mb-2">
-                <span class="font-bold text-gray-700">Aadhar Number:</span> <span id="paadharid" class="ml-2 font-semibold text-gray-800"></span>
-            </div>
-            <div class="mb-2">
-                <span class="font-bold text-gray-700">Birth Date:</span> <span id="pdob" class="ml-2 font-semibold text-gray-800"></span>
-            </div>
-           
         </div>
-    </div>
+    </main>
+
+    <footer class="bg-blue-500 p-4 text-white text-center mt-auto">
+        <div class="container mx-auto">
+            <p>&copy; 2024 Membership Management. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 
 </html>
