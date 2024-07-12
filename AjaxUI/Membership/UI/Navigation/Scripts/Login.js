@@ -32,10 +32,7 @@ $(document).ready(function() {
                             var selectedLob = $("#lob").val();
                             console.log("Selected LOB: " + selectedLob);
 
-                           $.ajax({
-                            url:""
-
-                           });
+                          
                         });
                     },
                     error: function(xhr, status, error) {

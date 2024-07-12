@@ -33,68 +33,67 @@ $(document).ready(function () {
                             console.log("selectedLob = " + selectedLob);
 
                             //Use API (userid and lob)
-                            $("#roleid").empty().append('<option value="">Select Role</option>');
-                            rolesInfo.forEach(function (rolesInfo) {
-                                console.log(rolesInfo.name);
-                                var option = $('<option></option>').attr("value", rolesInfo.name).text(rolesInfo.name);
-                                $("#roleid").append(option);
-
-                            });
-
-                            $("#roleid").change(function () {
-
-                                var selectedRole = $("#roleid").val();
-                                console.log(selectedRole);
-                                $("#btnsubmit").click(function () {
-                                    var contactNo = $("#contactNo").val();
-                                    var pass = $("#pass").val();
-                                    var lob = $("#lob").val();
-    
-                                    var claimData = {
-                                        "ContactNumber": contactNo,
-                                        "password": pass,
-                                        "lob": lob
-                                    };
-    
-                                    $.ajax({
-                                        url: "http://localhost:5000/api/auth/signin",
-                                        type: 'POST',
-                                        data: JSON.stringify(claimData),
-                                        contentType: 'application/json',
-                                        success: function (data) {
-                                            console.log("Token:", data.token);
-                                            localStorage.setItem('token', data.token);
-    
-                                            if (selectedRole === "Director") {
-                                                window.location.href = 'DirectorDashboard.html';
-                                                
+                            $.ajax({
+                                url:"http://localhost:5000/api/roles/users/"+userId+"/lob/"+selectedLob,
+                                typr:"GET",
+                                contentType:'application/json',
+                                success:function(data){
+                                    console.log(data);
+                                    var userRole = data.name; 
+                                    $("#btnsubmit").click(function () {
+                                        var contactNo = $("#contactNo").val();
+                                        var pass = $("#pass").val();
+                                        var lob = $("#lob").val();
+        
+                                        var claimData = {
+                                            "ContactNumber": contactNo,
+                                            "password": pass,
+                                            "lob": lob
+                                        };
+        
+                                        $.ajax({
+                                            url: "http://localhost:5000/api/auth/signin",
+                                            type: 'POST',
+                                            data: JSON.stringify(claimData),
+                                            contentType: 'application/json',
+                                            success: function (data) {
+                                                console.log("Token:", data.token);
+                                                localStorage.setItem('token', data.token);
+        
+                                                if (userRole === "Director") {
+                                                    window.location.href = 'DirectorDashboard.html';
+                                                    
+                                                }
+                                                else if (userRole === "HR Manager") {
+                                                    window.location.href = 'ManagerDashboard.html';
+                                                    
+                                                }
+                                                else if (userRole === "collection manager") {
+                                                    window.location.href = 'ManagerDashboard.html';
+                                                    
+                                                }
+                                                else {
+                                                    window.location.href = 'UserProfile.html';
+                                                    
+                                                }
+        
+                                            },
+                                            error: function (xhr, status, error) {
+                                                console.error("Error authenticating user:", xhr.responseText);
                                             }
-                                            else if (selectedRole === "HR Manager") {
-                                                window.location.href = 'ManagerDashboard.html';
-                                                
-                                            }
-                                            else if (selectedRole === "collection manager") {
-                                                window.location.href = 'ManagerDashboard.html';
-                                                
-                                            }
-                                            else if (selectedRole === "customer" || selectedRole === "employee") {
-                                                window.location.href = 'UserProfile.html';
-                                                
-                                            }
-    
-                                        },
-                                        error: function (xhr, status, error) {
-                                            console.error("Error authenticating user:", xhr.responseText);
-                                        }
+                                        });
                                     });
-                                });
-    
+        
+
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error("Error getting user role:", xhr.responseText);
+                                }
+                               });
+                           
                                
                               });
 
-
-
-                                                    });
                     },
                     error: function (xhr, status, error) {
                         console.error("Error fetching roles:", xhr.responseText);
