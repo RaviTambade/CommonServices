@@ -156,11 +156,11 @@ where userid =1 AND roleid =1;
 
 -- update img url according to userid
 update users
-set imageurl = "/images/tfl.jpg"
+set imageurl = "http://localhost:5000/images/bhupendra.jpg"
 where id =1;
 
 update users
-set imageurl = "/images/Ravi_Sir.jpeg"
+set imageurl = "http://localhost:5000/images/RaviSir.jpg"
 where id =2;
 
 
