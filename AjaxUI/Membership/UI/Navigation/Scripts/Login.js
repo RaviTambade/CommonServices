@@ -32,13 +32,10 @@ $(document).ready(function() {
                             var selectedLob = $("#lob").val();
                             console.log("Selected LOB: " + selectedLob);
 
-                            var selectedLOB = rolesData.find(role => role.lob === selectedLob);
-                            if (selectedLOB) {
-                                var selectedLOBId = selectedLOB.id;
-                                var selectedLOBRole = selectedLOB.name;
-                                console.log("Selected LOB ID: " + selectedLOBId);
-                                console.log("Selected LOB Role: " + selectedLOBRole);
-                            }
+                           $.ajax({
+                            url:""
+
+                           });
                         });
                     },
                     error: function(xhr, status, error) {
