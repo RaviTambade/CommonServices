@@ -32,6 +32,7 @@ $(document).ready(function () {
                             var selectedLob = $("#lob").val();
                             console.log("selectedLob = " + selectedLob);
 
+                            //Use API (userid and lob)
                             $("#roleid").empty().append('<option value="">Select Role</option>');
                             rolesInfo.forEach(function (rolesInfo) {
                                 console.log(rolesInfo.name);
