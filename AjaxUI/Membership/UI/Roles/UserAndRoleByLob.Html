@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="Scripts/UserAndRoleByLob.js"></script>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 ">
+    <nav class="bg-blue-500 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+          <div class="flex items-center space-x-4">
+            <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
+            <div class="text-white text-2xl font-bold">Membership Management</div>
+          </div>
+            <div class="space-x-4">
+                <a href="../../AuthHTML/UpdateUserPassword.html" class="text-white hover:text-gray-300">Update
+                    Password</a>
+                <a href="../../AuthHTML/UpdateContactNumber.html" class="text-white hover:text-gray-300">Update
+                    Contact</a>
+                <a href="../Users/Login.html" class="text-white hover:text-gray-300">Log Out</a>
+            </div>
+        </div>
+    </nav>
+</div>
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
+       
+
+        <div class="profile mt-4">
+            <hr class="my-4">
+            <div>
+                <input type="text" id="lob" class="" placeholder="Enter LOB"/>
+            </div>
+            <div>
+                <span class="font-bold">ID :</span> <span id="id" class="ml-2 font-semibold"></span>
+            </div>
+            <div>
+                <span class="font-bold">Full Name:</span> <span id="name" class="ml-2 font-semibold"></span>
+            </div>
+           
+            <div>
+                <span class="font-bold">Role Name:</span> <span id="role" class="ml-2 font-semibold"></span>
+            </div>
+            
+        </div>
+    </div>
+</body>
+
+</html>

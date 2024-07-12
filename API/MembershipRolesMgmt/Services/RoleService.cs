@@ -38,6 +38,11 @@ public class RoleService : IRoleService
         return await _repository.GetRolesByLob(lob);
     }
 
+    public async Task<List<UserRoleDetails>> GetUserAndRolesByLob(string lob)
+    {
+        return await _repository.GetUserAndRolesByLob(lob);
+    }
+
      public async Task<List<User>> UserDetailsByRole(LOB lob)
      {
         return await _repository.UserDetailsByRole(lob);

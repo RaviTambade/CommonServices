@@ -117,6 +117,31 @@ public class RoleRepository : IRoleRepository
         }
     }
 
+     public async Task<List<UserRoleDetails>> GetUserAndRolesByLob(string lob)
+    {
+    
+        try
+        {
+            var roles = await (from user in _context.Users
+            join userRole in _context.UserRoles on user.Id equals userRole.UserId
+            join role in _context.Roles on userRole.RoleId equals role.Id
+            where role.Lob == lob
+            select new UserRoleDetails
+            {
+                UserId = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                RoleName = role.Name
+            }).ToListAsync();
+
+            return roles;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
     public async Task<List<User>> UserDetailsByRole(LOB lob)
     {
         try
