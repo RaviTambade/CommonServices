@@ -7,86 +7,83 @@
     <title>User Profile</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="Scripts/UserProfileDetails.js" defer></script>
-    <!-- Include Tailwind CSS -->
+  
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        html,
-        body
-        {
+        html {
             height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        .footer {
+            margin-top: auto;
         }
     </style>
 </head>
 
-<body class="bg-gray-100 h-full flex flex-col">
-    <nav class="bg-blue-500 p-4 shadow-lg">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
-                <div class="text-white text-2xl font-bold">Membership Management</div>
+<body class="flex flex-col">
+    <div class="bg-gray-100 p-4 flex-grow">
+        <nav class="bg-blue-500 p-4 shadow-lg">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
+                    <div class="text-white text-2xl font-bold">Membership Management</div>
+                </div>
+                <div class="space-x-4">
+                    <a href="../../AuthHTML/UpdateUserPassword.html" class="text-white hover:text-gray-300">Update Password</a>
+                    <a href="../../AuthHTML/UpdateContactNumber.html" class="text-white hover:text-gray-300">Update Contact</a>
+                    <a href="../Users/Login.html" class="text-white hover:text-gray-300">Log Out</a>
+                </div>
             </div>
-            <div class="space-x-4">
-                <a href="../../AuthHTML/UpdateUserPassword.html" class="text-white hover:text-gray-300">Update
-                    Password</a>
-                <a href="../../AuthHTML/UpdateContactNumber.html" class="text-white hover:text-gray-300">Update
-                    Contact</a>
-                <a href="../Users/Login.html" class="text-white hover:text-gray-300">Log Out</a>
-            </div>
-        </div>
-    </nav>
+        </nav>
 
-    <main class="flex-grow flex justify-between">
-        <div class="w-full max-w-4xl p-8 mx-auto">
-            <div class="font-sans">
-                <div class="p-6 bg-white rounded-xl shadow-lg">
-                    <div class="flex items-center space-x-4">
-                        <img id="pimgurl" class="h-12 w-12" alt="Profile Photo">
-                        <div>
-                            <div class="mb-2">
-                                <span class="font-bold text-gray-700">First Name:</span>
-                                <span id="pfname" class="ml-2 font-semibold text-gray-800"></span>
+        <div class="border-1 shadow-lg shadow-gray-700 rounded-lg flex-grow">
+            <div class="flex rounded-t-lg bg-top-color sm:px-2 w-full">
+                <div class="h-40 w-40 overflow-hidden sm:rounded-full sm:relative sm:p-0 top-10 left-5 p-3">
+                    <img id="pimgurl"/>
+                </div>
+                <div class="w-2/3 sm:text-center pl-5 mt-10 text-start">
+                    <p id="fullname" class="font-poppins font-bold text-heading sm:text-4xl text-2xl"></p>
+                </div>
+            </div>
+
+            <div class="p-5">
+                <div class="flex flex-col sm:flex-row sm:mt-10">
+                    <div class="flex flex-col sm:w-1/3">
+                        <div class="profile mt-4">
+                            <hr class="my-4">
+                            <div>
+                                <span class="font-bold">Email:</span> <span id="pemail" class="ml-2 font-semibold"></span>
                             </div>
-                            <div class="mb-2">
-                                <span class="font-bold text-gray-700">Last Name:</span>
-                                <span id="plname" class="ml-2 font-semibold text-gray-800"></span>
+                            <div>
+                                <span class="font-bold">Contact Number:</span> <span id="pcontact" class="ml-2 font-semibold"></span>
+                            </div>
+                            <div>
+                                <span class="font-bold">Gender:</span> <span id="pgender" class="ml-2 font-semibold"></span>
+                            </div>
+                            <div>
+                                <span class="font-bold">Aadhar Number:</span> <span id="paadharid" class="ml-2 font-semibold"></span>
+                            </div>
+                            <div>
+                                <span class="font-bold">Birth Date:</span> <span id="pdob" class="ml-2 font-semibold"></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="profile mt-8">
-                    <hr class="my-4">
-                    <div class="mb-2 flex items-center">
-                        <span class="font-bold text-gray-700 w-32">Email:</span>
-                        <span id="pemail" class="ml-2 font-semibold text-gray-800"></span>
-                    </div>
-                    <div class="mb-2 flex items-center">
-                        <span class="font-bold text-gray-700 w-32">Contact Number:</span>
-                        <span id="pcontact" class="ml-2 font-semibold text-gray-800"></span>
-                    </div>
-                    <div class="mb-2 flex items-center">
-                        <span class="font-bold text-gray-700 w-32">Gender:</span>
-                        <span id="pgender" class="ml-2 font-semibold text-gray-800"></span>
-                    </div>
-                    <div class="mb-2 flex items-center">
-                        <span class="font-bold text-gray-700 w-32">Aadhar Number:</span>
-                        <span id="paadharid" class="ml-2 font-semibold text-gray-800"></span>
-                    </div>
-                    <div class="mb-2 flex items-center">
-                        <span class="font-bold text-gray-700 w-32">Birth Date:</span>
-                        <span id="pdob" class="ml-2 font-semibold text-gray-800"></span>
-                    </div>
-                </div>
             </div>
         </div>
-    </main>
+    </div>
 
-    <footer class="bg-blue-500 p-4 text-white text-center mt-auto">
+    <footer class="footer bg-blue-500 p-4 text-white text-center">
         <div class="container mx-auto">
             <p>&copy; 2024 Membership Management. All rights reserved.</p>
         </div>
     </footer>
-
 </body>
 
 </html>
