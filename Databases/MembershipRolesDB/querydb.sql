@@ -163,5 +163,11 @@ update users
 set imageurl = "http://localhost:5000/images/RaviSir.jpg"
 where id =2;
 
+-- Get Users according to lob
+select users.id,users.firstname,users.lastname,roles.name from users
+inner join userroles on users.id = userroles.userid
+inner join roles on roles.id = userroles.roleid
+where roles.lob = "EAgro";
+
 
     
