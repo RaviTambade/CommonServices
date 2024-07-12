@@ -2,6 +2,7 @@
 -- Active: 1707123530557@@127.0.0.1@3306@membershiprolesdb
 
 
+INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("http://localhost:5000/images/bhupendra.jpg","748511544076","Bhupendra","Walhekar","1996-08-25","Male","bhupendraw96@gmail.com","9175116616","password");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","580408011562","Abhay","Navale","2000-12-08","male","navaleabhay11@gmail.com","8456123654","password");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","580408011534","Shubham","Teli","2000-12-08","male","teliShubham@gmail.com","8456123623","password");
 INSERT INTO users(imageurl,aadharid,firstname,lastname,birthdate,gender,email,contactnumber,password) VALUES("AkshayTanpure.jpg","58040801153","Akash","Ajab","2000-12-28","male","ajabakash11@gmail.com","7758983095","password");
@@ -46,7 +47,7 @@ INSERT INTO users (imageurl, aadharid, firstname, lastname, birthdate, gender, e
 
 
 
-INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(1, 'Manchar','near gujrathi hospital', 'Manchar','Maharashtra','410503',"Residential");
+INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(1, 'Katraj','Near Icchapurti Mandir', 'Pune','Maharashtra','411046',"Residential");
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES (2, 'Pargaon tarfe khead','chikhalewasti', 'Pargaon tarfe khead','Maharashtra','410512',"Residential");
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(3, 'Kudalwadi','near ganesh mandir', 'Kudalwadi','Maharashtra','410512',"Residential");  
 INSERT INTO addresses(userid,area,landmark,city,state,pincode,addresstype) VALUES(4,'rajgurunagar',' near water tank','rajgurunagar','Maharashtra','410505',"Residential"); 
@@ -111,10 +112,7 @@ INSERT INTO roles(name,lob)VALUES('manager','banking');
 
 
 
-INSERT INTO userroles(userid,roleid) VALUES (1,1);
 INSERT INTO userroles(userid,roleid) VALUES (1,2);
-INSERT INTO userroles(userid,roleid) VALUES (1,3);
-INSERT INTO userroles(userid,roleid) VALUES (1,4);
 INSERT INTO userroles(userid,roleid) VALUES (2,1);
 INSERT INTO userroles(userid,roleid) VALUES (3,1);
 INSERT INTO userroles(userid,roleid) VALUES (4,2);
