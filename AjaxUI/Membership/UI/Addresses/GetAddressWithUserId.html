@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+< lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="Scripts/getAddressWithUserId.js"></script>
 </head>
-<body class="bg-gray-100">
+<body class="flex flex-col min-h-screen"></body>
     <!-- Navbar -->
     <nav class="bg-blue-500 p-4 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
@@ -25,7 +25,8 @@
           </div>
         </div>
       </nav>
-   
+      
+      <main class="flex-grow"></main>
         <h1 class="text-2xl font-bold mb-4">User Addresses</h1>
         <div class="mb-4">
             <input type="number" id="userId" placeholder="Enter User ID" class="p-2 border rounded-md">
@@ -49,13 +50,7 @@
                 <!-- Address rows will be inserted here -->
             </tbody>
         </table>
+    </main>
     
-
-    <!-- Footer -->
-    <footer class="bg-blue-500 py-4 mt-6">
-        <div class="container mx-auto text-center text-white">
-            <p>&copy; 2024 Membership Management. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 </html>
