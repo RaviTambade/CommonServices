@@ -30,6 +30,8 @@ $(document).ready(function () {
 
                         $("#lob").change(function () {
                             var selectedLob = $("#lob").val();
+                            window.sessionStorage.setItem("lob",selectedLob);
+
                             console.log("selectedLob = " + selectedLob);
 
                             //Use API (userid and lob)
@@ -74,7 +76,7 @@ $(document).ready(function () {
                                                     
                                                 }
                                                 else {
-                                                    window.location.href = 'TryUserProfile .html';
+                                                    window.location.href = 'TryUserProfile.html';
                                                     
                                                 }
         
