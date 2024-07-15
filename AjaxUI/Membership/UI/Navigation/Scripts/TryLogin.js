@@ -39,7 +39,7 @@ $(document).ready(function () {
                                 contentType:'application/json',
                                 success:function(data){
                                     console.log(data);
-                                    var userRole = data[0].name; 
+                                    var userRole = data[0].name; //Check this
                                     console.log("User Role Inside Sign In button : ",userRole);
                                     $("#btnsubmit").click(function () {
                                         var contactNo = $("#contactNo").val();
