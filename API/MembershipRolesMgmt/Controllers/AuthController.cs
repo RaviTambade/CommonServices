@@ -31,7 +31,7 @@ public class AuthController : ControllerBase
         string strJwtToken = string.Empty;
         
         var status = await _userService.Authenticate(claim);
-        Console.WriteLine(claim.)
+        
         if (status)
         {
             User user = await _userService.GetUser(claim.ContactNumber);

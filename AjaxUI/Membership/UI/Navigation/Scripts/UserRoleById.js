@@ -12,12 +12,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.length > 0) {
 
                     console.log(data);
-                    data.forEach(function (role) {
-                        var roleElement = document.createElement("div");
+                     /* data.forEach(function (role) {
+                       var roleElement = document.createElement("div");
                         roleElement.className = "p-4 bg-gray-100 border border-gray-300 rounded";
                         roleElement.textContent = `Role: ${role.name} | LOB: ${role.lob}`;
-                        rolesContainer.appendChild(roleElement);
+                        rolesContainer.appendChild(roleElement); */
+                        var tableHtml = "<table><thead><tr><th>Name</th><th>Role</th></tr></thead><tbody>";
+
+                    data.forEach(item => {
+                        tableHtml += "<tr><td>" + item.firstName+" "+item.lastName + "</td><td>" + item.roleName + "</td></tr>";
                     });
+
+                    tableHtml += "</tbody></table>";
+                    rolesContainer.innerHTML = tableHtml;
+                   // });
                 } else {
                     rolesContainer.textContent = "No Roles Found";
                 }
