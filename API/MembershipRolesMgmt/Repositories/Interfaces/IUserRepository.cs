@@ -16,6 +16,8 @@ public interface IUserRepository
     Task<UserDetails> GetUserDetailsByUserId(int userId);
     Task<User> GetUser(int userId);
     Task<User> GetUser(string contactNumber);
+
+     Task<User> GetUserByEmail(string email);
     Task<bool> Update(int id, User user);
     Task<bool> Update(string contactNumber, PasswordDetails credential);
     Task<bool> Update(string contactNumber, ContactNumberDetails credential);

@@ -53,8 +53,10 @@ $(document).ready(function () {
                                             "password": pass,
                                             "lob": lob
                                         };
-        
+                                        console.log(claimData);
+                                        console.log("inside the btn submit....");
                                         $.ajax({
+
                                             url: "http://localhost:5000/api/auth/signin",
                                             type: 'POST',
                                             data: JSON.stringify(claimData),
