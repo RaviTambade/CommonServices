@@ -39,7 +39,8 @@ $(document).ready(function () {
                                 contentType:'application/json',
                                 success:function(data){
                                     console.log(data);
-                                    var userRole = data.name; 
+                                    var userRole = data[0].name; 
+                                    console.log("User Role Inside Sign In button : ",userRole);
                                     $("#btnsubmit").click(function () {
                                         var contactNo = $("#contactNo").val();
                                         var pass = $("#pass").val();
@@ -59,7 +60,7 @@ $(document).ready(function () {
                                             success: function (data) {
                                                 console.log("Token:", data.token);
                                                 localStorage.setItem('token', data.token);
-        
+                                               
                                                 if (userRole === "Director") {
                                                     window.location.href = 'DirectorDashboard.html';
                                                     
@@ -73,7 +74,7 @@ $(document).ready(function () {
                                                     
                                                 }
                                                 else {
-                                                    window.location.href = 'UserProfile.html';
+                                                    window.location.href = 'TryUserProfile .html';
                                                     
                                                 }
         
