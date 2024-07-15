@@ -10,9 +10,9 @@ public interface IRoleRepository
     Task<List<Role>> GetRoles(int userId,string lob);
     Task<List<Role>> GetRoles(int userId);
     Task<List<Role>>GetRolesByLob(string lob);
-
     Task<List<UserRoleDetails>> GetUserAndRolesByLob(string lob);
     Task<List<User>> UserDetailsByRole(LOB lob);
+    Task<List<User>> UserDetailsByLob(LOB lob);
     Task<bool> Insert(Role role);
     Task<bool> Update(Role role);
     Task<bool> DeleteRole(int roleId);

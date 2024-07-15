@@ -57,7 +57,14 @@ public class RolesController : ControllerBase
         return await _service.GetUserAndRolesByLob(lob);
     }
 
-   [HttpGet("getuserbyroles/rolename/{roleName}/lob/{lob}")]
+    [HttpGet("getuserbylob/lob/{lob}")]
+    public async Task<List<User>> UserDetailsByLob(string lob)
+    {
+        var lobObj = new LOB { Lob = lob };
+        return await _service.UserDetailsByLob(lobObj);
+    }
+
+    [HttpGet("getuserbyroles/rolename/{roleName}/lob/{lob}")]
      public async Task<List<User>> UserDetailsByRole(string roleName, string lob)
      {
         var lobObj = new LOB { RoleName = roleName, Lob = lob };
