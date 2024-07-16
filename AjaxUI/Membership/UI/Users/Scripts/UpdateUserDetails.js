@@ -1,4 +1,27 @@
 $(document).ready(function () {
+
+    var userId = parseInt(sessionStorage.getItem("userid")); 
+    $.ajax({
+        url: "http://localhost:5000/api/users/userdetails/"+userId,
+        type: 'GET',
+        contentType: 'application/json',
+
+        success: function (data) {
+            $("#txtUserId").val(data.id);
+            $("#txtFirstName").val(data.firstName);
+            $("#txtLastName").val(data.lastName);
+            $("#txtEmail").val(data.email);
+            $("#txtAadharId").val(data.aadharId);
+            $("#txtBirthDate").val(data.birthDate);
+            $("#pgender").val(data.gender);
+            $("#txtImageUrl").val(data.imageUrl);
+        },
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+
+
     $('#btnUpdateUser').click(function () {
         updateUserDetails();
     });
@@ -23,10 +46,11 @@ function updateUserDetails() {
         data: JSON.stringify(user),
         success: function (result) {
             if (result) {
-                alert("User details updated successfully.");
+                alert("Updated Successfully.");
             } else {
                 alert("Failed to update user details.");
             }
+            window.location.href = 'UserProfileDetails.html';
         },
         error: function (xhr, status, error) {
             console.error(xhr.responseText);
