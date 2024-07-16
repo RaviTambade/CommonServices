@@ -7,105 +7,135 @@
     <title>User Profile</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="Scripts/UserProfileDetails.js" defer></script>
+  
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        .footer {
+            margin-top: auto;
+        }
+
+        .split {
+            display: flex;
+            gap: 50px;
+        }
+
+        .left, .right {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .left h3, .right h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .left div, .right div {
+            margin-bottom: 10px;
+        }
+
+        .left span, .right span {
+            font-weight: 600;
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100">
-    <nav class="bg-blue-500 p-4 shadow-lg">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
-                <div class="text-white text-2xl font-bold">Membership Management</div>
+<body class="flex flex-col">
+    <div class="bg-gray-100 p-4 flex-grow">
+        <nav class="bg-blue-500 p-4 shadow-lg">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
+                    <div class="text-white text-2xl font-bold">Membership Management</div>
+                </div>
+                <div class="space-x-4">
+                    <a href="../../AuthHTML/UpdateUserPassword.html" class="text-white hover:text-gray-300">Update Password</a>
+                    <a href="../../AuthHTML/UpdateContactNumber.html" class="text-white hover:text-gray-300">Update Contact</a>
+                    <a href="../Users/Login.html" class="text-white hover:text-gray-300">Log Out</a>
+                </div>
             </div>
-            <div class="space-x-4">
-                <a href="../../AuthHTML/UpdateUserPassword.html" class="text-white hover:text-gray-300">Update
-                    Password</a>
-                <a href="../../AuthHTML/UpdateContactNumber.html" class="text-white hover:text-gray-300">Update
-                    Contact</a>
-                <a href="../Users/Login.html" class="text-white hover:text-gray-300">Log Out</a>
-            </div>
-        </div>
-    </nav>
+        </nav>
 
-    <div class="flex justify-center p-4">
-        <div class="bg-white border-1 shadow-lg shadow-gray-700 rounded-lg w-full max-w-4xl">
+        <div class="border-1 shadow-lg shadow-gray-700 rounded-lg flex-grow">
             <div class="flex rounded-t-lg bg-top-color sm:px-2 w-full">
-                <div class="h-40 w-40 overflow-hidden rounded-full top-10 left-5 p-3">
-                    <img id="pimgurl" class="w-full h-full object-cover" />
+                <div class="h-40 w-40 overflow-hidden sm:rounded-full sm:relative sm:p-0 top-10 left-5 p-3">
+                    <img id="pimgurl"/>
                 </div>
                 <div class="w-2/3 sm:text-center pl-5 mt-10 text-start">
-                    <p id="fullname" class="font-poppins font-bold text-heading sm:text-4xl text-2xl"></p>
+                    <p id="fullname" class="font-poppins font-bold text-heading sm:text-4xl text-2xl text-gray-700"></p>
                 </div>
             </div>
 
             <div class="p-5">
-                <div class="flex flex-col sm:flex-row sm:mt-10">
-                    <div class="flex flex-col sm:w-1/3">
-                        <div class="profile mt-4">
-                            <hr class="my-4">
-                            <div>
-                                <span class="font-bold">Email:</span> <span id="pemail"
-                                    class="ml-2 font-semibold"></span>
-                            </div>
-                            <div>
-                                <span class="font-bold">Contact Number:</span> <span id="pcontact"
-                                    class="ml-2 font-semibold"></span>
-                            </div>
-                            <div>
-                                <span class="font-bold">Gender:</span> <span id="pgender"
-                                    class="ml-2 font-semibold"></span>
-                            </div>
-                            <div>
-                                <span class="font-bold">Aadhar Number:</span> <span id="paadharid"
-                                    class="ml-2 font-semibold"></span>
-                            </div>
-                            <div>
-                                <span class="font-bold">Birth Date:</span> <span id="pdob"
-                                    class="ml-2 font-semibold"></span>
-                            </div>
-
-                            <div>
-                                <p class="font-poppins font-bold text-heading sm:text-2xl ">Address </p>
-                                <div>
-                                    <span class="font-bold">Ares : </span> <span id="parea"
-                                        class="ml-2 font-semibold"></span>
-                                </div>
-                                <div>
-                                    <span class="font-bold">Land Mark :</span> <span id="plandmark"
-                                        class="ml-2 font-semibold"></span>
-                                </div>
-                                <div>
-                                    <span class="font-bold">City :</span> <span id="pcity"
-                                        class="ml-2 font-semibold"></span>
-                                </div>
-                                <div>
-                                    <span class="font-bold">State : </span> <span id="pstate"
-                                        class="ml-2 font-semibold"></span>
-                                </div>
-                                <div>
-                                    <span class="font-bold">Pincode :</span> <span id="ppincode"
-                                        class="ml-2 font-semibold"></span>
-                                </div>
-                                <div>
-                                    <span class="font-bold">Address Type :</span> <span id="ptype"
-                                        class="ml-2 font-semibold"></span>
-                                </div>
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-1 rounded focus:outline-none focus:shadow-outline">
-                                        <a href="UpdateUserDetails.html">Update Profile</a>
-                                    </button>
-                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-1 rounded focus:outline-none focus:shadow-outline">
-                                        <a href="../Addresses/UpdateAddress.html">Update Address</a>
-                                    </button>
-                                </div>
-
-                            </div>
+                <br/>
+                
+                <div class="split">
+                    <div class="left">
+                        <h3>Personal Details</h3>
+                        <div>
+                            <span>Email:</span> <span id="pemail" class="ml-2 font-semibold"></span>
                         </div>
+                        <div>
+                            <span>Contact Number:</span> <span id="pcontact" class="ml-2 font-semibold"></span>
+                        </div>
+                        <div>
+                            <span>Gender:</span> <span id="pgender" class="ml-2 font-semibold"></span>
+                        </div>
+                        <div>
+                            <span>Aadhar Number:</span> <span id="paadharid" class="ml-2 font-semibold"></span>
+                        </div>
+                        <div>
+                            <span>Birth Date:</span> <span id="pdob" class="ml-2 font-semibold"></span>
+                        </div>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-1 rounded focus:outline-none focus:shadow-outline">
+                            <a href="UpdateUserDetails.html">Update Profile</a>
+                        </button>
+                    </div>
+
+                    <div class="right">
+                        <h3>Address Details</h3>
+                        <div>
+                            <span>Area:</span> <span id="parea" class="ml-2 font-semibold"></span>
+                        </div>
+                        <div>
+                            <span>Land Mark:</span> <span id="plandmark" class="ml-2 font-semibold"></span>
+                        </div>
+                        <div>
+                            <span>City:</span> <span id="pcity" class="ml-2 font-semibold"></span>
+                        </div>
+                        <div>
+                            <span>State:</span> <span id="pstate" class="ml-2 font-semibold"></span>
+                        </div>
+                        <div>
+                            <span>Pincode:</span> <span id="ppincode" class="ml-2 font-semibold"></span>
+                        </div>
+                        <div>
+                            <span>Address Type:</span> <span id="ptype" class="ml-2 font-semibold"></span>
+                        </div>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-1 rounded focus:outline-none focus:shadow-outline">
+                            <a href="../Addresses/UpdateAddress.html">Update Address</a>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <footer class="footer bg-blue-500 p-4 text-white text-center">
+        <div class="container mx-auto">
+            <p>&copy; 2024 Membership Management. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 
 </html>

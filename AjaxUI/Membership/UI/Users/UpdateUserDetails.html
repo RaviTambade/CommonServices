@@ -5,91 +5,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update User Details</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="Scripts/UpdateUserDetails.js" defer></script>
 </head>
 
-<body class="bg-gray-100 ">
-    <div>
-        <nav class="bg-blue-500 p-4 shadow-lg">
-            <div class="container mx-auto flex justify-between items-center">
-                <div class="flex items-center space-x-4">
-                    <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
-                    <div class="text-white text-2xl font-bold">Membership Management</div>
-                </div>
-                <div class="space-x-4">
-                    <a href="../Navigation/Login.html" class="text-white hover:text-gray-300">Login</a>
-                    <a href="../Users/Register.html" class="text-white hover:text-gray-300">Register</a>
-                    <a href="../Navigation/AboutUs.html" class="text-white hover:text-gray-300">About</a>
-                    <a href="../Navigation/Contact.html" class="text-white hover:text-gray-300">Contact</a>
-                    <a href="../Navigation/Help.html" class="text-white hover:text-gray-300">Help</a>
-                </div>
+<body class="bg-gray-100">
+    <nav class="bg-blue-500 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
+                <div class="text-white text-2xl font-bold">Membership Management</div>
             </div>
-        </nav>
-    </div>
+            <div class="space-x-4">
+                <a href="../Navigation/Login.html" class="text-white hover:text-gray-300">Login</a>
+                <a href="../Users/Register.html" class="text-white hover:text-gray-300">Register</a>
+                <a href="../Navigation/AboutUs.html" class="text-white hover:text-gray-300">About</a>
+                <a href="../Navigation/Contact.html" class="text-white hover:text-gray-300">Contact</a>
+                <a href="../Navigation/Help.html" class="text-white hover:text-gray-300">Help</a>
+            </div>
+        </div>
+    </nav>
 
-    <div class="flex justify-center items-center min-h-screen p-4">
-        <div class="w-full max-w-md bg-white p-6 rounded shadow-md">
+    <main class="container mx-auto p-6">
+        <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
             <h2 class="text-2xl font-bold mb-4">Update User Details</h2>
-            <hr class="mb-4" />
+            <hr class="mb-4">
             <form id="updateForm" class="space-y-4">
-                <div>
-                    <label for="txtUserId" class="block mb-1">User ID:</label>
-                    <input type="text" id="txtUserId" placeholder="Enter User ID" required
-                        class="border border-gray-300 p-2 w-full" readonly/>
-                </div>
-                <div>
-                    <label for="txtFirstName" class="block mb-1">First Name:</label>
-                    <input type="text" id="txtFirstName" placeholder="Enter First Name" required
-                        class="border border-gray-300 p-2 w-full" />
-                </div>
-
-                <div>
-                    <label for="txtLastName" class="block mb-1">Last Name:</label>
-                    <input type="text" id="txtLastName" placeholder="Enter Last Name" required
-                        class="border border-gray-300 p-2 w-full" />
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="txtUserId" class="block text-gray-700">User ID:</label>
+                        <input type="text" id="txtUserId" placeholder="Enter User ID" required
+                            class="mt-1 p-2 w-full border border-gray-300 rounded-md" readonly>
+                    </div>
+                    <div>
+                        <label for="txtFirstName" class="block text-gray-700">First Name:</label>
+                        <input type="text" id="txtFirstName" placeholder="Enter First Name" required
+                            class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    </div>
                 </div>
 
-                <div>
-                    <label for="txtBirthDate" class="block mb-1">Birth Date:</label>
-                    <input type="date" id="txtBirthDate" required class="border border-gray-300 p-2 w-full" />
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="txtLastName" class="block text-gray-700">Last Name:</label>
+                        <input type="text" id="txtLastName" placeholder="Enter Last Name" required
+                            class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    </div>
+                    <div>
+                        <label for="txtBirthDate" class="block text-gray-700">Birth Date:</label>
+                        <input type="date" id="txtBirthDate" required
+                            class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    </div>
                 </div>
 
-                <div>
-                    <label for="txtGender" class="block mb-1">Gender:</label>
-                    <select id="txtGender" required class="border border-gray-300 p-2 w-full">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="txtGender" class="block text-gray-700">Gender:</label>
+                        <select id="txtGender" required
+                            class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="txtEmail" class="block text-gray-700">Email:</label>
+                        <input type="email" id="txtEmail" placeholder="Enter Email" required
+                            class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    </div>
                 </div>
 
-                <div>
-                    <label for="txtEmail" class="block mb-1">Email:</label>
-                    <input type="email" id="txtEmail" placeholder="Enter Email" required
-                        class="border border-gray-300 p-2 w-full" />
-                </div>
-
-                <div>
-                    <label for="txtAadharId" class="block mb-1">Aadhar ID:</label>
-                    <input type="text" id="txtAadharId" placeholder="Enter Aadhar ID" required
-                        class="border border-gray-300 p-2 w-full" />
-                </div>
-                <div>
-                    <label for="txtImageUrl" class="block mb-1">Image URL:</label>
-                    <input type="text" id="txtImageUrl" placeholder="Enter Image URL" required
-                        class="border border-gray-300 p-2 w-full" />
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="txtAadharId" class="block text-gray-700">Aadhar ID:</label>
+                        <input type="text" id="txtAadharId" placeholder="Enter Aadhar ID" required
+                            class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    </div>
+                    <div>
+                        <label for="txtImageUrl" class="block text-gray-700">Image URL:</label>
+                        <input type="text" id="txtImageUrl" placeholder="Enter Image URL" required
+                            class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    </div>
                 </div>
 
                 <div>
                     <input type="button" id="btnUpdateUser" value="Update User"
-                        class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-500 w-full" />
+                        class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 w-full">
                 </div>
             </form>
         </div>
-    </div>
-   
+    </main>
+
 </body>
 
 </html>

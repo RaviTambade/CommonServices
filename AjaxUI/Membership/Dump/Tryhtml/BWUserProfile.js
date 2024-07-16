@@ -1,6 +1,6 @@
 $(document).ready(function () {
    
-    var userId = 1;//parseInt(sessionStorage.getItem("userid")); 
+    var userId = parseInt(sessionStorage.getItem("userid")); 
     $.ajax({
         url: "http://localhost:5000/api/users/userdetails/"+userId,
         type: 'GET',
