@@ -1,10 +1,42 @@
 var userLOB = sessionStorage.getItem("lob");
-console.log("LOB of logged User : "+userLOB);
+console.log("LOB of logged User : " + userLOB);
 
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("btngetroles").addEventListener("click", function () {
         var rolesContainer = document.getElementById("roles");
         rolesContainer.innerHTML = '';
+
+        fetch(`http://localhost:5000/api/roles/lob/` + userLOB)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    console.log(data);
+                    data.forEach(item => {
+                        console.log(item.name);
+                        var radiobox = document.createElement('input');
+                        radiobox.type = 'radio';
+                        radiobox.id = 'num';
+                        radiobox.value = item.name;
+
+                        var label = document.createElement('label')
+                        label.htmlFor = 'num';
+                        var description = document.createTextNode(item.name);
+                        label.appendChild(description);
+                    
+
+                        rolesContainer.appendChild(radiobox);
+                        rolesContainer.appendChild(label);
+                    
+                    });
+                }
+                else {
+                    rolesContainer.textContent = "No Roles Found";
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
 
         fetch(`http://localhost:5000/api/roles/getUserAndRoles/lob/` + userLOB)
             .then(response => response.json())
@@ -32,6 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => {
                 console.error(error);
-            });
+            })
     });
 });

@@ -11,6 +11,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             success: function (userData) {
+
                 console.log("User's ID:", userData.id);
                 window.sessionStorage.setItem("userid", userData.id);
                 userId = userData.id;
