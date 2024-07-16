@@ -8,11 +8,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script src="Scripts/TryLogin.js"></script>
+  <script src="Scripts/DynamicDashboard.js"></script>
 </head>
 
 <body class="bg-gray-100 flex flex-col min-h-screen">
   <!-- Navbar -->
-  <nav class="bg-blue-500 p-4 shadow-lg">
+  <!-- <nav class="bg-blue-500 p-4 shadow-lg">
     <div class="container mx-auto flex justify-between items-center">
       <div class="flex items-center space-x-4">
         <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
@@ -23,6 +24,17 @@
         <a href="../Navigation/AboutUs.html" class="text-white hover:text-gray-300">About</a>
         <a href="../Navigation/Contact.html" class="text-white hover:text-gray-300">Contact</a>
         <a href="../Navigation/Help.html" class="text-white hover:text-gray-300">Help</a>
+      </div>
+    </div>
+  </nav> -->
+  <nav class="bg-blue-500 p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="flex items-center space-x-4">
+        <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
+        <div class="text-white text-2xl font-bold">Membership Management</div>
+      </div>
+      <div id="navbar-items" class="space-x-4">
+        <!-- Navbar items will be added here dynamically -->
       </div>
     </div>
   </nav>

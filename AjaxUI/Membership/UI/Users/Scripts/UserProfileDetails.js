@@ -1,8 +1,8 @@
 $(document).ready(function () {
    
-    var userId = parseInt(sessionStorage.getItem("userid")); 
+    //var userId = parseInt(sessionStorage.getItem("userid")); 
     $.ajax({
-        url: "http://localhost:5000/api/users/userdetails/" + userId,
+        url: "http://localhost:5000/api/users/userdetails/1",
         type: 'GET',
         contentType: 'application/json',
 
@@ -17,6 +17,24 @@ $(document).ready(function () {
             $("#pimgurl").attr("src",data.imageUrl);
             $("#pcreatedon").text(data.createdOn);
             $("#pmodifiedon").text(data.modifiedOn);
+        },
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+
+    $.ajax({
+        url: "http://localhost:5000/api/addresses/users/1",
+        type: 'GET',
+        contentType: 'application/json',
+        success: function (addressData) {
+            $("#parea").text(addressData[0].area);
+            $("#plandmark").text(addressData[0].landMark);
+            $("#pcity").text(addressData[0].city);
+            $("#pstate").text(addressData[0].state);
+            $("#ppincode").text(addressData[0].pinCode);
+            $("#ptype").text(addressData[0].addressType);
+            console.log(addressData[0].state);
         },
         error: function (xhr, status, error) {
             console.error(xhr.responseText);
