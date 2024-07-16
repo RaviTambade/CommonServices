@@ -68,6 +68,14 @@ public class UsersController : ControllerBase
         return await _svc.GetUser(contactNumber);
     }
 
+    [HttpGet]
+    [Route("email/{email}")]
+    public async Task<User> GetUserByEmail(string email)
+    {
+      
+        return await _svc.GetUserByEmail(email);
+    }
+
     [HttpPost]
     [Route("add")]
     public async Task<bool> Add(User user)

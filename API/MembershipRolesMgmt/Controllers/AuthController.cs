@@ -29,12 +29,15 @@ public class AuthController : ControllerBase
     public async Task<AuthToken> SignIn([FromBody] Claim claim)
     {
         string strJwtToken = string.Empty;
+        
         var status = await _userService.Authenticate(claim);
+        
         if (status)
         {
             User user = await _userService.GetUser(claim.ContactNumber);
             strJwtToken = await _tokenHelper.GenerateJwtToken(user, claim.Lob);
         }
+
         return new AuthToken(strJwtToken);
     }
 

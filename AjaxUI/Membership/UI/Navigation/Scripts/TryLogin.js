@@ -11,6 +11,7 @@ $(document).ready(function () {
             type: 'GET',
             contentType: 'application/json',
             success: function (userData) {
+
                 console.log("User's ID:", userData.id);
                 window.sessionStorage.setItem("userid", userData.id);
                 userId = userData.id;
@@ -53,8 +54,10 @@ $(document).ready(function () {
                                             "password": pass,
                                             "lob": lob
                                         };
-        
+                                        console.log(claimData);
+                                        console.log("inside the btn submit....");
                                         $.ajax({
+
                                             url: "http://localhost:5000/api/auth/signin",
                                             type: 'POST',
                                             data: JSON.stringify(claimData),
@@ -62,7 +65,8 @@ $(document).ready(function () {
                                             success: function (data) {
                                                 console.log("Token:", data.token);
                                                 localStorage.setItem('token', data.token);
-                                               
+                                               if(data.token)
+                                               {
                                                 if (userRole === "Director") {
                                                     window.location.href = 'DirectorDashboard.html';
                                                     
@@ -79,6 +83,11 @@ $(document).ready(function () {
                                                     window.location.href = 'TryUserProfile.html';
                                                     
                                                 }
+
+                                               }else{
+                                                alert("Enter valid Contact Number or Password")
+                                               }
+                                                
         
                                             },
                                             error: function (xhr, status, error) {

@@ -49,6 +49,11 @@ public class UserService : IUserService
         return await _repo.GetUser(contactNumber);
     }
 
+     public async Task<User> GetUserByEmail(string email)
+    {
+        return await _repo.GetUserByEmail(email);
+    }
+
     public async Task<bool> Add(User user)
     {
         return await _repo.Add(user);
