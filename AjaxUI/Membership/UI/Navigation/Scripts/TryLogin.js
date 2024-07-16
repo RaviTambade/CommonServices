@@ -1,6 +1,8 @@
 $(document).ready(function () {
     var rolesInfo;
     var userId;
+    sessionStorage.clear();
+    localStorage.clear();
 
     $("#contactNo").change(function () {
         var contactNo = $("#contactNo").val();
@@ -84,7 +86,8 @@ $(document).ready(function () {
                                                     
                                                 }
 
-                                               }else{
+                                               }
+                                               else{
                                                 alert("Enter valid Contact Number or Password")
                                                }
                                                 
