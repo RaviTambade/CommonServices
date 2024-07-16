@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         radiobox.type = 'radio';
                         radiobox.id = 'num';
                         radiobox.name = "options";
-                        radiobox.value = item.name;
+                        radiobox.value = item.id;
                         var label = document.createElement('label')
                         label.htmlFor = 'num';
                         var description = document.createTextNode(item.name);
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         rolesContainer.appendChild(radiobox);
                         rolesContainer.appendChild(label);
                     });
-                    var radioButtons = document.querySelectorAll('input[type="radio"]');
+                    // var radioButtons = document.querySelectorAll('input[type="radio"]');
                     radioButtons.forEach(function (radio) {
                         radio.addEventListener('click', function () {
                             if (this.checked) {
