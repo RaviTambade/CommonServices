@@ -31,6 +31,22 @@ document.addEventListener("DOMContentLoaded", function () {
                             if (this.checked) {
                                 var selectedOption = this.value;
                                 console.log("Selected Option: " + selectedOption);
+                                console.log("Selected LOB"+ userLOB);
+                                $.ajax({
+                                    url: `http://localhost:5000/api/roles/getuserbyroles/rolename/${selectedOption}/lob/${userLOB}`,
+                                    type: 'GET',
+                                    contentType: 'application/json',
+                                    success: function (data) {
+                                        console.log(data);
+
+                                        // const roles = $("#roles").empty();
+                                       // data.forEach(role => roles.append($('<div></div>').text(role.name)));
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error(xhr.responseText);
+                                        alert("An error occurred while fetching the roles. Please try again.");
+                                    }
+                                });
                             }
                         });
                     });
