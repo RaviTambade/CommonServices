@@ -264,6 +264,60 @@ public class UserRepository : IUserRepository
         return user;
     }
 
+        public async Task<User> GetUserByEmail(string email)
+    {
+        User user = new User();
+        MySqlConnection con = new MySqlConnection();
+        con.ConnectionString = _conString;
+        try
+        {
+            string query = "select * from users where email=@email";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@email", email);
+            await con.OpenAsync();
+            MySqlDataReader reader = command.ExecuteReader();
+            if (await reader.ReadAsync())
+            {
+                int id = int.Parse(reader["id"].ToString());
+                string? imageUrl = reader["imageurl"].ToString();
+                string? aadharId = reader["aadharid"].ToString();
+                string? firstName = reader["firstname"].ToString();
+                string? lastName = reader["lastname"].ToString();
+                DateTime birthDate = DateTime.Parse(reader["birthdate"].ToString());
+                DateOnly dateOnlyBirthDate = DateOnly.FromDateTime(birthDate);
+                string? gender = reader["gender"].ToString();
+                string? userEmail = reader["email"].ToString();
+                string? contact = reader["contactnumber"].ToString();
+                
+
+
+                user = new User()
+                {
+                    Id = id,
+                    ImageUrl = imageUrl,
+                    AadharId = aadharId,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    BirthDate = dateOnlyBirthDate,
+                    Gender = gender,
+                    Email = userEmail,
+                    ContactNumber = contact,
+                   
+                };
+            }
+            await reader.CloseAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return user;
+    }
+
     public async Task<List<User>> GetUsersByUserIds(string userIds)
     {
         List<User> users = new();
