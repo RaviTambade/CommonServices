@@ -26,9 +26,9 @@ public class UserRepository : IUserRepository
         try
         {
             string query =
-                "SELECT * FROM users WHERE email=@email AND BINARY password=@password";
+                "SELECT * FROM users WHERE contactnumber=@contactNumber AND BINARY password=@password";
             MySqlCommand cmd = new MySqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@email", claim.ContactNumber);
+            cmd.Parameters.AddWithValue("@contactNumber", claim.ContactNumber);
             cmd.Parameters.AddWithValue("@password", claim.Password);
             await con.OpenAsync();
             MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync();

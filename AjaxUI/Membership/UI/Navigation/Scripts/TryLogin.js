@@ -64,7 +64,8 @@ $(document).ready(function () {
                                             success: function (data) {
                                                 console.log("Token:", data.token);
                                                 localStorage.setItem('token', data.token);
-                                               
+                                               if(data.token)
+                                               {
                                                 if (userRole === "Director") {
                                                     window.location.href = 'DirectorDashboard.html';
                                                     
@@ -81,6 +82,11 @@ $(document).ready(function () {
                                                     window.location.href = 'TryUserProfile.html';
                                                     
                                                 }
+
+                                               }else{
+                                                alert("Enter valid Contact Number or Password")
+                                               }
+                                                
         
                                             },
                                             error: function (xhr, status, error) {
