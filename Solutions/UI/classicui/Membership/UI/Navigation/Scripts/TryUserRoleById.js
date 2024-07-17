@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.imageUrl + '</td>' +
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.firstName + '</td>' +
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.lastName + '</td>' +
+                                                '<td>'+'<button id="updaterole" value = "Update Role">'+ '</button>' + '</td>' +
                                                 '</tr>';
                                         });
                                         htmlContent += '</tbody></table></div>';
