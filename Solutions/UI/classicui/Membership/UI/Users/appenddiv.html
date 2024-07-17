@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Append Div on Button Click (jQuery)</title>
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="container">
+        <!-- Existing content or empty -->
+    </div>
+
+    <button id="addDiv">Add Div</button>
+
+    <script>
+        $(document).ready(function() {
+            $('#addDiv').click(function() {
+                // Create a new div element
+                var newDiv = $('<div class="appended-div">New Div</div>');
+                // Append the new div to the container
+                $('#container').append(newDiv);
+            });
+        });
+    </script>
+</body>
+</html>
