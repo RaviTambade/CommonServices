@@ -169,5 +169,26 @@ inner join userroles on users.id = userroles.userid
 inner join roles on roles.id = userroles.roleid
 where roles.lob = "EAgro";
 
+-- Update Address
+update addresses
+set area = "Katraj"
+where userid = 1;
+
+update addresses
+set landmark = "Katraj"
+where userid = 1;
+
+update addresses
+set city = "Katraj"
+where userid = 1;
+
+update addresses
+set state = "Katraj"
+where userid = 1;
+
+update addresses
+set pincode = "411000"
+where userid = 1;
+
 
     
