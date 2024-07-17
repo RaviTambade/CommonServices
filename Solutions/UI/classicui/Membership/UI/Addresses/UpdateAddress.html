@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +9,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="Scripts/UpdateAddress.js"></script>
 </head>
+
 <body>
     <nav class="bg-blue-500 p-4 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
+                <img src="../../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
                 <div class="text-white text-2xl font-bold">Membership Management</div>
             </div>
             <div class="space-x-4">
@@ -24,21 +26,22 @@
             </div>
         </div>
     </nav>
-    
+
     <main class="container mx-auto p-6">
         <h2 class="text-2xl font-bold mb-6">Update Address</h2>
         <form id="updateAddressForm" class="bg-white p-6 rounded-lg shadow-md">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label for="existingId" class="block text-gray-700">Existing ID:</label>
-                    <input type="number" id="existingId" name="existingId" required class="mt-1 p-2 w-full border rounded-md" readonly>
+                    <input type="number" id="existingId" name="existingId" required
+                        class="mt-1 p-2 w-full border rounded-md" readonly>
                 </div>
                 <div>
                     <label for="userId" class="block text-gray-700">User ID:</label>
-                    <input type="number" id="userId" name="userId" required class="mt-1 p-2 w-full border rounded-md" readonly>
+                    <input type="number" id="userId" name="userId" required class="mt-1 p-2 w-full border rounded-md"
+                        readonly>
                 </div>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label for="area" class="block text-gray-700">Area:</label>
@@ -49,7 +52,6 @@
                     <input type="text" id="landmark" name="landmark" required class="mt-1 p-2 w-full border rounded-md">
                 </div>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label for="state" class="block text-gray-700">State:</label>
@@ -60,7 +62,6 @@
                     <input type="text" id="city" name="city" required class="mt-1 p-2 w-full border rounded-md">
                 </div>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label for="pincode" class="block text-gray-700">Pincode:</label>
@@ -75,11 +76,11 @@
                     </select>
                 </div>
             </div>
-
-            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 max-w-md mt-4">Update</button>
+            <button type="submit"
+                class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 max-w-md mt-4">Update</button>
         </form>
-
         <div id="message" class="mt-4"></div>
     </main>
 </body>
+
 </html>

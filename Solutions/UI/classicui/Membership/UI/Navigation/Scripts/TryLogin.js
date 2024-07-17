@@ -70,27 +70,19 @@ $(document).ready(function () {
                                                if(data.token)
                                                {
                                                 if (userRole === "Director") {
-<<<<<<< HEAD
-                                                    window.location.href = 'Director.html';
+                                                    window.location.href = '../Navigation/Dashboard/Director.html';
                                                     
                                                 }
                                                 else if (userRole === "HR Manager") {
-                                                    window.location.href = 'Manager.html';
-=======
-                                                    window.location.href = '../navigation/dashboard/Director.html';
-                                                    
-                                                }
-                                                else if (userRole === "HR Manager") {
-                                                    window.location.href = '../navigation/dashboard/HRManager.html';
->>>>>>> 36f0ed810f9c9f964c5832b625d31d1acfe64176
+                                                    window.location.href = '../Navigation/Dashboard/HRManager.html';
                                                     
                                                 }
                                                 else if (userRole === "collection manager") {
-                                                    window.location.href = 'Manager.html';
+                                                    window.location.href = '../Navigation/Dashboard/HRManager.html';
                                                     
                                                 }
                                                 else {
-                                                    window.location.href = 'User.html';
+                                                    window.location.href = '../Navigation/Dashboard/User.html';
                                                     
                                                 }
 

@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    
-    var userId = parseInt(sessionStorage.getItem("userid")); 
+
+    var userId = parseInt(sessionStorage.getItem("userid"));
     $.ajax({
         url: `http://localhost:5000/api/addresses/users/${userId}`,
         method: 'GET',
@@ -18,13 +18,9 @@ $(document).ready(function () {
             console.error('There was a problem with the fetch operation.');
         }
     });
-
-
-
-
     $('#updateAddressForm').submit(function (event) {
         event.preventDefault();
-        var existingId =  $('#existingId').val();
+        var existingId = $('#existingId').val();
         var addressData = {
             id: $('#existingId').val(),
             userid: $('#userId').val(),
@@ -37,9 +33,8 @@ $(document).ready(function () {
         };
         console.log(existingId);
         console.log(addressData);
-
         $.ajax({
-            url: 'http://localhost:5000/api/addresses/'+existingId,
+            url: 'http://localhost:5000/api/addresses/' + existingId,
             method: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify(addressData),
