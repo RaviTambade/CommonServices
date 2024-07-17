@@ -184,6 +184,35 @@ public class AddressRepository : IAddressRepository
         return status;
     }
 
+     public async Task<bool> UpdateArea(AreaRequest theAreaRequest)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_connectionString);
+        try
+        {
+            string query ="UPDATE addresses SET area=@area WHERE id=@userId ";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@userId", theAreaRequest.userId);
+            command.Parameters.AddWithValue("@area", theAreaRequest.area);
+            
+            await con.OpenAsync();
+            int rowsAffected = await command.ExecuteNonQueryAsync();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
+
     public async Task<bool> Delete(int existingId)
     {
         bool status = false;

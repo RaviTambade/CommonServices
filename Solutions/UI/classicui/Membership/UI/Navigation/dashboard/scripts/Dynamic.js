@@ -31,7 +31,7 @@ $(document).ready(function () {
     const currentPage = window.location.pathname.split('/').pop();
     if (currentPage === 'Login.html') {
       updateNavbar(navItemsForLogin);
-    } else if (currentPage === 'DynamicDashboard.html') {
+    } else if (currentPage === 'Dynamic.html') {
       updateNavbar(navItemsForDashboard);
     }
   
