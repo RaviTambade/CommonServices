@@ -23,9 +23,9 @@ public class RoleService : IRoleService
         return await _repository.GetRoles(roleIds);
     }
 
-    public async Task<List<Role>> GetRoles(int userId, string lob)
+    public async Task<List<Role>> GetRolesOfUserByLOB(int userId, string lob)
     {
-        return await _repository.GetRoles(userId, lob);
+        return await _repository.GetRolesOfUserByLOB(userId, lob);
     }
 
     public async Task<List<Role>> GetRoles(int userId)
@@ -38,20 +38,20 @@ public class RoleService : IRoleService
         return await _repository.GetRolesByLob(lob);
     }
 
-    public async Task<List<UserRoleDetails>> GetUserAndRolesByLob(string lob)
+    public async Task<List<UserRoleDetails>> GetUserRoleDetailsByLOB(string lob)
     {
-        return await _repository.GetUserAndRolesByLob(lob);
+        return await _repository.GetUserRoleDetailsByLOB(lob);
     }
 
-    public async Task<List<User>> UserDetailsByLob(LOB lob)
+    public async Task<List<User>> GetAllUsersByLOB(LOB lob)
     {
-        return await _repository.UserDetailsByLob(lob);
+        return await _repository.GetAllUsersByLOB(lob);
     }
 
-    public async Task<List<User>> UserDetailsByRole(LOB lob)
-     {
-        return await _repository.UserDetailsByRole(lob);
-     }
+    // public async Task<List<User>> UserDetailsByRole(LOB lob)
+    //  {
+    //     return await _repository.UserDetailsByRole(lob);
+    //  }
 
     public async Task<bool> Insert(Role role)
     {
@@ -88,9 +88,9 @@ public class RoleService : IRoleService
         return await _repository.DeleteUserRole(userRoleId);
     }
 
-    public async Task<bool> CheckUserRole(int userId, int roleId)
+    public async Task<bool> IsUserHasRole(int userId, int roleId)
     {
-        return await _repository.CheckUserRole(userId, roleId);
+        return await _repository.IsUserHasRole(userId, roleId);
     }
 
     public async Task<List<string>> GetLOBs()

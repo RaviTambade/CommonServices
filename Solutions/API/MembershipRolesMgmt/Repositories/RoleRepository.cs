@@ -63,7 +63,7 @@ public class RoleRepository : IRoleRepository
         }
     }
 
-    public async Task<List<Role>> GetRoles(int userId, string lob)
+    public async Task<List<Role>> GetRolesOfUserByLOB(int userId, string lob)
     {
         try
         {
@@ -117,7 +117,7 @@ public class RoleRepository : IRoleRepository
         }
     }
 
-     public async Task<List<UserRoleDetails>> GetUserAndRolesByLob(string lob)
+     public async Task<List<UserRoleDetails>> GetUserRoleDetailsByLOB(string lob)
     {
     
         try
@@ -142,7 +142,7 @@ public class RoleRepository : IRoleRepository
         }
     }
 
-    public async Task<List<User>> UserDetailsByLob(LOB lob)
+    public async Task<List<User>> GetAllUsersByLOB(LOB lob)
     {
         try
         {
@@ -159,22 +159,7 @@ public class RoleRepository : IRoleRepository
         }
     }
 
-    public async Task<List<User>> UserDetailsByRole(LOB lob)
-    {
-        try
-        {
-             var details = await (from user in _context.Users
-                        join userrole in _context.UserRoles on user.Id equals userrole.UserId
-                        join role in _context.Roles on userrole.RoleId equals role.Id
-                        where role.Name == lob.RoleName && role.Lob == lob.Lob
-                        select user).ToListAsync();
-            return details;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-    }
+    
     public async Task<bool> Insert(Role role)
     {
         bool status = false;
@@ -301,7 +286,7 @@ public class RoleRepository : IRoleRepository
         return rowsAffected > 0;
     }
 
-    public async Task<bool> CheckUserRole(int userId, int roleId)
+    public async Task<bool> IsUserHasRole(int userId, int roleId)
     {
         try
         {

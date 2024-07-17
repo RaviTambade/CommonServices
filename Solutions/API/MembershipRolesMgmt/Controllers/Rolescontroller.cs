@@ -36,7 +36,7 @@ public class RolesController : ControllerBase
     [HttpGet("users/{userId}/lob/{lob}")]
     public async Task<List<Role>> GetRoles(int userId, string lob)
     {
-        return await _service.GetRoles(userId, lob);
+        return await _service.GetRolesOfUserByLOB(userId, lob);
     }
 
     [HttpGet("ids/{roleIds}")]
@@ -54,21 +54,21 @@ public class RolesController : ControllerBase
      [HttpGet("getUserAndRoles/lob/{lob}")]
     public async Task<List<UserRoleDetails>> GetUserAndRolesByLob(string lob)
     {
-        return await _service.GetUserAndRolesByLob(lob);
+        return await _service.GetUserRoleDetailsByLOB(lob);
     }
 
-    [HttpGet("getuserbylob/lob/{lob}")]
-    public async Task<List<User>> UserDetailsByLob(string lob)
-    {
-        var lobObj = new LOB { Lob = lob };
-        return await _service.UserDetailsByLob(lobObj);
-    }
+    // [HttpGet("getuserbylob/lob/{lob}")]
+    // public async Task<List<User>> UserDetailsByLob(string lob)
+    // {
+    //     var lobObj = new LOB { Lob = lob };
+    //     return await _service.UserDetailsByLob(lobObj);
+    // }
 
     [HttpGet("getuserbyroles/rolename/{roleName}/lob/{lob}")]
      public async Task<List<User>> UserDetailsByRole(string roleName, string lob)
      {
         var lobObj = new LOB { RoleName = roleName, Lob = lob };
-        return await _service.UserDetailsByRole(lobObj);
+        return await _service.GetAllUsersByLOB(lobObj);
      }
 
     [HttpPost("addrole")]
@@ -110,7 +110,7 @@ public class RolesController : ControllerBase
     [HttpGet("userid/{userId}/roleId/{roleId}")]
     public async Task<bool> CheckUserRole(int userId, int roleId)
     {
-        return await _service.CheckUserRole(userId, roleId);
+        return await _service.IsUserHasRole(userId, roleId);
     }
 
      [HttpDelete]
