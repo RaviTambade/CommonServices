@@ -413,7 +413,6 @@ public class UserRepository : IUserRepository
         return users;
     }
 
-
     public async Task<UserDetails> GetUserDetailsByUserId(int userId)
     {
         UserDetails user = new UserDetails();
@@ -623,5 +622,4 @@ public class UserRepository : IUserRepository
         return status;
     }
 
-   
 }

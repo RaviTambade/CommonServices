@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Label Example</title>
+</head>
+<body>
+    <div id="labelContainer">
+        <span id="labelText">Address</span>
+        <lable id="lableAddress">Pune</lable>
+        <input id ="txtAddress" type="text"  hidden="true" />
+        <button onclick="changeLabel()">Edit</button>
+    </div>
+
+    <script>
+        function changeLabel() {
+            var lbl = document.getElementById('lableAddress');
+            lbl.hidden=true;
+
+            var txt = document.getElementById('txtAddress');
+            txt.hidden=false;
+            txt.value= "Pune";
+            console.log("ChangeLable is clicked");
+
+        }
+    </script>
+</body>
+</html>

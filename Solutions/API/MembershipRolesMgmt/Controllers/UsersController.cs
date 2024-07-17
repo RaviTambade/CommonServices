@@ -100,6 +100,4 @@ public class UsersController : ControllerBase
     {
         return await _svc.Delete(userId);
     }
-
-    
 }
