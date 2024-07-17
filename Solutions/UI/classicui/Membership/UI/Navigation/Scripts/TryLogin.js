@@ -70,11 +70,11 @@ $(document).ready(function () {
                                                if(data.token)
                                                {
                                                 if (userRole === "Director") {
-                                                    window.location.href = 'DirectorDashboard.html';
+                                                    window.location.href = '../navigation/dashboard/Director.html';
                                                     
                                                 }
                                                 else if (userRole === "HR Manager") {
-                                                    window.location.href = 'ManagerDashboard.html';
+                                                    window.location.href = '../navigation/dashboard/HRManager.html';
                                                     
                                                 }
                                                 else if (userRole === "collection manager") {
