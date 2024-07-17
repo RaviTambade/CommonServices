@@ -35,6 +35,11 @@ public class AddressService : IAddressService
         return await _repository.Update(existingId, theAddress);
     }
 
+     public async Task<bool> UpdateArea(AreaRequest theAreaRequest)
+    {
+        return await _repository.UpdateArea(theAreaRequest);
+    }
+
     public async Task<bool> Delete(int existingId)
     {
         return await _repository.Delete(existingId);
