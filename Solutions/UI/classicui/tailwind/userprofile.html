@@ -6,39 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile Page</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="Scripts/UserProfileDetails.js" defer></script>
 </head>
 
-<body class="bg-gray-100 text-gray-800">
-
-    <!-- Navbar -->
-    <nav class="bg-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 py-2">
-            <div class="flex justify-between items-center">
-                <a href="#" class="text-lg font-semibold">User Profile</a>
-                <div>
-                    <a href="#" class="text-gray-600 hover:text-gray-900 mr-4">Home</a>
-                    <a href="#" class="text-gray-600 hover:text-gray-900">Logout</a>
-                </div>
+<body class="bg-gray-100">
+    <nav class="bg-blue-500 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <img src="../../../../../API/MembershipRolesMgmt/wwwroot/images/tfl.jpg" class="h-10 w-10">
+                <div class="text-white text-2xl font-bold">Membership Management</div>
+            </div>
+            <div class="space-x-4">
+                <a href="../Navigation/Login.html" class="text-white hover:text-gray-300">Login</a>
+                <a href="../Users/Register.html" class="text-white hover:text-gray-300">Register</a>
+                <a href="../Navigation/AboutUs.html" class="text-white hover:text-gray-300">About</a>
+                <a href="../Navigation/Contact.html" class="text-white hover:text-gray-300">Contact</a>
+                <a href="../Navigation/Help.html" class="text-white hover:text-gray-300">Help</a>
             </div>
         </div>
     </nav>
 
     <!-- Profile Header -->
-    <header class="bg-blue-500 text-white py-12">
+    
         <div class="max-w-7xl mx-auto px-4 flex items-center">
             <div class="flex-shrink-0">
-                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="h-24 w-24 rounded-full">
+                <img id="pimgurl" src="https://via.placeholder.com/150" alt="Profile Picture" class="h-24 w-24 rounded-full">
             </div>
             <div class="ml-8">
-                <h1 class="text-3xl font-semibold">John Doe</h1>
-                <p class="text-lg">Web Developer</p>
-                <p class="mt-2">New York, USA</p>
+                <h1 id="fullname" class="text-3xl font-semibold"></h1>
+                <p id="prole" class="text-lg"></p>
+                <p id="plocation" class="mt-2"></p>
             </div>
         </div>
-    </header>
+   
 
     <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="max-w-7xl mx-auto px-4 py-8 flex-grow">
 
         <!-- User Information -->
         <section class="mb-8">
@@ -47,64 +51,56 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <p class="text-gray-600 mb-2">Email:</p>
-                        <p class="font-semibold">johndoe@example.com</p>
+                        <p id="pemail" class="font-semibold"></p>
                     </div>
                     <div>
                         <p class="text-gray-600 mb-2">Phone:</p>
-                        <p class="font-semibold">+1 234 567 890</p>
+                        <p id="pcontact" class="font-semibold"></p>
                     </div>
                     <div>
-                        <p class="text-gray-600 mb-2">Joined:</p>
-                        <p class="font-semibold">January 2023</p>
+                        <p class="text-gray-600 mb-2">Gender:</p>
+                        <p id="pgender" class="font-semibold"></p>
                     </div>
                     <div>
-                        <p class="text-gray-600 mb-2">Website:</p>
-                        <a href="#" class="font-semibold text-blue-500 hover:underline">example.com</a>
+                        <p class="text-gray-600 mb-2">Aadhar Number:</p>
+                        <p id="paadharid" class="font-semibold"></p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 mb-2">Birth Date:</p>
+                        <p id="pdob" class="font-semibold"></p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Recent Activity -->
+        <!-- Address Information -->
         <section class="mb-8">
-            <h2 class="text-2xl font-semibold mb-4">Recent Activity</h2>
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <ul>
-                    <li class="mb-4">
-                        <p class="text-gray-600">Posted a new article:</p>
-                        <a href="#" class="text-blue-500 hover:underline">Lorem Ipsum</a>
-                    </li>
-                    <li class="mb-4">
-                        <p class="text-gray-600">Commented on:</p>
-                        <a href="#" class="text-blue-500 hover:underline">Another Article</a>
-                    </li>
-                    <li>
-                        <p class="text-gray-600">Updated profile information</p>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Social Links -->
-        <section>
-            <h2 class="text-2xl font-semibold mb-4">Social Links</h2>
+            <h2 class="text-2xl font-semibold mb-4">Address Information</h2>
             <div class="bg-white shadow-md rounded-lg p-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <p class="text-gray-600 mb-2">LinkedIn:</p>
-                        <a href="#" class="font-semibold text-blue-500 hover:underline">linkedin.com/johndoe</a>
+                        <p class="text-gray-600 mb-2">Area:</p>
+                        <p id="parea" class="font-semibold"></p>
                     </div>
                     <div>
-                        <p class="text-gray-600 mb-2">Twitter:</p>
-                        <a href="#" class="font-semibold text-blue-500 hover:underline">@johndoe</a>
+                        <p class="text-gray-600 mb-2">Landmark:</p>
+                        <p id="plandmark" class="font-semibold"></p>
                     </div>
                     <div>
-                        <p class="text-gray-600 mb-2">GitHub:</p>
-                        <a href="#" class="font-semibold text-blue-500 hover:underline">github.com/johndoe</a>
+                        <p class="text-gray-600 mb-2">City:</p>
+                        <p id="pcity" class="font-semibold"></p>
                     </div>
                     <div>
-                        <p class="text-gray-600 mb-2">Portfolio:</p>
-                        <a href="#" class="font-semibold text-blue-500 hover:underline">johndoe.portfolio.com</a>
+                        <p class="text-gray-600 mb-2">State:</p>
+                        <p id="pstate" class="font-semibold"></p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 mb-2">Pincode:</p>
+                        <p id="ppincode" class="font-semibold"></p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 mb-2">Address Type:</p>
+                        <p id="ptype" class="font-semibold"></p>
                     </div>
                 </div>
             </div>
@@ -112,12 +108,7 @@
 
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p>&copy; 2024 John Doe. All rights reserved.</p>
-        </div>
-    </footer>
+   
 
 </body>
 
