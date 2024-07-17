@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualization Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Placeholder for any additional CSS or JavaScript libraries for charts -->
+    <style>
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-xl font-semibold text-gray-800">Data Visualization Dashboard</a>
+            <!-- Navigation Links -->
+            <nav>
+                <a href="#" class="text-gray-600 hover:text-gray-800 px-3 py-2">Home</a>
+                <a href="#" class="text-gray-600 hover:text-gray-800 px-3 py-2">Analytics</a>
+                <a href="#" class="text-gray-600 hover:text-gray-800 px-3 py-2">Reports</a>
+                <a href="#" class="text-gray-600 hover:text-gray-800 px-3 py-2">Settings</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Chart 1: Line Chart -->
+            <section class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Sales Overview</h2>
+                <div class="chart-container">
+                    <canvas id="chart1"></canvas>
+                </div>
+            </section>
+
+            <!-- Chart 2: Bar Chart -->
+            <section class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Product Sales Comparison</h2>
+                <div class="chart-container">
+                    <canvas id="chart2"></canvas>
+                </div>
+            </section>
+
+            <!-- Chart 3: Doughnut Chart -->
+            <section class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Sales Distribution</h2>
+                <div class="chart-container">
+                    <canvas id="chart3"></canvas>
+                </div>
+            </section>
+
+            <!-- Chart 4: Area Chart -->
+            <section class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Website Traffic</h2>
+                <div class="chart-container">
+                    <canvas id="chart4"></canvas>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <p>&copy; 2024 Data Visualization Dashboard. All rights reserved.</p>
+            <nav>
+                <a href="#" class="text-gray-300 hover:text-gray-200 px-3 py-2">Privacy Policy</a>
+                <a href="#" class="text-gray-300 hover:text-gray-200 px-3 py-2">Terms of Service</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- Placeholder for any additional scripts (e.g., Chart.js, ApexCharts) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Example data for charts
+        const chart1Data = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Sales',
+                data: [100, 150, 200, 250, 300, 350],
+                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderWidth: 1
+            }]
+        };
+
+        const chart2Data = {
+            labels: ['Product A', 'Product B', 'Product C', 'Product D'],
+            datasets: [{
+                label: 'Sales ($)',
+                data: [12000, 9000, 15000, 8000],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const chart3Data = {
+            labels: ['Product A', 'Product B', 'Product C', 'Product D'],
+            datasets: [{
+                label: 'Sales Distribution',
+                data: [30, 20, 25, 25],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const chart4Data = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Page Views',
+                data: [2000, 2500, 3000, 2800, 3500, 3200],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 1
+            }]
+        };
+
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx1 = document.getElementById('chart1').getContext('2d');
+            new Chart(ctx1, {
+                type: 'line',
+                data: chart1Data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Sales ($)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            const ctx2 = document.getElementById('chart2').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: chart2Data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Products'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Sales ($)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            const ctx3 = document.getElementById('chart3').getContext('2d');
+            new Chart(ctx3, {
+                type: 'doughnut',
+                data: chart3Data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                }
+            });
+
+            const ctx4 = document.getElementById('chart4').getContext('2d');
+            new Chart(ctx4, {
+                type: 'line',
+                data: chart4Data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Page Views'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

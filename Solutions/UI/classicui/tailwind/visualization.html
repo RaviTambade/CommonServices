@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualization Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Placeholder for any additional CSS or JavaScript libraries for charts -->
+</head>
+
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-xl font-semibold text-gray-800">Data Visualization Dashboard</a>
+            <!-- Navigation Links -->
+            <nav>
+                <a href="#" class="text-gray-600 hover:text-gray-800 px-3 py-2">Home</a>
+                <a href="#" class="text-gray-600 hover:text-gray-800 px-3 py-2">Analytics</a>
+                <a href="#" class="text-gray-600 hover:text-gray-800 px-3 py-2">Reports</a>
+                <a href="#" class="text-gray-600 hover:text-gray-800 px-3 py-2">Settings</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Chart Section -->
+            <section class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Sales Overview</h2>
+                <!-- Placeholder for a chart (e.g., Chart.js, ApexCharts, etc.) -->
+                <div id="chart1" class="h-64"></div>
+            </section>
+
+            <!-- Data Table Section -->
+            <section class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Top Products</h2>
+                <!-- Example of a responsive data table -->
+                <div class="overflow-x-auto">
+                    <table class="table-auto w-full border-collapse border border-gray-200">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="px-4 py-2 text-left text-sm font-semibold text-gray-800 border-b">Product
+                                    Name</th>
+                                <th class="px-4 py-2 text-left text-sm font-semibold text-gray-800 border-b">Units
+                                    Sold</th>
+                                <th class="px-4 py-2 text-left text-sm font-semibold text-gray-800 border-b">Revenue
+                                    ($)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="px-4 py-2 text-sm text-gray-700 border">Product A</td>
+                                <td class="px-4 py-2 text-sm text-gray-700 border">1,200</td>
+                                <td class="px-4 py-2 text-sm text-gray-700 border">$12,000</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm text-gray-700 border">Product B</td>
+                                <td class="px-4 py-2 text-sm text-gray-700 border">900</td>
+                                <td class="px-4 py-2 text-sm text-gray-700 border">$9,000</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm text-gray-700 border">Product C</td>
+                                <td class="px-4 py-2 text-sm text-gray-700 border">1,500</td>
+                                <td class="px-4 py-2 text-sm text-gray-700 border">$15,000</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2 text-sm text-gray-700 border">Product D</td>
+                                <td class="px-4 py-2 text-sm text-gray-700 border">800</td>
+                                <td class="px-4 py-2 text-sm text-gray-700 border">$8,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <p>&copy; 2024 Data Visualization Dashboard. All rights reserved.</p>
+            <nav>
+                <a href="#" class="text-gray-300 hover:text-gray-200 px-3 py-2">Privacy Policy</a>
+                <a href="#" class="text-gray-300 hover:text-gray-200 px-3 py-2">Terms of Service</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- Placeholder for any additional scripts (e.g., Chart.js, ApexCharts) -->
+    <script>
+        // Example of initializing a chart (e.g., using Chart.js)
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('chart1').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Sales',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        data: [100, 150, 200, 250, 300, 350],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Sales ($)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

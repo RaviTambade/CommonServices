@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roles Assignment</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+    <!-- Sidebar -->
+    <div class="flex h-screen bg-gray-200">
+        <div class="bg-gray-800 w-64 space-y-6 py-7 px-2 hidden md:block">
+            <!-- Logo and Title -->
+            <a href="#" class="flex items-center space-x-2 px-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path
+                        d="M10 2a8 8 0 100 16 8 8 0 000-16zm1.145 5.863l-2.402 5.205a.503.503 0 01-.455.292h-.188a.5.5 0 01-.457-.293L6.863 9.864a.506.506 0 01.207-.696l.003-.002a.501.501 0 01.314-.105h.161a.5.5 0 01.465.308l1.342 3.354 2.4-5.204a.498.498 0 01.094-.138c.051-.066.116-.12.19-.156a.51.51 0 01.18-.035h.192a.498.498 0 01.381.211l1.822 2.68 1.424-3.45a.504.504 0 01.462-.306h.17a.5.5 0 01.472.326l1.772 4.948 1.223-4.243a.502.502 0 01.233-.293.509.509 0 01.4-.002c.076.037.141.092.195.158a.5.5 0 01.086.501l-2.128 5.254 1.334 2.259a.507.507 0 01.008.501.5.5 0 01-.433.292l-3.023.091-1.463 3.176a.508.508 0 01-.448.285h-.196a.503.503 0 01-.457-.293L10.51 8.628a.5.5 0 01-.365-.465z" />
+                </svg>
+                <span class="text-xl font-semibold text-white">Admin Dashboard</span>
+            </a>
+            <!-- Navigation Links -->
+            <nav class="mt-6">
+                <a href="#"
+                    class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">Dashboard</a>
+                <a href="#"
+                    class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">Users</a>
+                <a href="#"
+                    class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">Products</a>
+                <a href="#"
+                    class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">Orders</a>
+                <a href="#"
+                    class="block py-2.5 px-4 bg-gray-900 text-white rounded transition duration-200">Roles
+                    Assignment</a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="w-full p-4 md:space-y-4">
+            <!-- Header -->
+            <header class="bg-white shadow-md py-4 px-6 md:flex md:items-center md:justify-between">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-2xl font-semibold text-gray-800">Roles Assignment</h1>
+                    <div class="flex space-x-4">
+                        <button
+                            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-200">Create
+                            Role</button>
+                        <div class="relative">
+                            <button
+                                class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                                <img class="h-8 w-8 rounded-full"
+                                    src="https://randomuser.me/api/portraits/women/32.jpg" alt="User Avatar">
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div
+                                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 hidden">
+                                <div class="py-1">
+                                    <a href="#"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">View
+                                        Profile</a>
+                                    <a href="#"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Settings</a>
+                                </div>
+                                <div class="py-1">
+                                    <a href="#"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="bg-white shadow-md rounded-lg p-6">
+                <!-- Roles List -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-semibold text-gray-800">Manage Roles</h2>
+                    </div>
+                    <!-- Example Table for Roles -->
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border-gray-200 shadow-md rounded-lg overflow-hidden">
+                            <thead class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
+                                <tr>
+                                    <th class="py-3 px-6 text-left">Role Name</th>
+                                    <th class="py-3 px-6 text-left">Permissions</th>
+                                    <th class="py-3 px-6 text-center">Users Assigned</th>
+                                    <th class="py-3 px-6 text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm divide-y divide-gray-200">
+                                <!-- Example Row -->
+                                <tr>
+                                    <td class="py-4 px-6">Administrator</td>
+                                    <td class="py-4 px-6">Manage Users, Products, Orders</td>
+                                    <td class="py-4 px-6 text-center">10</td>
+                                    <td class="py-4 px-6 text-center">
+                                        <button
+                                            class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md transition duration-200">Edit</button>
+                                        <button
+                                            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md transition duration-200 ml-2">Delete</button>
+                                    </td>
+                                </tr>
+                                <!-- Another Example Row -->
+                                <tr>
+                                    <td class="py-4 px-6">Moderator</td>
+                                    <td class="py-4 px-6">Moderate Comments, Manage Content</td>
+                                    <td class="py-4 px-6 text-center">5</td>
+                                    <td class="py-4 px-6 text-center">
+                                        <button
+                                            class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md transition duration-200">Edit</button>
+                                        <button
+                                            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md transition duration-200 ml-2">Delete</button>
+                                    </td>
+                                </tr>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

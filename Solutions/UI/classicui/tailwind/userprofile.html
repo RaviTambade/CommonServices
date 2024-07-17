@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-2">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-lg font-semibold">User Profile</a>
+                <div>
+                    <a href="#" class="text-gray-600 hover:text-gray-900 mr-4">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Header -->
+    <header class="bg-blue-500 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 flex items-center">
+            <div class="flex-shrink-0">
+                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="h-24 w-24 rounded-full">
+            </div>
+            <div class="ml-8">
+                <h1 class="text-3xl font-semibold">John Doe</h1>
+                <p class="text-lg">Web Developer</p>
+                <p class="mt-2">New York, USA</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 py-8">
+
+        <!-- User Information -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">User Information</h2>
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-gray-600 mb-2">Email:</p>
+                        <p class="font-semibold">johndoe@example.com</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 mb-2">Phone:</p>
+                        <p class="font-semibold">+1 234 567 890</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 mb-2">Joined:</p>
+                        <p class="font-semibold">January 2023</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 mb-2">Website:</p>
+                        <a href="#" class="font-semibold text-blue-500 hover:underline">example.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Activity -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Recent Activity</h2>
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <ul>
+                    <li class="mb-4">
+                        <p class="text-gray-600">Posted a new article:</p>
+                        <a href="#" class="text-blue-500 hover:underline">Lorem Ipsum</a>
+                    </li>
+                    <li class="mb-4">
+                        <p class="text-gray-600">Commented on:</p>
+                        <a href="#" class="text-blue-500 hover:underline">Another Article</a>
+                    </li>
+                    <li>
+                        <p class="text-gray-600">Updated profile information</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Social Links -->
+        <section>
+            <h2 class="text-2xl font-semibold mb-4">Social Links</h2>
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-gray-600 mb-2">LinkedIn:</p>
+                        <a href="#" class="font-semibold text-blue-500 hover:underline">linkedin.com/johndoe</a>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 mb-2">Twitter:</p>
+                        <a href="#" class="font-semibold text-blue-500 hover:underline">@johndoe</a>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 mb-2">GitHub:</p>
+                        <a href="#" class="font-semibold text-blue-500 hover:underline">github.com/johndoe</a>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 mb-2">Portfolio:</p>
+                        <a href="#" class="font-semibold text-blue-500 hover:underline">johndoe.portfolio.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p>&copy; 2024 John Doe. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
