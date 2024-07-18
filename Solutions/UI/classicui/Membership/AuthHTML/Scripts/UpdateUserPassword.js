@@ -6,18 +6,15 @@ $(document).ready(function () {
     url: "http://localhost:5000/api/users/userdetails/" + userId,
     type: 'GET',
     contentType: 'application/json',
-
     success: function (data) {
-       console.log(data);
-       $("#fname").text(data.firstName);
-       $("#lname").text(data.lastName);
-        
+      console.log(data);
+      $("#fname").text(data.firstName);
+      $("#lname").text(data.lastName);
     },
     error: function (xhr, status, error) {
-        console.error(xhr.responseText);
+      console.error(xhr.responseText);
     }
-});
-
+  });
 
   $("#btnsubmit").click(function () {
     var oldPassword = $("#oldPass").val();
@@ -43,10 +40,12 @@ $(document).ready(function () {
       data: JSON.stringify(update),
       contentType: 'application/json',
       success: function (data) {
-        if (data === true)
+        if (data === true) {
           alert("Password Changed Successfully");
-        else
+          window.location.href = "login.html"; // Redirect to login page
+        } else {
           alert("Failed To Change Password");
+        }
       },
       error: function (xhr, status, error) {
         console.error("Failed to change password:", xhr.responseText);

@@ -41,6 +41,12 @@ public class AddressesController : ControllerBase
         return await _service.Update(existingId, theAddress);
     }
 
+    [HttpPut("update/area")]
+    public async Task<bool> UpdateArea(AreaRequest theAreaRequest)
+    {
+        return await _service.UpdateArea(theAreaRequest);
+    }
+
     [HttpDelete("{existingId}")]
     public async Task<bool> Delete(int existingId)
     {

@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Membership Management</title>
+    <title>Director Dashboard</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    
-    <script src="../dashboard/scripts/Director.js"></script>
+    <script src="../../Navigation/dashboard/scripts/Director.js"></script>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -16,61 +15,44 @@
     <nav class="bg-blue-500 p-4 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
+                <img src="../../../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
                 <div class="text-white text-2xl font-bold">Membership Management</div>
             </div>
-            <div class="relative">
-                <button
-                    class="text-white hover:text-gray-300 focus:outline-none focus:text-gray-300 transition duration-150 ease-in-out">
-                    Options
-                </button>
-                <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 hidden">
-                    <!-- <a href="../Navigation/LandingPage.html"class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Home</a> -->
-                    <a href="../Navigation/TryUserProfile.html"
-                        class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Profile</a>
-                    <a href="../Navigation/UserRoleById.html"
-                        class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Roles</a>
-                    <a href="../Navigation/UserRoleById.html"
-                        class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Manage Roles</a>
-
-                    <a href="../Navigation/Help.html"
-                        class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Help</a>
-                    <a href="../Navigation/Login.html"
-                        class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Log Out</a>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <button
+                        class="text-white hover:text-gray-300 focus:outline-none focus:text-gray-300 transition duration-150 ease-in-out">
+                        Options
+                    </button>
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 hidden">
+                        <a href="../../Users/UserProfileDetails.html"
+                            class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Profile</a>
+                        <a href="../../Navigation/UserRoleById.html"
+                            class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Roles</a>
+                        <a href="../../Navigation/UserRoleById.html"
+                            class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Manage Roles</a>
+                        <a href="../../Navigation/Help.html"
+                            class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Help</a>
+                    </div>
+                </div>
+                <div class="text-white flex items-center space-x-2">
+                    <span id="user-name" class="font-semibold"></span>
+                    <a href="../../Navigation/Login.html"
+                        class="text-white hover:text-gray-300 focus:outline-none focus:text-gray-300 transition duration-150 ease-in-out">
+                        Log Out
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
-
 
     <section class="bg-gray-100 py-20 flex-1">
         <div class="container max-w-md text-center">
             <h1>Director Dashboard</h1>
             <h3 class="text-3xl font-bold text-blue-500 mb-4">Welcome <span id="fname"
                     class="ml-2 font-semibold"></span> <span id="lname" class="ml-2 font-semibold"></span></h3>
-
-
             <span id="uid" class="ml-2 font-semibold"></span><br /><br />
-
         </div>
     </section>
-
-
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const dropdownButton = document.querySelector('.relative button');
-            const dropdownMenu = document.querySelector('.relative .absolute');
-
-
-            dropdownButton.addEventListener('click', function () {
-                dropdownMenu.classList.toggle('hidden');
-            });
-
-
-        });
-    </script>
 </body>
-
 </html>

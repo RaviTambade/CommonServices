@@ -70,19 +70,19 @@ $(document).ready(function () {
                                                if(data.token)
                                                {
                                                 if (userRole === "Director") {
-                                                    window.location.href = '../navigation/dashboard/Director.html';
+                                                    window.location.href = '../Navigation/Dashboard/Director.html';
                                                     
                                                 }
                                                 else if (userRole === "HR Manager") {
-                                                    window.location.href = '../navigation/dashboard/HRManager.html';
+                                                    window.location.href = '../Navigation/Dashboard/HRManager.html';
                                                     
                                                 }
                                                 else if (userRole === "collection manager") {
-                                                    window.location.href = 'ManagerDashboard.html';
+                                                    window.location.href = '../Navigation/Dashboard/HRManager.html';
                                                     
                                                 }
                                                 else {
-                                                    window.location.href = 'TryUserProfile.html';
+                                                    window.location.href = '../Navigation/Dashboard/User.html';
                                                     
                                                 }
 
@@ -105,10 +105,7 @@ $(document).ready(function () {
                                     console.error("Error getting user role:", xhr.responseText);
                                 }
                                });
-                           
-                               
                               });
-
                     },
                     error: function (xhr, status, error) {
                         console.error("Error fetching roles:", xhr.responseText);

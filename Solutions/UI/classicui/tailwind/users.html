@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile and Users List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-2">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-lg font-semibold">User Dashboard</a>
+                <div>
+                    <a href="#" class="text-gray-600 hover:text-gray-900 mr-4">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-gray-900">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 py-8 flex">
+
+        <!-- Sidebar -->
+        <aside class="w-1/3 pr-8">
+            <h2 class="text-2xl font-semibold mb-4">Users List</h2>
+            <!-- User List -->
+            <div class="overflow-y-auto max-h-screen">
+                <!-- User Item 1 -->
+                <div class="flex items-center py-4 cursor-pointer hover:bg-gray-200">
+                    <img src="https://via.placeholder.com/50" alt="User 1" class="h-10 w-10 rounded-full">
+                    <div class="ml-4">
+                        <p class="text-lg font-semibold">User 1</p>
+                        <p class="text-gray-600">Web Developer</p>
+                    </div>
+                </div>
+                <!-- User Item 2 -->
+                <div class="flex items-center py-4 cursor-pointer hover:bg-gray-200">
+                    <img src="https://via.placeholder.com/50" alt="User 2" class="h-10 w-10 rounded-full">
+                    <div class="ml-4">
+                        <p class="text-lg font-semibold">User 2</p>
+                        <p class="text-gray-600">Designer</p>
+                    </div>
+                </div>
+                <!-- User Item 3 -->
+                <div class="flex items-center py-4 cursor-pointer hover:bg-gray-200">
+                    <img src="https://via.placeholder.com/50" alt="User 3" class="h-10 w-10 rounded-full">
+                    <div class="ml-4">
+                        <p class="text-lg font-semibold">User 3</p>
+                        <p class="text-gray-600">Project Manager</p>
+                    </div>
+                </div>
+                <!-- Add more users as needed -->
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="w-2/3">
+            <!-- User Profile -->
+            <section class="bg-white shadow-md rounded-lg p-6">
+                <div class="flex items-center mb-4">
+                    <img src="https://via.placeholder.com/150" alt="Profile Picture" class="h-20 w-20 rounded-full">
+                    <div class="ml-6">
+                        <h1 class="text-3xl font-semibold">User 1</h1>
+                        <p class="text-lg text-gray-600">Web Developer</p>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-xl font-semibold mb-2">Contact Information</h2>
+                    <p class="text-gray-600 mb-2">Email: user1@example.com</p>
+                    <p class="text-gray-600 mb-2">Phone: +1 234 567 890</p>
+                    <p class="text-gray-600 mb-2">Location: New York, USA</p>
+                </div>
+                <div class="mt-4">
+                    <h2 class="text-xl font-semibold mb-2">Skills</h2>
+                    <ul class="list-disc pl-4">
+                        <li>HTML/CSS</li>
+                        <li>JavaScript</li>
+                        <li>React.js</li>
+                    </ul>
+                </div>
+                <div class="mt-4">
+                    <h2 class="text-xl font-semibold mb-2">Bio</h2>
+                    <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam varius turpis et hendrerit rutrum.</p>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p>&copy; 2024 User Dashboard. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

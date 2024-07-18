@@ -13,10 +13,10 @@
 <body class="bg-gray-100">
     <nav class="bg-blue-500 p-4 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
-          <div class="flex items-center space-x-4">
-            <img src="../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
-            <div class="text-white text-2xl font-bold">Membership Management</div>
-          </div>
+            <div class="flex items-center space-x-4">
+                <img src="../../../../../MembershipPortal/wwwroot/images/tfl.jpg" class="h-10 w-10">
+                <div class="text-white text-2xl font-bold">Membership Management</div>
+            </div>
             <div class="space-x-4">
                 <a href="../Navigation/Login.html" class="text-white hover:text-gray-300">Login</a>
                 <a href="../Users/Register.html" class="text-white hover:text-gray-300">Register</a>
@@ -28,20 +28,15 @@
     </nav>
     <div class="container mx-auto mt-10 p-5 bg-white shadow-md rounded-md">
         <h2 class="text-2xl font-bold mb-5">Search User by Contact Number</h2>
-
         <div class="form-group mb-5">
             <label for="contact" class="block text-sm font-medium text-gray-700">Enter User Contact Number:</label>
             <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" maxlength="10" required
                 class="mt-1 block max-w-md px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
-
         <button id="getUserDetailsBtn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Get User
             Details</button>
-
         <div id="dataDisplay" class="mt-5"></div>
     </div>
-    
-    
 </body>
 
 </html>
