@@ -19,11 +19,4 @@ $(document).ready(function () {
             console.error(xhr.responseText);
         }
     });
-
-    const dropdownButton = $('.relative button');
-    const dropdownMenu = $('.relative .absolute');
-
-    dropdownButton.on('click', function () {
-        dropdownMenu.toggleClass('hidden');
-    });
 });
