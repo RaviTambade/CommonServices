@@ -1,7 +1,8 @@
 $(document).ready(function () {
     var userLOB = sessionStorage.getItem("lob");
-    var userId = sessionStorage.getItem("userId");
+    var userId = parseInt(sessionStorage.getItem("userid"));
     console.log("LOB of logged User: " + userLOB);
+    
 
     $("#btngetroles").on("click", function () {
         var rolesContainer = $("#roles");
@@ -49,7 +50,7 @@ $(document).ready(function () {
     // Fetch user details and update the user's name
     if (userId) {
         $.ajax({
-            url: `http://localhost:5000/api/users/userdetails/${userId}`,
+            url: "http://localhost:5000/api/users/userdetails/" + userId,
             type: 'GET',
             contentType: 'application/json',
             success: function (data) {

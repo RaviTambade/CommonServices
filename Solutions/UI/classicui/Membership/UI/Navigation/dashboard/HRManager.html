@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HR Manager Dashboard</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Include Tailwind CSS from CDN -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="../../Navigation/dashboard/scripts/HRManager.js"></script>
+    <style>
+        /* Additional CSS styles can be added here */
+    </style>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -27,39 +31,37 @@
             </div>
         </div>
     </nav>
-                   
-                </div>
-                <div class="text-white flex items-center space-x-2">
-                    <span id="user-name" class="font-semibold"></span>
-                    <a href="../../Navigation/LandingPage.html"
-                        class="text-white hover:text-gray-300 focus:outline-none focus:text-gray-300 transition duration-150 ease-in-out">
-                        Log Out
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
 
+    <!-- Main Content -->
+    <section class="bg-gray-100 py-20 flex-1">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold text-blue-500 mb-8">Manager Dashboard</h1>
+            <h3 class="text-2xl font-semibold mb-4">Welcome <span id="fname" class="font-semibold"></span> <span
+                    id="lname" class="font-semibold"></span></h3>
 
-
-     <!-- Main Content -->
-     <section class="bg-gray-100 py-20 flex-1">
-        <div class="container max-w-md text-center">
-            <h1>Manager Dashboard</h1>
-            <h3 class="text-3xl font-bold text-blue-500 mb-4">Welcome <span id="fname"
-                    class="ml-2 font-semibold"></span> <span id="lname" class="ml-2 font-semibold"></span></h3>
-            
             <!-- Options -->
-            <div class="bg-white shadow-lg rounded-lg p-4 space-y-4">
-                <a href="../../Users/UserProfileDetails.html"
-                    class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Profile</a>
-                <a href="../../Navigation/UserRoleById.html"
-                    class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Roles</a>
-                <a href="../../Navigation/UserRoleById.html"
-                    class="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white">Manage Roles</a>
+            <div class="flex justify-center space-x-4">
+                <!-- Profile -->
+                <div class="bg-white shadow-lg rounded-lg p-4">
+                    <a href="../../Users/UserProfileDetails.html"
+                        class="block px-4 py-2 text-gray-800 bg-blue-500 rounded-md hover:bg-blue-700 hover:text-white transition duration-150">Profile</a>
+                </div>
+                <!-- Roles -->
+                <div class="bg-white shadow-lg rounded-lg p-4">
+                    <a href="../../Navigation/UserRoleById.html"
+                        class="block px-4 py-2 text-gray-800 bg-blue-500 rounded-md hover:bg-blue-700 hover:text-white transition duration-150">Roles</a>
+                </div>
+                <!-- Manage Roles -->
+                <div class="bg-white shadow-lg rounded-lg p-4">
+                    <a href="../../Navigation/UserRoleById.html"
+                        class="block px-4 py-2 text-gray-800 bg-blue-500 rounded-md hover:bg-blue-700 hover:text-white transition duration-150">Manage Roles</a>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Footer or additional content can be added here -->
+
 </body>
 
 </html>
