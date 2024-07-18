@@ -9,7 +9,18 @@ using Transflower.MembershipRolesMgmt.Services;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddCors();
+//builder.Services.AddCors();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.AllowAnyOrigin() // Replace with your allowed URL
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 
 builder.Services.AddDbContext<RoleContext>(
     options =>
@@ -45,6 +56,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 app.UseStaticFiles();
 app.UseMiddleware<JwtMiddleware>();

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
@@ -6,6 +7,7 @@ namespace Transflower.MembershipRolesMgmt.Controllers;
 
 [ApiController]
 [Route("/api/addresses")]
+[EnableCors("AllowSpecificOrigin")]
 public class AddressesController : ControllerBase
 {
     private readonly IAddressService _service;

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Transflower.MembershipRolesMgmt.Helpers;
 using Transflower.MembershipRolesMgmt.Models.Entities;
@@ -8,6 +9,7 @@ namespace Transflower.MembershipRolesMgmt.Controllers;
 
 [ApiController]
 [Route("/api/users")]
+[EnableCors("AllowSpecificOrigin")]
 public class UsersController : ControllerBase
 {
     private readonly IUserService _svc;
