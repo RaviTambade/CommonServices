@@ -184,7 +184,7 @@ public class AddressRepository : IAddressRepository
         return status;
     }
 
-     public async Task<bool> UpdateArea(AreaRequest theAreaRequest)
+     public async Task<bool> UpdateArea(AreaRequest theArea)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_connectionString);
@@ -192,8 +192,8 @@ public class AddressRepository : IAddressRepository
         {
             string query ="UPDATE addresses SET area=@area WHERE id=@userId ";
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@userId", theAreaRequest.UserId);
-            command.Parameters.AddWithValue("@area", theAreaRequest.Area);
+            command.Parameters.AddWithValue("@userId", theArea.UserId);
+            command.Parameters.AddWithValue("@area", theArea.Area);
             
             await con.OpenAsync();
             int rowsAffected = await command.ExecuteNonQueryAsync();
@@ -213,7 +213,7 @@ public class AddressRepository : IAddressRepository
         return status;
     }
 
-     public async Task<bool> UpdateLandMark(LandMarkRequest theLandMarkRequest)
+     public async Task<bool> UpdateLandMark(LandMarkRequest theLandMark)
     {
         bool status = false;
         MySqlConnection con = new MySqlConnection(_connectionString);
@@ -221,8 +221,95 @@ public class AddressRepository : IAddressRepository
         {
             string query ="UPDATE addresses SET landmark=@landmark WHERE id=@userId ";
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@userId", theLandMarkRequest.UserId);
-            command.Parameters.AddWithValue("@area", theLandMarkRequest.LandMark);
+            command.Parameters.AddWithValue("@userId", theLandMark.UserId);
+            command.Parameters.AddWithValue("@landmark", theLandMark.LandMark);
+            
+            await con.OpenAsync();
+            int rowsAffected = await command.ExecuteNonQueryAsync();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
+
+     public async Task<bool> UpdateCity(CityRequest theCity)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_connectionString);
+        try
+        {
+            string query ="UPDATE addresses SET city=@city WHERE id=@userId ";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@userId", theCity.UserId);
+            command.Parameters.AddWithValue("@city", theCity.City);
+            
+            await con.OpenAsync();
+            int rowsAffected = await command.ExecuteNonQueryAsync();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
+
+     public async Task<bool> UpdateState(StateRequest theState)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_connectionString);
+        try
+        {
+            string query ="UPDATE addresses SET state=@state WHERE id=@userId ";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@userId", theState.UserId);
+            command.Parameters.AddWithValue("@state", theState.State);
+            
+            await con.OpenAsync();
+            int rowsAffected = await command.ExecuteNonQueryAsync();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
+
+     public async Task<bool> UpdatePincode(PincodeRequest thePincode)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_connectionString);
+        try
+        {
+            string query ="UPDATE addresses SET pincode=@pincode WHERE id=@userId ";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@userId", thePincode.UserId);
+            command.Parameters.AddWithValue("@pincode", thePincode.Pincode);
             
             await con.OpenAsync();
             int rowsAffected = await command.ExecuteNonQueryAsync();

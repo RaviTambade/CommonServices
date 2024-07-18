@@ -35,15 +35,32 @@ public class AddressService : IAddressService
         return await _repository.Update(existingId, theAddress);
     }
 
-     public async Task<bool> UpdateArea(AreaRequest theAreaRequest)
+     public async Task<bool> UpdateArea(AreaRequest theArea)
     {
-        return await _repository.UpdateArea(theAreaRequest);
+        return await _repository.UpdateArea(theArea);
     }
 
-     public async Task<bool> UpdateLandMark(LandMarkRequest theLandMarkRequest)
+     public async Task<bool> UpdateLandMark(LandMarkRequest theLandMark)
     {
-        return await _repository.UpdateLandMark(theLandMarkRequest);
+        return await _repository.UpdateLandMark(theLandMark);
     }
+
+     public async Task<bool> UpdateCity(CityRequest theCity)
+    {
+        return await _repository.UpdateCity(theCity);
+    }
+
+     public async Task<bool> UpdateState(StateRequest theState)
+    {
+        return await _repository.UpdateState(theState);
+    }
+
+     public async Task<bool> UpdatePincode(PincodeRequest thePincode)
+    {
+        return await _repository.UpdatePincode(thePincode);
+    }
+
+
 
     public async Task<bool> Delete(int existingId)
     {

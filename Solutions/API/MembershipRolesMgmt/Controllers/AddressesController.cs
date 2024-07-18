@@ -48,9 +48,27 @@ public class AddressesController : ControllerBase
     }
 
     [HttpPut("update/landmark")]
-    public async Task<bool> UpdatelandMark(LandMarkRequest theLandMarkRequest)
+    public async Task<bool> UpdateLandMark(LandMarkRequest theLandMarkRequest)
     {
         return await _service.UpdateLandMark(theLandMarkRequest);
+    }
+
+    [HttpPut("update/city")]
+    public async Task<bool> UpdateCity(CityRequest theCity)
+    {
+        return await _service.UpdateCity(theCity);
+    }
+
+    [HttpPut("update/state")]
+    public async Task<bool> UpdateState(StateRequest theState)
+    {
+        return await _service.UpdateState(theState);
+    }
+
+    [HttpPut("update/pincode")]
+    public async Task<bool> UpdatePincode(PincodeRequest thePincode)
+    {
+        return await _service.UpdatePincode(thePincode);
     }
 
     [HttpDelete("{existingId}")]
