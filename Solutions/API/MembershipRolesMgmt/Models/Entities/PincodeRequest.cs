@@ -1,6 +1,6 @@
 namespace Transflower.MembershipRolesMgmt.Models.Entities;
-public class AreaRequest
+public class PincodeRequest
 {
     public int UserId { get; set; }
-    public string Area { get; set; }
+    public string Pincode { get; set; }
 }
