@@ -45,6 +45,12 @@ public class AddressesController : ControllerBase
         return await _service.UpdateArea(theAreaRequest);
     }
 
+    [HttpPut("update/landmark")]
+    public async Task<bool> UpdatelandMark(LandMarkRequest theLandMarkRequest)
+    {
+        return await _service.UpdateLandMark(theLandMarkRequest);
+    }
+
     [HttpDelete("{existingId}")]
     public async Task<bool> Delete(int existingId)
     {

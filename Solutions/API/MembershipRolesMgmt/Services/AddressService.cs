@@ -40,6 +40,11 @@ public class AddressService : IAddressService
         return await _repository.UpdateArea(theAreaRequest);
     }
 
+     public async Task<bool> UpdateLandMark(LandMarkRequest theLandMarkRequest)
+    {
+        return await _repository.UpdateLandMark(theLandMarkRequest);
+    }
+
     public async Task<bool> Delete(int existingId)
     {
         return await _repository.Delete(existingId);

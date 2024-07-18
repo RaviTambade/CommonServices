@@ -12,4 +12,5 @@ public interface IAddressRepository
     Task<bool> Update(int existingId, Address theAddress);
     Task<bool> Delete(int existingId);
     Task<bool> UpdateArea(AreaRequest theAreaRequest);
+    Task<bool> UpdateLandMark(LandMarkRequest theLandMarkRequest);
 }

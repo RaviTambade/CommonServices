@@ -192,8 +192,37 @@ public class AddressRepository : IAddressRepository
         {
             string query ="UPDATE addresses SET area=@area WHERE id=@userId ";
             MySqlCommand command = new MySqlCommand(query, con);
-            command.Parameters.AddWithValue("@userId", theAreaRequest.userId);
-            command.Parameters.AddWithValue("@area", theAreaRequest.area);
+            command.Parameters.AddWithValue("@userId", theAreaRequest.UserId);
+            command.Parameters.AddWithValue("@area", theAreaRequest.Area);
+            
+            await con.OpenAsync();
+            int rowsAffected = await command.ExecuteNonQueryAsync();
+            if (rowsAffected > 0)
+            {
+                status = true;
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        finally
+        {
+            await con.CloseAsync();
+        }
+        return status;
+    }
+
+     public async Task<bool> UpdateLandMark(LandMarkRequest theLandMarkRequest)
+    {
+        bool status = false;
+        MySqlConnection con = new MySqlConnection(_connectionString);
+        try
+        {
+            string query ="UPDATE addresses SET landmark=@landmark WHERE id=@userId ";
+            MySqlCommand command = new MySqlCommand(query, con);
+            command.Parameters.AddWithValue("@userId", theLandMarkRequest.UserId);
+            command.Parameters.AddWithValue("@area", theLandMarkRequest.LandMark);
             
             await con.OpenAsync();
             int rowsAffected = await command.ExecuteNonQueryAsync();
