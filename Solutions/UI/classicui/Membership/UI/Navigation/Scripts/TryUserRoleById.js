@@ -42,6 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                             '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>' +
                                             '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>' +
                                             '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>' +
+                                            '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>' +
+                                            
                                             '</tr></thead><tbody class="bg-white divide-y divide-gray-200">';
 
                                         $.each(data, function (index, item) {
@@ -50,11 +52,17 @@ document.addEventListener("DOMContentLoaded", function () {
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.imageUrl + '</td>' +
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.firstName + '</td>' +
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.lastName + '</td>' +
-                                                '<td>'+'<button id="updaterole" value = "Update Role">'+ '</button>' + '</td>' +
+                                                '<td>'+'<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="updaterole"> Update Role </button>'+ '</td>'
                                                 '</tr>';
                                         });
                                         htmlContent += '</tbody></table></div>';
                                         $('#dataDisplay').html(htmlContent);
+
+                                        $('#updaterole').click(function(){
+                                            window.location.href = '../Navigation/UserRoleManagment.html';
+                                        });
+                                    
+                                    
                                     },
                                     error: function (xhr, status, error) {
                                         console.error(xhr.responseText);
@@ -72,5 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => {
                 console.error(error);
             });
+
+        
     });
 });

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Services.Interfaces;
@@ -6,6 +7,8 @@ namespace Transflower.MembershipRolesMgmt.Controllers;
 
 [ApiController]
 [Route("/api/roles")]
+[EnableCors("AllowSpecificOrigin")]
+
 public class RolesController : ControllerBase
 {
     private readonly IRoleService _service;

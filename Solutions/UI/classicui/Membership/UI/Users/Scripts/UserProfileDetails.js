@@ -8,6 +8,7 @@ $(document).ready(function () {
         success: function (data) {
             var fullname = data.firstName + " " + data.lastName;
             $("#fullname").text(fullname);
+            $("#user-name").text(data.firstName + " " + data.lastName);
             $("#pemail").text(data.email);
             $("#paadharid").text(data.aadharId);
             $("#pdob").text(data.birthDate);

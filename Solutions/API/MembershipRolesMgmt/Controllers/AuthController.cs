@@ -6,12 +6,14 @@ using Transflower.MembershipRolesMgmt.Models.Entities;
 using Transflower.MembershipRolesMgmt.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using AuthorizeAttribute = Transflower.MembershipRolesMgmt.Helpers.AuthorizeAttribute;
+using Microsoft.AspNetCore.Cors;
 
 namespace Transflower.MembershipRolesMgmt.Controllers;
 
 [Authorize]
 [ApiController]
 [Route("/api/auth")]
+[EnableCors("AllowSpecificOrigin")]
 public class AuthController : ControllerBase
 {
     private readonly IUserService _userService;

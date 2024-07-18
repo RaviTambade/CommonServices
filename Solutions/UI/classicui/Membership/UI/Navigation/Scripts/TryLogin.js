@@ -15,6 +15,10 @@ $(document).ready(function () {
             success: function (userData) {
 
                 console.log("User's ID:", userData.id);
+                var fname = userData.firstName;
+                var lname = userData.lastName;
+                var fullName = fname + " " + lname;
+                window.sessionStorage.setItem("fullname", fullName);
                 window.sessionStorage.setItem("userid", userData.id);
                 userId = userData.id;
 
