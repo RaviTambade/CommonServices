@@ -1,34 +1,36 @@
 $(document).ready(function () {
+
     console.log("Document.Ready");
     var userId = parseInt(sessionStorage.getItem("userid"));
     var userLob = sessionStorage.getItem("lob");
-    var userFullName = sessionStorage.getItem("fullname");
+   
     console.log("User Id = " + userId);
     console.log("LOB = "+ userLob);
-    console.log("Name : "+ userFullName)
-   
-    $("#txtUserId").val(userId);
+    
+    
     $("#txtlob").val(userLob);
-    $("#userdetails").text(userFullName);
+    $.ajax({
+      url: `http://localhost:5000/api/users/details/id/` + userId,
+      type: 'GET',
+      contentType: 'application/json',
+      success: function (data) {
+        console.log(data);
+        var name = data.fullName;
+
+        $("#txtUserId").val(name);
+       
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr.responseText);
+        alert("An error occurred while fetching the user details. Please try again.");
+      }
+    });
 
     /*$('#txtUserId').change(function () {
       var id = $("#txtUserId").val();
       console.log("Input Id = " + id);
 
-      $.ajax({
-        url: `http://localhost:5000/api/users/details/id/` + id,
-        type: 'GET',
-        contentType: 'application/json',
-        success: function (data) {
-          console.log(data);
-          var name = data.fullName;
-          $("#userdetails").html(name);
-        },
-        error: function (xhr, status, error) {
-          console.error(xhr.responseText);
-          alert("An error occurred while fetching the user details. Please try again.");
-        }
-      });
+      
     });*/
 
    /* $.ajax({

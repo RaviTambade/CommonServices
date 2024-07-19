@@ -1,6 +1,19 @@
 var userLOB = sessionStorage.getItem("lob");
 console.log("LOB of logged User : " + userLOB);
 
+function redirectToupdate(){
+                     
+    // console.log("Type of info : "+ info);
+    // var ID = info.id;
+    alert("Hello");
+    
+   // var fullName = info.firstName + " " +info.lastName;
+    //alert(fullName);
+    //localStorage.setItem("selectedId",ID);
+    //localStorage.setItem("fullname",fullName);
+    window.location.href = '../Navigation/UserRoleManagment.html';
+};
+
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("btngetroles").addEventListener("click", function () {
         var rolesContainer = document.getElementById("roles");
@@ -47,22 +60,21 @@ document.addEventListener("DOMContentLoaded", function () {
                                             '</tr></thead><tbody class="bg-white divide-y divide-gray-200">';
 
                                         $.each(data, function (index, item) {
+                                            var stringifiedObj  = JSON.stringify(item);
+                                            console.log(item);
                                             htmlContent += '<tr>' +
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.id + '</td>' +
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.imageUrl + '</td>' +
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.firstName + '</td>' +
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.lastName + '</td>' +
-                                                '<td>'+'<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="updaterole"> Update Role </button>'+ '</td>'
+                                                '<td>'+'<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="updaterole"  onclick="redirectToupdate()"> Update Role </button>'+ '</td>'  //'+JSON.stringify(item)+'
                                                 '</tr>';
+                                               
+                                               
                                         });
                                         htmlContent += '</tbody></table></div>';
                                         $('#dataDisplay').html(htmlContent);
-
-                                        $('#updaterole').click(function(){
-                                            window.location.href = '../Navigation/UserRoleManagment.html';
-                                        });
-                                    
-                                    
+                                        
                                     },
                                     error: function (xhr, status, error) {
                                         console.error(xhr.responseText);
@@ -83,4 +95,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
         
     });
+    
 });
