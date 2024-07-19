@@ -1,11 +1,11 @@
 var userLOB = sessionStorage.getItem("lob");
 console.log("LOB of logged User : " + userLOB);
 
-function redirectToupdate(){
+function redirectToupdate(info){
                      
-    // console.log("Type of info : "+ info);
-    // var ID = info.id;
-    alert("Hello");
+     console.log("Type of info : "+ info);
+     var ID = info.id;
+    alert("Hello" + ID);
     
    // var fullName = info.firstName + " " +info.lastName;
     //alert(fullName);
@@ -60,14 +60,23 @@ document.addEventListener("DOMContentLoaded", function () {
                                             '</tr></thead><tbody class="bg-white divide-y divide-gray-200">';
 
                                         $.each(data, function (index, item) {
-                                            var stringifiedObj  = JSON.stringify(item);
+                                            //var stringifiedObj  = JSON.stringify(item);
                                             console.log(item);
+                                            console.log("Item Length  =  "+data.length);
+                                            console.log("Index " + index);
+                                            var array = item;
+                                            for(i=0;i<data.length;i++)
+                                            {
+                                                console.log("Array = " + array[i]);
+                                            }
+                                           
+                                           
                                             htmlContent += '<tr>' +
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.id + '</td>' +
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.imageUrl + '</td>' +
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.firstName + '</td>' +
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.lastName + '</td>' +
-                                                '<td>'+'<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="updaterole"  onclick="redirectToupdate()"> Update Role </button>'+ '</td>'  //'+JSON.stringify(item)+'
+                                                '<td>'+'<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="updaterole"  onclick="redirectToupdate('+ item[index]+ ')"> Update Role </button>'+ '</td>'  //'+JSON.stringify(item)+'
                                                 '</tr>';
                                                
                                                
