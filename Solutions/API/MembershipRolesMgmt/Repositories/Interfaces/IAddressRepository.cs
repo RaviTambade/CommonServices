@@ -11,5 +11,9 @@ public interface IAddressRepository
     Task<bool> Insert(Address address);
     Task<bool> Update(int existingId, Address theAddress);
     Task<bool> Delete(int existingId);
-    Task<bool> UpdateArea(AreaRequest theAreaRequest);
+    Task<bool> UpdateArea(AreaRequest theArea);
+    Task<bool> UpdateLandMark(LandMarkRequest theLandMark);
+    Task<bool> UpdateCity(CityRequest theCity);
+    Task<bool> UpdateState(StateRequest theState);
+    Task<bool> UpdatePincode(PincodeRequest thePincode);
 }
