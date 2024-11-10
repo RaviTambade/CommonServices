@@ -1,13 +1,12 @@
 var userLOB = sessionStorage.getItem("lob");
 console.log("LOB of logged User : " + userLOB);
 
-function redirectToupdate(info){
-                     
-     console.log("Type of info : "+ info);
-     var ID = info.id;
-    alert("Hello" + ID);
-    
-   // var fullName = info.firstName + " " +info.lastName;
+function redirectToupdate(element) {
+
+    console.log("Element : " + element);
+    alert(element);
+    localStorage.setItem("ID", element);
+    // var fullName = info.firstName + " " +info.lastName;
     //alert(fullName);
     //localStorage.setItem("selectedId",ID);
     //localStorage.setItem("fullname",fullName);
@@ -56,34 +55,87 @@ document.addEventListener("DOMContentLoaded", function () {
                                             '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>' +
                                             '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>' +
                                             '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>' +
-                                            
+
                                             '</tr></thead><tbody class="bg-white divide-y divide-gray-200">';
 
                                         $.each(data, function (index, item) {
                                             //var stringifiedObj  = JSON.stringify(item);
                                             console.log(item);
-                                            console.log("Item Length  =  "+data.length);
+                                            console.log("Item Length  =  " + data.length);
                                             console.log("Index " + index);
-                                            var array = item;
-                                            for(i=0;i<data.length;i++)
-                                            {
-                                                console.log("Array = " + array[i]);
-                                            }
-                                           
-                                           
+
                                             htmlContent += '<tr>' +
-                                                '<td class="px-6 py-4 whitespace-nowrap">' + item.id + '</td>' +
+                                                '<td class="px-6 py-4 whitespace-nowrap" name="id">' + item.id + '</td>' +
                                                 '<td class="px-6 py-4 whitespace-nowrap">' + item.imageUrl + '</td>' +
-                                                '<td class="px-6 py-4 whitespace-nowrap">' + item.firstName + '</td>' +
-                                                '<td class="px-6 py-4 whitespace-nowrap">' + item.lastName + '</td>' +
-                                                '<td>'+'<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="updaterole"  onclick="redirectToupdate('+ item[index]+ ')"> Update Role </button>'+ '</td>'  //'+JSON.stringify(item)+'
-                                                '</tr>';
-                                               
-                                               
+                                                '<td class="px-6 py-4 whitespace-nowrap" name="firstName">' + item.firstName + '</td>' +
+                                                '<td class="px-6 py-4 whitespace-nowrap" name="lastName">' + item.lastName + '</td>' +
+                                                '<td>' + '<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="updaterole"  > Update Role </button>' + '</td>'  //onclick="redirectToupdate('+ item[index]+ ')"
+                                            '</tr>';
+
+
                                         });
                                         htmlContent += '</tbody></table></div>';
                                         $('#dataDisplay').html(htmlContent);
-                                        
+
+                                        $(document).on("click", "#updaterole", function () {
+
+                                            var $row = $(this).closest("tr"),       // Finds the closest row <tr> 
+                                                $tds = $row.find("td");             // Finds all children <td> elements
+
+
+                                           /* var table = document.getElementById('userByRoleTable'),
+                                                rows = table.getElementsByTagName('tr'),
+                                                i, j, cells, customerId;
+
+                                            for (i = 0, j = rows.length; i < j; ++i) {
+                                                cells = rows[i].getElementsByTagName('td');
+                                                if (!cells.length) {
+                                                    continue;
+                                                }
+                                                Id = cells[0].innerHTML;
+                                                console.log("ID : "+ Id);
+                                            }*/
+
+
+
+
+                                             $.each($tds, function () { 
+                                                 //var retrived_data = $(this).text();
+                                                 //console.log(retrived_data);                             // Visits every single <td> element
+                                                 //console.log($(this).text());        // Prints out the text within the <td>
+                                                
+                                                var element = $(this).text().split(" ");
+
+                                                console.log(element);
+                                                //redirectToupdate(element)
+                                               localStorage.setItem("selectedId",element);
+                                                window.location.href = '../Navigation/UserRoleManagment.html';
+                                                 alert(element);
+                                             });
+
+
+                                            /*let $row = $(this).closest('tr');
+                                            let $tds = $row.find('td');
+
+                                            $.each($tds,function(){
+
+                                                //let a = $tds.find('input[name="id"]').text();
+                                                //let a = $tds.text();
+                                                //let a = $tds.find('.name').val();
+                                                let a = $(this).find('.name').text();
+                                                console.log("a = " + a);
+                                                //let b = $tds.find('input[name="firstname"]').text();
+                                                //let b = $tds.find('[name = " id"]').val();
+                                                //let b = $row.find('td').find('.name').val();
+                                                let b = $(this).find('.name').val()
+                                                console.log("b = " + b);
+                                                alert('Output : ' + a + ' ' + b);
+
+                                             })*/
+
+                                        });
+
+
                                     },
                                     error: function (xhr, status, error) {
                                         console.error(xhr.responseText);
@@ -102,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error(error);
             });
 
-        
+
     });
-    
+
 });
