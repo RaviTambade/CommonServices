@@ -15,7 +15,6 @@ function Register(){
         event.preventDefault();
     
         const data = {
-            
             ImageUrl:imageurl,
             FirstName:firstname,
             LastName:lastname,
@@ -41,9 +40,6 @@ function Register(){
      
       }
     
-
-
-
     return(
         <div>
             <h1>Resister Form</h1>

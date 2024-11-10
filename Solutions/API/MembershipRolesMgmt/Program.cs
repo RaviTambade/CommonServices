@@ -61,4 +61,4 @@ app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 app.UseStaticFiles();
 app.UseMiddleware<JwtMiddleware>();
 app.MapControllers();
-app.Run("http://localhost:5000");  // fixing port 
+app.Run("http://localhost:5142");  
